@@ -1,0 +1,84 @@
+// Visual effects driven by sim events: slash swooshes, hit sparks, damage numbers, dust. Render-only.
+import { bus } from '../core/events.js';
+import { JUICE } from '../data/juice.js';
+
+const D2R = Math.PI / 180;
+
+export function createEffects() {
+  let list = [];
+  const flashes = new Map();   // fighter id -> frames of white flash left
+  const add = (e) => list.push({ t: 0, ...e });
+
+  bus.on('swing', ({ f, move }) => { if (move.fx?.slash) add({ type: 'slash', f, ...move.fx.slash, life: JUICE.slash.life }); });
+  bus.on('hit', ({ target, damage, x, y, z, ko, move }) => {
+    flashes.set(target.id, JUICE.flashFrames);
+    const S = JUICE.sparks, big = ko || move.knockdown;
+    for (let i = 0; i < S.count * (big ? 1.6 : 1); i++) {
+      const a = Math.random() * Math.PI * 2, s = S.speed * (0.5 + Math.random());
+      add({ type: 'spark', x, y: y - z, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: S.life });
+    }
+    add({ type: 'ring', x, y: y - z, life: 10, r: big ? 46 : 28 });
+    add({ type: 'num', x, y: y - z - 20, text: String(damage), hero: target.team === 'hero', big, life: JUICE.numbers.life });
+  });
+  bus.on('land', ({ f, heavy }) => {
+    const n = JUICE.dust.count * (heavy ? 1.5 : 0.6);
+    for (let i = 0; i < n; i++) add({ type: 'dust', x: f.x + (Math.random() - 0.5) * 50, y: f.y, vx: (Math.random() - 0.5) * 2.2, life: JUICE.dust.life, r: 6 + Math.random() * 8 });
+  });
+
+  return {
+    clear() { list = []; flashes.clear(); },
+    flashOf: (id) => (flashes.get(id) ?? 0) / JUICE.flashFrames,
+    update() {
+      for (const [id, n] of flashes) n <= 1 ? flashes.delete(id) : flashes.set(id, n - 1);
+      for (const e of list) {
+        e.t++;
+        if (e.vx !== undefined) { e.x += e.vx; e.vx *= 0.88; }
+        if (e.vy !== undefined) { e.y += e.vy; e.vy *= 0.88; }
+      }
+      list = list.filter((e) => e.t < e.life);
+    },
+    draw(ctx) { for (const e of list) DRAW[e.type](ctx, e, e.t / e.life); },
+  };
+}
+
+const DRAW = {
+  slash(ctx, e, k) {
+    const f = e.f, dir = f.facing;
+    const cx = f.x + dir * e.cx, cy = f.y - f.z - e.cz;
+    const ang = (deg) => (dir > 0 ? deg * D2R : Math.PI - deg * D2R);
+    const head = Math.min(1, k * 2.5), tail = Math.max(0, k * 1.6 - 0.4);
+    const steps = 14, W = JUICE.slash.width * (e.big ? 1.4 : 1);
+    ctx.lineCap = 'round';
+    for (let i = 0; i < steps; i++) {
+      const a0 = tail + (head - tail) * (i / steps), a1 = tail + (head - tail) * ((i + 1) / steps);
+      const t0 = e.from + (e.to - e.from) * a0, t1 = e.from + (e.to - e.from) * a1;
+      const w = W * (i / steps) * (1 - k * 0.5);
+      ctx.beginPath(); ctx.arc(cx, cy, e.r, ang(t0), ang(t1), dir < 0 ? t1 > t0 : t1 < t0);
+      ctx.strokeStyle = JUICE.slash.edge; ctx.lineWidth = w + 4; ctx.stroke();
+      ctx.strokeStyle = JUICE.slash.color; ctx.lineWidth = w; ctx.stroke();
+    }
+  },
+  spark(ctx, e, k) {
+    ctx.strokeStyle = `rgba(255,${230 - k * 120},120,${1 - k})`; ctx.lineWidth = 3 * (1 - k) + 1;
+    ctx.beginPath(); ctx.moveTo(e.x, e.y); ctx.lineTo(e.x - e.vx * 2.5, e.y - e.vy * 2.5); ctx.stroke();
+  },
+  ring(ctx, e, k) {
+    ctx.strokeStyle = `rgba(255,255,255,${1 - k})`; ctx.lineWidth = 4 * (1 - k) + 1;
+    ctx.beginPath(); ctx.arc(e.x, e.y, e.r * (0.3 + k), 0, Math.PI * 2); ctx.stroke();
+  },
+  num(ctx, e, k) {
+    const N = JUICE.numbers, pop = k < 0.15 ? 1 + (0.15 - k) * 4 : 1;
+    ctx.save();
+    ctx.translate(e.x, e.y - e.t * N.rise);
+    ctx.scale(pop * (e.big ? 1.35 : 1), pop * (e.big ? 1.35 : 1));
+    ctx.globalAlpha = k > 0.7 ? (1 - k) / 0.3 : 1;
+    ctx.font = N.font; ctx.textAlign = 'center';
+    ctx.lineWidth = 5; ctx.strokeStyle = '#2a1630'; ctx.strokeText(e.text, 0, 0);
+    ctx.fillStyle = e.hero ? '#ff5a4e' : e.big ? '#ffd23f' : '#fff'; ctx.fillText(e.text, 0, 0);
+    ctx.restore();
+  },
+  dust(ctx, e, k) {
+    ctx.fillStyle = `rgba(214,190,150,${0.55 * (1 - k)})`;
+    ctx.beginPath(); ctx.arc(e.x, e.y - k * 14, e.r * (0.6 + k), 0, Math.PI * 2); ctx.fill();
+  },
+};

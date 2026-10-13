@@ -1,0 +1,69 @@
+// Draws one fighter as a standee: a flat image that leans, squashes, hops, flashes and falls over.
+// Pose numbers come from move.pose (data/moves); state poses are here.
+import { phaseOf } from '../sim/fighter.js';
+import { RULES } from '../data/rules.js';
+import { silhouette } from './tint.js';
+
+const ZERO = { rot: 0, sx: 1, sy: 1, dx: 0, dy: 0 };
+const lerp = (a, b, t) => a + (b - a) * t;
+const easeOut = (t) => 1 - (1 - t) ** 3;
+const mix = (a, b, t) => {
+  a = { ...ZERO, ...a }; b = { ...ZERO, ...b };
+  return { rot: lerp(a.rot, b.rot, t), sx: lerp(a.sx, b.sx, t), sy: lerp(a.sy, b.sy, t), dx: lerp(a.dx, b.dx, t), dy: lerp(a.dy, b.dy, t) };
+};
+
+function movePose(f) {
+  const [ph, p] = phaseOf(f), P = f.move.pose ?? {};
+  if (ph === 'windup') return mix(ZERO, P.windup, easeOut(p));
+  if (ph === 'active') return mix(P.windup, P.active, easeOut(Math.min(1, p * 2.5)));
+  return mix(P.active, ZERO, easeOut(p));
+}
+
+export function poseOf(f, time) {
+  const K = RULES.knockdown, LIE = -1.5;
+  if (f.move) return movePose(f);
+  switch (f.state) {
+    case 'idle': { const b = Math.sin(time * 3 + f.id) * 0.018; return { ...ZERO, sy: 1 + b, sx: 1 - b }; }
+    case 'walk': { const s = Math.sin(f.t * 0.24); return { ...ZERO, dy: -Math.abs(s) * 5, rot: s * 0.05 }; }
+    case 'jump': return { ...ZERO, rot: f.vz > 0 ? -0.1 : 0.08, sx: 1 - f.vz * 0.008, sy: 1 + f.vz * 0.012 };
+    case 'hurt': { const k = 1 - f.t / Math.max(1, f.stun); return { ...ZERO, rot: -0.25 * k, dx: f.t < 8 ? (f.t % 2 ? 3 : -3) : 0, sx: 1 + 0.05 * k, sy: 1 - 0.05 * k }; }
+    case 'knockdown': return { ...ZERO, rot: Math.max(LIE, -f.t * 0.13) };
+    case 'down': return { ...ZERO, rot: LIE, sy: f.t < 6 ? 0.85 : 1 };
+    case 'getup': return { ...ZERO, rot: LIE * (1 - easeOut(f.t / K.getupFrames)) };
+    case 'dead': return { ...ZERO, rot: LIE };
+  }
+  return ZERO;
+}
+
+export function drawShadow(ctx, f) {
+  const k = Math.max(0.45, 1 - f.z / 180), rx = f.def.body.w * 0.9 * k;
+  ctx.fillStyle = `rgba(20,12,30,${0.32 * k})`;
+  ctx.beginPath(); ctx.ellipse(f.x, f.y, rx, rx * 0.28, 0, 0, Math.PI * 2); ctx.fill();
+}
+
+// flash: 0..1 white overlay. tint: optional color overlay (e.g. hurt red).
+export function drawStandee(ctx, f, assets, time, flash = 0) {
+  const art = f.def.art, img = assets.get(art[f.pose] ?? art.idle);
+  const p = poseOf(f, time);
+  const h = art.height, w = img.width * (h / img.height);
+  const flip = f.facing * (art.facing ?? 1);
+  let alpha = 1;
+  if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;
+  if (f.invuln > 0 && f.state === 'idle') alpha = f.invuln % 6 < 3 ? 1 : 0.55;
+
+  ctx.save();
+  ctx.globalAlpha = alpha;
+  ctx.translate(f.x + p.dx * f.facing, f.y - f.z + p.dy);
+  ctx.rotate(p.rot * f.facing);
+  ctx.scale(p.sx * flip, p.sy);
+  const x = -w * art.anchorX, y = -h;
+  ctx.drawImage(img, x, y, w, h);
+  if (f.state === 'hurt' || f.state === 'knockdown') {
+    ctx.globalAlpha = alpha * 0.28; ctx.drawImage(silhouette(img, '#ff3b30'), x, y, w, h);
+  }
+  if (f.move?.fx?.telegraph && phaseOf(f)[0] === 'windup') {
+    ctx.globalAlpha = 0.25 + 0.25 * Math.sin(time * 40); ctx.drawImage(silhouette(img, '#ffd23f'), x, y, w, h);
+  }
+  if (flash > 0) { ctx.globalAlpha = flash; ctx.drawImage(silhouette(img, '#ffffff'), x, y, w, h); }
+  ctx.restore();
+}
