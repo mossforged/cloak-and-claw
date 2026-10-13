@@ -3,6 +3,8 @@
 A Golden Axe / D&D arcade / River City Ransom inspired belt-scroller beat 'em up, set in the animal world.
 Plain JavaScript + canvas. No engine, no build step.
 
+Play online: https://mossforged.github.io/cloak-and-claw/
+
 ## Run it (Mac)
 ```
 cd path/to/cloak-and-claw
