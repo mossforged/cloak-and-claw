@@ -41,6 +41,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 code: T007 on branch `t007-shield-block`: hold L / RB blocks (state `block`, shuffle 0.6, facing locked); frontal hits -> `block` event (chip 0, pushback, 12f blockstun, attacker shoved and its lunge stops), from behind lands. Clang fx, rig `block` pose, standee lean, run log `blocks`, lab "Hero block" sliders. L downloads logs only on game over.
+2026-10-14 code: 7/7 tests (new tests/block.test.mjs); bot run identical to main apart from the new `blocks: 0` field. Screens in docs/screens/T007/. Human check open: does blocking feel solid, rats fair?
 2026-10-14 lead: merged T006 (belt 400..463, mild zoom; lab Stage sliders). Belt depth to be revisited with stage art (Stage 5). Cast-pose toggle bug folded into T008.
 2026-10-14 code: T006 on branch `t006-floor-lane`: user picked framing "B mild zoom" from an in-game F-toggle test (toggle removed): art x -220 y -113 w 1400, floor 30..930 x 400..463 (63 px, under the packet's 85: the open floor in the art is shallow; deeper needed a zoom that cropped the market). Lab has a Stage section (floor + art sliders).
 2026-10-14 code: T006 notes: feet at bottom edge slightly overlap the tops of the two front dock posts near x 560-740; fighters look relatively smaller after the zoom. User reported "stuck in cast" = the T005 C toggle (sticky by design; easy to hit by accident, lead's call). Screen in docs/screens/T006/.

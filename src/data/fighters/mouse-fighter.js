@@ -9,5 +9,9 @@ export default {
   body: { w: 40, h: 100 },                      // hurtbox
   stats: { maxHp: 100, power: 0, defense: 0, speed: 1 },
   move: { walk: 2.7, depth: 1.9, jump: 9.5 },   // px/frame; jump = launch speed
+  // block (hold L): walkSpeed px/frame while blocking (0 = planted); chip = damage through the shield (never KOs);
+  // pushback = blocker slide px/frame; stun = frames the blocker can't act; attackerPush = attacker shoved back px/frame;
+  // hitstop/shake = feel on a block. Hits from behind land normally.
+  block: { walkSpeed: 0.6, chip: 0, pushback: 3, stun: 12, attackerPush: 4, hitstop: 4, shake: 3 },
   moves: MOUSE_SWORD, attack: 'slash1', airAttack: 'jumpSlash',
 };

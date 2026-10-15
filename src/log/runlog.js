@@ -31,10 +31,16 @@ export function createRunLog() {
     }
   });
 
+  bus.on('block', ({ target, damage }) => {
+    if (!world || target !== world.player) return;
+    c.blocks++;
+    c.damageTaken += damage;
+  });
+
   return {
     begin(w) {
       world = w; swing = null;
-      c = { hitsLanded: 0, damageDealt: 0, damageTaken: 0, swings: {}, swingsThatHit: 0, knockdowns: 0, windupsInterrupted: 0 };
+      c = { hitsLanded: 0, damageDealt: 0, damageTaken: 0, swings: {}, swingsThatHit: 0, knockdowns: 0, windupsInterrupted: 0, blocks: 0 };
     },
     summary() {
       const swings = Object.values(c.swings).reduce((a, b) => a + b, 0);
@@ -44,7 +50,7 @@ export function createRunLog() {
         wave: world.wave, kos: world.kos, xp: world.xp,
         damageDealt: c.damageDealt, damageTaken: c.damageTaken, hitsLanded: c.hitsLanded,
         swings, swingsByMove: { ...c.swings }, whiffs: swings - c.swingsThatHit,
-        knockdowns: c.knockdowns, windupsInterrupted: c.windupsInterrupted,
+        knockdowns: c.knockdowns, windupsInterrupted: c.windupsInterrupted, blocks: c.blocks,
       };
     },
   };
@@ -55,6 +61,6 @@ export function summaryLines(s) {
   const m = Math.floor(s.seconds / 60), sec = String(Math.floor(s.seconds % 60)).padStart(2, '0');
   return [
     `${m}:${sec}  wave ${s.wave}  KOs ${s.kos}  XP ${s.xp}  dealt ${s.damageDealt}  taken ${s.damageTaken}`,
-    `hits ${s.hitsLanded}/${s.swings} swings  whiffs ${s.whiffs}  knocked down ${s.knockdowns}  windups cut ${s.windupsInterrupted}`,
+    `hits ${s.hitsLanded}/${s.swings} swings  whiffs ${s.whiffs}  knocked down ${s.knockdowns}  windups cut ${s.windupsInterrupted}  blocks ${s.blocks ?? 0}`,
   ];
 }

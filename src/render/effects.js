@@ -1,4 +1,4 @@
-// Visual effects driven by sim events: slash swooshes, hit sparks, damage numbers, dust. Render-only.
+// Visual effects driven by sim events: slash swooshes, hit sparks, block clangs, damage numbers, dust. Render-only.
 import { bus } from '../core/events.js';
 import { JUICE } from '../data/juice.js';
 
@@ -19,6 +19,17 @@ export function createEffects() {
     }
     add({ type: 'ring', x, y: y - z, life: 10, r: big ? 46 : 28 });
     add({ type: 'num', x, y: y - z - 20, text: String(damage), hero: target.team === 'hero', big, life: JUICE.numbers.life });
+  });
+  bus.on('block', ({ target, damage, x, y, z }) => {
+    const B = JUICE.block, out = target.facing, sy = y - z;   // sparks fly out of the shield face, toward the attacker
+    for (let i = 0; i < B.sparks; i++) {
+      const a = (out > 0 ? 0 : Math.PI) + (Math.random() - 0.5) * 2 * B.spread, s = B.speed * (0.5 + Math.random());
+      add({ type: 'spark', x, y: sy, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 1, life: B.life, clang: true });
+    }
+    add({ type: 'shieldFlash', x, y: sy, dir: out, r: B.flashR, life: B.flashLife });
+    add({ type: 'ring', x, y: sy, life: B.ringLife, r: B.ringR });
+    add({ type: 'ring', x, y: sy, life: B.ringLife + 6, r: B.ringR * 1.7, thin: true });
+    if (damage > 0) add({ type: 'num', x, y: sy - 20, text: String(damage), hero: target.team === 'hero', big: false, life: JUICE.numbers.life });
   });
   bus.on('land', ({ f, heavy }) => {
     const n = JUICE.dust.count * (heavy ? 1.5 : 0.6);
@@ -62,12 +73,20 @@ const DRAW = {
     ctx.restore();
   },
   spark(ctx, e, k) {
-    ctx.strokeStyle = `rgba(255,${230 - k * 120},120,${1 - k})`; ctx.lineWidth = 3 * (1 - k) + 1;
+    ctx.strokeStyle = e.clang ? `rgba(255,255,${235 - k * 170},${1 - k})` : `rgba(255,${230 - k * 120},120,${1 - k})`; ctx.lineWidth = (e.clang ? 4 : 3) * (1 - k) + 1;
     ctx.beginPath(); ctx.moveTo(e.x, e.y); ctx.lineTo(e.x - e.vx * 2.5, e.y - e.vy * 2.5); ctx.stroke();
   },
   ring(ctx, e, k) {
-    ctx.strokeStyle = `rgba(255,255,255,${1 - k})`; ctx.lineWidth = 4 * (1 - k) + 1;
+    ctx.strokeStyle = `rgba(255,255,255,${1 - k})`; ctx.lineWidth = (e.thin ? 2 : 4) * (1 - k) + 1;
     ctx.beginPath(); ctx.arc(e.x, e.y, e.r * (0.3 + k), 0, Math.PI * 2); ctx.stroke();
+  },
+  shieldFlash(ctx, e, k) {   // white half-moon on the shield face, toward the attacker
+    const g = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, e.r);
+    g.addColorStop(0, `rgba(255,255,255,${0.95 * (1 - k)})`); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = g; ctx.beginPath();
+    ctx.ellipse(e.x, e.y, e.r * 0.7, e.r * 1.3, 0, e.dir > 0 ? -Math.PI / 2 : Math.PI / 2, e.dir > 0 ? Math.PI / 2 : Math.PI * 1.5);
+    ctx.fill(); ctx.restore();
   },
   num(ctx, e, k) {
     const N = JUICE.numbers, pop = k < 0.15 ? 1 + (0.15 - k) * 4 : 1;

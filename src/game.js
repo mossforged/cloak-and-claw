@@ -25,7 +25,7 @@ export function createGame(ctx, assets) {
       if (c.rig) opts.rig = !opts.rig;
       if (c.cast) opts.pose = opts.pose ? null : 'cast';   // view only: hero's rig holds the cast pose
       if (c.pause) opts.paused = !opts.paused;
-      if (c.log) downloadRuns();
+      if (c.blockTap && world.over) downloadRuns();   // L blocks in play; on the game-over screen it downloads the run logs
       if (opts.paused) return;
       if (world.over && (c.attack || c.start)) {
         world = createWorld(START_STAGE, START_HERO); renderer.reset(); juice.reset(); log.begin(world); opts.runLines = null;

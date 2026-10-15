@@ -9,6 +9,11 @@ export function createJuice() {
     j.freeze = Math.max(j.freeze, (move.hitstop ?? 0) + (ko ? JUICE.koHitstop : 0));
     kick((move.shake ?? 0) + (ko ? JUICE.koShake : 0));
   });
+  bus.on('block', ({ target }) => {
+    const B = target.def.block;
+    j.freeze = Math.max(j.freeze, B.hitstop ?? 0);
+    kick(B.shake ?? 0);
+  });
   bus.on('land', ({ heavy }) => heavy && kick(JUICE.heavyLandShake));
   j.tick = () => {
     j.shake *= JUICE.shake.decay;

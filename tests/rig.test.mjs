@@ -19,7 +19,7 @@ const fighter = (o) => ({ def, state: 'idle', t: 0, mf: 0, move: null, ...o });
 const finite = (j) => Object.values(j).every(Number.isFinite);
 
 // State -> pose key
-const cases = { idle: 'idle', walk: 'walk', jump: 'jump', hurt: 'hurt', knockdown: 'knockdown', down: 'down', dead: 'down', getup: 'getup' };
+const cases = { idle: 'idle', walk: 'walk', block: 'block', jump: 'jump', hurt: 'hurt', knockdown: 'knockdown', down: 'down', dead: 'down', getup: 'getup' };
 for (const [state, key] of Object.entries(cases)) {
   const r = targetPose(fighter({ state, t: 7 }), rig, 1.3);
   check(r.key === key, `${state} -> pose ${key} (got ${r.key})`);

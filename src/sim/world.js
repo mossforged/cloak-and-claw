@@ -18,7 +18,7 @@ export function createWorld(stageId, heroId, seed = Date.now()) {
   };
 }
 
-const NEUTRAL = { mx: 0, my: 0, attack: false, jump: false };
+const NEUTRAL = { mx: 0, my: 0, attack: false, jump: false, block: false };
 
 export function stepWorld(w, control) {
   w.frame++;

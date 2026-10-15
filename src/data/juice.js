@@ -6,5 +6,7 @@ export const JUICE = {
   sparks: { count: 10, speed: 5, life: 16 },
   dust: { count: 8, life: 24 },
   slash: { life: 9, width: 14, color: 'rgba(255,255,240,0.95)', edge: 'rgba(255,214,110,0.9)' },
+  // blocked hit: sparks off the shield (fanned back toward the attacker), white flash on the shield side, double clang ring
+  block: { sparks: 18, speed: 9, spread: 1.3, life: 16, flashLife: 8, flashR: 46, ringR: 30, ringLife: 14 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
 };
