@@ -4,11 +4,11 @@
 
 ## Next
 1. **User:** A003 props look check (crate, barrel, floor weapons).
-   **Code builder:** free; lead writing Stage 2 crowd-tool packets.
+   **Code builder:** T006 floor lane, then T007 shield block.
    **Art builder:** free (A003 merged; user look check pending).
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
-4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
+4. **Lead:** write T008 grab/throw and T009 floor weapons + breakables.
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -23,7 +23,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: none queued (Stage 2 packets next).
+- Code: `docs/tasks/T006-floor-lane.md`, then `T007-shield-block.md`. Next to write: T008 grab/throw, T009 floor weapons + breakables (after A003 look check).
 - Art: none queued.
 
 ## Open questions (for the user)
