@@ -5,7 +5,7 @@
 ## Next
 1. **Code builder:** T012 (wire A006 into block / cast / spin), then T014 (jump squat A/B), then T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
 2. **User:** judges A006 in motion after T012; picks a jump squat in T014.
-3. **Art builder:** idle (A007 approved).
+3. **Art builder:** A008 rat gear layers (hood, helmet + jerkin, captain hat + sash).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -21,7 +21,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T012-mouse-touchup-poses.md` (small), then `T014-jump-squat-ab.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
-- Art: none queued.
+- Art: `docs/tasks/A008-rat-gear-layers.md`.
 
 ## Open questions (for the user)
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
