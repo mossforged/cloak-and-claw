@@ -69,7 +69,7 @@ export const LAB_SCHEMA = [
   },
   {
     title: 'Hero movement', file: 'src/data/fighters/mouse-fighter.js',
-    fields: [['move.walk', 0.5, 8, 0.1], ['move.depth', 0.5, 6, 0.1], ['move.jump', 2, 20, 0.1]],
+    fields: [['move.walk', 0.5, 8, 0.1], ['move.depth', 0.5, 6, 0.1], ['move.jump', 2, 20, 0.1], { path: 'move.jumpSquat', min: 0, max: 12, step: 1, label: 'jump squat frames (mode A)' }],
   },
   {
     title: 'Hero block (hold L)', file: 'src/data/fighters/mouse-fighter.js',
@@ -139,6 +139,8 @@ export const LAB_SCHEMA = [
       ['koHitstop', 0, 40, 1], ['koShake', 0, 30, 0.5],
       ['block.glint.dx', -40, 120, 1], ['block.glint.dy', 0, 140, 1], ['block.glint.size', 0, 60, 1],
       ['block.glint.life', 1, 60, 1], ['block.glint.delay', 0, 20, 1],
+      ['jumpSquat.rise', 0, 15, 1], ['jumpSquat.land', 0, 20, 1], ['jumpSquat.landDepth', 0, 1, 0.05],
+      ['jumpSquat.squashX', 1, 1.4, 0.01], ['jumpSquat.squashY', 0.6, 1, 0.01],
     ],
   },
   {

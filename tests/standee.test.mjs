@@ -7,7 +7,7 @@ import { ITEMS } from '../src/data/items/index.js';
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
 const CHANNELS = ['rot', 'sx', 'sy', 'dx', 'dy', 'cy'];
-const STATES = ['idle', 'walk', 'block', 'jump', 'hurt', 'knockdown', 'down', 'getup', 'dead', 'grabbing', 'throw', 'grabbed', 'thrown', 'toss'];
+const STATES = ['idle', 'walk', 'block', 'jumpStart', 'jump', 'hurt', 'knockdown', 'down', 'getup', 'dead', 'grabbing', 'throw', 'grabbed', 'thrown', 'toss'];
 const finite = (p) => CHANNELS.every((k) => Number.isFinite(p[k]));
 
 for (const def of Object.values(FIGHTERS)) {

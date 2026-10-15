@@ -9,7 +9,10 @@ export default {
   art: { idle: 'assets/art/heroes/mouse-fighter.png', height: 128, facing: 1, anchorX: 0.47, rig: 'mouse-fighter', hand: { x: 30, y: 58, rot: -0.7 } },
   body: { w: 40, h: 100 },                      // hurtbox
   stats: { maxHp: 100, power: 0, defense: 0, speed: 1 },
-  move: { walk: 2.7, depth: 1.9, jump: 9.5 },   // px/frame; jump = launch speed
+  move: { walk: 2.7, depth: 1.9, jump: 9.5, jumpSquat: 4 },   // px/frame; jump = launch speed; jumpSquat = crouch frames before take-off (mode A)
+  // jump squat (T014; user picked A): 'A' = crouch in place for move.jumpSquat frames, then take off (weightier);
+  // 'B' = take off at once, crouch shown only in the drawing (JUICE.jumpSquat) + a landing squash; 'off' = the old jump.
+  jumpSquatMode: 'A',
   // block (hold L): walkSpeed px/frame while blocking (0 = planted); chip = damage through the shield (never KOs);
   // pushback = blocker slide px/frame; stun = frames the blocker can't act; attackerPush = attacker shoved back px/frame;
   // hitstop/shake = feel on a block. Hits from behind land normally.

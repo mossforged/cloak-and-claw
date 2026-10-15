@@ -5,6 +5,7 @@ import { RULES } from '../data/rules.js';
 import { JUICE } from '../data/juice.js';
 import { silhouette } from './tint.js';
 import { drawHeldStandee } from './props.js';
+import { squatOf, squashOf } from './jump-squat.js';
 
 const ZERO = { rot: 0, sx: 1, sy: 1, dx: 0, dy: 0, cy: 0 };   // cy: turn around this height above the feet (0 = feet)
 export const BLOCK_LEAN = 0.08;   // standee's forward lean while blocking (the rig's joints lean on their own)
@@ -69,7 +70,8 @@ export function drawShadow(ctx, f) {
 // flash: 0..1 white overlay. tint: optional color overlay (e.g. hurt red).
 export function drawStandee(ctx, f, assets, time, flash = 0) {
   const art = f.def.art, img = assets.get(art[f.pose] ?? art.idle);
-  const p = poseOf(f, time);
+  const p = { ...poseOf(f, time) }, q = squashOf(squatOf(f, time));   // T014 jump squat: squashed before/at take-off and on landing
+  p.sx *= q.sx; p.sy *= q.sy;
   const h = art.height, w = img.width * (h / img.height);
   const flip = f.facing * (art.facing ?? 1);
   let alpha = 1;

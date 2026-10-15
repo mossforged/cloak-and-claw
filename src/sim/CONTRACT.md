@@ -12,4 +12,5 @@
 - Every fighter is driven through `f.control` (input or AI write the same shape). `control.block` (held) only works for fighters whose def has a `block` config; a hit from the side the blocker faces emits `block` instead of `hit`.
 - Grab/throw (`grab.js`) only for fighters whose def has `grab`/`throw` configs, on enemies marked `throwable`. `grabbed` and `thrown` are in `HELPLESS` and can't be hit by moves; only a thrown body hits via `thrownHit`.
 - Props and items (`props.js`, `weapons.js`, T010): only hero-team hits break props; props block fighters on the ground. Loot rolls (crate picks, KO drop chance) use `world.itemRng`, never `world.rng`, so loot never changes the fight. Picking up, eating and tossing only for defs with `pickup` / `toss`; while `f.weapon` is held its kit's moves replace the fighter's (`movesOf`). A stage without `props` and a world where nothing is picked up behave exactly as before T010.
+- Jump squat (T014, hero uses A): only a def with `jumpSquatMode: 'A'` gets the `jumpStart` crouch before take-off; 'B', 'off' and no field = the old jump, frame for frame.
 - Units: pixels and frames (60/s). x = left/right, y = depth, z = height.

@@ -2,7 +2,8 @@
 // buffer that is then placed like a standee (same lean/squash/flip, shadow, flash and tints).
 import { phaseOf } from '../sim/fighter.js';
 import { poseOf, BLOCK_LEAN } from './standee.js';
-import { rigJoints, drawLayer } from './rig-pose.js';
+import { rigJoints, drawLayer, squatLayer } from './rig-pose.js';
+import { squatOf } from './jump-squat.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
 const BOX = { w: 300, h: 260, ox: 150, oy: 200 };  // buffer area in screen px; (ox, oy) = feet
@@ -96,9 +97,9 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   if (!memory.has(f)) memory.set(f, {});
   const mem = memory.get(f);
   // sword draw after a held weapon is thrown or breaks (not when swapped at a pickup or knocked loose)
-  if (mem.hadWeapon && !f.weapon && ['idle', 'walk', 'toss', 'attack', 'jump', 'block'].includes(f.state)) mem.drawT0 = time;
+  if (mem.hadWeapon && !f.weapon && ['idle', 'walk', 'toss', 'attack', 'jumpStart', 'jump', 'block'].includes(f.state)) mem.drawT0 = time;
   mem.hadWeapon = !!f.weapon;
-  const joints = drawLayer(rig, time, mem, rigJoints(f, rig, time, mem, pose));
+  const joints = drawLayer(rig, time, mem, squatLayer(rig, rigJoints(f, rig, time, mem, pose), pose ? 0 : squatOf(f, time)));   // T014 jump squat crouch
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);

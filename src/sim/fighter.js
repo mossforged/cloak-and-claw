@@ -1,8 +1,10 @@
 // Fighter entity + state machine. Pure logic: no drawing, no DOM.
-// States: idle walk block jump attack hurt knockdown down getup dead, plus grab/throw (sim/grab.js):
+// States: idle walk block jumpStart jump attack hurt knockdown down getup dead, plus grab/throw (sim/grab.js):
 // grabbing throw (holder), grabbed thrown (held / flying body); toss, pickup (held weapons, sim/weapons.js).
 // Every fighter is driven by f.control = { mx, my, attack, jump, block?, grab?, face? } (set by input or AI).
 // block (held) only works for fighters whose def has a `block` config.
+// Jump squat (T014 A/B test): with def.jumpSquatMode 'A' a jump first crouches in `jumpStart` for def.move.jumpSquat frames
+// (the press is kept, so the jump always comes; an attack pressed meanwhile is the air attack at take-off). 'B' / 'off': no delay.
 import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
 import { stepGrabbing, stepThrow, landThrown } from './grab.js';
@@ -16,7 +18,7 @@ export function createFighter(def, x, y, opts = {}) {
     x, y, z: 0, vx: 0, vy: 0, vz: 0, facing: opts.facing ?? 1,
     hp: def.stats.maxHp, maxHp: def.stats.maxHp,
     state: 'idle', t: 0, stun: 0, invuln: 0, lastHit: -999,
-    move: null, mf: 0, queued: false, hitList: new Set(), bounced: false,
+    move: null, mf: 0, queued: false, squatAttack: false, hitList: new Set(), bounced: false,
     grab: null, heldBy: null, thrower: null,   // grab/throw (sim/grab.js)
     weapon: null, pickup: null, moveKey: null, // held weapon + pickup in progress (sim/weapons.js); key of the current move
     control: { mx: 0, my: 0, attack: false, jump: false },
@@ -62,6 +64,8 @@ function stepMove(f) {
   }
 }
 
+function takeOff(f, d) { f.vz = d.move.jump; f.z = 0.01; setState(f, 'jump'); bus.emit('jump', { f }); }
+
 function land(f) {
   f.z = 0; f.vz = 0;
   if (f.state === 'jump') { f.move = null; setState(f, 'idle'); bus.emit('land', { f, heavy: false }); }
@@ -81,7 +85,11 @@ export function updateFighter(f, world) {
       if (c.grab && pressGrab(f, world)) break;
       f.vx = c.mx * d.move.walk * sp;
       f.vy = c.my * d.move.depth * sp;
-      if (c.jump && d.move.jump) { f.vz = d.move.jump; f.z = 0.01; setState(f, 'jump'); bus.emit('jump', { f }); break; }
+      if (c.jump && d.move.jump) {
+        if (d.jumpSquatMode === 'A' && d.move.jumpSquat > 0) { setState(f, 'jumpStart'); f.squatAttack = false; f.vx = f.vy = 0; }
+        else takeOff(f, d);
+        break;
+      }
       if (c.mx) f.facing = Math.sign(c.mx);
       if (c.face) f.facing = c.face;
       const moving = c.mx || c.my;
@@ -97,6 +105,14 @@ export function updateFighter(f, world) {
       f.vy = c.my * B.walkSpeed * sp;
       break;
     }
+    case 'jumpStart':   // jump squat (mode A): crouched in place, then take off moving the way the stick points
+      if (c.attack) f.squatAttack = true;
+      if (f.t >= d.move.jumpSquat) {
+        f.vx = c.mx * d.move.walk * sp; f.vy = c.my * d.move.depth * sp;
+        takeOff(f, d);
+        if (f.squatAttack && airAttackOf(f)) startMove(f, airAttackOf(f));
+      }
+      break;
     case 'jump':
       if (c.attack && !f.move && airAttackOf(f)) startMove(f, airAttackOf(f));
       if (f.move) stepMove(f);
