@@ -54,9 +54,9 @@ function tinted(color) {
   return tintBuf;
 }
 
-export function drawRig(ctx, f, rig, assets, time, flash = 0, alt = false) {
+export function drawRig(ctx, f, rig, assets, time, flash = 0) {
   if (!memory.has(f)) memory.set(f, {});
-  const joints = rigJoints(f, rig, time, memory.get(f), alt);
+  const joints = rigJoints(f, rig, time, memory.get(f));
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);

@@ -45,11 +45,10 @@ function strikePose(M, W, X, K, p, T) {
 }
 
 // Which pose a fighter is in: { key, joints } before blending.
-// alt: use poses.alt[move] when it exists (A/B test of a move's look; V in play).
-export function targetPose(f, rig, time, alt = false) {
+export function targetPose(f, rig, time) {
   const poses = rig.poses, S = { ...channelsOf(rig), ...poses.stance }, T = poses.timing;
   if (f.move) {
-    const key = moveKey(f), M = (alt && poses.alt?.[key]) || poses.moves?.[key];
+    const key = moveKey(f), M = poses.moves?.[key];
     if (M) {
       const [ph, p] = phaseOf(f);
       const W = evalPose(M.windup, S, 0), K = evalPose(M.strike, S, 0), X = M.through && evalPose(M.through, S, 0);
@@ -74,8 +73,8 @@ export function targetPose(f, rig, time, alt = false) {
 }
 
 // Final joints for this frame. mem is per-fighter render memory ({} to start).
-export function rigJoints(f, rig, time, mem, alt = false) {
-  const { key, joints } = targetPose(f, rig, time, alt);
+export function rigJoints(f, rig, time, mem) {
+  const { key, joints } = targetPose(f, rig, time);
   if (mem.key !== key) { mem.from = mem.last ?? joints; mem.t0 = time; mem.key = key; }
   const k = Math.min(1, (time - mem.t0) / rig.poses.timing.blend);
   mem.last = k < 1 ? mix(mem.from, joints, easeOut(k)) : joints;

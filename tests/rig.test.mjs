@@ -77,10 +77,10 @@ for (const leg of ['leg-front-lower', 'leg-back-lower']) {
   check(Math.abs((hi - lo) / need - 1) < 0.25, `${leg}: stride sweep ${(hi - lo).toFixed(1)} px ~ needed ${need.toFixed(1)} px (feet don't skate)`);
 }
 
-// Pose stretch and draw-order channels reach the layout (slash2 sweeps the arm from behind the torso to in front).
+// Pose stretch reaches the layout: slash2 (backhand) keeps the arm in front and flips the blade from back to front.
 const s2 = def.moves.slash2, wind = layoutRig(rig, targetPose(fighter({ state: 'attack', move: s2, mf: s2.windup }), rig, 0).joints);
 const idx = (Lx, n) => Lx.findIndex((e) => e.name === n);
-check(idx(wind, 'arm-front-upper') < idx(wind, 'torso'), 'slash2 windup: front arm drawn behind the torso');
+check(idx(wind, 'arm-front-upper') > idx(wind, 'torso'), 'slash2 windup: front arm drawn in front of the torso');
 const hit = layoutRig(rig, targetPose(fighter({ state: 'attack', move: s2, mf: s2.windup + s2.active - 1 }), rig, 0).joints);
 check(idx(hit, 'arm-front-upper') > idx(hit, 'torso'), 'slash2 strike: front arm drawn in front of the torso');
 const det = (Lx, n) => { const m = Lx.find((e) => e.name === n).m; return m[0] * m[3] - m[1] * m[2]; };

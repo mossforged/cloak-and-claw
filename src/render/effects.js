@@ -4,16 +4,12 @@ import { JUICE } from '../data/juice.js';
 
 const D2R = Math.PI / 180;
 
-// slashFor(f, move): optional override of move.fx.slash (the rig's A/B move variant).
-export function createEffects(slashFor = () => null) {
+export function createEffects() {
   let list = [];
   const flashes = new Map();   // fighter id -> frames of white flash left
   const add = (e) => list.push({ t: 0, ...e });
 
-  bus.on('swing', ({ f, move }) => {
-    const s = slashFor(f, move) ?? move.fx?.slash;
-    if (s) add({ type: 'slash', f, ...s, life: JUICE.slash.life });
-  });
+  bus.on('swing', ({ f, move }) => { if (move.fx?.slash) add({ type: 'slash', f, ...move.fx.slash, life: JUICE.slash.life }); });
   bus.on('hit', ({ target, damage, x, y, z, ko, move }) => {
     flashes.set(target.id, JUICE.flashFrames);
     const S = JUICE.sparks, big = ko || move.knockdown;

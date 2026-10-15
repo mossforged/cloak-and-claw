@@ -18,7 +18,7 @@ export const MOUSE_SWORD = {
     damage: 6, hitbox: { x: 10, z: 20, w: 82, h: 70 }, knockback: 2.5, hitstun: 18,
     hitstop: 4, shake: 2.5, lunge: 1.8,
     pose: { windup: { rot: 0.05, sx: 1.03, sy: 0.97, dx: -3 }, active: { rot: 0.1, sx: 1.06, sy: 0.96, dx: 6, dy: 2 } },
-    fx: { slash: { r: 58, from: 200, to: -15, cx: 14, cz: 56, flat: 0.32 } },
+    fx: { slash: { r: 50, from: 170, to: -20, cx: 22, cz: 62, flat: 0.32 } },
   },
   slash3: {
     windup: 10, active: 5, recovery: 22,

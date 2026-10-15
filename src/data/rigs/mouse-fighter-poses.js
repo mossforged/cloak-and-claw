@@ -69,16 +69,17 @@ export default {
       strike: { torso: 8, head: 4, dx: 2, 'arm-front-upper': -78, 'arm-front-lower': 10, sword: 90, 'arm-back-upper': -10, 'arm-back-lower': -30,
         'leg-front-upper': -52, 'leg-front-lower': 38, 'leg-back-upper': 42, 'leg-back-lower': -38, 'scarf-tail': -20, tail: -15 },
     },
-    slash2: {   // flat sweep across the body: blade from behind him, past the camera, out in front
-      // '.sx' on the sword = projected blade length (1 back, ~0 pointing at us, -1 flipped forward);
-      // '.order' moves the arm behind the torso (< 9) for the windup and in front for the strike.
-      windup: { torso: -6, head: -4, 'arm-front-upper': 85, 'arm-front-lower': -10, sword: 95, 'sword.sx': 1,
-        'arm-front-upper.order': 1.5, 'arm-front-lower.order': 1.7, 'sword.order': 1.6, 'arm-back-upper': -70,
-        'leg-front-upper': -42, 'leg-back-upper': 36 },
-      through: { torso: 4, head: -4, 'arm-front-upper': -15, 'arm-front-lower': -65, 'arm-front-upper.sy': 0.75, 'arm-front-lower.sy': 0.6,
-        sword: 246, 'sword.sx': 0.25, 'arm-back-upper': -40 },
-      strike: { torso: 10, head: 2, dx: 2, 'arm-front-upper': -78, 'arm-front-lower': -5, sword: 263, 'sword.sx': -1,
-        'arm-back-upper': -15, 'arm-back-lower': -40, 'leg-front-upper': -52, 'leg-front-lower': 38, 'leg-back-upper': 42, 'leg-back-lower': -38, 'scarf-tail': -18, tail: -12 },
+    slash2: {   // backhand cut outward, level: arm stays in front of the body
+      // fist cocked by the far shoulder with the blade lying back across the chest, then cut out forward.
+      // '.sx' on the sword = projected blade length (1 back, ~0 pointing at us, -1 flipped forward).
+      // A true horizontal cut needs the torso to twist (back-view torso art); see A001-02 notes.
+      windup: { torso: -6, head: -2, 'arm-front-upper': -54, 'arm-front-lower': -110, sword: 360, 'sword.sx': 1,
+        'arm-back-upper': -60, 'leg-front-upper': -42, 'leg-back-upper': 36 },
+      through: { torso: 2, head: -2, 'arm-front-upper': -77, 'arm-front-lower': -25, 'arm-front-lower.sy': 0.8,
+        sword: 282, 'sword.sx': 0.25, 'arm-back-upper': -40 },
+      strike: { torso: 10, head: 2, dx: 2, 'arm-front-upper': -95, 'arm-front-lower': -5, sword: 270, 'sword.sx': -1,
+        'arm-back-upper': -15, 'arm-back-lower': -40, 'leg-front-upper': -52, 'leg-front-lower': 38, 'leg-back-upper': 42, 'leg-back-lower': -38,
+        'scarf-tail': -18, tail: -12 },
     },
     slash3: {   // big wind-back, full swing over the top that knocks down
       windup: { torso: -12, head: -8, dx: -3, 'arm-front-upper': 182, 'arm-front-lower': -30, sword: -290, 'arm-back-upper': -100, 'arm-back-lower': -20,
@@ -91,22 +92,6 @@ export default {
         'leg-front-upper': -60, 'leg-front-lower': 75, 'leg-back-upper': -25, 'leg-back-lower': 70 },
       strike: { torso: 18, head: 6, 'arm-front-upper': -8, 'arm-front-lower': -10, sword: 120, 'arm-back-upper': -30,
         'leg-front-upper': -55, 'leg-front-lower': 70, 'leg-back-upper': -20, 'leg-back-lower': 65, 'scarf-tail': 25 },
-    },
-  },
-  // A/B test (V in play): another take on a move, same keys as `moves`, plus its own swoosh (fx).
-  // `base` names the move in `moves`, `label` this one. Delete the loser once the user picks.
-  alt: {
-    slash2: {
-      base: 'sweep from behind', label: 'backhand out',
-      // arm stays in front: fist cocked by the far shoulder, blade lying back across the chest, then cut outward
-      windup: { torso: -6, head: -2, 'arm-front-upper': -54, 'arm-front-lower': -110, sword: 360, 'sword.sx': 1,
-        'arm-back-upper': -60, 'leg-front-upper': -42, 'leg-back-upper': 36 },
-      through: { torso: 2, head: -2, 'arm-front-upper': -77, 'arm-front-lower': -25, 'arm-front-lower.sy': 0.8,
-        sword: 282, 'sword.sx': 0.25, 'arm-back-upper': -40 },
-      strike: { torso: 10, head: 2, dx: 2, 'arm-front-upper': -95, 'arm-front-lower': -5, sword: 270, 'sword.sx': -1,
-        'arm-back-upper': -15, 'arm-back-lower': -40, 'leg-front-upper': -52, 'leg-front-lower': 38, 'leg-back-upper': 42, 'leg-back-lower': -38,
-        'scarf-tail': -18, tail: -12 },
-      fx: { r: 50, from: 170, to: -20, cx: 22, cz: 62, flat: 0.32 },
     },
   },
 };

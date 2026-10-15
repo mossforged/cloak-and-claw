@@ -1,5 +1,5 @@
 // Keyboard + gamepad -> one control object per sim step:
-// { mx, my, attack, jump, start, debug, pause, rig, alt }  (mx/my are -1..1; buttons are "pressed this step")
+// { mx, my, attack, jump, start, debug, pause, rig }  (mx/my are -1..1; buttons are "pressed this step")
 import { KEYS, PAD } from '../data/controls.js';
 
 const held = new Set();      // key codes held
@@ -40,7 +40,7 @@ export function readControl() {
     mx: (isHeld('right') ? 1 : 0) - (isHeld('left') ? 1 : 0),
     my: (isHeld('down') ? 1 : 0) - (isHeld('up') ? 1 : 0),
   };
-  for (const a of ['attack', 'jump', 'start', 'debug', 'pause', 'rig', 'alt']) ctl[a] = pressed.has(a);
+  for (const a of ['attack', 'jump', 'start', 'debug', 'pause', 'rig']) ctl[a] = pressed.has(a);
   pressed.clear();
   readPad(ctl);
   return ctl;
