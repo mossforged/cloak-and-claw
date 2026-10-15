@@ -27,7 +27,7 @@
 - Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
-- The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade likely out; Kit Brawler undecided (confirm).
+- The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. Not urgent: revisit once core systems are locked down.
 
 ## Parked
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
