@@ -21,12 +21,20 @@ import { CUTLASS } from './moves/cutlass.js';
 import { PLANK_CLUB } from './moves/plank-club.js';
 import { BIG_FISH } from './moves/big-fish.js';
 import barrel from './props/barrel.js';
+import ratSpearman from './fighters/rat-spearman.js';
+import ratArcher from './fighters/rat-archer.js';
+import { RAT_SPEAR } from './moves/rat-spear.js';
+import { RAT_BOW } from './moves/rat-bow.js';
 
 export const ROOTS = {
   'src/data/moves/mouse-sword.js': MOUSE_SWORD,
   'src/data/moves/rat-blade.js': RAT_BLADE,
   'src/data/fighters/mouse-fighter.js': mouseFighter,
   'src/data/fighters/rat-raider.js': ratRaider,
+  'src/data/fighters/rat-spearman.js': ratSpearman,
+  'src/data/fighters/rat-archer.js': ratArcher,
+  'src/data/moves/rat-spear.js': RAT_SPEAR,
+  'src/data/moves/rat-bow.js': RAT_BOW,
   'src/data/rules.js': RULES,
   'src/data/juice.js': JUICE,
   'src/data/stages/harbor-market.js': harborMarket,
@@ -129,6 +137,33 @@ export const LAB_SCHEMA = [
       { path: 'ratSlash.lunge', min: 0, max: 8, step: 0.1, fallback: 0, file: RAT_MOVES },
       { path: 'ratSlash.depth', min: 2, max: 60, step: 1, fallback: RULES.depthHit, file: RAT_MOVES },
       ['ai.range', 10, 200, 1], ['ai.hover', 30, 400, 1], ['ai.aggression', 0, 1, 0.01],
+      ['ai.cooldown.0', 0, 300, 1], ['ai.cooldown.1', 0, 300, 1],
+    ],
+  },
+  {   // T011: spear kit (items/rat-spear.js gives the defaults; the fighter's own copy is what plays)
+    title: 'Rat Spearman', file: 'src/data/fighters/rat-spearman.js',
+    fields: [
+      ['move.walk', 0.5, 6, 0.1],
+      { path: 'spearThrust.windup', min: 1, max: 80, step: 1, file: 'src/data/moves/rat-spear.js' },
+      { path: 'spearThrust.recovery', min: 1, max: 80, step: 1, file: 'src/data/moves/rat-spear.js' },
+      { path: 'spearThrust.damage', min: 1, max: 50, step: 1, file: 'src/data/moves/rat-spear.js' },
+      { path: 'spearThrust.hitbox.w', min: 20, max: 220, step: 1, file: 'src/data/moves/rat-spear.js', label: 'reach (hitbox.w)' },
+      { path: 'spearThrust.lunge', min: 0, max: 8, step: 0.1, file: 'src/data/moves/rat-spear.js' },
+      ['ai.range', 10, 260, 1], ['ai.hover', 30, 400, 1], ['ai.aggression', 0, 1, 0.01],
+      ['ai.cooldown.0', 0, 300, 1], ['ai.cooldown.1', 0, 300, 1],
+    ],
+  },
+  {   // T011: bow kit; the arrow is bowShot's `shot`
+    title: 'Rat Archer', file: 'src/data/fighters/rat-archer.js',
+    fields: [
+      ['move.walk', 0.5, 6, 0.1],
+      { path: 'bowShot.windup', min: 1, max: 90, step: 1, file: 'src/data/moves/rat-bow.js', label: 'draw (windup)' },
+      { path: 'bowShot.recovery', min: 1, max: 80, step: 1, file: 'src/data/moves/rat-bow.js' },
+      { path: 'bowShot.shot.speed', min: 1, max: 20, step: 0.5, file: 'src/data/moves/rat-bow.js', label: 'arrow speed' },
+      { path: 'bowShot.shot.damage', min: 1, max: 40, step: 1, file: 'src/data/moves/rat-bow.js', label: 'arrow damage' },
+      { path: 'bowShot.shot.depth', min: 2, max: 40, step: 1, file: 'src/data/moves/rat-bow.js', label: 'arrow lane depth' },
+      { path: 'bowShot.shot.range', min: 100, max: 960, step: 10, file: 'src/data/moves/rat-bow.js', label: 'arrow range' },
+      ['ai.range', 60, 500, 5], ['ai.flee', 0, 400, 5], ['ai.slack', 0, 200, 5], ['ai.aggression', 0, 1, 0.01],
       ['ai.cooldown.0', 0, 300, 1], ['ai.cooldown.1', 0, 300, 1],
     ],
   },

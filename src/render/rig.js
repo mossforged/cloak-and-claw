@@ -4,6 +4,8 @@ import { phaseOf } from '../sim/fighter.js';
 import { poseOf, BLOCK_LEAN } from './standee.js';
 import { rigJoints, drawLayer, squatLayer } from './rig-pose.js';
 import { squatOf } from './jump-squat.js';
+import { gripLayout } from './rig-grip.js';
+import { ITEMS } from '../data/items/index.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
 const BOX = { w: 300, h: 260, ox: 150, oy: 200 };  // buffer area in screen px; (ox, oy) = feet
@@ -70,15 +72,19 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
 // A broken weapon is an empty hand until its swing ends. null = nothing held (the slot part draws as usual).
 // Empty hand too while the sword is sheathed: picking up (after the stow, or all along when swapping weapons)
 // and the first half of a sword draw (sheathed = mem.sheathed from drawLayer).
+// T011: a fighter with a `kit` (enemy weapon kit, items/*.js) holds it whenever he holds nothing else. A slot given as
+// { parent, attach, order } adds the weapon as a new part `held` there (upright: the bow stays straight up) instead of
+// replacing a part. grip/kit go to render/rig-grip.js (second hand, bow string).
 export function heldOf(f, rig, sheathed = false) {
-  const W = f.weapon, one = rig.slots?.['one-hand'];
+  const W = f.weapon ?? (f.def?.kit && { def: ITEMS[f.def.kit] }), one = rig.slots?.['one-hand'];
   const pk = f.state === 'pickup' && !W && (f.pickup?.swap || f.t >= f.def.pickup.stow);
   if (!W) return one && (pk || sheathed) ? { slot: one, part: null } : null;
-  const slot = rig.slots?.[W.def.grip];
-  if (!slot) return null;
-  if (W.broken) return { slot, part: null };
-  const A = W.def.art;
-  return { slot, part: { img: A.img, pivot: A.grip, rest: A.rest ?? 0, scale: A.px / rig.scale } };
+  const spec = rig.slots?.[W.def.grip];
+  if (!spec) return null;
+  const slot = typeof spec === 'string' ? spec : 'held', kit = W.def, grip = kit.grip;
+  if (W.broken) return { slot, part: null, grip, kit };
+  const A = kit.art, mount = typeof spec === 'string' ? {} : { ...spec, upright: true };
+  return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: A.rest ?? 0, scale: A.px / rig.scale } };
 }
 
 let buf, tintBuf;
@@ -104,8 +110,9 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
-  for (const { img, m } of layoutRig(rig, joints, mem.swap, heldOf(f, rig, mem.sheathed))) {
+  for (const { img, m, line } of gripLayout(rig, joints, mem.swap, heldOf(f, rig, mem.sheathed), f)) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
+    if (line) { g.strokeStyle = '#3a2a1e'; g.lineWidth = 0.8; g.beginPath(); line.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke(); continue; }
     g.transform(...m);
     g.drawImage(assets.get(img), 0, 0);
   }

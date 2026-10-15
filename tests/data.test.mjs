@@ -24,10 +24,11 @@ for (const [id, f] of Object.entries(FIGHTERS)) {
   for (const key of [f.attack, f.airAttack].filter(Boolean)) check(f.moves[key], `${id}: move '${key}' exists`);
   for (const [mk, m] of Object.entries(f.moves)) {
     for (const ph of PHASES) check(Number.isInteger(m[ph]) && m[ph] > 0, `${id}.${mk}: ${ph} is a positive integer`);
-    check(m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0, `${id}.${mk}: damage and hitbox`);
+    check((m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0) || (m.shot?.damage > 0 && m.shot.speed > 0 && existsSync(m.shot.art.img)), `${id}.${mk}: damage and hitbox (or a shot)`);
     if (m.next) check(f.moves[m.next], `${id}.${mk}: combo next '${m.next}' exists`);
   }
   if (f.team === 'enemy') check(f.ai && f.ai.range > 0, `${id}: ai config`);
+  if (f.kit) check(ITEMS[f.kit]?.kind === 'weapon' && f.moves === ITEMS[f.kit].moves, `${id}: kit '${f.kit}' is a weapon kit and gives his moves`);
 }
 for (const [id, s] of Object.entries(STAGES)) {
   check(existsSync(s.art.src), `stage ${id}: art exists`);
@@ -47,9 +48,11 @@ for (const [id, it] of Object.entries(ITEMS)) {
   check(it.moves[it.attack] && (!it.airAttack || it.moves[it.airAttack]), `item ${id}: attack move exists`);
   for (const [mk, m] of Object.entries(it.moves)) {
     for (const ph of PHASES) check(Number.isInteger(m[ph]) && m[ph] > 0, `item ${id}.${mk}: ${ph} is a positive integer`);
-    check(m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0, `item ${id}.${mk}: damage and hitbox`);
+    check((m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0) || m.shot?.damage > 0, `item ${id}.${mk}: damage and hitbox (or a shot)`);
     if (m.next) check(it.moves[m.next], `item ${id}.${mk}: combo next '${m.next}' exists`);
-    for (const r of Object.values(RIGS)) if (r.slots?.[it.grip]) check(r.poses.moves[m.rig ?? mk], `item ${id}.${mk}: rig ${r.id} has move pose '${m.rig ?? mk}'`);
+    // rigs of fighters that can wield it: pick-up heroes (any floor weapon) and fighters carrying it as their kit (T011)
+    const users = Object.values(FIGHTERS).filter((f) => f.art.rig && (f.pickup || f.kit === id)).map((f) => RIGS[f.art.rig]);
+    for (const r of users) if (r.slots?.[it.grip]) check(r.poses.moves[m.rig ?? mk], `item ${id}.${mk}: rig ${r.id} has move pose '${m.rig ?? mk}'`);
   }
 }
 for (const [id, p] of Object.entries(PROPS)) {

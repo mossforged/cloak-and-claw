@@ -6,11 +6,14 @@ Plain JavaScript + canvas. No engine, no build step.
 Play online: https://mossforged.github.io/cloak-and-claw/
 
 ## Run it (Mac)
+**Easiest:** double-click `tools/Play.command` in Finder. It starts a no-cache server on port 8100 and opens the game; keep its Terminal window open while playing, close it to stop.
+
+Or from a terminal:
 ```
 cd path/to/cloak-and-claw
-python3 -m http.server 8000
+python3 tools/serve.py
 ```
-Open http://localhost:8000. Add `?debug` to start with the debug overlay on.
+Open http://localhost:8000 (a no-cache server: a plain reload picks up every change. Avoid the plain `python3 -m http.server`: Chrome can keep stale code files from it, which froze wave 2 in T011). Add `?debug` to start with the debug overlay on.
 
 **Tuning lab:** http://localhost:8000/lab.html (online: https://mossforged.github.io/cloak-and-claw/lab.html) runs the game with live sliders for moves, movement, rules, Rat Raider and juice, plus slow motion, passive rats and wave respawn. "Copy changes" gives `file -> path: old -> new` lines to paste to the lead. Changes survive a reload; "Reset all" restores the defaults.
 

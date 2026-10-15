@@ -1,7 +1,7 @@
 import { RAT_BLADE } from '../moves/rat-blade.js';
 export default {
   id: 'rat-raider', name: 'Rat Raider', team: 'enemy',
-  art: { idle: 'assets/art/enemies/rat-raider.png', height: 136, facing: 1, anchorX: 0.56 },
+  art: { idle: 'assets/art/enemies/rat-raider.png', height: 136, facing: 1, anchorX: 0.56, rig: 'rat-raider' },
   body: { w: 44, h: 108 },
   throwable: true,   // the hero can grab and throw him (T009)
   stats: { maxHp: 30, power: 0, defense: 0, speed: 1 },

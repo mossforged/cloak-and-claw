@@ -1,5 +1,5 @@
 // The game state and one sim step. Order: AI -> fighters -> separation -> props block -> hits (fighters, then props)
-// -> thrown bodies -> KO drops -> items -> cleanup -> waves.
+// -> thrown bodies -> shots (loosed, flying) -> KO drops -> items -> cleanup -> waves.
 import { FIGHTERS } from '../data/fighters/index.js';
 import { STAGES } from '../data/stages/index.js';
 import { RULES } from '../data/rules.js';
@@ -11,13 +11,14 @@ import { resolveThrown } from './grab.js';
 import { thinkAI, separate } from './ai.js';
 import { createProps, hitProps, blockProps, stepItems, dropOnKO } from './props.js';
 import { stepWaves } from './waves.js';
+import { fireShots, stepShots } from './shots.js';
 
 export function createWorld(stageId, heroId, seed = Date.now()) {
   const stage = STAGES[stageId];
   const player = createFighter(FIGHTERS[heroId], stage.playerStart.x, stage.playerStart.y);
   return {
     stage, player, fighters: [player], frame: 0, rng: createRng(seed),
-    props: createProps(stage), items: [], itemRng: createRng(seed * 7 + 13),   // T010: own rng, so loot never shifts the fight's
+    props: createProps(stage), items: [], shots: [], itemRng: createRng(seed * 7 + 13),   // T010: own rng, so loot never shifts the fight's
     wave: 0, waveTimer: 40, kos: 0, xp: 0, over: false,
   };
 }
@@ -34,6 +35,8 @@ export function stepWorld(w, control) {
   resolveHits(w);
   hitProps(w);
   resolveThrown(w);
+  fireShots(w);
+  stepShots(w);
   dropOnKO(w);
   stepItems(w);
   for (const f of w.fighters) if (f.remove) { w.kos++; w.xp += f.def.xp ?? 0; }
