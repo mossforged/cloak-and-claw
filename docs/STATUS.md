@@ -5,7 +5,7 @@
 ## Next
 1. **Code builder:** T012 (wire A006 into block / cast / spin), then T014 (jump squat A/B), then T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
 2. **User:** judges A006 in motion after T012; picks a jump squat in T014.
-3. **Art builder:** A008 rat gear layers (hood, helmet + jerkin, captain hat + sash).
+3. **Art builder:** A008 delivered (source, merged); user look check pending. Then idle.
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -21,7 +21,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T012-mouse-touchup-poses.md` (small), then `T014-jump-squat-ab.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
-- Art: `docs/tasks/A008-rat-gear-layers.md`.
+- Art: none queued. A008 gear import goes with/after T011 (gear attaches to rat head/torso bones).
 
 ## Open questions (for the user)
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
@@ -46,6 +46,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged A008 (rat gear overlays: hood + quiver, helmet + jerkin, tricorn + sash; source). Helmet/hat cover part of the ears; torso fit approximate.
 2026-10-15 lead: merged T010 (floor weapons, crates/barrel, food, rat cutlass drops; pickup/swap animation; user OK round 2). Jump squat A/B queued as T014.
 2026-10-15 code: user OK'd T010 round 2 ("all of those changes are great"). User request for the lead (outside T010, not built): a small crouch before the jump (jump squat). Choice for the lead: a sim delay of a few frames before take-off (weightier, less responsive), or a view-only squash that doesn't delay the jump. User wants to compare both in play (an in-game toggle test, like T006's framing test).
 2026-10-15 code: T010 round 2 (user: "animate him stowing his weapon and deploying the new one"; "just one should be able to be picked up", a new one "should toss aside the one held"): weapon pickup is now a ~0.37 s `pickup` state (sheathe sword at the hip / flick the held weapon away behind him, crouch, rise with it); H on a weapon while holding one swaps; after a throw or a break he draws the sword from the hip (render-only arm layer). 11/11 tests; build "t010 floor weapons v2". New screen 5-swap-*.jpg.
