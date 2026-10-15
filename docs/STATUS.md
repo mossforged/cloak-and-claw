@@ -34,6 +34,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 code: T001 tuning lab on branch `t001-tuning-lab` (lab.html, src/lab/, src/data/lab-schema.js, tests/lab.test.mjs); no sim changes. Screens in docs/screens/T001/.
+2026-10-14 code: needs the user's human check: tune the combo in the lab in under 10 minutes.
 2026-10-14 lead: user answered the six genre-study questions (decisions.md); block, throws and floor weapons added to Stage 2.
 2026-10-14 lead: genre study written (docs/studies). A private lore appendix went to the user only, not the repo.
 2026-10-15 lead: set up the workflow (guides, contracts, CI, test runner, data test, brief, decisions, packets T001, T002, A001). Details in `docs/history.md`.
