@@ -23,7 +23,7 @@ export const JUICE = {
   items: { glow: 0.6, ghosts: 3, ringR: 26, sparkles: 8 },   // floor glow under pickups; ghosts behind a tossed weapon; eat/pickup pop
   weaponBreak: { hitstop: 6, shake: 6, life: 40 },
   // jump squat (T014, render only; see fighters' jumpSquatMode): legs extend from the crouch over `rise` frames after take-off
-  // (A and B); B also squashes on landing for `land` frames, `landDepth` of the full crouch. Standee: squashX/squashY at full crouch.
+  // (A and B); both squash on landing (A since T011) for `land` frames, `landDepth` of the full crouch. Standee: squashX/squashY at full crouch.
   jumpSquat: { rise: 5, land: 8, landDepth: 0.7, squashX: 1.1, squashY: 0.82 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
 };

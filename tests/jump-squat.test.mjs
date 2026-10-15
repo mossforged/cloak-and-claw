@@ -75,9 +75,8 @@ for (const mode of ['off', 'A', 'B']) {
   const land = squatOf(f, 0.01), later = squatOf(f, 0.01 + (J.land + 1) / 60);
   if (mode === 'off') check(rise === 0 && land === 0, 'off: never crouched');
   else check(rise === 1 && squatOf(fake({ state: 'jump', t: J.rise }), 0) === 0, `${mode}: full crouch at take-off, legs extended after rise`);
-  if (mode === 'B') check(land > 0.5 && later === 0, `B: landing squash (${land.toFixed(2)}) gone after land frames`);
+  if (mode !== 'off') check(land > 0.5 && later === 0, `${mode}: landing squash (${land.toFixed(2)}) gone after land frames`);
   if (mode === 'A') {
-    check(land === 0, 'A: no landing squash');
     const k = [0, SQ - 1].map((t) => squatOf(fake({ state: 'jumpStart', t }), 0));
     check(k[0] > 0 && k[1] === 1, `A: jumpStart crouches in (${k.map((v) => v.toFixed(2))})`);
   }
