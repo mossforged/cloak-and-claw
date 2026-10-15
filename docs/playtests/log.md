@@ -33,3 +33,4 @@ Suggested to the user: try windup ~34 in the lab. **User: "that fixed it."** For
 User's words (lightly cleaned): "The actual feel of striking and the knockback and all that feels pretty good. Maybe we can test the numbers, but for a first pass it feels pretty great."
 Issues he noted but set aside as not this stage's point: the walkable lane doesn't line up with the background art; the animations are janky.
 **Gate result: passed.**
+- 2026-10-15 A008 rat gear (review image): user likes the change of clothes and the hat. Legs still look "very strange, weirdly spread, weirdly muscly but still thin"; judge again in T011's crouch rig.

@@ -5,7 +5,7 @@
 ## Next
 1. **Code builder:** T012 (wire A006 into block / cast / spin), then T014 (jump squat A/B), then T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
 2. **User:** judges A006 in motion after T012; picks a jump squat in T014.
-3. **Art builder:** A008 delivered (source, merged); user look check pending. Then idle.
+3. **Art builder:** idle (A008 gear approved). Possible next: a rat leg redraw if T011's crouch doesn't fix the legs.
 
 ## Stage plan
 | Stage | What | Gate question for the user |
