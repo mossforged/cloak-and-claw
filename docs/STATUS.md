@@ -24,7 +24,7 @@
 - Art: `docs/tasks/A001-mouse-fighter-rig.md`.
 
 ## Open questions (for the user)
-- Are the four design pillars in `docs/handoffs/game-brief.md` right? (Lead's draft.)
+- None right now.
 
 ## Parked
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
