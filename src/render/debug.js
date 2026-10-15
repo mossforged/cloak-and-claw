@@ -42,10 +42,11 @@ export function drawDebug(ctx, world, juice, camX = 0) {
     ctx.fillStyle = '#fff'; ctx.fillText(label, f.x - 2, f.y + 17);
   }
   ctx.translate(camX, 0);
-  ctx.fillStyle = '#000'; ctx.fillRect(8, 500, 460, 32);
+  const cam = world.cam ? `   camera x ${world.cam.x.toFixed(0)}${world.cam.locked ? ' LOCKED' : ''} loop ${world.run.loop} queue ${world.run.queue.length}` : '';
+  ctx.fillStyle = '#000'; ctx.fillRect(8, 500, cam ? 760 : 460, 32);
   ctx.fillStyle = '#ff0';
   ctx.fillText(`frame ${world.frame}  wave ${world.wave}  fighters ${world.fighters.length}  attackers ${world.fighters.filter((f) => f.ai?.token).length}/${RULES.maxAttackers}`, 14, 514);
-  ctx.fillText(`hitstop ${juice.freeze}  shake ${juice.shake.toFixed(1)}   (* = has attack token)`, 14, 528);
+  ctx.fillText(`hitstop ${juice.freeze}  shake ${juice.shake.toFixed(1)}   (* = has attack token)${cam}`, 14, 528);
   ctx.restore();
 }
 
@@ -67,6 +68,4 @@ function drawScroll(ctx, world) {
   });
   ctx.strokeStyle = '#7cff7c'; ctx.beginPath(); ctx.moveTo(s.end, fl.top); ctx.lineTo(s.end, fl.bottom); ctx.stroke();
   ctx.fillStyle = '#7cff7c'; ctx.fillText('end (loop)', s.end - 30, fl.bottom + 14);
-  ctx.fillStyle = '#9fe2ff';
-  ctx.fillText(`camera x ${world.cam.x.toFixed(0)}${world.cam.locked ? ' LOCKED' : ''}  loop ${world.run.loop}  queue ${world.run.queue.length}`, world.cam.x + 14, 488);
 }
