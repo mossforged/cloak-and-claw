@@ -18,3 +18,11 @@ The user approved cutout rigs for every character. The Rat Raider is the main en
 - Human: is this the rat you want to fight?
 
 Out of scope: other enemies, animation, game import.
+
+## Addendum (lead, 2026-10-15): weapon-kit parts, same delivery
+The roster will be built from weapon kits on shared bodies (`docs/decisions.md`, 2026-10-15). Add these to the same folder, same canvas and scale as the reference:
+- `hand-front-grip.png` and `hand-back-grip.png`: closed fists gripping a shaft (for two-handed spears/polearms), matching the forearm cuffs so they can replace the hands at the wrist. If the forearm and hand are one piece in your parts, deliver `arm-back-lower-grip.png` (forearm + gripping fist) instead.
+- `hand-back-pinch.png` (or `arm-back-lower-pinch.png`): the far hand pinching a bowstring.
+- `spear.png`: a rough-hewn raider spear (long shaft, iron head, rag tied below the head), drawn straight, about 1.5x the rat's height.
+- `bow.png`: a short recurve raider bow, string undrawn; `arrow.png`: one arrow.
+- Show in `review.png` a quick mock assembly of the rat holding the spear two-handed and drawing the bow (rough placement is fine; it's to check scale and grip).

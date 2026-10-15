@@ -38,7 +38,7 @@
 - Belt depth: the Harbor Market art only allows a 63 px belt (packet asked 85+). User: "we might need to eventually return to belt depth and then get the art to match the goal." Plan: when stages become layered (Stage 5), set the target belt depth first and brief the stage art to it. Also: feet overlap two front dock posts slightly; fighters look a bit smaller after the zoom.
 - Companion / pet that fights alongside you (Castle Crashers' animal orbs). User likes it.
 - Co-op party of up to **three** players (user), not just two; plan Stage 8 and belt depth for it.
-- **Weapon kits + hand-grip parts** (decision 2026-10-15): after A004, an art task for the rat's extra hands (two-hand grip, bow-string pinch) + bow/arrow/spear images; then a code task for weapon kits on the rig.
+- **Weapon kits** (decision 2026-10-15): the rat's grip hands, spear, bow and arrow were folded into A004; after it, a code task for weapon kits on the rig.
 - **Enemy design workspace** (user): compose an enemy from body + stats + move library + AI params, test it on a bench vs dummy/bot, auto-measure (time to kill, escape time, block-through), export a data file. After Stage 4. Sketch in the 2026-10-15 study.
 - Standing lessons checklist: `docs/design/lessons.md`. Lessons to schedule (2026-10-15 study, section 9): shrink depth hit area while moving vertically; cap on-screen enemies at 5; lab frame-step + live reload; invisible side walls; colour-variant enemies.
 - A 360-degree spin special that hits all around (crowd clearer, Final Fight style), building on T008's spin slash.
