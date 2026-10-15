@@ -4,7 +4,8 @@
 
 ## Next
 1. **Code builder:** T001 tuning lab (started 2026-10-14).
-2. **Art builder:** A001 Mouse Fighter rig parts (started 2026-10-14).
+2. **Code builder (can run alongside T001, separate session):** T003 Mouse Fighter rig, so the user can see it move.
+   A001 rig parts merged 2026-10-14; look approved. Art builder is free.
 3. **Lead:** after T001, write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
 
 ## Stage plan
@@ -20,8 +21,8 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T001-tuning-lab.md`. Queued: `T002-run-log.md` (auto-ok).
-- Art: `docs/tasks/A001-mouse-fighter-rig.md`.
+- Code: `docs/tasks/T001-tuning-lab.md`, `docs/tasks/T003-mouse-rig.md`. Queued: `T002-run-log.md` (auto-ok).
+- Art: nothing queued (A001 done).
 
 ## Open questions (for the user)
 - None right now.
@@ -34,6 +35,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: merged A001 (source art; user approved the look). Wrote T003 (rig) so the user can see it move.
 2026-10-14 lead: Stage 1 gate passed (user: striking and knockback feel good). Lane/background mismatch noted for Stage 2.
 2026-10-14 lead: user answered the six genre-study questions (decisions.md); block, throws and floor weapons added to Stage 2.
 2026-10-14 lead: genre study written (docs/studies). A private lore appendix went to the user only, not the repo.
