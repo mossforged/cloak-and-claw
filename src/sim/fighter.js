@@ -1,7 +1,7 @@
 // Fighter entity + state machine. Pure logic: no drawing, no DOM.
 // States: idle walk block jump attack hurt knockdown down getup dead, plus grab/throw (sim/grab.js):
 // grabbing throw (holder), grabbed thrown (held / flying body).
-// Every fighter is driven by f.control = { mx, my, attack, jump, block?, face? } (set by input or AI).
+// Every fighter is driven by f.control = { mx, my, attack, jump, block?, grab?, face? } (set by input or AI).
 // block (held) only works for fighters whose def has a `block` config.
 import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
@@ -16,7 +16,7 @@ export function createFighter(def, x, y, opts = {}) {
     hp: def.stats.maxHp, maxHp: def.stats.maxHp,
     state: 'idle', t: 0, stun: 0, invuln: 0, lastHit: -999,
     move: null, mf: 0, queued: false, hitList: new Set(), bounced: false,
-    free: 0, press: 0, grab: null, heldBy: null, thrower: null,   // free = frames in idle/walk since the last move (grab.idleFrames)
+    grab: null, heldBy: null, thrower: null,   // grab/throw (sim/grab.js)
     control: { mx: 0, my: 0, attack: false, jump: false },
     ai: opts.ai ? { mode: 'hover', wait: 0, cool: 30, token: false, yOff: 0, attacked: false } : null,
     entering: !!opts.entering, remove: false,
@@ -28,7 +28,7 @@ export const HELPLESS = ['hurt', 'knockdown', 'down', 'getup', 'dead', 'grabbed'
 const BOUNCY = ['thrown', 'knockdown', 'down'];   // bounce off the floor's side edges (RULES.wallBounce)
 export const canAct = (f) => ACTIVE_STATES.includes(f.state);
 
-export function setState(f, s) { f.state = s; f.t = 0; if (!ACTIVE_STATES.includes(s)) f.free = 0; }
+export function setState(f, s) { f.state = s; f.t = 0; }
 
 // Which phase a move is in, and 0..1 progress through it.
 export function phaseOf(f) {
@@ -75,8 +75,7 @@ export function updateFighter(f, world) {
     case 'idle': case 'walk': {
       if (c.block && d.block) { setState(f, 'block'); f.stun = 0; f.vx = f.vy = 0; break; }
       if (c.attack && d.attack) { startMove(f, d.attack); break; }
-      f.free++;
-      if (d.grab && tryGrab(f, world)) break;
+      if (c.grab && d.grab && tryGrab(f, world)) break;
       f.vx = c.mx * d.move.walk * sp;
       f.vy = c.my * d.move.depth * sp;
       if (c.jump && d.move.jump) { f.vz = d.move.jump; f.z = 0.01; setState(f, 'jump'); bus.emit('jump', { f }); break; }

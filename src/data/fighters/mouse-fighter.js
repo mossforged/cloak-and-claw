@@ -13,12 +13,11 @@ export default {
   // pushback = blocker slide px/frame; stun = frames the blocker can't act; attackerPush = attacker shoved back px/frame;
   // hitstop/shake = feel on a block. Hits from behind land normally.
   block: { walkSpeed: 0.6, chip: 0, pushback: 3, stun: 12, attackerPush: 4, hitstop: 4, shake: 3 },
-  // grab (walk into a `throwable` enemy): range/depth = max x/y gap (feet to feet) to grab; idleFrames = frames
-  // after any move before a grab can happen (so combos never grab); delay = frames pushing into him first (an attack
-  // pressed in that time still attacks); holdX/holdY = where he is held (px in front; px of depth, - = just behind so the hero draws over him); holdMax = frames before he breaks free
+  // grab (press grab, H / pad Y, with a `throwable` enemy in front): range/depth = max x/y gap (feet to feet) to grab;
+  // holdX/holdY = where he is held (px in front; px of depth, - = just behind so the hero draws over him); holdMax = frames before he breaks free
   // (breakPush px/frame, breakStun frames); dropStun = his stumble when a hit makes you let go; clinchZ = grip height.
   // knee (attack while holding): windup/active/recovery frames, damage, hitstop, shake; the maxStrikes-th uses lastKnee and knocks down.
-  grab: { range: 56, depth: 12, idleFrames: 10, delay: 5, holdX: 52, holdY: -1, holdMax: 150, maxStrikes: 3,
+  grab: { range: 56, depth: 12, holdX: 52, holdY: -1, holdMax: 150, maxStrikes: 3,
     breakPush: 4, breakStun: 16, dropStun: 14, clinchZ: 62, hitstop: 3, shake: 2,
     knee: { windup: 6, active: 2, recovery: 12, damage: 4, hitstop: 5, shake: 3 },
     lastKnee: { damage: 8, hitstop: 9, shake: 7 } },

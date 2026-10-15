@@ -53,7 +53,7 @@ export const LAB_SCHEMA = [
   {
     title: 'Hero grab + throw', file: 'src/data/fighters/mouse-fighter.js',
     fields: [
-      ['grab.range', 20, 120, 1], ['grab.depth', 2, 40, 1], ['grab.idleFrames', 0, 60, 1], ['grab.delay', 1, 30, 1],
+      ['grab.range', 20, 120, 1], ['grab.depth', 2, 40, 1],
       ['grab.holdX', 20, 90, 1], ['grab.holdMax', 30, 400, 1], ['grab.maxStrikes', 1, 6, 1],
       ['grab.knee.damage', 1, 30, 1], ['grab.lastKnee.damage', 1, 40, 1],
       ['throw.vx', 1, 16, 0.1], ['throw.vz', 0, 14, 0.1], ['throw.damage', 1, 50, 1], ['throw.hitDamage', 1, 50, 1],

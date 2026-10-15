@@ -1,5 +1,5 @@
 // Keyboard + gamepad -> one control object per sim step:
-// { mx, my, attack, jump, start, debug, pause, rig, cast, block, blockTap }  (mx/my are -1..1; buttons are "pressed this step",
+// { mx, my, attack, jump, grab, start, debug, pause, rig, cast, block, blockTap }  (mx/my are -1..1; buttons are "pressed this step",
 // except block = held; blockTap = block pressed this step, used as the run-log download on the game-over screen)
 import { KEYS, PAD } from '../data/controls.js';
 
@@ -29,7 +29,7 @@ function readPad(ctl) {
   if (Math.abs(ay) > PAD.deadzone) ctl.my = Math.sign(ay);
   const b = (i) => pad.buttons[i]?.pressed;
   if (b(14)) ctl.mx = -1; if (b(15)) ctl.mx = 1; if (b(12)) ctl.my = -1; if (b(13)) ctl.my = 1;
-  for (const action of ['attack', 'jump', 'start', 'block']) {
+  for (const action of ['attack', 'jump', 'grab', 'start', 'block']) {
     const now = PAD[action].some(b);
     if (now && !padPrev[action]) ctl[action === 'block' ? 'blockTap' : action] = true;
     padPrev[action] = now;
@@ -42,7 +42,7 @@ export function readControl() {
     mx: (isHeld('right') ? 1 : 0) - (isHeld('left') ? 1 : 0),
     my: (isHeld('down') ? 1 : 0) - (isHeld('up') ? 1 : 0),
   };
-  for (const a of ['attack', 'jump', 'start', 'debug', 'pause', 'rig', 'cast']) ctl[a] = pressed.has(a);
+  for (const a of ['attack', 'jump', 'grab', 'start', 'debug', 'pause', 'rig', 'cast']) ctl[a] = pressed.has(a);
   ctl.block = isHeld('block');
   ctl.blockTap = pressed.has('block');
   pressed.clear();

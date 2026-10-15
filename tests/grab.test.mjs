@@ -1,4 +1,4 @@
-// Grab and throw (T009): grab only when the conditions are met; knee x3 knocks down; a thrown rat bowls over
+// Grab and throw (T009): grab only on the grab button with a rat in reach (never automatic); knee x3 knocks down; a thrown rat bowls over
 // another; break-free timer; a hit drops the grab; wall bounce keeps fighters on the belt; AI tokens and
 // separation around a grabbed rat; a grab-and-throw bot runs 3 min x 3 seeds without NaN or stuck rats.
 import { createWorld, stepWorld } from '../src/sim/world.js';
@@ -17,7 +17,7 @@ for (const k of Object.keys(ev)) bus.on(k, (e) => ev[k].push(e));
 const reset = () => { for (const k of Object.keys(ev)) ev[k].length = 0; };
 const log = createRunLog();
 
-const N = { mx: 0, my: 0, attack: false, jump: false, block: false };
+const N = { mx: 0, my: 0, attack: false, jump: false, block: false, grab: false };
 const R = { ...N, mx: 1 };
 // Hero at 260 facing right, rats at the given x offsets (same depth unless dy), no AI unless asked, no waves.
 function setup(offsets = [45], { ai = false, dy = 0 } = {}) {
@@ -30,51 +30,37 @@ function setup(offsets = [45], { ai = false, dy = 0 } = {}) {
   return { w, p, rats };
 }
 const run = (w, n, c = N) => { for (let i = 0; i < n; i++) stepWorld(w, typeof c === 'function' ? c(i) : c); };
-// Walk into the rat until grabbed (or give up).
-function grab(w, p, max = 40) { for (let i = 0; i < max && p.state !== 'grabbing'; i++) stepWorld(w, R); return p.state === 'grabbing'; }
+// Press grab (he's in reach in front).
+function grab(w, p) { stepWorld(w, { ...N, grab: true }); return p.state === 'grabbing'; }
 
-// grab: walking into him grabs after `delay` frames of pushing
+// grab: pressing grab with him in reach in front grabs at once
 {
   const { w, p, rats: [r] } = setup();
-  run(w, G.idleFrames);
-  run(w, G.delay - 1, R);
-  check(p.state === 'walk', `no grab before delay (state ${p.state})`);
-  stepWorld(w, R);
-  check(p.state === 'grabbing' && r.state === 'grabbed' && p.grab?.target === r, `grab after ${G.delay} frames pushing (state ${p.state}/${r.state})`);
+  stepWorld(w, { ...N, grab: true });
+  check(p.state === 'grabbing' && r.state === 'grabbed' && p.grab?.target === r, `grab button grabs (state ${p.state}/${r.state})`);
   check(ev.grab.length === 1 && ev.grab[0].f === p && ev.grab[0].target === r, 'grab event');
   check(Math.abs(r.x - (p.x + G.holdX)) < 1e-9 && r.y === p.y + G.holdY, 'held in front at holdX/holdY');
   check(log.summary().grabs === 1, 'run log counts the grab');
 }
-// no grab: standing next to him, walking away, out of depth, too far, enemy attacking, airborne, mid-combo
+// never automatic: walking into him, standing next to him, mashing a combo into him never grab
 {
-  let s = setup(); run(s.w, 30); check(s.p.state === 'idle', 'standing still never grabs');
-  s = setup(); run(s.w, 30, { ...N, mx: -1 }); check(s.p.state === 'walk', 'walking away never grabs');
-  s = setup([45], { dy: G.depth + 2 }); run(s.w, 20, { ...R, mx: 0 }); run(s.w, 6, R);
-  check(s.p.state !== 'grabbing', 'out of depth: no grab');
-  s = setup([200]); run(s.w, 12, R); check(s.p.state === 'walk', 'too far: no grab');
-  s = setup(); startMove(s.rats[0], rat.attack); run(s.w, 15, R); check(s.p.state !== 'grabbing', 'attacking rat: no grab');
-  s = setup(); s.rats[0].invuln = 60; run(s.w, 15, R); check(s.p.state !== 'grabbing', 'invulnerable (getting up) rat: no grab');
-}
-// attack pressed while pushing in still attacks; a combo pressed with forward held never grabs
-{
-  const { w, p } = setup();
-  run(w, G.idleFrames);
-  run(w, G.delay - 2, R);
-  stepWorld(w, { ...R, attack: true });
-  check(p.state === 'attack' && ev.grab.length === 0, `attack inside the delay attacks (state ${p.state})`);
-  const s = setup([60]);
-  let grabbed = false;
+  let s = setup(), grabbed = false;
+  for (let i = 0; i < 90; i++) { stepWorld(s.w, R); grabbed ||= s.p.state === 'grabbing'; }
+  check(!grabbed, 'walking into a rat never grabs on its own');
+  s = setup(); run(s.w, 30); check(s.p.state === 'idle', 'standing next to him never grabs');
+  s = setup([60]); grabbed = false;
   for (let i = 0; i < 90; i++) { stepWorld(s.w, { ...R, attack: i % 6 === 0 }); grabbed ||= s.p.state === 'grabbing'; }
   check(!grabbed, 'mashing attack while holding forward never grabs');
-  // right after a move ends, idleFrames must pass before a grab
-  const t = setup([45]);
-  startMove(t.p, 'slash1');
-  const m = hero.moves.slash1;
-  t.rats[0].invuln = 1e9;   // keep the rat standing through the swing
-  run(t.w, m.windup + m.active + m.recovery);
-  t.rats[0].invuln = 0; t.rats[0].state = 'idle'; t.rats[0].x = t.p.x + 45; t.rats[0].y = t.p.y;
-  run(t.w, G.idleFrames - 1, R);
-  check(t.p.state !== 'grabbing', 'no grab within idleFrames of a move');
+}
+// grab needs a target in reach in front
+{
+  let s = setup([-45]); stepWorld(s.w, { ...N, grab: true }); check(s.p.state !== 'grabbing', 'rat behind (facing away): no grab');
+  s = setup([-45]); stepWorld(s.w, { ...N, mx: -1, grab: true }); check(s.p.state === 'grabbing' && s.p.facing === -1, 'rat behind, pushing toward him: grab and turn');
+  s = setup([45], { dy: G.depth + 2 }); stepWorld(s.w, { ...N, grab: true }); check(s.p.state !== 'grabbing', 'out of depth: no grab');
+  s = setup([G.range + 10]); stepWorld(s.w, { ...N, grab: true }); check(s.p.state !== 'grabbing', 'too far: no grab');
+  s = setup(); startMove(s.rats[0], rat.attack); stepWorld(s.w, { ...N, grab: true }); check(s.p.state !== 'grabbing', 'attacking rat: no grab');
+  s = setup(); s.rats[0].invuln = 60; stepWorld(s.w, { ...N, grab: true }); check(s.p.state !== 'grabbing', 'invulnerable (getting up) rat: no grab');
+  s = setup(); stepWorld(s.w, { ...N, grab: true, attack: true }); check(s.p.state === 'attack', 'attack + grab on the same frame: attack wins');
 }
 // knee x3: two knees keep the hold, the third knocks down; damage adds up
 {
@@ -193,9 +179,10 @@ function grab(w, p, max = 40) { for (let i = 0; i < max && p.state !== 'grabbing
       const e = foes.sort((a, b) => Math.abs(a.x - p.x) - Math.abs(b.x - p.x))[0];
       let c = N;
       if (p.state === 'grabbing') c = p.t > 20 ? { ...N, mx: (i >> 7) % 2 ? -p.facing : p.facing, attack: true } : { ...N, attack: p.t % 25 === 5 };
-      else if (e) {   // push into the nearest rat; swing at him if he's winding up (can't grab an attacker)
+      else if (e) {   // walk to the nearest rat and press grab; swing at him if he's winding up (can't grab an attacker)
         const near = Math.abs(e.x - p.x) < 75 && Math.abs(e.y - p.y) < 10;
-        c = { ...N, mx: Math.sign(e.x - p.x), my: Math.abs(e.y - p.y) > 4 ? Math.sign(e.y - p.y) : 0, attack: near && e.state === 'attack' && i % 6 === 0 };
+        c = { ...N, mx: Math.sign(e.x - p.x), my: Math.abs(e.y - p.y) > 4 ? Math.sign(e.y - p.y) : 0, attack: near && e.state === 'attack' && i % 6 === 0,
+          grab: Math.abs(e.x - p.x) < G.range && i % 4 === 0 };
       }
       stepWorld(w, c);
       for (const f of w.fighters) {

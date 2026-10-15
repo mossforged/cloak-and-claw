@@ -1,6 +1,6 @@
 // Grab and throw (T009). Pure logic. Numbers: the holder's def.grab / def.throw; RULES.wallBounce.
-// Walking into a `throwable` enemy (after grab.idleFrames without attacking, pushing for grab.delay frames)
-// grabs him: holder `grabbing`, held `grabbed` (helpless). While holding: attack = knee (the
+// Pressing grab (control.grab) with a `throwable` enemy in reach in front grabs him: holder `grabbing`,
+// held `grabbed` (helpless). Walking into enemies never grabs on its own (round 2: always a choice). While holding: attack = knee (the
 // grab.maxStrikes-th knocks down); attack + direction, or jump, = throw that way. He breaks free after
 // grab.holdMax frames; a hit on the holder drops him. Throw: holder `throw` (wind, release, recovery);
 // the body is `thrown`, an arc that knocks down enemies it touches (`thrownHit`) and lands knocked down.
@@ -19,10 +19,9 @@ function knockDown(t, dir) {
   t.vz = K.vz; t.vx = dir * K.vx; t.vy = 0; t.z = Math.max(t.z, 0.01);
 }
 
-// The nearest throwable enemy the fighter is walking into, if any.
+// The nearest throwable enemy in reach on the side the fighter faces (or is pushing toward), if any.
 function targetOf(f, w) {
-  const G = f.def.grab, dir = Math.sign(f.control.mx);
-  if (!dir) return null;
+  const G = f.def.grab, dir = Math.sign(f.control.mx) || f.facing;
   let best = null;
   for (const t of w.fighters) {
     if (t.team === f.team || !t.def.throwable || !GRABBABLE.includes(t.state) || t.entering || t.z > 0 || t.invuln > 0) continue;
@@ -35,13 +34,12 @@ function targetOf(f, w) {
 
 const hold = (f, t) => { t.x = f.x + f.facing * f.def.grab.holdX; t.y = f.y + f.def.grab.holdY; t.z = 0; t.vx = t.vy = t.vz = 0; };
 
-// Called from idle/walk (after attack and block had their chance). true = grabbed this frame.
+// Called from idle/walk when grab is pressed (after attack and block had their chance). true = grabbed.
 export function tryGrab(f, w) {
-  const G = f.def.grab, t = f.free >= G.idleFrames ? targetOf(f, w) : null;
-  f.press = t ? f.press + 1 : 0;
-  if (!t || f.press < G.delay) return false;
+  const G = f.def.grab, t = targetOf(f, w);
+  if (!t) return false;
   f.facing = Math.sign(t.x - f.x) || f.facing;
-  setState(f, 'grabbing'); f.vx = f.vy = 0; f.press = 0;
+  setState(f, 'grabbing'); f.vx = f.vy = 0;
   f.grab = { target: t, strikes: 0, knee: -1, queued: false, dir: 0, back: false };
   t.move = null; t.ai && (t.ai.token = false);
   setState(t, 'grabbed'); t.facing = -f.facing; t.heldBy = f;

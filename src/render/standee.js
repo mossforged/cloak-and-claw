@@ -11,7 +11,7 @@ const lerp = (a, b, t) => a + (b - a) * t;
 const easeOut = (t) => 1 - (1 - t) ** 3;
 const mix = (a, b, t) => {
   a = { ...ZERO, ...a }; b = { ...ZERO, ...b };
-  return { rot: lerp(a.rot, b.rot, t), sx: lerp(a.sx, b.sx, t), sy: lerp(a.sy, b.sy, t), dx: lerp(a.dx, b.dx, t), dy: lerp(a.dy, b.dy, t) };
+  return { rot: lerp(a.rot, b.rot, t), sx: lerp(a.sx, b.sx, t), sy: lerp(a.sy, b.sy, t), dx: lerp(a.dx, b.dx, t), dy: lerp(a.dy, b.dy, t), cy: lerp(a.cy, b.cy, t) };
 };
 
 function movePose(f) {
