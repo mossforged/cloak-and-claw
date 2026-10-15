@@ -44,6 +44,13 @@ export const LAB_SCHEMA = [
     fields: [['move.walk', 0.5, 8, 0.1], ['move.depth', 0.5, 6, 0.1], ['move.jump', 2, 20, 0.1]],
   },
   {
+    title: 'Hero block (hold L)', file: 'src/data/fighters/mouse-fighter.js',
+    fields: [
+      ['block.walkSpeed', 0, 3, 0.1], ['block.chip', 0, 20, 1], ['block.pushback', 0, 10, 0.1], ['block.stun', 0, 40, 1],
+      ['block.attackerPush', 0, 10, 0.1], ['block.hitstop', 0, 20, 1], ['block.shake', 0, 15, 0.5],
+    ],
+  },
+  {
     title: 'Rules', file: 'src/data/rules.js',
     fields: [
       ['gravity', 0.1, 2, 0.01], ['depthHit', 2, 60, 1], ['maxAttackers', 0, 6, 1],
@@ -69,6 +76,8 @@ export const LAB_SCHEMA = [
     fields: [
       ['shake.decay', 0.5, 0.99, 0.01], ['shake.max', 0, 60, 1], ['flashFrames', 1, 30, 1],
       ['koHitstop', 0, 40, 1], ['koShake', 0, 30, 0.5],
+      ['block.glint.dx', -40, 120, 1], ['block.glint.dy', 0, 140, 1], ['block.glint.size', 0, 60, 1],
+      ['block.glint.life', 1, 60, 1], ['block.glint.delay', 0, 20, 1],
     ],
   },
   {

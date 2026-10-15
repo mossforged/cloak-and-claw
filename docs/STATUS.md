@@ -1,9 +1,9 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T006 floor lane (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; look approved).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T007 shield block (merged 2026-10-15). Last art task: A002 three-quarter rig parts (merged; look approved).
 
 ## Next
-   **Code builder:** T007 shield block, then T008 spin slash (user's idea).
+   **Code builder:** T008 spin slash (user's idea).
    **Art builder:** A004 Rat Raider rig parts.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
@@ -22,7 +22,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T007-shield-block.md`, then `T008-spin-slash.md`. Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
+- Code: `docs/tasks/T008-spin-slash.md`. Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
 - Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
@@ -33,7 +33,7 @@
 - Touch controls for phone play (Stage 5).
 - Art bible items (pie, cheese, potions, chest, coins) as pickups and RPG rewards (Stage 6).
 - Bramble Brute as the first boss.
-- Rig follow-ups: block pose (T007: mechanic good, pose fights the art; user agreed to polish later); art for a shield-forward arm + more face-on shield, a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
+- Rig follow-ups (Mouse Fighter art touch-up, A005 when queued): shield drawn facing the viewer, a raised-guard shield arm, a gritted-teeth bracing head (T007); a torso turned side-on a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
 - Belt depth: the Harbor Market art only allows a 63 px belt (packet asked 85+). User: "we might need to eventually return to belt depth and then get the art to match the goal." Plan: when stages become layered (Stage 5), set the target belt depth first and brief the stage art to it. Also: feet overlap two front dock posts slightly; fighters look a bit smaller after the zoom.
 - Companion / pet that fights alongside you (Castle Crashers' animal orbs). User likes it.
@@ -41,14 +41,24 @@
 - **Weapon kits** (decision 2026-10-15): the rat's grip hands, spear, bow and arrow were folded into A004; after it, a code task for weapon kits on the rig.
 - **Enemy design workspace** (user): compose an enemy from body + stats + move library + AI params, test it on a bench vs dummy/bot, auto-measure (time to kill, escape time, block-through), export a data file. After Stage 4. Sketch in the 2026-10-15 study.
 - Standing lessons checklist: `docs/design/lessons.md`. Lessons to schedule (2026-10-15 study, section 9): shrink depth hit area while moving vertically; cap on-screen enemies at 5; lab frame-step + live reload; invisible side walls; colour-variant enemies.
+- Parry: a timed block as a later skill layer (user's earlier idea; T007 report).
+- Gamepad block (RB) untested.
 - A 360-degree spin special that hits all around (crowd clearer, Final Fight style), building on T008's spin slash.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged T007 (shield block; sim change limited to fighters with a block config; user approved the readable pose, polish parked).
 2026-10-15 lead: A003 props approved. Block pose polish deferred (mechanic first, pose must be readable).
 2026-10-15 lead: study "What makes our game distinct?" (hooks); private lore appendix to the user only.
 2026-10-15 lead: decided the body x colour x weapon kit x gear assembly line; wrote docs/design/lessons.md.
 2026-10-15 lead: study "How beat 'em ups are made" (developer lessons); enemy design workspace parked.
+2026-10-15 code: user approved T007 round 4 ("that's the best one so far. we're good to go"). Branch `t007-shield-block` ready for the lead to merge.
+2026-10-15 code: T007 round 4 (lead: "shield forward, braced"): rig `block` now leans hard into the shield pushed up and out (drawn 1.12x, as if thrust at the viewer), face clear over the rim, sword cocked high; boots flat. Shield fights the art a little (see report), so a star glint now pops on the shield rim after each block (juice `block.glint`, lab Juice sliders).
+2026-10-15 code: 7/7 tests. Screens 1, 3, 4 in docs/screens/T007/ replaced (standee pose unchanged, now shows the glint). Art that would help: a face-on/three-quarter shield and a raised-shield arm drawing.
+2026-10-14 code: T007 round 3: block pose is now the user's "spartans behind their shield wall": hunched low behind the raised shield, eyes over the rim, sword arm tucked behind it with the point out past the edge; boots flat on the floor (new rig test). Rig screens replaced.
+2026-10-14 code: T007 round 2: user likes the block mechanics but not the pose ("drops his sword and leans back"). New rig `block`: leaning into a raised shield (chin height), wide brace, sword cocked over the shoulder; standee leans forward and only jolts back on a blocked hit. Screens replaced. User idea for the lead: a parry later.
+2026-10-14 code: T007 on branch `t007-shield-block`: hold L / RB blocks (state `block`, shuffle 0.6, facing locked); frontal hits -> `block` event (chip 0, pushback, 12f blockstun, attacker shoved and its lunge stops), from behind lands. Clang fx, rig `block` pose, standee lean, run log `blocks`, lab "Hero block" sliders. L downloads logs only on game over.
+2026-10-14 code: 7/7 tests (new tests/block.test.mjs); bot run identical to main apart from the new `blocks: 0` field. Screens in docs/screens/T007/. Human check open: does blocking feel solid, rats fair?
 2026-10-14 lead: merged T006 (belt 400..463, mild zoom; lab Stage sliders). Belt depth to be revisited with stage art (Stage 5). Cast-pose toggle bug folded into T008.
 2026-10-14 code: T006 on branch `t006-floor-lane`: user picked framing "B mild zoom" from an in-game F-toggle test (toggle removed): art x -220 y -113 w 1400, floor 30..930 x 400..463 (63 px, under the packet's 85: the open floor in the art is shallow; deeper needed a zoom that cropped the market). Lab has a Stage section (floor + art sliders).
 2026-10-14 code: T006 notes: feet at bottom edge slightly overlap the tops of the two front dock posts near x 560-740; fighters look relatively smaller after the zoom. User reported "stuck in cast" = the T005 C toggle (sticky by design; easy to hit by accident, lead's call). Screen in docs/screens/T006/.

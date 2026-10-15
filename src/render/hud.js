@@ -50,7 +50,7 @@ export function drawHud(ctx, world, assets, view, runLines = null) {
   }
   if (world.frame < 600 && !world.over) {
     ctx.globalAlpha = world.frame > 480 ? (600 - world.frame) / 120 : 1;
-    text(ctx, 'Move: WASD / Arrows   Attack: J   Jump: K   Debug: `   Pause: P   Rig: R', view.w / 2, view.h - 18, 18, '#fff', 'center');
+    text(ctx, 'Move: WASD / Arrows   Attack: J   Jump: K   Block: hold L   Debug: `   Pause: P   Rig: R', view.w / 2, view.h - 18, 18, '#fff', 'center');
     ctx.globalAlpha = 1;
   }
   if (world.over) {

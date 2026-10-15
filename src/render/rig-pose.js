@@ -69,6 +69,7 @@ export function targetPose(f, rig, time, override) {
   switch (f.state) {
     case 'walk': return named('walk', f.t / 60);
     case 'jump': return named('jump');
+    case 'block': return named('block');
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
     case 'down': case 'dead': return named('down');

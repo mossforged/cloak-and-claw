@@ -1,7 +1,7 @@
 // Draws a fighter as a cutout rig: parts in a hierarchy, posed by rig-pose.js, drawn into a
 // buffer that is then placed like a standee (same lean/squash/flip, shadow, flash and tints).
 import { phaseOf } from '../sim/fighter.js';
-import { poseOf } from './standee.js';
+import { poseOf, BLOCK_LEAN } from './standee.js';
 import { rigJoints } from './rig-pose.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
@@ -80,6 +80,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const p = { ...poseOf(f, time) };
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
   if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
+  if (f.state === 'block') { p.rot -= BLOCK_LEAN; p.sx = p.sy = 1; }   // the block pose leans and crouches; keep only the jolt
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;
   if (f.invuln > 0 && f.state === 'idle') alpha = f.invuln % 6 < 3 ? 1 : 0.55;

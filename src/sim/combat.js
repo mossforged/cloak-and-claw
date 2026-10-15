@@ -35,7 +35,22 @@ export function resolveHits(world) {
   }
 }
 
+// A fighter with a `block` config, in the block state, facing the attacker (attacker in front or level).
+const blocks = (a, t) => t.state === 'block' && t.def.block && Math.sign(a.x - t.x) !== -t.facing;
+
+function applyBlock(a, t, m, at) {
+  const B = t.def.block, dir = Math.sign(t.x - a.x) || a.facing;
+  const dmg = Math.min(B.chip, t.hp - 1);   // chip never finishes the blocker
+  if (dmg > 0) t.hp -= dmg;
+  setState(t, 'block');
+  t.stun = B.stun; t.vx = dir * B.pushback; t.vy = 0;
+  a.vx = -dir * B.attackerPush; a.bounced = true;   // the attacker is shoved back (and its lunge stops)
+  const x = t.x - dir * (t.def.body.w / 2 + 6);   // the shield face, on the attacker's side
+  bus.emit('block', { attacker: a, target: t, move: m, damage: Math.max(0, dmg), x, y: t.y, z: at.z });
+}
+
 function applyHit(a, t, m, world, at) {
+  if (blocks(a, t)) return applyBlock(a, t, m, at);
   const dmg = Math.max(1, Math.round(m.damage + (a.def.stats.power ?? 0) - (t.def.stats.defense ?? 0)));
   t.hp = Math.max(0, t.hp - dmg);
   t.lastHit = world.frame;
