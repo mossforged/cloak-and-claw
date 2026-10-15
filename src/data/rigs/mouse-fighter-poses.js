@@ -44,10 +44,11 @@ export default {
     'leg-back-upper': -60, 'leg-back-lower': 75, 'leg-front-upper': -25, 'leg-front-lower': 70,
     tail: 25, 'scarf-tail': 30,
   },
-  block: {   // T012 (A006 parts): face-on round shield on the whole guard arm, thrust out at chest height; gritted-teeth
+  block: {   // T012 (A006 parts): the angled A002 shield (user's pick over A006's face-on one) on the whole guard arm, thrust
+    // out at chest height; gritted-teeth
     // brace head clear above the rim (the user's T007 "shield forward, braced" pick); sword cocked high ready to answer.
     // Legs: boots kept as flat as in stance (torso + upper + lower), soles on the floor at this crouch.
-    swap: { 'arm-back-upper': 'arm-back-guard', shield: 'shield-face', head: 'head-brace' },
+    swap: { 'arm-back-upper': 'arm-back-guard', head: 'head-brace' },
     torso: 18, head: -6, dy: 8,
     'arm-back-upper': 70, shield: 0,
     'arm-front-upper': 60, 'arm-front-lower': -130, sword: -40,
@@ -55,7 +56,7 @@ export default {
     tail: -20, 'scarf-tail': -25,
   },
   blockHit: {   // on a blocked hit (blockstun): the shield is shoved further out at the attacker and eases back
-    swap: { 'arm-back-upper': 'arm-back-guard', shield: 'shield-face', head: 'head-brace' },
+    swap: { 'arm-back-upper': 'arm-back-guard', head: 'head-brace' },
     torso: 23, head: -4, dy: 9,
     'arm-back-upper': 80, shield: 0, 'shield.sx': 1.14, 'shield.sy': 1.14,
     'arm-front-upper': 60, 'arm-front-lower': -130, sword: -40,

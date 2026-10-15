@@ -64,10 +64,10 @@ for (const leg of ['leg-front-lower', 'leg-back-lower']) {
 }
 
 // Block (shield-wall crouch): both boots stay on the floor.
-// Block (T012): guard arm + face-on shield + brace head; the shield rides on the guard arm's fist; blockstun shoves it out.
+// Block (T012): guard arm + angled shield + brace head; the shield rides on the guard arm's fist; blockstun shoves it out.
 {
   const bp = targetPose(fighter({ state: 'block' }), rig, 0), L = layoutRig(rig, bp.joints, bp.swap);
-  check(bp.swap['arm-back-upper'] === 'arm-back-guard' && bp.swap.shield === 'shield-face' && bp.swap.head === 'head-brace', 'block: guard arm, face-on shield, brace head');
+  check(bp.swap['arm-back-upper'] === 'arm-back-guard' && !bp.swap.shield && bp.swap.head === 'head-brace', 'block: guard arm, angled shield (user pick, round 2), brace head');
   check(!L.some((e) => e.name === 'arm-back-lower'), 'block: old forearm hidden under the whole guard arm');
   const hit = targetPose(fighter({ state: 'block', t: 1, stun: 12 }), rig, 0);
   check(hit.key === 'block' && hit.joints['shield.sx'] > bp.joints['shield.sx'] + 0.08, 'blocked hit: shield shoved out (bigger), same pose key');
