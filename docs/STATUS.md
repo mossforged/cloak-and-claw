@@ -3,7 +3,7 @@
 **Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T008 spin slash (merged 2026-10-15; user's in-game check pending). Last art task: A002 three-quarter rig parts (merged; look approved).
 
 ## Next
-   **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** free; lead writing T009 grab/throw.
+   **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** T009 grab and throw.
    **Art builder:** A004 Rat Raider rig parts.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
@@ -22,7 +22,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: none queued (T009 grab/throw, T010 floor weapons + breakables next). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
+- Code: `docs/tasks/T009-grab-throw.md`. Next: T010 floor weapons + breakables (uses A003). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
 - Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
