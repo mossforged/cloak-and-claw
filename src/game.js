@@ -26,7 +26,6 @@ export function createGame(ctx, assets) {
       const c = readControl();
       if (c.debug) opts.debug = !opts.debug;
       if (c.rig) opts.rig = !opts.rig;
-      if (c.squat) cycleSquat(world.player.def);
       if (c.pause) opts.paused = !opts.paused;
       if (c.blockTap && world.over) downloadRuns();   // L blocks in play; on the game-over screen it downloads the run logs
       if (opts.paused) return;
@@ -41,10 +40,4 @@ export function createGame(ctx, assets) {
     },
     render(time) { renderer.draw(world, time, juice, opts); },
   };
-}
-
-// T014 test: F cycles the hero's jump squat off -> A -> B (live data; the HUD names the mode under the build label).
-const SQUAT_MODES = ['off', 'A', 'B'];
-function cycleSquat(def) {
-  def.jumpSquatMode = SQUAT_MODES[(SQUAT_MODES.indexOf(def.jumpSquatMode ?? 'off') + 1) % SQUAT_MODES.length];
 }

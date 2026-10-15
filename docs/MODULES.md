@@ -11,13 +11,13 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/main.js` | Sizes canvas, loads art referenced by data, starts loop | |
 | `src/config.js` | View size (960x540), FPS, start stage/hero | `VIEW FPS START_STAGE START_HERO` |
 | `lab.html` | Tuning lab page: game canvas + side panel, loads `src/lab/main.js` | |
-| `src/game.js` | Input -> sim step (skipped during hit-stop) -> render. Pause, debug toggle, rig toggle (R), cast test pose (C plays it once from idle, view only, via `render/view-pose.js`), jump squat test (F cycles the hero's `jumpSquatMode` off / A / B, T014), restart, run log (saves on game over; L downloads on the game-over screen only, elsewhere L blocks). Exposes `window.game` (`world opts log`) | `createGame` |
+| `src/game.js` | Input -> sim step (skipped during hit-stop) -> render. Pause, debug toggle, rig toggle (R), cast test pose (C plays it once from idle, view only, via `render/view-pose.js`), restart, run log (saves on game over; L downloads on the game-over screen only, elsewhere L blocks). Exposes `window.game` (`world opts log`) | `createGame` |
 
 ## Core (engine plumbing, rarely changes)
 | File | Purpose | Exports |
 |---|---|---|
 | `src/core/loop.js` | Fixed 60 step/sec loop | `startLoop(update, render)` |
-| `src/core/input.js` | Keyboard + gamepad -> `{mx,my,attack,jump,grab,start,debug,pause,rig,cast,squat,block,blockTap}` per step (`block` = held: L / RB; `blockTap` = pressed this step; `grab` = pressed: H / Y) | `initInput readControl` |
+| `src/core/input.js` | Keyboard + gamepad -> `{mx,my,attack,jump,grab,start,debug,pause,rig,cast,block,blockTap}` per step (`block` = held: L / RB; `blockTap` = pressed this step; `grab` = pressed: H / Y) | `initInput readControl` |
 | `src/core/events.js` | Pub/sub bus | `bus.on bus.emit` |
 | `src/core/assets.js` | Image loading; missing art -> labeled silhouette | `loadAssets collectArtPaths` |
 | `src/core/rng.js` | Seeded RNG (repeatable tests) | `createRng` |
@@ -47,7 +47,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/render/jump-squat.js` | Jump squat look (T014): how crouched (0..1) a fighter is drawn: A's `jumpStart`, legs extending over `JUICE.jumpSquat.rise` frames after take-off (A, B), landing squash (B only); 0 when the def's mode is off/absent. Rig mixes toward its `jumpSquat` pose (`squatLayer`), standee squashes | `squatOf squashOf` |
 | `src/render/view-pose.js` | View-only test pose on the hero (C = `cast`): plays once for `timing.castHold` s, only from idle, dropped on leaving idle. Pure | `stepViewPose` |
 | `src/render/juice.js` | Screen shake + hit-stop counters (from events; `block` uses the blocker's `block.hitstop/shake`; `grab` the holder's `grab.hitstop/shake`; `thrownHit` the thrower's `throw.hitstop/shake`; `propHit`/`propBreak`/`weaponBreak` from `JUICE.props` / `JUICE.weaponBreak`) | `createJuice` |
-| `src/render/hud.js` | Portrait, health bars, held weapon + hits left, wave banner, KOs/XP, build label (`BUILD` in config.js) + jump squat mode (T014 test), hints, game over (3 run-log lines), pause | `drawHud drawPaused` |
+| `src/render/hud.js` | Portrait, health bars, held weapon + hits left, wave banner, KOs/XP, build label (`BUILD` in config.js), hints, game over (3 run-log lines), pause | `drawHud drawPaused` |
 | `src/render/debug.js` | Overlay: floor belt, prop footprints + hp, item pickup zones + state, hurtboxes, hitboxes, states (+ held weapon), AI tokens | `drawDebug` |
 | `src/render/backdrop.js` | Sky, clouds, sea; stage cutout | `drawBackdrop drawStage` |
 | `src/render/tint.js` | Cached solid-colour silhouettes | `silhouette` |
@@ -93,7 +93,7 @@ Run log fields (one object per run; the player only):
 | `src/data/juice.js` | Shake, flash, number, spark, dust, slash look; block clang + glint; grab clinch, held-rat lean, thrown spin, trail, impact; props (hit/break feel, debris), items (floor glow, toss ghosts, pickup pop), weaponBreak; jumpSquat (rise/land frames, landing depth, standee squash) |
 | `src/data/controls.js` | Key and gamepad bindings |
 | `src/data/moves/*.js` | Move sets: timing, hitbox, damage, knockback, `launch` (knockdown speed), hitstop, shake, pose, fx (`word`: pop-up word); weapon kit moves (`cutlass`, `plank-club`, `big-fish`) add `rig`: which rig move pose they borrow |
-| `src/data/fighters/*.js` + `index.js` | Fighter defs: art, body, stats (RPG hooks), speeds (`move.jumpSquat` = squat frames), `jumpSquatMode` ('off' / 'A' sim squat / 'B' look only; T014 test, default B), `block` (optional: walkSpeed, chip, pushback, stun, attackerPush, hitstop, shake), `grab` + `throw` (optional, the holder's numbers), `throwable` (can be grabbed), `pickup` + `toss` (can pick up floor items and throw a held weapon), `drop` (enemy: weapon left on KO + chance), `art.hand` (standee weapon spot), moves, AI params. Registry in index |
+| `src/data/fighters/*.js` + `index.js` | Fighter defs: art, body, stats (RPG hooks), speeds (`move.jumpSquat` = squat frames), `jumpSquatMode` ('off' / 'A' sim squat / 'B' look only; T014, user picked A), `block` (optional: walkSpeed, chip, pushback, stun, attackerPush, hitstop, shake), `grab` + `throw` (optional, the holder's numbers), `throwable` (can be grabbed), `pickup` + `toss` (can pick up floor items and throw a held weapon), `drop` (enemy: weapon left on KO + chance), `art.hand` (standee weapon spot), moves, AI params. Registry in index |
 | `src/data/items/*.js` + `index.js` | Floor items (T010). Weapon kits: art (img, `px` size, `grip` point, `rest`), `grip` type, `durability`, moves + `attack`/`airAttack`, `toss` (damage, spin, feel). Food: art, `heal`. Registry `ITEMS` |
 | `src/data/props/*.js` + `index.js` | Breakable props (crate, barrel): art (+ debris), `body` (w, d = depth blocked, h), `hp` (hits), `drops` (id, `{id: weight}` or null). Registry `PROPS` |
 | `src/data/lab-schema.js` | Which data fields the tuning lab shows (`ROOTS` file -> object, `LAB_SCHEMA` sections/sliders, incl. a Stage section for the floor belt + art placement). New tunable = one line here |

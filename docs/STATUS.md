@@ -46,6 +46,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: T014 round 2: user picked **A** ("i like A") after comparing in play: hero `jumpSquatMode: 'A'` (4-frame crouch, then take-off). F toggle and HUD mode label removed (like T006); modes B/off stay in code + tests as data options. Build "t014 jump squat v2". Note: A has no landing squash (packet had it in B only); lead's call whether to add it.
 2026-10-15 code: T014 on branch `t014-jump-squat-ab`: F cycles the jump squat off / A / B (label under the build line; default B). A = sim `jumpStart` crouch for `move.jumpSquat` 4 frames, then take-off (attack meanwhile = air attack); B = no delay, crouch drawn on the first 5 rise frames + landing squash (`JUICE.jumpSquat`); new rig pose `jumpSquat`, standee squash. Build "t014 jump squat v1".
 2026-10-15 code: 12/12 tests (new tests/jump-squat.test.mjs; bot numbers = main; jumping bot off = B exactly). Filmstrips in docs/screens/T014/. Human check open: jump a lot in each mode: A (weightier), B (snappy but alive), or neither?
 2026-10-15 lead: merged T012 (A006 guard arm + brace head on block with the angled shield, true-back spin, cast). Cast parked for a later pass; A006 shield-face unused.

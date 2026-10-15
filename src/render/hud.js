@@ -45,8 +45,6 @@ export function drawHud(ctx, world, assets, view, runLines = null) {
   }
   text(ctx, `KOs ${world.kos}   XP ${world.xp}`, view.w - 20, 36, 22, '#ffe9a8', 'right');
   ctx.globalAlpha = 0.75; text(ctx, `build: ${BUILD}`, view.w - 20, 58, 14, '#fff', 'right'); ctx.globalAlpha = 1;
-  const SQ = { off: 'off', A: 'A (crouch, then jump)', B: 'B (look only)' }[p.def.jumpSquatMode ?? 'off'];
-  if (p.def.move.jumpSquat !== undefined) text(ctx, `jump squat: ${SQ}  -  F to change`, view.w - 20, 78, 15, '#ffe9a8', 'right');   // T014 A/B test
 
   for (const f of world.fighters) {
     if (f === p || f.state === 'dead' || world.frame - f.lastHit > 150) continue;

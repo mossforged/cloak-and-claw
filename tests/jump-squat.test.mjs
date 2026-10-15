@@ -14,7 +14,7 @@ let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
 const def = FIGHTERS['mouse-fighter'], SQ = def.move.jumpSquat, saved = def.jumpSquatMode;
 const N = { mx: 0, my: 0, attack: false, jump: false, block: false, grab: false };
-check(['off', 'A', 'B'].includes(saved), `default mode is off/A/B (got ${saved})`);
+check(saved === 'A', `hero default is A, the user's pick (got ${saved})`);
 check(SQ > 0, 'jumpSquat frames set');
 
 // One jump from standing (press on frame 10, holding right); trace of the hero per frame.
