@@ -12,6 +12,7 @@ const soleY = (part) => readFileSync(rig.parts[part].img).readUInt32BE(20) - 3;
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
 const near = (a, b, eps = 1e-6) => Math.abs(a - b) < eps;
+const evalLike = (pose) => ({ ...P.stance, ...pose });   // a still pose's joints (no waves), stance where it leaves one out
 
 const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig], P = rig.poses;
 check(rig, 'mouse-fighter uses a registered rig');
@@ -85,14 +86,19 @@ for (const leg of ['leg-front-lower', 'leg-back-lower']) {
   check(Math.abs((hi - lo) / need - 1) < 0.25, `${leg}: stride sweep ${(hi - lo).toFixed(1)} px ~ needed ${need.toFixed(1)} px (feet don't skate)`);
 }
 
-// Pose stretch reaches the layout: slash2 (backhand) keeps the arm in front and flips the blade from back to front.
+// slash2 spin slash: front arm stays in front of the torso; the blade goes from flat behind (mid-spin)
+// to flat in front (strike), and the sim frames of the move are untouched by the rig.
 const s2 = def.moves.slash2, wind = layoutRig(rig, targetPose(fighter({ state: 'attack', move: s2, mf: s2.windup }), rig, 0).joints);
 const idx = (Lx, n) => Lx.findIndex((e) => e.name === n);
 check(idx(wind, 'arm-front-upper') > idx(wind, 'torso'), 'slash2 windup: front arm drawn in front of the torso');
 const hit = layoutRig(rig, targetPose(fighter({ state: 'attack', move: s2, mf: s2.windup + s2.active - 1 }), rig, 0).joints);
 check(idx(hit, 'arm-front-upper') > idx(hit, 'torso'), 'slash2 strike: front arm drawn in front of the torso');
-const det = (Lx, n) => { const m = Lx.find((e) => e.name === n).m; return m[0] * m[3] - m[1] * m[2]; };
-check(det(wind, 'sword') > 0 && det(hit, 'sword') < 0, 'slash2: sword.sx flips the blade from behind to in front');
+const tipOf = (j) => ((['torso', 'arm-front-upper', 'arm-front-lower', 'sword'].reduce((a, k) => a + j[k], 0) % 360) + 360) % 360;
+check(near(tipOf(evalLike(P.moves.slash2.through)), 180, 5), 'slash2 through: blade flat out behind');
+check(near(tipOf(evalLike(P.moves.slash2.strike)), 0, 5) || near(tipOf(evalLike(P.moves.slash2.strike)), 360, 5), 'slash2 strike: blade flat out in front');
+check(s2.windup === 5 && s2.active === 4 && s2.recovery === 12 && s2.damage === 6, 'slash2: sim timing and damage unchanged (5/4/12, 6)');
+check(JSON.stringify(s2.hitbox) === JSON.stringify({ x: 10, z: 20, w: 82, h: 70 }), 'slash2: hitbox unchanged');
+check(s2.fx.slash.wrap && s2.fx.slash.to - s2.fx.slash.from > 180, 'slash2 swoosh wraps round the body (more than half a turn)');
 
 // Part swaps: every swap image exists and has an offset; poses only name known parts and their swaps.
 const pngSize = (img) => { const b = readFileSync(img); return [b.readUInt32BE(16), b.readUInt32BE(20)]; };
@@ -122,6 +128,15 @@ const s3w = poseLayout({ state: 'attack', move: s3, mf: s3.windup - 1 }), s3k = 
 check(imgOf(s3w, 'torso') === rig.parts.torso.swaps['torso-back'].img, 'slash3 windup: back torso');
 check(imgOf(s3k, 'torso') === rig.parts.torso.img, 'slash3 strike: front torso again');
 check(imgOf(s3k, 'head') === rig.parts.head.swaps['head-shout'].img, 'slash3 strike: shouting head');
+// slash2 turns his back for one drawing mid-spin: front torso at the end of the windup, back torso
+// (and the shouting head) one frame into active, front torso again from the next frame on.
+const s2at = (mf) => poseLayout({ state: 'attack', move: s2, mf });
+check(imgOf(s2at(s2.windup), 'torso') === rig.parts.torso.img, 'slash2 first active frame: front torso');
+check(imgOf(s2at(s2.windup + 1), 'torso') === rig.parts.torso.swaps['torso-back'].img, 'slash2 mid-spin: back torso');
+check(imgOf(s2at(s2.windup + 1), 'head') === rig.parts.head.swaps['head-shout'].img, 'slash2 mid-spin: shouting head');
+for (const mf of [s2.windup + 2, s2.windup + 3])
+  check(imgOf(s2at(mf), 'torso') === rig.parts.torso.img && imgOf(s2at(mf), 'head') === rig.parts.head.swaps['head-shout'].img, `slash2 frame ${mf}: front torso, shouting`);
+check(imgOf(s2at(s2.windup - 1), 'torso') === rig.parts.torso.img, 'slash2 windup: front torso');
 const late = poseLayout({ state: 'attack', move: s3, mf: s3.windup + s3.active + s3.recovery - 1 });
 check(imgOf(late, 'head') === rig.parts.head.img, 'end of recovery: neutral head again');
 check(imgOf(poseLayout({ state: 'hurt' }), 'head') === rig.parts.head.swaps['head-hurt'].img, 'hurt: hurt head');

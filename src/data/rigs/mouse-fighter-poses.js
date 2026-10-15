@@ -11,6 +11,8 @@ export default {
     overshoot: 1.6,     // easeOutBack strength on the strike (0 = none)
     bodyLean: 0.3,      // share of the move's standee lean (move.pose.rot) the rig keeps; joints do the rest
     swapBack: 0.5,      // fraction of a move's recovery that keeps the strike's swaps (shout face) before the normal drawings return
+    castHold: 1,        // s the C test pose (`cast`) plays before he drops back to normal
+    throughSwap: [0.25, 0.75],   // a `through` pose's swaps show while the swing is this share of the way to the strike
   },
   stance: {
     torso: 4, head: -4,
@@ -76,7 +78,7 @@ export default {
     'arm-front-upper': 10, 'arm-front-lower': -60, 'arm-back-upper': -50,
     'leg-back-upper': -75, 'leg-back-lower': 95, 'leg-front-upper': -20, 'leg-front-lower': 80,
   },
-  // Not a move: the flexibility test (sword thrust straight up for a spell). C holds it in play or the lab.
+  // Not a move: the flexibility test (sword thrust straight up for a spell). C plays it once from idle, in play or the lab.
   cast: {
     swap: { head: 'head-shout' },
     torso: -6, head: -14, dy: -2,
@@ -94,15 +96,14 @@ export default {
       strike: { swap: { head: 'head-shout' }, torso: 8, head: 4, dx: 2, 'arm-front-upper': -78, 'arm-front-lower': 10, sword: 90, 'arm-back-upper': -10, 'arm-back-lower': -30,
         'leg-back-upper': -52, 'leg-back-lower': 38, 'leg-front-upper': 50, 'leg-front-lower': -54, 'scarf-tail': -20, tail: -15 },
     },
-    slash2: {   // backhand cut outward, level: arm stays in front of the body
-      // fist cocked by the far shoulder with the blade lying back across the chest, then cut out forward.
-      // '.sx' on the sword = projected blade length (1 back, ~0 pointing at us, -1 flipped forward).
-      // A true horizontal cut needs the torso to twist (back-view torso art); see A001-02 notes.
-      windup: { torso: -6, head: -2, 'arm-front-upper': -54, 'arm-front-lower': -110, sword: 360, 'sword.sx': 1,
-        'arm-back-upper': -60, 'leg-back-upper': -42, 'leg-front-upper': 62, 'leg-front-lower': -64 },
-      through: { torso: 2, head: -2, 'arm-front-upper': -77, 'arm-front-lower': -25, 'arm-front-lower.sy': 0.8,
-        sword: 282, 'sword.sx': 0.25, 'arm-back-upper': -40 },
-      strike: { swap: { head: 'head-shout' }, torso: 10, head: 2, dx: 2, 'arm-front-upper': -95, 'arm-front-lower': -5, sword: 270, 'sword.sx': -1,
+    slash2: {   // spin slash: he turns his back mid-swing and the blade comes round flat at shoulder height.
+      // windup: blade drawn back low across the body. through (one drawing, mid-spin): back to us, arm
+      // and blade flat out behind. strike: front again, blade flat out in front.
+      windup: { torso: 2, head: -2, dy: 3, 'arm-front-upper': 70, 'arm-front-lower': -20, sword: 104, 'sword.sx': 0.75,
+        'arm-back-upper': -70, 'leg-back-upper': -46, 'leg-back-lower': 44, 'leg-front-upper': 64, 'leg-front-lower': -70, tail: 15, 'scarf-tail': 15 },
+      through: { swap: { torso: 'torso-back', head: 'head-shout' }, torso: 0, head: -4, 'head.sx': -1, dy: 2,
+        'arm-front-upper': 90, 'arm-front-lower': 0, sword: 90, 'sword.sx': 0.55, 'arm-front-lower.sy': 0.8, 'arm-back-upper': -100, 'arm-back-lower': -20, tail: 30, 'scarf-tail': 30 },
+      strike: { swap: { head: 'head-shout' }, torso: 10, head: 2, dx: 2, 'arm-front-upper': -102, 'arm-front-lower': 0, sword: 92,
         'arm-back-upper': -15, 'arm-back-lower': -40, 'leg-back-upper': -52, 'leg-back-lower': 38, 'leg-front-upper': 50, 'leg-front-lower': -54,
         'scarf-tail': -18, tail: -12 },
     },

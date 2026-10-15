@@ -1,4 +1,4 @@
-// Draw order: backdrop -> stage -> shadows -> fighters (sorted by depth; rig or standee) -> effects -> HUD -> debug.
+// Draw order: backdrop -> stage -> shadows -> far half of wrap swooshes -> fighters (sorted by depth; rig or standee) -> effects -> HUD -> debug.
 import { VIEW } from '../config.js';
 import { drawBackdrop, drawStage } from './backdrop.js';
 import { drawShadow, drawStandee } from './standee.js';
@@ -22,6 +22,7 @@ export function createRenderer(ctx, assets) {
       drawStage(ctx, world.stage, assets);
       const sorted = [...world.fighters].sort((a, b) => a.y - b.y);
       for (const f of sorted) drawShadow(ctx, f);
+      fx.drawBack(ctx);
       for (const f of sorted) {
         const rig = opts.rig !== false && RIGS[f.def.art.rig];   // R toggles rig vs standee
         if (rig) drawRig(ctx, f, rig, assets, time, fx.flashOf(f.id), f.def.team === 'hero' ? opts.pose : null);
