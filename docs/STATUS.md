@@ -6,7 +6,7 @@
 1. **Code builder:** T003 Mouse Fighter rig, so the user can see it move.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 3. **Art builder:** free (A001 done). Next art waits on seeing the rig move.
-4. **Lead:** write Stage 2 packets: rat telegraph fix (see playtest log), floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
+4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -21,7 +21,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T003-mouse-rig.md`. Queued: `T002-run-log.md` (auto-ok).
+- Code: `docs/tasks/T003-mouse-rig.md`, then `T004-rat-telegraph.md` (small, auto-ok). Queued: `T002-run-log.md` (auto-ok).
 - Art: nothing queued (A001 done).
 
 ## Open questions (for the user)

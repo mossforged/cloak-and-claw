@@ -22,3 +22,4 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-14 Combos: keep simple for now (no juggles).
 - 2026-10-14 Death: lives (arcade style) for now; may be rethought if we go roguelite.
 - 2026-10-14 Gate tags are created by a GitHub Action from docs/tags.txt, because the lead's cloud session cannot push tags.
+- 2026-10-14 Rat Raider swing windup 22 -> ~34 frames so a warned player can step out of the lane (user confirmed in the lab); lunge reduced to 1.2 (lead). Packet T004.
