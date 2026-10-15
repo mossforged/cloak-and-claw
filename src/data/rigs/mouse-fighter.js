@@ -23,22 +23,34 @@ export default {
   slots: { 'one-hand': 'sword' },
   parts: {
     torso: { img: P + 'torso.png', pivot: [100, 150], order: 9,
-      swaps: { 'torso-back': { img: P + 'torso-back.png', offset: [10, 0] } } },
+      swaps: {
+        'torso-back': { img: P + 'torso-back.png', offset: [10, 0] },
+        // A006 (T012): built-in scarf tails, so the separate scarf-tail hides while they show
+        'torso-side': { img: P + 'torso-side.png', offset: [21, 0], hide: ['scarf-tail'] },
+        'torso-back-full': { img: P + 'torso-back-full.png', offset: [0, 0], hide: ['scarf-tail'] },
+      } },
     head: { img: P + 'head-neutral.png', parent: 'torso', attach: [95, 8], pivot: [140, 170], order: 10,
       swaps: {
         'head-shout': { img: P + 'head-shout.png', offset: [0, -8] },
         'head-hurt': { img: P + 'head-hurt.png', offset: [0, -8] },
+        'head-brace': { img: P + 'head-brace.png', offset: [0, -4] },   // A006: gritted teeth behind the shield
+        'head-back': { img: P + 'head-back.png', offset: [0, 0] },      // A006: back of the head (mid-spin)
       } },
     'scarf-tail': { img: P + 'scarf-tail.png', parent: 'torso', attach: [28, 30], pivot: [62, 25], order: 8 },
     tail: { img: P + 'tail.png', parent: 'torso', attach: [40, 130], pivot: [152, 96], order: 7 },
 
-    'arm-front-upper': { img: P + 'arm-front-upper.png', parent: 'torso', attach: [30, 64], pivot: [58, 16], rest: -45, order: 12 },
+    'arm-front-upper': { img: P + 'arm-front-upper.png', parent: 'torso', attach: [30, 64], pivot: [58, 16], rest: -45, order: 12,
+      // A006 whole raised arm (shoulder at its sleeve, fist at the top): replaces the forearm, carries the sword
+      swaps: { 'arm-front-raised': { img: P + 'arm-front-raised.png', offset: [20, -126], hide: ['arm-front-lower'], carry: { sword: [23, 23] } } } },
     'arm-front-lower': { img: P + 'arm-front-lower.png', parent: 'arm-front-upper', attach: [20, 54], pivot: [58, 16], rest: -32, order: 14 },
     sword: { img: P + 'sword.png', parent: 'arm-front-lower', attach: [24, 70], pivot: [165, 40], rest: -144, order: 13 },
 
-    'arm-back-upper': { img: P + 'arm-back-upper.png', parent: 'torso', attach: [160, 60], pivot: [12, 14], rest: 42, order: 1 },
+    'arm-back-upper': { img: P + 'arm-back-upper.png', parent: 'torso', attach: [160, 60], pivot: [12, 14], rest: 42, order: 1,
+      // A006 whole guard arm (shoulder at the sleeve, fist raised): replaces the forearm, carries the shield
+      swaps: { 'arm-back-guard': { img: P + 'arm-back-guard.png', offset: [-116, -48], hide: ['arm-back-lower'], carry: { shield: [22, 17] } } } },
     'arm-back-lower': { img: P + 'arm-back-lower.png', parent: 'arm-back-upper', attach: [48, 54], pivot: [12, 12], rest: 32, order: 2 },
-    shield: { img: P + 'shield.png', parent: 'arm-back-lower', attach: [45, 64], pivot: [60, 85], upright: true, order: 11 },
+    shield: { img: P + 'shield.png', parent: 'arm-back-lower', attach: [45, 64], pivot: [60, 85], upright: true, order: 11,
+      swaps: { 'shield-face': { img: P + 'shield-face.png', offset: [-25, -1] } } },   // A006: face-on round shield, centred on the old one
 
     'leg-back-upper': { img: P + 'leg-back-upper.png', parent: 'torso', attach: [136, 146], pivot: [16, 12], rest: 24, scale: [1.5, 0.78], order: 4 },
     'leg-back-lower': { img: P + 'leg-back-lower.png', parent: 'leg-back-upper', attach: [46, 78], pivot: [24, 10], rest: 7, scale: [1.3, 1], order: 3 },

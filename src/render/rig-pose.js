@@ -125,7 +125,11 @@ export function targetPose(f, rig, time, override) {
   switch (f.state) {
     case 'walk': return named('walk', f.t / 60);
     case 'jump': return named('jump');
-    case 'block': return named('block');
+    case 'block': {   // blockstun: shoved into `blockHit` at the hit, easing back to `block` (one key: no blend restart)
+      if (!poses.blockHit || !(f.t < f.stun)) return named('block');
+      const k = easeOut(1 - f.t / f.stun);
+      return { key: 'block', joints: mix(evalPose(poses.block, S, 0), evalPose(poses.blockHit, S, 0), k), swap: swapOf(poses.block) };
+    }
     case 'grabbing': case 'throw': if (poses.grabbing) return grabPose(f, poses, S, time); break;
     case 'toss': if (poses.toss) return tossPose(f, poses, S, time); break;
     case 'pickup': if (poses.stow) return pickupPose(f, poses, S, time); break;

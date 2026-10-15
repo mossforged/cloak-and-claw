@@ -10,6 +10,6 @@
 - Render-only memory (rig pose blends) is kept in render, keyed by fighter, never written onto the fighter.
 - Render-only randomness (sparks, shake) may use `Math.random`.
 - Draw art from data paths only; a missing image shows a labeled placeholder.
-- Part swaps (`swap` in rig poses) only change which image a part draws; pivots and attach points stay in the part's own pixels.
+- Part swaps (`swap` in rig poses) only change which image a part draws; pivots and attach points stay in the part's own pixels. A swap may also hide other parts and carry children onto its own image (`hide`, `carry`): still drawing only, no bones or gameplay change.
 - Held weapons are generic: a kit's `grip` names a rig slot (`rig.slots`), the kit gives image, grip point, rest angle and `px` size; the weapon follows the slot part's joint. New grip types (two-hand, bow: T011) = a new slot + kit data. Debris pieces live only in render memory.
 - `opts.pose` (C key) shows a named rig pose on the hero for viewing (once, from idle; `view-pose.js`); it never touches the fighter.
