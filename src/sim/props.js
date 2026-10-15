@@ -119,7 +119,7 @@ function wear(w, it) {   // a tossed weapon's hit costs one use; at 0 it breaks 
 }
 
 export function stepItems(w) {
-  const I = RULES.items, fl = w.stage.floor;
+  const I = RULES.items, fl = w.bounds;
   for (const it of w.items) {
     if (it.state === 'floor') { if (it.def.kind === 'weapon' && --it.life <= 0) it.gone = true; continue; }
     it.x += it.vx; it.z += it.vz;

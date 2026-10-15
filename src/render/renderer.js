@@ -1,7 +1,9 @@
-// Draw order: backdrop -> stage -> shadows -> floor items + debris -> far half of wrap swooshes -> fighters, props and
-// flying items and arrows (sorted by depth; rig or standee) -> effects -> HUD -> debug.
+// Draw order: backdrop -> stage (or a scrolling stage's back layers, T013) -> shadows -> floor items + debris -> far half of wrap swooshes -> fighters, props and
+// flying items and arrows (sorted by depth; rig or standee) -> effects -> front layer pieces -> HUD -> debug.
+// Everything between the stage and the front pieces is in world space, shifted by the camera (w.cam; arenas have none).
 import { VIEW } from '../config.js';
 import { drawBackdrop, drawStage } from './backdrop.js';
+import { drawLayersBack, drawLayersFront } from './layers.js';
 import { drawShadow, drawStandee } from './standee.js';
 import { drawRig } from './rig.js';
 import { RIGS } from '../data/rigs/index.js';
@@ -23,7 +25,11 @@ export function createRenderer(ctx, assets) {
       drawBackdrop(ctx, world.stage, VIEW, time);
       ctx.save();
       ctx.translate(juice.ox, juice.oy);
-      drawStage(ctx, world.stage, assets);
+      const camX = Math.round(world.cam?.x ?? 0);
+      if (world.stage.layers) drawLayersBack(ctx, world.stage, camX, assets, VIEW);
+      else drawStage(ctx, world.stage, assets);
+      ctx.save();
+      ctx.translate(-camX, 0);
       const sorted = [...world.fighters, ...world.props, ...world.items.filter((it) => it.state !== 'floor'), ...world.shots].sort((a, b) => a.y - b.y);
       for (const f of world.fighters) drawShadow(ctx, f);
       for (const p of world.props) drawPropShadow(ctx, p);
@@ -41,8 +47,10 @@ export function createRenderer(ctx, assets) {
       fx.draw(ctx);
       pfx.draw(ctx);
       ctx.restore();
-      drawHud(ctx, world, assets, VIEW, opts.runLines);
-      if (opts.debug) drawDebug(ctx, world, juice);
+      if (world.stage.layers) drawLayersFront(ctx, world.stage, camX, world.fighters, assets);
+      ctx.restore();
+      drawHud(ctx, world, assets, VIEW, opts.runLines, camX);
+      if (opts.debug) drawDebug(ctx, world, juice, camX);
       if (opts.paused) drawPaused(ctx, VIEW);
     },
   };

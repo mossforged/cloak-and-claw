@@ -33,7 +33,9 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/sim/props.js` | Breakable props and floor items (T010). Props: solid obstacles (fighters on the ground pushed out; jumps above `body.h` pass), hit once per move by hero-team swings, thrown bodies and tossed weapons; at 0 hp break and drop their contents (id or weighted pick). Items: `pop` (falling) -> `floor` (weapons vanish after `RULES.items.floorLife`, blinking) ; `fly` = tossed weapon, knocks down the first enemy (or damages the first prop), costs a use, bounces off and drops. KO'd enemies with `drop` leave their weapon | `createProps spawnItem hitProps blockProps stepItems dropOnKO` |
 | `src/sim/weapons.js` | Held weapons (T010), for defs with `pickup`/`toss`: `f.weapon = {def, uses, hit, broken}`; kit moves replace the fighter's (`movesOf attackOf airAttackOf`); a move that lands costs a use, at 0 `weaponBreak` (empty hand finishes the swing). Grab button: holding -> eat food underfoot, else swap for a weapon underfoot (old one flicked aside behind him; only one is ever held), else toss (state `toss`); empty-handed -> grab an enemy in reach first, else eat / pick up the item underfoot. Weapon pickup = state `pickup` (def.pickup stow, reach, rise frames; in hand at the end of the reach; a hit before then leaves it on the floor). A knockdown knocks the weapon loose (`RULES.items.dropOnKnockdown`) | `movesOf attackOf airAttackOf itemUnder pressGrab stepToss stepPickup wearWeapon settleWeapon` |
 | `src/sim/shots.js` | Arrows (T011): a move with a `shot` looses one on its first active frame (`shot` event); it flies along the shooter's facing in his lane at `shot.z`, hits the nearest opposing fighter it crosses within `shot.depth` via `applyHit` (a stand-in attacker, so a block shoves nothing), gone after a hit, `range` or off the floor | `fireShots stepShots inFlight` |
-| `src/sim/waves.js` | Spawns stage waves, loops them tougher | `stepWaves` |
+| `src/sim/waves.js` | Spawns stage waves, loops them tougher (arena stages) | `stepWaves` |
+| `src/sim/camera.js` | T013: `w.cam` follows the player forward, stops at zone locks; `w.bounds` = walkable belt (arena: stage.floor itself) | `createCamera stepCamera fitBounds lockX maxCamX` |
+| `src/sim/zones.js` | T013: wave zones on a scrolling stage (lock, rats walk in from screen edges, cap `RULES.enemyCap`, GO, loop at `end`) | `createRun stepZones` |
 
 ## Render (reads state, never changes it)
 | File | Purpose | Exports |
@@ -53,6 +55,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/render/hud.js` | Portrait, health bars, held weapon + hits left, wave banner, KOs/XP, build label (`BUILD` in config.js), hints, game over (3 run-log lines), pause | `drawHud drawPaused` |
 | `src/render/debug.js` | Overlay: floor belt, prop footprints + hp, item pickup zones + state, arrows' hit lanes, hurtboxes, hitboxes, states (+ held weapon), AI tokens | `drawDebug` |
 | `src/render/backdrop.js` | Sky, clouds, sea; stage cutout | `drawBackdrop drawStage` |
+| `src/render/layers.js` | T013: scrolling stage layers (far parallax, back segments, shaded floor tile, decor back/front with fade) | `drawLayersBack drawLayersFront segmentsOf joinsOf` |
 | `src/render/tint.js` | Cached solid-colour silhouettes | `silhouette` |
 
 ## Log (run summaries; never changes gameplay state)
@@ -125,6 +128,8 @@ Run log fields (one object per run; the player only):
 | `tools/key_green.py` | Green-screen keyer for new art (an input that already has transparency, e.g. A008 gear, is only trimmed/scaled); `--scale S` keeps parts cut from one canvas at relative size and prints each trim box (seeds rig attach points) |
 | `tools/Play.command` | Double-click launcher (Finder): runs `serve.py` on port 8100 (a port Chrome never cached) and opens the game; reuses a server already there |
 | `tools/serve.py` | No-cache dev server (`Cache-Control: no-store`), port 8000 by default: `python3 tools/serve.py [port]` |
+| `tools/tile_fade.py` | Cross-fades a tile's edges so it repeats seamlessly, then scales (A007 floor) |
+| `tests/harbor-run.test.mjs` | T013: bot clears every harbor-run zone (3 seeds), all rat types, cap, no stuck locks, enemies/arrows on screen, camera forward-only, archer kept in the locked screen |
 | `tools/slice_sheet.py` | Slices a green parts sheet into keyed, trimmed part PNGs by name (reading order) |
 | `tools/rig-preview.html` | Rig pose sheet for fitting and screenshots: `/tools/rig-preview.html?cells=standee,idle,slash3:windup,cast&zoom=3` (states, named poses, `move:windup/strike/<frame>`, `walk:<0..1>`; `dots` shows pivots, `fx` draws move swooshes; `held=<item>` puts a floor weapon in the hand and allows its kit moves as cells) |
 

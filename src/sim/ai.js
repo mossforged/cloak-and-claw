@@ -10,7 +10,7 @@ import { inFlight } from './shots.js';
 const tokensInUse = (w) => w.fighters.filter((f) => f.ai?.token).length;
 
 export function thinkAI(f, w) {
-  const ai = f.ai, cfg = f.def.ai, c = f.control, p = w.player, fl = w.stage.floor;
+  const ai = f.ai, cfg = f.def.ai, c = f.control, p = w.player, fl = w.bounds;
   c.attack = false; c.jump = false; c.face = 0;
 
   if (HELPLESS.includes(f.state)) { ai.token = false; ai.attacked = false; return; }

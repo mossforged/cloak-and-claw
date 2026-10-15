@@ -148,7 +148,7 @@ export function updateFighter(f, world) {
   // physics
   f.x += f.vx; f.y += f.vy;
   if (f.z > 0 || f.vz > 0) { f.z += f.vz; if (f.z <= 0) land(f); }
-  const fl = world.stage.floor;
+  const fl = world.bounds;
   if (!f.entering) {
     const x = Math.max(fl.left, Math.min(fl.right, f.x));
     if (RULES.wallBounce && x !== f.x && BOUNCY.includes(f.state) && Math.sign(f.vx) === Math.sign(f.x - x)) f.vx = -f.vx * RULES.wallBounce;

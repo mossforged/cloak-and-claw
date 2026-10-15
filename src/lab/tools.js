@@ -23,12 +23,16 @@ export function createLabTools(game) {
       s.passive = on;
       if (!on) for (const f of window.game.world.fighters) if (f.ai) f.ai.cool = 30;
     },
-    // Clears enemies, refills the hero (reviving after a game over) and replays the current wave.
+    // Clears enemies, refills the hero (reviving after a game over) and replays the current wave (or locked zone).
     respawnWave() {
       const w = window.game.world, p = w.player;
       w.fighters = w.fighters.filter((f) => f.team === 'hero');
       Object.assign(p, { hp: p.maxHp, state: 'idle', t: 0, move: null, z: 0, vz: 0, invuln: 60 });
       w.over = false;
+      if (w.run) {   // scrolling stage (T013): refill the locked zone's queue (unlocked: just the hero refill)
+        if (w.run.locked) Object.assign(w.run, { queue: [...w.stage.zones[w.run.zone].enemies], n: 0, spawnT: 1 });
+        return;
+      }
       w.wave = Math.max(0, w.wave - 1);
       w.waveTimer = 1;
     },

@@ -7,6 +7,7 @@ import { RIGS } from '../src/data/rigs/index.js';
 import { jointsOfRig } from '../src/render/rig-pose.js';
 import { ITEMS } from '../src/data/items/index.js';
 import { PROPS } from '../src/data/props/index.js';
+import { segmentsOf, joinsOf } from '../src/render/layers.js';
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
@@ -31,11 +32,27 @@ for (const [id, f] of Object.entries(FIGHTERS)) {
   if (f.kit) check(ITEMS[f.kit]?.kind === 'weapon' && f.moves === ITEMS[f.kit].moves, `${id}: kit '${f.kit}' is a weapon kit and gives his moves`);
 }
 for (const [id, s] of Object.entries(STAGES)) {
-  check(existsSync(s.art.src), `stage ${id}: art exists`);
+  if (s.art) check(existsSync(s.art.src), `stage ${id}: art exists`);
   const fl = s.floor;
   check(fl.left < fl.right && fl.top < fl.bottom, `stage ${id}: floor bounds`);
   check(s.playerStart.y >= fl.top && s.playerStart.y <= fl.bottom, `stage ${id}: playerStart on floor`);
-  for (const w of s.waves) for (const e of w.enemies) check(FIGHTERS[e]?.team === 'enemy', `stage ${id}: wave enemy '${e}'`);
+  for (const w of [...s.waves, ...(s.zones ?? [])]) for (const e of w.enemies) check(FIGHTERS[e]?.team === 'enemy', `stage ${id}: wave enemy '${e}'`);
+  check(s.art || s.layers, `stage ${id}: has art or layers`);
+  if (s.layers) {   // T013 scrolling stage
+    const L = s.layers, B = L.back, imgs = [L.far.src, L.floor.src, ...Object.values(B.segments).map((g) => g.src), ...Object.values(L.pieces).map((p) => p.src)];
+    for (const src of imgs) check(existsSync(src), `stage ${id}: layer art ${src}`);
+    for (const k of B.sequence) check(B.segments[k], `stage ${id}: back segment '${k}'`);
+    const segs = segmentsOf(s), len = segs.at(-1).x + segs.at(-1).w;
+    check(len === s.camera.length, `stage ${id}: camera.length ${s.camera.length} = back segments ${len}`);
+    check(fl.left >= 0 && fl.right <= len, `stage ${id}: floor inside the stage`);
+    for (const d of L.decor) check(L.pieces[d.piece] && ['back', 'front'].includes(d.layer), `stage ${id}: decor ${d.piece} ${d.layer}`);
+    // every segment join is covered by a back-layer decor piece within 20 px
+    for (const j of joinsOf(s)) check(L.decor.some((d) => d.layer === 'back' && Math.abs(d.x - j) <= 20), `stage ${id}: join at ${j} covered`);
+    const xs = s.zones.map((z) => z.x);
+    check(xs.every((x, i) => i === 0 || x > xs[i - 1]), `stage ${id}: zones in order`);
+    check(xs.every((x) => x - 480 >= 0 && x + 480 <= len), `stage ${id}: zone screens inside the stage`);
+    check(s.end > xs.at(-1) && s.end <= fl.right, `stage ${id}: end after the last zone, on the floor`);
+  }
 }
 // Items, weapon kits and props (T010)
 const dropIds = (d) => (!d ? [] : typeof d === 'string' ? [d] : Object.keys(d));
