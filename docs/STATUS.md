@@ -3,8 +3,8 @@
 **Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T009 grab and throw (merged 2026-10-15; user OK on round 3). Last art task: A006 Mouse Fighter touch-up parts (merged; user look check pending).
 
 ## Next
-1. **Code builder:** T012 (wire A006 into block / cast / spin), then T014 (jump squat A/B), then T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
-2. **User:** judges A006 in motion after T012; picks a jump squat in T014.
+1. **Code builder:** T014 (jump squat A/B), then T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
+2. **User:** picks a jump squat in T014.
 3. **Art builder:** idle (A008 gear approved). Possible next: a rat leg redraw if T011's crouch doesn't fix the legs.
 
 ## Stage plan
@@ -20,7 +20,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T012-mouse-touchup-poses.md` (small), then `T014-jump-squat-ab.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
+- Code: `docs/tasks/T014-jump-squat-ab.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
 - Art: none queued. A008 gear import goes with/after T011 (gear attaches to rat head/torso bones).
 
 ## Open questions (for the user)
@@ -46,6 +46,10 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged T012 (A006 guard arm + brace head on block with the angled shield, true-back spin, cast). Cast parked for a later pass; A006 shield-face unused.
+2026-10-15 code: T012 round 2 (user: likes the block "except i think the angled shield would make more sense"; "the spin is good"; cast "isnt totally natural yet but its fine for now"): block keeps the guard arm + brace head and blockstun shove, back to the angled A002 shield (A006 shield-face imported but unused). Build "t012 a006 poses v2". Cast left as is; parked for a later pass.
+2026-10-15 code: T012 on branch `t012-mouse-touchup-poses`: A006 parts wired as rig swaps (`--scale 0.4`, offsets from the shared canvas). Block = guard arm + face-on shield + brace head (shield thrust out at chest, face clear), shoved further out on a blocked hit; slash2 mid-spin = true back (full back torso + back of head; replaces the old back torso + shouting face, still mirrored), flat cut on the side-on torso; cast = whole raised arm, fist above the ear, blade straight up. Kept A002 for slash3 (side torso hidden behind shield/sword, its sleeve stub showed). New swap fields `hide`/`carry` (whole-arm drawings carry shield/sword). No sim changes.
+2026-10-15 code: 11/11 tests (rig tests updated for the new spin/cast, block + carry checks). Screens in docs/screens/T012/ (block/cast fit variants with the old pose, slash2 before/after strips, in-game block + cast, after sheet). Human check open: in play, do the guard, spin and cast look like Mouse Fighter?
 2026-10-15 lead: merged A008 (rat gear overlays: hood + quiver, helmet + jerkin, tricorn + sash; source). Helmet/hat cover part of the ears; torso fit approximate.
 2026-10-15 lead: merged T010 (floor weapons, crates/barrel, food, rat cutlass drops; pickup/swap animation; user OK round 2). Jump squat A/B queued as T014.
 2026-10-15 code: user OK'd T010 round 2 ("all of those changes are great"). User request for the lead (outside T010, not built): a small crouch before the jump (jump squat). Choice for the lead: a sim delay of a few frames before take-off (weightier, less responsive), or a view-only squash that doesn't delay the jump. User wants to compare both in play (an in-game toggle test, like T006's framing test).

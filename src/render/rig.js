@@ -22,6 +22,9 @@ const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[
 
 // A swap image is drawn so its pixel (x, y) lands on the part's own (offset + scale * (x, y)):
 // pivot and children's attach points stay in the part's own pixels whichever image shows.
+// A swap may also hide other parts (`hide: [names]`, e.g. the forearm when a whole-arm drawing is in) and
+// re-attach children to points on its own image (`carry: { child: [x, y] }` in swap image px, e.g. the
+// shield onto the drawn fist): the child then hangs off this part, keeping its own joint angle (T012).
 const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 
 // Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order.
@@ -29,7 +32,14 @@ const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 // drawing; part null = empty hand, slot hidden). Pure; tests use it.
 export function layoutRig(rig, joints, swap = {}, held = null) {
   const frames = {};
-  const parts = held ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : rig.parts;
+  const parts = held ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : { ...rig.parts };
+  const hidden = new Set();
+  for (const [name, key] of Object.entries(swap)) {
+    const s = parts[name]?.swaps?.[key];
+    if (!s) continue;
+    for (const h of s.hide ?? []) hidden.add(h);
+    for (const [c, xy] of Object.entries(s.carry ?? {})) if (parts[c]) parts[c] = { ...parts[c], parent: name, attach: apply(swapMatrix(s), ...xy) };
+  }
   const frameOf = (name) => {
     if (frames[name]) return frames[name];
     const p = parts[name];
@@ -51,7 +61,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
       const s = p.swaps?.[swap[name]];
       return { name, p, order: joints[`${name}.order`] ?? p.order, img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m };
     })
-    .filter((e) => !(held && e.name === held.slot && !held.part))
+    .filter((e) => !hidden.has(e.name) && !(held && e.name === held.slot && !held.part))
     .sort((a, b) => a.order - b.order);
 }
 

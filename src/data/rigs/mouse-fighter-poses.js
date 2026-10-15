@@ -44,14 +44,24 @@ export default {
     'leg-back-upper': -60, 'leg-back-lower': 75, 'leg-front-upper': -25, 'leg-front-lower': 70,
     tail: 25, 'scarf-tail': 30,
   },
-  block: {   // shield forward, braced: deep forward lean behind the shield pushed up and out (drawn a little
-    // larger, as if thrust at the viewer), eyes over the rim, sword cocked high ready to answer.
+  block: {   // T012 (A006 parts): the angled A002 shield (user's pick over A006's face-on one) on the whole guard arm, thrust
+    // out at chest height; gritted-teeth
+    // brace head clear above the rim (the user's T007 "shield forward, braced" pick); sword cocked high ready to answer.
     // Legs: boots kept as flat as in stance (torso + upper + lower), soles on the floor at this crouch.
+    swap: { 'arm-back-upper': 'arm-back-guard', head: 'head-brace' },
     torso: 18, head: -6, dy: 8,
-    'arm-back-upper': -105, 'arm-back-lower': -30, shield: 0, 'shield.sx': 1.12, 'shield.sy': 1.12,
+    'arm-back-upper': 70, shield: 0,
     'arm-front-upper': 60, 'arm-front-lower': -130, sword: -40,
     'leg-back-upper': -104, 'leg-back-lower': 74, 'leg-front-upper': 59, 'leg-front-lower': -77,
     tail: -20, 'scarf-tail': -25,
+  },
+  blockHit: {   // on a blocked hit (blockstun): the shield is shoved further out at the attacker and eases back
+    swap: { 'arm-back-upper': 'arm-back-guard', head: 'head-brace' },
+    torso: 23, head: -4, dy: 9,
+    'arm-back-upper': 80, shield: 0, 'shield.sx': 1.14, 'shield.sy': 1.14,
+    'arm-front-upper': 60, 'arm-front-lower': -130, sword: -40,
+    'leg-back-upper': -104, 'leg-back-lower': 74, 'leg-front-upper': 59, 'leg-front-lower': -77,
+    tail: -25, 'scarf-tail': -30,
   },
   hurt: {
     swap: { head: 'head-hurt' },
@@ -80,10 +90,11 @@ export default {
     'leg-back-upper': -75, 'leg-back-lower': 95, 'leg-front-upper': -20, 'leg-front-lower': 80,
   },
   // Not a move: the flexibility test (sword thrust straight up for a spell). C plays it once from idle, in play or the lab.
-  cast: {
-    swap: { head: 'head-shout' },
-    torso: -6, head: -14, dy: -2,
-    'arm-front-upper': 172, 'arm-front-lower': 8, sword: -264,   // tip: -6 + 172 + 8 - 264 = -90, straight up
+  cast: {   // T012: A006 whole raised arm, fist high above the ear (face clear), blade straight up; the fist wraps the grip
+    // (sword drawn just behind the arm). Arm on screen: torso + arm-front-upper + its rest (-45); blade tip: torso + arm + sword = -90.
+    swap: { head: 'head-shout', 'arm-front-upper': 'arm-front-raised' },
+    torso: -4, head: -14, dy: -2,
+    'arm-front-upper': 35, sword: -121, 'sword.order': 11.5,
     'arm-back-upper': -30, 'arm-back-lower': -40, shield: 4,
     'leg-back-upper': -38, 'leg-back-lower': 22, 'leg-front-upper': 64, 'leg-front-lower': -52,
     tail: 15, 'scarf-tail': 20,
@@ -178,9 +189,9 @@ export default {
       // to the front with the blade flat out at shoulder height. 'sx' = whole-body width (-1 mirrored).
       windup: { sx: 0.65, torso: 2, head: -2, dy: 3, 'arm-front-upper': 70, 'arm-front-lower': -20, sword: 104, 'sword.sx': 0.75,
         'arm-back-upper': -70, 'leg-back-upper': -46, 'leg-back-lower': 44, 'leg-front-upper': 64, 'leg-front-lower': -70, tail: 15, 'scarf-tail': 15 },
-      through: { swap: { torso: 'torso-back', head: 'head-shout' }, sx: -1, torso: 0, head: -4, dy: 2,
+      through: { swap: { torso: 'torso-back-full', head: 'head-back' }, sx: -1, torso: 0, head: -4, dy: 2,
         'arm-front-upper': 90, 'arm-front-lower': 0, sword: 90, 'sword.sx': 0.55, 'arm-front-lower.sy': 0.8, 'arm-back-upper': -100, 'arm-back-lower': -20, tail: 30, 'scarf-tail': 30 },
-      strike: { swap: { head: 'head-shout' }, torso: 10, head: 2, dx: 2, 'arm-front-upper': -102, 'arm-front-lower': 0, sword: 92,
+      strike: { swap: { head: 'head-shout', torso: 'torso-side' }, torso: 10, head: 2, dx: 2, 'arm-front-upper': -102, 'arm-front-lower': 0, sword: 92,
         'arm-back-upper': -15, 'arm-back-lower': -40, 'leg-back-upper': -52, 'leg-back-lower': 38, 'leg-front-upper': 50, 'leg-front-lower': -54,
         'scarf-tail': -18, tail: -12 },
     },
