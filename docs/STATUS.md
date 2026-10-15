@@ -1,13 +1,12 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T002 run log (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; user look check pending).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T002 run log (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; look approved).
 
 ## Next
-1. **User:** A002 look check: is this the angle and look you want him to move with? Then code T005.
+1. **Code builder:** T005 (import A002, part swaps, cast pose), started 2026-10-14.
    **Art builder:** free.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
-3. **Code builder, after the user's A002 yes:** T005 (import A002, part swaps, cast pose).
 4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
 
 ## Stage plan
@@ -23,7 +22,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T005-rig-three-quarter-swaps.md` (waits on A002 look approval).
+- Code: `docs/tasks/T005-rig-three-quarter-swaps.md` (in progress).
 - Art: none queued.
 
 ## Open questions (for the user)
@@ -39,6 +38,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: user approved A002's look ("I do like it"); T005 started.
 2026-10-14 lead: merged A002 (source; 18 parts + swaps; scale approximate per HANDOFF). Wrote T005.
 2026-10-14 lead: merged T002 (run log; 6/6 test files; sim change is report-only `targetPhase` on `hit`). User to check that L downloads the JSON.
 2026-10-14 code: T002 run log on branch `t002-run-log`: src/log/ (runlog.js counts from bus events, store.js keeps 20 runs in localStorage, L downloads JSON), 2-line summary under "Defeated!". Only sim change: `hit` payload gains `targetPhase` (for windups cut).
