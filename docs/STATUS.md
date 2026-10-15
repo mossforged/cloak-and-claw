@@ -38,6 +38,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 code: T004 rat telegraph on branch `t004-rat-telegraph`: ratSlash windup 22->34, lunge 2.2->1.2; lab gains rat lunge + depth (fallback RULES.depthHit). New tests/rat-telegraph.test.mjs (dodging after 15 frames clears the lane by 36 px vs 16).
+2026-10-14 code: smoke bot still clears waves (kos 33/33/32, hp 68/60/36 vs before 32/32/33, 68/20/52). Lab test now lets a fallback field be absent outside pick sections.
 2026-10-14 lead: merged T003 (rig; 4/4 test files pass; move timing/hitboxes unchanged, only the slash2 swoosh shape). Art and code follow-ups from the builder parked below.
 2026-10-14 code: T003 Mouse Fighter rig on branch `t003-mouse-rig` (tools/slice_sheet.py, src/data/rigs/, src/render/rig.js + rig-pose.js, R toggles rig/standee, tests/rig.test.mjs); no sim changes. Screens in docs/screens/T003/.
 2026-10-14 code: T003 round 2 from user notes: angled upright shield, stockier build, slower matched stride, slash2 is now a flat sweep across the body (flat swoosh). slash2 is now a backhand cut outward (user's pick); a true horizontal cut waits on back-view torso art. Human check still open; no combo GIF.

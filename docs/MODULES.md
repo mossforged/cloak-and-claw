@@ -70,7 +70,8 @@ One line per file: what it does and what it exports. **Read this instead of the 
 |---|---|
 | `tests/run.mjs` | `npm test`: runs every `tests/*.test.mjs`; a file that fails to load counts as a failure |
 | `tests/sim-smoke.test.mjs` | Bot plays 3 min x 3 seeds headless; checks NaN, fairness, progress |
-| `tests/lab.test.mjs` | Lab schema names only existing fields, defaults inside slider ranges, tweak model set/format/reset/load |
+| `tests/lab.test.mjs` | Lab schema names only existing fields (or ones with a fallback), defaults inside slider ranges, tweak model set/format/reset/load |
+| `tests/rat-telegraph.test.mjs` | A player at the rat's attack spot who steps out of the lane 15 frames into the windup escapes the swing; old numbers still catch them |
 | `tests/data.test.mjs` | Every fighter/move/stage/wave/art path resolves; rig parts, parents and pose joints resolve |
 | `tests/rig.test.mjs` | Rig pose per state, move windup/strike reached, blend start/end, layout order, feet on the ground, walk stride matches walk speed, slash2 stretch/order channels |
 | `tests/bot.mjs` | Scripted player used by tests |

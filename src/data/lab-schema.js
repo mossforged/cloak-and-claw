@@ -56,6 +56,8 @@ export const LAB_SCHEMA = [
       { path: 'ratSlash.active', min: 1, max: 30, step: 1, file: RAT_MOVES },
       { path: 'ratSlash.recovery', min: 1, max: 80, step: 1, file: RAT_MOVES },
       { path: 'ratSlash.damage', min: 1, max: 50, step: 1, file: RAT_MOVES },
+      { path: 'ratSlash.lunge', min: 0, max: 8, step: 0.1, fallback: 0, file: RAT_MOVES },
+      { path: 'ratSlash.depth', min: 2, max: 60, step: 1, fallback: RULES.depthHit, file: RAT_MOVES },
       ['ai.range', 10, 200, 1], ['ai.hover', 30, 400, 1], ['ai.aggression', 0, 1, 0.01],
       ['ai.cooldown.0', 0, 300, 1], ['ai.cooldown.1', 0, 300, 1],
     ],
