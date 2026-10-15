@@ -1,22 +1,37 @@
 # Status
 
-## Rung 1a: done (standee prototype)
-- Mouse Fighter vs waves of Rat Raiders in Harbor Market (single-screen arena, belt movement).
-- 3-hit sword combo (finisher knocks down), jump + jump slash, hurt / knockdown / get-up / defeat.
-- Rats hover and take turns attacking (max 1 at a time), with a flashing windup you can interrupt.
-- Juice: hit-stop, screen shake, white hit flash, red hurt tint, sparks, damage numbers, slash arcs, dust.
-- HUD, wave banner, KOs/XP counter, game over + restart, pause, debug overlay (` key or `?debug`).
-- Headless test (`npm test`).
+**Stage 1 (standee combat) is built and waiting for its gate.** Last code task: none yet under the workflow (Stage 1 predates it). Last art task: none.
 
 ## Next
-1. **Playtest 1a and tune feel** (numbers in `src/data/moves/` and `src/data/rules.js`).
-2. **Rung 1b: cutout rig** for Mouse Fighter. Needs the parts sheet (see `docs/ART_PIPELINE.md`). Build: rig data, rig renderer, pivot editor + move tuning page with sliders.
-3. Rung 2: second enemy type (Rat Archer or Skeletal Mouse, which can share the mouse rig).
+1. **User:** play Stage 1 and answer Gate 1 (below). Locally or at https://mossforged.github.io/cloak-and-claw/
+2. **Code builder:** T001 tuning lab (can start now).
+3. **Art builder:** A001 Mouse Fighter rig parts (can start now).
 
-## Undecided / deferred
-- Pose-swap images (attack/hurt/down) as a cheap upgrade before or alongside the rig.
-- Touch controls for mobile.
-- Audio (hooks: `swing`, `hit`, `jump`, `land`, `wave` events).
-- River City Ransom-style RPG layer: XP is counted; stats (`power`, `defense`, `speed`) exist on fighters but nothing raises them yet.
-- Scrolling stages (need layered stage art), more heroes with their own move sets.
-- Name of the game (working title: Tales of Cloak & Claw).
+## Stage plan
+| Stage | What | Gate question for the user |
+|---|---|---|
+| 1 | Standee combat in one arena (built) | After 10 minutes: is hitting rats fun even with flat standees? What feels off? |
+| 2 | Tuning lab + feel pass (T001, then tuning tasks from the playtest) | Do the combo, jump and rats feel right now? |
+| 3 | Cutout rig for Mouse Fighter (A001 + rig task) | Does the rig look alive enough that you want every character rigged? (No = pose swaps instead) |
+| 4 | Enemy variety (Rat Archer, Skeletal Mouse) + run log (T002) | Does a 10-minute run have variety and readable threats? |
+| 5 | Scrolling stage with layered art + touch controls | Does moving through a stage feel like Golden Axe? |
+| 6 | RPG layer: stats grow, food/shop between stages | Do you want "one more run" to get stronger? |
+| 7 | Sound, builds for fresh testers | Do new players get it without coaching? |
+| 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
+
+## What builders need now
+- Code: `docs/tasks/T001-tuning-lab.md`. Queued: `T002-run-log.md` (auto-ok).
+- Art: `docs/tasks/A001-mouse-fighter-rig.md`.
+
+## Open questions (for the user)
+- Are the four design pillars in `docs/handoffs/game-brief.md` right? (Lead's draft.)
+- Game title: keep "Tales of Cloak & Claw" or name this game separately?
+
+## Parked
+- Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
+- Touch controls for phone play (Stage 5).
+- Art bible items (pie, cheese, potions, chest, coins) as pickups and RPG rewards (Stage 6).
+- Bramble Brute as the first boss.
+
+## Last session
+2026-10-15 lead: set up the workflow (guides, contracts, CI, test runner, data test, brief, decisions, packets T001, T002, A001). Details in `docs/history.md`.

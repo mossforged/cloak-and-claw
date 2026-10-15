@@ -1,27 +1,24 @@
-# Working rules for AI agents (Claude, Codex, anyone)
+# Art builder guide (Codex)
 
-This is a browser beat 'em up in plain JavaScript (ES modules, canvas 2D, no build step, no engine).
-The codebase is split so that **any change should need only a few small files**. Keep it that way.
+You are the **art builder**. A lead chat writes art packets in `docs/tasks/A0NN-*.md` and reviews your branch. A separate code builder imports your art into the game.
 
-## Before you touch anything
-1. Read `docs/STATUS.md` (where things stand) and `docs/MODULES.md` (what every file does).
-2. Open **only** the files your task needs. Do not read the whole repo.
-3. Art tasks: read `docs/ART_PIPELINE.md` only.
+## Step 0: folder check
+Run `pwd`. It must end in `cloak-and-claw-art`. If not, **stop** and tell the user you are in the wrong folder (the code builder works in `cloak-and-claw`; sharing a folder breaks both).
 
-## Boundaries (do not break these)
-- `src/sim/` is pure game logic. It never imports from `src/render/`, never touches the DOM. It runs headless in Node.
-- `src/render/` only reads world state and listens to events. It never changes gameplay state.
-- Sim talks to render through events on `src/core/events.js` (list in MODULES.md).
-- **All tuning numbers live in `src/data/`** (moves, fighters, stages, rules, juice). Logic files hold no magic numbers.
-- New hero / enemy / move / stage = new data file + one line in the matching `index.js` registry.
-- Keep files under ~200 lines. If one grows past that, split it and update MODULES.md.
+## Start of every session
+1. `git pull` on main.
+2. Read `docs/STATUS.md`, your packet, `docs/style-contract.md` and `docs/handoffs/asset-contract.md`. Look at `docs/concepts/art-bible/contact-sheet.jpg` for the style. Optional context: `docs/handoffs/game-brief.md`.
+3. Create a branch: `git checkout -b a0nn-<short-slug>`. Never commit to main.
 
-## After a change
-- Run `npm test` (headless sim smoke test; must print ALL OK).
-- Update `docs/MODULES.md` if you added/renamed a file, export or event.
-- Update `docs/STATUS.md` (done / next / undecided) in a line or two.
-- Commit with a message saying what changed and why.
+## You own
+`assets/source/` only. Plus the asset's row in `docs/assets.md` (set state to `source` when delivered).
+You never touch `src/`, `tests/`, `tools/`, `assets/art/`, `index.html` or other docs.
 
-## Who does what
-- Claude: code and systems.
-- Codex / ComfyUI: art and animation assets, following `docs/ART_PIPELINE.md`. Art agents only add files under `assets/` and edit the `art:` block of data files.
+## Asset rules
+- Deliver to `assets/source/<ID>-<slug>/` exactly as the packet names the files.
+- Follow the style contract: side view facing right, flat #00FF00 background, light from upper left, bold dark outlines, no ground shadow, consistent scale.
+- Include `prompt.md` (tool + exact prompts), `review.png` (all images on grey + one at game size, about 130 px tall, over `assets/art/stages/harbor-market.png`) and `HANDOFF.md`.
+- If the tool cannot meet a rule (for example parts keep overlapping), deliver your best attempt and say so in `HANDOFF.md`. Do not invent a workaround in code.
+
+## Handoff
+Commit, `git push -u origin <branch>`, and report: branch name, files delivered, what is missing or flawed, and any question for the user.

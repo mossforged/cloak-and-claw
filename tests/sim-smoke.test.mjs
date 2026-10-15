@@ -1,5 +1,5 @@
 // Headless smoke test: runs the sim with a bot for 3 minutes of game time and checks invariants.
-// Run: npm test   (no browser needed)
+// Run via: npm test
 import { createWorld, stepWorld } from '../src/sim/world.js';
 import { bus } from '../src/core/events.js';
 import { botControl } from './bot.mjs';

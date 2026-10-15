@@ -1,5 +1,7 @@
 # Module map
 
+Each `src/<module>/CONTRACT.md` states what the module owns and must not do. This page is the index.
+
 One line per file: what it does and what it exports. **Read this instead of the code** to find where a change goes.
 
 ## Entry and glue
@@ -53,7 +55,9 @@ One line per file: what it does and what it exports. **Read this instead of the 
 ## Tests and tools
 | File | Purpose |
 |---|---|
-| `tests/sim-smoke.mjs` | `npm test`: bot plays 3 min x 3 seeds headless, checks for NaN, fairness, progress |
+| `tests/run.mjs` | `npm test`: runs every `tests/*.test.mjs`; a file that fails to load counts as a failure |
+| `tests/sim-smoke.test.mjs` | Bot plays 3 min x 3 seeds headless; checks NaN, fairness, progress |
+| `tests/data.test.mjs` | Every fighter/move/stage/wave/art path resolves |
 | `tests/bot.mjs` | Scripted player used by tests |
 | `tools/key_green.py` | Green-screen keyer for new art |
 

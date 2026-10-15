@@ -25,5 +25,6 @@ Open http://localhost:8000. Add `?debug` to start with the debug overlay on.
 ## Test
 `npm test` runs the game headless with a bot (needs Node; no install step).
 
-## For AI collaborators
-Read `AGENTS.md` first. Docs: `docs/STATUS.md`, `docs/MODULES.md`, `docs/ART_PIPELINE.md`.
+## How this project is built
+A lead chat writes task packets (`docs/tasks/`) and reviews branches; **Claude Code** builds code (`CLAUDE.md`); **Codex** builds art (`AGENTS.md`); the user plays and answers stage gates.
+Start with `docs/STATUS.md`. Also: `docs/decisions.md`, `docs/handoffs/game-brief.md`, `docs/style-contract.md`, `docs/handoffs/asset-contract.md`, `docs/MODULES.md`, `docs/handoffs/setup-mac.md`.

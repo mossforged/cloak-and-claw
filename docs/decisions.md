@@ -1,0 +1,15 @@
+# Decisions
+
+Append-only. A change is a new line that supersedes an older one (say which). Newest at the bottom.
+
+- 2026-10-13 Genre: belt-scroller beat 'em up (not a flat side-scroller), inspired by Golden Axe, the D&D arcade games and River City Ransom (RPG growth). It is the user's animation-experiment project; turn-based projects avoid animation.
+- 2026-10-13 Setting: the user's animal world (Tales of Cloak & Claw). Art from the user's cartoon art bible (29 images); cartoon chosen because it is easier to generate consistently and to rig.
+- 2026-10-13 Stack: plain JS + canvas 2D, no engine, no build step.
+- 2026-10-13 First content: Mouse Fighter (hero), Rat Raider (enemy), Harbor Market (single-screen arena). More heroes with distinct move sets later, not yet.
+- 2026-10-13 Animation path: standees first (stage 1), then a cutout rig (stage 3). Pose swaps are the fallback if the rig disappoints.
+- 2026-10-13 Fairness: at most 1 enemy attacks at a time (`RULES.maxAttackers`), with a telegraphed windup the player can interrupt.
+- 2026-10-13 Repo `mossforged/cloak-and-claw`, public, GitHub Pages on. Commits use the anonymous handle only.
+- 2026-10-15 Workflow: a lead chat writes task packets and reviews; Claude Code builds code; Codex builds art; the user plays and answers gates. One clone per builder on the Mac.
+- 2026-10-15 Tunable data stays in `src/data/` (not a top-level `data/`) so browser imports need no path tricks.
+- 2026-10-15 Art flow: the art builder delivers to `assets/source/<ID>-<slug>/`; the code builder keys/trims into `assets/art/` and wires data. No Git LFS for now (art is small; revisit if sources pass ~200 MB).
+- 2026-10-15 ASSUMPTION (lead, needs the user's yes): the four design pillars in `docs/handoffs/game-brief.md`.
