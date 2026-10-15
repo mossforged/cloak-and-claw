@@ -52,5 +52,3 @@ Use case: stylized-concept. Single separate foreground prop cutout PNG: low hori
 ```text
 Use case: stylized-concept. Single separate foreground prop cutout PNG: low dock lantern on a SHORT stout timber bollard with rope wrapped round base, small gold glowing nautical lantern with dark iron frame. Same warm painted cartoon Harbor Market style as reference, bold dark outlines, upper-left sun. Whole object centered with generous TRANSPARENT margin, no background, floor, shadow or other objects. Intended only 64 px tall at game size; squat base and small lamp so mostly feet are occluded. No tall lamppost.
 ```
-
-
