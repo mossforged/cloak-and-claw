@@ -34,3 +34,4 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-15 Keep the on-screen build label (BUILD in src/config.js, shown under the KO counter): the code builder updates it per task so the user can see which version is running. (User request.)
 - 2026-10-15 Grab is a button (H / gamepad Y), never automatic on walking into an enemy; reach 75 px, depth 16. Supersedes T009's walk-in grab. (User, during T009.)
 - 2026-10-15 A007 Harbor Market layers approved by the user (keeps the market look; 120 px floor feels right). Import rules: one uniform scale per layer then crop (no vertical squash), floor dimmed slightly so fighters read, segment joins covered by foreground props placed in data. First scrolling stage is T013, added as a new stage beside the arena.
+- 2026-10-15 Jump squat: mode A (a 4-frame crouch in the sim before take-off; a hit during it cancels the jump). User's pick after an in-game A/B test (T014).

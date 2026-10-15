@@ -15,6 +15,10 @@
 6. **Fairness:** archers count toward the attack-token limit while drawing; keep `maxAttackers` behaviour. Waves: add the variants to Harbor Market waves gradually (e.g. wave 2 adds a spearman, wave 3 an archer).
 7. Lab sliders for the new moves/AI (optional; good defaults).
 
+## Small extras (do first, separate commits)
+- **Dev server:** add `tools/serve.py`, a no-cache static server (`Cache-Control: no-store`) on port 8000; update README and `CLAUDE.md`-referenced run line in README so the user stops needing hard reloads.
+- **Landing squash for jump mode A:** reuse B's render-only landing squash so the jump has a crouch at both ends. No sim change.
+
 ## Acceptance
 - Headless: `npm test` passes; old cutlass rat behaves as before (old case = old result); escape tests for thrust and arrow; arrows blocked by the shield.
 - Windowed: `docs/screens/T011/`: the three variants side by side (crouched stance) next to Mouse Fighter; spearman mid-thrust; archer at full draw with arrow in flight.

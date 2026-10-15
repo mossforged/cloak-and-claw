@@ -3,8 +3,8 @@
 **Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T009 grab and throw (merged 2026-10-15; user OK on round 3). Last art task: A006 Mouse Fighter touch-up parts (merged; user look check pending).
 
 ## Next
-1. **Code builder:** T014 (jump squat A/B), then T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
-2. **User:** picks a jump squat in T014.
+1. **Code builder:** T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
+2. **User:** judges the rat crouch, legs and gear in T011.
 3. **Art builder:** idle (A008 gear approved). Possible next: a rat leg redraw if T011's crouch doesn't fix the legs.
 
 ## Stage plan
@@ -20,7 +20,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T014-jump-squat-ab.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
+- Code: `docs/tasks/T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
 - Art: none queued. A008 gear import goes with/after T011 (gear attaches to rat head/torso bones).
 
 ## Open questions (for the user)
@@ -47,6 +47,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged T014 (jump squat A: 4-frame sim crouch; toggle removed). Landing squash for A and a no-cache dev server added to T011 as small extras.
 2026-10-15 code: T014 round 2: user picked **A** ("i like A") after comparing in play: hero `jumpSquatMode: 'A'` (4-frame crouch, then take-off). F toggle and HUD mode label removed (like T006); modes B/off stay in code + tests as data options. Build "t014 jump squat v2". Note: A has no landing squash (packet had it in B only); lead's call whether to add it.
 2026-10-15 code: T014 on branch `t014-jump-squat-ab`: F cycles the jump squat off / A / B (label under the build line; default B). A = sim `jumpStart` crouch for `move.jumpSquat` 4 frames, then take-off (attack meanwhile = air attack); B = no delay, crouch drawn on the first 5 rise frames + landing squash (`JUICE.jumpSquat`); new rig pose `jumpSquat`, standee squash. Build "t014 jump squat v1".
 2026-10-15 code: 12/12 tests (new tests/jump-squat.test.mjs; bot numbers = main; jumping bot off = B exactly). Filmstrips in docs/screens/T014/. Human check open: jump a lot in each mode: A (weightier), B (snappy but alive), or neither?
