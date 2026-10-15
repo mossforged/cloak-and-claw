@@ -5,6 +5,7 @@ import { RULES } from '../data/rules.js';
 import { silhouette } from './tint.js';
 
 const ZERO = { rot: 0, sx: 1, sy: 1, dx: 0, dy: 0 };
+export const BLOCK_LEAN = 0.08;   // standee's forward lean while blocking (the rig's joints lean on their own)
 const lerp = (a, b, t) => a + (b - a) * t;
 const easeOut = (t) => 1 - (1 - t) ** 3;
 const mix = (a, b, t) => {
@@ -25,9 +26,9 @@ export function poseOf(f, time) {
   switch (f.state) {
     case 'idle': { const b = Math.sin(time * 3 + f.id) * 0.018; return { ...ZERO, sy: 1 + b, sx: 1 - b }; }
     case 'walk': { const s = Math.sin(f.t * 0.24); return { ...ZERO, dy: -Math.abs(s) * 5, rot: s * 0.05 }; }
-    case 'block': {   // braced lean back behind the shield; jolts on a blocked hit (blockstun)
+    case 'block': {   // braced forward into the shield, crouched; jolts back on a blocked hit (blockstun)
       const k = f.t < f.stun ? 1 - f.t / f.stun : 0;
-      return { ...ZERO, rot: -0.1 - 0.12 * k, dx: -3 - 4 * k, sx: 0.96 + 0.04 * k, sy: 1.02 - 0.04 * k };
+      return { ...ZERO, rot: BLOCK_LEAN - 0.2 * k, dx: -6 * k, sx: 1.03, sy: 0.96 };
     }
     case 'jump': return { ...ZERO, rot: f.vz > 0 ? -0.1 : 0.08, sx: 1 - f.vz * 0.008, sy: 1 + f.vz * 0.012 };
     case 'hurt': { const k = 1 - f.t / Math.max(1, f.stun); return { ...ZERO, rot: -0.25 * k, dx: f.t < 8 ? (f.t % 2 ? 3 : -3) : 0, sx: 1 + 0.05 * k, sy: 1 - 0.05 * k }; }

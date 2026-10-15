@@ -35,7 +35,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | File | Purpose | Exports |
 |---|---|---|
 | `src/render/renderer.js` | Draw order: backdrop, stage, shadows, fighters by depth (rig if `art.rig` and `opts.rig`, else standee), effects, HUD, debug | `createRenderer` |
-| `src/render/standee.js` | Fighter drawn as a standee: lean/squash/hop per state (block = braced lean back, jolts in blockstun) and move phase, flips, flashes, tints | `drawStandee drawShadow poseOf` |
+| `src/render/standee.js` | Fighter drawn as a standee: lean/squash/hop per state (block = braced forward lean, jolts back in blockstun; `BLOCK_LEAN` is undone by the rig) and move phase, flips, flashes, tints | `drawStandee drawShadow poseOf` |
 | `src/render/rig.js` | Fighter drawn as a cutout rig: part hierarchy -> buffer, then placed like a standee (lean, flip, flash, tints). Draws swap images (`layoutRig(rig, joints, swap)` returns each part's `img`); optional held pose (`cast`) | `drawRig layoutRig` |
 | `src/render/rig-pose.js` | Rig pose per state/move phase (waves, windup/through/strike, easing, overshoot) and blending from the last drawn pose; part swaps per pose/phase (switch at once, strike swaps last `timing.swapBack` of recovery); optional pose override. Channels: joint angles, dx/dy, per-part `.sx/.sy` stretch and `.order`. Pure | `targetPose rigJoints channelsOf jointsOfRig` |
 | `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps), sparks, rings, damage numbers, dust; block clang (bright sparks toward the attacker, shield-side flash, double ring) (from events) | `createEffects` |

@@ -41,12 +41,12 @@ export default {
     'leg-back-upper': -60, 'leg-back-lower': 75, 'leg-front-upper': -25, 'leg-front-lower': 70,
     tail: 25, 'scarf-tail': 30,
   },
-  block: {   // shield raised forward, sword drawn back, braced low; head stays neutral
-    torso: -2, head: 2, dy: 3,
-    'arm-back-upper': -88, 'arm-back-lower': -40, shield: 0,
-    'arm-front-upper': 35, 'arm-front-lower': -30, sword: 157,   // tip: -2 + 35 - 30 + 157 = 160, back and low
-    'leg-back-upper': -60, 'leg-back-lower': 50, 'leg-front-upper': 62, 'leg-front-lower': -66,
-    tail: -10, 'scarf-tail': -8,
+  block: {   // braced behind the shield: leaning into it, wide stance, sword cocked over the shoulder ready to answer
+    torso: 12, head: 4, dy: 2,
+    'arm-back-upper': -104, 'arm-back-lower': -44, shield: -4,   // shield pushed forward, top at chin height
+    'arm-front-upper': 150, 'arm-front-lower': -40, sword: -152,   // tip: 12 + 150 - 40 - 152 = -30, up and forward
+    'leg-back-upper': -72, 'leg-back-lower': 56, 'leg-front-upper': 50, 'leg-front-lower': -62,
+    tail: -15, 'scarf-tail': -20,
   },
   hurt: {
     swap: { head: 'head-hurt' },
