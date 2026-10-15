@@ -1,10 +1,10 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T008 spin slash (merged 2026-10-15; user OK on round 2). Last art task: A002 three-quarter rig parts (merged; look approved).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T008 spin slash (merged 2026-10-15; user OK on round 2). Last art task: A004 Rat Raider rig + weapon kit (merged; user look check pending).
 
 ## Next
    **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** T009 grab and throw.
-   **Art builder:** A004 Rat Raider rig parts.
+   **Art builder:** free. **User:** A004 look check.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 4. **Lead:** write T009 grab/throw and T010 floor weapons + breakables; after A004, the rat rig import task.
@@ -23,7 +23,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T009-grab-throw.md`. Next: T010 floor weapons + breakables (uses A003). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
-- Art: `docs/tasks/A004-rat-raider-rig.md`.
+- Art: none queued (A004 merged).
 
 ## Open questions (for the user)
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
@@ -48,6 +48,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged T008 round 2 (+ build label kept) and A004 (rat rig + spear/bow kit, source).
 2026-10-15 lead: merged T008 (spin slash, view-only; cast key fixed).
 2026-10-15 code: user OK'd T008 round 2 spin ("sounds good for now"); C cast fix confirmed working by the user. Branch `t008-spin-slash` ready for the lead to merge.
 2026-10-15 code: T008 on branch `t008-spin-slash`: slash2 is a spin slash (windup low back; one back-view torso frame mid-active with the head looking back along the flat blade; flat cut in front), wrap-around swoosh with its far half behind him. Sim/timing/hitbox unchanged. C now plays the cast pose once (1 s, idle only).
