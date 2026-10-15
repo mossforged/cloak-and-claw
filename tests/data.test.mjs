@@ -49,7 +49,12 @@ for (const [id, r] of Object.entries(RIGS)) {
   const known = new Set([...jointsOfRig(r), 'speed']);
   const P = r.poses, M = P.moves ?? {};
   const named = { stance: P.stance, idle: P.idle, walk: P.walk, jump: P.jump, hurt: P.hurt, knockdown: P.knockdown, down: P.down, getup: P.getup };
-  for (const [k, m] of Object.entries(M)) { named[`${k}.windup`] = m.windup; named[`${k}.strike`] = m.strike; }
+  for (const [k, m] of Object.entries(M)) { named[`${k}.windup`] = m.windup; named[`${k}.strike`] = m.strike; if (m.through) named[`${k}.through`] = m.through; }
+  for (const [k, m] of Object.entries(P.alt ?? {})) {
+    check(M[k], `rig ${id}: alt '${k}' varies a move in moves`);
+    check(m.label && m.base, `rig ${id}: alt '${k}' has label and base`);
+    named[`alt.${k}.windup`] = m.windup; named[`alt.${k}.strike`] = m.strike; if (m.through) named[`alt.${k}.through`] = m.through;
+  }
   for (const [k, pose] of Object.entries(named)) {
     check(pose, `rig ${id}: pose '${k}' exists`);
     for (const j of Object.keys(pose ?? {})) check(known.has(j), `rig ${id}: pose '${k}' names unknown joint '${j}'`);

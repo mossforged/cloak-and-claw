@@ -9,7 +9,7 @@ export function createGame(ctx, assets) {
   let world = createWorld(START_STAGE, START_HERO);
   const renderer = createRenderer(ctx, assets);
   const juice = createJuice();
-  const opts = { debug: new URLSearchParams(location.search).has('debug'), paused: false, rig: true };
+  const opts = { debug: new URLSearchParams(location.search).has('debug'), paused: false, rig: true, alt: false };
   window.game = { get world() { return world; }, opts };   // console access for debugging
 
   return {
@@ -17,6 +17,7 @@ export function createGame(ctx, assets) {
       const c = readControl();
       if (c.debug) opts.debug = !opts.debug;
       if (c.rig) opts.rig = !opts.rig;
+      if (c.alt) opts.alt = !opts.alt;
       if (c.pause) opts.paused = !opts.paused;
       if (opts.paused) return;
       if (world.over && (c.attack || c.start)) { world = createWorld(START_STAGE, START_HERO); renderer.reset(); juice.reset(); }

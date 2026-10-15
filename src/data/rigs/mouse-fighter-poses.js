@@ -93,4 +93,20 @@ export default {
         'leg-front-upper': -55, 'leg-front-lower': 70, 'leg-back-upper': -20, 'leg-back-lower': 65, 'scarf-tail': 25 },
     },
   },
+  // A/B test (V in play): another take on a move, same keys as `moves`, plus its own swoosh (fx).
+  // `base` names the move in `moves`, `label` this one. Delete the loser once the user picks.
+  alt: {
+    slash2: {
+      base: 'sweep from behind', label: 'backhand out',
+      // arm stays in front: fist cocked by the far shoulder, blade lying back across the chest, then cut outward
+      windup: { torso: -6, head: -2, 'arm-front-upper': -54, 'arm-front-lower': -110, sword: 360, 'sword.sx': 1,
+        'arm-back-upper': -60, 'leg-front-upper': -42, 'leg-back-upper': 36 },
+      through: { torso: 2, head: -2, 'arm-front-upper': -77, 'arm-front-lower': -25, 'arm-front-lower.sy': 0.8,
+        sword: 282, 'sword.sx': 0.25, 'arm-back-upper': -40 },
+      strike: { torso: 10, head: 2, dx: 2, 'arm-front-upper': -95, 'arm-front-lower': -5, sword: 270, 'sword.sx': -1,
+        'arm-back-upper': -15, 'arm-back-lower': -40, 'leg-front-upper': -52, 'leg-front-lower': 38, 'leg-back-upper': 42, 'leg-back-lower': -38,
+        'scarf-tail': -18, tail: -12 },
+      fx: { r: 50, from: 170, to: -20, cx: 22, cz: 62, flat: 0.32 },
+    },
+  },
 };
