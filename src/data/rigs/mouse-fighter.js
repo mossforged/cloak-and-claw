@@ -11,6 +11,8 @@
 //   swaps:  alternate drawings a pose can switch to (`swap: { part: name }` in rigs/*-poses.js).
 //           offset/scale place the swap image in the part's own pixels, so pivot and attach points
 //           stay put: a swap pixel (x, y) lands on offset + scale * (x, y).
+// slots: grip type -> the part a held weapon replaces (T010): the weapon is drawn on that part's bone, joint and
+//           draw order with its own image, grip point (pivot) and size; the part's own drawing is hidden meanwhile.
 // Facing right; angles in degrees, + = clockwise (torso/head lean forward, hanging limbs swing back).
 const P = 'assets/art/heroes/mouse-fighter/rig/';
 
@@ -18,6 +20,7 @@ export default {
   id: 'mouse-fighter',
   scale: 0.29,      // part px -> screen px
   rootY: 33,        // hip height above the feet, screen px, in the stance pose
+  slots: { 'one-hand': 'sword' },
   parts: {
     torso: { img: P + 'torso.png', pivot: [100, 150], order: 9,
       swaps: { 'torso-back': { img: P + 'torso-back.png', offset: [10, 0] } } },

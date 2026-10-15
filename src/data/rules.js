@@ -8,4 +8,9 @@ export const RULES = {
   waveDelay: 90,          // frames between clearing a wave and the next arriving
   deadLinger: 50,         // frames a defeated enemy blinks before vanishing
   wallBounce: 0.5,        // thrown / knocked-down fighters hitting the floor's side edge bounce back at this share of their speed
+  // floor items (T010): gravity on items popping out of crates / dropped weapons; flyGravity on a tossed weapon;
+  // floorLife = frames a weapon lies on the floor before it vanishes (blinking for the last `blink`); food stays;
+  // dropOnKnockdown = a held weapon falls out of your hand when you are knocked down; popVz/popVx = how items pop out.
+  items: { gravity: 0.5, flyGravity: 0.12, floorLife: 720, blink: 150, dropOnKnockdown: true, popVz: 5, popVx: 1.6 },
+  footprint: 0.5,         // share of a fighter's body width that props block (feet, not shoulders)
 };

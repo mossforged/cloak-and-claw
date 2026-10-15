@@ -6,8 +6,12 @@ export const getPath = (obj, path) => path.split('.').reduce((o, k) => (o == nul
 
 export function setPath(obj, path, v) {
   const ks = path.split('.'), last = ks.pop();
-  const parent = ks.reduce((o, k) => (o[k] ??= {}), obj);
-  if (v === undefined) delete parent[last]; else parent[last] = v;
+  if (v === undefined) {   // unset: delete the leaf, never create its parents (e.g. a move without `launch`)
+    const parent = ks.reduce((o, k) => o?.[k], obj);
+    if (parent) delete parent[last];
+    return;
+  }
+  ks.reduce((o, k) => (o[k] ??= {}), obj)[last] = v;
 }
 
 const norm = (f, file) => (Array.isArray(f)
@@ -18,7 +22,7 @@ const norm = (f, file) => (Array.isArray(f)
 export function fieldsOf(section, pickKey) {
   return section.fields.map((f) => {
     const n = norm(f, section.file);
-    return { ...n, label: n.path, path: section.pick ? `${pickKey}.${n.path}` : n.path };
+    return { ...n, label: n.label ?? n.path, path: section.pick ? `${pickKey}.${n.path}` : n.path };
   });
 }
 

@@ -3,7 +3,8 @@
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { targetPose, rigJoints, jointsOfRig } from '../src/render/rig-pose.js';
-import { layoutRig } from '../src/render/rig.js';
+import { layoutRig, heldOf } from '../src/render/rig.js';
+import { ITEMS } from '../src/data/items/index.js';
 import { readFileSync, existsSync } from 'node:fs';
 
 // Bottom row of a part image (PNG header height), i.e. the boot sole.
@@ -63,11 +64,14 @@ for (const leg of ['leg-front-lower', 'leg-back-lower']) {
 }
 
 // Block (shield-wall crouch): both boots stay on the floor.
-const B = layoutRig(rig, targetPose(fighter({ state: 'block' }), rig, 0).joints);
-for (const leg of ['leg-front-lower', 'leg-back-lower']) {
-  const m = B.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
-  const sy = m[1] * x + m[3] * y + m[5];
-  check(Math.abs(sy) < 4, `block: ${leg} boot sole on the floor (y=${sy.toFixed(1)})`);
+// Pickup reach crouch (T010 round 2) too.
+for (const [name, f] of [['block', fighter({ state: 'block' })], ['reach', fighter({ state: 'pickup', t: def.pickup.stow + def.pickup.reach - 1 })]]) {
+  const B = layoutRig(rig, targetPose(f, rig, 0).joints);
+  for (const leg of ['leg-front-lower', 'leg-back-lower']) {
+    const m = B.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
+    const sy = m[1] * x + m[3] * y + m[5];
+    check(Math.abs(sy) < 4, `${name}: ${leg} boot sole on the floor (y=${sy.toFixed(1)})`);
+  }
 }
 
 // Walk: feet don't skate. While a foot is planted (half a stride cycle) the body moves walk * 60 / speed / 2 px;
@@ -174,6 +178,33 @@ const GL = layoutRig(rig, gp({}).joints);
 for (const leg of ['leg-front-lower', 'leg-back-lower']) {
   const m = GL.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
   check(Math.abs(m[1] * x + m[3] * y + m[5]) < 8, `grabbing: ${leg} boot near the floor`);
+}
+
+// Held weapon (T010): replaces the hand slot's drawing on the same bone and order; empty hand when broken; toss poses.
+{
+  const j = targetPose(fighter({}), rig, 0).joints;
+  const plain = layoutRig(rig, j), club = ITEMS['plank-club'];
+  const held = layoutRig(rig, j, {}, heldOf({ weapon: { def: club, broken: false } }, rig));
+  const slot = rig.slots['one-hand'], a = plain.find((e) => e.name === slot), b = held.find((e) => e.name === slot);
+  check(b && b.img === club.art.img && b.order === a.order, 'held weapon drawn in the sword slot, same order');
+  const grip = (e) => [e.m[0] * e.p.pivot[0] + e.m[2] * e.p.pivot[1] + e.m[4], e.m[1] * e.p.pivot[0] + e.m[3] * e.p.pivot[1] + e.m[5]];
+  check(near(grip(a)[0], grip(b)[0], 1e-6) && near(grip(a)[1], grip(b)[1], 1e-6), 'weapon grip sits where the sword hilt was (same hand)');
+  const sz = Math.hypot(b.m[0], b.m[1]);
+  check(near(sz, club.art.px, 1e-6), `held weapon at its floor size (${sz.toFixed(3)} vs ${club.art.px})`);
+  const broken = layoutRig(rig, j, {}, heldOf({ weapon: { def: club, broken: true } }, rig));
+  check(!broken.some((e) => e.name === slot), 'broken weapon: empty hand (no sword either)');
+  check(heldOf({ weapon: null }, rig) === null, 'nothing held: sword as usual');
+  const PK = def.pickup;
+  const pk = (t, o = {}) => targetPose(fighter({ state: 'pickup', t, ...o }), rig, 0).key;
+  check(pk(1) === 'stow' && pk(PK.stow + 1) === 'reach' && pk(PK.stow + PK.reach + 1) === 'rise', 'pickup: stow -> reach -> rise');
+  check(heldOf(fighter({ state: 'pickup', t: 1, pickup: { swap: false } }), rig) === null, 'pickup: sword shows while it is being stowed');
+  check(heldOf(fighter({ state: 'pickup', t: PK.stow + 1, pickup: { swap: false } }), rig)?.part === null, 'pickup: sword sheathed once stowed');
+  check(heldOf(fighter({ state: 'pickup', t: 1, pickup: { swap: true } }), rig)?.part === null, 'swap: empty hand from the start (old weapon flicked away)');
+  check(heldOf(fighter({}), rig, true)?.part === null && heldOf(fighter({}), rig, false) === null, 'sword draw: sheathed in its first half only');
+  const T = def.toss;
+  check(targetPose(fighter({ state: 'toss', t: 2 }), rig, 0).key === 'toss' && targetPose(fighter({ state: 'toss', t: T.wind + 2 }), rig, 0).key === 'tossRelease', 'toss -> tossRelease poses');
+  const m = club.moves.club2;
+  check(targetPose(fighter({ state: 'attack', move: m, moveKey: 'club2', mf: m.windup }), rig, 0).joints['arm-front-upper'] === P.moves.slash3.windup['arm-front-upper'], 'weapon move borrows its rig move pose (club2 -> slash3)');
 }
 
 console.log(fails ? `${fails} failures` : 'ALL OK');

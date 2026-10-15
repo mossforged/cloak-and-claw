@@ -10,4 +10,5 @@ export default {
   // ai: see src/sim/ai.js. range = attack distance; hover = waiting distance; think/cooldown = [min,max] frames.
   ai: { brain: 'brawler', range: 64, hover: 165, think: [20, 50], cooldown: [50, 110], aggression: 0.55 },
   xp: 10,
+  drop: { item: 'rat-cutlass', chance: 0.85 },   // knocked out: his cutlass falls to the floor (T010)
 };

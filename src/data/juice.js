@@ -17,5 +17,10 @@ export const JUICE = {
   thrownSpin: 0.32,
   trail: { points: 16, gap: 3, width: 26, alpha: 0.85, color: 'rgba(255,255,240,', edge: 'rgba(255,214,110,', lines: 3 },
   impact: { sparks: 26, speed: 9, life: 20, ringR: 64, flashR: 70 },
+  // props + items (T010): a hit shudders the prop for `wobble` frames and throws chips; a break throws its debris
+  // (debrisSpeed px/frame out, debrisLift up; they tumble, bounce, lie for debrisLife frames and fade) with a crunch flash.
+  props: { hitstop: 3, shake: 2.5, breakHitstop: 6, breakShake: 8, wobble: 12, chips: 8, debrisSpeed: 6, debrisLift: 8.5, debrisLife: 80, flashR: 60 },
+  items: { glow: 0.6, ghosts: 3, ringR: 26, sparkles: 8 },   // floor glow under pickups; ghosts behind a tossed weapon; eat/pickup pop
+  weaponBreak: { hitstop: 6, shake: 6, life: 40 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
 };

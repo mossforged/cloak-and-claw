@@ -3,11 +3,9 @@
 **Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T009 grab and throw (merged 2026-10-15; user OK on round 3). Last art task: A006 Mouse Fighter touch-up parts (merged; user look check pending).
 
 ## Next
-   **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** T009 grab and throw.
-   **Art builder:** idle (A007 approved). **User:** judges A006 in motion after T012.
-   **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
-2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
-4. **Lead:** write T009 grab/throw and T010 floor weapons + breakables; after A004, the rat rig import task.
+1. **Code builder:** T012 (wire A006 into block / cast / spin), then T014 (jump squat A/B), then T011 (rat rig + weapon kits), then T013 (scrolling Harbor Market).
+2. **User:** judges A006 in motion after T012; picks a jump squat in T014.
+3. **Art builder:** idle (A007 approved).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -22,7 +20,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T010-floor-weapons-breakables.md`, then `T012-mouse-touchup-poses.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
+- Code: `docs/tasks/T012-mouse-touchup-poses.md` (small), then `T014-jump-squat-ab.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
 - Art: none queued.
 
 ## Open questions (for the user)
@@ -48,6 +46,11 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged T010 (floor weapons, crates/barrel, food, rat cutlass drops; pickup/swap animation; user OK round 2). Jump squat A/B queued as T014.
+2026-10-15 code: user OK'd T010 round 2 ("all of those changes are great"). User request for the lead (outside T010, not built): a small crouch before the jump (jump squat). Choice for the lead: a sim delay of a few frames before take-off (weightier, less responsive), or a view-only squash that doesn't delay the jump. User wants to compare both in play (an in-game toggle test, like T006's framing test).
+2026-10-15 code: T010 round 2 (user: "animate him stowing his weapon and deploying the new one"; "just one should be able to be picked up", a new one "should toss aside the one held"): weapon pickup is now a ~0.37 s `pickup` state (sheathe sword at the hip / flick the held weapon away behind him, crouch, rise with it); H on a weapon while holding one swaps; after a throw or a break he draws the sword from the hip (render-only arm layer). 11/11 tests; build "t010 floor weapons v2". New screen 5-swap-*.jpg.
+2026-10-15 code: T010 on branch `t010-floor-weapons`: 2 crates + 1 barrel on Harbor Market (solid, 3/4 hits, debris + crunch; club crate, food crate, fish barrel); H picks up what's underfoot (enemy in grab reach wins), eats cheese (+15) / pie (+45); cutlass, plank club, big fish are weapon kits (own moves, durability, H tosses them: knocks down the first rat); KO'd rats drop cutlasses (85%, blink out after 12 s). New src/sim/props.js + weapons.js, render/props.js + prop-fx.js, data/items + data/props, rig `slots`.
+2026-10-15 code: 11/11 tests (new tests/props.test.mjs). No-props stage = main's exact bot numbers (loot uses its own rng); with props KOs 32/32/33 vs 32/33/32. Screens in docs/screens/T010/. Human check open: are smashing crates and fighting with the fish and club fun?
 2026-10-15 lead: merged A006 (guard, brace head, side torso, true back view, raised arm; source).
 2026-10-15 lead: merged T009 (grab on a button, H / pad Y; throws bowl rats; side-wall bounce). Bot KOs 32/33/32 vs 33/33/34 due to wall bounce only.
 2026-10-15 lead: merged A005 (rattier heads, heavier legs; source).

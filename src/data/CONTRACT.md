@@ -1,6 +1,6 @@
 # data: every tunable number and every content definition
 
-**Owns:** rules, juice, controls, moves, fighters (+ registry), rigs + poses (+ registry), stages (+ registry).
+**Owns:** rules, juice, controls, moves, fighters (+ registry), rigs + poses (+ registry), stages (+ registry), items: weapon kits + food (+ registry), props (+ registry).
 **Does not own:** logic. Data files export plain objects only.
 
 **Rules:**
@@ -8,4 +8,5 @@
 - New content = new file + one line in that folder's `index.js`.
 - The `art:` block of a fighter or stage points at game-ready images under `assets/art/`. The art builder never edits these files; the code builder imports art and edits `art:` blocks.
 - A fighter's `art.rig: '<id>'` draws it with `rigs/<id>.js` (+ `<id>-poses.js`) instead of the standee; the standee `idle` image stays as fallback and HUD portrait.
-- `npm test` includes a data check (`tests/data.test.mjs`): every move, combo link, wave enemy and art path must resolve.
+- A weapon kit (`items/*.js`, kind `weapon`) = image + grip type + moves + durability + toss; its moves name the rig move pose they borrow (`rig`). Stage `props` place breakables; a prop or stage entry's `drops` is an item id or `{ id: weight }`.
+- `npm test` includes a data check (`tests/data.test.mjs`): every move, combo link, wave enemy, item, prop, drop and art path must resolve.

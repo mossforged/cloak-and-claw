@@ -5,7 +5,8 @@ export default {
   // art: pose image paths (only idle exists yet; other poses fall back to idle).
   // height = on-screen px; facing = 1 if the image faces right; anchorX = feet centre as a fraction of width.
   // rig: draw with data/rigs/<id> instead of the standee (R toggles in play).
-  art: { idle: 'assets/art/heroes/mouse-fighter.png', height: 128, facing: 1, anchorX: 0.47, rig: 'mouse-fighter' },
+  // hand: where a held floor weapon is drawn on the standee (px forward of / above the feet; rot = blade angle, rad, - = up).
+  art: { idle: 'assets/art/heroes/mouse-fighter.png', height: 128, facing: 1, anchorX: 0.47, rig: 'mouse-fighter', hand: { x: 30, y: 58, rot: -0.7 } },
   body: { w: 40, h: 100 },                      // hurtbox
   stats: { maxHp: 100, power: 0, defense: 0, speed: 1 },
   move: { walk: 2.7, depth: 1.9, jump: 9.5 },   // px/frame; jump = launch speed
@@ -26,5 +27,12 @@ export default {
   // (within depth px of y), each touch keeps hitSlow of his speed; hitstop/shake on those touches, landHitstop/landShake on landing.
   throw: { wind: 10, recovery: 16, z: 36, overZ: 60, vx: 7.5, vz: 5.5, damage: 12, hitDamage: 10, depth: 22, hitSlow: 0.85,
     hitstop: 8, shake: 9, landHitstop: 5, landShake: 6 },
+  // pickup (H with nothing grabbable in reach): items whose spot is within range px (x) and depth px (y) of his feet.
+  // Weapons take stow (sheathe sword / flick the held weapon aside), reach (crouch; in hand at its end), rise frames;
+  // the flicked-aside weapon leaves at height asideZ with speed asideVx back, asideVz up. Food is eaten at once.
+  // toss (H while holding a weapon): wind/recovery frames; the weapon leaves his hand at height z with speed vx, vz (px/frame);
+  // it hits enemies (and props) within depth px of its lane.
+  pickup: { range: 34, depth: 14, stow: 7, reach: 7, rise: 8, asideZ: 50, asideVx: 2.6, asideVz: 4.5 },
+  toss: { wind: 8, recovery: 14, z: 62, vx: 11, vz: 1.2, depth: 20 },
   moves: MOUSE_SWORD, attack: 'slash1', airAttack: 'jumpSlash',
 };

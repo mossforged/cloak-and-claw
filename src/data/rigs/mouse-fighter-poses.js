@@ -13,6 +13,7 @@ export default {
     swapBack: 0.5,      // fraction of a move's recovery that keeps the strike's swaps (shout face) before the normal drawings return
     castHold: 1,        // s the C test pose (`cast`) plays before he drops back to normal
     throughSwap: [0, 0.75],      // a `through` pose's swaps show while the swing is this share of the way to the strike
+    drawSword: 0.36,    // s: after a floor weapon is thrown or breaks, his hand goes to the hip (`stow` arm) and draws the sword back up
   },
   stance: {
     torso: 4, head: -4,
@@ -128,6 +129,40 @@ export default {
     'arm-back-upper': -20, 'arm-back-lower': -40, shield: 10,
     'leg-back-upper': -58, 'leg-back-lower': 36, 'leg-front-upper': 52, 'leg-front-lower': -50,
     tail: -25, 'scarf-tail': -30,
+  },
+  // Weapon toss (T010, H while holding a floor weapon): toss = cocked back overhead, tossRelease = arm whipped
+  // forward, hand open. Wind lasts def.toss.wind frames, then the release eases back to idle over toss.recovery.
+  toss: {
+    torso: -10, head: -6, dy: 1,
+    'arm-front-upper': 150, 'arm-front-lower': -30, sword: -200,
+    'arm-back-upper': -20, 'arm-back-lower': -40, shield: 4,
+    'leg-back-upper': -50, 'leg-back-lower': 40, 'leg-front-upper': 66, 'leg-front-lower': -66,
+    tail: 15, 'scarf-tail': 15,
+  },
+  tossRelease: {
+    swap: { head: 'head-shout' },
+    torso: 16, head: 4, dx: 4,
+    'arm-front-upper': -95, 'arm-front-lower': 0, sword: 80,
+    'arm-back-upper': 10, 'arm-back-lower': -30, shield: 10,
+    'leg-back-upper': -58, 'leg-back-lower': 36, 'leg-front-upper': 52, 'leg-front-lower': -50,
+    tail: -20, 'scarf-tail': -25,
+  },
+  // Weapon pickup (T010 round 2): stow = sword arm swept back to the hip, blade down and behind (sheathing it, or
+  // flicking the held weapon away); reach = crouched, leaning in, hand down at the weapon on the floor in front.
+  // pickup state: idle -> stow over def.pickup.stow frames, -> reach over .reach, -> idle over .rise.
+  stow: {
+    torso: 8, head: -2, dy: 2,
+    'arm-front-upper': 52, 'arm-front-lower': -30, sword: 120,
+    'arm-back-upper': -50, 'arm-back-lower': -60, shield: 6,
+    'leg-back-upper': -52, 'leg-back-lower': 36, 'leg-front-upper': 50, 'leg-front-lower': -54,
+    tail: 10, 'scarf-tail': 10,
+  },
+  reach: {   // legs solved so both boots stay flat on the floor at this crouch (tests/rig.test.mjs)
+    torso: 28, head: -22, dy: 12,
+    'arm-front-upper': -40, 'arm-front-lower': -25, sword: 45,
+    'arm-back-upper': -90, 'arm-back-lower': -40, shield: 10,
+    'leg-back-upper': -133, 'leg-back-lower': 93, 'leg-front-upper': 52, 'leg-front-lower': -80,
+    tail: -10, 'scarf-tail': -20,
   },
   // Sword tip direction on screen = torso + arm-front-upper + arm-front-lower + sword
   // (0 = forward, -90 = up, 90 = down, 180 = back). Swings go the way the numbers run.

@@ -37,6 +37,12 @@ export function drawHud(ctx, world, assets, view, runLines = null) {
   ctx.restore();
   text(ctx, p.def.name, 96, 34, 22);
   bar(ctx, 96, 44, 220, 16, k, lk, k > 0.3 ? '#5fd35a' : '#ff5a4e');
+  if (p.weapon && !p.weapon.broken) {   // T010: held weapon + hits left
+    const W = p.weapon, img = assets.get(W.def.art.img), w = 46, h = img.height * w / img.width;
+    ctx.fillStyle = 'rgba(42,22,48,0.75)'; ctx.beginPath(); ctx.roundRect(92, 66, 54, 28, 8); ctx.fill();
+    ctx.drawImage(img, 96, 80 - h / 2, w, h);
+    text(ctx, `${W.def.name} x${W.uses}`, 152, 87, 16, W.uses <= 2 ? '#ff9a6a' : '#ffe9a8');
+  }
   text(ctx, `KOs ${world.kos}   XP ${world.xp}`, view.w - 20, 36, 22, '#ffe9a8', 'right');
   ctx.globalAlpha = 0.75; text(ctx, `build: ${BUILD}`, view.w - 20, 58, 14, '#fff', 'right'); ctx.globalAlpha = 1;
 
@@ -52,7 +58,7 @@ export function drawHud(ctx, world, assets, view, runLines = null) {
   }
   if (world.frame < 600 && !world.over) {
     ctx.globalAlpha = world.frame > 480 ? (600 - world.frame) / 120 : 1;
-    text(ctx, 'Move: WASD / Arrows   Attack: J   Jump: K   Block: hold L   Grab: H, then J knee / dir+J throw   Pause: P', view.w / 2, view.h - 18, 18, '#fff', 'center');
+    text(ctx, 'Move: WASD   Attack: J   Jump: K   Block: hold L   Grab, pick up, throw weapon: H   Pause: P', view.w / 2, view.h - 18, 18, '#fff', 'center');
     ctx.globalAlpha = 1;
   }
   if (world.over) {

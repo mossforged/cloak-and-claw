@@ -38,6 +38,12 @@ export function thinkAI(f, w) {
   c.mx = Math.abs(dx) > 5 ? Math.sign(dx) : 0;
   c.my = Math.abs(dy) > 3 ? Math.sign(dy) : 0;
   c.face = -side;
+  const p0 = f.blockedBy;   // a prop in the way (sim/props.js): step round it on the side with room
+  if (p0 && c.mx && Math.abs(dy) < p0.def.body.d) {
+    const room = (s) => (s > 0 ? fl.bottom - p0.y : p0.y - fl.top) - p0.def.body.d / 2;
+    const s = f.y >= p0.y ? 1 : -1;
+    c.my = room(s) > 12 ? s : -s;
+  }
   ai.mode = ai.token ? 'engage' : 'hover';
 
   if (ai.token && Math.abs(dx) < 14 && Math.abs(dy) < 6 && p.state !== 'down') {
