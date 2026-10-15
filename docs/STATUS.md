@@ -4,7 +4,7 @@
 
 ## Next
 1. **Code builder:** T005 (import A002, part swaps, cast pose), started 2026-10-14.
-   **Art builder:** A003 harbor props (crates, barrels, floor weapons).
+   **Art builder:** free (A003 merged; user look check pending).
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
@@ -23,7 +23,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T005-rig-three-quarter-swaps.md` (in progress).
-- Art: `docs/tasks/A003-harbor-props.md`.
+- Art: none queued.
 
 ## Open questions (for the user)
 - None right now.
@@ -38,6 +38,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: merged A003 harbor props (source). Note: source PNGs are ~1.5 MB each; watch repo size (LFS threshold in decisions).
 2026-10-14 lead: user approved A002's look ("I do like it"); T005 started.
 2026-10-14 lead: merged A002 (source; 18 parts + swaps; scale approximate per HANDOFF). Wrote T005.
 2026-10-14 lead: merged T002 (run log; 6/6 test files; sim change is report-only `targetPhase` on `hit`). User to check that L downloads the JSON.
