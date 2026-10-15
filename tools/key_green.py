@@ -1,5 +1,6 @@
 """Green-screen keyer. Usage: python3 tools/key_green.py in.png out.png [max_size] [--scale S]
 Removes green background, despills edges, trims to content, optionally downsizes.
+An input that already has transparency (e.g. A008 gear overlays) keeps its alpha and is only trimmed/scaled.
   max_size: fit the trimmed image inside max_size px (each image gets its own factor).
   --scale S: uniform factor instead, so parts cut from one canvas keep their relative sizes.
 Prints the output size and the trim box's top-left on the input canvas (for rig attach points)."""
@@ -8,13 +9,18 @@ import numpy as np
 from PIL import Image
 
 def key(src, dst, max_size=None, scale=None):
-    a = np.asarray(Image.open(src).convert("RGB")).astype(np.float32)
+    img = Image.open(src)
+    if img.mode == "RGBA" and img.getchannel("A").getextrema()[0] < 255:
+        return finish(img, dst, max_size, scale)
+    a = np.asarray(img.convert("RGB")).astype(np.float32)
     r, g, b = a[..., 0], a[..., 1], a[..., 2]
     spill = g - np.maximum(r, b)            # how "green" a pixel is
     alpha = np.clip(1 - (spill - 25) / 70, 0, 1)  # >95 fully clear, <25 fully solid
     g2 = np.where(spill > 0, np.minimum(g, np.maximum(r, b) + 8), g)  # despill
     out = np.dstack([r, g2, b, alpha * 255]).astype(np.uint8)
-    im = Image.fromarray(out)
+    return finish(Image.fromarray(out), dst, max_size, scale)
+
+def finish(im, dst, max_size, scale):
     bbox = im.getchannel("A").point(lambda v: 255 if v > 20 else 0).getbbox()
     im = im.crop(bbox)
     if scale:

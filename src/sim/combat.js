@@ -6,7 +6,7 @@ import { releaseGrab } from './grab.js';
 import { wearWeapon } from './weapons.js';
 
 export function hitboxOf(f) {
-  if (!f.move || phaseOf(f)[0] !== 'active') return null;
+  if (!f.move?.hitbox || phaseOf(f)[0] !== 'active') return null;   // shot moves have no hitbox (sim/shots.js)
   const hb = f.move.hitbox;
   const x0 = f.facing > 0 ? f.x + hb.x : f.x - hb.x - hb.w;
   return { x0, x1: x0 + hb.w, z0: f.z + hb.z, z1: f.z + hb.z + hb.h, y: f.y, depth: f.move.depth ?? RULES.depthHit };
@@ -51,7 +51,7 @@ function applyBlock(a, t, m, at) {
   bus.emit('block', { attacker: a, target: t, move: m, damage: Math.max(0, dmg), x, y: t.y, z: at.z });
 }
 
-// Also used for a tossed weapon's hit (sim/props.js). m.launch = {vx, vz} replaces RULES.knockdown's launch speed.
+// Also used for a tossed weapon's hit (sim/props.js) and an arrow's (sim/shots.js: m = the shot). m.launch = {vx, vz} replaces RULES.knockdown's launch speed.
 export function applyHit(a, t, m, world, at) {
   if (blocks(a, t)) return applyBlock(a, t, m, at);
   if (t.grab) releaseGrab(t);   // a hit on the holder drops the grab (T009)

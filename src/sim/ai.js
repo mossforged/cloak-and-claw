@@ -1,7 +1,11 @@
 // Enemy brains. Writes f.control just like the keyboard does for the player.
 // "brawler": hovers at a distance; takes an attack token (RULES.maxAttackers) to step in and swing.
+// "archer" (T011): keeps `range` away in the player's lane (backs off when he comes closer), takes a token like a
+// brawler (so drawing the bow counts toward maxAttackers) and shoots once within `slack` of his spot, or when cornered
+// within `flee`; never while his last arrow is still flying.
 import { RULES } from '../data/rules.js';
 import { HELPLESS } from './fighter.js';
+import { inFlight } from './shots.js';
 
 const tokensInUse = (w) => w.fighters.filter((f) => f.ai?.token).length;
 
@@ -46,7 +50,11 @@ export function thinkAI(f, w) {
   }
   ai.mode = ai.token ? 'engage' : 'hover';
 
-  if (ai.token && Math.abs(dx) < 14 && Math.abs(dy) < 6 && p.state !== 'down') {
+  const near = Math.abs(f.x - p.x), archer = cfg.brain === 'archer';
+  const cornered = archer && near < cfg.flee && (tx === fl.left || tx === fl.right);
+  const ready = Math.abs(dx) < (cfg.slack ?? 14) || cornered;
+  if (archer && inFlight(w, f)) return;
+  if (ai.token && ready && Math.abs(dy) < 6 && p.state !== 'down') {
     c.mx = c.my = 0; c.attack = true; f.facing = -side;
   }
 }

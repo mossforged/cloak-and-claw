@@ -22,6 +22,10 @@ export function drawDebug(ctx, world, juice) {
     if (P) ctx.strokeRect(it.x - P.range, it.y - P.depth, P.range * 2, P.depth * 2);
     ctx.fillStyle = '#fff07a'; ctx.fillText(`${it.def.id} ${it.state}${it.def.kind === 'weapon' ? ' x' + it.uses : ''}`, it.x - 30, it.y + 26);
   }
+  for (const s of world.shots) {   // arrow (T011): its hit lane (depth) and height
+    ctx.fillStyle = 'rgba(255,60,60,0.5)'; ctx.fillRect(s.x - 12, s.y - s.def.depth, 24, s.def.depth * 2);
+    ctx.strokeStyle = 'rgba(255,60,60,1)'; ctx.strokeRect(s.x - 12, s.y - s.z - 2, 24, 4);
+  }
   const box = (b, color) => { ctx.strokeStyle = color; ctx.strokeRect(b.x0, b.y - b.z1, b.x1 - b.x0, b.z1 - b.z0); };
   for (const f of world.fighters) {
     ctx.lineWidth = 1.5;

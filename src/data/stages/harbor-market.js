@@ -13,7 +13,7 @@ export default {
   ],
   waves: [
     { enemies: ['rat-raider', 'rat-raider'] },
-    { enemies: ['rat-raider', 'rat-raider', 'rat-raider'] },
-    { enemies: ['rat-raider', 'rat-raider', 'rat-raider', 'rat-raider'] },
+    { enemies: ['rat-raider', 'rat-raider', 'rat-spearman'] },               // T011: the spearman joins in wave 2
+    { enemies: ['rat-raider', 'rat-spearman', 'rat-raider', 'rat-archer'] },   // and an archer in wave 3
   ],
 };
