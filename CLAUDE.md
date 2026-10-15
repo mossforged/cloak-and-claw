@@ -17,6 +17,7 @@ You never edit `assets/source/` (the art builder's) and never change `docs/` exc
 - **Every tunable number goes in `src/data/`.** New content = data file + registry line.
 - Files stay under ~200 lines; split and update `docs/MODULES.md` when they grow.
 - Extending a system: the old case must give exactly the old result.
+- New tunable systems get lab sliders (`src/data/lab-schema.js`) as an option, but ship with good, tested defaults: the user should not need to tune anything for it to work.
 
 ## Importing art
 When a packet says to import an asset: run `python3 tools/key_green.py assets/source/<ID>-<slug>/<file>.png assets/art/<...>.png <max_px>`, wire the `art:` block in data, check the feet anchor with the debug overlay (` key), and mark the asset `game-ready` in `docs/assets.md`.
