@@ -1,9 +1,10 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T001 tuning lab (merged 2026-10-14). Last art task: A001 (merged, look approved).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T003 Mouse Fighter rig (merged 2026-10-14). Last art task: A001 (merged, look approved).
 
 ## Next
-1. **Code builder:** T003 Mouse Fighter rig, so the user can see it move.
+1. **User:** Stage 3 question, now answerable: does the rig look alive enough that you want every character rigged?
+   **Code builder:** T004 rat telegraph (small), then T002 run log.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 3. **Art builder:** free (A001 done). Next art waits on seeing the rig move.
 4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
@@ -21,7 +22,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T003-mouse-rig.md`, then `T004-rat-telegraph.md` (small, auto-ok). Queued: `T002-run-log.md` (auto-ok).
+- Code: `docs/tasks/T004-rat-telegraph.md` (small, auto-ok). Queued: `T002-run-log.md` (auto-ok).
 - Art: nothing queued (A001 done).
 
 ## Open questions (for the user)
@@ -32,10 +33,14 @@
 - Touch controls for phone play (Stage 5).
 - Art bible items (pie, cheese, potions, chest, coins) as pickups and RPG rewards (Stage 6).
 - Bramble Brute as the first boss.
+- Rig follow-ups (from T003): A001-02 art: back or three-quarter-back torso (+ matching head) for a true horizontal slash2 with a body twist; shield painted at the standee's angle; expression heads (neutral, shout, hurt); parts lit to match the standee. Code: poses that swap a part's image; a shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: merged T003 (rig; 4/4 test files pass; move timing/hitboxes unchanged, only the slash2 swoosh shape). Art and code follow-ups from the builder parked below.
+2026-10-14 code: T003 Mouse Fighter rig on branch `t003-mouse-rig` (tools/slice_sheet.py, src/data/rigs/, src/render/rig.js + rig-pose.js, R toggles rig/standee, tests/rig.test.mjs); no sim changes. Screens in docs/screens/T003/.
+2026-10-14 code: T003 round 2 from user notes: angled upright shield, stockier build, slower matched stride, slash2 is now a flat sweep across the body (flat swoosh). slash2 is now a backhand cut outward (user's pick); a true horizontal cut waits on back-view torso art. Human check still open; no combo GIF.
 2026-10-14 lead: merged T001 (tuning lab). User's lab check still open.
 2026-10-14 lead: merged A001 (source art; user approved the look). Wrote T003 (rig) so the user can see it move.
 2026-10-14 lead: Stage 1 gate passed (user: striking and knockback feel good). Lane/background mismatch noted for Stage 2.
