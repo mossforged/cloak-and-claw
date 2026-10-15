@@ -1,0 +1,332 @@
+{
+  "canvas": [
+    1226,
+    1283
+  ],
+  "note": "Source placement guide, not runtime pivots. Uniform scaling estimated by anatomy; see HANDOFF for fit gaps.",
+  "parts": [
+    {
+      "name": "head",
+      "source": "parts-sheet.png",
+      "crop": [
+        24,
+        31,
+        505,
+        359
+      ],
+      "uniform_scale": 1.4,
+      "position": [
+        365,
+        80
+      ],
+      "size": [
+        673,
+        459
+      ]
+    },
+    {
+      "name": "torso",
+      "source": "parts-sheet.png",
+      "crop": [
+        487,
+        30,
+        857,
+        391
+      ],
+      "uniform_scale": 1.27,
+      "position": [
+        478,
+        510
+      ],
+      "size": [
+        470,
+        458
+      ]
+    },
+    {
+      "name": "scarf-tail",
+      "source": "parts-sheet.png",
+      "crop": [
+        879,
+        79,
+        1091,
+        340
+      ],
+      "uniform_scale": 0.83,
+      "position": [
+        345,
+        408
+      ],
+      "size": [
+        176,
+        217
+      ]
+    },
+    {
+      "name": "tail",
+      "source": "parts-sheet.png",
+      "crop": [
+        1134,
+        70,
+        1495,
+        322
+      ],
+      "uniform_scale": 1.1,
+      "position": [
+        110,
+        574
+      ],
+      "size": [
+        397,
+        277
+      ]
+    },
+    {
+      "name": "arm-front-upper",
+      "source": "parts-sheet.png",
+      "crop": [
+        52,
+        405,
+        250,
+        611
+      ],
+      "uniform_scale": 0.88,
+      "position": [
+        412,
+        529
+      ],
+      "size": [
+        174,
+        181
+      ]
+    },
+    {
+      "name": "arm-front-lower",
+      "source": "parts-sheet.png",
+      "crop": [
+        296,
+        400,
+        530,
+        658
+      ],
+      "uniform_scale": 0.84,
+      "position": [
+        325,
+        636
+      ],
+      "size": [
+        197,
+        217
+      ]
+    },
+    {
+      "name": "arm-back-upper",
+      "source": "parts-sheet.png",
+      "crop": [
+        625,
+        425,
+        817,
+        638
+      ],
+      "uniform_scale": 0.8,
+      "position": [
+        811,
+        575
+      ],
+      "size": [
+        154,
+        170
+      ]
+    },
+    {
+      "name": "arm-back-lower",
+      "source": "parts-sheet.png",
+      "crop": [
+        877,
+        402,
+        1099,
+        663
+      ],
+      "uniform_scale": 0.76,
+      "position": [
+        871,
+        631
+      ],
+      "size": [
+        169,
+        198
+      ]
+    },
+    {
+      "name": "leg-front-upper",
+      "source": "parts-sheet.png",
+      "crop": [
+        47,
+        660,
+        250,
+        942
+      ],
+      "uniform_scale": 0.83,
+      "position": [
+        405,
+        849
+      ],
+      "size": [
+        168,
+        234
+      ]
+    },
+    {
+      "name": "leg-front-lower",
+      "source": "parts-sheet.png",
+      "crop": [
+        289,
+        673,
+        542,
+        974
+      ],
+      "uniform_scale": 0.83,
+      "position": [
+        249,
+        933
+      ],
+      "size": [
+        210,
+        250
+      ]
+    },
+    {
+      "name": "leg-back-upper",
+      "source": "parts-sheet.png",
+      "crop": [
+        645,
+        668,
+        850,
+        951
+      ],
+      "uniform_scale": 0.75,
+      "position": [
+        803,
+        855
+      ],
+      "size": [
+        154,
+        212
+      ]
+    },
+    {
+      "name": "leg-back-lower",
+      "source": "parts-sheet.png",
+      "crop": [
+        936,
+        677,
+        1198,
+        967
+      ],
+      "uniform_scale": 0.75,
+      "position": [
+        864,
+        934
+      ],
+      "size": [
+        196,
+        218
+      ]
+    },
+    {
+      "name": "sword",
+      "source": "parts-sheet.png",
+      "crop": [
+        1136,
+        361,
+        1513,
+        656
+      ],
+      "uniform_scale": 1.37,
+      "position": [
+        2,
+        718
+      ],
+      "size": [
+        516,
+        404
+      ]
+    },
+    {
+      "name": "shield",
+      "source": "parts-sheet.png",
+      "crop": [
+        1264,
+        629,
+        1492,
+        978
+      ],
+      "uniform_scale": 1.24,
+      "position": [
+        925,
+        481
+      ],
+      "size": [
+        283,
+        433
+      ]
+    },
+    {
+      "name": "head-shout",
+      "source": "swaps-sheet.png",
+      "crop": [
+        13,
+        229,
+        609,
+        690
+      ],
+      "uniform_scale": 1.1291946308724832,
+      "position": [
+        365,
+        80
+      ],
+      "size": [
+        673,
+        521
+      ]
+    },
+    {
+      "name": "head-hurt",
+      "source": "swaps-sheet.png",
+      "crop": [
+        534,
+        229,
+        1122,
+        680
+      ],
+      "uniform_scale": 1.1445578231292517,
+      "position": [
+        365,
+        80
+      ],
+      "size": [
+        673,
+        516
+      ]
+    },
+    {
+      "name": "torso-back",
+      "source": "swaps-sheet.png",
+      "crop": [
+        1083,
+        319,
+        1522,
+        795
+      ],
+      "uniform_scale": 0.9621848739495799,
+      "position": [
+        478,
+        510
+      ],
+      "size": [
+        422,
+        458
+      ]
+    }
+  ]
+}
