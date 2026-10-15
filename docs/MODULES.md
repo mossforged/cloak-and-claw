@@ -11,13 +11,13 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/main.js` | Sizes canvas, loads art referenced by data, starts loop | |
 | `src/config.js` | View size (960x540), FPS, start stage/hero | `VIEW FPS START_STAGE START_HERO` |
 | `lab.html` | Tuning lab page: game canvas + side panel, loads `src/lab/main.js` | |
-| `src/game.js` | Input -> sim step (skipped during hit-stop) -> render. Pause, debug toggle, rig toggle (R), restart, run log (saves on game over, L downloads). Exposes `window.game` (`world opts log`) | `createGame` |
+| `src/game.js` | Input -> sim step (skipped during hit-stop) -> render. Pause, debug toggle, rig toggle (R), cast test pose toggle (C, view only), restart, run log (saves on game over, L downloads). Exposes `window.game` (`world opts log`) | `createGame` |
 
 ## Core (engine plumbing, rarely changes)
 | File | Purpose | Exports |
 |---|---|---|
 | `src/core/loop.js` | Fixed 60 step/sec loop | `startLoop(update, render)` |
-| `src/core/input.js` | Keyboard + gamepad -> `{mx,my,attack,jump,start,debug,pause,rig,log}` per step | `initInput readControl` |
+| `src/core/input.js` | Keyboard + gamepad -> `{mx,my,attack,jump,start,debug,pause,rig,cast,log}` per step | `initInput readControl` |
 | `src/core/events.js` | Pub/sub bus | `bus.on bus.emit` |
 | `src/core/assets.js` | Image loading; missing art -> labeled silhouette | `loadAssets collectArtPaths` |
 | `src/core/rng.js` | Seeded RNG (repeatable tests) | `createRng` |
@@ -36,8 +36,8 @@ One line per file: what it does and what it exports. **Read this instead of the 
 |---|---|---|
 | `src/render/renderer.js` | Draw order: backdrop, stage, shadows, fighters by depth (rig if `art.rig` and `opts.rig`, else standee), effects, HUD, debug | `createRenderer` |
 | `src/render/standee.js` | Fighter drawn as a standee: lean/squash/hop per state and move phase, flips, flashes, tints | `drawStandee drawShadow poseOf` |
-| `src/render/rig.js` | Fighter drawn as a cutout rig: part hierarchy -> buffer, then placed like a standee (lean, flip, flash, tints) | `drawRig layoutRig` |
-| `src/render/rig-pose.js` | Rig pose per state/move phase (waves, windup/through/strike, easing, overshoot) and blending from the last drawn pose. Channels: joint angles, dx/dy, per-part `.sx/.sy` stretch and `.order`. Pure | `targetPose rigJoints channelsOf jointsOfRig` |
+| `src/render/rig.js` | Fighter drawn as a cutout rig: part hierarchy -> buffer, then placed like a standee (lean, flip, flash, tints). Draws swap images (`layoutRig(rig, joints, swap)` returns each part's `img`); optional held pose (`cast`) | `drawRig layoutRig` |
+| `src/render/rig-pose.js` | Rig pose per state/move phase (waves, windup/through/strike, easing, overshoot) and blending from the last drawn pose; part swaps per pose/phase (switch at once, strike swaps last `timing.swapBack` of recovery); optional pose override. Channels: joint angles, dx/dy, per-part `.sx/.sy` stretch and `.order`. Pure | `targetPose rigJoints channelsOf jointsOfRig` |
 | `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps), sparks, rings, damage numbers, dust (from events) | `createEffects` |
 | `src/render/juice.js` | Screen shake + hit-stop counters (from events) | `createJuice` |
 | `src/render/hud.js` | Portrait, health bars, wave banner, KOs/XP, hints, game over, pause | `drawHud drawPaused` |
@@ -82,7 +82,7 @@ Run log fields (one object per run; the player only):
 | `src/data/moves/*.js` | Move sets: timing, hitbox, damage, knockback, hitstop, shake, pose, fx |
 | `src/data/fighters/*.js` + `index.js` | Fighter defs: art, body, stats (RPG hooks), speeds, moves, AI params. Registry in index |
 | `src/data/lab-schema.js` | Which data fields the tuning lab shows (`ROOTS` file -> object, `LAB_SCHEMA` sections/sliders). New tunable = one line here |
-| `src/data/rigs/*.js` + `index.js` | Cutout rigs: parts (image, parent, pivot, attach, rest, scale, order) and `-poses.js` (stance, idle/walk waves, state poses, move windup/through/strike, blend timing). Registry in index |
+| `src/data/rigs/*.js` + `index.js` | Cutout rigs: parts (image, parent, pivot, attach, rest, scale, order, `swaps` = alternate drawings with offset) and `-poses.js` (stance, idle/walk waves, state poses, move windup/through/strike, `swap: {part: name}` per pose, test poses like `cast`, blend timing). Registry in index |
 | `src/data/stages/*.js` + `index.js` | Stage art placement, backdrop, floor belt, start point, waves. Registry in index |
 
 ## Tests and tools
@@ -96,8 +96,9 @@ Run log fields (one object per run; the player only):
 | `tests/rig.test.mjs` | Rig pose per state, move windup/strike reached, blend start/end, layout order, feet on the ground, walk stride matches walk speed, slash2 stretch/order channels |
 | `tests/runlog.test.mjs` | Bot runs 3 min x 3 seeds; log matches independently counted events (hits, damage, swings, knockdowns, windups cut); idle 1-hp run logs 1 knockdown |
 | `tests/bot.mjs` | Scripted player used by tests |
-| `tools/key_green.py` | Green-screen keyer for new art |
+| `tools/key_green.py` | Green-screen keyer for new art; `--scale S` keeps parts cut from one canvas at relative size and prints each trim box (seeds rig attach points) |
 | `tools/slice_sheet.py` | Slices a green parts sheet into keyed, trimmed part PNGs by name (reading order) |
+| `tools/rig-preview.html` | Rig pose sheet for fitting and screenshots: `/tools/rig-preview.html?cells=standee,idle,slash3:windup,cast&zoom=3` (states, named poses, `move:windup/strike/<frame>`, `walk:<0..1>`; `dots` shows pivots) |
 
 ## Events (sim -> render)
 | Event | Payload | Listeners |

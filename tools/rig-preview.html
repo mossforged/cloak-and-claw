@@ -1,0 +1,65 @@
+<!doctype html>
+<!-- Rig pose sheet: draws the rig in chosen poses side by side (plus the standee) for fitting and screenshots.
+     Serve the repo root, then open /tools/rig-preview.html?cells=standee,idle,slash3:windup,slash3:strike,hurt,cast
+     Cell: a state (idle walk jump hurt knockdown down getup), a named pose (cast), '<move>:windup|strike|<frame>',
+     or 'walk:<0..1 of a stride>'. Options: zoom=2, dots (joint pivots), rig=mouse-fighter. -->
+<meta charset="utf-8">
+<title>Rig preview</title>
+<style>body { margin: 0; background: #6e6e76; } canvas { display: block; }</style>
+<canvas id="c"></canvas>
+<script type="module">
+import { FIGHTERS } from '../src/data/fighters/index.js';
+import { RIGS } from '../src/data/rigs/index.js';
+import { targetPose } from '../src/render/rig-pose.js';
+import { layoutRig } from '../src/render/rig.js';
+
+const q = new URLSearchParams(location.search);
+const def = FIGHTERS[q.get('rig') ?? 'mouse-fighter'], rig = RIGS[def.art.rig];
+const cells = (q.get('cells') ?? 'standee,idle,walk:0,walk:0.25,slash1:windup,slash1:strike,slash2:windup,slash2:strike,slash3:windup,slash3:strike,jumpSlash:strike,hurt,knockdown,down,cast').split(',');
+const Z = +(q.get('zoom') ?? 2), CW = 170, CH = 190, FEET = 160, COLS = Math.min(cells.length, +(q.get('cols') ?? 8));
+
+const load = (src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = '../' + src; });
+const paths = new Set([def.art.idle]);
+for (const p of Object.values(rig.parts)) { paths.add(p.img); for (const s of Object.values(p.swaps ?? {})) paths.add(s.img); }
+const imgs = {};
+await Promise.all([...paths].map(async (p) => { imgs[p] = await load(p); }));
+
+function poseFor(cell) {
+  const [a, b] = cell.split(':');
+  const f = { def, state: 'idle', t: 0, mf: 0, move: null };
+  if (rig.poses[a] && !['idle', 'walk', 'jump', 'hurt', 'knockdown', 'down', 'getup', 'stance'].includes(a)) return targetPose(f, rig, 0, a);
+  const m = def.moves[a];
+  if (m) {
+    Object.assign(f, { state: m.air ? 'jump' : 'attack', move: m });
+    f.mf = b === 'windup' ? m.windup - 1 : b === 'strike' ? m.windup + m.active - 1 : +b;
+  } else {
+    f.state = a === 'stance' ? 'idle' : a;
+    if (a === 'walk') f.t = (+b || 0) * 60 / rig.poses.walk.speed;
+    if (a === 'getup') f.t = +b || 20;
+  }
+  return targetPose(f, rig, 0);
+}
+
+const c = document.getElementById('c'), g = c.getContext('2d');
+c.width = COLS * CW * Z; c.height = Math.ceil(cells.length / COLS) * CH * Z;
+g.font = `${11 * Z}px sans-serif`;
+cells.forEach((cell, i) => {
+  const ox = (i % COLS) * CW * Z, oy = Math.floor(i / COLS) * CH * Z;
+  g.setTransform(1, 0, 0, 1, 0, 0);
+  g.fillStyle = '#ffffff22'; g.fillRect(ox + 10 * Z, oy + FEET * Z, (CW - 20) * Z, Z);
+  g.fillStyle = '#fff'; g.fillText(cell, ox + 6 * Z, oy + 14 * Z);
+  const at = [ox + CW / 2 * Z, oy + FEET * Z];
+  if (cell === 'standee') {
+    const im = imgs[def.art.idle], h = def.art.height, w = h * im.width / im.height;
+    g.drawImage(im, at[0] - w * def.art.anchorX * Z, at[1] - h * Z, w * Z, h * Z);
+    return;
+  }
+  const { joints, swap } = poseFor(cell);
+  for (const { img, m, p } of layoutRig(rig, joints, swap)) {
+    g.setTransform(Z, 0, 0, Z, ...at); g.transform(...m);
+    if (imgs[img]) g.drawImage(imgs[img], 0, 0);
+    if (q.has('dots')) { g.fillStyle = '#0ff'; g.beginPath(); g.arc(p.pivot[0], p.pivot[1], 4, 0, 7); g.fill(); }
+  }
+});
+document.title = 'ready';
+</script>

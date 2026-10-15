@@ -10,3 +10,5 @@
 - Render-only memory (rig pose blends) is kept in render, keyed by fighter, never written onto the fighter.
 - Render-only randomness (sparks, shake) may use `Math.random`.
 - Draw art from data paths only; a missing image shows a labeled placeholder.
+- Part swaps (`swap` in rig poses) only change which image a part draws; pivots and attach points stay in the part's own pixels.
+- `opts.pose` (C key) holds a named rig pose on the hero for viewing; it never touches the fighter.

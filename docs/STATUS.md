@@ -1,9 +1,10 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T002 run log (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; look approved).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T005 rig three-quarter + part swaps (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; look approved).
 
 ## Next
-1. **Code builder:** T005 (import A002, part swaps, cast pose), started 2026-10-14.
+1. **User:** A003 props look check (crate, barrel, floor weapons).
+   **Code builder:** free; lead writing Stage 2 crowd-tool packets.
    **Art builder:** free (A003 merged; user look check pending).
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
@@ -14,7 +15,7 @@
 |---|---|---|
 | 1 | Standee combat in one arena (**passed**) | After 10 minutes: is hitting rats fun even with flat standees? What feels off? |
 | 2 | Tuning lab + feel pass (T001, then tuning tasks from the playtest); block, grab/throw, floor weapons and breakables | Do the combo, jump and rats feel right now? Does blocking and throwing make crowds fun to manage? |
-| 3 | Cutout rig for Mouse Fighter (A001 + T003 done; user said yes to the system; A002 three-quarter revision + part swaps next) | Does the rig look alive enough that you want every character rigged? (No = pose swaps instead) |
+| 3 | Cutout rig for Mouse Fighter (**done**: A001, T003, A002, T005; user: "a big improvement"). Follow-ups parked | Does the rig look alive enough that you want every character rigged? (No = pose swaps instead) |
 | 4 | Enemy variety (Rat Archer, Skeletal Mouse) + run log (T002) | Does a 10-minute run have variety and readable threats? |
 | 5 | Scrolling stage with layered art + touch controls | Does moving through a stage feel like Golden Axe? |
 | 6 | RPG layer: stats grow, food/shop between stages, lives | Do you want "one more run" to get stronger? |
@@ -22,7 +23,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T005-rig-three-quarter-swaps.md` (in progress).
+- Code: none queued (Stage 2 packets next).
 - Art: none queued.
 
 ## Open questions (for the user)
@@ -33,13 +34,17 @@
 - Touch controls for phone play (Stage 5).
 - Art bible items (pie, cheese, potions, chest, coins) as pickups and RPG rewards (Stage 6).
 - Bramble Brute as the first boss.
-- Rig follow-ups (from T003): A001-02 art: back or three-quarter-back torso (+ matching head) for a true horizontal slash2 with a body twist; shield painted at the standee's angle; expression heads (neutral, shout, hurt); parts lit to match the standee. Code: poses that swap a part's image; a shared shading layer over the assembled rig.
+- Rig follow-ups: art for a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: merged T005 (rig 3/4 + swaps; 6/6 tests; sim and moves unchanged). Stage 3 rig work done; follow-ups parked.
 2026-10-14 lead: merged A003 harbor props (source). Note: source PNGs are ~1.5 MB each; watch repo size (LFS threshold in decisions).
 2026-10-14 lead: user approved A002's look ("I do like it"); T005 started.
+2026-10-14 code: T005 human check (user): "a big improvement"; loves the expression swaps. Cast pose is awkward; user thinks it needs a different torso position, same root cause as the horizontal slash2 (art follow-up for the lead).
+2026-10-14 code: T005 on branch `t005-rig-3q-swaps`: A002 parts imported (key_green --scale 0.4; A001 files removed), rig re-fit (wider legs, front boot mirrored), part swaps (`swaps` in rig data, `swap` in poses: slash3 windup torso-back, strikes head-shout, hurt/knockdown/down head-hurt), `cast` pose on C. No sim changes.
+2026-10-14 code: tests/rig.test.mjs checks swap images/offsets/pose refs and when swaps show; new tools/rig-preview.html pose sheet. Screens in docs/screens/T005/ (no GIF; combo filmstrip instead). User's A002 look check was taken as given by "Do T005".
 2026-10-14 lead: merged A002 (source; 18 parts + swaps; scale approximate per HANDOFF). Wrote T005.
 2026-10-14 lead: merged T002 (run log; 6/6 test files; sim change is report-only `targetPhase` on `hit`). User to check that L downloads the JSON.
 2026-10-14 code: T002 run log on branch `t002-run-log`: src/log/ (runlog.js counts from bus events, store.js keeps 20 runs in localStorage, L downloads JSON), 2-line summary under "Defeated!". Only sim change: `hit` payload gains `targetPhase` (for windups cut).

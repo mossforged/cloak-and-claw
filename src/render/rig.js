@@ -20,8 +20,13 @@ const scaleOf = (p) => (Array.isArray(p.scale) ? p.scale : [p.scale ?? 1, p.scal
 // image -> bone frame (no translation); pose stretch '<part>.sx/.sy' multiplies the data scale.
 const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[`${name}.sx`] ?? 1), y * (j[`${name}.sy`] ?? 1)), rot(p.rest ?? 0)); };
 
-// Each part's image matrix (part px -> screen px, feet at 0,0), in draw order. Pure; tests use it.
-export function layoutRig(rig, joints) {
+// A swap image is drawn so its pixel (x, y) lands on the part's own (offset + scale * (x, y)):
+// pivot and children's attach points stay in the part's own pixels whichever image shows.
+const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
+
+// Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order.
+// swap: { part: swap name } from the pose. Pure; tests use it.
+export function layoutRig(rig, joints, swap = {}) {
   const frames = {};
   const frameOf = (name) => {
     if (frames[name]) return frames[name];
@@ -39,7 +44,11 @@ export function layoutRig(rig, joints) {
     return (frames[name] = m);
   };
   return Object.entries(rig.parts)
-    .map(([name, p]) => ({ name, p, order: joints[`${name}.order`] ?? p.order, m: mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1])) }))
+    .map(([name, p]) => {
+      const m = mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1]));
+      const s = p.swaps?.[swap[name]];
+      return { name, p, order: joints[`${name}.order`] ?? p.order, img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m };
+    })
     .sort((a, b) => a.order - b.order);
 }
 
@@ -54,17 +63,18 @@ function tinted(color) {
   return tintBuf;
 }
 
-export function drawRig(ctx, f, rig, assets, time, flash = 0) {
+// pose: optional named pose to hold (view-only test poses such as `cast`).
+export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   if (!memory.has(f)) memory.set(f, {});
-  const joints = rigJoints(f, rig, time, memory.get(f));
+  const mem = memory.get(f), joints = rigJoints(f, rig, time, mem, pose);
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
-  for (const { p, m } of layoutRig(rig, joints)) {
+  for (const { img, m } of layoutRig(rig, joints, mem.swap)) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     g.transform(...m);
-    g.drawImage(assets.get(p.img), 0, 0);
+    g.drawImage(assets.get(img), 0, 0);
   }
 
   const p = { ...poseOf(f, time) };
