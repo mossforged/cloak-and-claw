@@ -128,15 +128,17 @@ const s3w = poseLayout({ state: 'attack', move: s3, mf: s3.windup - 1 }), s3k = 
 check(imgOf(s3w, 'torso') === rig.parts.torso.swaps['torso-back'].img, 'slash3 windup: back torso');
 check(imgOf(s3k, 'torso') === rig.parts.torso.img, 'slash3 strike: front torso again');
 check(imgOf(s3k, 'head') === rig.parts.head.swaps['head-shout'].img, 'slash3 strike: shouting head');
-// slash2 turns his back for one drawing mid-spin: front torso at the end of the windup, back torso
-// (and the shouting head) one frame into active, front torso again from the next frame on.
+// slash2 spins: front torso through the windup, then mirrored with the back torso (and the shouting head)
+// for the first two active frames, front again from the next frame on.
 const s2at = (mf) => poseLayout({ state: 'attack', move: s2, mf });
-check(imgOf(s2at(s2.windup), 'torso') === rig.parts.torso.img, 'slash2 first active frame: front torso');
-check(imgOf(s2at(s2.windup + 1), 'torso') === rig.parts.torso.swaps['torso-back'].img, 'slash2 mid-spin: back torso');
+const s2sx = (mf) => targetPose(fighter({ state: 'attack', move: s2, mf }), rig, 0).joints.sx;
+check(imgOf(s2at(s2.windup - 1), 'torso') === rig.parts.torso.img && s2sx(s2.windup - 1) > 0, 'slash2 windup: front torso, facing forward');
+for (const mf of [s2.windup, s2.windup + 1]) check(imgOf(s2at(mf), 'torso') === rig.parts.torso.swaps['torso-back'].img, `slash2 frame ${mf}: back torso`);
 check(imgOf(s2at(s2.windup + 1), 'head') === rig.parts.head.swaps['head-shout'].img, 'slash2 mid-spin: shouting head');
+check(s2sx(s2.windup + 1) < -0.5, `slash2 mid-spin: body mirrored (sx ${s2sx(s2.windup + 1)})`);
 for (const mf of [s2.windup + 2, s2.windup + 3])
-  check(imgOf(s2at(mf), 'torso') === rig.parts.torso.img && imgOf(s2at(mf), 'head') === rig.parts.head.swaps['head-shout'].img, `slash2 frame ${mf}: front torso, shouting`);
-check(imgOf(s2at(s2.windup - 1), 'torso') === rig.parts.torso.img, 'slash2 windup: front torso');
+  check(imgOf(s2at(mf), 'torso') === rig.parts.torso.img && imgOf(s2at(mf), 'head') === rig.parts.head.swaps['head-shout'].img && s2sx(mf) > 0.5, `slash2 frame ${mf}: front torso, facing forward, shouting`);
+check(['idle', 'walk', 'block', 'hurt'].every((st) => targetPose(fighter({ state: st }), rig, 0).joints.sx === 1), 'poses that leave sx out keep the body as drawn');
 const late = poseLayout({ state: 'attack', move: s3, mf: s3.windup + s3.active + s3.recovery - 1 });
 check(imgOf(late, 'head') === rig.parts.head.img, 'end of recovery: neutral head again');
 check(imgOf(poseLayout({ state: 'hurt' }), 'head') === rig.parts.head.swaps['head-hurt'].img, 'hurt: hurt head');

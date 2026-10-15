@@ -32,7 +32,7 @@ export function layoutRig(rig, joints, swap = {}) {
     if (frames[name]) return frames[name];
     const p = rig.parts[name];
     let m;
-    if (!p.parent) m = mul(mul(tr(joints.dx ?? 0, (joints.dy ?? 0) - rig.rootY), sc(rig.scale)), rot(joints[name] ?? 0));
+    if (!p.parent) m = mul(mul(tr(joints.dx ?? 0, (joints.dy ?? 0) - rig.rootY), sc(rig.scale * (joints.sx ?? 1), rig.scale)), rot(joints[name] ?? 0));
     else {
       const q = rig.parts[p.parent];
       const [ax, ay] = apply(shape(p.parent, q, joints), p.attach[0] - q.pivot[0], p.attach[1] - q.pivot[1]);
