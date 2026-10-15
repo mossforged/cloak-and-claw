@@ -157,5 +157,24 @@ check(cast.key === 'cast' && cast.swap.head === 'head-shout', 'cast override: ke
 const tip = ['torso', 'arm-front-upper', 'arm-front-lower', 'sword'].reduce((a, j) => a + cast.joints[j], 0);
 check(near(((tip % 360) + 360) % 360, 270, 1), `cast: sword points straight up (sum ${tip})`);
 
+// Grab and throw (T009): holding -> grabbing; a knee reaches the knee pose at its strike frame; a forward throw
+// winds into throwWind, a back throw into throwWindBack (body mirrored by the end of the wind), then throwRelease.
+const G = def.grab, TH = def.throw;
+const gp = (o) => targetPose(fighter({ state: 'grabbing', grab: { knee: -1 }, ...o }), rig, 0);
+check(gp({}).key === 'grabbing' && finite(gp({}).joints), 'grabbing -> pose grabbing');
+const kneeAt = gp({ grab: { knee: G.knee.windup } });
+check(kneeAt.key === 'knee' && near(kneeAt.joints['leg-back-upper'], P.knee['leg-back-upper']), 'knee strike frame reaches the knee pose');
+check(kneeAt.swap.head === 'head-shout', 'knee: shouting head');
+const tw = (back, t) => targetPose(fighter({ state: 'throw', t, grab: { back } }), rig, 0);
+check(tw(false, 2).key === 'throwWind' && tw(true, 2).key === 'throwWindBack', 'throw wind pose by direction');
+check(tw(true, TH.wind - 1).joints.sx < -0.5 && tw(false, TH.wind - 1).joints.sx > 0.5, 'back throw mirrors the body by the end of the wind; forward does not');
+check(tw(false, TH.wind + 1).key === 'throwRelease' && tw(false, TH.wind + TH.recovery).key === 'throwRelease', 'release pose after the wind');
+// boots stay on the floor in the grab hold
+const GL = layoutRig(rig, gp({}).joints);
+for (const leg of ['leg-front-lower', 'leg-back-lower']) {
+  const m = GL.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
+  check(Math.abs(m[1] * x + m[3] * y + m[5]) < 8, `grabbing: ${leg} boot near the floor`);
+}
+
 console.log(fails ? `${fails} failures` : 'ALL OK');
 process.exit(fails ? 1 : 0);

@@ -48,6 +48,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: T009 on branch `t009-grab-throw`: walk into a rat (after 10 idle frames, 5 frames pushing) to grab; J = knee (3rd knocks down), dir+J or jump = throw (back throw mirrors him, rat goes over the shoulder); thrown rat bowls over rats it touches; breaks free after 2.5 s; a hit drops the grab. New src/sim/grab.js, events grab/throw/thrownHit, side-wall bounce (RULES.wallBounce), run log grabs/throws/thrownHits, lab "Hero grab + throw".
+2026-10-15 code: 9/9 tests (new tests/grab.test.mjs). Bot smoke KOs 32/33/32 vs 33/33/34 on main: only the wall bounce (wallBounce 0 gives main's exact numbers); the old bot never grabs. Screens in docs/screens/T009/. Human check open: is throwing satisfying, any accidental grabs?
 2026-10-15 lead: merged T008 round 2 (+ build label kept) and A004 (rat rig + spear/bow kit, source).
 2026-10-15 lead: merged T008 (spin slash, view-only; cast key fixed).
 2026-10-15 code: user OK'd T008 round 2 spin ("sounds good for now"); C cast fix confirmed working by the user. Branch `t008-spin-slash` ready for the lead to merge.

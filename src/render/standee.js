@@ -2,9 +2,10 @@
 // Pose numbers come from move.pose (data/moves); state poses are here.
 import { phaseOf } from '../sim/fighter.js';
 import { RULES } from '../data/rules.js';
+import { JUICE } from '../data/juice.js';
 import { silhouette } from './tint.js';
 
-const ZERO = { rot: 0, sx: 1, sy: 1, dx: 0, dy: 0 };
+const ZERO = { rot: 0, sx: 1, sy: 1, dx: 0, dy: 0, cy: 0 };   // cy: turn around this height above the feet (0 = feet)
 export const BLOCK_LEAN = 0.08;   // standee's forward lean while blocking (the rig's joints lean on their own)
 const lerp = (a, b, t) => a + (b - a) * t;
 const easeOut = (t) => 1 - (1 - t) ** 3;
@@ -30,6 +31,16 @@ export function poseOf(f, time) {
       const k = f.t < f.stun ? 1 - f.t / f.stun : 0;
       return { ...ZERO, rot: BLOCK_LEAN - 0.2 * k, dx: -6 * k, sx: 1.03, sy: 0.96 };
     }
+    case 'grabbing': return { ...ZERO, rot: 0.06, dx: 2 };
+    case 'throw': {   // leans back into the wind, then pitches forward on the release
+      const w = f.def.throw.wind, k = f.t < w ? f.t / w : Math.max(0, 1 - (f.t - w) / f.def.throw.recovery);
+      return { ...ZERO, rot: f.t < w ? -0.22 * k : 0.2 * k, sx: 1 + 0.05 * k, sy: 1 - 0.05 * k };
+    }
+    case 'grabbed': {   // pulled up by the collar; doubles over on each knee (t restarts on a strike); tips over as he is hoisted to throw
+      const j = f.t < 10 ? 1 - f.t / 10 : 0, H = JUICE.held, tip = Math.min(H.tipMax, f.z * H.tip);
+      return { ...ZERO, rot: H.lean - H.jerk * j + tip, dy: -3 * j, sx: 1 + 0.06 * j, sy: 1 - 0.08 * j, cy: tip ? f.def.body.h * 0.5 : 0 };
+    }
+    case 'thrown': return { ...ZERO, rot: -f.t * JUICE.thrownSpin, cy: f.def.body.h * 0.5 };   // tumbles round his middle
     case 'jump': return { ...ZERO, rot: f.vz > 0 ? -0.1 : 0.08, sx: 1 - f.vz * 0.008, sy: 1 + f.vz * 0.012 };
     case 'hurt': { const k = 1 - f.t / Math.max(1, f.stun); return { ...ZERO, rot: -0.25 * k, dx: f.t < 8 ? (f.t % 2 ? 3 : -3) : 0, sx: 1 + 0.05 * k, sy: 1 - 0.05 * k }; }
     case 'knockdown': return { ...ZERO, rot: Math.max(LIE, -f.t * 0.13) };
@@ -58,12 +69,13 @@ export function drawStandee(ctx, f, assets, time, flash = 0) {
 
   ctx.save();
   ctx.globalAlpha = alpha;
-  ctx.translate(f.x + p.dx * f.facing, f.y - f.z + p.dy);
+  ctx.translate(f.x + p.dx * f.facing, f.y - f.z + p.dy - p.cy);
   ctx.rotate(p.rot * f.facing);
+  ctx.translate(0, p.cy);
   ctx.scale(p.sx * flip, p.sy);
   const x = -w * art.anchorX, y = -h;
   ctx.drawImage(img, x, y, w, h);
-  if (f.state === 'hurt' || f.state === 'knockdown') {
+  if (f.state === 'hurt' || f.state === 'knockdown' || (f.state === 'grabbed' && f.t < 8)) {
     ctx.globalAlpha = alpha * 0.28; ctx.drawImage(silhouette(img, '#ff3b30'), x, y, w, h);
   }
   if (f.move?.fx?.telegraph && phaseOf(f)[0] === 'windup') {

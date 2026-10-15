@@ -80,6 +80,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const p = { ...poseOf(f, time) };
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
   if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
+  if (f.state === 'grabbing' || f.state === 'throw') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
   if (f.state === 'block') { p.rot -= BLOCK_LEAN; p.sx = p.sy = 1; }   // the block pose leans and crouches; keep only the jolt
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;

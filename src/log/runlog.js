@@ -37,10 +37,19 @@ export function createRunLog() {
     c.damageTaken += damage;
   });
 
+  // grab/throw (T009): knees and the thrown body's landing arrive as player `hit` events; bowling as `thrownHit`
+  bus.on('grab', ({ f }) => { if (world && f === world.player) { c.grabs++; swing = null; } });
+  bus.on('throw', ({ f }) => { if (world && f === world.player) c.throws++; });
+  bus.on('thrownHit', ({ thrower, damage }) => {
+    if (!world || thrower !== world.player) return;
+    c.thrownHits++;
+    c.damageDealt += damage;
+  });
+
   return {
     begin(w) {
       world = w; swing = null;
-      c = { hitsLanded: 0, damageDealt: 0, damageTaken: 0, swings: {}, swingsThatHit: 0, knockdowns: 0, windupsInterrupted: 0, blocks: 0 };
+      c = { hitsLanded: 0, damageDealt: 0, damageTaken: 0, swings: {}, swingsThatHit: 0, knockdowns: 0, windupsInterrupted: 0, blocks: 0, grabs: 0, throws: 0, thrownHits: 0 };
     },
     summary() {
       const swings = Object.values(c.swings).reduce((a, b) => a + b, 0);
@@ -51,6 +60,7 @@ export function createRunLog() {
         damageDealt: c.damageDealt, damageTaken: c.damageTaken, hitsLanded: c.hitsLanded,
         swings, swingsByMove: { ...c.swings }, whiffs: swings - c.swingsThatHit,
         knockdowns: c.knockdowns, windupsInterrupted: c.windupsInterrupted, blocks: c.blocks,
+        grabs: c.grabs, throws: c.throws, thrownHits: c.thrownHits,
       };
     },
   };
@@ -61,6 +71,6 @@ export function summaryLines(s) {
   const m = Math.floor(s.seconds / 60), sec = String(Math.floor(s.seconds % 60)).padStart(2, '0');
   return [
     `${m}:${sec}  wave ${s.wave}  KOs ${s.kos}  XP ${s.xp}  dealt ${s.damageDealt}  taken ${s.damageTaken}`,
-    `hits ${s.hitsLanded}/${s.swings} swings  whiffs ${s.whiffs}  knocked down ${s.knockdowns}  windups cut ${s.windupsInterrupted}  blocks ${s.blocks ?? 0}`,
+    `hits ${s.hitsLanded}/${s.swings} swings  whiffs ${s.whiffs}  knocked down ${s.knockdowns}  windups cut ${s.windupsInterrupted}  blocks ${s.blocks ?? 0}  throws ${s.throws ?? 0} (${s.thrownHits ?? 0} bowled)`,
   ];
 }

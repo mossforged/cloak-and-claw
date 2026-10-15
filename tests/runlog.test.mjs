@@ -15,6 +15,7 @@ bus.on('hit', (e) => {
   if (e.target.team === 'enemy') ref.enemyDamage += e.damage;
 });
 bus.on('swing', (e) => { if (e.f === w.player) ref.swings++; });
+bus.on('thrownHit', (e) => { if (e.thrower === w.player) { ref.dealt += e.damage; ref.enemyDamage += e.damage; } });
 
 for (const seed of [1, 2, 3]) {
   w = createWorld('harbor-market', 'mouse-fighter', seed);

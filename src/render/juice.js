@@ -14,6 +14,12 @@ export function createJuice() {
     j.freeze = Math.max(j.freeze, B.hitstop ?? 0);
     kick(B.shake ?? 0);
   });
+  bus.on('grab', ({ f }) => { j.freeze = Math.max(j.freeze, f.def.grab.hitstop ?? 0); kick(f.def.grab.shake ?? 0); });
+  bus.on('thrownHit', ({ thrower, ko }) => {
+    const T = thrower.def.throw;
+    j.freeze = Math.max(j.freeze, (T.hitstop ?? 0) + (ko ? JUICE.koHitstop : 0));
+    kick((T.shake ?? 0) + (ko ? JUICE.koShake : 0));
+  });
   bus.on('land', ({ heavy }) => heavy && kick(JUICE.heavyLandShake));
   j.tick = () => {
     j.shake *= JUICE.shake.decay;

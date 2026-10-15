@@ -1,4 +1,4 @@
-// The game state and one sim step. Order: AI -> fighters -> separation -> hits -> cleanup -> waves.
+// The game state and one sim step. Order: AI -> fighters -> separation -> hits -> thrown bodies -> cleanup -> waves.
 import { FIGHTERS } from '../data/fighters/index.js';
 import { STAGES } from '../data/stages/index.js';
 import { RULES } from '../data/rules.js';
@@ -6,6 +6,7 @@ import { bus } from '../core/events.js';
 import { createRng } from '../core/rng.js';
 import { createFighter, updateFighter } from './fighter.js';
 import { resolveHits } from './combat.js';
+import { resolveThrown } from './grab.js';
 import { thinkAI, separate } from './ai.js';
 import { stepWaves } from './waves.js';
 
@@ -27,6 +28,7 @@ export function stepWorld(w, control) {
   for (const f of w.fighters) updateFighter(f, w);
   separate(w);
   resolveHits(w);
+  resolveThrown(w);
   for (const f of w.fighters) if (f.remove) { w.kos++; w.xp += f.def.xp ?? 0; }
   w.fighters = w.fighters.filter((f) => !f.remove);
   stepWaves(w);
