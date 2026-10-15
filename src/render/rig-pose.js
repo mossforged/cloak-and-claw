@@ -96,6 +96,13 @@ export function drawLayer(rig, time, mem, joints) {
   return out;
 }
 
+// Jump squat (T014): joints pulled toward the rig's `jumpSquat` crouch by k (0..1, render/jump-squat.js). Like drawLayer,
+// a layer over the blended pose (mem.last stays unlayered).
+export function squatLayer(rig, joints, k) {
+  if (!(k > 0) || !rig.poses.jumpSquat) return joints;
+  return mix(joints, evalPose(rig.poses.jumpSquat, { ...channelsOf(rig), ...rig.poses.stance }, 0), k);
+}
+
 // Active-phase swaps: a `through` pose that names swaps shows them only while the swing is near it
 // (timing.throughSwap, as a share of the way to the strike), e.g. one back-view drawing mid-spin.
 function activeSwap(M, p, T) {

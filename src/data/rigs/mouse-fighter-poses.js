@@ -44,6 +44,13 @@ export default {
     'leg-back-upper': -60, 'leg-back-lower': 75, 'leg-front-upper': -25, 'leg-front-lower': 70,
     tail: 25, 'scarf-tail': 30,
   },
+  jumpSquat: {   // T014: crouch before take-off and on landing (render/jump-squat.js); reach's legs (boots flat), arms swung back
+    torso: 22, head: -10, dy: 12,
+    'arm-front-upper': 40, 'arm-front-lower': -60, sword: 30,
+    'arm-back-upper': -20, 'arm-back-lower': -50, shield: 8,
+    'leg-back-upper': -133, 'leg-back-lower': 99, 'leg-front-upper': 52, 'leg-front-lower': -74,
+    tail: -15, 'scarf-tail': -20,
+  },
   block: {   // T012 (A006 parts): the angled A002 shield (user's pick over A006's face-on one) on the whole guard arm, thrust
     // out at chest height; gritted-teeth
     // brace head clear above the rim (the user's T007 "shield forward, braced" pick); sword cocked high ready to answer.

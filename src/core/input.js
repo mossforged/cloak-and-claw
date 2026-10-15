@@ -1,5 +1,5 @@
 // Keyboard + gamepad -> one control object per sim step:
-// { mx, my, attack, jump, grab, start, debug, pause, rig, cast, block, blockTap }  (mx/my are -1..1; buttons are "pressed this step",
+// { mx, my, attack, jump, grab, start, debug, pause, rig, cast, squat, block, blockTap }  (mx/my are -1..1; buttons are "pressed this step",
 // except block = held; blockTap = block pressed this step, used as the run-log download on the game-over screen)
 import { KEYS, PAD } from '../data/controls.js';
 
@@ -42,7 +42,7 @@ export function readControl() {
     mx: (isHeld('right') ? 1 : 0) - (isHeld('left') ? 1 : 0),
     my: (isHeld('down') ? 1 : 0) - (isHeld('up') ? 1 : 0),
   };
-  for (const a of ['attack', 'jump', 'grab', 'start', 'debug', 'pause', 'rig', 'cast']) ctl[a] = pressed.has(a);
+  for (const a of ['attack', 'jump', 'grab', 'start', 'debug', 'pause', 'rig', 'cast', 'squat']) ctl[a] = pressed.has(a);
   ctl.block = isHeld('block');
   ctl.blockTap = pressed.has('block');
   pressed.clear();
