@@ -1,4 +1,4 @@
-// Visual effects driven by sim events: slash swooshes, hit sparks, block clangs, damage numbers, dust. Render-only.
+// Visual effects driven by sim events: slash swooshes, hit sparks, block clangs and glints, damage numbers, dust. Render-only.
 import { bus } from '../core/events.js';
 import { JUICE } from '../data/juice.js';
 
@@ -27,6 +27,8 @@ export function createEffects() {
       add({ type: 'spark', x, y: sy, vx: Math.cos(a) * s, vy: Math.sin(a) * s - 1, life: B.life, clang: true });
     }
     add({ type: 'shieldFlash', x, y: sy, dir: out, r: B.flashR, life: B.flashLife });
+    const G = B.glint;   // star glint on the shield rim, just after the clang (t < 0 = not shown yet)
+    add({ type: 'glint', x: target.x + out * G.dx, y: target.y - target.z - G.dy, size: G.size, life: G.life, t: -G.delay });
     add({ type: 'ring', x, y: sy, life: B.ringLife, r: B.ringR });
     add({ type: 'ring', x, y: sy, life: B.ringLife + 6, r: B.ringR * 1.7, thin: true });
     if (damage > 0) add({ type: 'num', x, y: sy - 20, text: String(damage), hero: target.team === 'hero', big: false, life: JUICE.numbers.life });
@@ -87,6 +89,20 @@ const DRAW = {
     ctx.fillStyle = g; ctx.beginPath();
     ctx.ellipse(e.x, e.y, e.r * 0.7, e.r * 1.3, 0, e.dir > 0 ? -Math.PI / 2 : Math.PI / 2, e.dir > 0 ? Math.PI / 2 : Math.PI * 1.5);
     ctx.fill(); ctx.restore();
+  },
+  glint(ctx, e, k) {   // four-point star that pops open and shrinks away, turning a little
+    if (k < 0) return;
+    const s = e.size * Math.sin(Math.PI * k), w = s * 0.16;
+    ctx.save(); ctx.globalCompositeOperation = 'lighter';
+    ctx.translate(e.x, e.y); ctx.rotate(k * 0.6);
+    ctx.fillStyle = 'rgba(255,250,215,0.95)';
+    for (const [a, l] of [[0, 1], [Math.PI / 2, 1], [Math.PI / 4, 0.45], [-Math.PI / 4, 0.45]]) {
+      ctx.save(); ctx.rotate(a); ctx.beginPath();
+      ctx.moveTo(-s * l, 0); ctx.lineTo(0, -w); ctx.lineTo(s * l, 0); ctx.lineTo(0, w); ctx.closePath(); ctx.fill();
+      ctx.restore();
+    }
+    ctx.beginPath(); ctx.arc(0, 0, w * 1.4, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
   },
   num(ctx, e, k) {
     const N = JUICE.numbers, pop = k < 0.15 ? 1 + (0.15 - k) * 4 : 1;

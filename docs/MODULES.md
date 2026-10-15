@@ -38,7 +38,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/render/standee.js` | Fighter drawn as a standee: lean/squash/hop per state (block = braced forward lean, jolts back in blockstun; `BLOCK_LEAN` is undone by the rig) and move phase, flips, flashes, tints | `drawStandee drawShadow poseOf` |
 | `src/render/rig.js` | Fighter drawn as a cutout rig: part hierarchy -> buffer, then placed like a standee (lean, flip, flash, tints). Draws swap images (`layoutRig(rig, joints, swap)` returns each part's `img`); optional held pose (`cast`) | `drawRig layoutRig` |
 | `src/render/rig-pose.js` | Rig pose per state/move phase (waves, windup/through/strike, easing, overshoot) and blending from the last drawn pose; part swaps per pose/phase (switch at once, strike swaps last `timing.swapBack` of recovery); optional pose override. Channels: joint angles, dx/dy, per-part `.sx/.sy` stretch and `.order`. Pure | `targetPose rigJoints channelsOf jointsOfRig` |
-| `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps), sparks, rings, damage numbers, dust; block clang (bright sparks toward the attacker, shield-side flash, double ring) (from events) | `createEffects` |
+| `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps), sparks, rings, damage numbers, dust; block clang (bright sparks toward the attacker, shield-side flash, double ring, then a star glint on the shield rim) (from events) | `createEffects` |
 | `src/render/juice.js` | Screen shake + hit-stop counters (from events; `block` uses the blocker's `block.hitstop/shake`) | `createJuice` |
 | `src/render/hud.js` | Portrait, health bars, wave banner, KOs/XP, hints, game over, pause | `drawHud drawPaused` |
 | `src/render/debug.js` | Overlay: floor belt, hurtboxes, hitboxes, states, AI tokens | `drawDebug` |
@@ -78,7 +78,7 @@ Run log fields (one object per run; the player only):
 | File | Purpose |
 |---|---|
 | `src/data/rules.js` | Gravity, hit depth, max simultaneous attackers, knockdown timings, wave delay |
-| `src/data/juice.js` | Shake, flash, number, spark, dust, slash look |
+| `src/data/juice.js` | Shake, flash, number, spark, dust, slash look; block clang + glint |
 | `src/data/controls.js` | Key and gamepad bindings |
 | `src/data/moves/*.js` | Move sets: timing, hitbox, damage, knockback, hitstop, shake, pose, fx |
 | `src/data/fighters/*.js` + `index.js` | Fighter defs: art, body, stats (RPG hooks), speeds, `block` (optional: walkSpeed, chip, pushback, stun, attackerPush, hitstop, shake), moves, AI params. Registry in index |
@@ -107,7 +107,7 @@ Run log fields (one object per run; the player only):
 |---|---|---|
 | `swing` | `{f, move}` move's active frames begin | effects (slash), run log |
 | `hit` | `{attacker, target, move, damage, x, y, z, ko, targetPhase}` (`targetPhase`: target's move phase before the hit, `none` if idle) | effects, juice, run log |
-| `block` | `{attacker, target, move, damage, x, y, z}` frontal hit stopped by the shield (`damage` = chip, x = shield face) | effects (clang), juice, run log |
+| `block` | `{attacker, target, move, damage, x, y, z}` frontal hit stopped by the shield (`damage` = chip, x = shield face) | effects (clang, glint), juice, run log |
 | `land` | `{f, heavy}` landed from jump / knockdown | effects (dust), juice |
 | `jump` | `{f}` | (none yet; audio later) |
 | `defeated` | `{f}` fighter finished their down state at 0 hp | (none yet) |

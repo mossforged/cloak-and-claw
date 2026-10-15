@@ -76,6 +76,8 @@ export const LAB_SCHEMA = [
     fields: [
       ['shake.decay', 0.5, 0.99, 0.01], ['shake.max', 0, 60, 1], ['flashFrames', 1, 30, 1],
       ['koHitstop', 0, 40, 1], ['koShake', 0, 30, 0.5],
+      ['block.glint.dx', -40, 120, 1], ['block.glint.dy', 0, 140, 1], ['block.glint.size', 0, 60, 1],
+      ['block.glint.life', 1, 60, 1], ['block.glint.delay', 0, 20, 1],
     ],
   },
   {

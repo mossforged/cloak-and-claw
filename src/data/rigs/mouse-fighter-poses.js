@@ -41,14 +41,13 @@ export default {
     'leg-back-upper': -60, 'leg-back-lower': 75, 'leg-front-upper': -25, 'leg-front-lower': 70,
     tail: 25, 'scarf-tail': 30,
   },
-  block: {   // shield wall (user: "like spartans behind their shield wall"): hunched low behind the raised shield,
-    // eyes just over the rim, sword arm tucked behind the shield with the point out past its edge.
+  block: {   // shield forward, braced: deep forward lean behind the shield pushed up and out (drawn a little
+    // larger, as if thrust at the viewer), eyes over the rim, sword cocked high ready to answer.
     // Legs: boots kept as flat as in stance (torso + upper + lower), soles on the floor at this crouch.
-    torso: 16, head: 12, dy: 9,
-    'arm-back-upper': -98, 'arm-back-lower': -110, shield: 0,
-    'arm-front-upper': -40, 'arm-front-lower': -80, sword: -274,
-    'arm-front-upper.order': 10.1, 'sword.order': 10.2, 'arm-front-lower.order': 10.3,   // behind the shield (11), over the head (10)
-    'leg-back-upper': -103, 'leg-back-lower': 75, 'leg-front-upper': 64, 'leg-front-lower': -80,
+    torso: 18, head: -6, dy: 8,
+    'arm-back-upper': -105, 'arm-back-lower': -30, shield: 0, 'shield.sx': 1.12, 'shield.sy': 1.12,
+    'arm-front-upper': 60, 'arm-front-lower': -130, sword: -40,
+    'leg-back-upper': -104, 'leg-back-lower': 74, 'leg-front-upper': 59, 'leg-front-lower': -77,
     tail: -20, 'scarf-tail': -25,
   },
   hurt: {
