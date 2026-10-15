@@ -48,6 +48,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: user OK'd T009 round 3 ("thats good now"): grab button, reach and throws approved. Branch `t009-grab-throw` ready for the lead to merge.
 2026-10-15 code: T009 round 3 (user: grab range "pretty tight"): grab reach 56 -> 75 px, depth 12 -> 16 (sword's hit depth), so a rat at his 64 px attack spot can be grabbed; rats winding up still can't. 10/10 tests.
 2026-10-15 code: T009 round 2 (user: throwing "feels good" when intended, but grabbing should "always be a choice rather than automatic"; rats "disappear for a bit"): grab is now a button, H / pad Y, with a rat in reach in front; walking into rats never grabs. The vanishing was my bug: rats' attack poses lacked the new `cy` channel (NaN transform), fixed + new tests/standee.test.mjs. 10/10 tests.
 2026-10-15 code: T009 on branch `t009-grab-throw`: walk into a rat (after 10 idle frames, 5 frames pushing) to grab; J = knee (3rd knocks down), dir+J or jump = throw (back throw mirrors him, rat goes over the shoulder); thrown rat bowls over rats it touches; breaks free after 2.5 s; a hit drops the grab. New src/sim/grab.js, events grab/throw/thrownHit, side-wall bounce (RULES.wallBounce), run log grabs/throws/thrownHits, lab "Hero grab + throw".
