@@ -3,7 +3,6 @@
 **Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T006 floor lane (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; look approved).
 
 ## Next
-1. **User:** A003 props look check (crate, barrel, floor weapons).
    **Code builder:** T007 shield block, then T008 spin slash (user's idea).
    **Art builder:** A004 Rat Raider rig parts.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
@@ -34,7 +33,7 @@
 - Touch controls for phone play (Stage 5).
 - Art bible items (pie, cheese, potions, chest, coins) as pickups and RPG rewards (Stage 6).
 - Bramble Brute as the first boss.
-- Rig follow-ups: art for a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
+- Rig follow-ups: block pose (T007: mechanic good, pose fights the art; user agreed to polish later); art for a shield-forward arm + more face-on shield, a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
 - Belt depth: the Harbor Market art only allows a 63 px belt (packet asked 85+). User: "we might need to eventually return to belt depth and then get the art to match the goal." Plan: when stages become layered (Stage 5), set the target belt depth first and brief the stage art to it. Also: feet overlap two front dock posts slightly; fighters look a bit smaller after the zoom.
 - Companion / pet that fights alongside you (Castle Crashers' animal orbs). User likes it.
@@ -46,6 +45,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: A003 props approved. Block pose polish deferred (mechanic first, pose must be readable).
 2026-10-15 lead: study "What makes our game distinct?" (hooks); private lore appendix to the user only.
 2026-10-15 lead: decided the body x colour x weapon kit x gear assembly line; wrote docs/design/lessons.md.
 2026-10-15 lead: study "How beat 'em ups are made" (developer lessons); enemy design workspace parked.
