@@ -2,7 +2,7 @@
 // ROOTS maps a data file to the live object it exports; every field path is relative to its file's root.
 // Section: { title, file, pick?, fields }. pick: true = choose one key of the root from a dropdown
 // (e.g. a move), and field paths are relative to that key. A field may override `file`.
-// Field: [path, min, max, step, fallback?]. fallback = value assumed when the field is absent
+// Field: [path, min, max, step, fallback?] or { path, min, max, step, fallback?, file?, label? }. fallback = value assumed when the field is absent
 // (the slider can then add it); without one, an absent field shows as "not set".
 import { MOUSE_SWORD } from './moves/mouse-sword.js';
 import { RAT_BLADE } from './moves/rat-blade.js';
@@ -11,6 +11,16 @@ import ratRaider from './fighters/rat-raider.js';
 import { RULES } from './rules.js';
 import { JUICE } from './juice.js';
 import harborMarket from './stages/harbor-market.js';
+import ratCutlass from './items/rat-cutlass.js';
+import plankClub from './items/plank-club.js';
+import bigFish from './items/big-fish.js';
+import cheeseWedge from './items/cheese-wedge.js';
+import berryPie from './items/berry-pie.js';
+import crate from './props/crate.js';
+import { CUTLASS } from './moves/cutlass.js';
+import { PLANK_CLUB } from './moves/plank-club.js';
+import { BIG_FISH } from './moves/big-fish.js';
+import barrel from './props/barrel.js';
 
 export const ROOTS = {
   'src/data/moves/mouse-sword.js': MOUSE_SWORD,
@@ -20,7 +30,25 @@ export const ROOTS = {
   'src/data/rules.js': RULES,
   'src/data/juice.js': JUICE,
   'src/data/stages/harbor-market.js': harborMarket,
+  'src/data/items/rat-cutlass.js': ratCutlass,
+  'src/data/items/plank-club.js': plankClub,
+  'src/data/items/big-fish.js': bigFish,
+  'src/data/items/cheese-wedge.js': cheeseWedge,
+  'src/data/items/berry-pie.js': berryPie,
+  'src/data/props/crate.js': crate,
+  'src/data/props/barrel.js': barrel,
+  'src/data/moves/cutlass.js': CUTLASS,
+  'src/data/moves/plank-club.js': PLANK_CLUB,
+  'src/data/moves/big-fish.js': BIG_FISH,
 };
+// One pick section per floor weapon's moves (T010).
+const weaponMoves = (title, file) => ({
+  title, file, pick: true,
+  fields: [
+    ['windup', 1, 40, 1], ['active', 1, 30, 1], ['recovery', 1, 60, 1], ['damage', 1, 50, 1],
+    ['knockback', 0, 16, 0.1], ['hitbox.w', 10, 220, 1], ['launch.vx', 0, 20, 0.1, 4.5], ['launch.vz', 0, 16, 0.1, 6.5],
+  ],
+});
 
 const pose = (ph) => [
   [`pose.${ph}.rot`, -1, 1, 0.01, 0], [`pose.${ph}.sx`, 0.7, 1.3, 0.01, 1],
@@ -63,6 +91,26 @@ export const LAB_SCHEMA = [
       { path: 'trail.width', min: 0, max: 60, step: 1, file: 'src/data/juice.js' },
     ],
   },
+  {
+    title: 'Floor weapons, props + food', file: 'src/data/items/plank-club.js',
+    fields: [
+      { path: 'durability', min: 1, max: 40, step: 1, label: 'club durability' },
+      { path: 'toss.damage', min: 1, max: 50, step: 1, label: 'club toss damage' },
+      { path: 'durability', min: 1, max: 40, step: 1, file: 'src/data/items/rat-cutlass.js', label: 'cutlass durability' },
+      { path: 'durability', min: 1, max: 40, step: 1, file: 'src/data/items/big-fish.js', label: 'fish durability' },
+      { path: 'toss.vx', min: 2, max: 24, step: 0.5, file: 'src/data/fighters/mouse-fighter.js' },
+      { path: 'pickup.range', min: 8, max: 80, step: 1, file: 'src/data/fighters/mouse-fighter.js' },
+      { path: 'heal', min: 1, max: 100, step: 1, file: 'src/data/items/cheese-wedge.js', label: 'cheese heal' },
+      { path: 'heal', min: 1, max: 100, step: 1, file: 'src/data/items/berry-pie.js', label: 'pie heal' },
+      { path: 'hp', min: 1, max: 10, step: 1, file: 'src/data/props/crate.js', label: 'crate hp' },
+      { path: 'hp', min: 1, max: 10, step: 1, file: 'src/data/props/barrel.js', label: 'barrel hp' },
+      { path: 'drop.chance', min: 0, max: 1, step: 0.05, file: 'src/data/fighters/rat-raider.js' },
+      { path: 'items.floorLife', min: 60, max: 3000, step: 30, file: 'src/data/rules.js' },
+    ],
+  },
+  weaponMoves('Cutlass moves', 'src/data/moves/cutlass.js'),
+  weaponMoves('Plank club moves', 'src/data/moves/plank-club.js'),
+  weaponMoves('Big fish moves', 'src/data/moves/big-fish.js'),
   {
     title: 'Rules', file: 'src/data/rules.js',
     fields: [

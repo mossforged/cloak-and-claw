@@ -48,6 +48,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: T010 on branch `t010-floor-weapons`: 2 crates + 1 barrel on Harbor Market (solid, 3/4 hits, debris + crunch; club crate, food crate, fish barrel); H picks up what's underfoot (enemy in grab reach wins), eats cheese (+15) / pie (+45); cutlass, plank club, big fish are weapon kits (own moves, durability, H tosses them: knocks down the first rat); KO'd rats drop cutlasses (85%, blink out after 12 s). New src/sim/props.js + weapons.js, render/props.js + prop-fx.js, data/items + data/props, rig `slots`.
+2026-10-15 code: 11/11 tests (new tests/props.test.mjs). No-props stage = main's exact bot numbers (loot uses its own rng); with props KOs 32/32/33 vs 32/33/32. Screens in docs/screens/T010/. Human check open: are smashing crates and fighting with the fish and club fun?
 2026-10-15 lead: merged T009 (grab on a button, H / pad Y; throws bowl rats; side-wall bounce). Bot KOs 32/33/32 vs 33/33/34 due to wall bounce only.
 2026-10-15 lead: merged A005 (rattier heads, heavier legs; source).
 2026-10-15 code: user OK'd T009 round 3 ("thats good now"): grab button, reach and throws approved. Branch `t009-grab-throw` ready for the lead to merge.

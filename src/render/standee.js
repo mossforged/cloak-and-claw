@@ -4,6 +4,7 @@ import { phaseOf } from '../sim/fighter.js';
 import { RULES } from '../data/rules.js';
 import { JUICE } from '../data/juice.js';
 import { silhouette } from './tint.js';
+import { drawHeldStandee } from './props.js';
 
 const ZERO = { rot: 0, sx: 1, sy: 1, dx: 0, dy: 0, cy: 0 };   // cy: turn around this height above the feet (0 = feet)
 export const BLOCK_LEAN = 0.08;   // standee's forward lean while blocking (the rig's joints lean on their own)
@@ -30,6 +31,10 @@ export function poseOf(f, time) {
     case 'block': {   // braced forward into the shield, crouched; jolts back on a blocked hit (blockstun)
       const k = f.t < f.stun ? 1 - f.t / f.stun : 0;
       return { ...ZERO, rot: BLOCK_LEAN - 0.2 * k, dx: -6 * k, sx: 1.03, sy: 0.96 };
+    }
+    case 'toss': {   // winds back, then pitches forward as the weapon leaves the hand
+      const T = f.def.toss, k = f.t < T.wind ? f.t / T.wind : Math.max(0, 1 - (f.t - T.wind) / T.recovery);
+      return { ...ZERO, rot: f.t < T.wind ? -0.2 * k : 0.18 * k, sx: 1 + 0.04 * k, sy: 1 - 0.04 * k };
     }
     case 'grabbing': return { ...ZERO, rot: 0.06, dx: 2 };
     case 'throw': {   // leans back into the wind, then pitches forward on the release
@@ -75,6 +80,7 @@ export function drawStandee(ctx, f, assets, time, flash = 0) {
   ctx.scale(p.sx * flip, p.sy);
   const x = -w * art.anchorX, y = -h;
   ctx.drawImage(img, x, y, w, h);
+  drawHeldStandee(ctx, f, assets, art.facing ?? 1);   // T010: a held floor weapon over the hand
   if (f.state === 'hurt' || f.state === 'knockdown' || (f.state === 'grabbed' && f.t < 8)) {
     ctx.globalAlpha = alpha * 0.28; ctx.drawImage(silhouette(img, '#ff3b30'), x, y, w, h);
   }

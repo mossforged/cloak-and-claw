@@ -41,7 +41,7 @@ for (const seed of [1, 2, 3]) {
   check(s.whiffs >= 0 && s.whiffs <= s.swings, 'whiffs in range');
   check(s.knockdowns === downs, `knockdowns ${s.knockdowns} vs observed ${downs}`);
   check(s.windupsInterrupted === ref.cut, 'windups interrupted');
-  check(summaryLines(s).length === 2, 'two summary lines');
+  check(summaryLines(s).length === 3, 'three summary lines');
 }
 
 // A player who stands still at 1 hp gets knocked down (KO hits always knock down) and the run ends.

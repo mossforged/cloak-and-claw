@@ -129,6 +129,23 @@ export default {
     'leg-back-upper': -58, 'leg-back-lower': 36, 'leg-front-upper': 52, 'leg-front-lower': -50,
     tail: -25, 'scarf-tail': -30,
   },
+  // Weapon toss (T010, H while holding a floor weapon): toss = cocked back overhead, tossRelease = arm whipped
+  // forward, hand open. Wind lasts def.toss.wind frames, then the release eases back to idle over toss.recovery.
+  toss: {
+    torso: -10, head: -6, dy: 1,
+    'arm-front-upper': 150, 'arm-front-lower': -30, sword: -200,
+    'arm-back-upper': -20, 'arm-back-lower': -40, shield: 4,
+    'leg-back-upper': -50, 'leg-back-lower': 40, 'leg-front-upper': 66, 'leg-front-lower': -66,
+    tail: 15, 'scarf-tail': 15,
+  },
+  tossRelease: {
+    swap: { head: 'head-shout' },
+    torso: 16, head: 4, dx: 4,
+    'arm-front-upper': -95, 'arm-front-lower': 0, sword: 80,
+    'arm-back-upper': 10, 'arm-back-lower': -30, shield: 10,
+    'leg-back-upper': -58, 'leg-back-lower': 36, 'leg-front-upper': 52, 'leg-front-lower': -50,
+    tail: -20, 'scarf-tail': -25,
+  },
   // Sword tip direction on screen = torso + arm-front-upper + arm-front-lower + sword
   // (0 = forward, -90 = up, 90 = down, 180 = back). Swings go the way the numbers run.
   moves: {

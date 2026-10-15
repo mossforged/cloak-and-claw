@@ -3,6 +3,7 @@ import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
 import { phaseOf, setState, HELPLESS } from './fighter.js';
 import { releaseGrab } from './grab.js';
+import { wearWeapon } from './weapons.js';
 
 export function hitboxOf(f) {
   if (!f.move || phaseOf(f)[0] !== 'active') return null;
@@ -16,7 +17,7 @@ export function hurtboxOf(f) {
   return { x0: f.x - b.w / 2, x1: f.x + b.w / 2, z0: f.z, z1: f.z + b.h, y: f.y };
 }
 
-const vulnerable = (f) => f.invuln <= 0 && !HELPLESS.slice(1).includes(f.state);
+export const vulnerable = (f) => f.invuln <= 0 && !HELPLESS.slice(1).includes(f.state);
 
 export function resolveHits(world) {
   for (const a of world.fighters) {
@@ -50,7 +51,8 @@ function applyBlock(a, t, m, at) {
   bus.emit('block', { attacker: a, target: t, move: m, damage: Math.max(0, dmg), x, y: t.y, z: at.z });
 }
 
-function applyHit(a, t, m, world, at) {
+// Also used for a tossed weapon's hit (sim/props.js). m.launch = {vx, vz} replaces RULES.knockdown's launch speed.
+export function applyHit(a, t, m, world, at) {
   if (blocks(a, t)) return applyBlock(a, t, m, at);
   if (t.grab) releaseGrab(t);   // a hit on the holder drops the grab (T009)
   const dmg = Math.max(1, Math.round(m.damage + (a.def.stats.power ?? 0) - (t.def.stats.defense ?? 0)));
@@ -63,10 +65,11 @@ function applyHit(a, t, m, world, at) {
   const K = RULES.knockdown;
   if (m.knockdown || t.hp <= 0 || t.z > 0) {
     setState(t, 'knockdown');
-    t.vz = K.vz; t.vx = dir * K.vx; t.vy = 0; t.z = Math.max(t.z, 0.01);
+    t.vz = m.launch?.vz ?? K.vz; t.vx = dir * (m.launch?.vx ?? K.vx); t.vy = 0; t.z = Math.max(t.z, 0.01);
   } else {
     setState(t, 'hurt');
     t.stun = m.hitstun; t.vx = dir * m.knockback;
   }
+  if (a.move === m) wearWeapon(a, at, t);   // a held weapon wears on each move that lands
   bus.emit('hit', { attacker: a, target: t, move: m, damage: dmg, x: at.x, y: t.y, z: at.z, ko: t.hp <= 0, targetPhase });
 }

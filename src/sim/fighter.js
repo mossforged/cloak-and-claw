@@ -1,11 +1,12 @@
 // Fighter entity + state machine. Pure logic: no drawing, no DOM.
 // States: idle walk block jump attack hurt knockdown down getup dead, plus grab/throw (sim/grab.js):
-// grabbing throw (holder), grabbed thrown (held / flying body).
+// grabbing throw (holder), grabbed thrown (held / flying body); toss (throwing a held weapon, sim/weapons.js).
 // Every fighter is driven by f.control = { mx, my, attack, jump, block?, grab?, face? } (set by input or AI).
 // block (held) only works for fighters whose def has a `block` config.
 import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
-import { tryGrab, stepGrabbing, stepThrow, landThrown } from './grab.js';
+import { stepGrabbing, stepThrow, landThrown } from './grab.js';
+import { movesOf, attackOf, airAttackOf, pressGrab, stepToss, settleWeapon } from './weapons.js';
 
 let nextId = 1;
 
@@ -17,6 +18,7 @@ export function createFighter(def, x, y, opts = {}) {
     state: 'idle', t: 0, stun: 0, invuln: 0, lastHit: -999,
     move: null, mf: 0, queued: false, hitList: new Set(), bounced: false,
     grab: null, heldBy: null, thrower: null,   // grab/throw (sim/grab.js)
+    weapon: null, moveKey: null,               // held weapon (sim/weapons.js); key of the current move
     control: { mx: 0, my: 0, attack: false, jump: false },
     ai: opts.ai ? { mode: 'hover', wait: 0, cool: 30, token: false, yOff: 0, attacked: false } : null,
     entering: !!opts.entering, remove: false,
@@ -40,7 +42,8 @@ export function phaseOf(f) {
 }
 
 export function startMove(f, key) {
-  f.move = f.def.moves[key];
+  f.move = movesOf(f)[key]; f.moveKey = key;
+  if (f.weapon) f.weapon.hit = false;
   f.mf = 0; f.queued = false; f.bounced = false; f.hitList.clear();
   if (f.control.mx) f.facing = Math.sign(f.control.mx);
   if (!f.move.air) setState(f, 'attack');
@@ -52,7 +55,7 @@ function stepMove(f) {
   if (m.lunge && !m.air && !f.bounced && f.mf >= m.windup - 2 && f.mf < m.windup + m.active) f.vx = f.facing * m.lunge;
   if (f.control.attack && m.next && f.mf >= m.comboFrom) f.queued = true;
   f.mf++;
-  if (m.next && f.queued && f.mf >= m.windup + m.active) return startMove(f, m.next);
+  if (m.next && f.queued && !f.weapon?.broken && f.mf >= m.windup + m.active) return startMove(f, m.next);
   if (f.mf >= m.windup + m.active + m.recovery) {
     f.move = null;
     if (f.state === 'attack') setState(f, 'idle');
@@ -74,8 +77,8 @@ export function updateFighter(f, world) {
   switch (f.state) {
     case 'idle': case 'walk': {
       if (c.block && d.block) { setState(f, 'block'); f.stun = 0; f.vx = f.vy = 0; break; }
-      if (c.attack && d.attack) { startMove(f, d.attack); break; }
-      if (c.grab && d.grab && tryGrab(f, world)) break;
+      if (c.attack && attackOf(f)) { startMove(f, attackOf(f)); break; }
+      if (c.grab && pressGrab(f, world)) break;
       f.vx = c.mx * d.move.walk * sp;
       f.vy = c.my * d.move.depth * sp;
       if (c.jump && d.move.jump) { f.vz = d.move.jump; f.z = 0.01; setState(f, 'jump'); bus.emit('jump', { f }); break; }
@@ -95,7 +98,7 @@ export function updateFighter(f, world) {
       break;
     }
     case 'jump':
-      if (c.attack && !f.move && d.airAttack) startMove(f, d.airAttack);
+      if (c.attack && !f.move && airAttackOf(f)) startMove(f, airAttackOf(f));
       if (f.move) stepMove(f);
       f.vz -= RULES.gravity;
       break;
@@ -107,6 +110,7 @@ export function updateFighter(f, world) {
     case 'knockdown': case 'thrown': f.vz -= RULES.gravity; break;
     case 'grabbing': stepGrabbing(f, world); break;
     case 'throw': stepThrow(f, world); break;
+    case 'toss': stepToss(f, world); break;
     case 'grabbed':   // positioned by the holder; freed if the holder let go without saying so
       f.vx = f.vy = 0;
       if (f.heldBy?.grab?.target !== f) { f.heldBy = null; f.z = 0; setState(f, 'idle'); }
@@ -121,6 +125,8 @@ export function updateFighter(f, world) {
     case 'getup': if (f.t >= K.getupFrames) setState(f, 'idle'); break;
     case 'dead': if (f.team !== 'hero' && f.t >= RULES.deadLinger) f.remove = true; break;
   }
+
+  settleWeapon(f, world);
 
   // physics
   f.x += f.vx; f.y += f.vy;

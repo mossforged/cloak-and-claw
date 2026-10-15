@@ -21,6 +21,10 @@ export function createJuice() {
     kick((T.shake ?? 0) + (ko ? JUICE.koShake : 0));
   });
   bus.on('land', ({ heavy }) => heavy && kick(JUICE.heavyLandShake));
+  const P = JUICE.props, WB = JUICE.weaponBreak;   // T010
+  bus.on('propHit', () => { j.freeze = Math.max(j.freeze, P.hitstop); kick(P.shake); });
+  bus.on('propBreak', () => { j.freeze = Math.max(j.freeze, P.breakHitstop); kick(P.breakShake); });
+  bus.on('weaponBreak', () => { j.freeze = Math.max(j.freeze, WB.hitstop); kick(WB.shake); });
   j.tick = () => {
     j.shake *= JUICE.shake.decay;
     if (j.shake < 0.2) j.shake = 0;

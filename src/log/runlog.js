@@ -4,6 +4,7 @@ import { bus } from '../core/events.js';
 const FPS = 60;
 
 function moveKey(f, move) {
+  if (f.move === move && f.moveKey) return f.moveKey;   // weapon kit moves too (T010)
   return Object.keys(f.def.moves).find((k) => f.def.moves[k] === move) ?? 'unknown';
 }
 
@@ -46,10 +47,19 @@ export function createRunLog() {
     c.damageDealt += damage;
   });
 
+  // floor weapons, props, food (T010)
+  const mine = (f) => world && f === world.player;
+  bus.on('propBreak', ({ by }) => { if (mine(by)) c.breaks++; });
+  bus.on('eat', ({ f, heal }) => { if (mine(f)) { c.foodEaten++; c.healed += heal; } });
+  bus.on('pickup', ({ f }) => { if (mine(f)) c.weaponPickups++; });
+  bus.on('weaponThrow', ({ f }) => { if (mine(f)) c.weaponThrows++; });
+  bus.on('weaponBreak', ({ f }) => { if (mine(f)) c.weaponBreaks++; });
+
   return {
     begin(w) {
       world = w; swing = null;
-      c = { hitsLanded: 0, damageDealt: 0, damageTaken: 0, swings: {}, swingsThatHit: 0, knockdowns: 0, windupsInterrupted: 0, blocks: 0, grabs: 0, throws: 0, thrownHits: 0 };
+      c = { hitsLanded: 0, damageDealt: 0, damageTaken: 0, swings: {}, swingsThatHit: 0, knockdowns: 0, windupsInterrupted: 0, blocks: 0, grabs: 0, throws: 0, thrownHits: 0,
+        breaks: 0, foodEaten: 0, healed: 0, weaponPickups: 0, weaponThrows: 0, weaponBreaks: 0 };
     },
     summary() {
       const swings = Object.values(c.swings).reduce((a, b) => a + b, 0);
@@ -61,6 +71,7 @@ export function createRunLog() {
         swings, swingsByMove: { ...c.swings }, whiffs: swings - c.swingsThatHit,
         knockdowns: c.knockdowns, windupsInterrupted: c.windupsInterrupted, blocks: c.blocks,
         grabs: c.grabs, throws: c.throws, thrownHits: c.thrownHits,
+        breaks: c.breaks, foodEaten: c.foodEaten, healed: c.healed, weaponPickups: c.weaponPickups, weaponThrows: c.weaponThrows, weaponBreaks: c.weaponBreaks,
       };
     },
   };
@@ -72,5 +83,6 @@ export function summaryLines(s) {
   return [
     `${m}:${sec}  wave ${s.wave}  KOs ${s.kos}  XP ${s.xp}  dealt ${s.damageDealt}  taken ${s.damageTaken}`,
     `hits ${s.hitsLanded}/${s.swings} swings  whiffs ${s.whiffs}  knocked down ${s.knockdowns}  windups cut ${s.windupsInterrupted}  blocks ${s.blocks ?? 0}  throws ${s.throws ?? 0} (${s.thrownHits ?? 0} bowled)`,
+    `crates broken ${s.breaks ?? 0}  food eaten ${s.foodEaten ?? 0} (+${s.healed ?? 0} hp)  weapons picked up ${s.weaponPickups ?? 0}  thrown ${s.weaponThrows ?? 0}  broken ${s.weaponBreaks ?? 0}`,
   ];
 }

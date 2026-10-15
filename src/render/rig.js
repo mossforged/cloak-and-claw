@@ -25,16 +25,18 @@ const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[
 const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 
 // Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order.
-// swap: { part: swap name } from the pose. Pure; tests use it.
-export function layoutRig(rig, joints, swap = {}) {
+// swap: { part: swap name } from the pose. held: { slot, part } from heldOf (a held weapon replaces the slot part's
+// drawing; part null = empty hand, slot hidden). Pure; tests use it.
+export function layoutRig(rig, joints, swap = {}, held = null) {
   const frames = {};
+  const parts = held ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : rig.parts;
   const frameOf = (name) => {
     if (frames[name]) return frames[name];
-    const p = rig.parts[name];
+    const p = parts[name];
     let m;
     if (!p.parent) m = mul(mul(tr(joints.dx ?? 0, (joints.dy ?? 0) - rig.rootY), sc(rig.scale * (joints.sx ?? 1), rig.scale)), rot(joints[name] ?? 0));
     else {
-      const q = rig.parts[p.parent];
+      const q = parts[p.parent];
       const [ax, ay] = apply(shape(p.parent, q, joints), p.attach[0] - q.pivot[0], p.attach[1] - q.pivot[1]);
       const pf = frameOf(p.parent);
       // upright parts (the shield) cancel their parents' turn: the pose angle is relative to the rig, not the arm
@@ -43,13 +45,24 @@ export function layoutRig(rig, joints, swap = {}) {
     }
     return (frames[name] = m);
   };
-  return Object.entries(rig.parts)
+  return Object.entries(parts)
     .map(([name, p]) => {
       const m = mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1]));
       const s = p.swaps?.[swap[name]];
       return { name, p, order: joints[`${name}.order`] ?? p.order, img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m };
     })
+    .filter((e) => !(held && e.name === held.slot && !held.part))
     .sort((a, b) => a.order - b.order);
+}
+
+// The held weapon in a rig's hand slot (T010): the kit's image, grip point and size on the slot part's bone.
+// A broken weapon is an empty hand until its swing ends. null = nothing held (the slot part draws as usual).
+export function heldOf(f, rig) {
+  const W = f.weapon, slot = W && rig.slots?.[W.def.grip];
+  if (!slot) return null;
+  if (W.broken) return { slot, part: null };
+  const A = W.def.art;
+  return { slot, part: { img: A.img, pivot: A.grip, rest: A.rest ?? 0, scale: A.px / rig.scale } };
 }
 
 let buf, tintBuf;
@@ -71,7 +84,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
-  for (const { img, m } of layoutRig(rig, joints, mem.swap)) {
+  for (const { img, m } of layoutRig(rig, joints, mem.swap, heldOf(f, rig))) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     g.transform(...m);
     g.drawImage(assets.get(img), 0, 0);
@@ -80,7 +93,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const p = { ...poseOf(f, time) };
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
   if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
-  if (f.state === 'grabbing' || f.state === 'throw') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
+  if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
   if (f.state === 'block') { p.rot -= BLOCK_LEAN; p.sx = p.sy = 1; }   // the block pose leans and crouches; keep only the jolt
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;

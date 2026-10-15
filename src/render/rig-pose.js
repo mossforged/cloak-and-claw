@@ -38,7 +38,7 @@ const mix = (a, b, t) => {
   return o;
 };
 
-const moveKey = (f) => Object.keys(f.def.moves).find((k) => f.def.moves[k] === f.move);
+const moveKey = (f) => f.moveKey ?? Object.keys(f.def.moves).find((k) => f.def.moves[k] === f.move);
 
 function strikePose(M, W, X, K, p, T) {
   const s = Math.min(1, p / T.strikeIn);
@@ -66,6 +66,15 @@ function grabPose(f, poses, S, time) {
     swap: k < 0.5 ? swapOf(poses.throwRelease) : {} };
 }
 
+// Weapon toss (T010): `toss` over def.toss.wind frames, then `tossRelease` easing back to idle over the recovery.
+function tossPose(f, poses, S, time) {
+  const P = (k) => evalPose(poses[k], S, 0), T = f.def.toss;
+  if (f.t < T.wind) return { key: 'toss', joints: mix(evalPose(poses.idle, S, time), P('toss'), easeOut(f.t / T.wind)), swap: swapOf(poses.toss) };
+  const k = (f.t - T.wind) / T.recovery;
+  return { key: 'tossRelease', joints: mix(P('tossRelease'), evalPose(poses.idle, S, time), easeInOut(Math.max(0, k * 1.4 - 0.4))),
+    swap: k < 0.5 ? swapOf(poses.tossRelease) : {} };
+}
+
 // Active-phase swaps: a `through` pose that names swaps shows them only while the swing is near it
 // (timing.throughSwap, as a share of the way to the strike), e.g. one back-view drawing mid-spin.
 function activeSwap(M, p, T) {
@@ -80,7 +89,7 @@ export function targetPose(f, rig, time, override) {
   const poses = rig.poses, S = { ...channelsOf(rig), ...poses.stance }, T = poses.timing;
   if (override && poses[override]) return { key: override, joints: evalPose(poses[override], S, time), swap: swapOf(poses[override]) };
   if (f.move) {
-    const key = moveKey(f), M = poses.moves?.[key];
+    const key = moveKey(f), M = poses.moves?.[f.move.rig ?? key];   // move.rig: a weapon kit's move borrows that rig move pose
     if (M) {
       const [ph, p] = phaseOf(f);
       const W = evalPose(M.windup, S, 0), K = evalPose(M.strike, S, 0), X = M.through && evalPose(M.through, S, 0);
@@ -97,6 +106,7 @@ export function targetPose(f, rig, time, override) {
     case 'jump': return named('jump');
     case 'block': return named('block');
     case 'grabbing': case 'throw': if (poses.grabbing) return grabPose(f, poses, S, time); break;
+    case 'toss': if (poses.toss) return tossPose(f, poses, S, time); break;
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
     case 'down': case 'dead': return named('down');

@@ -3,4 +3,4 @@ export const VIEW = { w: 960, h: 540 };   // internal resolution; CSS scales to 
 export const FPS = 60;                    // sim runs at a fixed 60 steps/sec; all timings are in frames
 export const START_STAGE = 'harbor-market';
 export const START_HERO = 'mouse-fighter';
-export const BUILD = 't009 grab throw';   // shown small under the KO counter so testers know which version is running
+export const BUILD = 't010 floor weapons v1';   // shown small under the KO counter so testers know which version is running
