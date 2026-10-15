@@ -20,7 +20,7 @@
 | 5 | Scrolling stage with layered art + touch controls | Does moving through a stage feel like Golden Axe? |
 | 6 | RPG layer: stats grow, food/shop between stages, lives | Do you want "one more run" to get stronger? |
 | 7 | Sound, builds for fresh testers | Do new players get it without coaching? |
-| 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
+| 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
 - Code: `docs/tasks/T007-shield-block.md`, then `T008-spin-slash.md`. Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
@@ -37,6 +37,8 @@
 - Rig follow-ups: art for a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
 - Belt depth: the Harbor Market art only allows a 63 px belt (packet asked 85+). User: "we might need to eventually return to belt depth and then get the art to match the goal." Plan: when stages become layered (Stage 5), set the target belt depth first and brief the stage art to it. Also: feet overlap two front dock posts slightly; fighters look a bit smaller after the zoom.
+- Companion / pet that fights alongside you (Castle Crashers' animal orbs). User likes it.
+- Co-op party of up to **three** players (user), not just two; plan Stage 8 and belt depth for it.
 - A 360-degree spin special that hits all around (crowd clearer, Final Fight style), building on T008's spin slash.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 

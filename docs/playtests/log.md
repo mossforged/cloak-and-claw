@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-14 Belt depth in the lab
+User tried floor top ~340, bottom ~460 (about 120 px) in the lab: "The numbers seem pretty good. It might be a bit much right now, but we don't know what sort of crowds we're going to get. And I do like the idea of having a companion, a pet... if this is going to be a party of three players, you're going to want room to maneuver." On the lab: "pretty amazing... we should continue to use that and develop it."
+
 ## 2026-10-14 T005 rig (three-quarter parts + part swaps)
 User (relayed by the code builder): "a big improvement"; loves the expression swaps. The cast pose (sword raised) is awkward; he thinks it needs a different torso position, the same root cause as slash2 not being a true horizontal cut.
 Lead note: feet sit ~5 px off the floor in the knockdown and slash3 strike poses (builder).
