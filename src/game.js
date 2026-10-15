@@ -26,6 +26,7 @@ export function createGame(ctx, assets) {
       if (c.cast) opts.pose = opts.pose ? null : 'cast';   // view only: hero's rig holds the cast pose
       if (c.pause) opts.paused = !opts.paused;
       if (c.log) downloadRuns();
+      if (c.framing) cycleFraming(world.stage, opts);
       if (opts.paused) return;
       if (world.over && (c.attack || c.start)) {
         world = createWorld(START_STAGE, START_HERO); renderer.reset(); juice.reset(); log.begin(world); opts.runLines = null;
@@ -37,4 +38,14 @@ export function createGame(ctx, assets) {
     },
     render(time) { renderer.draw(world, time, juice, opts); },
   };
+}
+
+// T006 test: copy the next stage framing into the live stage data; the banner names it.
+function cycleFraming(stage, opts) {
+  const list = stage.framings;
+  if (!list) return;
+  opts.framing = ((opts.framing ?? 0) + 1) % list.length;
+  const f = list[opts.framing];
+  Object.assign(stage.art, f.art); Object.assign(stage.floor, f.floor);
+  opts.banner = { text: `Framing ${opts.framing + 1}/${list.length}: ${f.name}  (F = next)`, until: performance.now() + 4000 };
 }
