@@ -30,7 +30,7 @@ When a packet says to import an asset: run `python3 tools/key_green.py assets/so
 1. `npm test` passes. Add tests for new logic.
 2. Windowed acceptance: save screenshots to `docs/screens/T0NN/` if you can; otherwise list exactly what the user should look at.
 3. Update `docs/MODULES.md` / contracts if files, exports or events changed.
-4. Two lines under "Last session" in `docs/STATUS.md`.
+4. Two lines under "Last session" in `docs/STATUS.md`. Set `BUILD` in `src/config.js` to the task and round (e.g. `t009 grab v1`).
 5. Commit (author is the repo's configured anonymous handle), `git push -u origin <branch>`, and report the branch name and anything you could not do.
 - Found a problem outside your task? Note it in your report; don't fix it.
 - The user asks for something outside the packet? Note it in your report for the lead; don't build it.

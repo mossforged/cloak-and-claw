@@ -1,6 +1,6 @@
 // Rig poses: picks the pose for a fighter's state/move, evaluates waves and move phases,
 // and eases from the last drawn pose into a new one. Pure (no DOM), so tests can run it.
-// Channels: '<part>' angle, 'dx'/'dy' root offset, and per part '<part>.sx' / '<part>.sy'
+// Channels: '<part>' angle, 'dx'/'dy' root offset, 'sx' whole-body width (-1 = mirrored, e.g. mid-spin), and per part '<part>.sx' / '<part>.sy'
 // (stretch across/along the bone, 1 = as drawn, negative flips) and '<part>.order' (draw order).
 // Part swaps: a pose's `swap: { <part>: '<swap name>' }` picks one of the part's `swaps` images.
 // Swaps don't blend: they switch the moment the pose (or move phase) that names them starts.
@@ -14,7 +14,7 @@ const easeOutBack = (t, s) => 1 + (s + 1) * (t - 1) ** 3 + s * (t - 1) ** 2;
 
 // Every channel a pose may use, with its value when a pose leaves it out.
 export function channelsOf(rig) {
-  const out = { dx: 0, dy: 0 };
+  const out = { dx: 0, dy: 0, sx: 1 };   // sx: whole-body width (1 = as drawn, -1 = mirrored; through 0 reads as a turn)
   for (const [name, p] of Object.entries(rig.parts)) {
     out[name] = 0; out[`${name}.sx`] = 1; out[`${name}.sy`] = 1; out[`${name}.order`] = p.order;
   }
