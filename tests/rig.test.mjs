@@ -61,6 +61,14 @@ for (const leg of ['leg-front-lower', 'leg-back-lower']) {
   check(Math.abs(y) < 8, `${leg}: boot sole within 8 px of the ground in stance (y=${y.toFixed(1)})`);
 }
 
+// Block (shield-wall crouch): both boots stay on the floor.
+const B = layoutRig(rig, targetPose(fighter({ state: 'block' }), rig, 0).joints);
+for (const leg of ['leg-front-lower', 'leg-back-lower']) {
+  const m = B.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
+  const sy = m[1] * x + m[3] * y + m[5];
+  check(Math.abs(sy) < 4, `block: ${leg} boot sole on the floor (y=${sy.toFixed(1)})`);
+}
+
 // Walk: feet don't skate. While a foot is planted (half a stride cycle) the body moves walk * 60 / speed / 2 px;
 // the foot's sweep from front to back relative to the hips must match that.
 const walkSpeed = def.move.walk * 60, need = walkSpeed / P.walk.speed / 2;

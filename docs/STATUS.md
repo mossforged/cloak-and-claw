@@ -41,6 +41,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 code: T007 round 3: block pose is now the user's "spartans behind their shield wall": hunched low behind the raised shield, eyes over the rim, sword arm tucked behind it with the point out past the edge; boots flat on the floor (new rig test). Rig screens replaced.
 2026-10-14 code: T007 round 2: user likes the block mechanics but not the pose ("drops his sword and leans back"). New rig `block`: leaning into a raised shield (chin height), wide brace, sword cocked over the shoulder; standee leans forward and only jolts back on a blocked hit. Screens replaced. User idea for the lead: a parry later.
 2026-10-14 code: T007 on branch `t007-shield-block`: hold L / RB blocks (state `block`, shuffle 0.6, facing locked); frontal hits -> `block` event (chip 0, pushback, 12f blockstun, attacker shoved and its lunge stops), from behind lands. Clang fx, rig `block` pose, standee lean, run log `blocks`, lab "Hero block" sliders. L downloads logs only on game over.
 2026-10-14 code: 7/7 tests (new tests/block.test.mjs); bot run identical to main apart from the new `blocks: 0` field. Screens in docs/screens/T007/. Human check open: does blocking feel solid, rats fair?
