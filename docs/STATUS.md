@@ -4,11 +4,11 @@
 
 ## Next
 1. **User:** A003 props look check (crate, barrel, floor weapons).
-   **Code builder:** T006 floor lane, then T007 shield block.
-   **Art builder:** free (A003 merged; user look check pending).
+   **Code builder:** T006 floor lane, then T007 shield block, then T008 spin slash (user's idea).
+   **Art builder:** A004 Rat Raider rig parts.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
-4. **Lead:** write T008 grab/throw and T009 floor weapons + breakables.
+4. **Lead:** write T009 grab/throw and T010 floor weapons + breakables; after A004, the rat rig import task.
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -23,8 +23,8 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T006-floor-lane.md`, then `T007-shield-block.md`. Next to write: T008 grab/throw, T009 floor weapons + breakables (after A003 look check).
-- Art: none queued.
+- Code: `docs/tasks/T006-floor-lane.md`, then `T007-shield-block.md`, then `T008-spin-slash.md`. Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
+- Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
 - None right now.
@@ -36,6 +36,7 @@
 - Bramble Brute as the first boss.
 - Rig follow-ups: art for a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
+- A 360-degree spin special that hits all around (crowd clearer, Final Fight style), building on T008's spin slash.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
