@@ -2,6 +2,10 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-15 T011 rats (spear, bow, look)
+User (relayed by the code builder): spear and bow rats "do feel different"; but the rats "don't match the original standee in quality", aren't crouching, "arms and legs are skinny". Variant C (thicker, shorter limbs) applied as a stopgap.
+Lead: the rig rat is a different design from the standee (long weasel snout, small ears, rangy); redraw the parts from the standee (A009). Merge T011 now. **User: agreed on both.**
+
 ## 2026-10-15 A006 Mouse Fighter touch-up parts
 User: "I think I need to see it in action. The rough assemblies they did aren't great." -> T012 wires them in; judged in play.
 

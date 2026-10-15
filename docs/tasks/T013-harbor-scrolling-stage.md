@@ -25,3 +25,11 @@ A007 (approved by the user 2026-10-15) delivered a layered Harbor Market: `far.p
 - Human: does walking through the market feel like Golden Axe? Can you always see the fighters on the floor? Do you notice any joins?
 
 Out of scope: touch controls, new art, other stages, cutscenes or a boss, stage select UI.
+
+## Addendum (lead, 2026-10-15, after T011 merged)
+T011 added the Rat Spearman and Rat Archer (arrows in `src/sim/shots.js`). For this stage:
+- **Zones mix the variants** like the arena waves: early zones cutlass rats, then a spearman, later an archer with melee rats. Final zone may hold two of the three types. Keep the 5-on-screen cap and the attacker limit.
+- **Archers stay on screen:** while a zone is locked, an archer's "keep away" retreat stops at the locked screen edges (it must never back off-screen and shoot from where the player can't see it).
+- **Arrows** disappear when they leave the camera view (or the locked walls), not only the old arena edges.
+- **New run** uses the T011 no-cache server (`tools/Play.command` / `tools/serve.py`) for windowed checks.
+- Acceptance adds: bot clears `harbor-run` with all three rat types present; a windowed frame of an archer shooting inside a locked zone.
