@@ -1,12 +1,12 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: none merged yet. Last art task: none merged yet.
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T001 tuning lab (merged 2026-10-14). Last art task: A001 (merged, look approved).
 
 ## Next
-1. **Code builder:** T001 tuning lab (started 2026-10-14).
-2. **Code builder (can run alongside T001, separate session):** T003 Mouse Fighter rig, so the user can see it move.
-   A001 rig parts merged 2026-10-14; look approved. Art builder is free.
-3. **Lead:** after T001, write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
+1. **Code builder:** T003 Mouse Fighter rig, so the user can see it move.
+2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
+3. **Art builder:** free (A001 done). Next art waits on seeing the rig move.
+4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -21,7 +21,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T001-tuning-lab.md`, `docs/tasks/T003-mouse-rig.md`. Queued: `T002-run-log.md` (auto-ok).
+- Code: `docs/tasks/T003-mouse-rig.md`. Queued: `T002-run-log.md` (auto-ok).
 - Art: nothing queued (A001 done).
 
 ## Open questions (for the user)
@@ -32,11 +32,15 @@
 - Touch controls for phone play (Stage 5).
 - Art bible items (pie, cheese, potions, chest, coins) as pickups and RPG rewards (Stage 6).
 - Bramble Brute as the first boss.
+- Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: merged T001 (tuning lab). User's lab check still open.
 2026-10-14 lead: merged A001 (source art; user approved the look). Wrote T003 (rig) so the user can see it move.
 2026-10-14 lead: Stage 1 gate passed (user: striking and knockback feel good). Lane/background mismatch noted for Stage 2.
+2026-10-14 code: T001 tuning lab on branch `t001-tuning-lab` (lab.html, src/lab/, src/data/lab-schema.js, tests/lab.test.mjs); no sim changes. Screens in docs/screens/T001/.
+2026-10-14 code: needs the user's human check: tune the combo in the lab in under 10 minutes.
 2026-10-14 lead: user answered the six genre-study questions (decisions.md); block, throws and floor weapons added to Stage 2.
 2026-10-14 lead: genre study written (docs/studies). A private lore appendix went to the user only, not the repo.
 2026-10-15 lead: set up the workflow (guides, contracts, CI, test runner, data test, brief, decisions, packets T001, T002, A001). Details in `docs/history.md`.

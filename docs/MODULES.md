@@ -10,6 +10,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `index.html` | Canvas + loads `src/main.js` | |
 | `src/main.js` | Sizes canvas, loads art referenced by data, starts loop | |
 | `src/config.js` | View size (960x540), FPS, start stage/hero | `VIEW FPS START_STAGE START_HERO` |
+| `lab.html` | Tuning lab page: game canvas + side panel, loads `src/lab/main.js` | |
 | `src/game.js` | Input -> sim step (skipped during hit-stop) -> render. Pause, debug toggle, restart. Exposes `window.game` | `createGame` |
 
 ## Core (engine plumbing, rarely changes)
@@ -42,6 +43,14 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/render/backdrop.js` | Sky, clouds, sea; stage cutout | `drawBackdrop drawStage` |
 | `src/render/tint.js` | Cached solid-colour silhouettes | `silhouette` |
 
+## Lab (tuning page, `lab.html`; never loaded by index.html)
+| File | Purpose | Exports |
+|---|---|---|
+| `src/lab/main.js` | Lab entry: same boot as `src/main.js`, debug on, builds panel, exposes `window.game.lab` | |
+| `src/lab/tweaks.js` | Pure model: expands `LAB_SCHEMA` into fields, writes live data objects, defaults snapshot, change list/format, save/load | `createTweaks fieldsOf allFields getPath setPath roundTo` |
+| `src/lab/tools.js` | Wraps `game.update`: slow motion, passive rats (holds `ai.cool`), respawn wave. No sim changes | `createLabTools` |
+| `src/lab/panel.js` | DOM side panel built from the schema; localStorage persistence | `buildPanel loadSaved` |
+
 ## Data (all tuning lives here)
 | File | Purpose |
 |---|---|
@@ -50,6 +59,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/data/controls.js` | Key and gamepad bindings |
 | `src/data/moves/*.js` | Move sets: timing, hitbox, damage, knockback, hitstop, shake, pose, fx |
 | `src/data/fighters/*.js` + `index.js` | Fighter defs: art, body, stats (RPG hooks), speeds, moves, AI params. Registry in index |
+| `src/data/lab-schema.js` | Which data fields the tuning lab shows (`ROOTS` file -> object, `LAB_SCHEMA` sections/sliders). New tunable = one line here |
 | `src/data/stages/*.js` + `index.js` | Stage art placement, backdrop, floor belt, start point, waves. Registry in index |
 
 ## Tests and tools
@@ -57,6 +67,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 |---|---|
 | `tests/run.mjs` | `npm test`: runs every `tests/*.test.mjs`; a file that fails to load counts as a failure |
 | `tests/sim-smoke.test.mjs` | Bot plays 3 min x 3 seeds headless; checks NaN, fairness, progress |
+| `tests/lab.test.mjs` | Lab schema names only existing fields, defaults inside slider ranges, tweak model set/format/reset/load |
 | `tests/data.test.mjs` | Every fighter/move/stage/wave/art path resolves |
 | `tests/bot.mjs` | Scripted player used by tests |
 | `tools/key_green.py` | Green-screen keyer for new art |

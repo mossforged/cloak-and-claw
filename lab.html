@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Tuning Lab · Cloak & Claw</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #0d0b14; --panel: #17141f; --line: #2c2738; --text: #e8e3f0; --dim: #8d86a0; --accent: #ffc94a; --changed: #ffc94a; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--text); overflow: hidden;
+    font: 12px/1.35 ui-sans-serif, system-ui, -apple-system, sans-serif; }
+  body { display: flex; }
+  #stage { flex: 1; min-width: 0; display: flex; }
+  canvas { display: block; width: 100%; height: 100%; object-fit: contain; }
+
+  #lab { position: relative; width: 300px; flex: none; background: var(--panel); border-left: 1px solid var(--line);
+    overflow-y: auto; overscroll-behavior: contain; }
+  #lab.collapsed { width: 0; border: 0; overflow: visible; }
+  #lab.collapsed > :not(.collapse) { display: none; }
+  #lab .collapse { position: fixed; top: 8px; right: 8px; z-index: 2; width: 28px; height: 28px; padding: 0; }
+  #lab h1 { font: 20px "Lilita One", sans-serif; color: var(--accent); margin: 10px 12px 6px; }
+  #lab .body { padding: 0 12px 24px; }
+  #lab section { border-bottom: 1px solid var(--line); padding: 8px 0; display: grid; gap: 6px; }
+  #lab .row { display: flex; align-items: center; gap: 6px; }
+  #lab .count { color: var(--dim); margin-left: auto; }
+  #lab button { background: #2a2536; color: var(--text); border: 1px solid #3b3449; border-radius: 4px; padding: 4px 8px; cursor: pointer; font: inherit; }
+  #lab button:hover { background: #352f44; }
+  #lab button.primary, #lab .seg button.on { background: var(--accent); color: #1b1408; border-color: var(--accent); }
+  #lab .seg { display: flex; gap: 2px; }
+  #lab textarea { width: 100%; box-sizing: border-box; background: #0f0d15; color: var(--text); border: 1px solid var(--line);
+    font: 11px ui-monospace, Menlo, monospace; resize: vertical; }
+  #lab details { border-bottom: 1px solid var(--line); padding: 6px 0; }
+  #lab summary { cursor: pointer; font-weight: 600; padding: 2px 0; }
+  #lab select { margin: 6px 0; background: #0f0d15; color: var(--text); border: 1px solid var(--line); padding: 3px; font: inherit; }
+  #lab .field { display: grid; grid-template-columns: 104px 1fr 54px; gap: 6px; align-items: center; padding: 1px 0; }
+  #lab .field .name { cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--dim); }
+  #lab .field.changed .name { color: var(--changed); font-weight: 600; }
+  #lab .field.unset { opacity: 0.4; }
+  #lab .field input[type=range] { width: 100%; accent-color: var(--accent); }
+  #lab .field input[type=number] { width: 100%; box-sizing: border-box; background: #0f0d15; color: var(--text); border: 1px solid var(--line); font: inherit; }
+
+  @media (max-width: 900px) {
+    #lab { position: fixed; top: 0; right: 0; bottom: 0; width: min(320px, 92vw); z-index: 1; box-shadow: -8px 0 24px #0008; }
+  }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="game"></canvas></div>
+<aside id="lab"></aside>
+<script type="module" src="src/lab/main.js"></script>
+</body>
+</html>

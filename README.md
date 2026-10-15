@@ -12,6 +12,8 @@ python3 -m http.server 8000
 ```
 Open http://localhost:8000. Add `?debug` to start with the debug overlay on.
 
+**Tuning lab:** http://localhost:8000/lab.html (online: https://mossforged.github.io/cloak-and-claw/lab.html) runs the game with live sliders for moves, movement, rules, Rat Raider and juice, plus slow motion, passive rats and wave respawn. "Copy changes" gives `file -> path: old -> new` lines to paste to the lead. Changes survive a reload; "Reset all" restores the defaults.
+
 ## Controls
 | Action | Keyboard | Gamepad |
 |---|---|---|

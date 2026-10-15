@@ -8,7 +8,7 @@ You are the **code builder**. A lead chat writes task packets in `docs/tasks/` a
 3. Create a branch: `git checkout -b t0nn-<short-slug>`. Never commit task work to main.
 
 ## You own
-`src/`, `tests/`, `tools/`, `index.html`, `assets/art/` (game-ready art you import), `package.json`, `.github/`.
+`src/`, `tests/`, `tools/`, `index.html`, `lab.html`, `README.md` (links and run instructions), `assets/art/` (game-ready art you import), `package.json`, `.github/`.
 You never edit `assets/source/` (the art builder's) and never change `docs/` except: `docs/MODULES.md`, module `CONTRACT.md` files, `docs/screens/T0NN/`, and the "Last session" lines of `docs/STATUS.md`.
 
 ## Module rules
