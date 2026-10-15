@@ -13,3 +13,4 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-15 Tunable data stays in `src/data/` (not a top-level `data/`) so browser imports need no path tricks.
 - 2026-10-15 Art flow: the art builder delivers to `assets/source/<ID>-<slug>/`; the code builder keys/trims into `assets/art/` and wires data. No Git LFS for now (art is small; revisit if sources pass ~200 MB).
 - 2026-10-15 ASSUMPTION (lead, needs the user's yes): the four design pillars in `docs/handoffs/game-brief.md`.
+- 2026-10-14 Title: the game is called Tales of Cloak & Claw (user).
