@@ -1,10 +1,10 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T009 grab and throw (merged 2026-10-15; user OK on round 3). Last art task: A005 Rat Raider head + legs revision (merged; user look check pending).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T009 grab and throw (merged 2026-10-15; user OK on round 3). Last art task: A006 Mouse Fighter touch-up parts (merged; user look check pending).
 
 ## Next
    **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** T009 grab and throw.
-   **Art builder:** A006 Mouse Fighter touch-up parts.
+   **Art builder:** free. **User:** A006 look check.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 4. **Lead:** write T009 grab/throw and T010 floor weapons + breakables; after A004, the rat rig import task.
@@ -23,7 +23,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T010-floor-weapons-breakables.md`, then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
-- Art: `docs/tasks/A006-mouse-fighter-touchup.md`.
+- Art: none queued (A006 merged). Code to wire A006 into the block, cast and spin poses: T012 (to write after the user's look check).
 
 ## Open questions (for the user)
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
@@ -48,6 +48,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged A006 (guard, brace head, side torso, true back view, raised arm; source).
 2026-10-15 lead: merged T009 (grab on a button, H / pad Y; throws bowl rats; side-wall bounce). Bot KOs 32/33/32 vs 33/33/34 due to wall bounce only.
 2026-10-15 lead: merged A005 (rattier heads, heavier legs; source).
 2026-10-15 code: user OK'd T009 round 3 ("thats good now"): grab button, reach and throws approved. Branch `t009-grab-throw` ready for the lead to merge.

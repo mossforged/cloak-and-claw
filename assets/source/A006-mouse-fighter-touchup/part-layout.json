@@ -1,0 +1,114 @@
+{
+  "canvas": [
+    1226,
+    1283
+  ],
+  "note": "Source placement only; not runtime pivots. Uniform anatomy fit; see HANDOFF.",
+  "parts": {
+    "shield-face": {
+      "raw_size": [
+        438,
+        443
+      ],
+      "position": [
+        790,
+        481
+      ],
+      "size": [
+        428,
+        433
+      ],
+      "uniform_scale": 0.9771689497716894
+    },
+    "head-brace": {
+      "raw_size": [
+        678,
+        478
+      ],
+      "position": [
+        365,
+        80
+      ],
+      "size": [
+        673,
+        474
+      ],
+      "uniform_scale": 0.9926253687315634
+    },
+    "head-back": {
+      "raw_size": [
+        705,
+        562
+      ],
+      "position": [
+        365,
+        80
+      ],
+      "size": [
+        673,
+        536
+      ],
+      "uniform_scale": 0.9546099290780142
+    },
+    "torso-side": {
+      "raw_size": [
+        467,
+        516
+      ],
+      "position": [
+        530,
+        510
+      ],
+      "size": [
+        415,
+        458
+      ],
+      "uniform_scale": 0.8886509635974305
+    },
+    "torso-back-full": {
+      "raw_size": [
+        439,
+        464
+      ],
+      "position": [
+        478,
+        510
+      ],
+      "size": [
+        433,
+        458
+      ],
+      "uniform_scale": 0.9863325740318907
+    },
+    "arm-back-guard": {
+      "raw_size": [
+        424,
+        357
+      ],
+      "position": [
+        690,
+        490
+      ],
+      "size": [
+        356,
+        300
+      ],
+      "uniform_scale": 0.839622641509434
+    },
+    "arm-front-raised": {
+      "raw_size": [
+        254,
+        641
+      ],
+      "position": [
+        430,
+        245
+      ],
+      "size": [
+        155,
+        390
+      ],
+      "uniform_scale": 0.610236220472441
+    }
+  }
+}
