@@ -3,7 +3,7 @@
 **Owns:** world state, fighter state machine and physics, hit detection and damage, enemy AI, waves.
 **Does not own:** anything visual; tuning numbers (those are in `src/data/`).
 
-**Public API:** `createWorld(stageId, heroId, seed)`, `stepWorld(world, control)`; helpers `phaseOf`, `hitboxOf`, `hurtboxOf`, `HELPLESS` are read by render/debug.
+**Public API:** `createWorld(stageId, heroId, seed)`, `stepWorld(world, control)`; helpers `phaseOf`, `hitboxOf`, `hurtboxOf`, `HELPLESS` are read by render/debug. The `hit` payload carries `targetPhase` for the run log (src/log).
 **Emits:** `swing hit land jump defeated wave gameOver` (payloads in docs/MODULES.md).
 
 **Rules:**

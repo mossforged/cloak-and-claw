@@ -39,6 +39,7 @@ function applyHit(a, t, m, world, at) {
   const dmg = Math.max(1, Math.round(m.damage + (a.def.stats.power ?? 0) - (t.def.stats.defense ?? 0)));
   t.hp = Math.max(0, t.hp - dmg);
   t.lastHit = world.frame;
+  const targetPhase = phaseOf(t)[0];   // for the run log: was the target mid-windup?
   t.move = null;
   const dir = Math.sign(t.x - a.x) || a.facing;
   t.facing = -dir;
@@ -50,5 +51,5 @@ function applyHit(a, t, m, world, at) {
     setState(t, 'hurt');
     t.stun = m.hitstun; t.vx = dir * m.knockback;
   }
-  bus.emit('hit', { attacker: a, target: t, move: m, damage: dmg, x: at.x, y: t.y, z: at.z, ko: t.hp <= 0 });
+  bus.emit('hit', { attacker: a, target: t, move: m, damage: dmg, x: at.x, y: t.y, z: at.z, ko: t.hp <= 0, targetPhase });
 }
