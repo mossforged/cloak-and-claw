@@ -21,3 +21,4 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-14 Floor weapons and breakables: yes. The user loves floor weapons and enemies dropping their weapons; breakable crates hold food.
 - 2026-10-14 Combos: keep simple for now (no juggles).
 - 2026-10-14 Death: lives (arcade style) for now; may be rethought if we go roguelite.
+- 2026-10-14 Gate tags are created by a GitHub Action from docs/tags.txt, because the lead's cloud session cannot push tags.

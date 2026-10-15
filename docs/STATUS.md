@@ -1,6 +1,6 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1` on commit 4d9a233 still to be pushed from the Mac). Last code task: none merged yet. Last art task: none merged yet.
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: none merged yet. Last art task: none merged yet.
 
 ## Next
 1. **Code builder:** T001 tuning lab (started 2026-10-14).

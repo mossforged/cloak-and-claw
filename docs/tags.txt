@@ -1,0 +1,4 @@
+# Gate tags. One per line: <tag> <commit> <note>
+# A GitHub Action (.github/workflows/tags.yml) creates any tag listed here that doesn't exist yet.
+# Lines are never removed; tags are never moved.
+stage-1 4d9a233 Stage 1 gate passed: standee combat (2026-10-14)
