@@ -41,6 +41,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: user approved T007 round 4 ("that's the best one so far. we're good to go"). Branch `t007-shield-block` ready for the lead to merge.
 2026-10-15 code: T007 round 4 (lead: "shield forward, braced"): rig `block` now leans hard into the shield pushed up and out (drawn 1.12x, as if thrust at the viewer), face clear over the rim, sword cocked high; boots flat. Shield fights the art a little (see report), so a star glint now pops on the shield rim after each block (juice `block.glint`, lab Juice sliders).
 2026-10-15 code: 7/7 tests. Screens 1, 3, 4 in docs/screens/T007/ replaced (standee pose unchanged, now shows the glint). Art that would help: a face-on/three-quarter shield and a raised-shield arm drawing.
 2026-10-14 code: T007 round 3: block pose is now the user's "spartans behind their shield wall": hunched low behind the raised shield, eyes over the rim, sword arm tucked behind it with the point out past the edge; boots flat on the floor (new rig test). Rig screens replaced.
