@@ -24,7 +24,7 @@
 - Art: `docs/tasks/A001-mouse-fighter-rig.md`.
 
 ## Open questions (for the user)
-- None right now.
+- After the Stage 1 gate: the six questions at the end of `docs/studies/2026-10-14-belt-scroller-genre-study.md` (run structure, defence, throws, crates/food, combo depth, death rules).
 
 ## Parked
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
@@ -34,4 +34,5 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: genre study written (docs/studies). A private lore appendix went to the user only, not the repo.
 2026-10-15 lead: set up the workflow (guides, contracts, CI, test runner, data test, brief, decisions, packets T001, T002, A001). Details in `docs/history.md`.
