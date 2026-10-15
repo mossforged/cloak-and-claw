@@ -20,8 +20,7 @@ export default {
       spearThrust: {   // draws the spear back along his side (long telegraph), then drives it straight out at the enemy
         windup: { swap: { head: 'head-snarl' }, torso: 6, head: -6, dx: -4, ...arms(10, -70, -30, -60, 55),
           'leg-back-upper': -32, 'leg-back-lower': 34, 'leg-front-upper': 39, 'leg-front-lower': -71, tail: 20 },
-        strike: { swap: { head: 'head-snarl' }, torso: 34, head: -22, dx: 6, ...arms(-45, -55, -70, -40, 61),
-          'leg-back-upper': -96, 'leg-back-lower': 74, 'leg-front-upper': 14, 'leg-front-lower': -36, tail: -25 },
+        strike: { swap: { head: 'head-snarl' }, torso: 22, head: -14, ...arms(-45, -55, -70, -40, 73), tail: -25 },   // arms drive, body stays back
       },
     },
   },

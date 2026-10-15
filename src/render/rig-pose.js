@@ -140,6 +140,7 @@ export function targetPose(f, rig, time, override) {
     case 'grabbing': case 'throw': if (poses.grabbing) return grabPose(f, poses, S, time); break;
     case 'toss': if (poses.toss) return tossPose(f, poses, S, time); break;
     case 'pickup': if (poses.stow) return pickupPose(f, poses, S, time); break;
+    case 'grabbed': case 'thrown': if (poses.held) return named('held'); break;   // T011: a rig with a `held` pose (rats)
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
     case 'down': case 'dead': return named('down');

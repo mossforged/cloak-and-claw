@@ -1,4 +1,4 @@
-// Rat rigs (T011): raider / spearman / archer share the A004+A005 body. Feet on the floor in the crouch and in move
+// Rat rigs (T011): raider / spearman / archer share the A004+A005 body. Grabbed/thrown use `held`. Feet on the floor in the crouch and in move
 // poses, walk doesn't skate, every pose finite; the kit sits in the hands: spear on the near fist with the far fist IK'd
 // onto the shaft (point a little up), bow in the far fist with the near hand on the string (drawn back at full draw).
 import { FIGHTERS } from '../src/data/fighters/index.js';
@@ -26,6 +26,8 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     check(Object.values(r.joints).every(Number.isFinite) && Object.keys(r.joints).every((j) => jointsOfRig(rig).includes(j)), `${id} ${state}: finite rig joints`);
     check(lay(fighter({ state, t: 7 })).every((e) => (e.m ?? e.line.flat()).every(Number.isFinite)), `${id} ${state}: layout finite`);
   }
+
+  for (const state of ['grabbed', 'thrown']) check(targetPose(fighter({ state }), rig, 0).key === 'held', `${id} ${state}: held pose (hurt face)`);
 
   // crouch stance and ground moves: both soles on the floor
   const S = feet(lay(fighter({})));

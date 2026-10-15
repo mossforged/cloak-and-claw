@@ -37,6 +37,13 @@ export default {
     'leg-back-upper': -26, 'leg-back-lower': 34, 'leg-front-upper': 39, 'leg-front-lower': -71,
     tail: -25, 'scarf-tail': -30,
   },
+  held: {   // grabbed by the collar / flying when thrown (T011): hurt face, legs kicking off the ground, arms flailing
+    swap: { head: 'head-hurt' },
+    torso: -4, head: -18,
+    'arm-front-upper': 70, 'arm-front-lower': -60, 'arm-back-upper': -30, 'arm-back-lower': -50,
+    'leg-back-upper': -40, 'leg-back-lower': 50, 'leg-front-upper': 30, 'leg-front-lower': 20,
+    tail: -30, 'scarf-tail': -30,
+  },
   knockdown: {
     swap: { head: 'head-hurt' },
     torso: -20, head: -25,
@@ -58,7 +65,7 @@ export default {
   },
   moves: {
     ratSlash: {   // long telegraph: rears up with the cutlass high behind his head, then a lunging chop down in front
-      windup: { torso: -6, head: -6, 'arm-front-upper': 150, 'arm-front-lower': -40, sword: -40, 'arm-back-upper': -100, 'arm-back-lower': -20,
+      windup: { torso: -6, head: -6, 'arm-front-upper': 150, 'arm-front-lower': -40, sword: -214, 'arm-back-upper': -100, 'arm-back-lower': -20,
         'leg-back-upper': -32, 'leg-back-lower': 34, 'leg-front-upper': 39, 'leg-front-lower': -71, tail: 20, 'scarf-tail': 15 },
       strike: { swap: { head: 'head-snarl' }, torso: 30, head: -14, dx: 4, 'arm-front-upper': -70, 'arm-front-lower': -10, sword: 60, 'arm-back-upper': 20, 'arm-back-lower': -40,
         'leg-back-upper': -96, 'leg-back-lower': 74, 'leg-front-upper': 14, 'leg-front-lower': -36, tail: -25, 'scarf-tail': -25 },

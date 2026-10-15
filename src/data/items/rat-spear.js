@@ -8,5 +8,5 @@ export default {
   grip: 'two-hand', durability: 10,
   moves: RAT_SPEAR, attack: 'spearThrust',
   toss: { damage: 10, spin: 0.3, hitstop: 7, shake: 6 },
-  ai: { range: 118, hover: 215, think: [24, 56], cooldown: [70, 130], aggression: 0.5 },
+  ai: { range: 140, hover: 230, think: [24, 56], cooldown: [70, 130], aggression: 0.5 },
 };

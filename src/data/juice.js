@@ -25,5 +25,8 @@ export const JUICE = {
   // jump squat (T014, render only; see fighters' jumpSquatMode): legs extend from the crouch over `rise` frames after take-off
   // (A and B); both squash on landing (A since T011) for `land` frames, `landDepth` of the full crouch. Standee: squashX/squashY at full crouch.
   jumpSquat: { rise: 5, land: 8, landDepth: 0.7, squashX: 1.1, squashY: 0.82 },
+  // arrows in flight (T011, render/shots.js): drawn `size` x the nocked arrow so they read at a glance, with a light
+  // `glow` (blur px) round them and a speed streak `streak` px long behind (`width`, `alpha`)
+  shot: { size: 1.5, glow: 7, streak: 60, width: 3, alpha: 0.6 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
 };
