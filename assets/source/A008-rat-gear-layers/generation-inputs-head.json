@@ -1,0 +1,17 @@
+[
+  {
+    "name": "gear-hood",
+    "path": "assets/source/A005-rat-raider-head-legs/head-neutral.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig gear overlay. Reference image is the existing rat head: use its three-quarter angle facing right, skull proportions, warm hand-painted cartoon finish, bold dark brown outlines and upper-left light. Output ONLY the requested clothing, no rat, fur, skin, ears, face, mannequin, text, shadow or other objects. Empty face and ear holes must be genuinely transparent. Show entire item large with clear margin. Make a short muted olive-brown cloth archer hood fitted to this rat head. Two open ear slits let BOTH existing ears poke through; large near ear at upper left, smaller far ear upper right. A broad open face frames both eyes and long muzzle without covering them. Short ragged drape around rear cheeks and neck, stitched seams, a few worn patches. Do not include ears or a face in the holes. Hood should wrap around the crown between the ears and around left/back cheek."
+  },
+  {
+    "name": "gear-helmet",
+    "path": "assets/source/A005-rat-raider-head-legs/head-neutral.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig gear overlay. Reference image is the existing rat head: use its three-quarter angle facing right, skull proportions, warm hand-painted cartoon finish, bold dark brown outlines and upper-left light. Output ONLY the requested clothing, no rat, fur, skin, ears, face, mannequin, text, shadow or other objects. Empty face and ear holes must be genuinely transparent. Show entire item large with clear margin. Make a dented open-faced iron skull cap fitted to this rat head, a low rounded dome between the two ears, ear notches on either side keep both ears completely visible. Short rolled brow rim above both eyes, small rivets, battered iron, modest warm reflected highlights. No nose guard, no cheek plates obscuring face, no horns. Skull cap overlay only."
+  },
+  {
+    "name": "gear-captain-hat",
+    "path": "assets/source/A005-rat-raider-head-legs/head-neutral.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig gear overlay. Reference image is the existing rat head: use its three-quarter angle facing right, skull proportions, warm hand-painted cartoon finish, bold dark brown outlines and upper-left light. Output ONLY the requested clothing, no rat, fur, skin, ears, face, mannequin, text, shadow or other objects. Empty face and ear holes must be genuinely transparent. Show entire item large with clear margin. Make a battered dark brown tricorn captain hat with muted gold edging and one sweeping ochre feather leaning upper left. Fit its brim above this rat's brows and below the tops of his ears, with ear notches so both ears remain visible behind. Strong triangular silhouette, creased leather, worn patch, tiny brass fastening. Output hat and feather ONLY; no head or ears."
+  }
+]
