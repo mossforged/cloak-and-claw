@@ -8,9 +8,9 @@ Play online: https://mossforged.github.io/cloak-and-claw/
 ## Run it (Mac)
 ```
 cd path/to/cloak-and-claw
-python3 -m http.server 8000
+python3 tools/serve.py
 ```
-Open http://localhost:8000. Add `?debug` to start with the debug overlay on.
+Open http://localhost:8000 (a no-cache server on port 8000: a plain reload picks up every change; `python3 -m http.server 8000` also works but may need hard reloads). Add `?debug` to start with the debug overlay on.
 
 **Tuning lab:** http://localhost:8000/lab.html (online: https://mossforged.github.io/cloak-and-claw/lab.html) runs the game with live sliders for moves, movement, rules, Rat Raider and juice, plus slow motion, passive rats and wave respawn. "Copy changes" gives `file -> path: old -> new` lines to paste to the lead. Changes survive a reload; "Reset all" restores the defaults.
 
