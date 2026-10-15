@@ -17,7 +17,7 @@ export default {
   // holdX/holdY = where he is held (px in front; px of depth, - = just behind so the hero draws over him); holdMax = frames before he breaks free
   // (breakPush px/frame, breakStun frames); dropStun = his stumble when a hit makes you let go; clinchZ = grip height.
   // knee (attack while holding): windup/active/recovery frames, damage, hitstop, shake; the maxStrikes-th uses lastKnee and knocks down.
-  grab: { range: 56, depth: 12, holdX: 52, holdY: -1, holdMax: 150, maxStrikes: 3,
+  grab: { range: 75, depth: 16, holdX: 52, holdY: -1, holdMax: 150, maxStrikes: 3,
     breakPush: 4, breakStun: 16, dropStun: 14, clinchZ: 62, hitstop: 3, shake: 2,
     knee: { windup: 6, active: 2, recovery: 12, damage: 4, hitstop: 5, shake: 3 },
     lastKnee: { damage: 8, hitstop: 9, shake: 7 } },
