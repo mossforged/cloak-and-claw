@@ -15,3 +15,9 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-15 ASSUMPTION (lead, needs the user's yes): the four design pillars in `docs/handoffs/game-brief.md`.
 - 2026-10-14 Title: the game is called Tales of Cloak & Claw (user).
 - 2026-10-14 Design pillars confirmed by the user as written in docs/handoffs/game-brief.md (supersedes the 2026-10-15 ASSUMPTION line).
+- 2026-10-14 Run structure: B first (arcade run with River City Ransom-style growth: coins, food, shop between stages), later grow into C (branching path map + boon choices) if runs feel samey. (User, from the genre study.)
+- 2026-10-14 Defence: depends on the hero; default is a **block** (Mouse Fighter: shield block; a timed parry is a possible later layer).
+- 2026-10-14 Grabs and throws: yes.
+- 2026-10-14 Floor weapons and breakables: yes. The user loves floor weapons and enemies dropping their weapons; breakable crates hold food.
+- 2026-10-14 Combos: keep simple for now (no juggles).
+- 2026-10-14 Death: lives (arcade style) for now; may be rethought if we go roguelite.
