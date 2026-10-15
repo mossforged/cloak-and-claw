@@ -10,9 +10,10 @@ export default {
   parts: { ...rat.parts, hood: GEAR.hood, quiver: GEAR.quiver },
   poses: {
     ...base,
-    stance: { ...base.stance, torso: 12, head: -8, 'leg-back-upper': -56, 'leg-back-lower': 61, 'leg-front-upper': 43, 'leg-front-lower': -40, ...arms(-60, -30, -45, -80) },
+    stance: { ...base.stance, torso: 12, head: -8, 'leg-back-upper': -74, 'leg-back-lower': 94, 'leg-front-upper': 50, 'leg-front-lower': -82, ...arms(-60, -30, -45, -80) },
     idle: { ...base.idle, torso: [12, 2, 0], head: [-8, 3, 0.15], 'arm-front-upper': -60, 'arm-back-upper': [-45, 3, 0.1], 'arm-back-lower': -80 },
-    walk: { ...base.walk, dy: [-5.5, 2, 0.75, 2], torso: [16, 2, 0, 2], head: [-10, 2, 0.1, 2], 'arm-front-upper': -60, 'arm-back-upper': [-45, 6, 0] },
+    walk: { ...base.walk, dy: [-4, 2, 0.75, 2], torso: [16, 2, 0, 2],
+      'leg-back-upper': [-74, 32.5, 0], 'leg-back-lower': [94, 23, 0.8], 'leg-front-upper': [50, 30.5, 0.5], 'leg-front-lower': [-82, 19, 0.3], head: [-10, 2, 0.1, 2], 'arm-front-upper': -60, 'arm-back-upper': [-45, 6, 0] },
     hurt: { ...base.hurt, ...arms(30, -100, -40, -40) },
     moves: {
       bowShot: {   // windup = the draw (string to the cheek), bow arm locked out; strike = the loose, string hand flicks back; legs stay planted

@@ -6,23 +6,23 @@
 export default {
   timing: { blend: 0.09, strikeIn: 0.55, overshoot: 1.4, bodyLean: 0.3, swapBack: 0.5, throughSwap: [0, 0.75] },
   stance: {
-    torso: 20, head: -14, tail: 0, 'scarf-tail': 0,
+    torso: 26, head: -20, tail: 0, 'scarf-tail': 0,
     'arm-front-upper': 25, 'arm-front-lower': -150, sword: 0,
     'arm-back-upper': -75, 'arm-back-lower': -40,
-    'leg-back-upper': -78, 'leg-back-lower': 62, 'leg-front-upper': 26, 'leg-front-lower': -40,   // both soles on the floor (rig test)
+    'leg-back-upper': -99, 'leg-back-lower': 107, 'leg-front-upper': 29, 'leg-front-lower': -69,   // both soles on the floor (rig test)
   },
   idle: {   // coiled: a slow breathing bob with the tail swishing
     speed: 0.6,
-    torso: [20, 2, 0], head: [-14, 3, 0.15], dy: [0, 1, 0.25],
+    torso: [26, 2, 0], head: [-20, 3, 0.15], dy: [0, 1, 0.25],
     'arm-front-upper': [25, 4, 0.1], 'arm-back-upper': [-75, 5, 0.1], 'arm-back-lower': [-40, 6, 0.3],
     tail: [0, 12, 0.3], 'scarf-tail': [0, 8, 0.55],
   },
   // Scuttle: short quick steps in the crouch (walk 2.0 px/frame; tests/rig.test.mjs checks the feet don't skate).
   walk: {
     speed: 1.9,
-    torso: [24, 2, 0, 2], head: [-16, 2, 0.1, 2], dy: [-4.5, 2, 0.75, 2],
-    'leg-back-upper': [-64, 17, 0], 'leg-back-lower': [52, 12, 0.8],
-    'leg-front-upper': [4, 19, 0.5], 'leg-front-lower': [-14, 12, 0.3],
+    torso: [26, 2, 0, 2], head: [-20, 2, 0.1, 2], dy: [-4, 2, 0.75, 2],
+    'leg-back-upper': [-99, 33, 0], 'leg-back-lower': [107, 23.5, 0.8],
+    'leg-front-upper': [29, 26.5, 0.5], 'leg-front-lower': [-69, 17, 0.3],
     'arm-front-upper': [25, 10, 0.5], 'arm-back-upper': [-75, 12, 0],
     tail: [5, 14, 0.25], 'scarf-tail': [10, 8, 0.4, 2],
   },
@@ -34,7 +34,7 @@ export default {
     swap: { head: 'head-hurt' },
     torso: -6, head: -16, dx: -3,
     'arm-front-upper': 60, 'arm-front-lower': -90, sword: 30, 'arm-back-upper': 10, 'arm-back-lower': -30,
-    'leg-back-upper': -26, 'leg-back-lower': 34, 'leg-front-upper': 39, 'leg-front-lower': -71,
+    'leg-back-upper': -43, 'leg-back-lower': 74, 'leg-front-upper': 60, 'leg-front-lower': -96,
     tail: -25, 'scarf-tail': -30,
   },
   held: {   // grabbed by the collar / flying when thrown (T011): hurt face, legs kicking off the ground, arms flailing
@@ -61,14 +61,14 @@ export default {
   getup: {
     torso: 30, head: -10,
     'arm-front-upper': 10, 'arm-front-lower': -60, 'arm-back-upper': -50,
-    'leg-back-upper': -100, 'leg-back-lower': 92, 'leg-front-upper': 16, 'leg-front-lower': -36,
+    'leg-back-upper': -107, 'leg-back-lower': 110, 'leg-front-upper': 24, 'leg-front-lower': -66,
   },
   moves: {
     ratSlash: {   // long telegraph: rears up with the cutlass high behind his head, then a lunging chop down in front
       windup: { torso: -6, head: -6, 'arm-front-upper': 150, 'arm-front-lower': -40, sword: -214, 'arm-back-upper': -100, 'arm-back-lower': -20,
-        'leg-back-upper': -32, 'leg-back-lower': 34, 'leg-front-upper': 39, 'leg-front-lower': -71, tail: 20, 'scarf-tail': 15 },
+        'leg-back-upper': -41, 'leg-back-lower': 75, 'leg-front-upper': 74, 'leg-front-lower': -98, tail: 20, 'scarf-tail': 15 },
       strike: { swap: { head: 'head-snarl' }, torso: 30, head: -14, dx: 4, 'arm-front-upper': -70, 'arm-front-lower': -10, sword: 60, 'arm-back-upper': 20, 'arm-back-lower': -40,
-        'leg-back-upper': -96, 'leg-back-lower': 74, 'leg-front-upper': 14, 'leg-front-lower': -36, tail: -25, 'scarf-tail': -25 },
+        'leg-back-upper': -107, 'leg-back-lower': 110, 'leg-front-upper': 31, 'leg-front-lower': -61, tail: -25, 'scarf-tail': -25 },
     },
   },
 };

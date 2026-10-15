@@ -11,7 +11,7 @@ export default {
   parts: { ...rat.parts, helmet: GEAR.helmet, jerkin: GEAR.jerkin },
   poses: {
     ...base,
-    stance: { ...base.stance, ...arms(-12, -66, -60, -60, 50) },   // spear -8 (point slightly up), near fist at the hip
+    stance: { ...base.stance, ...arms(-12, -66, -60, -60, 44) },   // spear -8 (point slightly up), near fist at the hip
     idle: { ...base.idle, 'arm-front-upper': [-12, 3, 0.1], 'arm-back-upper': [-60, 3, 0.1], 'arm-back-lower': -60 },
     walk: { ...base.walk, speed: 1.7, 'arm-front-upper': [-12, 4, 0.5], 'arm-back-upper': [-60, 4, 0] },
     hurt: { ...base.hurt, ...arms(30, -100, -40, -60, 60) },
@@ -19,7 +19,7 @@ export default {
     moves: {
       spearThrust: {   // draws the spear back along his side (long telegraph), then drives it straight out at the enemy
         windup: { swap: { head: 'head-snarl' }, torso: 6, head: -6, dx: -4, ...arms(10, -70, -30, -60, 55),
-          'leg-back-upper': -32, 'leg-back-lower': 34, 'leg-front-upper': 39, 'leg-front-lower': -71, tail: 20 },
+          'leg-back-upper': -68, 'leg-back-lower': 86, 'leg-front-upper': 46, 'leg-front-lower': -87, tail: 20 },
         strike: { swap: { head: 'head-snarl' }, torso: 22, head: -14, ...arms(-45, -55, -70, -40, 73), tail: -25 },   // arms drive, body stays back
       },
     },
