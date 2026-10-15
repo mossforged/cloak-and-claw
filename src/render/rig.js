@@ -17,7 +17,8 @@ const tr = (x, y) => [1, 0, 0, 1, x, y];
 const sc = (x, y = x) => [x, 0, 0, y, 0, 0];
 const apply = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const scaleOf = (p) => (Array.isArray(p.scale) ? p.scale : [p.scale ?? 1, p.scale ?? 1]);
-const shape = (p) => mul(sc(...scaleOf(p)), rot(p.rest ?? 0));   // image -> bone frame (no translation)
+// image -> bone frame (no translation); pose stretch '<part>.sx/.sy' multiplies the data scale.
+const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[`${name}.sx`] ?? 1), y * (j[`${name}.sy`] ?? 1)), rot(p.rest ?? 0)); };
 
 // Each part's image matrix (part px -> screen px, feet at 0,0), in draw order. Pure; tests use it.
 export function layoutRig(rig, joints) {
@@ -29,14 +30,17 @@ export function layoutRig(rig, joints) {
     if (!p.parent) m = mul(mul(tr(joints.dx ?? 0, (joints.dy ?? 0) - rig.rootY), sc(rig.scale)), rot(joints[name] ?? 0));
     else {
       const q = rig.parts[p.parent];
-      const [ax, ay] = apply(shape(q), p.attach[0] - q.pivot[0], p.attach[1] - q.pivot[1]);
-      m = mul(mul(frameOf(p.parent), tr(ax, ay)), rot(joints[name] ?? 0));
+      const [ax, ay] = apply(shape(p.parent, q, joints), p.attach[0] - q.pivot[0], p.attach[1] - q.pivot[1]);
+      const pf = frameOf(p.parent);
+      // upright parts (the shield) cancel their parents' turn: the pose angle is relative to the rig, not the arm
+      const undo = p.upright ? -Math.atan2(pf[1], pf[0]) / D : 0;
+      m = mul(mul(pf, tr(ax, ay)), rot(undo + (joints[name] ?? 0)));
     }
     return (frames[name] = m);
   };
   return Object.entries(rig.parts)
-    .map(([name, p]) => ({ name, p, m: mul(mul(frameOf(name), shape(p)), tr(-p.pivot[0], -p.pivot[1])) }))
-    .sort((a, b) => a.p.order - b.p.order);
+    .map(([name, p]) => ({ name, p, order: joints[`${name}.order`] ?? p.order, m: mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1])) }))
+    .sort((a, b) => a.order - b.order);
 }
 
 let buf, tintBuf;
@@ -52,7 +56,7 @@ function tinted(color) {
 
 export function drawRig(ctx, f, rig, assets, time, flash = 0) {
   if (!memory.has(f)) memory.set(f, {});
-  const joints = rigJoints(f, rig.poses, time, memory.get(f));
+  const joints = rigJoints(f, rig, time, memory.get(f));
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
@@ -65,6 +69,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0) {
 
   const p = { ...poseOf(f, time) };
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
+  if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;
   if (f.invuln > 0 && f.state === 'idle') alpha = f.invuln % 6 < 3 ? 1 : 0.55;

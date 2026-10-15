@@ -37,8 +37,8 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/render/renderer.js` | Draw order: backdrop, stage, shadows, fighters by depth (rig if `art.rig` and `opts.rig`, else standee), effects, HUD, debug | `createRenderer` |
 | `src/render/standee.js` | Fighter drawn as a standee: lean/squash/hop per state and move phase, flips, flashes, tints | `drawStandee drawShadow poseOf` |
 | `src/render/rig.js` | Fighter drawn as a cutout rig: part hierarchy -> buffer, then placed like a standee (lean, flip, flash, tints) | `drawRig layoutRig` |
-| `src/render/rig-pose.js` | Rig pose per state/move phase (waves, easing, overshoot) and blending from the last drawn pose. Pure | `targetPose rigJoints jointsOfRig` |
-| `src/render/effects.js` | Slash swooshes, sparks, rings, damage numbers, dust (from events) | `createEffects` |
+| `src/render/rig-pose.js` | Rig pose per state/move phase (waves, windup/through/strike, easing, overshoot) and blending from the last drawn pose. Channels: joint angles, dx/dy, per-part `.sx/.sy` stretch and `.order`. Pure | `targetPose rigJoints channelsOf jointsOfRig` |
+| `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps), sparks, rings, damage numbers, dust (from events) | `createEffects` |
 | `src/render/juice.js` | Screen shake + hit-stop counters (from events) | `createJuice` |
 | `src/render/hud.js` | Portrait, health bars, wave banner, KOs/XP, hints, game over, pause | `drawHud drawPaused` |
 | `src/render/debug.js` | Overlay: floor belt, hurtboxes, hitboxes, states, AI tokens | `drawDebug` |
@@ -72,7 +72,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `tests/sim-smoke.test.mjs` | Bot plays 3 min x 3 seeds headless; checks NaN, fairness, progress |
 | `tests/lab.test.mjs` | Lab schema names only existing fields, defaults inside slider ranges, tweak model set/format/reset/load |
 | `tests/data.test.mjs` | Every fighter/move/stage/wave/art path resolves; rig parts, parents and pose joints resolve |
-| `tests/rig.test.mjs` | Rig pose per state, move windup/strike reached, blend start/end, layout order and feet on the ground |
+| `tests/rig.test.mjs` | Rig pose per state, move windup/strike reached, blend start/end, layout order, feet on the ground, walk stride matches walk speed, slash2 stretch/order channels |
 | `tests/bot.mjs` | Scripted player used by tests |
 | `tools/key_green.py` | Green-screen keyer for new art |
 | `tools/slice_sheet.py` | Slices a green parts sheet into keyed, trimmed part PNGs by name (reading order) |

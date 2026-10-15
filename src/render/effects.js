@@ -48,15 +48,18 @@ const DRAW = {
     const ang = (deg) => (dir > 0 ? deg * D2R : Math.PI - deg * D2R);
     const head = Math.min(1, k * 2.5), tail = Math.max(0, k * 1.6 - 0.4);
     const steps = 14, W = JUICE.slash.width * (e.big ? 1.4 : 1);
+    ctx.save();   // flat < 1 squashes the arc into an ellipse: a sweep on the floor plane, across the body
+    ctx.translate(cx, cy); ctx.scale(1, e.flat ?? 1);
     ctx.lineCap = 'round';
     for (let i = 0; i < steps; i++) {
       const a0 = tail + (head - tail) * (i / steps), a1 = tail + (head - tail) * ((i + 1) / steps);
       const t0 = e.from + (e.to - e.from) * a0, t1 = e.from + (e.to - e.from) * a1;
       const w = W * (i / steps) * (1 - k * 0.5);
-      ctx.beginPath(); ctx.arc(cx, cy, e.r, ang(t0), ang(t1), dir < 0 ? t1 > t0 : t1 < t0);
+      ctx.beginPath(); ctx.arc(0, 0, e.r, ang(t0), ang(t1), dir < 0 ? t1 > t0 : t1 < t0);
       ctx.strokeStyle = JUICE.slash.edge; ctx.lineWidth = w + 4; ctx.stroke();
       ctx.strokeStyle = JUICE.slash.color; ctx.lineWidth = w; ctx.stroke();
     }
+    ctx.restore();
   },
   spark(ctx, e, k) {
     ctx.strokeStyle = `rgba(255,${230 - k * 120},120,${1 - k})`; ctx.lineWidth = 3 * (1 - k) + 1;

@@ -37,7 +37,7 @@
 
 ## Last session
 2026-10-14 code: T003 Mouse Fighter rig on branch `t003-mouse-rig` (tools/slice_sheet.py, src/data/rigs/, src/render/rig.js + rig-pose.js, R toggles rig/standee, tests/rig.test.mjs); no sim changes. Screens in docs/screens/T003/.
-2026-10-14 code: needs the user's human check: does the rig look alive enough to rig every character? No combo GIF yet (needed a browser download).
+2026-10-14 code: T003 round 2 from user notes: angled upright shield, stockier build, slower matched stride, slash2 is now a flat sweep across the body (flat swoosh). Human check still open; no combo GIF.
 2026-10-14 lead: merged T001 (tuning lab). User's lab check still open.
 2026-10-14 lead: merged A001 (source art; user approved the look). Wrote T003 (rig) so the user can see it move.
 2026-10-14 lead: Stage 1 gate passed (user: striking and knockback feel good). Lane/background mismatch noted for Stage 2.
