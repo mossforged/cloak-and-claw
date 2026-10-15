@@ -1,12 +1,12 @@
 // Fighter entity + state machine. Pure logic: no drawing, no DOM.
 // States: idle walk block jump attack hurt knockdown down getup dead, plus grab/throw (sim/grab.js):
-// grabbing throw (holder), grabbed thrown (held / flying body); toss (throwing a held weapon, sim/weapons.js).
+// grabbing throw (holder), grabbed thrown (held / flying body); toss, pickup (held weapons, sim/weapons.js).
 // Every fighter is driven by f.control = { mx, my, attack, jump, block?, grab?, face? } (set by input or AI).
 // block (held) only works for fighters whose def has a `block` config.
 import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
 import { stepGrabbing, stepThrow, landThrown } from './grab.js';
-import { movesOf, attackOf, airAttackOf, pressGrab, stepToss, settleWeapon } from './weapons.js';
+import { movesOf, attackOf, airAttackOf, pressGrab, stepToss, stepPickup, settleWeapon } from './weapons.js';
 
 let nextId = 1;
 
@@ -18,7 +18,7 @@ export function createFighter(def, x, y, opts = {}) {
     state: 'idle', t: 0, stun: 0, invuln: 0, lastHit: -999,
     move: null, mf: 0, queued: false, hitList: new Set(), bounced: false,
     grab: null, heldBy: null, thrower: null,   // grab/throw (sim/grab.js)
-    weapon: null, moveKey: null,               // held weapon (sim/weapons.js); key of the current move
+    weapon: null, pickup: null, moveKey: null, // held weapon + pickup in progress (sim/weapons.js); key of the current move
     control: { mx: 0, my: 0, attack: false, jump: false },
     ai: opts.ai ? { mode: 'hover', wait: 0, cool: 30, token: false, yOff: 0, attacked: false } : null,
     entering: !!opts.entering, remove: false,
@@ -111,6 +111,7 @@ export function updateFighter(f, world) {
     case 'grabbing': stepGrabbing(f, world); break;
     case 'throw': stepThrow(f, world); break;
     case 'toss': stepToss(f, world); break;
+    case 'pickup': stepPickup(f, world); break;
     case 'grabbed':   // positioned by the holder; freed if the holder let go without saying so
       f.vx = f.vy = 0;
       if (f.heldBy?.grab?.target !== f) { f.heldBy = null; f.z = 0; setState(f, 'idle'); }

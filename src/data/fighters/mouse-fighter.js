@@ -28,9 +28,11 @@ export default {
   throw: { wind: 10, recovery: 16, z: 36, overZ: 60, vx: 7.5, vz: 5.5, damage: 12, hitDamage: 10, depth: 22, hitSlow: 0.85,
     hitstop: 8, shake: 9, landHitstop: 5, landShake: 6 },
   // pickup (H with nothing grabbable in reach): items whose spot is within range px (x) and depth px (y) of his feet.
+  // Weapons take stow (sheathe sword / flick the held weapon aside), reach (crouch; in hand at its end), rise frames;
+  // the flicked-aside weapon leaves at height asideZ with speed asideVx back, asideVz up. Food is eaten at once.
   // toss (H while holding a weapon): wind/recovery frames; the weapon leaves his hand at height z with speed vx, vz (px/frame);
   // it hits enemies (and props) within depth px of its lane.
-  pickup: { range: 34, depth: 14 },
+  pickup: { range: 34, depth: 14, stow: 7, reach: 7, rise: 8, asideZ: 50, asideVx: 2.6, asideVz: 4.5 },
   toss: { wind: 8, recovery: 14, z: 62, vx: 11, vz: 1.2, depth: 20 },
   moves: MOUSE_SWORD, attack: 'slash1', airAttack: 'jumpSlash',
 };

@@ -64,11 +64,14 @@ for (const leg of ['leg-front-lower', 'leg-back-lower']) {
 }
 
 // Block (shield-wall crouch): both boots stay on the floor.
-const B = layoutRig(rig, targetPose(fighter({ state: 'block' }), rig, 0).joints);
-for (const leg of ['leg-front-lower', 'leg-back-lower']) {
-  const m = B.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
-  const sy = m[1] * x + m[3] * y + m[5];
-  check(Math.abs(sy) < 4, `block: ${leg} boot sole on the floor (y=${sy.toFixed(1)})`);
+// Pickup reach crouch (T010 round 2) too.
+for (const [name, f] of [['block', fighter({ state: 'block' })], ['reach', fighter({ state: 'pickup', t: def.pickup.stow + def.pickup.reach - 1 })]]) {
+  const B = layoutRig(rig, targetPose(f, rig, 0).joints);
+  for (const leg of ['leg-front-lower', 'leg-back-lower']) {
+    const m = B.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
+    const sy = m[1] * x + m[3] * y + m[5];
+    check(Math.abs(sy) < 4, `${name}: ${leg} boot sole on the floor (y=${sy.toFixed(1)})`);
+  }
 }
 
 // Walk: feet don't skate. While a foot is planted (half a stride cycle) the body moves walk * 60 / speed / 2 px;
@@ -191,6 +194,13 @@ for (const leg of ['leg-front-lower', 'leg-back-lower']) {
   const broken = layoutRig(rig, j, {}, heldOf({ weapon: { def: club, broken: true } }, rig));
   check(!broken.some((e) => e.name === slot), 'broken weapon: empty hand (no sword either)');
   check(heldOf({ weapon: null }, rig) === null, 'nothing held: sword as usual');
+  const PK = def.pickup;
+  const pk = (t, o = {}) => targetPose(fighter({ state: 'pickup', t, ...o }), rig, 0).key;
+  check(pk(1) === 'stow' && pk(PK.stow + 1) === 'reach' && pk(PK.stow + PK.reach + 1) === 'rise', 'pickup: stow -> reach -> rise');
+  check(heldOf(fighter({ state: 'pickup', t: 1, pickup: { swap: false } }), rig) === null, 'pickup: sword shows while it is being stowed');
+  check(heldOf(fighter({ state: 'pickup', t: PK.stow + 1, pickup: { swap: false } }), rig)?.part === null, 'pickup: sword sheathed once stowed');
+  check(heldOf(fighter({ state: 'pickup', t: 1, pickup: { swap: true } }), rig)?.part === null, 'swap: empty hand from the start (old weapon flicked away)');
+  check(heldOf(fighter({}), rig, true)?.part === null && heldOf(fighter({}), rig, false) === null, 'sword draw: sheathed in its first half only');
   const T = def.toss;
   check(targetPose(fighter({ state: 'toss', t: 2 }), rig, 0).key === 'toss' && targetPose(fighter({ state: 'toss', t: T.wind + 2 }), rig, 0).key === 'tossRelease', 'toss -> tossRelease poses');
   const m = club.moves.club2;

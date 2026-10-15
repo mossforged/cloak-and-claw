@@ -2,7 +2,7 @@
 // buffer that is then placed like a standee (same lean/squash/flip, shadow, flash and tints).
 import { phaseOf } from '../sim/fighter.js';
 import { poseOf, BLOCK_LEAN } from './standee.js';
-import { rigJoints } from './rig-pose.js';
+import { rigJoints, drawLayer } from './rig-pose.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
 const BOX = { w: 300, h: 260, ox: 150, oy: 200 };  // buffer area in screen px; (ox, oy) = feet
@@ -57,8 +57,13 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
 
 // The held weapon in a rig's hand slot (T010): the kit's image, grip point and size on the slot part's bone.
 // A broken weapon is an empty hand until its swing ends. null = nothing held (the slot part draws as usual).
-export function heldOf(f, rig) {
-  const W = f.weapon, slot = W && rig.slots?.[W.def.grip];
+// Empty hand too while the sword is sheathed: picking up (after the stow, or all along when swapping weapons)
+// and the first half of a sword draw (sheathed = mem.sheathed from drawLayer).
+export function heldOf(f, rig, sheathed = false) {
+  const W = f.weapon, one = rig.slots?.['one-hand'];
+  const pk = f.state === 'pickup' && !W && (f.pickup?.swap || f.t >= f.def.pickup.stow);
+  if (!W) return one && (pk || sheathed) ? { slot: one, part: null } : null;
+  const slot = rig.slots?.[W.def.grip];
   if (!slot) return null;
   if (W.broken) return { slot, part: null };
   const A = W.def.art;
@@ -79,12 +84,16 @@ function tinted(color) {
 // pose: optional named pose to hold (view-only test poses such as `cast`).
 export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   if (!memory.has(f)) memory.set(f, {});
-  const mem = memory.get(f), joints = rigJoints(f, rig, time, mem, pose);
+  const mem = memory.get(f);
+  // sword draw after a held weapon is thrown or breaks (not when swapped at a pickup or knocked loose)
+  if (mem.hadWeapon && !f.weapon && ['idle', 'walk', 'toss', 'attack', 'jump', 'block'].includes(f.state)) mem.drawT0 = time;
+  mem.hadWeapon = !!f.weapon;
+  const joints = drawLayer(rig, time, mem, rigJoints(f, rig, time, mem, pose));
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
-  for (const { img, m } of layoutRig(rig, joints, mem.swap, heldOf(f, rig))) {
+  for (const { img, m } of layoutRig(rig, joints, mem.swap, heldOf(f, rig, mem.sheathed))) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     g.transform(...m);
     g.drawImage(assets.get(img), 0, 0);
@@ -93,7 +102,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const p = { ...poseOf(f, time) };
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
   if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
-  if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
+  if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss' || f.state === 'pickup') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
   if (f.state === 'block') { p.rot -= BLOCK_LEAN; p.sx = p.sy = 1; }   // the block pose leans and crouches; keep only the jolt
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;

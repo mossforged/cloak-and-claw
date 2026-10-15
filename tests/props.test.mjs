@@ -34,6 +34,7 @@ const run = (w, n, c = N) => { for (let i = 0; i < n; i++) stepWorld(w, typeof c
 const rat = (w, x, y, o = {}) => { const r = createFighter(FIGHTERS['rat-raider'], x, y, { facing: -1, ...o }); w.fighters.push(r); return r; };
 const settle = (w) => run(w, 60);   // let popped items land
 const hold = (w, id, uses) => { w.player.weapon = { def: ITEMS[id], uses: uses ?? ITEMS[id].durability, hit: false, broken: false }; };
+const PK = FIGHTERS['mouse-fighter'].pickup;
 const swing = (w, frames = 60) => { stepWorld(w, C({ attack: true })); run(w, frames); };
 
 // 1. Crate breaks after its hp and drops its item (stage override: the club crate)
@@ -65,7 +66,11 @@ const swing = (w, frames = 60) => { stepWorld(w, C({ attack: true })); run(w, fr
   stepWorld(w, C({ grab: true }));
   check(!w.player.weapon && w.items.length === 1, 'H does nothing with the item just out of reach (40 px)');
   w.player.x = w.items[0].x - 20; stepWorld(w, C({ grab: true }));
-  check(w.player.weapon?.def.id === 'plank-club' && w.items.length === 0, 'H picks up the weapon underfoot');
+  check(w.player.state === 'pickup' && !w.player.weapon, 'H on a weapon starts the pickup (stow, reach, rise)');
+  run(w, PK.stow + PK.reach + 1);
+  check(w.player.weapon?.def.id === 'plank-club' && w.items.length === 0, 'H picks up the weapon underfoot (in hand at the end of the reach)');
+  run(w, PK.rise + 1);
+  check(w.player.state === 'idle', 'back to idle after the rise');
   check(events.pickup?.length >= 1, 'pickup event');
   const w2 = world({ props: null });
   spawnItem(w2, 'plank-club', 200, 432, 0); settle(w2);
@@ -74,6 +79,28 @@ const swing = (w, frames = 60) => { stepWorld(w, C({ attack: true })); run(w, fr
   check(w2.player.state === 'grabbing' && !w2.player.weapon, 'rat in grab reach: H grabs him, the item stays');
   run(w2, 5);
   check(w2.player.state === 'grabbing', 'walking over an item never picks it up by itself');
+}
+
+// 2b. Only one weapon: H on a weapon while holding one swaps (the old one flicked aside, behind him, uses kept);
+// a hit during the pickup leaves the new weapon on the floor
+{
+  const w = world({ props: null }); hold(w, 'rat-cutlass', 5);
+  spawnItem(w, 'big-fish', 210, 432, 0); settle(w); reset();
+  stepWorld(w, C({ grab: true }));
+  check(!w.player.weapon && w.player.state === 'pickup', 'swap: the held cutlass leaves the hand at once');
+  run(w, PK.stow + PK.reach + PK.rise + 60);
+  const old = w.items.find((i) => i.def.id === 'rat-cutlass');
+  check(w.player.weapon?.def.id === 'big-fish', 'swap: now holding the fish');
+  check(old && old.state === 'floor' && old.uses === 5 && old.x < w.player.x - PK.range, `swap: cutlass on the floor behind him, out of reach (x ${old?.x.toFixed(0)}), uses kept`);
+  check(w.items.length === 1 && (events.weaponThrow ?? []).length === 0, 'swap is not a throw; one weapon in hand, one on the floor');
+  const w2 = world({ props: null });
+  spawnItem(w2, 'plank-club', 200, 432, 0); settle(w2);
+  const r = rat(w2, 250, 432); r.hp = 999;
+  w2.player.x = 200; r.x = 330;   // out of grab reach
+  stepWorld(w2, C({ grab: true }));
+  r.x = 260; r.move = r.def.moves.ratSlash; r.mf = r.move.windup; r.state = 'attack'; r.facing = -1;
+  run(w2, 30);
+  check(!w2.player.weapon && w2.items.length === 1 && w2.items[0].state === 'floor', 'hit mid-pickup: nothing picked up, the club stays on the floor');
 }
 
 // 3. Food heals and is consumed (capped at max hp); eaten even while holding a weapon

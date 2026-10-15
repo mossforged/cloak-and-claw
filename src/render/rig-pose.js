@@ -75,6 +75,27 @@ function tossPose(f, poses, S, time) {
     swap: k < 0.5 ? swapOf(poses.tossRelease) : {} };
 }
 
+// Weapon pickup (T010 round 2): idle -> `stow` -> `reach` (crouched at the weapon) -> idle, on def.pickup frames.
+function pickupPose(f, poses, S, time) {
+  const P = (k) => evalPose(poses[k], S, 0), T = f.def.pickup, idle = evalPose(poses.idle, S, time);
+  if (f.t < T.stow) return { key: 'stow', joints: mix(idle, P('stow'), easeOut(f.t / T.stow)), swap: {} };
+  if (f.t < T.stow + T.reach) return { key: 'reach', joints: mix(P('stow'), P('reach'), easeInOut((f.t - T.stow) / T.reach)), swap: {} };
+  return { key: 'rise', joints: mix(P('reach'), idle, easeInOut(Math.min(1, (f.t - T.stow - T.reach) / T.rise))), swap: {} };
+}
+
+// Sword draw (T010 round 2): an arm-only layer over whatever pose he is in, after a floor weapon leaves his hand
+// (thrown or broken). The arm sweeps to the `stow` arm (sword still sheathed: mem.sheathed) and back up with the sword.
+// Starts when drawRig sets mem.drawT0. Returns the layered joints (mem.last is left unlayered for blending).
+const ARM = ['arm-front-upper', 'arm-front-lower', 'sword'];
+export function drawLayer(rig, time, mem, joints) {
+  const dur = rig.poses.timing.drawSword, k = mem.drawT0 === undefined ? 1 : (time - mem.drawT0) / dur;
+  mem.sheathed = k < 0.5;
+  if (k >= 1 || !rig.poses.stow) return joints;
+  const w = k < 0.5 ? easeOut(k * 2) : 1 - easeInOut((k - 0.5) * 2), out = { ...joints };
+  for (const j of ARM) out[j] = lerp(joints[j], rig.poses.stow[j], w);
+  return out;
+}
+
 // Active-phase swaps: a `through` pose that names swaps shows them only while the swing is near it
 // (timing.throughSwap, as a share of the way to the strike), e.g. one back-view drawing mid-spin.
 function activeSwap(M, p, T) {
@@ -107,6 +128,7 @@ export function targetPose(f, rig, time, override) {
     case 'block': return named('block');
     case 'grabbing': case 'throw': if (poses.grabbing) return grabPose(f, poses, S, time); break;
     case 'toss': if (poses.toss) return tossPose(f, poses, S, time); break;
+    case 'pickup': if (poses.stow) return pickupPose(f, poses, S, time); break;
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
     case 'down': case 'dead': return named('down');

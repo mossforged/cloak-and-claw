@@ -36,6 +36,10 @@ export function poseOf(f, time) {
       const T = f.def.toss, k = f.t < T.wind ? f.t / T.wind : Math.max(0, 1 - (f.t - T.wind) / T.recovery);
       return { ...ZERO, rot: f.t < T.wind ? -0.2 * k : 0.18 * k, sx: 1 + 0.04 * k, sy: 1 - 0.04 * k };
     }
+    case 'pickup': {   // dips down to the floor and back up
+      const T = f.def.pickup, n = T.stow + T.reach, k = f.t < n ? Math.max(0, (f.t - T.stow * 0.5) / (n - T.stow * 0.5)) : 1 - (f.t - n) / T.rise;
+      return { ...ZERO, rot: 0.25 * k, sy: 1 - 0.15 * k, sx: 1 + 0.05 * k };
+    }
     case 'grabbing': return { ...ZERO, rot: 0.06, dx: 2 };
     case 'throw': {   // leans back into the wind, then pitches forward on the release
       const w = f.def.throw.wind, k = f.t < w ? f.t / w : Math.max(0, 1 - (f.t - w) / f.def.throw.recovery);
