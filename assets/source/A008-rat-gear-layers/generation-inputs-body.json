@@ -1,0 +1,27 @@
+[
+  {
+    "name": "gear-hood-back",
+    "path": "assets/source/A004-rat-raider-rig/torso-back.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig clothing overlay. Reference image defines the existing rat torso shape, three-quarter angle, warm painted cartoon style, bold dark brown outlines and upper-left light. Output ONLY requested gear, no body, fur, skin, mannequin, background, text or shadow. Holes and surrounding space genuinely transparent. Show entire item large with clear margins. Back view of a short muted olive-brown archer hood. Empty rounded hood dome with two open ear slits at top sides, cloth falls into a short shoulder cowl over upper back. Three-quarter back view matching reference. Ragged stitched cloth, worn patches. Raised hood and cowl only, no torso, ears or head."
+  },
+  {
+    "name": "gear-quiver",
+    "path": "assets/source/A004-rat-raider-rig/torso.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig clothing overlay. Reference image defines the existing rat torso shape, three-quarter angle, warm painted cartoon style, bold dark brown outlines and upper-left light. Output ONLY requested gear, no body, fur, skin, mannequin, background, text or shadow. Holes and surrounding space genuinely transparent. Show entire item large with clear margins. Slim worn brown leather back quiver holding three wooden arrows with cream fletching. Sits diagonally on back: arrow fletchings protrude up-left behind near shoulder; tubular case trails down-right behind upper torso. Quiver and arrows ONLY, no torso, no strap looping across front, no bow. Compact readable silhouette."
+  },
+  {
+    "name": "gear-jerkin",
+    "path": "assets/source/A004-rat-raider-rig/torso.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig clothing overlay. Reference image defines the existing rat torso shape, three-quarter angle, warm painted cartoon style, bold dark brown outlines and upper-left light. Output ONLY requested gear, no body, fur, skin, mannequin, background, text or shadow. Holes and surrounding space genuinely transparent. Show entire item large with clear margins. Sleeveless padded dark umber leather jerkin overlay fitted exactly around reference chest, shoulders and waist. Large open neck hole exposes existing red scarf; open armholes, broad quilted leather panels and side lacing, short hip tabs. Three-quarter facing right, left side broader. Cover old tunic and straps, leave scarf and arms visible. No scarf or underlying torso drawn. Leather vest ONLY."
+  },
+  {
+    "name": "gear-jerkin-back",
+    "path": "assets/source/A004-rat-raider-rig/torso-back.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig clothing overlay. Reference image defines the existing rat torso shape, three-quarter angle, warm painted cartoon style, bold dark brown outlines and upper-left light. Output ONLY requested gear, no body, fur, skin, mannequin, background, text or shadow. Holes and surrounding space genuinely transparent. Show entire item large with clear margins. BACK VIEW sleeveless padded dark umber leather jerkin fitted around reference torso-back. Large open neck hole, open armholes; quilted leather panels, central back seam, edge lacing, short hip tabs. Same three-quarter back angle. Cover tunic and strap, leave scarf and arms visible. No scarf or torso, just vest."
+  },
+  {
+    "name": "gear-sash",
+    "path": "assets/source/A004-rat-raider-rig/torso.png",
+    "prompt": "Use case: precise-object-edit. Asset: isolated transparent game-rig clothing overlay. Reference image defines the existing rat torso shape, three-quarter angle, warm painted cartoon style, bold dark brown outlines and upper-left light. Output ONLY requested gear, no body, fur, skin, mannequin, background, text or shadow. Holes and surrounding space genuinely transparent. Show entire item large with clear margins. Wide scarlet cloth sash wrapped around reference waist, same red as bandana. Broad horizontal waist wrap with dark brown leather belt over it, square brass buckle facing viewer slightly to right, cloth knot at left hip and two short ragged hanging ends. ONLY waist sash and belt, no torso, pouch, shoulder strap or scarf. Three-quarter elliptical waist."
+  }
+]
