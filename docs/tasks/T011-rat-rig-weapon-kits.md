@@ -1,7 +1,7 @@
 # T011 - Rat Raider rig + weapon kits (sword, spear, bow) (code builder)
 
 **Modules:** `src/data/rigs/` (new rat rig + poses), `src/render/rig.js` / `rig-pose.js` (weapon kits, held-weapon attach, grip swaps), `src/data/fighters/` (rat variants), `src/data/moves/` (spear and bow moves), `src/sim/` (projectiles for arrows; AI ranges), `assets/art/enemies/rat-raider/rig/`, tests. **Read:** `src/render/CONTRACT.md`, `src/sim/CONTRACT.md`, `src/data/CONTRACT.md`, `docs/decisions.md` (weapon-kit assembly line, 2026-10-15), `docs/design/lessons.md`, `assets/source/A004-rat-raider-rig/HANDOFF.md`, `assets/source/A005-rat-raider-head-legs/HANDOFF.md`, `docs/playtests/log.md` (A004/A005 entries).
-**Needs:** T009 merged (one code session at a time). **Autonomy:** human-gated (look and feel). This is the start of Stage 4 (enemy variety).
+**Needs:** T010 merged (reuse its generic held-weapon attach and weapon-kit data; extend it with `two-hand` and `bow` grips). **Autonomy:** human-gated (look and feel). This is the start of Stage 4 (enemy variety).
 
 ## Do
 1. **Import** the rat parts: A004 body, arms, torso, torso-back, tail, bandana, grip/pinch hands, sword (cutlass), spear, bow, arrow; **A005 heads (neutral, snarl, hurt) and A005 legs** (they replace A004's). Key/trim as for Mouse Fighter.
