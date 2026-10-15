@@ -39,6 +39,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 code: T006 on branch `t006-floor-lane`: user picked framing "B mild zoom" from an in-game F-toggle test (toggle removed): art x -220 y -113 w 1400, floor 30..930 x 400..463 (63 px, under the packet's 85: the open floor in the art is shallow; deeper needed a zoom that cropped the market). Lab has a Stage section (floor + art sliders).
+2026-10-14 code: T006 notes: feet at bottom edge slightly overlap the tops of the two front dock posts near x 560-740; fighters look relatively smaller after the zoom. User reported "stuck in cast" = the T005 C toggle (sticky by design; easy to hit by accident, lead's call). Screen in docs/screens/T006/.
 2026-10-14 lead: merged T005 (rig 3/4 + swaps; 6/6 tests; sim and moves unchanged). Stage 3 rig work done; follow-ups parked.
 2026-10-14 lead: merged A003 harbor props (source). Note: source PNGs are ~1.5 MB each; watch repo size (LFS threshold in decisions).
 2026-10-14 lead: user approved A002's look ("I do like it"); T005 started.

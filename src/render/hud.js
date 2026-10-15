@@ -66,8 +66,3 @@ export function drawPaused(ctx, view) {
   ctx.fillStyle = 'rgba(20,10,30,0.45)'; ctx.fillRect(0, 0, view.w, view.h);
   text(ctx, 'Paused', view.w / 2, view.h / 2, 64, '#fff', 'center');
 }
-
-export function drawBanner(ctx, view, msg) {
-  ctx.fillStyle = 'rgba(20,10,30,0.6)'; ctx.fillRect(0, 70, view.w, 36);
-  text(ctx, msg, view.w / 2, 96, 22, '#fff', 'center');
-}

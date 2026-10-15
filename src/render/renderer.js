@@ -4,7 +4,7 @@ import { drawBackdrop, drawStage } from './backdrop.js';
 import { drawShadow, drawStandee } from './standee.js';
 import { drawRig } from './rig.js';
 import { RIGS } from '../data/rigs/index.js';
-import { drawHud, drawPaused, drawBanner } from './hud.js';
+import { drawHud, drawPaused } from './hud.js';
 import { drawDebug } from './debug.js';
 import { createEffects } from './effects.js';
 
@@ -31,7 +31,6 @@ export function createRenderer(ctx, assets) {
       ctx.restore();
       drawHud(ctx, world, assets, VIEW, opts.runLines);
       if (opts.debug) drawDebug(ctx, world, juice);
-      if (opts.banner && performance.now() < opts.banner.until) drawBanner(ctx, VIEW, opts.banner.text);
       if (opts.paused) drawPaused(ctx, VIEW);
     },
   };
