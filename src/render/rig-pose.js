@@ -2,6 +2,8 @@
 // and eases from the last drawn pose into a new one. Pure (no DOM), so tests can run it.
 // Channels: '<part>' angle, 'dx'/'dy' root offset, and per part '<part>.sx' / '<part>.sy'
 // (stretch across/along the bone, 1 = as drawn, negative flips) and '<part>.order' (draw order).
+// Part swaps: a pose's `swap: { <part>: '<swap name>' }` picks one of the part's `swaps` images.
+// Swaps don't blend: they switch the moment the pose (or move phase) that names them starts.
 import { phaseOf } from '../sim/fighter.js';
 import { RULES } from '../data/rules.js';
 
@@ -23,7 +25,7 @@ export const jointsOfRig = (rig) => Object.keys(channelsOf(rig));
 function evalPose(pose, stance, t) {
   const out = { ...stance };
   for (const [k, v] of Object.entries(pose ?? {})) {
-    if (k === 'speed') continue;
+    if (k === 'speed' || k === 'swap') continue;
     out[k] = Array.isArray(v) ? v[0] + v[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (v[3] ?? 1) + (v[2] ?? 0))) : v;
   }
   return out;
@@ -44,37 +46,45 @@ function strikePose(M, W, X, K, p, T) {
   return s < 0.5 ? mix(W, X, s * 2) : mix(X, K, easeOutBack(s * 2 - 1, T.overshoot));
 }
 
-// Which pose a fighter is in: { key, joints } before blending.
-export function targetPose(f, rig, time) {
+const swapOf = (pose) => pose?.swap ?? {};
+
+// Which pose a fighter is in: { key, joints, swap } before blending.
+// override: a named pose to hold whatever the fighter does (view-only, e.g. the `cast` test pose).
+export function targetPose(f, rig, time, override) {
   const poses = rig.poses, S = { ...channelsOf(rig), ...poses.stance }, T = poses.timing;
+  if (override && poses[override]) return { key: override, joints: evalPose(poses[override], S, time), swap: swapOf(poses[override]) };
   if (f.move) {
     const key = moveKey(f), M = poses.moves?.[key];
     if (M) {
       const [ph, p] = phaseOf(f);
       const W = evalPose(M.windup, S, 0), K = evalPose(M.strike, S, 0), X = M.through && evalPose(M.through, S, 0);
       const rest = evalPose(f.state === 'attack' ? poses.idle : poses.jump, S, time);
-      if (ph === 'windup') return { key, joints: mix(rest, W, easeOut(p)) };
-      if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T) };
-      return { key, joints: mix(K, rest, easeInOut(p)) };
+      if (ph === 'windup') return { key, joints: mix(rest, W, easeOut(p)), swap: swapOf(M.windup) };
+      if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: swapOf(M.strike) };
+      // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest
+      return { key, joints: mix(K, rest, easeInOut(p)), swap: p < T.swapBack ? swapOf(M.strike) : {} };
     }
   }
+  const named = (key, t = 0) => ({ key, joints: evalPose(poses[key], S, t), swap: swapOf(poses[key]) });
   switch (f.state) {
-    case 'walk': return { key: 'walk', joints: evalPose(poses.walk, S, f.t / 60) };
-    case 'jump': return { key: 'jump', joints: evalPose(poses.jump, S, 0) };
-    case 'hurt': return { key: 'hurt', joints: evalPose(poses.hurt, S, 0) };
-    case 'knockdown': return { key: 'knockdown', joints: evalPose(poses.knockdown, S, 0) };
-    case 'down': case 'dead': return { key: 'down', joints: evalPose(poses.down, S, 0) };
+    case 'walk': return named('walk', f.t / 60);
+    case 'jump': return named('jump');
+    case 'hurt': return named('hurt');
+    case 'knockdown': return named('knockdown');
+    case 'down': case 'dead': return named('down');
     case 'getup': {
       const k = easeInOut(Math.min(1, f.t / RULES.knockdown.getupFrames));
-      return { key: 'getup', joints: mix(evalPose(poses.down, S, 0), evalPose(poses.getup, S, 0), Math.min(1, k * 1.6)) };
+      return { key: 'getup', joints: mix(evalPose(poses.down, S, 0), evalPose(poses.getup, S, 0), Math.min(1, k * 1.6)), swap: swapOf(poses.getup) };
     }
   }
-  return { key: 'idle', joints: evalPose(poses.idle, S, time) };
+  return named('idle', time);
 }
 
-// Final joints for this frame. mem is per-fighter render memory ({} to start).
-export function rigJoints(f, rig, time, mem) {
-  const { key, joints } = targetPose(f, rig, time);
+// Final joints for this frame. mem is per-fighter render memory ({} to start); mem.swap holds
+// this frame's part swaps (they switch at once, joints blend).
+export function rigJoints(f, rig, time, mem, override) {
+  const { key, joints, swap } = targetPose(f, rig, time, override);
+  mem.swap = swap;
   if (mem.key !== key) { mem.from = mem.last ?? joints; mem.t0 = time; mem.key = key; }
   const k = Math.min(1, (time - mem.t0) / rig.poses.timing.blend);
   mem.last = k < 1 ? mix(mem.from, joints, easeOut(k)) : joints;

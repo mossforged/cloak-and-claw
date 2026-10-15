@@ -39,6 +39,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 code: T005 on branch `t005-rig-3q-swaps`: A002 parts imported (key_green --scale 0.4; A001 files removed), rig re-fit (wider legs, front boot mirrored), part swaps (`swaps` in rig data, `swap` in poses: slash3 windup torso-back, strikes head-shout, hurt/knockdown/down head-hurt), `cast` pose on C. No sim changes.
+2026-10-14 code: tests/rig.test.mjs checks swap images/offsets/pose refs and when swaps show; new tools/rig-preview.html pose sheet. Screens in docs/screens/T005/ (no GIF; combo filmstrip instead). User's A002 look check was taken as given by "Do T005".
 2026-10-14 lead: merged A002 (source; 18 parts + swaps; scale approximate per HANDOFF). Wrote T005.
 2026-10-14 lead: merged T002 (run log; 6/6 test files; sim change is report-only `targetPhase` on `hit`). User to check that L downloads the JSON.
 2026-10-14 code: T002 run log on branch `t002-run-log`: src/log/ (runlog.js counts from bus events, store.js keeps 20 runs in localStorage, L downloads JSON), 2-line summary under "Defeated!". Only sim change: `hit` payload gains `targetPhase` (for windups cut).

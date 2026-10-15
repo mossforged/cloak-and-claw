@@ -4,7 +4,7 @@ import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { targetPose, rigJoints, jointsOfRig } from '../src/render/rig-pose.js';
 import { layoutRig } from '../src/render/rig.js';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 
 // Bottom row of a part image (PNG header height), i.e. the boot sole.
 const soleY = (part) => readFileSync(rig.parts[part].img).readUInt32BE(20) - 3;
@@ -32,9 +32,9 @@ for (const [key, mp] of Object.entries(P.moves)) {
   const m = def.moves[key], state = m.air ? 'jump' : 'attack';
   const atWindupEnd = targetPose(fighter({ state, move: m, mf: m.windup }), rig, 0);
   check(atWindupEnd.key === key, `${key}: pose key is the move key`);
-  for (const [j, v] of Object.entries(mp.windup)) check(near(atWindupEnd.joints[j], v), `${key}: ${j} at windup end = ${v}`);
+  for (const [j, v] of Object.entries(mp.windup)) if (j !== 'swap') check(near(atWindupEnd.joints[j], v), `${key}: ${j} at windup end = ${v}`);
   const done = targetPose(fighter({ state, move: m, mf: m.windup + m.active - 1 }), rig, 0);
-  for (const [j, v] of Object.entries(mp.strike)) check(near(done.joints[j], v, 1), `${key}: ${j} at late active ~ ${v} (got ${done.joints[j]})`);
+  for (const [j, v] of Object.entries(mp.strike)) if (j !== 'swap') check(near(done.joints[j], v, 1), `${key}: ${j} at late active ~ ${v} (got ${done.joints[j]})`);
 }
 
 // Blending: a new pose starts from the last drawn one and reaches the target after timing.blend.
@@ -85,6 +85,52 @@ const hit = layoutRig(rig, targetPose(fighter({ state: 'attack', move: s2, mf: s
 check(idx(hit, 'arm-front-upper') > idx(hit, 'torso'), 'slash2 strike: front arm drawn in front of the torso');
 const det = (Lx, n) => { const m = Lx.find((e) => e.name === n).m; return m[0] * m[3] - m[1] * m[2]; };
 check(det(wind, 'sword') > 0 && det(hit, 'sword') < 0, 'slash2: sword.sx flips the blade from behind to in front');
+
+// Part swaps: every swap image exists and has an offset; poses only name known parts and their swaps.
+const pngSize = (img) => { const b = readFileSync(img); return [b.readUInt32BE(16), b.readUInt32BE(20)]; };
+for (const [name, p] of Object.entries(rig.parts)) {
+  for (const [sw, s] of Object.entries(p.swaps ?? {})) {
+    check(existsSync(s.img), `${name}.${sw}: swap image exists (${s.img})`);
+    check(s.offset?.length === 2 && s.offset.every(Number.isFinite), `${name}.${sw}: swap has a finite [x, y] offset`);
+    if (!existsSync(s.img)) continue;
+    // no jump: the swap image's centre lands within 15% of the part image's size of the part's own centre
+    const [w, h] = pngSize(p.img), [sw2, sh] = pngSize(s.img), k = s.scale ?? 1;
+    const dx = s.offset[0] + k * sw2 / 2 - w / 2, dy = s.offset[1] + k * sh / 2 - h / 2;
+    check(Math.abs(dx) < 0.15 * w && Math.abs(dy) < 0.15 * h, `${name}.${sw}: swap centred on the part (off by ${dx.toFixed(0)}, ${dy.toFixed(0)} px)`);
+  }
+}
+const allPoses = { ...Object.fromEntries(Object.entries(P).filter(([k]) => k !== 'timing' && k !== 'moves')) };
+for (const [k, m] of Object.entries(P.moves)) for (const ph of ['windup', 'through', 'strike']) if (m[ph]) allPoses[`${k}.${ph}`] = m[ph];
+for (const [k, pose] of Object.entries(allPoses))
+  for (const [part, sw] of Object.entries(pose.swap ?? {}))
+    check(rig.parts[part]?.swaps?.[sw], `pose ${k}: swap ${part} -> '${sw}' is a known part and swap`);
+
+// Swaps reach the layout at the right moments: slash3 turns away in the windup and back on the strike,
+// strikes shout, hurt winces, idle is the normal drawing.
+const imgOf = (Lx, n) => Lx.find((e) => e.name === n).img;
+const poseLayout = (o, override) => { const t = targetPose(fighter(o), rig, 0, override); return layoutRig(rig, t.joints, t.swap); };
+const s3 = def.moves.slash3;
+const s3w = poseLayout({ state: 'attack', move: s3, mf: s3.windup - 1 }), s3k = poseLayout({ state: 'attack', move: s3, mf: s3.windup + 1 });
+check(imgOf(s3w, 'torso') === rig.parts.torso.swaps['torso-back'].img, 'slash3 windup: back torso');
+check(imgOf(s3k, 'torso') === rig.parts.torso.img, 'slash3 strike: front torso again');
+check(imgOf(s3k, 'head') === rig.parts.head.swaps['head-shout'].img, 'slash3 strike: shouting head');
+const late = poseLayout({ state: 'attack', move: s3, mf: s3.windup + s3.active + s3.recovery - 1 });
+check(imgOf(late, 'head') === rig.parts.head.img, 'end of recovery: neutral head again');
+check(imgOf(poseLayout({ state: 'hurt' }), 'head') === rig.parts.head.swaps['head-hurt'].img, 'hurt: hurt head');
+check(imgOf(poseLayout({ state: 'knockdown' }), 'head') === rig.parts.head.swaps['head-hurt'].img, 'knockdown: hurt head');
+const idleL = poseLayout({});
+check(idleL.every((e) => e.img === e.p.img && !e.swap), 'idle: every part shows its normal image');
+check(layoutRig(rig, targetPose(fighter({}), rig, 0).joints).every((e, i) => e.m.every((v, j) => v === idleL[i].m[j])), 'no swap argument = same layout as no swaps');
+// a swapped part keeps its joint: the head's pivot lands on the same screen point with or without the swap
+const hurtJ = targetPose(fighter({ state: 'hurt' }), rig, 0).joints;
+const pivotAt = (Lx) => { const e = Lx.find((x) => x.name === 'arm-front-upper'); return [e.m[4], e.m[5]]; };
+check(pivotAt(layoutRig(rig, hurtJ, {})).every((v, i) => near(v, pivotAt(layoutRig(rig, hurtJ, { torso: 'torso-back' }))[i])), 'swapping the torso does not move the arms');
+
+// cast (view-only test pose): sword straight up, shouting, reachable as an override whatever the state.
+const cast = targetPose(fighter({ state: 'walk', t: 9 }), rig, 0, 'cast');
+check(cast.key === 'cast' && cast.swap.head === 'head-shout', 'cast override: key cast, shouting head');
+const tip = ['torso', 'arm-front-upper', 'arm-front-lower', 'sword'].reduce((a, j) => a + cast.joints[j], 0);
+check(near(((tip % 360) + 360) % 360, 270, 1), `cast: sword points straight up (sum ${tip})`);
 
 console.log(fails ? `${fails} failures` : 'ALL OK');
 process.exit(fails ? 1 : 0);

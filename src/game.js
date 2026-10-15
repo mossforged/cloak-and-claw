@@ -12,7 +12,7 @@ export function createGame(ctx, assets) {
   let world = createWorld(START_STAGE, START_HERO);
   const renderer = createRenderer(ctx, assets);
   const juice = createJuice();
-  const opts = { debug: new URLSearchParams(location.search).has('debug'), paused: false, rig: true, runLines: null };
+  const opts = { debug: new URLSearchParams(location.search).has('debug'), paused: false, rig: true, pose: null, runLines: null };
   const log = createRunLog();
   log.begin(world);
   bus.on('gameOver', () => { const s = log.summary(); saveRun(s); opts.runLines = summaryLines(s); });
@@ -23,6 +23,7 @@ export function createGame(ctx, assets) {
       const c = readControl();
       if (c.debug) opts.debug = !opts.debug;
       if (c.rig) opts.rig = !opts.rig;
+      if (c.cast) opts.pose = opts.pose ? null : 'cast';   // view only: hero's rig holds the cast pose
       if (c.pause) opts.paused = !opts.paused;
       if (c.log) downloadRuns();
       if (opts.paused) return;

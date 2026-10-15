@@ -24,7 +24,7 @@ export function createRenderer(ctx, assets) {
       for (const f of sorted) drawShadow(ctx, f);
       for (const f of sorted) {
         const rig = opts.rig !== false && RIGS[f.def.art.rig];   // R toggles rig vs standee
-        if (rig) drawRig(ctx, f, rig, assets, time, fx.flashOf(f.id));
+        if (rig) drawRig(ctx, f, rig, assets, time, fx.flashOf(f.id), f.def.team === 'hero' ? opts.pose : null);
         else drawStandee(ctx, f, assets, time, fx.flashOf(f.id));
       }
       fx.draw(ctx);
