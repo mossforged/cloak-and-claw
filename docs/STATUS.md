@@ -27,7 +27,7 @@
 - Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
-- None right now.
+- The hook (study 2026-10-15): which pitch (Fellowship / Kit Brawler / Merciful Blade / mix)? Solo party of three or two? Hook tests before or after Stage 2's crowd tools?
 
 ## Parked
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
@@ -46,6 +46,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: study "What makes our game distinct?" (hooks); private lore appendix to the user only.
 2026-10-15 lead: decided the body x colour x weapon kit x gear assembly line; wrote docs/design/lessons.md.
 2026-10-15 lead: study "How beat 'em ups are made" (developer lessons); enemy design workspace parked.
 2026-10-14 lead: merged T006 (belt 400..463, mild zoom; lab Stage sliders). Belt depth to be revisited with stage art (Stage 5). Cast-pose toggle bug folded into T008.
