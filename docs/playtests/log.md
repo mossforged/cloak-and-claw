@@ -2,6 +2,10 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-15 A004 Rat Raider look
+User: "He reads a bit more mouse head than rat to me, and his legs look pretty skinny. That said, I love his pained expression. The way he holds the spear is a bit strange."
+Lead: head and legs -> art revision A005 (keep the hurt expression); spear hold -> rig placement in the rat's code task (rear hand low near the butt, front hand mid-shaft, point angled slightly up at the enemy).
+
 ## 2026-10-14 Belt depth in the lab
 User tried floor top ~340, bottom ~460 (about 120 px) in the lab: "The numbers seem pretty good. It might be a bit much right now, but we don't know what sort of crowds we're going to get. And I do like the idea of having a companion, a pet... if this is going to be a party of three players, you're going to want room to maneuver." On the lab: "pretty amazing... we should continue to use that and develop it."
 
