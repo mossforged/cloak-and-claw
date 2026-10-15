@@ -4,7 +4,7 @@
 
 ## Next
 1. **Code builder:** T005 (import A002, part swaps, cast pose), started 2026-10-14.
-   **Art builder:** free.
+   **Art builder:** A003 harbor props (crates, barrels, floor weapons).
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
@@ -23,7 +23,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T005-rig-three-quarter-swaps.md` (in progress).
-- Art: none queued.
+- Art: `docs/tasks/A003-harbor-props.md`.
 
 ## Open questions (for the user)
 - None right now.
