@@ -48,6 +48,14 @@ function strikePose(M, W, X, K, p, T) {
 
 const swapOf = (pose) => pose?.swap ?? {};
 
+// Active-phase swaps: a `through` pose that names swaps shows them only while the swing is near it
+// (timing.throughSwap, as a share of the way to the strike), e.g. one back-view drawing mid-spin.
+function activeSwap(M, p, T) {
+  if (!M.through?.swap) return swapOf(M.strike);
+  const s = Math.min(1, p / T.strikeIn), [a, b] = T.throughSwap;
+  return s >= a && s < b ? swapOf(M.through) : swapOf(M.strike);
+}
+
 // Which pose a fighter is in: { key, joints, swap } before blending.
 // override: a named pose to hold whatever the fighter does (view-only, e.g. the `cast` test pose).
 export function targetPose(f, rig, time, override) {
@@ -60,7 +68,7 @@ export function targetPose(f, rig, time, override) {
       const W = evalPose(M.windup, S, 0), K = evalPose(M.strike, S, 0), X = M.through && evalPose(M.through, S, 0);
       const rest = evalPose(f.state === 'attack' ? poses.idle : poses.jump, S, time);
       if (ph === 'windup') return { key, joints: mix(rest, W, easeOut(p)), swap: swapOf(M.windup) };
-      if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: swapOf(M.strike) };
+      if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: activeSwap(M, p, T) };
       // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest
       return { key, joints: mix(K, rest, easeInOut(p)), swap: p < T.swapBack ? swapOf(M.strike) : {} };
     }

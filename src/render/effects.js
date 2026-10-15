@@ -50,25 +50,30 @@ export function createEffects() {
       }
       list = list.filter((e) => e.t < e.life);
     },
-    draw(ctx) { for (const e of list) DRAW[e.type](ctx, e, e.t / e.life); },
+    // drawBack: the far half of wrap-around swooshes, before the fighters; draw: everything else, after them.
+    drawBack(ctx) { for (const e of list) if (e.wrap) DRAW.slash(ctx, e, e.t / e.life, 'back'); },
+    draw(ctx) { for (const e of list) DRAW[e.type](ctx, e, e.t / e.life, 'front'); },
   };
 }
 
 const DRAW = {
-  slash(ctx, e, k) {
+  slash(ctx, e, k, layer) {   // wrap: the arc goes round the body; its far side (top of the ellipse) is drawn behind him
     const f = e.f, dir = f.facing;
     const cx = f.x + dir * e.cx, cy = f.y - f.z - e.cz;
     const ang = (deg) => (dir > 0 ? deg * D2R : Math.PI - deg * D2R);
     const head = Math.min(1, k * 2.5), tail = Math.max(0, k * 1.6 - 0.4);
-    const steps = 14, W = JUICE.slash.width * (e.big ? 1.4 : 1);
+    const steps = e.wrap ? 28 : 14, W = JUICE.slash.width * (e.big ? 1.4 : 1);
     ctx.save();   // flat < 1 squashes the arc into an ellipse: a sweep on the floor plane, across the body
-    ctx.translate(cx, cy); ctx.scale(1, e.flat ?? 1);
+    ctx.translate(cx, cy); if (!e.wrap) ctx.scale(1, e.flat ?? 1);   // wrap draws a true ellipse so the stroke keeps its width
     ctx.lineCap = 'round';
     for (let i = 0; i < steps; i++) {
       const a0 = tail + (head - tail) * (i / steps), a1 = tail + (head - tail) * ((i + 1) / steps);
       const t0 = e.from + (e.to - e.from) * a0, t1 = e.from + (e.to - e.from) * a1;
       const w = W * (i / steps) * (1 - k * 0.5);
-      ctx.beginPath(); ctx.arc(0, 0, e.r, ang(t0), ang(t1), dir < 0 ? t1 > t0 : t1 < t0);
+      if (e.wrap && (Math.sin((t0 + t1) / 2 * D2R) < 0) !== (layer === 'back')) continue;
+      ctx.beginPath();
+      if (e.wrap) ctx.ellipse(0, 0, e.r, e.r * e.flat, 0, ang(t0), ang(t1), dir < 0 ? t1 > t0 : t1 < t0);
+      else ctx.arc(0, 0, e.r, ang(t0), ang(t1), dir < 0 ? t1 > t0 : t1 < t0);
       ctx.strokeStyle = JUICE.slash.edge; ctx.lineWidth = w + 4; ctx.stroke();
       ctx.strokeStyle = JUICE.slash.color; ctx.lineWidth = w; ctx.stroke();
     }
@@ -120,3 +125,4 @@ const DRAW = {
     ctx.beginPath(); ctx.arc(e.x, e.y - k * 14, e.r * (0.6 + k), 0, Math.PI * 2); ctx.fill();
   },
 };
+export const drawSlash = DRAW.slash;   // for tools/rig-preview.html

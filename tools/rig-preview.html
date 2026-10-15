@@ -2,7 +2,7 @@
 <!-- Rig pose sheet: draws the rig in chosen poses side by side (plus the standee) for fitting and screenshots.
      Serve the repo root, then open /tools/rig-preview.html?cells=standee,idle,slash3:windup,slash3:strike,hurt,cast
      Cell: a state (idle walk jump hurt knockdown down getup), a named pose (cast), '<move>:windup|strike|<frame>',
-     or 'walk:<0..1 of a stride>'. Options: zoom=2, dots (joint pivots), rig=mouse-fighter. -->
+     or 'walk:<0..1 of a stride>'. Options: zoom=2, dots (joint pivots), fx (move swooshes), rig=mouse-fighter. -->
 <meta charset="utf-8">
 <title>Rig preview</title>
 <style>body { margin: 0; background: #6e6e76; } canvas { display: block; }</style>
@@ -12,6 +12,8 @@ import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { targetPose } from '../src/render/rig-pose.js';
 import { layoutRig } from '../src/render/rig.js';
+import { drawSlash } from '../src/render/effects.js';
+import { JUICE } from '../src/data/juice.js';
 
 const q = new URLSearchParams(location.search);
 const def = FIGHTERS[q.get('rig') ?? 'mouse-fighter'], rig = RIGS[def.art.rig];
@@ -55,11 +57,17 @@ cells.forEach((cell, i) => {
     return;
   }
   const { joints, swap } = poseFor(cell);
+  // fx: the move's swoosh as it looks this many frames after the swing starts (back half behind the rig)
+  const m = def.moves[cell.split(':')[0]], mf = cell.includes(':strike') ? m?.windup + m?.active - 1 : +cell.split(':')[1];
+  const sl = q.has('fx') && m?.fx?.slash && mf >= m.windup && { f: { x: 0, y: 0, z: 0, facing: 1 }, ...m.fx.slash, t: mf - m.windup + 1, life: JUICE.slash.life };
+  const swoosh = (layer) => { if (sl && sl.t < sl.life && (layer === 'front' || sl.wrap)) { g.setTransform(Z, 0, 0, Z, ...at); drawSlash(g, sl, sl.t / sl.life, layer); } };
+  swoosh('back');
   for (const { img, m, p } of layoutRig(rig, joints, swap)) {
     g.setTransform(Z, 0, 0, Z, ...at); g.transform(...m);
     if (imgs[img]) g.drawImage(imgs[img], 0, 0);
     if (q.has('dots')) { g.fillStyle = '#0ff'; g.beginPath(); g.arc(p.pivot[0], p.pivot[1], 4, 0, 7); g.fill(); }
   }
+  swoosh('front');
 });
 document.title = 'ready';
 </script>

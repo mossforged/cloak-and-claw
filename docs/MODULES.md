@@ -11,7 +11,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/main.js` | Sizes canvas, loads art referenced by data, starts loop | |
 | `src/config.js` | View size (960x540), FPS, start stage/hero | `VIEW FPS START_STAGE START_HERO` |
 | `lab.html` | Tuning lab page: game canvas + side panel, loads `src/lab/main.js` | |
-| `src/game.js` | Input -> sim step (skipped during hit-stop) -> render. Pause, debug toggle, rig toggle (R), cast test pose toggle (C, view only), restart, run log (saves on game over; L downloads on the game-over screen only, elsewhere L blocks). Exposes `window.game` (`world opts log`) | `createGame` |
+| `src/game.js` | Input -> sim step (skipped during hit-stop) -> render. Pause, debug toggle, rig toggle (R), cast test pose (C plays it once from idle, view only, via `render/view-pose.js`), restart, run log (saves on game over; L downloads on the game-over screen only, elsewhere L blocks). Exposes `window.game` (`world opts log`) | `createGame` |
 
 ## Core (engine plumbing, rarely changes)
 | File | Purpose | Exports |
@@ -34,11 +34,12 @@ One line per file: what it does and what it exports. **Read this instead of the 
 ## Render (reads state, never changes it)
 | File | Purpose | Exports |
 |---|---|---|
-| `src/render/renderer.js` | Draw order: backdrop, stage, shadows, fighters by depth (rig if `art.rig` and `opts.rig`, else standee), effects, HUD, debug | `createRenderer` |
+| `src/render/renderer.js` | Draw order: backdrop, stage, shadows, far half of wrap swooshes, fighters by depth (rig if `art.rig` and `opts.rig`, else standee), effects, HUD, debug | `createRenderer` |
 | `src/render/standee.js` | Fighter drawn as a standee: lean/squash/hop per state (block = braced forward lean, jolts back in blockstun; `BLOCK_LEAN` is undone by the rig) and move phase, flips, flashes, tints | `drawStandee drawShadow poseOf` |
 | `src/render/rig.js` | Fighter drawn as a cutout rig: part hierarchy -> buffer, then placed like a standee (lean, flip, flash, tints). Draws swap images (`layoutRig(rig, joints, swap)` returns each part's `img`); optional held pose (`cast`) | `drawRig layoutRig` |
-| `src/render/rig-pose.js` | Rig pose per state/move phase (waves, windup/through/strike, easing, overshoot) and blending from the last drawn pose; part swaps per pose/phase (switch at once, strike swaps last `timing.swapBack` of recovery); optional pose override. Channels: joint angles, dx/dy, per-part `.sx/.sy` stretch and `.order`. Pure | `targetPose rigJoints channelsOf jointsOfRig` |
-| `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps), sparks, rings, damage numbers, dust; block clang (bright sparks toward the attacker, shield-side flash, double ring, then a star glint on the shield rim) (from events) | `createEffects` |
+| `src/render/rig-pose.js` | Rig pose per state/move phase (waves, windup/through/strike, easing, overshoot) and blending from the last drawn pose; part swaps per pose/phase (switch at once, strike swaps last `timing.swapBack` of recovery); optional pose override. A `through` pose's swaps show only mid-swing (`timing.throughSwap`; slash2's one back-view drawing). Channels: joint angles, dx/dy, per-part `.sx/.sy` stretch and `.order`. Pure | `targetPose rigJoints channelsOf jointsOfRig` |
+| `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps; `wrap` goes round the body, far side drawn behind via `drawBack`), sparks, rings, damage numbers, dust; block clang (bright sparks toward the attacker, shield-side flash, double ring, then a star glint on the shield rim) (from events) | `createEffects drawSlash` |
+| `src/render/view-pose.js` | View-only test pose on the hero (C = `cast`): plays once for `timing.castHold` s, only from idle, dropped on leaving idle. Pure | `stepViewPose` |
 | `src/render/juice.js` | Screen shake + hit-stop counters (from events; `block` uses the blocker's `block.hitstop/shake`) | `createJuice` |
 | `src/render/hud.js` | Portrait, health bars, wave banner, KOs/XP, hints, game over, pause | `drawHud drawPaused` |
 | `src/render/debug.js` | Overlay: floor belt, hurtboxes, hitboxes, states, AI tokens | `drawDebug` |
@@ -94,13 +95,14 @@ Run log fields (one object per run; the player only):
 | `tests/lab.test.mjs` | Lab schema names only existing fields (or ones with a fallback), defaults inside slider ranges, tweak model set/format/reset/load |
 | `tests/rat-telegraph.test.mjs` | A player at the rat's attack spot who steps out of the lane 15 frames into the windup escapes the swing; old numbers still catch them |
 | `tests/data.test.mjs` | Every fighter/move/stage/wave/art path resolves; rig parts, parents and pose joints resolve |
-| `tests/rig.test.mjs` | Rig pose per state, move windup/strike reached, blend start/end, layout order, feet on the ground, walk stride matches walk speed, slash2 stretch/order channels |
+| `tests/rig.test.mjs` | Rig pose per state, move windup/strike reached, blend start/end, layout order, feet on the ground, walk stride matches walk speed, slash2 spin slash (blade flat behind then in front, one back-view torso frame mid-spin, sim numbers unchanged, swoosh wraps) |
+| `tests/view-pose.test.mjs` | C cast pose plays once for castHold from idle, never latches, ignored/dropped outside idle |
 | `tests/block.test.mjs` | Frontal hit on a blocker: chip only, no hurt/knockdown, `block` event, attacker shoved; chip never KOs; hit from behind lands; no attacking while blocking; blockstun; rats can't block |
 | `tests/runlog.test.mjs` | Bot runs 3 min x 3 seeds; log matches independently counted events (hits, damage, swings, knockdowns, windups cut); idle 1-hp run logs 1 knockdown |
 | `tests/bot.mjs` | Scripted player used by tests |
 | `tools/key_green.py` | Green-screen keyer for new art; `--scale S` keeps parts cut from one canvas at relative size and prints each trim box (seeds rig attach points) |
 | `tools/slice_sheet.py` | Slices a green parts sheet into keyed, trimmed part PNGs by name (reading order) |
-| `tools/rig-preview.html` | Rig pose sheet for fitting and screenshots: `/tools/rig-preview.html?cells=standee,idle,slash3:windup,cast&zoom=3` (states, named poses, `move:windup/strike/<frame>`, `walk:<0..1>`; `dots` shows pivots) |
+| `tools/rig-preview.html` | Rig pose sheet for fitting and screenshots: `/tools/rig-preview.html?cells=standee,idle,slash3:windup,cast&zoom=3` (states, named poses, `move:windup/strike/<frame>`, `walk:<0..1>`; `dots` shows pivots, `fx` draws move swooshes) |
 
 ## Events (sim -> render)
 | Event | Payload | Listeners |

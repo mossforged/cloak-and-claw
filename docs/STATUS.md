@@ -1,9 +1,9 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T007 shield block (merged 2026-10-15). Last art task: A002 three-quarter rig parts (merged; look approved).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T008 spin slash (merged 2026-10-15; user's in-game check pending). Last art task: A002 three-quarter rig parts (merged; look approved).
 
 ## Next
-   **Code builder:** T008 spin slash (user's idea).
+   **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** free; lead writing T009 grab/throw.
    **Art builder:** A004 Rat Raider rig parts.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
@@ -22,7 +22,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T008-spin-slash.md`. Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
+- Code: none queued (T009 grab/throw, T010 floor weapons + breakables next). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
 - Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
@@ -41,12 +41,16 @@
 - **Weapon kits** (decision 2026-10-15): the rat's grip hands, spear, bow and arrow were folded into A004; after it, a code task for weapon kits on the rig.
 - **Enemy design workspace** (user): compose an enemy from body + stats + move library + AI params, test it on a bench vs dummy/bot, auto-measure (time to kill, escape time, block-through), export a data file. After Stage 4. Sketch in the 2026-10-15 study.
 - Standing lessons checklist: `docs/design/lessons.md`. Lessons to schedule (2026-10-15 study, section 9): shrink depth hit area while moving vertically; cap on-screen enemies at 5; lab frame-step + live reload; invisible side walls; colour-variant enemies.
+- Spin swoosh's far half draws behind all fighters, not just the attacker: fine with a few rats, may look odd in crowds (T008). Blade tip grazes the floor line ~1 frame early in slash2's windup.
 - Parry: a timed block as a later skill layer (user's earlier idea; T007 report).
 - Gamepad block (RB) untested.
 - A 360-degree spin special that hits all around (crowd clearer, Final Fight style), building on T008's spin slash.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged T008 (spin slash, view-only; cast key fixed).
+2026-10-15 code: T008 on branch `t008-spin-slash`: slash2 is a spin slash (windup low back; one back-view torso frame mid-active with the head looking back along the flat blade; flat cut in front), wrap-around swoosh with its far half behind him. Sim/timing/hitbox unchanged. C now plays the cast pose once (1 s, idle only).
+2026-10-15 code: 8/8 tests (new tests/view-pose.test.mjs, rig test slash2 checks). Screens in docs/screens/T008/. Human check open: does slash2 read as a flat spinning cut?
 2026-10-15 lead: merged T007 (shield block; sim change limited to fighters with a block config; user approved the readable pose, polish parked).
 2026-10-15 lead: A003 props approved. Block pose polish deferred (mechanic first, pose must be readable).
 2026-10-15 lead: study "What makes our game distinct?" (hooks); private lore appendix to the user only.
