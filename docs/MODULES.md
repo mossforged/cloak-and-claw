@@ -123,6 +123,7 @@ Run log fields (one object per run; the player only):
 | `tests/runlog.test.mjs` | Bot runs 3 min x 3 seeds; log matches independently counted events (hits, damage, swings, knockdowns, windups cut); idle 1-hp run logs 1 knockdown |
 | `tests/bot.mjs` | Scripted player used by tests |
 | `tools/key_green.py` | Green-screen keyer for new art (an input that already has transparency, e.g. A008 gear, is only trimmed/scaled); `--scale S` keeps parts cut from one canvas at relative size and prints each trim box (seeds rig attach points) |
+| `tools/Play.command` | Double-click launcher (Finder): runs `serve.py` on port 8100 (a port Chrome never cached) and opens the game; reuses a server already there |
 | `tools/serve.py` | No-cache dev server (`Cache-Control: no-store`), port 8000 by default: `python3 tools/serve.py [port]` |
 | `tools/slice_sheet.py` | Slices a green parts sheet into keyed, trimmed part PNGs by name (reading order) |
 | `tools/rig-preview.html` | Rig pose sheet for fitting and screenshots: `/tools/rig-preview.html?cells=standee,idle,slash3:windup,cast&zoom=3` (states, named poses, `move:windup/strike/<frame>`, `walk:<0..1>`; `dots` shows pivots, `fx` draws move swooshes; `held=<item>` puts a floor weapon in the hand and allows its kit moves as cells) |

@@ -6,6 +6,9 @@ Plain JavaScript + canvas. No engine, no build step.
 Play online: https://mossforged.github.io/cloak-and-claw/
 
 ## Run it (Mac)
+**Easiest:** double-click `tools/Play.command` in Finder. It starts a no-cache server on port 8100 and opens the game; keep its Terminal window open while playing, close it to stop.
+
+Or from a terminal:
 ```
 cd path/to/cloak-and-claw
 python3 tools/serve.py
