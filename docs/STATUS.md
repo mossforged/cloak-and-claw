@@ -3,10 +3,10 @@
 **Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T003 Mouse Fighter rig (merged 2026-10-14). Last art task: A001 (merged, look approved).
 
 ## Next
-1. **User:** Stage 3 question, now answerable: does the rig look alive enough that you want every character rigged?
+1. **Art builder:** A002 Mouse Fighter parts in three-quarter view + back torso + expression heads.
    **Code builder:** T004 rat telegraph (small), then T002 run log.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
-3. **Art builder:** free (A001 done). Next art waits on seeing the rig move.
+3. **After A002:** code task to import it and add part swaps (back torso on big wind-ups, expression heads on hits), plus a sword-raised "magic" pose as a flexibility test.
 4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
 
 ## Stage plan
@@ -14,7 +14,7 @@
 |---|---|---|
 | 1 | Standee combat in one arena (**passed**) | After 10 minutes: is hitting rats fun even with flat standees? What feels off? |
 | 2 | Tuning lab + feel pass (T001, then tuning tasks from the playtest); block, grab/throw, floor weapons and breakables | Do the combo, jump and rats feel right now? Does blocking and throwing make crowds fun to manage? |
-| 3 | Cutout rig for Mouse Fighter (A001 + rig task) | Does the rig look alive enough that you want every character rigged? (No = pose swaps instead) |
+| 3 | Cutout rig for Mouse Fighter (A001 + T003 done; user said yes to the system; A002 three-quarter revision + part swaps next) | Does the rig look alive enough that you want every character rigged? (No = pose swaps instead) |
 | 4 | Enemy variety (Rat Archer, Skeletal Mouse) + run log (T002) | Does a 10-minute run have variety and readable threats? |
 | 5 | Scrolling stage with layered art + touch controls | Does moving through a stage feel like Golden Axe? |
 | 6 | RPG layer: stats grow, food/shop between stages, lives | Do you want "one more run" to get stronger? |
@@ -23,7 +23,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T004-rat-telegraph.md` (small, auto-ok). Queued: `T002-run-log.md` (auto-ok).
-- Art: nothing queued (A001 done).
+- Art: `docs/tasks/A002-mouse-fighter-rig-three-quarter.md`.
 
 ## Open questions (for the user)
 - None right now.
@@ -38,6 +38,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: user approved the rig system; switched art to three-quarter view (decision + style contract); wrote A002.
 2026-10-14 lead: merged T003 (rig; 4/4 test files pass; move timing/hitboxes unchanged, only the slash2 swoosh shape). Art and code follow-ups from the builder parked below.
 2026-10-14 code: T003 Mouse Fighter rig on branch `t003-mouse-rig` (tools/slice_sheet.py, src/data/rigs/, src/render/rig.js + rig-pose.js, R toggles rig/standee, tests/rig.test.mjs); no sim changes. Screens in docs/screens/T003/.
 2026-10-14 code: T003 round 2 from user notes: angled upright shield, stockier build, slower matched stride, slash2 is now a flat sweep across the body (flat swoosh). slash2 is now a backhand cut outward (user's pick); a true horizontal cut waits on back-view torso art. Human check still open; no combo GIF.

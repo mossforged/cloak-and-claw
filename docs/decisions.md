@@ -23,3 +23,5 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-14 Death: lives (arcade style) for now; may be rethought if we go roguelite.
 - 2026-10-14 Gate tags are created by a GitHub Action from docs/tags.txt, because the lead's cloud session cannot push tags.
 - 2026-10-14 Rat Raider swing windup 22 -> ~34 frames so a warned player can step out of the lane (user confirmed in the lab); lunge reduced to 1.2 (lead). Packet T004.
+- 2026-10-14 Characters are drawn in **three-quarter view toward the camera** (about 30 degrees, like the art bible standees), not pure profile. Supersedes "side view" in the style contract. (User raised it; genre practice; user deferred to the lead.)
+- 2026-10-14 Cutout rigs approved as the animation approach (Stage 3 question answered yes by the user). Big swings and expressions use **part swaps** (alternate drawings of a part switched at key moments, as Vanillaware does), not more joints.

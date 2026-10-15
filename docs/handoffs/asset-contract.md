@@ -15,7 +15,7 @@
 `requested` -> `source` (delivered) -> `game-ready` (imported by code builder) -> `approved` (user saw it in game).
 
 ## Image rules
-Follow `docs/style-contract.md`. Character art: side view facing right, flat #00FF00 background, light from upper left, no ground shadow, consistent scale. PNG. Sources at least 1024 px on the long side.
+Follow `docs/style-contract.md`. Character art: three-quarter view toward the camera (about 30 degrees), facing right, flat #00FF00 background, light from upper left, no ground shadow, consistent scale. PNG. Sources at least 1024 px on the long side.
 
 ## Cutout rig parts (for rig requests)
 - Each part drawn separately with clear space between parts; none overlapping.

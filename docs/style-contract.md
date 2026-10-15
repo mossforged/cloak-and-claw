@@ -6,7 +6,7 @@
 
 ## Characters
 - Warm painted cartoon, **bold dark outlines**, readable silhouette at 130 px.
-- **Side view facing right** (slight three-quarter is fine). The game mirrors them to face left.
+- **Three-quarter view toward the camera** (about 30 degrees turned toward the viewer, like the art bible standees), facing right. Both eyes visible. Not pure profile. The game mirrors them to face left.
 - Light from the **upper left**. No ground shadow (the game draws one).
 - Same scale and feet height across every image of one character.
 - Generated on flat **#00FF00** green (or transparent). No green in the character.

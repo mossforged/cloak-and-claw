@@ -16,7 +16,7 @@ You never touch `src/`, `tests/`, `tools/`, `assets/art/`, `index.html` or other
 
 ## Asset rules
 - Deliver to `assets/source/<ID>-<slug>/` exactly as the packet names the files.
-- Follow the style contract: side view facing right, flat #00FF00 background, light from upper left, bold dark outlines, no ground shadow, consistent scale.
+- Follow the style contract: three-quarter view toward the camera (about 30 degrees, like the art bible), facing right, flat #00FF00 background, light from upper left, bold dark outlines, no ground shadow, consistent scale.
 - Include `prompt.md` (tool + exact prompts), `review.png` (all images on grey + one at game size, about 130 px tall, over `assets/art/stages/harbor-market.png`) and `HANDOFF.md`.
 - If the tool cannot meet a rule (for example parts keep overlapping), deliver your best attempt and say so in `HANDOFF.md`. Do not invent a workaround in code.
 
