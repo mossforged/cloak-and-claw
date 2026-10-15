@@ -4,7 +4,7 @@
 
 ## Next
    **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** T009 grab and throw.
-   **Art builder:** A007 delivered (source, merged); awaiting the user's look check. Idle until then. **User:** judges A006 in motion after T012.
+   **Art builder:** idle (A007 approved). **User:** judges A006 in motion after T012.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 4. **Lead:** write T009 grab/throw and T010 floor weapons + breakables; after A004, the rat rig import task.
@@ -22,8 +22,8 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T010-floor-weapons-breakables.md`, then `T012-mouse-touchup-poses.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority). 
-- Art: none queued. A007 import (Stage 5) must use one uniform scale per layer and crop, not the review's squash; floor seam and segment joins get covered by foreground props/dividers or a seam-fix pass.
+- Code: `docs/tasks/T010-floor-weapons-breakables.md`, then `T012-mouse-touchup-poses.md` (small), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority), then `T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage).
+- Art: none queued.
 
 ## Open questions (for the user)
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
