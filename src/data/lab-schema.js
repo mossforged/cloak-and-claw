@@ -10,6 +10,7 @@ import mouseFighter from './fighters/mouse-fighter.js';
 import ratRaider from './fighters/rat-raider.js';
 import { RULES } from './rules.js';
 import { JUICE } from './juice.js';
+import harborMarket from './stages/harbor-market.js';
 
 export const ROOTS = {
   'src/data/moves/mouse-sword.js': MOUSE_SWORD,
@@ -18,6 +19,7 @@ export const ROOTS = {
   'src/data/fighters/rat-raider.js': ratRaider,
   'src/data/rules.js': RULES,
   'src/data/juice.js': JUICE,
+  'src/data/stages/harbor-market.js': harborMarket,
 };
 
 const pose = (ph) => [
@@ -67,6 +69,13 @@ export const LAB_SCHEMA = [
     fields: [
       ['shake.decay', 0.5, 0.99, 0.01], ['shake.max', 0, 60, 1], ['flashFrames', 1, 30, 1],
       ['koHitstop', 0, 40, 1], ['koShake', 0, 30, 0.5],
+    ],
+  },
+  {
+    title: 'Stage (Harbor Market)', file: 'src/data/stages/harbor-market.js',
+    fields: [
+      ['floor.top', 250, 540, 1], ['floor.bottom', 250, 540, 1], ['floor.left', 0, 480, 1], ['floor.right', 480, 960, 1],
+      ['art.x', -800, 200, 1], ['art.y', -600, 200, 1], ['art.w', 900, 2600, 10],
     ],
   },
 ];

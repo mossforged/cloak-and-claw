@@ -81,7 +81,7 @@ Run log fields (one object per run; the player only):
 | `src/data/controls.js` | Key and gamepad bindings |
 | `src/data/moves/*.js` | Move sets: timing, hitbox, damage, knockback, hitstop, shake, pose, fx |
 | `src/data/fighters/*.js` + `index.js` | Fighter defs: art, body, stats (RPG hooks), speeds, moves, AI params. Registry in index |
-| `src/data/lab-schema.js` | Which data fields the tuning lab shows (`ROOTS` file -> object, `LAB_SCHEMA` sections/sliders). New tunable = one line here |
+| `src/data/lab-schema.js` | Which data fields the tuning lab shows (`ROOTS` file -> object, `LAB_SCHEMA` sections/sliders, incl. a Stage section for the floor belt + art placement). New tunable = one line here |
 | `src/data/rigs/*.js` + `index.js` | Cutout rigs: parts (image, parent, pivot, attach, rest, scale, order, `swaps` = alternate drawings with offset) and `-poses.js` (stance, idle/walk waves, state poses, move windup/through/strike, `swap: {part: name}` per pose, test poses like `cast`, blend timing). Registry in index |
 | `src/data/stages/*.js` + `index.js` | Stage art placement, backdrop, floor belt, start point, waves. Registry in index |
 

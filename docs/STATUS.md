@@ -1,10 +1,10 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T005 rig three-quarter + part swaps (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; look approved).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T006 floor lane (merged 2026-10-14). Last art task: A002 three-quarter rig parts (merged; look approved).
 
 ## Next
 1. **User:** A003 props look check (crate, barrel, floor weapons).
-   **Code builder:** T006 floor lane, then T007 shield block, then T008 spin slash (user's idea).
+   **Code builder:** T007 shield block, then T008 spin slash (user's idea).
    **Art builder:** A004 Rat Raider rig parts.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
@@ -23,7 +23,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T006-floor-lane.md`, then `T007-shield-block.md`, then `T008-spin-slash.md`. Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
+- Code: `docs/tasks/T007-shield-block.md`, then `T008-spin-slash.md`. Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
 - Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
@@ -36,10 +36,14 @@
 - Bramble Brute as the first boss.
 - Rig follow-ups: art for a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
+- Belt depth: the Harbor Market art only allows a 63 px belt (packet asked 85+). User: "we might need to eventually return to belt depth and then get the art to match the goal." Plan: when stages become layered (Stage 5), set the target belt depth first and brief the stage art to it. Also: feet overlap two front dock posts slightly; fighters look a bit smaller after the zoom.
 - A 360-degree spin special that hits all around (crowd clearer, Final Fight style), building on T008's spin slash.
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: merged T006 (belt 400..463, mild zoom; lab Stage sliders). Belt depth to be revisited with stage art (Stage 5). Cast-pose toggle bug folded into T008.
+2026-10-14 code: T006 on branch `t006-floor-lane`: user picked framing "B mild zoom" from an in-game F-toggle test (toggle removed): art x -220 y -113 w 1400, floor 30..930 x 400..463 (63 px, under the packet's 85: the open floor in the art is shallow; deeper needed a zoom that cropped the market). Lab has a Stage section (floor + art sliders).
+2026-10-14 code: T006 notes: feet at bottom edge slightly overlap the tops of the two front dock posts near x 560-740; fighters look relatively smaller after the zoom. User reported "stuck in cast" = the T005 C toggle (sticky by design; easy to hit by accident, lead's call). Screen in docs/screens/T006/.
 2026-10-14 lead: merged T005 (rig 3/4 + swaps; 6/6 tests; sim and moves unchanged). Stage 3 rig work done; follow-ups parked.
 2026-10-14 lead: merged A003 harbor props (source). Note: source PNGs are ~1.5 MB each; watch repo size (LFS threshold in decisions).
 2026-10-14 lead: user approved A002's look ("I do like it"); T005 started.

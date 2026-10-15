@@ -21,3 +21,6 @@ The user's idea: now that Mouse Fighter has a back-view torso, slash2 can be a f
 - Human: does slash2 now read as a flat spinning cut?
 
 Out of scope: a 360 special move, changing hitboxes, the cast pose.
+
+## Addendum (lead, 2026-10-14)
+- **Cast pose key bug (from T006 report):** pressing C latches the `cast` pose until C is pressed again, and he can move and attack while drawn in it. Make C play the cast pose once (about 1 s, then back to normal), only from idle, and ignore it during attacks/hurt. Keep it a view-only test pose (no gameplay effect).
