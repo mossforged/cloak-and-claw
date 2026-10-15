@@ -27,9 +27,9 @@ for (const f of fields) {
     check(v >= f.min && v <= f.max, `${f.file} ${f.path}: default ${v} inside slider ${f.min}..${f.max}`);
   }
 }
-// A field outside a pick section must exist outright.
+// A field outside a pick section must exist outright, unless it has a fallback (the lab can add it).
 const pickFiles = new Set(LAB_SCHEMA.filter((s) => s.pick).map((s) => s.file));
-for (const f of fields) if (!pickFiles.has(f.file)) check(typeof getPath(ROOTS[f.file], f.path) === 'number', `${f.file} ${f.path}: exists`);
+for (const f of fields) if (!pickFiles.has(f.file)) check(typeof getPath(ROOTS[f.file], f.path) === 'number' || f.fallback !== undefined, `${f.file} ${f.path}: exists`);
 
 // Tweak model
 const t = createTweaks(LAB_SCHEMA, ROOTS);
@@ -45,6 +45,8 @@ check(t.editable(dx) && t.shown(dx) === 0, 'absent field with fallback is editab
 t.set(dx, 4);
 const lunge = t.fields.get('src/data/moves/mouse-sword.js|jumpSlash.lunge');
 check(!t.editable(lunge), 'absent field without fallback is not editable');
+const ratDepth = t.fields.get('src/data/moves/rat-blade.js|ratSlash.depth');
+check(t.editable(ratDepth) && t.shown(ratDepth) === RULES.depthHit, 'rat depth slider falls back to RULES.depthHit');
 const text = t.format();
 check(text.includes('src/data/moves/mouse-sword.js -> slash3.hitstop: 9 -> 20'), 'format line for hitstop');
 check(text.includes('src/data/rules.js -> gravity: 0.55 -> 0.6'), 'format line for gravity');

@@ -3,7 +3,7 @@
 You are the **code builder**. A lead chat writes task packets in `docs/tasks/` and reviews your branch. The user plays the results.
 
 ## Start of every session
-1. `git pull` on main.
+1. `git checkout main && git pull`. (Never start a new task on the previous task's branch.)
 2. Read `docs/STATUS.md`, then the packet you were given (`docs/tasks/T0NN-*.md`), then only the contracts and files it names. Use `docs/MODULES.md` to find anything else; do not read the whole repo.
 3. Create a branch: `git checkout -b t0nn-<short-slug>`. Never commit task work to main.
 

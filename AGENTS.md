@@ -6,7 +6,7 @@ You are the **art builder**. A lead chat writes art packets in `docs/tasks/A0NN-
 Run `pwd`. It must end in `cloak-and-claw-art`. If not, **stop** and tell the user you are in the wrong folder (the code builder works in `cloak-and-claw`; sharing a folder breaks both).
 
 ## Start of every session
-1. `git pull` on main.
+1. `git checkout main && git pull`. (Never start a new task on the previous task's branch.)
 2. Read `docs/STATUS.md`, your packet, `docs/style-contract.md` and `docs/handoffs/asset-contract.md`. Look at `docs/concepts/art-bible/contact-sheet.jpg` for the style. Optional context: `docs/handoffs/game-brief.md`.
 3. Create a branch: `git checkout -b a0nn-<short-slug>`. Never commit to main.
 

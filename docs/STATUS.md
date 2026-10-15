@@ -1,10 +1,10 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T003 Mouse Fighter rig (merged 2026-10-14). Last art task: A001 (merged, look approved).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T004 rat telegraph (merged 2026-10-14). Last art task: A001 (merged, look approved).
 
 ## Next
 1. **Art builder:** A002 Mouse Fighter parts in three-quarter view + back torso + expression heads.
-   **Code builder:** T004 rat telegraph (small), then T002 run log.
+   **Code builder:** T002 run log.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 3. **After A002:** code task to import it and add part swaps (back torso on big wind-ups, expression heads on hits), plus a sword-raised "magic" pose as a flexibility test.
 4. **Lead:** write Stage 2 packets: floor lane matched to the stage art, block, grab/throw, floor weapons and breakables.
@@ -22,7 +22,7 @@
 | 8 | Second hero with own move set, local co-op | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T004-rat-telegraph.md` (small, auto-ok). Queued: `T002-run-log.md` (auto-ok).
+- Code: `docs/tasks/T002-run-log.md` (auto-ok).
 - Art: `docs/tasks/A002-mouse-fighter-rig-three-quarter.md`.
 
 ## Open questions (for the user)
@@ -38,7 +38,10 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 lead: merged T004 (rat windup 34, lunge 1.2; escape test). Art clone had pulled main into the old a001 branch (nothing pushed); guides now say: checkout main first.
 2026-10-14 lead: user approved the rig system; switched art to three-quarter view (decision + style contract); wrote A002.
+2026-10-14 code: T004 rat telegraph on branch `t004-rat-telegraph`: ratSlash windup 22->34, lunge 2.2->1.2; lab gains rat lunge + depth (fallback RULES.depthHit). New tests/rat-telegraph.test.mjs (dodging after 15 frames clears the lane by 36 px vs 16).
+2026-10-14 code: smoke bot still clears waves (kos 33/33/32, hp 68/60/36 vs before 32/32/33, 68/20/52). Lab test now lets a fallback field be absent outside pick sections.
 2026-10-14 lead: merged T003 (rig; 4/4 test files pass; move timing/hitboxes unchanged, only the slash2 swoosh shape). Art and code follow-ups from the builder parked below.
 2026-10-14 code: T003 Mouse Fighter rig on branch `t003-mouse-rig` (tools/slice_sheet.py, src/data/rigs/, src/render/rig.js + rig-pose.js, R toggles rig/standee, tests/rig.test.mjs); no sim changes. Screens in docs/screens/T003/.
 2026-10-14 code: T003 round 2 from user notes: angled upright shield, stockier build, slower matched stride, slash2 is now a flat sweep across the body (flat swoosh). slash2 is now a backhand cut outward (user's pick); a true horizontal cut waits on back-view torso art. Human check still open; no combo GIF.
