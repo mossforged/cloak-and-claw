@@ -49,6 +49,7 @@
 ## Last session
 2026-10-15 code: T008 on branch `t008-spin-slash`: slash2 is a spin slash (windup low back; one back-view torso frame mid-active with the head looking back along the flat blade; flat cut in front), wrap-around swoosh with its far half behind him. Sim/timing/hitbox unchanged. C now plays the cast pose once (1 s, idle only).
 2026-10-15 code: 8/8 tests (new tests/view-pose.test.mjs, rig test slash2 checks). Screens in docs/screens/T008/. Human check open: does slash2 read as a flat spinning cut?
+2026-10-15 code: user request (outside T008, for the lead): small "build: t008 spin slash" label under the KO counter (`BUILD` in src/config.js, drawn by hud.js) so testers can tell versions apart. Lead: keep, change per task, or drop.
 2026-10-15 lead: merged T007 (shield block; sim change limited to fighters with a block config; user approved the readable pose, polish parked).
 2026-10-15 lead: A003 props approved. Block pose polish deferred (mechanic first, pose must be readable).
 2026-10-15 lead: study "What makes our game distinct?" (hooks); private lore appendix to the user only.

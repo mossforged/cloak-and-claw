@@ -41,7 +41,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/render/effects.js` | Slash swooshes (optionally `flat` for level sweeps; `wrap` goes round the body, far side drawn behind via `drawBack`), sparks, rings, damage numbers, dust; block clang (bright sparks toward the attacker, shield-side flash, double ring, then a star glint on the shield rim) (from events) | `createEffects drawSlash` |
 | `src/render/view-pose.js` | View-only test pose on the hero (C = `cast`): plays once for `timing.castHold` s, only from idle, dropped on leaving idle. Pure | `stepViewPose` |
 | `src/render/juice.js` | Screen shake + hit-stop counters (from events; `block` uses the blocker's `block.hitstop/shake`) | `createJuice` |
-| `src/render/hud.js` | Portrait, health bars, wave banner, KOs/XP, hints, game over, pause | `drawHud drawPaused` |
+| `src/render/hud.js` | Portrait, health bars, wave banner, KOs/XP, build label (`BUILD` in config.js), hints, game over, pause | `drawHud drawPaused` |
 | `src/render/debug.js` | Overlay: floor belt, hurtboxes, hitboxes, states, AI tokens | `drawDebug` |
 | `src/render/backdrop.js` | Sky, clouds, sea; stage cutout | `drawBackdrop drawStage` |
 | `src/render/tint.js` | Cached solid-colour silhouettes | `silhouette` |

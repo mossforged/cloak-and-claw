@@ -1,5 +1,6 @@
 // Health bars, wave banner, KO counter, controls hint and game-over screen. Drawn in screen space.
 import { bus } from '../core/events.js';
+import { BUILD } from '../config.js';
 
 const FONT = (px) => `${px}px "Lilita One", sans-serif`;
 let banner = null;
@@ -37,6 +38,7 @@ export function drawHud(ctx, world, assets, view, runLines = null) {
   text(ctx, p.def.name, 96, 34, 22);
   bar(ctx, 96, 44, 220, 16, k, lk, k > 0.3 ? '#5fd35a' : '#ff5a4e');
   text(ctx, `KOs ${world.kos}   XP ${world.xp}`, view.w - 20, 36, 22, '#ffe9a8', 'right');
+  ctx.globalAlpha = 0.75; text(ctx, `build: ${BUILD}`, view.w - 20, 58, 14, '#fff', 'right'); ctx.globalAlpha = 1;
 
   for (const f of world.fighters) {
     if (f === p || f.state === 'dead' || world.frame - f.lastHit > 150) continue;
