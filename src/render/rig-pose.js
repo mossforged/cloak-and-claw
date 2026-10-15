@@ -48,6 +48,24 @@ function strikePose(M, W, X, K, p, T) {
 
 const swapOf = (pose) => pose?.swap ?? {};
 
+// Grab and throw (T009): `grabbing` hold, `knee` strike (from def.grab.knee frames), `throw` wind (`throwWindBack`
+// for a back throw: the body narrows and mirrors, he turns as the rat goes over) then `throwRelease`, easing to idle.
+function grabPose(f, poses, S, time) {
+  const P = (k) => evalPose(poses[k], S, 0), g = f.grab;
+  if (f.state === 'grabbing') {
+    const K = f.def.grab.knee, n = g?.knee ?? -1;
+    if (n < 0) return { key: 'grabbing', joints: P('grabbing'), swap: swapOf(poses.grabbing) };
+    const j = n < K.windup ? mix(P('grabbing'), P('knee'), easeOut(n / K.windup))
+      : mix(P('knee'), P('grabbing'), easeInOut(Math.max(0, (n - K.windup - K.active) / K.recovery)));
+    return { key: 'knee', joints: j, swap: n < K.windup + K.active + K.recovery / 2 ? swapOf(poses.knee) : {} };
+  }
+  const T = f.def.throw, wind = g?.back ? 'throwWindBack' : 'throwWind';
+  if (f.t < T.wind) return { key: wind, joints: mix(P('grabbing'), P(wind), easeOut(f.t / T.wind)), swap: swapOf(poses[wind]) };
+  const k = (f.t - T.wind) / T.recovery;
+  return { key: 'throwRelease', joints: mix(P('throwRelease'), evalPose(poses.idle, S, time), easeInOut(Math.max(0, k * 1.4 - 0.4))),
+    swap: k < 0.5 ? swapOf(poses.throwRelease) : {} };
+}
+
 // Active-phase swaps: a `through` pose that names swaps shows them only while the swing is near it
 // (timing.throughSwap, as a share of the way to the strike), e.g. one back-view drawing mid-spin.
 function activeSwap(M, p, T) {
@@ -78,6 +96,7 @@ export function targetPose(f, rig, time, override) {
     case 'walk': return named('walk', f.t / 60);
     case 'jump': return named('jump');
     case 'block': return named('block');
+    case 'grabbing': case 'throw': if (poses.grabbing) return grabPose(f, poses, S, time); break;
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
     case 'down': case 'dead': return named('down');

@@ -10,5 +10,12 @@ export const JUICE = {
   // then a star glint on the shield's upper rim (glint dx/dy: px forward of / above the blocker's feet; delay: frames after the clang)
   block: { sparks: 18, speed: 9, spread: 1.3, life: 16, flashLife: 8, flashR: 46, ringR: 30, ringLife: 14,
     glint: { dx: 46, dy: 78, size: 26, life: 20, delay: 3 } },
+  // grab/throw (T009): clinch flash at the grip; the held rat leans (rad, + = toward the holder; he is pulled up by the collar) and doubles over on each knee (jerk);
+  // a thrown body spins thrownSpin rad/frame and leaves a whoosh trail (points kept, gap = newest points left bare so the streak stops short of him, width, alpha); thrownHit = big impact burst.
+  grab: { flashR: 34, life: 9, ringR: 24 },
+  held: { lean: -0.16, jerk: -0.3, tip: 0.025, tipMax: 1.8 },   // tip: rad per px he is lifted during the throw wind
+  thrownSpin: 0.32,
+  trail: { points: 16, gap: 3, width: 26, alpha: 0.85, color: 'rgba(255,255,240,', edge: 'rgba(255,214,110,', lines: 3 },
+  impact: { sparks: 26, speed: 9, life: 20, ringR: 64, flashR: 70 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
 };

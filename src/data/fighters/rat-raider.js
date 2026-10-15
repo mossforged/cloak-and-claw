@@ -3,6 +3,7 @@ export default {
   id: 'rat-raider', name: 'Rat Raider', team: 'enemy',
   art: { idle: 'assets/art/enemies/rat-raider.png', height: 136, facing: 1, anchorX: 0.56 },
   body: { w: 44, h: 108 },
+  throwable: true,   // the hero can grab and throw him (T009)
   stats: { maxHp: 30, power: 0, defense: 0, speed: 1 },
   move: { walk: 2.0, depth: 1.4, jump: 0 },
   moves: RAT_BLADE, attack: 'ratSlash',

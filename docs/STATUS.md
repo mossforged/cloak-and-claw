@@ -1,6 +1,6 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T008 spin slash (merged 2026-10-15; user OK on round 2). Last art task: A005 Rat Raider head + legs revision (merged; user look check pending).
+**Stage 2 (feel pass + crowd tools) in progress.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T009 grab and throw (merged 2026-10-15; user OK on round 3). Last art task: A005 Rat Raider head + legs revision (merged; user look check pending).
 
 ## Next
    **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** T009 grab and throw.
@@ -22,7 +22,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T009-grab-throw.md`. Next: T010 floor weapons + breakables (uses A003; to write), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
+- Code: `docs/tasks/T010-floor-weapons-breakables.md`, then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
 - Art: `docs/tasks/A006-mouse-fighter-touchup.md`.
 
 ## Open questions (for the user)
@@ -33,7 +33,7 @@
 - Touch controls for phone play (Stage 5).
 - Art bible items (pie, cheese, potions, chest, coins) as pickups and RPG rewards (Stage 6).
 - Bramble Brute as the first boss.
-- Rig follow-ups (Mouse Fighter art touch-up, A005 when queued): shield drawn facing the viewer, a raised-guard shield arm, a gritted-teeth bracing head (T007); a torso turned side-on a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
+- Rig follow-ups (A006 covers most; still to add later: a raised-knee leg and a gripping hand on the sword arm for the grab knee, from T009): shield drawn facing the viewer, a raised-guard shield arm, a gritted-teeth bracing head (T007); a torso turned side-on a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
 - Belt depth: the Harbor Market art only allows a 63 px belt (packet asked 85+). User: "we might need to eventually return to belt depth and then get the art to match the goal." Plan: when stages become layered (Stage 5), set the target belt depth first and brief the stage art to it. Also: feet overlap two front dock posts slightly; fighters look a bit smaller after the zoom.
 - Companion / pet that fights alongside you (Castle Crashers' animal orbs). User likes it.
@@ -48,7 +48,13 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 lead: merged T009 (grab on a button, H / pad Y; throws bowl rats; side-wall bounce). Bot KOs 32/33/32 vs 33/33/34 due to wall bounce only.
 2026-10-15 lead: merged A005 (rattier heads, heavier legs; source).
+2026-10-15 code: user OK'd T009 round 3 ("thats good now"): grab button, reach and throws approved. Branch `t009-grab-throw` ready for the lead to merge.
+2026-10-15 code: T009 round 3 (user: grab range "pretty tight"): grab reach 56 -> 75 px, depth 12 -> 16 (sword's hit depth), so a rat at his 64 px attack spot can be grabbed; rats winding up still can't. 10/10 tests.
+2026-10-15 code: T009 round 2 (user: throwing "feels good" when intended, but grabbing should "always be a choice rather than automatic"; rats "disappear for a bit"): grab is now a button, H / pad Y, with a rat in reach in front; walking into rats never grabs. The vanishing was my bug: rats' attack poses lacked the new `cy` channel (NaN transform), fixed + new tests/standee.test.mjs. 10/10 tests.
+2026-10-15 code: T009 on branch `t009-grab-throw`: walk into a rat (after 10 idle frames, 5 frames pushing) to grab; J = knee (3rd knocks down), dir+J or jump = throw (back throw mirrors him, rat goes over the shoulder); thrown rat bowls over rats it touches; breaks free after 2.5 s; a hit drops the grab. New src/sim/grab.js, events grab/throw/thrownHit, side-wall bounce (RULES.wallBounce), run log grabs/throws/thrownHits, lab "Hero grab + throw".
+2026-10-15 code: 9/9 tests (new tests/grab.test.mjs). Bot smoke KOs 32/33/32 vs 33/33/34 on main: only the wall bounce (wallBounce 0 gives main's exact numbers); the old bot never grabs. Screens in docs/screens/T009/. Human check open: is throwing satisfying, any accidental grabs?
 2026-10-15 lead: merged T008 round 2 (+ build label kept) and A004 (rat rig + spear/bow kit, source).
 2026-10-15 lead: merged T008 (spin slash, view-only; cast key fixed).
 2026-10-15 code: user OK'd T008 round 2 spin ("sounds good for now"); C cast fix confirmed working by the user. Branch `t008-spin-slash` ready for the lead to merge.

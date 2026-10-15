@@ -47,12 +47,15 @@ export function thinkAI(f, w) {
 
 // Keeps enemies from stacking on top of each other.
 export function separate(w) {
-  const es = w.fighters.filter((f) => f.ai && f.state !== 'dead');
+  // a grabbed enemy is pinned (held in place: the other one steps aside); a thrown one flies through
+  const es = w.fighters.filter((f) => f.ai && f.state !== 'dead' && f.state !== 'thrown');
+  const pinned = (f) => (f.state === 'grabbed' ? 0 : 1);
   for (let i = 0; i < es.length; i++) for (let j = i + 1; j < es.length; j++) {
     const a = es[i], b = es[j], dx = b.x - a.x, dy = b.y - a.y;
     if (Math.abs(dx) < 34 && Math.abs(dy) < 14) {
       const px = (dx >= 0 ? 1 : -1) * 0.6, py = (dy >= 0 ? 1 : -1) * 0.4;
-      a.x -= px; b.x += px; a.y -= py; b.y += py;
+      const ka = pinned(a) * (2 - pinned(b)), kb = pinned(b) * (2 - pinned(a));   // both free: 1 each (as before)
+      a.x -= px * ka; b.x += px * kb; a.y -= py * ka; b.y += py * kb;
     }
   }
 }

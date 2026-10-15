@@ -7,4 +7,5 @@ export const RULES = {
   knockdown: { vz: 6.5, vx: 4.5, downFrames: 45, getupFrames: 18, invulnAfter: 30 },
   waveDelay: 90,          // frames between clearing a wave and the next arriving
   deadLinger: 50,         // frames a defeated enemy blinks before vanishing
+  wallBounce: 0.5,        // thrown / knocked-down fighters hitting the floor's side edge bounce back at this share of their speed
 };

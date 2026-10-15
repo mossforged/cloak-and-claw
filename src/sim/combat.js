@@ -2,6 +2,7 @@
 import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
 import { phaseOf, setState, HELPLESS } from './fighter.js';
+import { releaseGrab } from './grab.js';
 
 export function hitboxOf(f) {
   if (!f.move || phaseOf(f)[0] !== 'active') return null;
@@ -51,6 +52,7 @@ function applyBlock(a, t, m, at) {
 
 function applyHit(a, t, m, world, at) {
   if (blocks(a, t)) return applyBlock(a, t, m, at);
+  if (t.grab) releaseGrab(t);   // a hit on the holder drops the grab (T009)
   const dmg = Math.max(1, Math.round(m.damage + (a.def.stats.power ?? 0) - (t.def.stats.defense ?? 0)));
   t.hp = Math.max(0, t.hp - dmg);
   t.lastHit = world.frame;

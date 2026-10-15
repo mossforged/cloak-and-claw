@@ -1,4 +1,5 @@
-// Visual effects driven by sim events: slash swooshes, hit sparks, block clangs and glints, damage numbers, dust. Render-only.
+// Visual effects driven by sim events: slash swooshes, hit sparks, block clangs and glints, damage numbers, dust;
+// grab clinch flash, whoosh trail on a thrown body, big impact burst when it bowls someone over. Render-only.
 import { bus } from '../core/events.js';
 import { JUICE } from '../data/juice.js';
 
@@ -33,6 +34,25 @@ export function createEffects() {
     add({ type: 'ring', x, y: sy, life: B.ringLife + 6, r: B.ringR * 1.7, thin: true });
     if (damage > 0) add({ type: 'num', x, y: sy - 20, text: String(damage), hero: target.team === 'hero', big: false, life: JUICE.numbers.life });
   });
+  bus.on('grab', ({ target, x, y, z }) => {
+    const G = JUICE.grab;
+    flashes.set(target.id, JUICE.flashFrames);
+    add({ type: 'clinch', x, y: y - z, r: G.flashR, life: G.life });
+    add({ type: 'ring', x, y: y - z, life: G.life, r: G.ringR, thin: true });
+  });
+  bus.on('throw', ({ target }) => add({ type: 'trail', f: target, pts: [], life: 1e9 }));
+  bus.on('thrownHit', ({ body, target, damage, x, y, z, ko }) => {
+    const I = JUICE.impact, sy = y - z;
+    flashes.set(target.id, JUICE.flashFrames * 2); flashes.set(body.id, JUICE.flashFrames);
+    for (let i = 0; i < I.sparks; i++) {
+      const a = Math.random() * Math.PI * 2, s = I.speed * (0.5 + Math.random());
+      add({ type: 'spark', x, y: sy, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: I.life });
+    }
+    add({ type: 'clinch', x, y: sy, r: I.flashR, life: 10 });
+    add({ type: 'ring', x, y: sy, life: 14, r: I.ringR });
+    add({ type: 'ring', x, y: sy, life: 20, r: I.ringR * 1.6, thin: true });
+    add({ type: 'num', x, y: sy - 24, text: String(damage), hero: false, big: true, life: JUICE.numbers.life });
+  });
   bus.on('land', ({ f, heavy }) => {
     const n = JUICE.dust.count * (heavy ? 1.5 : 0.6);
     for (let i = 0; i < n; i++) add({ type: 'dust', x: f.x + (Math.random() - 0.5) * 50, y: f.y, vx: (Math.random() - 0.5) * 2.2, life: JUICE.dust.life, r: 6 + Math.random() * 8 });
@@ -45,6 +65,7 @@ export function createEffects() {
       for (const [id, n] of flashes) n <= 1 ? flashes.delete(id) : flashes.set(id, n - 1);
       for (const e of list) {
         e.t++;
+        if (e.type === 'trail') trailStep(e);
         if (e.vx !== undefined) { e.x += e.vx; e.vx *= 0.88; }
         if (e.vy !== undefined) { e.y += e.vy; e.vy *= 0.88; }
       }
@@ -56,7 +77,42 @@ export function createEffects() {
   };
 }
 
+// A thrown body's trail: its last few centre points while it flies; fades out once it lands.
+function trailStep(e) {
+  const f = e.f, T = JUICE.trail;
+  if (f.state === 'thrown') {
+    e.pts.push({ x: f.x, y: f.y - f.z - f.def.body.h * 0.5 });
+    if (e.pts.length > T.points) e.pts.shift();
+  } else if (e.life > e.t + 12) e.life = e.t + 12;
+  if (f.state !== 'thrown' && e.pts.length) e.pts.shift();
+}
+
 const DRAW = {
+  trail(ctx, e) {   // tapering streak behind the body (stops short of him so he stays visible), plus a few speed lines
+    const T = JUICE.trail, n = e.pts.length - T.gap;
+    if (n < 2) return;
+    ctx.save(); ctx.lineCap = 'round';
+    for (const [style, extra] of [[T.edge, 6], [T.color, 0]]) {   // gold edge, then the white core (like a slash swoosh)
+      for (let i = 1; i < n; i++) {
+        const k = i / n, a = e.pts[i - 1], b = e.pts[i];
+        ctx.strokeStyle = `${style}${T.alpha * k})`; ctx.lineWidth = T.width * k + extra;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+    }
+    const h = e.f.def.body.h * 0.35, head = e.pts[e.pts.length - 1], tail = e.pts[0];
+    ctx.strokeStyle = `${T.color}0.8)`; ctx.lineWidth = 2.5;
+    for (let j = 0; j < T.lines; j++) {
+      const oy = (j - (T.lines - 1) / 2) * h * 0.7;
+      ctx.beginPath(); ctx.moveTo(head.x + (tail.x - head.x) * 0.3, head.y + oy); ctx.lineTo(tail.x, tail.y + oy); ctx.stroke();
+    }
+    ctx.restore();
+  },
+  clinch(ctx, e, k) {   // quick white burst at the grip
+    const g = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, e.r * (0.6 + k * 0.6));
+    g.addColorStop(0, `rgba(255,255,255,${0.9 * (1 - k)})`); g.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(e.x, e.y, e.r * (0.6 + k * 0.6), 0, Math.PI * 2); ctx.fill(); ctx.restore();
+  },
   slash(ctx, e, k, layer) {   // wrap: the arc goes round the body; its far side (top of the ellipse) is drawn behind him
     const f = e.f, dir = f.facing;
     const cx = f.x + dir * e.cx, cy = f.y - f.z - e.cz;

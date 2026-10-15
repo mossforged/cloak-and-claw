@@ -1,9 +1,11 @@
 // Fighter entity + state machine. Pure logic: no drawing, no DOM.
-// States: idle walk block jump attack hurt knockdown down getup dead
-// Every fighter is driven by f.control = { mx, my, attack, jump, block?, face? } (set by input or AI).
+// States: idle walk block jump attack hurt knockdown down getup dead, plus grab/throw (sim/grab.js):
+// grabbing throw (holder), grabbed thrown (held / flying body).
+// Every fighter is driven by f.control = { mx, my, attack, jump, block?, grab?, face? } (set by input or AI).
 // block (held) only works for fighters whose def has a `block` config.
 import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
+import { tryGrab, stepGrabbing, stepThrow, landThrown } from './grab.js';
 
 let nextId = 1;
 
@@ -14,6 +16,7 @@ export function createFighter(def, x, y, opts = {}) {
     hp: def.stats.maxHp, maxHp: def.stats.maxHp,
     state: 'idle', t: 0, stun: 0, invuln: 0, lastHit: -999,
     move: null, mf: 0, queued: false, hitList: new Set(), bounced: false,
+    grab: null, heldBy: null, thrower: null,   // grab/throw (sim/grab.js)
     control: { mx: 0, my: 0, attack: false, jump: false },
     ai: opts.ai ? { mode: 'hover', wait: 0, cool: 30, token: false, yOff: 0, attacked: false } : null,
     entering: !!opts.entering, remove: false,
@@ -21,7 +24,8 @@ export function createFighter(def, x, y, opts = {}) {
 }
 
 export const ACTIVE_STATES = ['idle', 'walk'];
-export const HELPLESS = ['hurt', 'knockdown', 'down', 'getup', 'dead'];
+export const HELPLESS = ['hurt', 'knockdown', 'down', 'getup', 'dead', 'grabbed', 'thrown'];   // all but 'hurt' can't be hit
+const BOUNCY = ['thrown', 'knockdown', 'down'];   // bounce off the floor's side edges (RULES.wallBounce)
 export const canAct = (f) => ACTIVE_STATES.includes(f.state);
 
 export function setState(f, s) { f.state = s; f.t = 0; }
@@ -59,6 +63,7 @@ function land(f) {
   f.z = 0; f.vz = 0;
   if (f.state === 'jump') { f.move = null; setState(f, 'idle'); bus.emit('land', { f, heavy: false }); }
   else if (f.state === 'knockdown') { f.vx *= 0.4; setState(f, 'down'); bus.emit('land', { f, heavy: true }); }
+  else if (f.state === 'thrown') landThrown(f);
 }
 
 export function updateFighter(f, world) {
@@ -70,6 +75,7 @@ export function updateFighter(f, world) {
     case 'idle': case 'walk': {
       if (c.block && d.block) { setState(f, 'block'); f.stun = 0; f.vx = f.vy = 0; break; }
       if (c.attack && d.attack) { startMove(f, d.attack); break; }
+      if (c.grab && d.grab && tryGrab(f, world)) break;
       f.vx = c.mx * d.move.walk * sp;
       f.vy = c.my * d.move.depth * sp;
       if (c.jump && d.move.jump) { f.vz = d.move.jump; f.z = 0.01; setState(f, 'jump'); bus.emit('jump', { f }); break; }
@@ -98,7 +104,13 @@ export function updateFighter(f, world) {
       f.vx *= RULES.hurtFriction; f.vy = 0;
       if (f.t >= f.stun) setState(f, 'idle');
       break;
-    case 'knockdown': f.vz -= RULES.gravity; break;
+    case 'knockdown': case 'thrown': f.vz -= RULES.gravity; break;
+    case 'grabbing': stepGrabbing(f, world); break;
+    case 'throw': stepThrow(f, world); break;
+    case 'grabbed':   // positioned by the holder; freed if the holder let go without saying so
+      f.vx = f.vy = 0;
+      if (f.heldBy?.grab?.target !== f) { f.heldBy = null; f.z = 0; setState(f, 'idle'); }
+      break;
     case 'down':
       f.vx *= 0.8;
       if (f.t >= K.downFrames) {
@@ -114,6 +126,10 @@ export function updateFighter(f, world) {
   f.x += f.vx; f.y += f.vy;
   if (f.z > 0 || f.vz > 0) { f.z += f.vz; if (f.z <= 0) land(f); }
   const fl = world.stage.floor;
-  if (!f.entering) f.x = Math.max(fl.left, Math.min(fl.right, f.x));
+  if (!f.entering) {
+    const x = Math.max(fl.left, Math.min(fl.right, f.x));
+    if (RULES.wallBounce && x !== f.x && BOUNCY.includes(f.state) && Math.sign(f.vx) === Math.sign(f.x - x)) f.vx = -f.vx * RULES.wallBounce;
+    f.x = x;
+  }
   f.y = Math.max(fl.top, Math.min(fl.bottom, f.y));
 }
