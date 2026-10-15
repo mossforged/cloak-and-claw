@@ -4,7 +4,7 @@
 
 ## Next
    **User:** play slash2 (the spin) and C (cast pose plays once). **Code builder:** T009 grab and throw.
-   **Art builder:** free. **User:** A005 look check.
+   **Art builder:** free.
    **Code builder:** free until the lead writes the Stage 2 crowd-tool packets.
 2. **User:** try the lab (`/lab.html`): can you tune the combo the way you want in under 10 minutes?
 4. **Lead:** write T009 grab/throw and T010 floor weapons + breakables; after A004, the rat rig import task.
@@ -22,8 +22,8 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T009-grab-throw.md`. Next: T010 floor weapons + breakables (uses A003). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
-- Art: none queued (A005 merged). Next code after T009: code task to import the rat rig + sword/spear/bow kits (spear hold: rear hand low near the butt, front hand mid-shaft, point angled up).
+- Code: `docs/tasks/T009-grab-throw.md`. Next: T010 floor weapons + breakables (uses A003; to write), then `T011-rat-rig-weapon-kits.md` (written; rat crouch stance is the user's priority). Next to write: T009 grab/throw, T010 floor weapons + breakables (after A003 look check).
+- Art: none queued (A005 merged).
 
 ## Open questions (for the user)
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
