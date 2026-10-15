@@ -1,0 +1,205 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "method": "Uniform similarity fitting to hand-estimated A004 anatomical anchors; descriptive source metadata, not runtime rig pivots.",
+  "parts": {
+    "head-neutral": {
+      "generated_file": "/Users/johniadarola/.codex/generated_images/01a140fe-f014-7531-9427-7402818aa9d1/exec-7d092036-1b66-4219-acfc-ed415710b42d.png",
+      "scale": 0.5,
+      "rotation_degrees": 0.0,
+      "translation_xy": [
+        530.0,
+        710.0
+      ],
+      "bounds": [
+        590,
+        818,
+        1129,
+        1228
+      ],
+      "joint_correspondences": null
+    },
+    "head-snarl": {
+      "generated_file": "/Users/johniadarola/.codex/generated_images/01a140fe-f014-7531-9427-7402818aa9d1/exec-993326d7-0b21-4d73-b8f6-2fd0bc6cfc69.png",
+      "scale": 0.5,
+      "rotation_degrees": 0.0,
+      "translation_xy": [
+        530.0,
+        710.0
+      ],
+      "bounds": [
+        592,
+        810,
+        1129,
+        1256
+      ],
+      "joint_correspondences": null
+    },
+    "head-hurt": {
+      "generated_file": "/Users/johniadarola/.codex/generated_images/01a140fe-f014-7531-9427-7402818aa9d1/exec-1d661485-f0df-4587-97ee-d6256335c46a.png",
+      "scale": 0.5,
+      "rotation_degrees": 0.0,
+      "translation_xy": [
+        530.0,
+        710.0
+      ],
+      "bounds": [
+        590,
+        818,
+        1128,
+        1228
+      ],
+      "joint_correspondences": null
+    },
+    "leg-front-upper": {
+      "generated_file": "/Users/johniadarola/.codex/generated_images/01a140fe-f014-7531-9427-7402818aa9d1/exec-67331055-b90b-49d7-a168-c21feea8947b.png",
+      "scale": 0.21069662613491658,
+      "rotation_degrees": 0.9953906148053261,
+      "translation_xy": [
+        443.4508867114746,
+        1549.1729694712124
+      ],
+      "bounds": [
+        459,
+        1562,
+        680,
+        1795
+      ],
+      "joint_correspondences": [
+        [
+          [
+            940,
+            130
+          ],
+          [
+            190,
+            950
+          ]
+        ],
+        [
+          [
+            641,
+            1580
+          ],
+          [
+            480,
+            1750
+          ]
+        ]
+      ]
+    },
+    "leg-front-lower": {
+      "generated_file": "/Users/johniadarola/.codex/generated_images/01a140fe-f014-7531-9427-7402818aa9d1/exec-93495bbf-f7cb-438d-be44-9a322286b0cd.png",
+      "scale": 0.23502992031473136,
+      "rotation_degrees": -7.218580313639632,
+      "translation_xy": [
+        327.8447437811735,
+        1765.0141055373765
+      ],
+      "bounds": [
+        420,
+        1747,
+        568,
+        2030
+      ],
+      "joint_correspondences": [
+        [
+          [
+            790,
+            100
+          ],
+          [
+            520,
+            945
+          ]
+        ],
+        [
+          [
+            515,
+            1765
+          ],
+          [
+            477,
+            1970
+          ]
+        ]
+      ]
+    },
+    "leg-back-upper": {
+      "generated_file": "/Users/johniadarola/.codex/generated_images/01a140fe-f014-7531-9427-7402818aa9d1/exec-f1f7b0a2-3359-4ded-8db1-381bbe89721f.png",
+      "scale": 0.19200389635851542,
+      "rotation_degrees": 8.55016777215991,
+      "translation_xy": [
+        835.5456548887094,
+        1514.033056637038
+      ],
+      "bounds": [
+        849,
+        1531,
+        1039,
+        1769
+      ],
+      "joint_correspondences": [
+        [
+          [
+            280,
+            200
+          ],
+          [
+            1100,
+            1030
+          ]
+        ],
+        [
+          [
+            883,
+            1560
+          ],
+          [
+            1015,
+            1741
+          ]
+        ]
+      ]
+    },
+    "leg-back-lower": {
+      "generated_file": "/Users/johniadarola/.codex/generated_images/01a140fe-f014-7531-9427-7402818aa9d1/exec-b4d3f012-b31d-4b16-917e-59d6083b59cd.png",
+      "scale": 0.19678866930793001,
+      "rotation_degrees": 4.056247639813284,
+      "translation_xy": [
+        909.179599060202,
+        1725.2130717358802
+      ],
+      "bounds": [
+        942,
+        1738,
+        1093,
+        1979
+      ],
+      "joint_correspondences": [
+        [
+          [
+            445,
+            110
+          ],
+          [
+            610,
+            1000
+          ]
+        ],
+        [
+          [
+            995,
+            1753
+          ],
+          [
+            1015,
+            1930
+          ]
+        ]
+      ]
+    }
+  }
+}
