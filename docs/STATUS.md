@@ -27,7 +27,7 @@
 - Art: `docs/tasks/A004-rat-raider-rig.md`.
 
 ## Open questions (for the user)
-- The hook (study 2026-10-15): which pitch (Fellowship / Kit Brawler / Merciful Blade / mix)? Solo party of three or two? Hook tests before or after Stage 2's crowd tools?
+- The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade likely out; Kit Brawler undecided (confirm).
 
 ## Parked
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
