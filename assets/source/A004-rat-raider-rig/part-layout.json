@@ -1,0 +1,334 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "reference_offset": [
+    200,
+    650
+  ],
+  "reference_original_size": [
+    1024,
+    1536
+  ],
+  "parts": {
+    "head": {
+      "source_bounds": [
+        1010,
+        961
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        610,
+        755,
+        1105,
+        1226
+      ],
+      "uniform_scale": 0.49011446409989595
+    },
+    "torso": {
+      "source_bounds": [
+        839,
+        1177
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        554,
+        1097,
+        977,
+        1690
+      ],
+      "uniform_scale": 0.5038232795242141
+    },
+    "scarf-tail": {
+      "source_bounds": [
+        944,
+        714
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        428,
+        962,
+        671,
+        1146
+      ],
+      "uniform_scale": 0.25770308123249297
+    },
+    "tail": {
+      "source_bounds": [
+        953,
+        1018
+      ],
+      "rotation_degrees": 55,
+      "placed_bounds": [
+        387,
+        1310,
+        655,
+        1575
+      ],
+      "uniform_scale": 0.19399707174231332
+    },
+    "arm-front-upper": {
+      "source_bounds": [
+        857,
+        1160
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        513,
+        1102,
+        698,
+        1352
+      ],
+      "uniform_scale": 0.21551724137931033
+    },
+    "arm-front-lower": {
+      "source_bounds": [
+        907,
+        1245
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        342,
+        1311,
+        534,
+        1574
+      ],
+      "uniform_scale": 0.21124497991967872
+    },
+    "arm-back-upper": {
+      "source_bounds": [
+        881,
+        1148
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        908,
+        1199,
+        1024,
+        1350
+      ],
+      "uniform_scale": 0.13153310104529617
+    },
+    "arm-back-lower": {
+      "source_bounds": [
+        964,
+        848
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        967,
+        1319,
+        1190,
+        1515
+      ],
+      "uniform_scale": 0.23113207547169812
+    },
+    "leg-front-upper": {
+      "source_bounds": [
+        896,
+        1269
+      ],
+      "rotation_degrees": -65,
+      "placed_bounds": [
+        415,
+        1545,
+        738,
+        1830
+      ],
+      "uniform_scale": 0.2112676056338028
+    },
+    "leg-front-lower": {
+      "source_bounds": [
+        809,
+        1362
+      ],
+      "rotation_degrees": -25,
+      "placed_bounds": [
+        376,
+        1721,
+        645,
+        2045
+      ],
+      "uniform_scale": 0.20532319391634982
+    },
+    "leg-back-upper": {
+      "source_bounds": [
+        937,
+        1167
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        846,
+        1525,
+        1052,
+        1782
+      ],
+      "uniform_scale": 0.22022279348757498
+    },
+    "leg-back-lower": {
+      "source_bounds": [
+        745,
+        1201
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        944,
+        1725,
+        1101,
+        1978
+      ],
+      "uniform_scale": 0.21065778517901748
+    },
+    "torso-back": {
+      "source_bounds": [
+        719,
+        1146
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        580,
+        1097,
+        952,
+        1690
+      ],
+      "uniform_scale": 0.5174520069808028
+    },
+    "head-snarl": {
+      "source_bounds": [
+        995,
+        1072
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        610,
+        755,
+        1105,
+        1288
+      ],
+      "uniform_scale": 0.49720149253731344
+    },
+    "head-hurt": {
+      "source_bounds": [
+        988,
+        974
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        610,
+        755,
+        1105,
+        1243
+      ],
+      "uniform_scale": 0.5010266940451745
+    },
+    "hand-front-grip": {
+      "source_bounds": [
+        962,
+        788
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        377,
+        1467,
+        513,
+        1578
+      ],
+      "uniform_scale": 0.14086294416243655
+    },
+    "arm-back-lower-grip": {
+      "source_bounds": [
+        968,
+        1286
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        1003,
+        1319,
+        1142,
+        1504
+      ],
+      "uniform_scale": 0.14385692068429237
+    },
+    "arm-back-lower-pinch": {
+      "source_bounds": [
+        984,
+        923
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        973,
+        1319,
+        1170,
+        1504
+      ],
+      "uniform_scale": 0.20043336944745396
+    },
+    "spear": {
+      "source_bounds": [
+        262,
+        1471
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        1110,
+        80,
+        1471,
+        2105
+      ],
+      "uniform_scale": 1.3766145479265806
+    },
+    "bow": {
+      "source_bounds": [
+        360,
+        1432
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        768,
+        1035,
+        949,
+        1755
+      ],
+      "uniform_scale": 0.5027932960893855
+    },
+    "arrow": {
+      "source_bounds": [
+        236,
+        1418
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        775,
+        1204,
+        845,
+        1625
+      ],
+      "uniform_scale": 0.29689703808180534
+    },
+    "sword": {
+      "source": "A003-harbor-props/rat-cutlass.png",
+      "rotation_degrees": -62,
+      "placed_bounds": [
+        340,
+        1420,
+        753,
+        1980
+      ]
+    },
+    "head-neutral": {
+      "source_bounds": [
+        1010,
+        961
+      ],
+      "rotation_degrees": 0,
+      "placed_bounds": [
+        610,
+        755,
+        1105,
+        1226
+      ],
+      "uniform_scale": 0.49011446409989595
+    }
+  }
+}
