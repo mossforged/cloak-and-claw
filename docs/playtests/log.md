@@ -4,7 +4,7 @@ The user's feedback in their own words, dated, newest first. The lead adds entri
 
 ## 2026-10-15 A005 Rat Raider look
 User: "He still seems lankier than the art bible version, like his legs are more upright than the sort of crouched art bible version."
-Lead: mostly pose, not proportion: the A005 reference is a neutral upright rig pose. Fix in the rig (T011): default stance = the art bible's fighting crouch (bent knees, wide feet, low hips, hunched forward, head out); shorten legs per part if needed. Art approved as is (pending user's yes).
+Lead: mostly pose, not proportion: the A005 reference is a neutral upright rig pose. Fix in the rig (T011): default stance = the art bible's fighting crouch (bent knees, wide feet, low hips, hunched forward, head out); shorten legs per part if needed. Art approved as is: user "yes that sounds good".
 
 ## 2026-10-15 A004 Rat Raider look
 User: "He reads a bit more mouse head than rat to me, and his legs look pretty skinny. That said, I love his pained expression. The way he holds the spear is a bit strange."
