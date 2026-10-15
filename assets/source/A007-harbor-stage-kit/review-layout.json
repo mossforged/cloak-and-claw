@@ -1,0 +1,35 @@
+{
+  "viewport": [
+    960,
+    540
+  ],
+  "floor_back_y": 390,
+  "floor_front_y": 510,
+  "walk_depth": 120,
+  "back_render_width": 1440,
+  "back_source_baseline_y": {
+    "back-1": 700,
+    "back-2": 742,
+    "back-3": 703
+  },
+  "back_render_baseline_y": 390,
+  "floor_render_size": [
+    1440,
+    235
+  ],
+  "floor_source_lip_y_approx": 370,
+  "far_render_size": [
+    1920,
+    640
+  ],
+  "far_review_xy": [
+    -200,
+    -190
+  ],
+  "back_2_review_xy": [
+    -240,
+    0
+  ],
+  "front_post_visible_height": 48,
+  "notes": "Review compositing measurements only; no runtime integration."
+}
