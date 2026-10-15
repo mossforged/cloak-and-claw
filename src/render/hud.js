@@ -26,7 +26,7 @@ function lagged(f) {
   return [k, v];
 }
 
-export function drawHud(ctx, world, assets, view) {
+export function drawHud(ctx, world, assets, view, runLines = null) {
   const p = world.player, [k, lk] = lagged(p);
   // portrait
   const img = assets.get(p.def.art.idle);
@@ -57,6 +57,8 @@ export function drawHud(ctx, world, assets, view) {
     ctx.fillStyle = 'rgba(20,10,30,0.55)'; ctx.fillRect(0, 0, view.w, view.h);
     text(ctx, 'Defeated!', view.w / 2, view.h / 2 - 20, 72, '#ff5a4e', 'center');
     text(ctx, `Reached wave ${world.wave} with ${world.kos} KOs  -  press J to fight again`, view.w / 2, view.h / 2 + 30, 24, '#fff', 'center');
+    runLines?.forEach((s, i) => text(ctx, s, view.w / 2, view.h / 2 + 66 + i * 26, 19, '#ffe9a8', 'center'));
+    if (runLines) text(ctx, 'L: download run logs', view.w / 2, view.h - 24, 16, '#fff', 'center');
   }
 }
 

@@ -38,6 +38,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-14 code: T002 run log on branch `t002-run-log`: src/log/ (runlog.js counts from bus events, store.js keeps 20 runs in localStorage, L downloads JSON), 2-line summary under "Defeated!". Only sim change: `hit` payload gains `targetPhase` (for windups cut).
+2026-10-14 code: new tests/runlog.test.mjs (bot 3 min x 3 seeds, log matches events; idle 1-hp run logs 1 knockdown). Screen in docs/screens/T002/. L download not clicked in the browser (needs a human).
 2026-10-14 lead: merged T004 (rat windup 34, lunge 1.2; escape test). Art clone had pulled main into the old a001 branch (nothing pushed); guides now say: checkout main first.
 2026-10-14 lead: user approved the rig system; switched art to three-quarter view (decision + style contract); wrote A002.
 2026-10-14 code: T004 rat telegraph on branch `t004-rat-telegraph`: ratSlash windup 22->34, lunge 2.2->1.2; lab gains rat lunge + depth (fallback RULES.depthHit). New tests/rat-telegraph.test.mjs (dodging after 15 frames clears the lane by 36 px vs 16).

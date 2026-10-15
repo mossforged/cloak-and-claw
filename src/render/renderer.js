@@ -29,7 +29,7 @@ export function createRenderer(ctx, assets) {
       }
       fx.draw(ctx);
       ctx.restore();
-      drawHud(ctx, world, assets, VIEW);
+      drawHud(ctx, world, assets, VIEW, opts.runLines);
       if (opts.debug) drawDebug(ctx, world, juice);
       if (opts.paused) drawPaused(ctx, VIEW);
     },
