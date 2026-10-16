@@ -15,7 +15,10 @@
 // grips: per grip type, the hand swaps it puts on, and IK (render/rig-grip.js): ik.arm = [upper, lower] joints it bends;
 //   ik.end = the part whose point ik.hand (that part's own px) must reach ik.to on the weapon art (spear `grip2`, bow
 //   `nock`); arrow / string = draw order of a nocked arrow and the drawn string (in front of the body).
-// tint (T018 stopgap until A011's refitted gear): spearman/archer recolour the whole figure a little (rigs/rat-*.js).
+// overlays / views / masks (T019): A011 gear, face details and recolour masks (rigs/rat-raider-gear.js, generated);
+//   which groups a rat wears = its fighter's art.gear + its look's detail (data/looks.js), drawn by render/looks.js.
+import { OVERLAYS, VIEWS, MASKS } from './rat-raider-gear.js';
+
 const P = 'assets/art/enemies/rat-raider/rig/';
 const SLOT = [55.2, 50.8];   // the near grip hand's shaft slot, hand-front px
 
@@ -23,6 +26,7 @@ export default {
   id: 'rat-raider',
   scale: 0.25260,   // part px -> screen px (136 px tall, as the standee)
   rootY: 43.144,    // pelvis pivot height above the feet in the master crouch (screen px)
+  overlays: OVERLAYS, views: VIEWS, masks: MASKS,
   slots: {
     'one-hand': { parent: 'hand-front', attach: SLOT, order: 830, rest: -75 },
     'two-hand': { parent: 'hand-front', attach: SLOT, order: 830, rest: -75 },

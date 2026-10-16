@@ -3,6 +3,7 @@ import { RULES } from '../data/rules.js';
 import { FIGHTERS } from '../data/fighters/index.js';
 import { bus } from '../core/events.js';
 import { createFighter } from './fighter.js';
+import { pickLook } from './looks.js';
 
 export function stepWaves(w) {
   if (w.fighters.some((f) => f.team === 'enemy')) return;
@@ -16,6 +17,7 @@ export function stepWaves(w) {
     const x = side > 0 ? fl.right + 50 + i * 30 : fl.left - 50 - i * 30;
     const y = w.rng.range(fl.top + 10, fl.bottom - 10);
     const e = createFighter(FIGHTERS[id], x, y, { ai: true, entering: true, facing: -side });
+    e.look = pickLook(e.def, w.lookRng);   // T019: render-only individual look
     if (loop) e.hp = e.maxHp = Math.round(e.maxHp * (1 + 0.3 * loop));
     w.fighters.push(e);
   });

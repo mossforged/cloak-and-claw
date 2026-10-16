@@ -2,7 +2,6 @@
 // grip hand low by the hip near the butt (slot in rigs/rat-raider.js), far grip hand closed on the shaft (IK,
 // render/rig-grip.js), point angled slightly up at the enemy. The far arm's angles here only pick the elbow's bend.
 // Spear direction on screen (0 = forward, - = up) = -75 + torso + arm-front-upper + arm-front-lower + hand-front.
-// tint: stopgap until A011's refitted helmet and jerkin (A008's gear was drawn for the old head; hidden): steel-blue clothes.
 import rat from './rat-raider.js';
 import base from './rat-raider-poses.js';
 
@@ -10,7 +9,6 @@ const arms = (a, b, h, c, d) => ({ 'arm-front-upper': a, 'arm-front-lower': b, '
 const FRONT = { 'arm-front-upper.order': 815, 'hand-back.order': 845 };   // spear arm in front of the body; far fist over the shaft
 export default {
   ...rat, id: 'rat-spearman',
-  tint: { color: '#3d5c8a', alpha: 0.45, parts: ['torso', 'pelvis', 'leg-front-upper', 'leg-back-upper', 'scarf-tail'] },
   poses: {
     ...base,
     stance: { ...base.stance, ...arms(-80, -59, -162, 20, 20), ...FRONT },   // spear -10 (point slightly up), near fist at the hip
