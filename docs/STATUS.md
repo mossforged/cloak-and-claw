@@ -4,7 +4,7 @@
 
 ## Next
 1. **Code builder:** T013 (scrolling Harbor Market).
-2. **Art builder (in parallel):** A009 (rat rig parts redrawn from the art-bible standee, two head sets).
+2. **Art builder: ON HOLD.** A009 waits for the rig standard (study 2026-10-16); it will be rewritten to the standard's first gate (the rat master) once the user agrees.
 3. **User:** judges T013's look and feel; judges A009 (does it match the standee? head S or R?).
 4. **After A009 is approved:** a gear refit art task (hood, helmet, hat on the chosen head), then a code task to import A009 into the rat rig.
 
@@ -22,9 +22,10 @@
 
 ## What builders need now
 - Code: `docs/tasks/T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage). Run the game with `tools/Play.command` or `tools/serve.py` (no stale cache).
-- Art: `docs/tasks/A009-rat-raider-standee-rig.md`. Doesn't touch anything T013 uses.
+- Art: nothing until the rig standard is agreed. A009 is on hold (don't start it).
 
 ## Open questions (for the user)
+- **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
@@ -48,6 +49,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: study "How pros build 2D rigs" + proposed rig standard (separate hands, feet, pelvis; planned swap library; master-first, cut-not-regenerate; four gates with a motion test). A009 on hold pending the user's yes. T013 waiting for the user's play check.
 2026-10-15 lead: merged T011 (rat rig + weapon kits; spearman and archer in waves 2-3; 14/14 tests, CI green). User agreed: rat look is the drawings, not the rig -> A009 redraws the rat parts from the art-bible standee; T013 next for code.
 2026-10-15 code: T011 round 2: game froze at wave 2 for the user = Chrome kept a stale `fighters/index.js` from the plain `http.server` (not a code bug). Added `tools/Play.command` (double-click; no-cache server on port 8100). User: spear and bow rats "do feel different"; but the rats "don't match the original standee in quality", not crouching, "arms and legs are skinny".
 2026-10-15 code: applied mock-up variant C (docs/screens/T011/5-*.jpg, user agreed) as a stopgap: legs ~1.5x thicker / 0.75x shorter, arms 1.4x, head 1.15x, torso 1.1x, hips lower, feet closer (legs re-solved, walk retuned). Build "t011 rat kits v2". **Lead decision:** matching the standee needs rat parts drawn to its proportions (cut from the standee drawing), or rats as pose-swap standees instead of a rig.
