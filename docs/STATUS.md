@@ -4,7 +4,7 @@
 
 ## Next
 1. **Code builder:** T015 (subtle bracing motion while blocking). Next after it: the rig bench, once the rig standard is approved.
-2. **Art builder: ON HOLD.** A009 waits for the rig standard (study 2026-10-16); it will be rewritten to the standard's first gate (the rat master) once the user agrees.
+2. **Art builder:** idle. A009 delivered (branch `a009-rat-raider-standee-rig`); waiting for the user's look check (match the standee? head S or R?). Then the follow-up task brings it up to the rig standard.
 3. **User:** approve or change the rig standard's rules; confirm two T013 calls (camera never scrolls back; the stage loop jumps to the start); judge T015.
 4. **After A009 is approved:** a gear refit art task (hood, helmet, hat on the chosen head), then a code task to import A009 into the rat rig.
 
@@ -49,6 +49,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: rig standard approved by the user. A009 arrived (built from the old packet before approval): a big step toward the standee; under review as the rat master + first parts. Its `generated/` raw outputs (32 MB) should be dropped before merge (repo .git ~205 MB).
 2026-10-16 lead: merged T013 (harbor-run scrolling stage; 15/15 tests; user passed the play check). Builder also fixed a T010 freeze (jump attack while holding a floor weapon), with a test. Belt depth settled at 120 px on the scrolling stage. Wrote T015 (bracing motion, user idea).
 2026-10-16 lead: study "How pros build 2D rigs" + proposed rig standard (separate hands, feet, pelvis; planned swap library; master-first, cut-not-regenerate; four gates with a motion test). A009 on hold pending the user's yes. T013 waiting for the user's play check.
 2026-10-15 code: T013 human check done (user): sea strip fixed, joins not noticeable ("the background images seem smooth"), parallax good, no freeze. Ready for lead review.

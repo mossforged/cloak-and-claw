@@ -2,7 +2,7 @@
 
 Every rigged character follows this. Art packets cite it and only list what differs. Background and sources: `docs/studies/2026-10-16-how-pros-build-2d-rigs.md`.
 
-**Status:** purpose agreed with the user (2026-10-16); the rules below are PROPOSED until the user approves them. Mouse Fighter predates it and is not retrofitted until a move needs it.
+**Status: APPROVED by the user (2026-10-16).** Mouse Fighter predates it and is not retrofitted until a move needs it.
 
 ## 0. Purpose (agreed with the user, 2026-10-16)
 Every rule below must serve one of these. A rule that serves none gets cut.
