@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 A012 rat spear and bow (review mock-ups)
+User: "the spearman's missing an arm?" (far hand hidden, spear held one-handed) and "the archer rat could be drawing the string back further maybe?" -> T020 (far hand drawn over the shaft; full draw to the ear).
+
 ## 2026-10-16 T018 new rat in game
 User: the first walk was "very scuttly" next to the upright mouse; C was best of A/B/C, asked for more upright; picked F (the tallest) as the rat walk.
 

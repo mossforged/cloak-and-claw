@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T018 new rat in game (merged 2026-10-16). Last art task: A011 rat finishing set (merged 2026-10-16; user: "very cool").
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T018 new rat in game (merged 2026-10-16). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
 
 ## Next
-1. **Code:** T019 (real gear for archer/spearman + random face details, tints and size per rat).
-2. **Art:** A012 (spear, bow and arrow redrawn to match the new rat; near pinch hand; measured weapon points).
-3. **User:** judge T019 (gear and crowd variety in a fight).
+1. **Code:** T019 (rat gear + individual variety), then T020 (new spear/bow in game; spearman's far hand visibly on the shaft; archer full draw to the ear).
+2. **Art:** idle (rat roster art complete: A010, A011, A012). Next: the next enemy body under the rig standard (lead to propose).
+3. **User:** judge T019 (gear and crowd variety), then T020 (spear and bow holds).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -20,8 +20,8 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T019-rat-gear-and-variety.md`.
-- Art: `docs/tasks/A012-rat-spear-bow.md`.
+- Code: `docs/tasks/T019-rat-gear-and-variety.md`, then `T020-rat-weapons-and-holds.md`.
+- Art: none queued.
 
 ## Open questions (for the user)
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
@@ -29,7 +29,6 @@
 
 ## Parked
 - Rig bench's generic strip rolls the head in knockdown/down (game poses are fine; T018). Fix when the bench is next touched.
-- A010 has no near-hand pinch: the archer borrows the far pinch turned 180 degrees (T018). In A012.
 - Fish slap lands mid-spin while he faces away (timing comes from the unchanged hitbox, T017). Revisit in a later feel pass if it reads wrong.
 - Weapon drops for the other rats: drops are optional (keep the floor uncluttered), but a drop is always the weapon held (decision 2026-10-16). Whether the spearman ever drops his spear: decide with Stage 4 enemies.
 - **Heavy throwables by size** (user, 2026-10-15): the biggest breakables (barrels, big crates) can be picked up and thrown only by big animals (e.g. a badger hero; a brute enemy hurling a barrel at the player). Mouse-sized heroes can only smash them. Props get a `weight` and fighters a `size`/`strength` in data; ties into the species x size hook. For Stage 4 (brute enemy) and Stage 8 (second, bigger hero).
@@ -52,6 +51,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged A012 (weapons are cleaner, bolder versions of A004's designs; near pinch reads as a fist up close). User on the review mock-ups: "the spearman's missing an arm", the archer "could be drawing the string back further": both are rig poses -> T020.
 2026-10-16 lead: wrote A012 (spear/bow/arrow redraw + near pinch hand), user's pick.
 2026-10-16 lead: merged T018 (A010 rat in game for all three types, uniform scale, standard part names, holds/drops the same cutlass; user picked upright walk F; bot runs identical; 18/18 tests; pycache removed; mouse poses split).
 2026-10-16 lead: merged A011 (user: "very cool"); wrote T019 (gear + individual variety in game, muted earthy tint palette by default). Art idle.
