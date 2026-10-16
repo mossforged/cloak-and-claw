@@ -46,7 +46,7 @@ export function thinkAI(f, w) {
     if (!c.mx) f.entering = false;
     return;
   }
-  if (p.state === 'dead') { c.mx = c.my = 0; return; }
+  if (p.state === 'dead' || p.state === 'downed') { c.mx = c.my = 0; return; }   // T022: nobody beats on the fallen
 
   const side = Math.sign(f.x - p.x) || 1;
   if (--ai.wait <= 0) {
@@ -77,7 +77,7 @@ export function thinkAI(f, w) {
   const cornered = archer && near < cfg.flee && (tx === fl.left || tx === fl.right);
   const ready = Math.abs(dx) < (cfg.slack ?? 14) || cornered;
   if (archer && inFlight(w, f)) return;
-  if (ai.token && ready && Math.abs(dy) < 6 && p.state !== 'down') {
+  if (ai.token && ready && Math.abs(dy) < 6 && p.state !== 'down' && p.state !== 'downed') {
     c.mx = c.my = 0; c.attack = true; f.facing = -side;
   }
 }

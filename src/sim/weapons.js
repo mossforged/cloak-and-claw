@@ -4,6 +4,7 @@
 // empty hand finishes the swing, then the fighter's own moves return). Grab button (H), for fighters with `pickup`:
 // holding a weapon -> eat food underfoot, else swap for a weapon underfoot, else toss the weapon (state `toss`:
 // wind, release, recovery); empty-handed -> grab an enemy in reach (sim/grab.js) first, else eat / pick up the item underfoot.
+// T022: a downed friend in reach is picked up before anything else (sim/revive.js); a potion goes into the potion slot.
 // Picking up a weapon is state `pickup` (round 2): stow (sheathe the sword, or flick the held weapon aside: it lands
 // behind him), reach (crouch; the weapon is in hand at the end), rise. Only one weapon is ever held.
 import { RULES } from '../data/rules.js';
@@ -11,6 +12,8 @@ import { bus } from '../core/events.js';
 import { setState } from './fighter.js';
 import { tryGrab } from './grab.js';
 import { spawnItem } from './props.js';
+import { takePotion } from './potions.js';
+import { startRevive } from './revive.js';
 
 export const movesOf = (f) => f.weapon?.def.moves ?? f.def.moves;
 export const attackOf = (f) => f.weapon?.def.attack ?? f.def.attack;
@@ -21,7 +24,7 @@ export function itemUnder(f, w, kind) {
   const P = f.def.pickup;
   let best = null;
   for (const it of w.items) {
-    if (it.state !== 'floor' || (kind && it.def.kind !== kind)) continue;
+    if (it.state !== 'floor' || (kind && it.def.kind !== kind) || (it.def.kind === 'potion' && f.potion)) continue;   // T022: one potion slot
     if (Math.abs(it.x - f.x) > P.range || Math.abs(it.y - f.y) > P.depth) continue;
     if (!best || Math.abs(it.x - f.x) < Math.abs(best.x - f.x)) best = it;
   }
@@ -62,12 +65,15 @@ export function stepPickup(f, w) {
 
 // Grab button pressed in idle/walk. true = it did something (the fighter's step ends).
 export function pressGrab(f, w) {
+  if (startRevive(f, w)) return true;   // T022: a downed friend in reach comes first (only with more than one hero)
   if (!f.def.pickup) return !!(f.def.grab && tryGrab(f, w));
   if (f.weapon) {
     const food = itemUnder(f, w, 'food');
     if (food) return eat(f, food, w);
     const other = itemUnder(f, w, 'weapon');
     if (other) return startPickup(f, other, w);
+    const pot = itemUnder(f, w, 'potion');
+    if (pot) return takePotion(f, pot, w);
     if (!f.def.toss) return false;
     setState(f, 'toss'); f.vx = f.vy = 0;
     return true;
@@ -75,7 +81,7 @@ export function pressGrab(f, w) {
   if (f.def.grab && tryGrab(f, w)) return true;
   const it = itemUnder(f, w);
   if (!it) return false;
-  return it.def.kind === 'food' ? eat(f, it, w) : startPickup(f, it, w);
+  return it.def.kind === 'food' ? eat(f, it, w) : it.def.kind === 'potion' ? takePotion(f, it, w) : startPickup(f, it, w);
 }
 
 // `toss`: wind, then the weapon leaves the hand as a spinning projectile (sim/props.js stepItems), recovery.

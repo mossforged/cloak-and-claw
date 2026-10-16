@@ -28,6 +28,8 @@ import { RAT_SPEAR } from './moves/rat-spear.js';
 import { RAT_BOW } from './moves/rat-bow.js';
 import mouseFighterBrace from './rigs/mouse-fighter-brace.js';
 import { LOOKS } from './looks.js';
+import healthPotion from './items/health-potion.js';
+import { ALLY } from './ally.js';
 
 export const ROOTS = {
   'src/data/moves/mouse-sword.js': MOUSE_SWORD,
@@ -54,6 +56,8 @@ export const ROOTS = {
   'src/data/moves/big-fish.js': BIG_FISH,
   'src/data/rigs/mouse-fighter-brace.js': mouseFighterBrace,
   'src/data/looks.js': LOOKS,
+  'src/data/items/health-potion.js': healthPotion,
+  'src/data/ally.js': ALLY,
 };
 // One pick section per floor weapon's moves (T010).
 const weaponMoves = (title, file) => ({
@@ -243,6 +247,25 @@ export const LAB_SCHEMA = [
       ['layers.fade', 0, 1, 0.05], ['camera.follow', 200, 700, 5], ['camera.catchUp', 1, 20, 0.5], ['camera.edge', 0, 120, 1],
       ['floor.top', 300, 540, 1], ['floor.bottom', 300, 540, 1],
       { path: 'enemyCap', min: 1, max: 8, step: 1, file: 'src/data/rules.js' }, { path: 'zoneStagger', min: 1, max: 120, step: 1, file: 'src/data/rules.js' },
+    ],
+  },
+  {
+    title: 'Helping (T022: downed, revive, potions)', file: 'src/data/rules.js',
+    fields: [
+      ['downed.frames', 60, 1800, 10], ['revive.frames', 10, 240, 1], ['revive.hpShare', 0.05, 1, 0.05], ['revive.invuln', 0, 240, 5],
+      ['revive.range', 20, 140, 1], ['revive.depth', 6, 60, 1],
+      ['potions.drinkHold', 6, 90, 1], ['potions.drink', 4, 90, 1], ['potions.flight', 10, 80, 1], ['potions.reach', 100, 900, 10],
+      ['potions.drops.crate', 0, 1, 0.05], ['potions.drops.barrel', 0, 1, 0.05], ['potions.drops.rat-raider', 0, 1, 0.05],
+      { path: 'heal', min: 5, max: 100, step: 1, file: 'src/data/items/health-potion.js', label: 'potion heal' },
+      { path: 'splash.x', min: 10, max: 140, step: 1, file: 'src/data/items/health-potion.js', label: 'potion splash x' },
+    ],
+  },
+  {
+    title: 'AI ally (T022, ?ally=1)', file: 'src/data/ally.js',
+    fields: [
+      ['damage', 0.1, 1.5, 0.05], ['swingGap', 10, 150, 1], ['range', 40, 110, 1], ['leash', 100, 600, 10], ['back', 40, 400, 10],
+      ['react', 0, 30, 1], ['dodge.reach', 0, 80, 1], ['dodge.lane', 0, 40, 1],
+      ['potionAt', 0.05, 1, 0.05], ['drinkAt', 0.05, 1, 0.05], ['alone', 40, 400, 10],
     ],
   },
 ];

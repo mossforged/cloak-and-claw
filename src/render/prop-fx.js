@@ -2,6 +2,8 @@
 // propHit: wood chips + dust; propBreak: debris pieces tumble with gravity and fade, crunch flash + ring + dust;
 // eat: heal number, ring pop, rising sparkles; pickup: ring + star glint; weaponBreak: the weapon snaps in two halves
 // that spin away and fade, with sparks; a hit whose move has fx.word pops that word (the fish's SLAP!).
+// T022 (JUICE.help): heal = green burst (ring, green sparkles) and a rising +N; revive = flash, double ring, 'Up!' word;
+// potionPickup = the pickup pop.
 import { bus } from '../core/events.js';
 import { JUICE } from '../data/juice.js';
 
@@ -35,6 +37,26 @@ export function createPropFx(assets) {
     add({ type: 'ring', x, y: y - 20, r: I.ringR, life: 14 });
     add({ type: 'heal', x, y: y - 50, text: `+${heal}`, life: JUICE.numbers.life });
     for (let i = 0; i < I.sparkles; i++) add({ type: 'sparkle', x: x + (Math.random() - 0.5) * 50, y: y - Math.random() * 40, vy: -0.8 - Math.random(), size: 6 + Math.random() * 6, life: 28 + Math.random() * 14 });
+  });
+  bus.on('heal', ({ f, heal, x, y }) => {
+    const H = JUICE.help.heal, cy = f.y - 50;
+    add({ type: 'ring', x: f.x, y: cy, r: H.ringR, life: 16, color: '125,255,106' });
+    add({ type: 'ring', x: f.x, y: cy, r: H.ringR * 1.6, life: 22, color: '125,255,106' });
+    add({ type: 'heal', x: f.x, y: cy - 40, text: `+${heal}`, life: JUICE.numbers.life });
+    for (let i = 0; i < H.sparkles; i++) add({ type: 'sparkle', x: f.x + (Math.random() - 0.5) * 60, y: f.y - Math.random() * 90, vy: -0.9 - Math.random(), size: 6 + Math.random() * 7, life: 30 + Math.random() * 14, green: true });
+    if (x !== f.x) dust(x, y, 3, 24);   // tossed: a splash where it landed
+  });
+  bus.on('revive', ({ target }) => {
+    const U = JUICE.help.up, cy = target.y - 50;
+    add({ type: 'flash', x: target.x, y: cy, r: U.flashR, life: 12 });
+    add({ type: 'ring', x: target.x, y: cy, r: U.ringR, life: 14 });
+    add({ type: 'ring', x: target.x, y: cy, r: U.ringR * 1.7, life: 22 });
+    add({ type: 'word', x: target.x, y: cy - 70, text: U.word, life: 46 });
+    for (let i = 0; i < 10; i++) add({ type: 'sparkle', x: target.x + (Math.random() - 0.5) * 70, y: target.y - Math.random() * 100, vy: -1 - Math.random(), size: 7 + Math.random() * 7, life: 30 + Math.random() * 12 });
+  });
+  bus.on('potionPickup', ({ x, y }) => {
+    add({ type: 'ring', x, y: y - 14, r: JUICE.items.ringR, life: 12 });
+    add({ type: 'sparkle', x, y: y - 30, vy: -0.6, size: 18, life: 18 });
   });
   bus.on('pickup', ({ x, y }) => {
     add({ type: 'ring', x, y: y - 14, r: JUICE.items.ringR, life: 12 });
@@ -110,13 +132,13 @@ const DRAW = {
     ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
   },
   ring(ctx, e, k) {
-    ctx.strokeStyle = `rgba(255,255,255,${1 - k})`; ctx.lineWidth = 4 * (1 - k) + 1;
+    ctx.strokeStyle = `rgba(${e.color ?? '255,255,255'},${1 - k})`; ctx.lineWidth = 4 * (1 - k) + 1;
     ctx.beginPath(); ctx.arc(e.x, e.y, e.r * (0.3 + k), 0, Math.PI * 2); ctx.stroke();
   },
   sparkle(ctx, e, k) {   // four-point star, pops open then shrinks
     const s = e.size * Math.sin(Math.PI * k), w = s * 0.2;
     ctx.save(); ctx.globalCompositeOperation = 'lighter'; ctx.translate(e.x, e.y); ctx.rotate(k);
-    ctx.fillStyle = 'rgba(255,250,200,0.95)';
+    ctx.fillStyle = e.green ? 'rgba(150,255,140,0.95)' : 'rgba(255,250,200,0.95)';
     for (const a of [0, Math.PI / 2]) { ctx.save(); ctx.rotate(a); ctx.beginPath(); ctx.moveTo(-s, 0); ctx.lineTo(0, -w); ctx.lineTo(s, 0); ctx.lineTo(0, w); ctx.closePath(); ctx.fill(); ctx.restore(); }
     ctx.restore();
   },

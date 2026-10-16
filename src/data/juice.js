@@ -39,4 +39,10 @@ export const JUICE = {
   // T021 player slots: canvas filter on a slot's hero and HUD portrait (the test hero on slots 1, 2 = a tinted Mouse
   // Fighter, no new art) and the slot's P1/P2/P3 tag colour
   heroes: { filter: ['none', 'hue-rotate(150deg) saturate(1.2)', 'hue-rotate(250deg) saturate(1.1)'], tag: ['#ffd23f', '#6fd3ff', '#ff8adf'] },
+  // T022 helping (render/helping.js, prop-fx.js): timer ring over a downed hero (r px, z = height over his feet, `warn` =
+  // share of time left where it turns red and pulses), revive ring (r, width) round him while a friend holds grab, the
+  // prompt shown to a friend in reach; revive pop (flash r, rings, 'Up!' word); heal burst (ring r, green sparkles);
+  // the potion drawn in hand while tossing/drinking (px, at x/z from the feet); lob ghosts behind a potion in flight.
+  help: { timer: { r: 15, z: 46, warn: 0.3 }, revive: { r: 34, width: 7 }, prompt: true,
+    up: { flashR: 90, ringR: 52, word: 'Up!' }, heal: { ringR: 40, sparkles: 12 }, hand: { px: 0.26, x: 24, z: 84 }, ghosts: 4 },
 };

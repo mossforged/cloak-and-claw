@@ -64,7 +64,13 @@ export function poseOf(f, time) {
     case 'knockdown': return { ...ZERO, rot: Math.max(LIE, -f.t * 0.13) };
     case 'down': return { ...ZERO, rot: LIE, sy: f.t < 6 ? 0.85 : 1 };
     case 'getup': return { ...ZERO, rot: LIE * (1 - easeOut(f.t / K.getupFrames)) };
-    case 'dead': return { ...ZERO, rot: LIE };
+    case 'dead': case 'downed': return { ...ZERO, rot: LIE };
+    case 'revive': { const k = Math.min(1, f.t / 8); return { ...ZERO, rot: 0.25 * k, sy: 1 - 0.15 * k, sx: 1 + 0.05 * k }; }   // T022: crouched over his friend
+    case 'potionToss': {   // as a weapon toss, on the potion's timings
+      const T = RULES.potions, k = f.t < T.wind ? f.t / T.wind : Math.max(0, 1 - (f.t - T.wind) / T.recovery);
+      return { ...ZERO, rot: f.t < T.wind ? -0.2 * k : 0.18 * k, sx: 1 + 0.04 * k, sy: 1 - 0.04 * k };
+    }
+    case 'drink': return { ...ZERO, rot: -0.12 * Math.min(1, f.t / 8) };
   }
   return ZERO;
 }

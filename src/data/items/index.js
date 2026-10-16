@@ -7,4 +7,5 @@ import cheeseWedge from './cheese-wedge.js';
 import berryPie from './berry-pie.js';
 import ratSpear from './rat-spear.js';
 import ratBow from './rat-bow.js';
-export const ITEMS = Object.fromEntries([ratCutlass, plankClub, bigFish, cheeseWedge, berryPie, ratSpear, ratBow].map((d) => [d.id, d]));
+import healthPotion from './health-potion.js';
+export const ITEMS = Object.fromEntries([ratCutlass, plankClub, bigFish, cheeseWedge, berryPie, ratSpear, ratBow, healthPotion].map((d) => [d.id, d]));
