@@ -50,6 +50,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: reviewed A011 (branch `a011-rat-raider-finishing`, 136 files / 35 MB, scope clean): gear refit on all six heads and three torso views, 4 face details, 82 masks, rig-source overlays. Waiting for the user's look. Repo: assets/source 117 MB, pack ~159 MB (LFS threshold in decisions: ~200 MB of sources).
 2026-10-16 lead: merged T017 (weapon feel, render only; bot runs identical; 18/18 tests; user OK after 5 rounds). T018 gets two small extras: remove committed tools/__pycache__, split the over-long mouse poses file.
 2026-10-16 lead: merged A010 (17 parts, 15 swaps, rig-source.json; the A003 cutlass fits the grip; 17/17 tests). T018 can start after T017. Note for T018: a thin slot seam shows in the enlarged grip hand; check at game size.
 2026-10-16 lead: user approved the A010 rat; sword rejected (blade unfinished) -> rule: enemies hold the weapon they drop (rat holds the A003 cutlass). A010 addendum (rig-source.json, no sword), wrote A011 (finishing set) and T018 (import).
