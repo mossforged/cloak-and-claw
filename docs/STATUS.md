@@ -4,7 +4,7 @@
 
 ## Next
 1. **Code:** T023 (import the new Mouse Fighter + attack footwork), in progress.
-2. **Art:** idle until the combatant standard names the next body (first enemy built through the standard).
+2. **Art:** A014 stronghold concept sheets (three directions, building spots in three states, props and ambient life). Concepts only, so no large-file setup needed.
 3. **User:** answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
 4. **Lead:** review T023; draft the combatant standard (heroes + enemies), then the mission/stage standard.
 
@@ -23,7 +23,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T023-import-new-mouse.md`.
-- Art: none queued.
+- Art: `docs/tasks/A014-stronghold-concepts.md`.
 
 ## Open questions (for the user)
 - **Stage 2 gate** (above). Then the lead tags `stage-2` and `stage-3`.
@@ -43,5 +43,6 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-16 lead: wrote A014 (broad concept sheets for the stronghold home base; user's ask to keep Art busy). Concept packets deliver small JPGs to `docs/concepts/<ID>/` (Art guide updated).
 2026-10-16 lead: user chose large-file storage for source art (option A): `.gitattributes` tracks new source images from A014 on (old folders and review sheets stay normal); Mac setup, Art guide and asset contract updated.
 2026-10-16 lead: STATUS tidied (old notes, parked detail and old plan to history.md); stage plan rewritten around the hook (user approved the rewrite). Stage 2 gate question to the user.
