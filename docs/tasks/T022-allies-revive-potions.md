@@ -26,3 +26,6 @@ The hook (user, 2026-10-16): **community and helping**. Rescued adventurers figh
 - Human: play solo with `?ally=1` and with two people. Does picking a friend up feel good and worth the risk? Does tossing a potion feel like helping? Is the ally helpful without stealing the fight?
 
 Out of scope: rescued adventurers' art and own move sets, more helping verbs (shield cover, friend toss, team lift: later), failure costs, the home base.
+
+## Addendum (lead, 2026-10-16, from the study "Mission and home-base games")
+Dragon's Crown's AI allies became "boss fodder", "getting torn to shreds" by big attacks. So the ally brain's **first rule is to step out of telegraphed danger**: when an enemy is in windup and the ally is inside that attack's reach and lane, he moves out of the lane (or blocks, if he can) before doing anything else. Add a test: an ally standing in a rat's lane during a windup has left the lane by the strike frame.
