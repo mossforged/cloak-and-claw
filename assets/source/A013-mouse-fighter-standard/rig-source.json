@@ -321,9 +321,9 @@
         ]
       ]
     },
-    "foot-back-out": {
-      "img": "foot-back-out.png",
-      "of": "foot-back"
+    "foot-front-out": {
+      "img": "foot-front-out.png",
+      "of": "foot-front"
     }
   },
   "overlays": {},
