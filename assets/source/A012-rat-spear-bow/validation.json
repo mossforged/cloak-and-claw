@@ -1,0 +1,99 @@
+{
+  "handCanvas": [
+    1536,
+    2304
+  ],
+  "handPivot": [
+    410,
+    1260
+  ],
+  "lowerFingersAndCuffUnchanged": true,
+  "poses": {
+    "spearman": {
+      "hand-front": {
+        "wrist": [
+          272.6068166567682,
+          391.93803101121426
+        ],
+        "rotation": -12,
+        "hand": "grip",
+        "elbow": [
+          266.6600926601588,
+          384.21177156179914
+        ]
+      },
+      "hand-back": {
+        "wrist": [
+          300.24393486222584,
+          383.70911581259554
+        ],
+        "rotation": 0,
+        "hand": "grip",
+        "elbow": [
+          306.5673907993376,
+          387.29511039804896
+        ]
+      },
+      "weapon": {
+        "grip": [
+          265,
+          395
+        ],
+        "grip2": [
+          313.3693988562867,
+          384.7187668890618
+        ],
+        "rotation": 78,
+        "scale": 0.115
+      }
+    },
+    "archer": {
+      "hand-back": {
+        "wrist": [
+          688.8745360059391,
+          370.99034892353376
+        ],
+        "rotation": 0,
+        "hand": "grip",
+        "elbow": [
+          681.6159305839886,
+          370.59273166545074
+        ]
+      },
+      "hand-front": {
+        "wrist": [
+          648.2148849294729,
+          364.9324424647364
+        ],
+        "rotation": 180,
+        "hand": "pinch",
+        "elbow": [
+          647.3662568234032,
+          374.6452402959031
+        ]
+      },
+      "weapon": {
+        "grip": [
+          702,
+          372
+        ],
+        "tips": [
+          [
+            688.35,
+            329.49
+          ],
+          [
+            688.35,
+            414.64
+          ]
+        ],
+        "drawnNock": [
+          662.35,
+          372.0
+        ],
+        "scale": 0.065
+      }
+    }
+  },
+  "note": "Uniform scales, no stretched limbs. IK validates both wrists reachable. Static review only; human look and runtime motion check pending."
+}

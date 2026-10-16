@@ -1,0 +1,72 @@
+{
+  "coordinateSpace": "Full delivered source PNG pixels; origin top-left, x right, y down. All points measured before trim.",
+  "importNote": "For a trimmed/scaled game item, subtract trim origin then multiply points by the import scale. reviewScale maps source pixels to screen pixels directly; do not apply the old item px values unchanged.",
+  "weapons": {
+    "spear": {
+      "img": "spear.png",
+      "grip": [
+        510,
+        1120
+      ],
+      "grip2": [
+        510,
+        690
+      ],
+      "tip": [
+        512,
+        25
+      ],
+      "reviewScale": 0.115,
+      "rest": 90,
+      "canvas": [
+        1024,
+        1536
+      ]
+    },
+    "bow": {
+      "img": "bow.png",
+      "grip": [
+        610,
+        754
+      ],
+      "tips": [
+        [
+          400,
+          100
+        ],
+        [
+          400,
+          1410
+        ]
+      ],
+      "nock": [
+        400,
+        754
+      ],
+      "reviewScale": 0.065,
+      "rest": 0,
+      "reviewPull": 400,
+      "canvas": [
+        1024,
+        1536
+      ]
+    },
+    "arrow": {
+      "img": "arrow.png",
+      "nock": [
+        100,
+        366
+      ],
+      "tip": [
+        2076,
+        364
+      ],
+      "reviewScale": 0.035,
+      "rest": 0,
+      "canvas": [
+        2110,
+        745
+      ]
+    }
+  }
+}
