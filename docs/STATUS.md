@@ -60,6 +60,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: handover point for a fresh lead chat (lead-opening.md working notes updated). In flight: Code on T023 (new Mouse Fighter + attack footwork). Next lead jobs: review T023, then draft the combatant standard, then the mission/stage standard; design talk on the first rescued folk.
 2026-10-16 lead: user play-checked T021 (multi-hero): "I didn't see any issues with it".
 2026-10-16 lead: merged T022 (user approved v2; ally leaves floor potions to players; 22/22 tests; solo bot numbers identical). Next: T023, then the combatant standard.
 2026-10-16 lead: user: gear mostly agreed (significance a goal, not a rule); downed allies wounded for a mission or no cost, to be tested; combatant standard agreed (after T022/T023).
