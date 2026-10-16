@@ -1,0 +1,12 @@
+{
+  "rawAnklePivot": [
+    665,
+    515
+  ],
+  "canvasAnklePivot": [
+    1009,
+    1940
+  ],
+  "uniformScale": 0.3,
+  "note": "Uniform scale only, no rotation or stretching. Ankle cap is covered by original shin. Raw foot is an image-tool turned view of original foot; same source canvas and exact existing ankle pivot."
+}

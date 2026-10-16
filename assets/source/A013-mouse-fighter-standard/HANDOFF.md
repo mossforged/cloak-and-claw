@@ -1,6 +1,6 @@
 # A013 — Mouse Fighter standard source kit
 
-Branch: `a013-mouse-fighter-standard`. State: **source; human G1/G2 review pending**. No game import or visual motion approval is claimed.
+Branch: `a013-mouse-fighter-standard`. State: **source; initial look accepted by user; turned-foot addendum ready for review**. No game import or visual motion approval is claimed.
 
 Delivered: front and rear masters, all 15 standard biped parts plus tail/scarf-tail, 17 swaps (six expression/view heads, seven hand variants, side/rear torsos and two whole-arm drawings), measured `rig-source.json`, `item-fits.json`, source provenance and reproducible preparation scripts. Every part and swap uses a 1536 × 2304 canvas, a common uniform scale and y=2050 floor. The near boot now points forward/right.
 
@@ -25,3 +25,11 @@ No required filename is missing. Recolour masks, face-detail overlays, new moves
 Human review: **is this our hero?** After the look is accepted, review bends and the standard motion strip on the rig bench before importing.
 
 Final static measurements: **0.12%** of the independent body master is uncovered; **3.12%** of part silhouette lies outside it (primarily the completed far glove). All 17 pivots overlap their own part and, where applicable, its parent. Existing bench reader: no errors or missing standard parts; 289 sampled strip frames have finite transforms. Draft import at uniform x0.4 succeeds with output confined to `/private/tmp`.
+
+## Addendum — turned-out back foot (2026-10-16)
+
+Delivered `foot-back-out.png`, same 1536 × 2304 green canvas and exact **[1009, 1940] ankle pivot** as `foot-back`. Registered in `rig-source.json` as a swap `of: "foot-back"`; inherits parent and band 210. The painted view brings the toes toward the camera, foreshortens the boot and preserves its brown leather straps, gold fastening and three pink toes. Its higher hidden cap sits behind the original shin; no replacement master was made.
+
+`review-foot-back-out.png` compares the approved standee and actual part assemblies using the forward and turned foot, with enlarged foot details and a native 960 × 540 game panel. The separate native panel is `review-foot-back-out-game-size.png`; both mouse assemblies have 130 px bodies. This comparison is appended to `review.png`. `assembled-foot-back-out.png` is the actual new assembly with unchanged A002 items. The exact image prompt and reproducible uniform registration are in `prompt.md`, `addendum.py`, and `foot-back-out-registration.json`; raw painting retained as `raw-foot-back-out.png`.
+
+Code: use `foot-back-out` in stance, idle, block and other planted poses; retain `foot-back` for walking. No optional front-foot swap was needed. This is a painted perspective swap, so it intentionally differs from the original master's foot silhouette. Static ankle overlap is checked; G3 visual motion review remains with Code. No required addendum deliverable is missing.
