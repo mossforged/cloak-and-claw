@@ -3,7 +3,7 @@
 **Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T020 rat weapons held right (merged 2026-10-16; user: "it looks good to me"). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
 
 ## Next
-1. **Code:** next task waits on A013 (import the new Mouse Fighter, sword and shield in his fists). Meanwhile free for a foundation task once the user picks one.
+1. **Code:** T021 (engine supports more than one hero: `w.heroes`, per-slot input, AI targets a hero, camera for several, HUD per hero; one-player game unchanged). Then the Mouse Fighter import once A013 merges.
 2. **Art:** A013 (Mouse Fighter to the rig standard: master + parts, like the rat). Foundational: the hero is seen most and the last old-style rig.
 3. **User:** A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools).
 
@@ -20,11 +20,11 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: nothing queued (Mouse Fighter import after A013 merges).
+- Code: `docs/tasks/T021-multi-hero-engine.md`.
 - Art: `docs/tasks/A013-mouse-fighter-standard.md`.
 
 ## Open questions (for the user)
-- **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook, (2) multi-hero engine (17 single-player assumptions in 9 files), (3) run loop in grey box (growth, coins/food, shop, lives), (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
+- **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook, (2) multi-hero engine (**started: T021, user 2026-10-16**), (3) run loop in grey box (growth, coins/food, shop, lives), (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
@@ -56,6 +56,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user chose to do the multi-hero engine change now -> wrote T021.
 2026-10-16 lead: merged T020 (4 rounds; user picked the cutlass orientation and spear hold E; 20/20 tests). Mouse floor weapons now follow his fist too.
 2026-10-16 lead: A013 addendum turned the far foot; user spotted it was the near (trailing) foot that should turn. Lead's wording error ("back foot" vs part `foot-back` = far). Addendum 2: `foot-front-out`. Rig standard + lessons now say front/back = near/far, never leading/trailing.
 2026-10-16 lead: user on A013: "it looks good"; back foot points forward where the standee's turns toward the camera -> A013 addendum: `foot-back-out` swap (same branch), then merge.
