@@ -50,6 +50,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 code: T018 on branch `t018-import-new-rat`: A010 imported via tools/rig_from_source.py (uniform scale, no fudges), rat poses rewritten on the standard names (master crouch, IK-fitted scuttle, hand swaps), raider holds and drops the same rat-cutlass item, grip IK places hand parts; spearman/archer tinted (A008 gear hidden until A011). Bot runs identical; 18/18 tests.
+2026-10-16 code: T018 notes: A010 has no near pinch hand (archer borrows the far one turned 180 deg; ask A011); the bench's standard strip still rolls the head in knockdown/down (game poses don't). Screens in docs/screens/T018/; human look check open.
 2026-10-16 lead: merged T017 (weapon feel, render only; bot runs identical; 18/18 tests; user OK after 5 rounds). T018 gets two small extras: remove committed tools/__pycache__, split the over-long mouse poses file.
 2026-10-16 lead: merged A010 (17 parts, 15 swaps, rig-source.json; the A003 cutlass fits the grip; 17/17 tests). T018 can start after T017. Note for T018: a thin slot seam shows in the enlarged grip hand; check at game size.
 2026-10-16 lead: user approved the A010 rat; sword rejected (blade unfinished) -> rule: enemies hold the weapon they drop (rat holds the A003 cutlass). A010 addendum (rig-source.json, no sword), wrote A011 (finishing set) and T018 (import).

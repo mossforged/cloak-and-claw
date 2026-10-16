@@ -37,7 +37,7 @@ const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 // drawing; part null = empty hand, slot hidden). Pure; tests use it.
 export function layoutRig(rig, joints, swap = {}, held = null) {
   const frames = {};
-  const parts = held ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : { ...rig.parts };
+  const parts = held?.part ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : { ...rig.parts };
   const hidden = new Set();
   for (const [name, key] of Object.entries(swap)) {
     const s = parts[name]?.swaps?.[key];
@@ -74,22 +74,39 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
 // A broken weapon is an empty hand until its swing ends. null = nothing held (the slot part draws as usual).
 // Empty hand too while the sword is sheathed: picking up (after the stow, or all along when swapping weapons)
 // and the first half of a sword draw (sheathed = mem.sheathed from drawLayer).
-// T011: a fighter with a `kit` (enemy weapon kit, items/*.js) holds it whenever he holds nothing else. A slot given as
-// { parent, attach, order } adds the weapon as a new part `held` there (upright: the bow stays straight up) instead of
-// replacing a part. grip/kit go to render/rig-grip.js (second hand, bow string).
+// T011: a fighter with a `kit` (enemy weapon kit, items/*.js) holds it whenever he holds nothing else (T018: or the item
+// named by art.held, a look-only weapon: the Rat Raider's cutlass). A slot given as
+// { parent, attach, order, rest?, upright? } adds the weapon as a new part `held` there (upright: the bow stays straight
+// up) instead of replacing a part. grip/kit go to render/rig-grip.js (second hand, bow string).
+// T018: once a knocked-out fighter has dropped his kit (f.dropped, def.drop = that item), his hand is empty: what he
+// swung is what lies on the floor.
 export function heldOf(f, rig, sheathed = false) {
-  const W = f.weapon ?? (f.def?.kit && { def: ITEMS[f.def.kit] }), one = rig.slots?.['one-hand'];
+  const K = f.def?.kit ?? f.def?.art?.held, W = f.weapon ?? (K && { def: ITEMS[K] }), one = rig.slots?.['one-hand'];
   const pk = f.state === 'pickup' && !W && (f.pickup?.swap || f.t >= f.def.pickup.stow);
   if (!W) return one && (pk || sheathed) ? { slot: one, part: null } : null;
   const spec = rig.slots?.[W.def.grip];
   if (!spec) return null;
   const slot = typeof spec === 'string' ? spec : 'held', kit = W.def, grip = kit.grip;
-  if (W.broken) return { slot, part: null, grip, kit };
-  const A = kit.art, mount = typeof spec === 'string' ? {} : { ...spec, upright: true };
-  return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: A.rest ?? 0, scale: A.px / rig.scale } };
+  if (W.broken || (!f.weapon && f.dropped && f.def.drop?.item === kit.id)) return { slot, part: null, grip, kit };
+  const A = kit.art, mount = typeof spec === 'string' ? {} : spec;   // T018: a slot's own `rest` turns the item in the hand
+  return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: (mount.rest ?? 0) + (A.rest ?? 0), scale: A.px / rig.scale } };
 }
 
 let buf, tintBuf;
+// T018 stopgap tint (rig.tint = { color, alpha, parts }): the named parts (clothes) draw a recoloured copy, made once
+// per image. Removed when A011's gear and masks land.
+const tintCache = new Map();
+function partTint(im, T, name) {
+  if (!T?.parts.includes(name) || !im?.width) return im;
+  const key = `${im.src}|${T.color}|${T.alpha}`;
+  if (!tintCache.has(key)) {
+    const c = document.createElement('canvas'), g = c.getContext('2d');
+    c.width = im.width; c.height = im.height;
+    g.drawImage(im, 0, 0); g.globalCompositeOperation = 'source-atop'; g.globalAlpha = T.alpha; g.fillStyle = T.color; g.fillRect(0, 0, c.width, c.height);
+    tintCache.set(key, c);
+  }
+  return tintCache.get(key);
+}
 const canvas = () => { const c = document.createElement('canvas'); c.width = BOX.w * RES; c.height = BOX.h * RES; return c; };
 
 function tinted(color) {
@@ -120,7 +137,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     if (line) { g.strokeStyle = '#3a2a1e'; g.lineWidth = 0.8; g.beginPath(); line.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke(); continue; }
     g.transform(...m);
-    const im = assets.get(img);
+    const im = partTint(assets.get(img), rig.tint, name);
     if (!B || name !== held.slot) { g.drawImage(im, 0, 0); continue; }
     for (const { sx, sw, t } of bendStrips(im.width, im.height, part.pivot, bendSteps(B, m, mem.flop, mem.limp?.x ?? 1))) {
       g.save(); g.transform(...t); g.drawImage(im, sx, 0, sw, im.height, sx, 0, sw, im.height); g.restore();
