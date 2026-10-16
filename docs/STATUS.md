@@ -1,6 +1,6 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T016 rig bench (merged 2026-10-16). Last art task: A010 new rat to the rig standard (merged 2026-10-16). Queued: A009 rat parts redrawn from the standee.
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T016 rig bench (merged 2026-10-16). Last art task: A010 new rat to the rig standard (merged 2026-10-16).
 
 ## Next
 1. **Code:** T017 (weapon feel), then T018 (import the new rat into the game for all three rat types; holds the cutlass he drops).
