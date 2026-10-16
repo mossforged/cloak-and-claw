@@ -111,18 +111,30 @@ function activeSwap(M, p, T) {
   return s >= a && s < b ? swapOf(M.through) : swapOf(M.strike);
 }
 
+// Weapon feel (T017): a rig's `kits[<item id>]` gives a held floor weapon its own look: `moves` (its own move poses,
+// used before the borrowed `move.rig` one) and state poses (`idle`, `walk`) laid over the normal ones. View only.
+const kitPoses = (f, poses) => poses.kits?.[f.weapon?.def.id];
+const withKit = (poses, KP) => (KP ? Object.fromEntries(Object.entries(poses).map(([k, v]) => [k, KP[k] ? { ...v, ...KP[k] } : v])) : poses);
+
+function windupPose(M, rest, W, p, time) {
+  const h = M.hold ?? 0, j = mix(rest, W, easeOut(Math.min(1, p / (1 - h))));
+  if (h && p > 1 - h && M.tremble) j['arm-front-upper'] += M.tremble * Math.sin(time * 70);
+  return j;
+}
+
 // Which pose a fighter is in: { key, joints, swap } before blending.
 // override: a named pose to hold whatever the fighter does (view-only, e.g. the `cast` test pose).
 export function targetPose(f, rig, time, override) {
-  const poses = rig.poses, S = { ...channelsOf(rig), ...poses.stance }, T = poses.timing;
+  const KP = kitPoses(f, rig.poses), poses = withKit(rig.poses, KP), S = { ...channelsOf(rig), ...poses.stance }, T = poses.timing;
   if (override && poses[override]) return { key: override, joints: evalPose(poses[override], S, time), swap: swapOf(poses[override]) };
   if (f.move) {
-    const key = moveKey(f), M = poses.moves?.[f.move.rig ?? key];   // move.rig: a weapon kit's move borrows that rig move pose
+    const key = moveKey(f), M = KP?.moves?.[key] ?? poses.moves?.[f.move.rig ?? key];   // move.rig: a weapon kit's move borrows that rig move pose
     if (M) {
       const [ph, p] = phaseOf(f);
       const W = evalPose(M.windup, S, 0), K = evalPose(M.strike, S, 0), X = M.through && evalPose(M.through, S, 0);
       const rest = evalPose(f.state === 'attack' ? poses.idle : poses.jump, S, time);
-      if (ph === 'windup') return { key, joints: mix(rest, W, easeOut(p)), swap: swapOf(M.windup) };
+      // M.hold: share of the windup held at the top (the club's heavy beat), with a strain tremble of M.tremble degrees on the arm
+      if (ph === 'windup') return { key, joints: windupPose(M, rest, W, p, time), swap: swapOf(M.windup) };
       if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: activeSwap(M, p, T) };
       // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest
       return { key, joints: mix(K, rest, easeInOut(p)), swap: p < T.swapBack ? swapOf(M.strike) : {} };

@@ -7,7 +7,7 @@ export function createJuice() {
   const kick = (amount) => { j.shake = Math.min(JUICE.shake.max, j.shake + amount); };
   bus.on('hit', ({ move, ko }) => {
     j.freeze = Math.max(j.freeze, (move.hitstop ?? 0) + (ko ? JUICE.koHitstop : 0));
-    kick((move.shake ?? 0) + (ko ? JUICE.koShake : 0));
+    kick((move.shake ?? 0) + (move.fx?.shake ?? 0) + (ko ? JUICE.koShake : 0));   // fx.shake: a weapon's extra (T017, view only)
   });
   bus.on('block', ({ target }) => {
     const B = target.def.block;

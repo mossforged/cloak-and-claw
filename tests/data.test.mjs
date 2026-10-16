@@ -99,8 +99,15 @@ for (const [id, r] of Object.entries(RIGS)) {
   const known = new Set([...jointsOfRig(r), 'speed', 'swap']);   // swap contents: tests/rig.test.mjs
   const P = r.poses, M = P.moves ?? {};
   const named = { stance: P.stance, idle: P.idle, walk: P.walk, jump: P.jump, hurt: P.hurt, knockdown: P.knockdown, down: P.down, getup: P.getup };
-  for (const [k, pose] of Object.entries(P)) if (!(k in named) && k !== 'timing' && k !== 'moves') named[k] = pose;   // extra named poses (cast)
-  for (const [k, m] of Object.entries(M)) { named[`${k}.windup`] = m.windup; named[`${k}.strike`] = m.strike; if (m.through) named[`${k}.through`] = m.through; }
+  for (const [k, pose] of Object.entries(P)) if (!(k in named) && !['timing', 'moves', 'kits'].includes(k)) named[k] = pose;   // extra named poses (cast)
+  const addMoves = (pre, ms) => { for (const [k, m] of Object.entries(ms)) { named[`${pre}${k}.windup`] = m.windup; named[`${pre}${k}.strike`] = m.strike; if (m.through) named[`${pre}${k}.through`] = m.through; } };
+  addMoves('', M);
+  for (const [kit, KP] of Object.entries(P.kits ?? {})) {   // T017 weapon feel: a kit's own state and move poses
+    check(ITEMS[kit]?.kind === 'weapon', `rig ${id}: kits '${kit}' is a weapon kit`);
+    for (const [k, pose] of Object.entries(KP)) if (k !== 'moves') { check(P[k], `rig ${id}: kit ${kit} pose '${k}' lays over an existing pose`); named[`${kit}.${k}`] = pose; }
+    for (const k of Object.keys(KP.moves ?? {})) check(ITEMS[kit]?.moves?.[k], `rig ${id}: kit ${kit} move pose '${k}' is one of its moves`);
+    addMoves(`${kit}.`, KP.moves ?? {});
+  }
   for (const [k, pose] of Object.entries(named)) {
     check(pose, `rig ${id}: pose '${k}' exists`);
     for (const j of Object.keys(pose ?? {})) check(known.has(j), `rig ${id}: pose '${k}' names unknown joint '${j}'`);

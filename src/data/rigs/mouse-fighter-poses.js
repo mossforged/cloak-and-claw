@@ -4,6 +4,8 @@
 // Moves: `windup` is reached at the end of the windup phase, `strike` during active, then recovery eases back to stance.
 // swap: { part: swap name } switches a part's drawing for that pose or move phase (rigs/mouse-fighter.js `swaps`);
 // parts not named show their normal image (head-neutral, front torso).
+import { KIT_POSES } from './mouse-fighter-kit-poses.js';
+
 export default {
   timing: {
     blend: 0.09,        // s to ease from the last drawn pose into a new pose
@@ -182,6 +184,7 @@ export default {
     'leg-back-upper': -133, 'leg-back-lower': 93, 'leg-front-upper': 52, 'leg-front-lower': -80,
     tail: -10, 'scarf-tail': -20,
   },
+  kits: KIT_POSES,   // T017 weapon feel: per floor weapon idle/walk/move poses (rigs/mouse-fighter-kit-poses.js)
   // Sword tip direction on screen = torso + arm-front-upper + arm-front-lower + sword
   // (0 = forward, -90 = up, 90 = down, 180 = back). Swings go the way the numbers run.
   moves: {
