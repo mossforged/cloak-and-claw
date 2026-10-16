@@ -1,0 +1,869 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "units": "source pixels; top-left origin; x right; y down",
+  "head_set": "R (user selected in this session)",
+  "master": "reference.png (unchanged A009 G1 master)",
+  "baseline_y": 1997,
+  "rest_assembly": "composite the complete source canvases at (0,0), in depth order; no trimming/scaling/rotation",
+  "measurement_method": "Visible seam centers picked on master at full canvas resolution; recorded to nearest pixel. Hidden joint centers use the visible cuff/cloth seam as their landmark. Swaps use the identical pivot of the base part. See pivots.png. These are raster joint landmarks, not A009 target boxes.",
+  "parts": {
+    "pelvis": {
+      "file": "pelvis.png",
+      "parent": null,
+      "pivot_canvas": [
+        850,
+        1570
+      ],
+      "attach_on_parent_canvas": null,
+      "depth": 400,
+      "bounds": [
+        578,
+        1460,
+        1082,
+        1722
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "torso": {
+      "file": "torso.png",
+      "parent": "pelvis",
+      "pivot_canvas": [
+        850,
+        1490
+      ],
+      "attach_on_parent_canvas": [
+        850,
+        1490
+      ],
+      "depth": 600,
+      "bounds": [
+        456,
+        1020,
+        1203,
+        1718
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "head": {
+      "file": "head.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        910,
+        1218
+      ],
+      "attach_on_parent_canvas": [
+        910,
+        1218
+      ],
+      "depth": 700,
+      "bounds": [
+        614,
+        650,
+        1411,
+        1263
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "arm-front-upper": {
+      "file": "arm-front-upper.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        665,
+        1165
+      ],
+      "attach_on_parent_canvas": [
+        665,
+        1165
+      ],
+      "depth": 590,
+      "bounds": [
+        448,
+        1050,
+        781,
+        1331
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "arm-front-lower": {
+      "file": "arm-front-lower.png",
+      "parent": "arm-front-upper",
+      "pivot_canvas": [
+        500,
+        1225
+      ],
+      "attach_on_parent_canvas": [
+        500,
+        1225
+      ],
+      "depth": 820,
+      "bounds": [
+        391,
+        1107,
+        541,
+        1302
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "hand-front": {
+      "file": "hand-front.png",
+      "parent": "arm-front-lower",
+      "pivot_canvas": [
+        410,
+        1260
+      ],
+      "attach_on_parent_canvas": [
+        410,
+        1260
+      ],
+      "depth": 840,
+      "bounds": [
+        192,
+        1147,
+        422,
+        1355
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "shaft_slot_center_canvas": [
+        330,
+        1274
+      ]
+    },
+    "arm-back-upper": {
+      "file": "arm-back-upper.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        1125,
+        1315
+      ],
+      "attach_on_parent_canvas": [
+        1125,
+        1315
+      ],
+      "depth": 110,
+      "bounds": [
+        1044,
+        1260,
+        1290,
+        1469
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "arm-back-lower": {
+      "file": "arm-back-lower.png",
+      "parent": "arm-back-upper",
+      "pivot_canvas": [
+        1238,
+        1360
+      ],
+      "attach_on_parent_canvas": [
+        1238,
+        1360
+      ],
+      "depth": 120,
+      "bounds": [
+        1185,
+        1283,
+        1333,
+        1466
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "hand-back": {
+      "file": "hand-back.png",
+      "parent": "arm-back-lower",
+      "pivot_canvas": [
+        1310,
+        1360
+      ],
+      "attach_on_parent_canvas": [
+        1310,
+        1360
+      ],
+      "depth": 130,
+      "bounds": [
+        1280,
+        1209,
+        1514,
+        1441
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "leg-front-upper": {
+      "file": "leg-front-upper.png",
+      "parent": "pelvis",
+      "pivot_canvas": [
+        742,
+        1585
+      ],
+      "attach_on_parent_canvas": [
+        742,
+        1585
+      ],
+      "depth": 510,
+      "bounds": [
+        346,
+        1515,
+        851,
+        1829
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "leg-front-lower": {
+      "file": "leg-front-lower.png",
+      "parent": "leg-front-upper",
+      "pivot_canvas": [
+        442,
+        1748
+      ],
+      "attach_on_parent_canvas": [
+        442,
+        1748
+      ],
+      "depth": 520,
+      "bounds": [
+        232,
+        1715,
+        458,
+        1908
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "foot-front": {
+      "file": "foot-front.png",
+      "parent": "leg-front-lower",
+      "pivot_canvas": [
+        337,
+        1842
+      ],
+      "attach_on_parent_canvas": [
+        337,
+        1842
+      ],
+      "depth": 530,
+      "bounds": [
+        148,
+        1820,
+        420,
+        1997
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "leg-back-upper": {
+      "file": "leg-back-upper.png",
+      "parent": "pelvis",
+      "pivot_canvas": [
+        1004,
+        1570
+      ],
+      "attach_on_parent_canvas": [
+        1004,
+        1570
+      ],
+      "depth": 210,
+      "bounds": [
+        820,
+        1496,
+        1276,
+        1755
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "leg-back-lower": {
+      "file": "leg-back-lower.png",
+      "parent": "leg-back-upper",
+      "pivot_canvas": [
+        1115,
+        1740
+      ],
+      "attach_on_parent_canvas": [
+        1115,
+        1740
+      ],
+      "depth": 220,
+      "bounds": [
+        1012,
+        1728,
+        1251,
+        1891
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "foot-back": {
+      "file": "foot-back.png",
+      "parent": "leg-back-lower",
+      "pivot_canvas": [
+        1165,
+        1825
+      ],
+      "attach_on_parent_canvas": [
+        1165,
+        1825
+      ],
+      "depth": 230,
+      "bounds": [
+        1041,
+        1800,
+        1379,
+        1933
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "tail": {
+      "file": "tail.png",
+      "parent": "pelvis",
+      "pivot_canvas": [
+        480,
+        1575
+      ],
+      "attach_on_parent_canvas": [
+        480,
+        1575
+      ],
+      "depth": 300,
+      "bounds": [
+        47,
+        1389,
+        481,
+        1611
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "scarf-tail": {
+      "file": "scarf-tail.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        720,
+        1040
+      ],
+      "attach_on_parent_canvas": [
+        720,
+        1040
+      ],
+      "depth": 550,
+      "bounds": [
+        360,
+        884,
+        768,
+        1088
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1
+    },
+    "sword": {
+      "file": "sword.png",
+      "parent": "hand-front",
+      "pivot_canvas": [
+        330,
+        1274
+      ],
+      "attach_on_parent_canvas": [
+        330,
+        1274
+      ],
+      "depth": 830,
+      "bounds": [
+        25,
+        703,
+        471,
+        1470
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "grip_canvas": [
+        330,
+        1274
+      ]
+    },
+    "head-neutral": {
+      "file": "head-neutral.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        910,
+        1218
+      ],
+      "attach_on_parent_canvas": [
+        910,
+        1218
+      ],
+      "depth": 700,
+      "bounds": [
+        614,
+        650,
+        1411,
+        1263
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "head"
+    },
+    "head-attack": {
+      "file": "head-attack.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        910,
+        1218
+      ],
+      "attach_on_parent_canvas": [
+        910,
+        1218
+      ],
+      "depth": 700,
+      "bounds": [
+        609,
+        650,
+        1420,
+        1263
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "head"
+    },
+    "head-hurt": {
+      "file": "head-hurt.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        910,
+        1218
+      ],
+      "attach_on_parent_canvas": [
+        910,
+        1218
+      ],
+      "depth": 700,
+      "bounds": [
+        606,
+        650,
+        1419,
+        1263
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "head"
+    },
+    "head-effort": {
+      "file": "head-effort.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        910,
+        1218
+      ],
+      "attach_on_parent_canvas": [
+        910,
+        1218
+      ],
+      "depth": 700,
+      "bounds": [
+        619,
+        651,
+        1414,
+        1263
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "head"
+    },
+    "head-ko": {
+      "file": "head-ko.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        910,
+        1218
+      ],
+      "attach_on_parent_canvas": [
+        910,
+        1218
+      ],
+      "depth": 700,
+      "bounds": [
+        618,
+        650,
+        1413,
+        1263
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "head"
+    },
+    "head-back": {
+      "file": "head-back.png",
+      "parent": "torso",
+      "pivot_canvas": [
+        910,
+        1218
+      ],
+      "attach_on_parent_canvas": [
+        910,
+        1218
+      ],
+      "depth": 700,
+      "bounds": [
+        615,
+        690,
+        1410,
+        1218
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "head"
+    },
+    "torso-side": {
+      "file": "torso-side.png",
+      "parent": "pelvis",
+      "pivot_canvas": [
+        850,
+        1490
+      ],
+      "attach_on_parent_canvas": [
+        850,
+        1490
+      ],
+      "depth": 600,
+      "bounds": [
+        648,
+        1040,
+        1058,
+        1700
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "torso"
+    },
+    "torso-back": {
+      "file": "torso-back.png",
+      "parent": "pelvis",
+      "pivot_canvas": [
+        850,
+        1490
+      ],
+      "attach_on_parent_canvas": [
+        850,
+        1490
+      ],
+      "depth": 600,
+      "bounds": [
+        527,
+        1040,
+        1120,
+        1700
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "torso"
+    },
+    "hand-front-open": {
+      "file": "hand-front-open.png",
+      "parent": "arm-front-lower",
+      "pivot_canvas": [
+        410,
+        1260
+      ],
+      "attach_on_parent_canvas": [
+        410,
+        1260
+      ],
+      "depth": 840,
+      "bounds": [
+        175,
+        1112,
+        445,
+        1351
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "hand-front"
+    },
+    "hand-front-fist": {
+      "file": "hand-front-fist.png",
+      "parent": "arm-front-lower",
+      "pivot_canvas": [
+        410,
+        1260
+      ],
+      "attach_on_parent_canvas": [
+        410,
+        1260
+      ],
+      "depth": 840,
+      "bounds": [
+        219,
+        1170,
+        440,
+        1352
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "hand-front"
+    },
+    "hand-front-grip": {
+      "file": "hand-front-grip.png",
+      "parent": "arm-front-lower",
+      "pivot_canvas": [
+        410,
+        1260
+      ],
+      "attach_on_parent_canvas": [
+        410,
+        1260
+      ],
+      "depth": 840,
+      "bounds": [
+        192,
+        1147,
+        422,
+        1355
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "hand-front",
+      "shaft_hole_center_canvas": null,
+      "shaft_slot_center_canvas": [
+        330,
+        1274
+      ]
+    },
+    "hand-back-open": {
+      "file": "hand-back-open.png",
+      "parent": "arm-back-lower",
+      "pivot_canvas": [
+        1310,
+        1360
+      ],
+      "attach_on_parent_canvas": [
+        1310,
+        1360
+      ],
+      "depth": 130,
+      "bounds": [
+        1280,
+        1209,
+        1514,
+        1441
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "hand-back"
+    },
+    "hand-back-fist": {
+      "file": "hand-back-fist.png",
+      "parent": "arm-back-lower",
+      "pivot_canvas": [
+        1310,
+        1360
+      ],
+      "attach_on_parent_canvas": [
+        1310,
+        1360
+      ],
+      "depth": 130,
+      "bounds": [
+        1282,
+        1254,
+        1512,
+        1458
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "hand-back"
+    },
+    "hand-back-grip": {
+      "file": "hand-back-grip.png",
+      "parent": "arm-back-lower",
+      "pivot_canvas": [
+        1310,
+        1360
+      ],
+      "attach_on_parent_canvas": [
+        1310,
+        1360
+      ],
+      "depth": 130,
+      "bounds": [
+        1281,
+        1261,
+        1526,
+        1444
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "hand-back",
+      "shaft_hole_center_canvas": [
+        1443,
+        1365
+      ]
+    },
+    "hand-back-pinch": {
+      "file": "hand-back-pinch.png",
+      "parent": "arm-back-lower",
+      "pivot_canvas": [
+        1310,
+        1360
+      ],
+      "attach_on_parent_canvas": [
+        1310,
+        1360
+      ],
+      "depth": 130,
+      "bounds": [
+        1274,
+        1265,
+        1529,
+        1441
+      ],
+      "origin_canvas": [
+        0,
+        0
+      ],
+      "rest_rotation_degrees": 0,
+      "rest_scale": 1,
+      "replaces": "hand-back"
+    }
+  },
+  "depth_exception": "arm-front-upper is 590, below torso 600, so the shoulder-pad seam is covered. Other near-arm pieces remain in the 800 band; see HANDOFF."
+}

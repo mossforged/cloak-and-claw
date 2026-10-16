@@ -1,0 +1,100 @@
+{
+  "baseline_y": 1997,
+  "master_bounds": [
+    20,
+    651,
+    1514,
+    1997
+  ],
+  "assembly_bounds": [
+    25,
+    650,
+    1514,
+    1997
+  ],
+  "near_hand_shaft_holes": [],
+  "far_hand_shaft_holes": [
+    [
+      2142,
+      [
+        1443,
+        1365
+      ]
+    ]
+  ],
+  "joint_landmarks": {
+    "pelvis": [
+      850,
+      1570
+    ],
+    "torso": [
+      850,
+      1490
+    ],
+    "head": [
+      910,
+      1218
+    ],
+    "arm-front-upper": [
+      665,
+      1165
+    ],
+    "arm-front-lower": [
+      500,
+      1225
+    ],
+    "hand-front": [
+      410,
+      1260
+    ],
+    "arm-back-upper": [
+      1125,
+      1315
+    ],
+    "arm-back-lower": [
+      1238,
+      1360
+    ],
+    "hand-back": [
+      1310,
+      1360
+    ],
+    "leg-front-upper": [
+      742,
+      1585
+    ],
+    "leg-front-lower": [
+      442,
+      1748
+    ],
+    "foot-front": [
+      337,
+      1842
+    ],
+    "leg-back-upper": [
+      1004,
+      1570
+    ],
+    "leg-back-lower": [
+      1115,
+      1740
+    ],
+    "foot-back": [
+      1165,
+      1825
+    ],
+    "tail": [
+      480,
+      1575
+    ],
+    "scarf-tail": [
+      720,
+      1040
+    ],
+    "sword": [
+      330,
+      1274
+    ]
+  },
+  "note": "Measurements are source-canvas seam points; thickness probe provenance from A009 is in measurements-a009.json."
+}

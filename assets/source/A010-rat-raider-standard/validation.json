@@ -1,0 +1,19 @@
+{
+  "checks_passed": [
+    "33 required parts/swaps present; canvas 1536 x 2304",
+    "exact green corners and unclipped foreground bounds",
+    "all swaps share base pivots",
+    "neutral head alias identical",
+    "R hurt head unchanged from A009",
+    "approved reference unchanged from A009",
+    "review game panel 960 x 540",
+    "no raw generated folder or alternate head sets"
+  ],
+  "part_count": 33,
+  "body_pixel_comparison": {
+    "region": "master foreground, x=501..1289, y=1281..2303; excludes selected head, near paw and sword",
+    "match_within_2_rgb_levels_percent": 100.0
+  },
+  "source_folder_bytes": 20950722,
+  "human_gate": "pending; static source checks do not validate motion or anatomical joint centers"
+}
