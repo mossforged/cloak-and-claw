@@ -13,5 +13,5 @@ export default {
   // fling: swinging flings it straight (windup = stiffness by the windup's end, fully stiff from the strike, limp again over
   // `release` of the recovery with a springy overshoot: period s, damping).
   feel: { wobble: { period: 0.22, damping: 0.13, gain: 1.3, bob: 0.4, max: 40 }, squash: { amount: 0.32, time: 0.45 },
-    bend: { segs: 10, sag: 0.12, flop: 0.85, fling: { windup: 0.6, release: 0.4, period: 0.32, damping: 0.22 } } },
+    bend: { segs: 10, sag: 0.24, flop: 0.85, fling: { windup: 0.6, release: 0.4, period: 0.32, damping: 0.22 } } },
 };
