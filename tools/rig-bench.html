@@ -1,0 +1,173 @@
+<!doctype html>
+<!-- Rig bench (T016): checks a rig delivery straight from Art's source folder, before anything is imported.
+     G2 fit overlay: the parts at rest over the master (+ difference view and mismatch score; click a part for its joint).
+     G3 motion strip: a rig built from rig-source.json plays the standard biped strip (data/rigs/biped-poses.js) at game
+     size beside the standee and over the Harbor Market floor; Export saves the strip as one image.
+     Serve the repo root, then /tools/rig-bench.html?src=A010-rat-raider-standard (Art's assets/source/<ID>-<slug>/)
+     or ?fixture=mouse-fighter (tools/fixtures/). Options: view=overlay|master|parts|diff, part=<name>, fighter=<id>,
+     export (only the strip image, for screenshots), t=<s> (freeze the motion at that time). -->
+<meta charset="utf-8">
+<title>Rig bench</title>
+<style>
+  body { margin: 0; background: #2b2b30; color: #ddd; font: 13px sans-serif; }
+  main { display: flex; flex-wrap: wrap; gap: 16px; padding: 12px; }
+  section { background: #3a3a41; padding: 10px; border-radius: 6px; }
+  #fit { max-width: 560px; }
+  h2 { font-size: 14px; margin: 0 0 8px; color: #fff; }
+  button { background: #55555e; color: #eee; border: 0; padding: 4px 9px; border-radius: 4px; cursor: pointer; }
+  button.on { background: #c9a227; color: #222; }
+  canvas { display: block; background: #6e6e76; }
+  #parts { max-height: 300px; overflow: auto; margin-top: 8px; }
+  #parts div { padding: 2px 4px; cursor: pointer; white-space: nowrap; }
+  #parts div.sel { background: #c9a22755; }
+  .bad { color: #ff7a6e; } .good { color: #8fd18f; } .dim { color: #999; }
+  #err { color: #ff7a6e; white-space: pre-wrap; }
+  body.export main > :not(#strip) { display: none; }
+  body.export main { padding: 0; } body.export #strip { padding: 0; background: none; } body.export #strip h2, body.export #strip button { display: none; }
+</style>
+<main>
+  <section id="fit">
+    <h2>G2 fit: parts at rest over the master</h2>
+    <div id="modes"></div>
+    <canvas id="fitc"></canvas>
+    <div id="score"></div>
+    <div id="parts"></div>
+  </section>
+  <section id="motion">
+    <h2>G3 motion: standard strip <span id="now" class="dim"></span></h2>
+    <div><button id="play">pause</button> speed <select id="speed"><option>0.25</option><option>0.5</option><option selected>1</option></select></div>
+    <canvas id="zoomc"></canvas>
+    <h2 style="margin-top:10px">game size (1x) over Harbor Market</h2>
+    <canvas id="gamec"></canvas>
+    <div id="err"></div>
+  </section>
+  <section id="strip">
+    <h2>Exported strip <button id="export">export PNG</button></h2>
+    <canvas id="stripc"></canvas>
+  </section>
+</main>
+<script type="module">
+import { FIGHTERS } from '../src/data/fighters/index.js';
+import { STAGES } from '../src/data/stages/index.js';
+import { sourceUrl, readSource, buildRig, stripAt, stripLength } from './bench/source.js';
+import { keyImage, fitReport } from './bench/fit.js';
+import { drawFigure, drawStandee, renderStrip } from './bench/draw.js';
+
+const q = new URLSearchParams(location.search);
+const $ = (id) => document.getElementById(id);
+if (q.has('export')) document.body.classList.add('export');
+const load = (src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = '../' + src; });
+const fail = (msg) => { $('err').textContent += msg + '\n'; };
+
+const url = sourceUrl(q);
+const json = await fetch('../' + url).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+if (!json) { fail(`no rig-source.json at ${url}`); document.title = 'ready'; throw new Error('no source'); }
+const src = readSource(json, url);
+src.errors.forEach(fail);
+
+// key every image once (master, parts, swaps)
+const paths = new Set([src.master, ...Object.values(src.parts).map((p) => p.img), ...Object.values(src.swaps).map((s) => s.img)]);
+const keyed = {};
+await Promise.all([...paths].map(async (p) => { const im = await load(p); if (im) keyed[p] = keyImage(im); else fail(`missing image ${p}`); }));
+
+const def = FIGHTERS[q.get('fighter') ?? src.fighter];
+const standee = def && { art: def.art, img: await load(def.art.idle) };
+const height = def?.art.height ?? 136;
+const boxes = Object.fromEntries(Object.entries(keyed).map(([p, k]) => [p, k.box]));
+const rig = buildRig(src, { boxes, top: keyed[src.master].box[1], height });
+const bench = { src, rig, imgs: Object.fromEntries(Object.entries(keyed).map(([p, k]) => [p, k.canvas])) };
+const name = url.split('/').slice(-2, -1)[0] === 'fixtures' ? url.split('/').pop() : url.split('/').slice(-2, -1)[0];
+
+// ---- G2 fit view
+const report = fitReport(src, keyed);
+const [W, H] = src.canvas, FZ = Math.min(560 / H, 520 / W);
+const fitc = $('fitc'), fg = fitc.getContext('2d');
+fitc.width = Math.round(W * FZ); fitc.height = Math.round(H * FZ);
+let view = q.get('view') ?? 'overlay', sel = q.get('part');
+const MODES = { overlay: 'parts over master', master: 'master only', parts: 'parts only', diff: 'difference' };
+for (const [k, label] of Object.entries(MODES)) {
+  const b = document.createElement('button'); b.textContent = label; b.dataset.k = k;
+  b.onclick = () => { view = k; drawFit(); }; $('modes').append(b, ' ');
+}
+const put = (k, alpha = 1) => { fg.globalAlpha = alpha; fg.drawImage(k.canvas, k.box[0] * FZ, k.box[1] * FZ, k.canvas.width * FZ, k.canvas.height * FZ); };
+const dot = ([x, y], color, r = 5) => { fg.globalAlpha = 1; fg.fillStyle = color; fg.strokeStyle = '#000'; fg.beginPath(); fg.arc(x * FZ, y * FZ, r, 0, 7); fg.fill(); fg.stroke(); };
+function drawFit() {
+  document.querySelectorAll('#modes button').forEach((b) => b.classList.toggle('on', b.dataset.k === view));
+  fg.setTransform(1, 0, 0, 1, 0, 0); fg.globalAlpha = 1; fg.clearRect(0, 0, fitc.width, fitc.height);
+  if (view === 'diff') fg.drawImage(report.diff, 0, 0, fitc.width, fitc.height);
+  else {
+    if (view !== 'parts') put(keyed[src.master], view === 'master' ? 1 : 0.35);
+    if (view !== 'master') {
+      for (const p of Object.values(src.parts).sort((a, b) => a.band - b.band)) put(keyed[p.img], sel && sel !== p.name ? 0.3 : 1);
+    }
+  }
+  fg.globalAlpha = 1; fg.strokeStyle = '#ffffff55'; fg.beginPath(); fg.moveTo(0, src.floorY * FZ); fg.lineTo(fitc.width, src.floorY * FZ); fg.stroke();
+  const p = src.parts[sel];
+  if (p) {
+    const parent = src.parts[p.parent];
+    if (parent) { fg.strokeStyle = '#ffd23f'; fg.beginPath(); fg.moveTo(...p.pivot.map((v) => v * FZ)); fg.lineTo(...parent.pivot.map((v) => v * FZ)); fg.stroke(); dot(parent.pivot, '#ffd23f', 4); }
+    dot(p.pivot, '#0ff', 6);
+  }
+  fg.globalAlpha = 1;
+}
+const pct = (v) => `${(v * 100).toFixed(1)}%`;
+$('score').innerHTML = `<b>Mismatch</b>: master not covered by parts <b class="${report.missed > 0.05 ? 'bad' : 'good'}">${pct(report.missed)}</b>,
+  parts outside the master <b class="${report.extra > 0.05 ? 'bad' : 'good'}">${pct(report.extra)}</b>
+  <span class="dim">(difference view: red = master only, blue = parts only)</span><br>
+  ${src.missing.length ? `<span class="bad">missing standard parts: ${src.missing.join(', ')}</span> (their poses are skipped)<br>` : ''}
+  ${src.extras.length ? `extras: ${src.extras.join(', ')}<br>` : ''}
+  swaps: ${Object.keys(src.swaps).join(', ') || 'none'}${Object.keys(src.overlays).length ? `<br>overlays (not in motion yet): ${Object.keys(src.overlays).join(', ')}` : ''}
+  ${src.note ? `<br><span class="dim">${src.note}</span>` : ''}`;
+const yes = (v) => (v === null ? '<span class="dim">root</span>' : v ? '<span class="good">yes</span>' : '<span class="bad">no</span>');
+$('parts').innerHTML = '<div class="dim">part (band) | joint on part | on parent | outside master</div>' + Object.values(src.parts).map((p) => {
+  const r = report.parts[p.name];
+  return `<div data-p="${p.name}">${p.name} <span class="dim">(${p.band})</span> | ${yes(r.onSelf)} | ${yes(r.onParent)} | <span class="${r.outside > 0.1 ? 'bad' : ''}">${pct(r.outside)}</span></div>`;
+}).join('');
+const markSel = () => document.querySelectorAll('#parts div[data-p]').forEach((d) => d.classList.toggle('sel', d.dataset.p === sel));
+$('parts').onclick = (e) => { const d = e.target.closest('[data-p]'); if (!d) return; sel = sel === d.dataset.p ? null : d.dataset.p; markSel(); drawFit(); };
+markSel(); drawFit();
+
+// ---- G3 motion: zoomed view (standee beside the rig) and 1x over the Harbor Market floor
+const ZZ = 2, zoomc = $('zoomc'), zg = zoomc.getContext('2d');
+zoomc.width = 300 * ZZ; zoomc.height = 190 * ZZ;
+const stage = STAGES['harbor-market'], stageImg = await load(stage.art.src);
+const gamec = $('gamec'), gg = gamec.getContext('2d');
+gamec.width = 420; gamec.height = 210;
+const GAME = { x: 120, y: 290, feet: 432 };   // crop of the 960x540 view: left/top; feet on the belt
+for (const g of [zg, gg]) g.imageSmoothingQuality = 'high';
+let playing = !q.has('t'), t = +(q.get('t') ?? 0), last = performance.now();
+$('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'pause' : 'play'; };
+$('play').textContent = playing ? 'pause' : 'play';
+function frame(now) {
+  const speed = +$('speed').value;
+  if (playing) t = (t + Math.min(0.05, (now - last) / 1000) * speed) % stripLength();
+  last = now;
+  const s = stripAt(t);
+  $('now').textContent = `${t.toFixed(2)} s: ${s.pose}`;
+  zg.setTransform(1, 0, 0, 1, 0, 0); zg.fillStyle = '#6e6e76'; zg.fillRect(0, 0, zoomc.width, zoomc.height);
+  zg.fillStyle = '#ffffff30'; zg.fillRect(10 * ZZ, 165 * ZZ, 280 * ZZ, ZZ);
+  zg.fillStyle = '#fff'; zg.font = `${10 * ZZ}px sans-serif`;
+  if (standee) { drawStandee(zg, standee.art, standee.img, 80 * ZZ, 165 * ZZ, ZZ); zg.fillText('standee', 10 * ZZ, 14 * ZZ); }
+  zg.fillStyle = '#fff'; zg.font = `${10 * ZZ}px sans-serif`; zg.fillText('rig (built from rig-source.json)', 150 * ZZ, 14 * ZZ);
+  drawFigure(zg, bench, s, 200 * ZZ, 165 * ZZ, ZZ);
+  // 1x: the stage art placed as in the game, cropped; standee and rig on the belt
+  gg.setTransform(1, 0, 0, 1, 0, 0);
+  const sky = gg.createLinearGradient(0, 0, 0, gamec.height); sky.addColorStop(0, stage.backdrop.sky[0]); sky.addColorStop(1, stage.backdrop.sky[1]);
+  gg.fillStyle = sky; gg.fillRect(0, 0, gamec.width, gamec.height);
+  if (stageImg) { const A = stage.art, h = A.w * stageImg.height / stageImg.width; gg.drawImage(stageImg, A.x - GAME.x, A.y - GAME.y, A.w, h); }
+  if (standee) drawStandee(gg, standee.art, standee.img, 130, GAME.feet - GAME.y);
+  drawFigure(gg, bench, s, 270, GAME.feet - GAME.y, 1);
+  if (playing) requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+// ---- exported strip
+const strip = renderStrip(bench, standee, { title: `${name}: standard motion strip (G3)` });
+const sc = $('stripc');
+sc.width = strip.width; sc.height = strip.height;
+sc.style.width = `${q.has('export') ? strip.width : Math.min(strip.width, 1200)}px`;
+sc.getContext('2d').drawImage(strip, 0, 0);
+$('export').onclick = () => strip.toBlob((b) => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `${name}-motion-strip.png`; a.click(); });
+window.bench = { src, rig, report, stripAt };
+document.title = 'ready';
+</script>

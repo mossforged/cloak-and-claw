@@ -1,0 +1,30 @@
+{
+  "note": "T016 fixture: Mouse Fighter's A002 parts (shared 1226x1283 canvas, reference.png = master) written as a rig-source.json. Joints = the game rig's pivots (rigs/mouse-fighter.js) mapped back to the canvas (key_green trim box + pivot / 0.4). Predates the rig standard: no pelvis, hands or feet (legs hang off the torso, the sword off the forearm); A002's limbs are approximate, so the fit view shows real drift. A006 swaps are not on this canvas and are left out.",
+  "dir": "assets/source/A002-mouse-fighter-rig-3q",
+  "fighter": "mouse-fighter",
+  "canvas": [1226, 1283],
+  "master": "reference.png",
+  "floorY": 1175,
+  "parts": {
+    "torso": { "img": "torso.png", "parent": null, "pivot": [728, 885], "band": 600 },
+    "head": { "img": "head-neutral.png", "parent": "torso", "pivot": [715, 505], "band": 700 },
+    "scarf-tail": { "img": "scarf-tail.png", "parent": "torso", "pivot": [500, 470], "band": 590 },
+    "tail": { "img": "tail.png", "parent": "torso", "pivot": [490, 814], "band": 300 },
+    "arm-front-upper": { "img": "arm-front-upper.png", "parent": "torso", "pivot": [557, 569], "band": 810 },
+    "arm-front-lower": { "img": "arm-front-lower.png", "parent": "arm-front-upper", "pivot": [470, 676], "band": 830 },
+    "sword": { "img": "sword.png", "parent": "arm-front-lower", "pivot": [414, 818], "band": 820 },
+    "arm-back-upper": { "img": "arm-back-upper.png", "parent": "torso", "pivot": [841, 610], "band": 110 },
+    "arm-back-lower": { "img": "arm-back-lower.png", "parent": "arm-back-upper", "pivot": [901, 661], "band": 120 },
+    "shield": { "img": "shield.png", "parent": "arm-back-lower", "pivot": [1075, 693], "band": 760 },
+    "leg-back-upper": { "img": "leg-back-upper.png", "parent": "torso", "pivot": [843, 885], "band": 220 },
+    "leg-back-lower": { "img": "leg-back-lower.png", "parent": "leg-back-upper", "pivot": [924, 959], "band": 210 },
+    "leg-front-upper": { "img": "leg-front-upper.png", "parent": "torso", "pivot": [515, 879], "band": 520 },
+    "leg-front-lower": { "img": "leg-front-lower.png", "parent": "leg-front-upper", "pivot": [389, 963], "band": 510 }
+  },
+  "swaps": {
+    "head-attack": { "img": "head-shout.png", "of": "head" },
+    "head-hurt": { "img": "head-hurt.png", "of": "head" },
+    "torso-back": { "img": "torso-back.png", "of": "torso" }
+  },
+  "overlays": {}
+}
