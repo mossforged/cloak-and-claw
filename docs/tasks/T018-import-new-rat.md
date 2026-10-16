@@ -12,7 +12,8 @@ The new rat (A010, head R) passed the look check in the rig bench. The user: "he
 4. **Weapons: the rat holds the cutlass he drops** (decision 2026-10-16): the Rat Raider's held weapon is the `rat-cutlass` item art, attached at `hand-front` with its grip point, like floor weapons. The KO drop is the same item, so what he swings is what falls. Spearman and archer keep their kits (spear, bow) on the new hands.
 5. **Gear:** A008's overlays were drawn for the old head and won't fit. Until A011 delivers refitted gear, show spearman and archer apart with a **temporary tint** on the bandana/clothes (data, removed when gear lands) and hide the old gear. Note what's hidden in the report.
 6. **Front upper arm:** A010 puts it behind the torso (band 590, to hide a seam). Check it during strikes when the arm crosses the body; report if it vanishes wrongly.
-7. Bench fixture stays; `rig-bench.html?src=A010-rat-raider-standard` must still work.
+7. The grip hand has a cut slot for the handle; check at game size that the seam doesn't show around the cutlass (A010's `cutlass-grip-check.png`).
+8. Bench fixture stays; `rig-bench.html?src=A010-rat-raider-standard` must still work.
 
 ## Acceptance
 - Headless: `npm test` passes; sim unchanged (bot numbers identical: this is art and poses only); rig tests updated for the new part list (every pose names only existing parts; the cutlass attaches at the hand grip; the KO drop is the same item id).
