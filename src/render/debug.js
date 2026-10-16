@@ -1,7 +1,7 @@
 // Debug overlay (toggle with `): floor belt (scrolling stage, T013: walkable bounds, zone lock screens + markers, back
 // segment joins, camera), hurtboxes (green), live hitboxes (red), feet anchors, state labels.
 import { hitboxOf, hurtboxOf } from '../sim/combat.js';
-import { RULES } from '../data/rules.js';
+import { attackLimit } from '../sim/ai.js';
 import { joinsOf } from './layers.js';
 
 export function drawDebug(ctx, world, juice, camX = 0) {
@@ -20,7 +20,7 @@ export function drawDebug(ctx, world, juice, camX = 0) {
     ctx.strokeRect(p.x - B.w / 2, p.y - B.d / 2, B.w, B.d); ctx.strokeRect(p.x - B.w / 2, p.y - B.h, B.w, B.h);
     ctx.fillStyle = '#ffb040'; ctx.fillText(`${p.def.id} hp${p.hp}`, p.x - B.w / 2, p.y - B.h - 4);
   }
-  const P = world.player.def.pickup;
+  const P = world.heroes.find((h) => h.def.pickup)?.def.pickup;
   for (const it of world.items) {   // pickup zone (feet must be inside) and state
     ctx.strokeStyle = 'rgba(255,240,120,0.9)';
     if (P) ctx.strokeRect(it.x - P.range, it.y - P.depth, P.range * 2, P.depth * 2);
@@ -37,7 +37,7 @@ export function drawDebug(ctx, world, juice, camX = 0) {
     const hb = hitboxOf(f);
     if (hb) { box(hb, 'rgba(255,60,60,1)'); ctx.fillStyle = 'rgba(255,60,60,0.5)'; ctx.fillRect(hb.x0, hb.y - hb.depth, hb.x1 - hb.x0, hb.depth * 2); }
     ctx.strokeStyle = '#fff'; ctx.beginPath(); ctx.moveTo(f.x - 6, f.y); ctx.lineTo(f.x + 6, f.y); ctx.moveTo(f.x, f.y - 6); ctx.lineTo(f.x, f.y + 6); ctx.stroke();
-    const label = `${f.state}${f.move ? ':' + f.moveKey + '@' + f.mf : ''}${f.weapon ? ' [' + f.weapon.def.id + ' x' + f.weapon.uses + ']' : ''} hp${f.hp}${f.ai ? ' ' + f.ai.mode + (f.ai.token ? '*' : '') : ''}`;
+    const label = `${f.slot != null && world.heroes.length > 1 ? 'P' + (f.slot + 1) + ' ' : ''}${f.state}${f.move ? ':' + f.moveKey + '@' + f.mf : ''}${f.weapon ? ' [' + f.weapon.def.id + ' x' + f.weapon.uses + ']' : ''} hp${f.hp}${f.ai ? ' ' + f.ai.mode + (f.ai.token ? '*' : '') + (world.heroes.length > 1 ? '>P' + (f.ai.target + 1) : '') : ''}`;
     ctx.fillStyle = '#000'; ctx.fillRect(f.x - 4, f.y + 6, label.length * 7.3, 14);
     ctx.fillStyle = '#fff'; ctx.fillText(label, f.x - 2, f.y + 17);
   }
@@ -45,8 +45,8 @@ export function drawDebug(ctx, world, juice, camX = 0) {
   const cam = world.cam ? `   camera x ${world.cam.x.toFixed(0)}${world.cam.locked ? ' LOCKED' : ''} loop ${world.run.loop} queue ${world.run.queue.length}` : '';
   ctx.fillStyle = '#000'; ctx.fillRect(8, 500, cam ? 760 : 460, 32);
   ctx.fillStyle = '#ff0';
-  ctx.fillText(`frame ${world.frame}  wave ${world.wave}  fighters ${world.fighters.length}  attackers ${world.fighters.filter((f) => f.ai?.token).length}/${RULES.maxAttackers}`, 14, 514);
-  ctx.fillText(`hitstop ${juice.freeze}  shake ${juice.shake.toFixed(1)}   (* = has attack token)${cam}`, 14, 528);
+  ctx.fillText(`frame ${world.frame}  wave ${world.wave}  fighters ${world.fighters.length}  attackers ${world.fighters.filter((f) => f.ai?.token).length}/${attackLimit(world)}`, 14, 514);
+  ctx.fillText(`hitstop ${juice.freeze}  shake ${juice.shake.toFixed(1)}   (* = has attack token, >P2 = target)${cam}`, 14, 528);
   ctx.restore();
 }
 

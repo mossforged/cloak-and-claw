@@ -4,7 +4,11 @@
 // view. The camera follows the player once he passes `follow` px from the screen's left edge, only forward, never past
 // the stage's length, and stops at a zone's lock point (sim/zones.js sets cam.locked). It moves at most `catchUp`
 // px per frame, so after a zone unlocks with the player far right it glides over instead of snapping.
+// Several heroes (T021): it follows the living heroes' centre, but never so far that the hindmost leaves the screen
+// (cam.x <= his x - `keep`, default `edge`): when they spread, the leading hero is held at the right edge (Golden Axe).
+// One hero: centre = his x and follow > keep, so it moves exactly as before.
 import { VIEW } from '../config.js';
+import { heroesUp } from './heroes.js';
 
 export function createCamera(stage) {
   if (!stage.camera) return { cam: null, bounds: stage.floor };
@@ -21,7 +25,9 @@ export function stepCamera(w) {
   if (!cam.locked) {
     const next = w.stage.zones[w.run.zone];
     const stop = Math.min(maxCamX(w.stage), next ? lockX(next) : Infinity);
-    const want = w.player.x - C.follow;
+    const up = heroesUp(w), xs = (up.length ? up : w.heroes).map((h) => h.x);
+    const centre = xs.reduce((a, b) => a + b, 0) / xs.length;
+    const want = Math.min(centre - C.follow, Math.min(...xs) - (C.keep ?? C.edge));
     if (want > cam.x) cam.x = Math.min(want, stop, cam.x + C.catchUp);
   }
   fitBounds(w);

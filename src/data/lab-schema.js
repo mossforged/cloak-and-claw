@@ -163,6 +163,9 @@ export const LAB_SCHEMA = [
     fields: [
       ['gravity', 0.1, 2, 0.01], ['depthHit', 2, 60, 1], ['maxAttackers', 0, 6, 1],
       ['knockdown.vz', 0, 15, 0.1], ['knockdown.vx', 0, 12, 0.1], ['knockdown.downFrames', 0, 150, 1],
+      // T021: several heroes (?heroes=2): extra attackers per extra hero, enemy target choice
+      ['maxAttackersPerHero', 0, 3, 1], ['targeting.stick', 0, 300, 5], ['targeting.lane', 0, 6, 0.1],
+      ['targeting.crowd', 0, 400, 10], ['targeting.margin', 0, 300, 5],
     ],
   },
   {

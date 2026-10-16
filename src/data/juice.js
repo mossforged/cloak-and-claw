@@ -36,4 +36,7 @@ export const JUICE = {
   impactDust: { spread: 30, speed: 3.4, r: 16, life: 32, color: '150,118,84' },   // color: rgb, darker than landing dust so it reads on stone
   drops: { dx: 10, dy: 50, speed: 6, spread: 2.2, gravity: 0.45, life: 28 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
+  // T021 player slots: canvas filter on a slot's hero and HUD portrait (the test hero on slots 1, 2 = a tinted Mouse
+  // Fighter, no new art) and the slot's P1/P2/P3 tag colour
+  heroes: { filter: ['none', 'hue-rotate(150deg) saturate(1.2)', 'hue-rotate(250deg) saturate(1.1)'], tag: ['#ffd23f', '#6fd3ff', '#ff8adf'] },
 };

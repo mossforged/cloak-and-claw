@@ -3,7 +3,7 @@
 **Owns:** world state, fighter state machine and physics, hit detection and damage, enemy AI, waves, breakable props, floor items and held weapons, projectiles (arrows).
 **Does not own:** anything visual; tuning numbers (those are in `src/data/`).
 
-**Public API:** `createWorld(stageId, heroId, seed)`, `stepWorld(world, control)`; helpers `phaseOf`, `hitboxOf`, `hurtboxOf`, `HELPLESS` are read by render/debug. The `hit` payload carries `targetPhase` for the run log (src/log).
+**Public API:** `createWorld(stageId, heroes, seed)` (heroes = one id or an array, order = player slot; or `createWorld({ stage, heroes, seed })`), `stepWorld(world, control)` (control = slot 0's object or an array, one per slot); helpers `phaseOf`, `hitboxOf`, `hurtboxOf`, `HELPLESS` are read by render/debug. The `hit` payload carries `targetPhase` for the run log (src/log).
 **Emits:** `swing hit block land jump defeated wave gameOver grab throw thrownHit propHit propBreak itemLand pickup eat weaponThrow weaponBreak weaponDrop shot` (payloads in docs/MODULES.md). Knees, a thrown body's landing and a tossed weapon's hit are ordinary `hit` events from the holder/thrower.
 
 **Rules:**
@@ -16,4 +16,5 @@
 - Arrows (`shots.js`, T011): a move with a `shot` has no hitbox; the arrow hits through `applyHit` with a stand-in attacker (a block shoves the arrow, never the far-away archer). Brawler AI with no `slack`/`brain: 'archer'` behaves exactly as before; a stage with only cutlass rats gives the pre-T011 numbers.
 - Jump squat (T014, hero uses A): only a def with `jumpSquatMode: 'A'` gets the `jumpStart` crouch before take-off; 'B', 'off' and no field = the old jump, frame for frame.
 - Scrolling stages (T013, `camera.js`, `zones.js`): `w.cam` (x, locked), `w.run` (zone, locked, queue, cleared, loop) and `w.bounds` (walkable belt inside the camera view) live in the world; render only reads them. Everything clamps to `w.bounds`; on an arena `w.bounds` is `stage.floor` itself and `w.cam`/`w.run` are null, so arena results are unchanged.
+- Heroes (T021, `heroes.js`): `w.heroes` (each with `slot` 0..2 and `controller`: `{kind: 'human', index}`, or `{kind: 'script', think(w, f)}` in tests; `'ai'` allies later). **`w.player` is a deprecated read-only alias for `w.heroes[0]`: nothing new may use it.** Enemies pick a target hero (`ai.target` = slot, `pickTarget`, RULES.targeting; one hero = always him, no rng used); attack tokens stay global (`attackLimit`: `maxAttackers` + `maxAttackersPerHero` per extra living hero) and at most `maxAttackers` on one hero. Camera follows the living heroes' centre but keeps the hindmost on screen. A zone starts / the stage loops when any hero gets there; game over when every hero is 'dead'. A downed hero stays down (revive hook in `heroes.js`). One hero = exactly the pre-T021 game.
 - Units: pixels and frames (60/s). x = left/right, y = depth, z = height.

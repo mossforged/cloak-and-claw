@@ -56,6 +56,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 code: T021 on branch `t021-multi-hero`: `w.heroes` (slot, controller; `w.player` = deprecated alias), per-slot input (slot 0 = keyboard + pad 1 as before; pads 2, 3; optional arrows+numpad layout `?keys2`), enemies pick a sticky target hero (tokens global, scale per hero, max 1 per hero), camera follows the heroes' centre and holds the leader at the edge, game over when all down, HUD/debug/run log/C pose per hero. Test hero: `?heroes=2` (tinted Mouse Fighter). One-hero bot numbers identical to main in every test; 21/21 tests (new tests/multi-hero.test.mjs). Build `t021 multi-hero v1`.
+2026-10-16 code: T021 human check open: two people on a stage (second pad or `?heroes=2&keys2`), and one player feels unchanged. Screens docs/screens/T021/. Notes: heroes can stand on top of each other (no hero separation); the test-hero tint turns his red bandana green too.
 2026-10-16 lead: user set the hook: community and helping (fallen world, rescue missions, a ruined stronghold rebuilt by the rescued, co-op heroes helping each other). Game brief + decisions updated.
 2026-10-16 lead: user chose to do the multi-hero engine change now -> wrote T021.
 2026-10-16 lead: merged T020 (4 rounds; user picked the cutlass orientation and spear hold E; 20/20 tests). Mouse floor weapons now follow his fist too.

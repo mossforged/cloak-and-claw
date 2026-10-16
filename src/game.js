@@ -1,6 +1,7 @@
 // Browser glue: input -> sim step (with hit-stop) -> render. Owns pause, debug and restart.
 import { START_STAGE, START_HERO } from './config.js';
-import { readControl } from './core/input.js';
+import { readControls } from './core/input.js';
+import { KEYBOARD2 } from './data/controls.js';
 import { createWorld, stepWorld } from './sim/world.js';
 import { createRenderer } from './render/renderer.js';
 import { stepViewPose } from './render/view-pose.js';
@@ -12,14 +13,20 @@ import { createRunLog, summaryLines } from './log/runlog.js';
 import { saveRun, downloadRuns } from './log/store.js';
 
 // ?stage=harbor-market loads the old arena (T013); default START_STAGE
-const STAGE = (() => { const id = new URLSearchParams(location.search).get('stage'); return STAGES[id] ? id : START_STAGE; })();
+const Q = new URLSearchParams(location.search);
+const STAGE = STAGES[Q.get('stage')] ? Q.get('stage') : START_STAGE;
+// T021 test: ?heroes=2 (or 3) adds Mouse Fighters on player slots 1, 2 (tinted, render/hero-tint.js): gamepads 2 and 3,
+// or ?keys2 for the second keyboard layout (arrows + numpad). Not in normal play yet.
+const HEROES = Array(Math.max(1, Math.min(3, +Q.get('heroes') || 1))).fill(START_HERO);
+if (Q.has('keys2')) KEYBOARD2.on = true;
+const newWorld = () => createWorld(STAGE, HEROES);
 
 export function createGame(ctx, assets) {
-  let world = createWorld(STAGE, START_HERO);
+  let world = newWorld();
   const renderer = createRenderer(ctx, assets);
   const juice = createJuice();
-  const opts = { debug: new URLSearchParams(location.search).has('debug'), paused: false, rig: true, pose: null, runLines: null };
-  const view = { pose: null, left: 0 };   // C test pose (render-only)
+  const opts = { debug: Q.has('debug'), paused: false, rig: true, poses: [], runLines: null };
+  const views = HEROES.map(() => ({ pose: null, left: 0 }));   // C test pose per hero (render-only)
   const log = createRunLog();
   log.begin(world);
   bus.on('gameOver', () => { const s = log.summary(); saveRun(s); opts.runLines = summaryLines(s); });
@@ -27,19 +34,19 @@ export function createGame(ctx, assets) {
 
   return {
     update() {
-      const c = readControl();
+      const cs = readControls(), c = cs[0];   // slot 0 also has the view keys
       if (c.debug) opts.debug = !opts.debug;
       if (c.rig) opts.rig = !opts.rig;
       if (c.pause) opts.paused = !opts.paused;
       if (c.blockTap && world.over) downloadRuns();   // L blocks in play; on the game-over screen it downloads the run logs
       if (opts.paused) return;
-      if (world.over && (c.attack || c.start)) {
-        world = createWorld(STAGE, START_HERO); renderer.reset(); juice.reset(); view.pose = opts.pose = null; log.begin(world); opts.runLines = null;
+      if (world.over && cs.some((k) => k.attack || k.start)) {
+        world = newWorld(); renderer.reset(); juice.reset(); for (const v of views) v.pose = null; opts.poses = []; log.begin(world); opts.runLines = null;
       }
       juice.tick();
       if (juice.freeze > 0) { juice.freeze--; return; }   // hit-stop: sim and effects pause, shake continues
-      stepWorld(world, c);
-      opts.pose = stepViewPose(view, world.player, c.cast, RIGS[world.player.def.art.rig]);   // view only: C plays the cast pose once
+      stepWorld(world, cs);
+      opts.poses = world.heroes.map((h, i) => stepViewPose(views[i], h, cs[i].cast, RIGS[h.def.art.rig]));   // view only: C plays the cast pose once
       renderer.tick();
     },
     render(time) { renderer.draw(world, time, juice, opts); },

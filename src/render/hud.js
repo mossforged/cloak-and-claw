@@ -1,7 +1,10 @@
-// Health bars, wave banner, GO arrow (scrolling stage cleared zone, T013), KO counter, controls hint and game-over screen.
+// Hero panels (one per player slot, T021), enemy health bars, wave banner, GO arrow (scrolling stage cleared zone, T013), KO counter, controls hint and game-over screen.
 // Drawn in screen space (camX = the camera's x, for the bars over enemies).
 import { bus } from '../core/events.js';
 import { BUILD } from '../config.js';
+import { JUICE } from '../data/juice.js';
+
+const HUD_STEP = 320;   // px between hero panels along the top (T021)
 
 const FONT = (px) => `${px}px "Lilita One", sans-serif`;
 let banner = null;
@@ -28,27 +31,36 @@ function lagged(f) {
   return [k, v];
 }
 
-export function drawHud(ctx, world, assets, view, runLines = null, camX = 0) {
-  const p = world.player, [k, lk] = lagged(p);
-  // portrait
-  const img = assets.get(p.def.art.idle);
-  ctx.save(); ctx.beginPath(); ctx.arc(52, 50, 34, 0, Math.PI * 2);
-  ctx.fillStyle = '#f3e6c8'; ctx.fill(); ctx.lineWidth = 5; ctx.strokeStyle = '#2a1630'; ctx.stroke(); ctx.clip();
-  ctx.drawImage(img, 0, 0, img.width, img.height * 0.55, 6, 14, 92, 92 * 0.55 * img.height / img.width);
+// One hero's portrait, name, health bar and held weapon (T021: slot 0 where it always was, slots 1 and 2 along the top).
+function drawHero(ctx, h, assets, multi) {
+  const [k, lk] = lagged(h), x = h.slot * HUD_STEP, tint = JUICE.heroes.filter[h.slot];
+  const img = assets.get(h.def.art.idle);
+  ctx.save(); ctx.beginPath(); ctx.arc(x + 52, 50, 34, 0, Math.PI * 2);
+  ctx.fillStyle = '#f3e6c8'; ctx.fill(); ctx.lineWidth = 5; ctx.strokeStyle = multi ? JUICE.heroes.tag[h.slot] : '#2a1630'; ctx.stroke(); ctx.clip();
+  if (h.slot > 0 && tint) ctx.filter = tint;
+  if (h.state === 'dead' && multi) ctx.globalAlpha = 0.45;
+  ctx.drawImage(img, 0, 0, img.width, img.height * 0.55, x + 6, 14, 92, 92 * 0.55 * img.height / img.width);
   ctx.restore();
-  text(ctx, p.def.name, 96, 34, 22);
-  bar(ctx, 96, 44, 220, 16, k, lk, k > 0.3 ? '#5fd35a' : '#ff5a4e');
-  if (p.weapon && !p.weapon.broken) {   // T010: held weapon + hits left
-    const W = p.weapon, img = assets.get(W.def.art.img), w = 46, h = img.height * w / img.width;
-    ctx.fillStyle = 'rgba(42,22,48,0.75)'; ctx.beginPath(); ctx.roundRect(92, 66, 54, 28, 8); ctx.fill();
-    ctx.drawImage(img, 96, 80 - h / 2, w, h);
-    text(ctx, `${W.def.name} x${W.uses}`, 152, 87, 16, W.uses <= 2 ? '#ff9a6a' : '#ffe9a8');
+  text(ctx, multi ? `P${h.slot + 1} ${h.def.name}` : h.def.name, x + 96, 34, 22, multi ? JUICE.heroes.tag[h.slot] : '#fff');
+  bar(ctx, x + 96, 44, 220, 16, k, lk, k > 0.3 ? '#5fd35a' : '#ff5a4e');
+  if (multi && h.state === 'dead') text(ctx, 'Down', x + 206, 59, 16, '#ff9a6a', 'center');
+  if (h.weapon && !h.weapon.broken) {   // T010: held weapon + hits left
+    const W = h.weapon, img = assets.get(W.def.art.img), w = 46, ih = img.height * w / img.width;
+    ctx.fillStyle = 'rgba(42,22,48,0.75)'; ctx.beginPath(); ctx.roundRect(x + 92, 66, 54, 28, 8); ctx.fill();
+    ctx.drawImage(img, x + 96, 80 - ih / 2, w, ih);
+    text(ctx, `${W.def.name} x${W.uses}`, x + 152, 87, 16, W.uses <= 2 ? '#ff9a6a' : '#ffe9a8');
   }
-  text(ctx, `KOs ${world.kos}   XP ${world.xp}`, view.w - 20, 36, 22, '#ffe9a8', 'right');
-  ctx.globalAlpha = 0.75; text(ctx, `build: ${BUILD}`, view.w - 20, 58, 14, '#fff', 'right'); ctx.globalAlpha = 1;
+}
+
+export function drawHud(ctx, world, assets, view, runLines = null, camX = 0) {
+  const multi = world.heroes.length > 1;
+  for (const h of world.heroes) drawHero(ctx, h, assets, multi);
+  const ty = world.heroes.length > 2 ? 128 : 36;   // three panels fill the top: KOs/XP go under them
+  text(ctx, `KOs ${world.kos}   XP ${world.xp}`, view.w - 20, ty, 22, '#ffe9a8', 'right');
+  ctx.globalAlpha = 0.75; text(ctx, `build: ${BUILD}`, view.w - 20, ty + 22, 14, '#fff', 'right'); ctx.globalAlpha = 1;
 
   for (const f of world.fighters) {
-    if (f === p || f.state === 'dead' || world.frame - f.lastHit > 150) continue;
+    if (f.slot != null || f.state === 'dead' || world.frame - f.lastHit > 150) continue;
     const [ek, elk] = lagged(f);
     bar(ctx, f.x - camX - 26, f.y - f.def.art.height - 18, 52, 6, ek, elk, '#ff7a3d');
   }

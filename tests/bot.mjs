@@ -1,6 +1,5 @@
-// Simple scripted player: walks to the nearest enemy and attacks. Used by headless tests.
-export function botControl(w) {
-  const p = w.player;
+// Simple scripted player: walks to the nearest enemy and attacks. Used by headless tests. p = the hero it plays (T021).
+export function botControl(w, p = w.heroes[0]) {
   const foes = w.fighters.filter((f) => f.team === 'enemy' && !f.entering && f.state !== 'dead');
   if (!foes.length) return { mx: 0, my: 0, attack: false, jump: false };
   const e = foes.reduce((a, b) => (Math.abs(a.x - p.x) < Math.abs(b.x - p.x) ? a : b));
