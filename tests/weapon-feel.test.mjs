@@ -7,7 +7,7 @@ import { ITEMS } from '../src/data/items/index.js';
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { targetPose, channelsOf } from '../src/render/rig-pose.js';
-import { feelLayer, stepWobble, squashCurve, bendOf, bendStrips } from '../src/render/weapon-feel.js';
+import { feelLayer, stepWobble, squashCurve, bendSteps, bendStrips } from '../src/render/weapon-feel.js';
 import { createJuice } from '../src/render/juice.js';
 import { bus } from '../src/core/events.js';
 import { botControl } from './bot.mjs';
@@ -133,17 +133,19 @@ for (const [props, weaponBot] of [[true, true], [false, false]]) {
   check(feelLayer(rig, g, j, 1.15, m2)['sword.sx'] < 0.75, 'squash holds through the hit-stop (his swing frozen)');
 }
 
-// 5b. Fish bend (floppy body): sags nose-down when held level either way round, not when hanging; slices join up
+// 5b. Fish bend (limp body): held level either way round, the far end curls toward the floor; hanging straight, no
+// bend; slices join up
 {
-  const B = ITEMS['big-fish'].feel.bend, D = Math.PI / 180;
-  check(bendOf(B, [1, 0, 0, 1, 0, 0]) === B.droop, 'bend: level, pointing forward: full droop (clockwise = nose down)');
-  check(bendOf(B, [-1, 0, 0, 1, 0, 0]) === B.droop, 'bend: mirrored image pointing back: still nose down');
-  check(Math.abs(bendOf(B, [0, 1, -1, 0, 0, 0])) < 1e-9, 'bend: hanging straight down: no sag');
-  check(bendOf(B, [1, 0, 0, 1, 0, 0], 5) === B.droop + 5, 'bend: plus the wobble flop');
-  const S = bendStrips(240, 100, [34, 46], 0, B.segs);
+  const B = ITEMS['big-fish'].feel.bend, D = Math.PI / 180, sum = (a) => a.reduce((x, y) => x + y, 0);
+  const fwd = bendSteps(B, [1, 0, 0, 1, 0, 0]), back = bendSteps(B, [-1, 0, 0, 1, 0, 0]);
+  check(sum(fwd) > 45 && fwd[0] > fwd[fwd.length - 1], `bend: level, pointing forward: nose curls well down (${sum(fwd).toFixed(0)} deg), most near the grip`);
+  check(Math.abs(sum(back) - sum(fwd)) < 1e-9, 'bend: mirrored image pointing back: the same curl, nose down on screen');
+  check(Math.abs(sum(bendSteps(B, [0, 1, -1, 0, 0, 0]))) < 1e-9, 'bend: hanging straight down: no bend');
+  check(sum(bendSteps(B, [1, 0, 0, 1, 0, 0], 20)) > sum(fwd) + 5, 'bend: the wobble flop bends it further (the sag pulls part back)');
+  const S = bendStrips(240, 100, [34, 46], new Array(B.segs).fill(0));
   check(S.length === B.segs + 1 && S.every((x) => x.t.join() === '1,0,0,1,0,0'), 'bend 0: every slice in place (old look)');
-  const T = bendStrips(240, 100, [34, 46], 30, B.segs), last = T[T.length - 1].t;
-  check(Math.abs(Math.atan2(last[1], last[0]) - 30 * D) < 1e-9, 'bend 30: the far end is turned the full 30 degrees');
+  const T = bendStrips(240, 100, [34, 46], fwd), last = T[T.length - 1].t;
+  check(Math.abs(Math.atan2(last[1], last[0]) - sum(fwd) * D) < 1e-9, 'bend: the far end is turned by the whole bend');
   const ap = (t, x, y) => [t[0] * x + t[2] * y + t[4], t[1] * x + t[3] * y + t[5]];
   const ok = T.slice(2).every((x, i) => { const [a, b] = ap(T[i + 1].t, x.sx, 46), [c, d] = ap(x.t, x.sx, 46); return Math.hypot(a - c, b - d) < 1e-9; });
   check(ok, 'bend: neighbouring slices meet at the seam on the centre line');

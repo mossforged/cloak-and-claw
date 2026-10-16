@@ -6,7 +6,7 @@ import { rigJoints, drawLayer, squatLayer } from './rig-pose.js';
 import { squatOf } from './jump-squat.js';
 import { gripLayout } from './rig-grip.js';
 import { braceLayer } from './brace.js';
-import { feelLayer, bendOf, bendStrips } from './weapon-feel.js';
+import { feelLayer, bendSteps, bendStrips } from './weapon-feel.js';
 import { ITEMS } from '../data/items/index.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
@@ -122,7 +122,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
     g.transform(...m);
     const im = assets.get(img);
     if (!B || name !== held.slot) { g.drawImage(im, 0, 0); continue; }
-    for (const { sx, sw, t } of bendStrips(im.width, im.height, part.pivot, bendOf(B, m, mem.flop), B.segs)) {
+    for (const { sx, sw, t } of bendStrips(im.width, im.height, part.pivot, bendSteps(B, m, mem.flop))) {
       g.save(); g.transform(...t); g.drawImage(im, sx, 0, sw, im.height, sx, 0, sw, im.height); g.restore();
     }
   }
