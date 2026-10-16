@@ -44,3 +44,4 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-16 Individual variety for enemies (user asked that three archers not look identical): face-detail overlays that fit every expression, random fur/clothing tints, optional gear picks, small render-only size change. Added to the rig standard (section 7a). Classic beat 'em ups mostly use palette swaps only.
 - 2026-10-16 Rat Raider head set **R** (standee head with a slightly longer muzzle and visible front teeth), from A009's review. (User.)
 - 2026-10-16 Rig deliveries carry a `rig-source.json` (parts, parents, joint points measured on the shared canvas, draw bands, swaps, overlays); Code's rig bench and importer read it (rig standard section 5).
+- 2026-10-16 Scrolling stages: the camera never scrolls back (Golden Axe style); when the stage loops, the player returns to the start (placeholder until a boss or stage exit). (User, from T013.)
