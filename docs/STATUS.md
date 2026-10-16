@@ -54,6 +54,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: A013 addendum turned the far foot; user spotted it was the near (trailing) foot that should turn. Lead's wording error ("back foot" vs part `foot-back` = far). Addendum 2: `foot-front-out`. Rig standard + lessons now say front/back = near/far, never leading/trailing.
 2026-10-16 lead: user on A013: "it looks good"; back foot points forward where the standee's turns toward the camera -> A013 addendum: `foot-back-out` swap (same branch), then merge.
 2026-10-16 lead: reviewed A013 (branch `a013-mouse-fighter-standard`, 69 files / 32 MB, scope clean). Bench: master uncovered 0.1%, parts outside 3.1% (old mouse 12.7% / 10.3%); far hand 87% outside = the grip swap used where the master's hand hides behind the shield (documented). Near arm in bands 590/580 (behind torso at rest; watch when the arm crosses). Waiting for the user's look ("is this our hero?").
 2026-10-16 lead: merged T019 round 2 (user: individual looks weren't showing at game size -> wider palettes, more face details, fur range 0.12; user approved v2).

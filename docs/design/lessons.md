@@ -36,3 +36,4 @@ Distilled from the studies in `docs/studies/` (genre study 2026-10-14, developer
 - Set gameplay numbers (belt depth, sizes) first, then brief the art to them. (our decision)
 - Study classics critically: keep what works, drop the frustrations. (SoR4)
 - Show builds to strangers early; watch, don't coach. (SoR4)
+- Part names front/back mean near/far, not leading/trailing; in packets name the exact part (e.g. `foot-front` = near foot) and use "leading/trailing" only for stance. (A013: the wrong foot was turned because a packet said "back foot".)

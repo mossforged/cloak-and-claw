@@ -36,3 +36,10 @@ Fix with a swap, not a new master (that's what separate feet are for):
 2. Optional, only if it reads better: `foot-front-out.png` (slightly turned) for very wide stances.
 3. Add it to `rig-source.json` swaps (`of: "foot-back"`), and a small review: the master stance with `foot-back` vs `foot-back-out` beside the standee, at full size and game size.
 Code then uses the turned-out back foot in stance, idle, block and other planted poses, and the forward foot when walking.
+
+## Addendum 2 (lead, 2026-10-16): wrong foot, the lead's wording
+User: the new drawing turned his **left** foot (far side, the leading foot, which correctly points forward), but it's his **right** foot (near side, camera side, the trailing foot) that turns toward the camera in the standee.
+The mistake was in addendum 1: it said "back foot" meaning the trailing foot in his stance, but in the rig standard `foot-back` means the **far** foot. In this stance the trailing foot is the **near** one, `foot-front`.
+1. Make **`foot-front-out.png`**: the **near** (right, camera-side) boot turned out toward the camera as in the standee, same canvas, **same ankle pivot as `foot-front`**, a turned view of the same boot.
+2. Remove `foot-back-out` from `rig-source.json` (keep or delete the file; it's unused). Add the swap `foot-front-out` (`of: "foot-front"`).
+3. Review as before: standee, master with `foot-front`, master with `foot-front-out`, full size and game size.

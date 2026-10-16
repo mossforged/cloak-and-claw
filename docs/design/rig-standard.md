@@ -35,7 +35,7 @@ G1 is cheap and catches the expensive mistake (a different character). Don't dra
 - The master is the single source of truth. Every later image is cut from it or drawn over it.
 
 ## 3. Standard biped part list (fixed names)
-Names are identical for every biped, so poses, weapon kits and gear transfer between bodies. "front" = near (camera side), "back" = far.
+Names are identical for every biped, so poses, weapon kits and gear transfer between bodies. "front" = near (camera side), "back" = far. **These never mean leading/trailing.** In a stance the trailing foot is often the near (`front`) one. Packets and reviews say "near/far" for parts and "leading/trailing" for stance, and name the part explicitly (lesson from A013, where "back foot" was misread).
 
 | Group | Parts |
 |---|---|
