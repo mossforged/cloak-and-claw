@@ -5,7 +5,7 @@
 ## Next
 1. **Code:** T020 (weapons held right: cutlass in line with the fist; new spear/bow; spearman's far hand on the shaft; archer full draw to the ear).
 2. **Art:** A013 (Mouse Fighter to the rig standard: master + parts, like the rat). Foundational: the hero is seen most and the last old-style rig.
-3. **User:** judge T020 (and T019's look in the same play: individuals? colours right?); A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools) (spear and bow holds).
+3. **User:** judge T020 (and T019's look in the same play: individuals? colours right?); A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
