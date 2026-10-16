@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 T019 rat looks in game
+User: "not sure the individual customization is happening" (looks too alike at game size) -> round 2 widened palettes and face details; user approved v2.
+
 ## 2026-10-16 T019 testing: cutlass grip
 User: "the sword angle doesn't match the grip angle. the sword is more upright so it doesn't look like it's being held." -> T020.
 

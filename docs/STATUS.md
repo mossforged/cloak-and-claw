@@ -5,7 +5,7 @@
 ## Next
 1. **Code:** T020 (weapons held right: cutlass in line with the fist; new spear/bow; spearman's far hand on the shaft; archer full draw to the ear).
 2. **Art:** A013 (Mouse Fighter to the rig standard: master + parts, like the rat). Foundational: the hero is seen most and the last old-style rig.
-3. **User:** judge T020 (and T019's look in the same play: individuals? colours right?); A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools).
+3. **User:** judge T020; A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -29,6 +29,7 @@
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
+- Rat variety beyond T019's limits (Code's offer): different fur colours per rat and a bigger size range than +-4%. Only if crowds still look samey.
 - Enemy spacing: two rats can stand almost on top of each other (seen in T019 testing). `separate()` in sim/ai.js uses hard-coded 34 px / 0.6 push, tuned for the old skinny rats: base it on body width, push harder than the walk, spread waiting rats around the player, numbers in data.
 - Rig bench's generic strip rolls the head in knockdown/down (game poses are fine; T018). Fix when the bench is next touched.
 - Fish slap lands mid-spin while he faces away (timing comes from the unchanged hitbox, T017). Revisit in a later feel pass if it reads wrong.
@@ -53,6 +54,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T019 round 2 (user: individual looks weren't showing at game size -> wider palettes, more face details, fur range 0.12; user approved v2).
 2026-10-16 lead: merged T019 (CI green, sim change only hands each spawn its look; 19/19 tests) so Code isn't blocked; its look check folds into T020's play check. Wrote A013 (Mouse Fighter to the rig standard).
 2026-10-16 lead: user testing T019: the cutlass angle doesn't match the fist ("doesn't look like it's being held") -> added to T020 (slot axis per grip hand, handle axis per item, aligned in every pose). Enemy overlap parked.
 2026-10-16 lead: merged A012 (weapons are cleaner, bolder versions of A004's designs; near pinch reads as a fist up close). User on the review mock-ups: "the spearman's missing an arm", the archer "could be drawing the string back further": both are rig poses -> T020.
