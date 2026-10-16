@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T019 rat gear + individual looks (merged 2026-10-16). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T020 rat weapons held right (merged 2026-10-16; user: "it looks good to me"). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
 
 ## Next
-1. **Code:** T020 (weapons held right: cutlass in line with the fist; new spear/bow; spearman's far hand on the shaft; archer full draw to the ear).
+1. **Code:** next task waits on A013 (import the new Mouse Fighter, sword and shield in his fists). Meanwhile free for a foundation task once the user picks one.
 2. **Art:** A013 (Mouse Fighter to the rig standard: master + parts, like the rat). Foundational: the hero is seen most and the last old-style rig.
-3. **User:** judge T020; A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools).
+3. **User:** A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -20,7 +20,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T020-rat-weapons-and-holds.md`.
+- Code: nothing queued (Mouse Fighter import after A013 merges).
 - Art: `docs/tasks/A013-mouse-fighter-standard.md`.
 
 ## Open questions (for the user)
@@ -29,6 +29,8 @@
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
+- Floor/item shadows look "a bit abstract" (user, T020). A small render pass later.
+- User question (T020): should weapons be drawn with the hands as part of them for correct grips? Lead's answer: no as the default (one weapon then needs a drawing per body and per grip, which breaks the floor-weapon = held-weapon rule and the kit system); instead keep separate grip hands and use weapon-specific hand swaps only where a grip can't be faked (as `hand-front-pinch`). Revisit if grips keep fighting us.
 - Rat variety beyond T019's limits (Code's offer): different fur colours per rat and a bigger size range than +-4%. Only if crowds still look samey.
 - Enemy spacing: two rats can stand almost on top of each other (seen in T019 testing). `separate()` in sim/ai.js uses hard-coded 34 px / 0.6 push, tuned for the old skinny rats: base it on body width, push harder than the walk, spread waiting rats around the player, numbers in data.
 - Rig bench's generic strip rolls the head in knockdown/down (game poses are fine; T018). Fix when the bench is next touched.
@@ -54,6 +56,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T020 (4 rounds; user picked the cutlass orientation and spear hold E; 20/20 tests). Mouse floor weapons now follow his fist too.
 2026-10-16 lead: A013 addendum turned the far foot; user spotted it was the near (trailing) foot that should turn. Lead's wording error ("back foot" vs part `foot-back` = far). Addendum 2: `foot-front-out`. Rig standard + lessons now say front/back = near/far, never leading/trailing.
 2026-10-16 lead: user on A013: "it looks good"; back foot points forward where the standee's turns toward the camera -> A013 addendum: `foot-back-out` swap (same branch), then merge.
 2026-10-16 lead: reviewed A013 (branch `a013-mouse-fighter-standard`, 69 files / 32 MB, scope clean). Bench: master uncovered 0.1%, parts outside 3.1% (old mouse 12.7% / 10.3%); far hand 87% outside = the grip swap used where the master's hand hides behind the shield (documented). Near arm in bands 590/580 (behind torso at rest; watch when the arm crosses). Waiting for the user's look ("is this our hero?").

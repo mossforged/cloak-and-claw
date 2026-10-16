@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 T020 rat weapons in hand
+User: cutlass "still not quite lined up", then "the wrong direction" -> picked a flipped hold from labelled variants (round 4). Spear: "clutching it very close", wants it underhand -> picked variant E (low at the belt, front arm reaching out). Final: "it looks good to me". Asked whether weapons should be drawn with hands; floor shadows "a bit abstract".
+
 ## 2026-10-16 A013 Mouse Fighter to the rig standard
 User: "it looks good." "In his stance, his forward foot points forward, which is good. His back foot also points forward, whereas in the standee it's more toward the camera." -> A013 addendum (turned-out back foot swap for planted poses).
 
