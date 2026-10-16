@@ -67,6 +67,14 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   }
 }
 
+// Raider (T020 r4): the cutlass flipped across its handle while holding (idle, walk, hurt), as drawn in the swing.
+{
+  const def = FIGHTERS['rat-raider'], rig = RIGS['rat-raider'], m = def.moves.ratSlash;
+  const flipped = (o) => { const h = heldOf({ def, state: 'idle', t: 0, mf: 0, move: null, weapon: null, hp: 10, ...o }, rig); return Array.isArray(h.part.scale) && h.part.scale[1] < 0; };
+  check(flipped({}) && flipped({ state: 'walk' }) && flipped({ state: 'hurt' }), 'raider: cutlass flipped while holding');
+  check(!flipped({ state: 'attack', move: m, moveKey: 'ratSlash', mf: 0 }) && !flipped({ state: 'attack', move: m, moveKey: 'ratSlash', mf: m.windup + 2 }), 'raider: cutlass as drawn while swinging');
+}
+
 // Spearman: both fists on the shaft line, far fist closed round it and over it.
 {
   const def = FIGHTERS['rat-spearman'], rig = RIGS['rat-spearman'], K = ITEMS['rat-spear'], G = rig.grips['two-hand'];

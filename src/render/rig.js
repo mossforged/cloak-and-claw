@@ -92,7 +92,12 @@ export function heldOf(f, rig, sheathed = false) {
   const slot = typeof spec === 'string' ? spec : 'held', kit = W.def, grip = kit.grip;
   if (W.broken || (!f.weapon && f.dropped && f.def.drop?.item === kit.id)) return { slot, part: null, grip, kit };
   const A = kit.art, mount = typeof spec === 'string' ? {} : spec;   // T018: a slot's own `rest` turns the item in the hand
-  return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit), scale: A.px / rig.scale } };
+  const k = A.px / rig.scale, ax = rig.axes?.[grip];
+  // T020: a slot with flip 'hold' draws the item flipped across the handle axis while not attacking (the raider's
+  // cutlass: tip curving back as he holds it, as drawn once he swings; user's pick). Reflection across angle ax =
+  // flip y, then turn rest - 2 ax: the handle stays in the fist.
+  if (mount.flip === 'hold' && !f.move && ax != null) return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit) - 2 * ax, scale: [k, -k] } };
+  return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit), scale: k } };
 }
 
 // T020: the handle runs through the fist. rig.axes[grip type] = the slot axis: the direction (degrees, in the slot

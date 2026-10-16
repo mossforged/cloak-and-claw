@@ -15,7 +15,8 @@
 //   restIn turns the item so its handle runs along it). Near grip hand: its slot is cut straight up the fist (-90,
 //   measured on A010 hand-front-grip). Far grip hand: a ring of claws, the handle across the forearm (wrist -> ring
 //   centre is 2 degrees, so -88: the bow stands straight up with the hand level). T020 round 2: the cutlass sits 10 deg back
-//   of the cut slot (user's pick by eye: the knuckle rows lean).
+//   of the cut slot (user's pick by eye: the knuckle rows lean). flip 'hold': the item drawn flipped across that axis
+//   except during a move (render/rig.js heldOf).
 // grips: per grip type, the hand swaps it puts on, and IK (render/rig-grip.js): ik.arm = [upper, lower] joints it bends;
 //   ik.end = the part whose point ik.hand (that part's own px) must reach ik.to on the weapon art (spear `grip2`, bow
 //   `nock`); arrow / string = draw order of a nocked arrow and the drawn string (in front of the body).
@@ -38,7 +39,7 @@ export default {
   rootY: 43.144,    // pelvis pivot height above the feet in the master crouch (screen px)
   overlays: OVERLAYS, views: VIEWS, masks: MASKS,
   slots: {
-    'one-hand': { parent: 'hand-front', attach: SLOT, order: 830 },   // the cutlass's convex (cutting) edge already faces away from him in the back arm
+    'one-hand': { parent: 'hand-front', attach: SLOT, order: 830, flip: 'hold' },   // T020 r4: flipped while holding, as drawn when swinging (user's pick)
     'two-hand': { parent: 'hand-front', attach: SLOT, order: 830 },
     bow: { parent: 'hand-back', attach: RING, order: 125 },
   },
