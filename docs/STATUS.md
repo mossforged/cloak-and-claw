@@ -24,6 +24,7 @@
 - Art: none queued.
 
 ## Open questions (for the user)
+- **Repo size:** pack ~225 MB; the Git LFS (large file storage) decision is due (decisions: revisit near 200 MB of sources). Lead to propose options in the next chat.
 - **Combatant standard** (heroes + enemies: stats, move sets, AI roles, footwork rules, enemy bench) to draft once T022 and T023 land, then a mission/stage standard. Before any new hero or enemy (user: standards before content).
 - **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook (**decided 2026-10-16**), (2) multi-hero engine (**started: T021, user 2026-10-16**), (3) run loop in grey box, now shaped by the hook: mission -> rescue/rewards -> home (place the rescued, spend resources, slot gear) -> next mission, (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
