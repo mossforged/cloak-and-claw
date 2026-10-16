@@ -1,9 +1,9 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T015 bracing loop while blocking (merged 2026-10-16; user: "he looks braced"). Last art task: A008 rat gear (merged). Queued: A009 rat parts redrawn from the standee.
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T016 rig bench (merged 2026-10-16). Last art task: A008 rat gear (merged). Queued: A009 rat parts redrawn from the standee.
 
 ## Next
-1. **Code:** T016 (rig bench: fit overlay over the master + standard motion strip, straight from Art's source folder).
+1. **Code:** idle until A010 lands; next is importing the new rat into the game once A010 passes the bench (packet to come). Optional meanwhile: the user may try the bench on the mouse.
 2. **Art:** A010 (bring A009 up to the rig standard; head set **R**). Runs in parallel with T016.
 3. **User:** judge A010 (does the reassembled rat match? sword right?) and its motion strip in the bench.
 4. **After A010 passes the fit check and motion strip:** Code imports the new rat into the game; then Art does the finishing set (recolour masks, face-detail overlays, hood/helmet/hat refit on head R).
@@ -21,7 +21,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T016-rig-bench.md`.
+- Code: nothing queued (waiting on A010).
 - Art: `docs/tasks/A010-rat-raider-standard-parts.md` (head set R).
 
 ## Open questions (for the user)
@@ -49,6 +49,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T016 (rig bench + biped strip + mouse fixture + draft importer; 17/17 tests, CI green). Bench on the mouse confirms A002's known drift (12.7% of master uncovered; sword 44% and front shin 23% outside). Standard section 8 now names rig-source.json.
 2026-10-15 code: T016 on branch `t016-rig-bench`: `tools/rig-bench.html` (G2 fit overlay + difference view + mismatch score; G3 standard strip from new `src/data/rigs/biped-poses.js`, live beside the standee and 1x over Harbor Market, PNG export), draft importer `tools/rig_from_source.py`, mouse fixture (A002 canvas). Game unchanged.
 2026-10-15 code: T016 17/17 tests (new tests/rig-bench.test.mjs). Screens docs/screens/T016/. Human check open: open `/tools/rig-bench.html?fixture=mouse-fighter`: sensible fit view and strip? (A010 is the real test.)
 2026-10-16 lead: merged T015 (render-only bracing loop; 16/16 tests). User picked head **R** for the rat. Wrote T016 (rig bench) and the `rig-source.json` format (rig standard section 5); A010 updated to deliver it.
