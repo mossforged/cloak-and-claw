@@ -48,6 +48,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: T013 round 3: user confirmed no freeze, parallax good. Blue sea strip between the back art's uneven feet and the lane: stone backfill (40 px of the floor tile, darkened 0.35) drawn behind the back segments (`layers.floor.backfill`, lab sliders). Segment/join screens retaken.
 2026-10-15 code: T013 user check: lines and unlock shudder confirmed gone (round 2). Golden Axe feel / joins question still for the user.
 2026-10-15 code: T013 round 2 (user playtest): freeze before fight 3 = jump attack while holding a cutlass/club/fish threw every frame (T010 bug, also on the arena): startMove falls back to the fighter's own move. Black lines while hitting = fractional shake opening floor tile edges: whole-pixel shake on layered stages + 1 px tile overlap. Unlock shudder = camera snapped to the player: now glides at `camera.catchUp` 4 px/frame.
 2026-10-15 code: tests: props #11 (jump attack with every kit), harbor-run: camera never jumps more than catchUp, unlock glide, 20-seed rough-play (grab/jump/block/wander mash) never throws or stalls.

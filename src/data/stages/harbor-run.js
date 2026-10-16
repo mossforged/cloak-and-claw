@@ -24,7 +24,9 @@ export default {
       sequence: ['back-1', 'back-2', 'back-3', 'back-1'],
     },
     // floor: one tile (A007 floor, seam cross-faded by tools/tile_fade.py) repeated; top at `y`; shade = black overlay so fighters read
-    floor: { src: A + 'floor.webp', y: 386, shade: 0.18 },
+    // backfill = px of the same stone drawn behind the back art's base (darkened by backfillShade): fills the gaps between
+    // its uneven feet, which otherwise show the far sea as a blue strip along the lane
+    floor: { src: A + 'floor.webp', y: 386, shade: 0.18, backfill: 40, backfillShade: 0.35 },
     // decor pieces: art (anchorX = share of the width at the base point), drawn h px tall with the base at (x, y)
     pieces: {
       post: { src: A + 'front-post.webp', anchorX: 0.5 },

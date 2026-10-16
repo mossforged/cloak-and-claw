@@ -55,7 +55,7 @@ One line per file: what it does and what it exports. **Read this instead of the 
 | `src/render/hud.js` | Portrait, health bars, held weapon + hits left, wave banner, KOs/XP, build label (`BUILD` in config.js), hints, game over (3 run-log lines), pause | `drawHud drawPaused` |
 | `src/render/debug.js` | Overlay: floor belt, prop footprints + hp, item pickup zones + state, arrows' hit lanes, hurtboxes, hitboxes, states (+ held weapon), AI tokens | `drawDebug` |
 | `src/render/backdrop.js` | Sky, clouds, sea; stage cutout | `drawBackdrop drawStage` |
-| `src/render/layers.js` | T013: scrolling stage layers (far parallax, back segments, shaded floor tile, decor back/front with fade) | `drawLayersBack drawLayersFront segmentsOf joinsOf` |
+| `src/render/layers.js` | T013: scrolling stage layers (far parallax, stone backfill behind the back art's base, back segments, shaded floor tile, decor back/front with fade) | `drawLayersBack drawLayersFront segmentsOf joinsOf` |
 | `src/render/tint.js` | Cached solid-colour silhouettes | `silhouette` |
 
 ## Log (run summaries; never changes gameplay state)
