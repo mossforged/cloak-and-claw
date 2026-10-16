@@ -1,0 +1,379 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "master": "master-body.png",
+  "reference": "reference.png",
+  "floorY": 2050,
+  "fighter": "mouse-fighter",
+  "note": "Body-only independent master for G2; reference.png is the selected full master with generated weapon depictions. Items are NOT body parts. Use existing A002 sword/shield with item-fits.json. Visible body cuts from the selected raw-boot-edit master. Generated paint is restricted to hidden joint disks; default far hand intentionally uses the drawn grip swap; original cut retained as provenance. G1/G2 human review and G3 motion pending.",
+  "parts": {
+    "head": {
+      "img": "head.png",
+      "parent": "torso",
+      "pivot": [
+        877,
+        1308
+      ],
+      "band": 700
+    },
+    "torso": {
+      "img": "torso.png",
+      "parent": "pelvis",
+      "pivot": [
+        783,
+        1590
+      ],
+      "band": 600
+    },
+    "pelvis": {
+      "img": "pelvis.png",
+      "parent": null,
+      "pivot": [
+        777,
+        1660
+      ],
+      "band": 400
+    },
+    "arm-front-upper": {
+      "img": "arm-front-upper.png",
+      "parent": "torso",
+      "pivot": [
+        643,
+        1386
+      ],
+      "band": 590
+    },
+    "arm-front-lower": {
+      "img": "arm-front-lower.png",
+      "parent": "arm-front-upper",
+      "pivot": [
+        497,
+        1337
+      ],
+      "band": 580
+    },
+    "hand-front": {
+      "img": "hand-front.png",
+      "parent": "arm-front-lower",
+      "pivot": [
+        431,
+        1308
+      ],
+      "band": 840
+    },
+    "arm-back-upper": {
+      "img": "arm-back-upper.png",
+      "parent": "torso",
+      "pivot": [
+        998,
+        1405
+      ],
+      "band": 110
+    },
+    "arm-back-lower": {
+      "img": "arm-back-lower.png",
+      "parent": "arm-back-upper",
+      "pivot": [
+        1032,
+        1492
+      ],
+      "band": 120
+    },
+    "hand-back": {
+      "img": "hand-back.png",
+      "parent": "arm-back-lower",
+      "pivot": [
+        1038,
+        1526
+      ],
+      "band": 140
+    },
+    "leg-front-upper": {
+      "img": "leg-front-upper.png",
+      "parent": "pelvis",
+      "pivot": [
+        635,
+        1719
+      ],
+      "band": 530
+    },
+    "leg-front-lower": {
+      "img": "leg-front-lower.png",
+      "parent": "leg-front-upper",
+      "pivot": [
+        499,
+        1850
+      ],
+      "band": 520
+    },
+    "foot-front": {
+      "img": "foot-front.png",
+      "parent": "leg-front-lower",
+      "pivot": [
+        477,
+        1937
+      ],
+      "band": 510
+    },
+    "leg-back-upper": {
+      "img": "leg-back-upper.png",
+      "parent": "pelvis",
+      "pivot": [
+        953,
+        1743
+      ],
+      "band": 230
+    },
+    "leg-back-lower": {
+      "img": "leg-back-lower.png",
+      "parent": "leg-back-upper",
+      "pivot": [
+        1002,
+        1863
+      ],
+      "band": 220
+    },
+    "foot-back": {
+      "img": "foot-back.png",
+      "parent": "leg-back-lower",
+      "pivot": [
+        1009,
+        1940
+      ],
+      "band": 210
+    },
+    "tail": {
+      "img": "tail.png",
+      "parent": "pelvis",
+      "pivot": [
+        499,
+        1713
+      ],
+      "band": 300
+    },
+    "scarf-tail": {
+      "img": "scarf-tail.png",
+      "parent": "torso",
+      "pivot": [
+        613,
+        1271
+      ],
+      "band": 590
+    }
+  },
+  "swaps": {
+    "head-neutral": {
+      "img": "head-neutral.png",
+      "of": "head"
+    },
+    "hand-front-grip": {
+      "img": "hand-front-grip.png",
+      "of": "hand-front",
+      "slot": {
+        "of": "hand-front",
+        "center": [
+          363,
+          1300
+        ],
+        "direction": [
+          [
+            379,
+            1348
+          ],
+          [
+            347,
+            1253
+          ]
+        ]
+      }
+    },
+    "hand-back-shield": {
+      "img": "hand-back-shield.png",
+      "of": "hand-back",
+      "slot": {
+        "of": "hand-back",
+        "center": [
+          1155,
+          1508
+        ],
+        "direction": [
+          [
+            1155,
+            1451
+          ],
+          [
+            1155,
+            1566
+          ]
+        ]
+      }
+    },
+    "head-attack": {
+      "img": "head-attack.png",
+      "of": "head"
+    },
+    "head-hurt": {
+      "img": "head-hurt.png",
+      "of": "head"
+    },
+    "head-effort": {
+      "img": "head-effort.png",
+      "of": "head"
+    },
+    "head-ko": {
+      "img": "head-ko.png",
+      "of": "head"
+    },
+    "hand-front-open": {
+      "img": "hand-front-open.png",
+      "of": "hand-front"
+    },
+    "hand-front-fist": {
+      "img": "hand-front-fist.png",
+      "of": "hand-front"
+    },
+    "hand-back-open": {
+      "img": "hand-back-open.png",
+      "of": "hand-back"
+    },
+    "hand-back-fist": {
+      "img": "hand-back-fist.png",
+      "of": "hand-back"
+    },
+    "hand-back-grip": {
+      "img": "hand-back-grip.png",
+      "of": "hand-back",
+      "slot": {
+        "of": "hand-back",
+        "center": [
+          1155,
+          1508
+        ],
+        "direction": [
+          [
+            1155,
+            1566
+          ],
+          [
+            1155,
+            1451
+          ]
+        ]
+      }
+    },
+    "head-back": {
+      "img": "head-back.png",
+      "of": "head"
+    },
+    "torso-back": {
+      "img": "torso-back.png",
+      "of": "torso"
+    },
+    "torso-side": {
+      "img": "torso-side.png",
+      "of": "torso"
+    },
+    "arm-front-raised": {
+      "img": "arm-front-raised.png",
+      "of": "arm-front-upper",
+      "hide": [
+        "arm-front-lower",
+        "hand-front"
+      ],
+      "note": "Whole arm key drawing: code must hide the listed children and carry item from this drawing, not from old wrist.",
+      "itemGrip": [
+        659,
+        1153
+      ],
+      "slotDirection": [
+        [
+          659,
+          1173
+        ],
+        [
+          659,
+          1133
+        ]
+      ]
+    },
+    "arm-back-guard": {
+      "img": "arm-back-guard.png",
+      "of": "arm-back-upper",
+      "hide": [
+        "arm-back-lower",
+        "hand-back"
+      ],
+      "note": "Whole arm key drawing: code must hide the listed children and carry item from this drawing, not from old wrist.",
+      "itemGrip": [
+        849,
+        1275
+      ],
+      "slotDirection": [
+        [
+          849,
+          1295
+        ],
+        [
+          849,
+          1255
+        ]
+      ]
+    }
+  },
+  "overlays": {},
+  "grips": {
+    "hand-front-grip": {
+      "of": "hand-front",
+      "center": [
+        363,
+        1300
+      ],
+      "direction": [
+        [
+          379,
+          1348
+        ],
+        [
+          347,
+          1253
+        ]
+      ]
+    },
+    "hand-back-grip": {
+      "of": "hand-back",
+      "center": [
+        1155,
+        1508
+      ],
+      "direction": [
+        [
+          1155,
+          1566
+        ],
+        [
+          1155,
+          1451
+        ]
+      ]
+    },
+    "hand-back-shield": {
+      "of": "hand-back",
+      "center": [
+        1155,
+        1508
+      ],
+      "direction": [
+        [
+          1155,
+          1451
+        ],
+        [
+          1155,
+          1566
+        ]
+      ]
+    }
+  }
+}

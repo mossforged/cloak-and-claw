@@ -1,0 +1,82 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "parts": 17,
+  "swaps": 17,
+  "missingStandardParts": [],
+  "bodyMasterMissed": 0.0011801764563348965,
+  "partsOutsideBodyMaster": 0.03117067694536767,
+  "jointOverlap": {
+    "head": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "torso": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "pelvis": {
+      "onSelf": true,
+      "onParent": null
+    },
+    "arm-front-upper": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "arm-front-lower": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "hand-front": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "arm-back-upper": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "arm-back-lower": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "hand-back": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "leg-front-upper": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "leg-front-lower": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "foot-front": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "leg-back-upper": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "leg-back-lower": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "foot-back": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "tail": {
+      "onSelf": true,
+      "onParent": true
+    },
+    "scarf-tail": {
+      "onSelf": true,
+      "onParent": true
+    }
+  },
+  "note": "Body master independently excludes weapon depictions from the original master using recorded polygons. Not derived from assembly. Static rest fit only; G3 must be judged on bench. Shared raw pivots are rounded once into source canvas."
+}
