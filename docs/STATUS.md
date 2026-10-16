@@ -24,9 +24,9 @@
 - Art: `docs/tasks/A013-mouse-fighter-standard.md`.
 
 ## Open questions (for the user)
-- **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook, (2) multi-hero engine (**started: T021, user 2026-10-16**), (3) run loop in grey box (growth, coins/food, shop, lives), (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
+- **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook (**decided 2026-10-16**), (2) multi-hero engine (**started: T021, user 2026-10-16**), (3) run loop in grey box (growth, coins/food, shop, lives), (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
-- The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
+- **Hook decided (2026-10-16): community and helping** (see game brief). Open details: solo play with AI allies?; mission structure; helping verbs in combat; what failure costs.
 
 ## Parked
 - Floor/item shadows look "a bit abstract" (user, T020). A small render pass later.
@@ -56,6 +56,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user set the hook: community and helping (fallen world, rescue missions, a ruined stronghold rebuilt by the rescued, co-op heroes helping each other). Game brief + decisions updated.
 2026-10-16 lead: user chose to do the multi-hero engine change now -> wrote T021.
 2026-10-16 lead: merged T020 (4 rounds; user picked the cutlass orientation and spear hold E; 20/20 tests). Mouse floor weapons now follow his fist too.
 2026-10-16 lead: A013 addendum turned the far foot; user spotted it was the near (trailing) foot that should turn. Lead's wording error ("back foot" vs part `foot-back` = far). Addendum 2: `foot-front-out`. Rig standard + lessons now say front/back = near/far, never leading/trailing.

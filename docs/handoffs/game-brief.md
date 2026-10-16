@@ -8,6 +8,12 @@ Paste this whole file to any new agent before giving it a task.
 3. **You grow by fighting.** Like River City Ransom, your fighter visibly gets stronger across a run; a run fits a 30 to 60 minute session.
 4. **The art stays doable.** Cartoon standees and cutout rigs, not hand-drawn frame animation. This game is also an animation study, so rig experiments are welcome, but the game never waits on them.
 
+## The hook (user, 2026-10-16; details still open)
+**Community and helping, in every layer.** The world has fallen into shadow: folk have stopped helping each other and vermin bands hold the land. One mouse, raised on stories of animals coming to each other's aid, sets out to bring that world back.
+- **Story:** he claims a ruined, abandoned stronghold (an abbey-like place, not an abbey) and goes out on missions to rescue folk who have been taken.
+- **Home base:** everyone rescued moves in. Some unlock abilities to use between missions, some give buffs as the place is rebuilt, some are adventurers who join future missions. Missions also bring back treasure (slottable gear: weapons, rings) and resources to rebuild the stronghold.
+- **Fighting:** co-op with two or three heroes, and much of the fighting is heroes helping each other.
+
 ## Concept
 A belt-scroller beat 'em up (you move left/right and up/down in depth, like Golden Axe and the D&D arcade games) with River City Ransom's light RPG growth. Set in the user's animal fantasy world (Tales of Cloak & Claw / Eldrith): small heroic animals against raiders, beasts and stranger things. Single player first; distinct heroes with their own move sets and local co-op come later.
 
