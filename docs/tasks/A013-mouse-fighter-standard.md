@@ -27,3 +27,12 @@ Do **G1 (master) and G2 (parts) in one delivery**, as A010 did for the rat; the 
 - Human: is this our hero?
 
 Out of scope: recolour masks and face details (he's unique), new moves, importing (Code does that after approval).
+
+## Addendum (lead, 2026-10-16, after the user's review): one more foot, same branch
+User: "it looks good." One note: "in his stance, his forward foot points forward, which is good. his back foot also points forward, whereas in the standee it's more toward the camera."
+In the standee the back foot is turned out toward the viewer (about 45 degrees), the classic braced fighting stance; in the master both feet point forward, which reads more like walking.
+Fix with a swap, not a new master (that's what separate feet are for):
+1. **`foot-back-out.png`**: the back boot turned out toward the camera as in the standee (toes pointing down-left of forward, sole partly hidden), same canvas, **same ankle pivot** as `foot-back`. Paint it as a turned view of the same boot (cuff, buckle, toes), not a new design.
+2. Optional, only if it reads better: `foot-front-out.png` (slightly turned) for very wide stances.
+3. Add it to `rig-source.json` swaps (`of: "foot-back"`), and a small review: the master stance with `foot-back` vs `foot-back-out` beside the standee, at full size and game size.
+Code then uses the turned-out back foot in stance, idle, block and other planted poses, and the forward foot when walking.
