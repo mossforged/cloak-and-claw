@@ -1,0 +1,127 @@
+[
+  {
+    "anatomy": "upper arm",
+    "original_center": [
+      176,
+      190
+    ],
+    "normal": [
+      0.48,
+      0.88
+    ],
+    "source_center": [
+      530,
+      1198
+    ],
+    "part_center": [
+      530,
+      1198
+    ],
+    "standee_px": 66.2,
+    "reference_px": 204.2,
+    "part_px": 195.0,
+    "standee_ratio": 0.1418,
+    "reference_ratio": 0.1513,
+    "part_ratio": 0.1444
+  },
+  {
+    "anatomy": "forearm",
+    "original_center": [
+      145,
+      207
+    ],
+    "normal": [
+      0.25,
+      0.97
+    ],
+    "source_center": [
+      440,
+      1247
+    ],
+    "part_center": [
+      440,
+      1247
+    ],
+    "standee_px": 55.0,
+    "reference_px": 151.0,
+    "part_px": 148.8,
+    "standee_ratio": 0.1178,
+    "reference_ratio": 0.1119,
+    "part_ratio": 0.1102
+  },
+  {
+    "anatomy": "thigh",
+    "original_center": [
+      147,
+      365
+    ],
+    "normal": [
+      0.48,
+      0.88
+    ],
+    "source_center": [
+      446,
+      1702
+    ],
+    "part_center": [
+      424,
+      1680
+    ],
+    "standee_px": 64.0,
+    "reference_px": 190.5,
+    "part_px": 218.2,
+    "standee_ratio": 0.137,
+    "reference_ratio": 0.1411,
+    "part_ratio": 0.1616
+  },
+  {
+    "anatomy": "calf",
+    "original_center": [
+      107,
+      410
+    ],
+    "normal": [
+      0.9,
+      0.44
+    ],
+    "source_center": [
+      330,
+      1832
+    ],
+    "part_center": [
+      344,
+      1858
+    ],
+    "standee_px": 43.8,
+    "reference_px": 136.0,
+    "part_px": 123.8,
+    "standee_ratio": 0.0938,
+    "reference_ratio": 0.1007,
+    "part_ratio": 0.0917
+  },
+  {
+    "anatomy": "boot",
+    "original_center": [
+      96,
+      444
+    ],
+    "normal": [
+      1,
+      0
+    ],
+    "source_center": [
+      298,
+      1930
+    ],
+    "part_center": [
+      312,
+      1956
+    ],
+    "standee_px": 84.2,
+    "reference_px": 271.0,
+    "part_px": 255.0,
+    "standee_ratio": 0.1803,
+    "reference_ratio": 0.2007,
+    "part_ratio": 0.1889
+  }
+]

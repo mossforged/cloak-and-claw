@@ -1,0 +1,349 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "reference_uniform_scale": 1.134453781512605,
+  "reference_offset": [
+    20,
+    650
+  ],
+  "parts": {
+    "torso": {
+      "target_box_in_reference": [
+        385,
+        330,
+        1050,
+        930
+      ],
+      "placed_bounds": [
+        502,
+        1024,
+        1167,
+        1705
+      ],
+      "uniform_scale": 0.7283680175246441,
+      "rotation_degrees": 0
+    },
+    "torso-back": {
+      "target_box_in_reference": [
+        385,
+        330,
+        1050,
+        930
+      ],
+      "placed_bounds": [
+        477,
+        1024,
+        1191,
+        1705
+      ],
+      "uniform_scale": 0.8076923076923077,
+      "rotation_degrees": 0
+    },
+    "scarf-tail": {
+      "target_box_in_reference": [
+        300,
+        205,
+        655,
+        385
+      ],
+      "placed_bounds": [
+        363,
+        883,
+        761,
+        1087
+      ],
+      "uniform_scale": 0.38269230769230766,
+      "rotation_degrees": 0
+    },
+    "tail": {
+      "target_box_in_reference": [
+        20,
+        650,
+        455,
+        850
+      ],
+      "placed_bounds": [
+        42,
+        1390,
+        535,
+        1613
+      ],
+      "uniform_scale": 0.4433453237410072,
+      "rotation_degrees": 0
+    },
+    "arm-front-upper": {
+      "target_box_in_reference": [
+        350,
+        355,
+        665,
+        580
+      ],
+      "placed_bounds": [
+        406,
+        1038,
+        786,
+        1323
+      ],
+      "uniform_scale": 0.3377777777777778,
+      "rotation_degrees": 0
+    },
+    "arm-front-lower": {
+      "target_box_in_reference": [
+        270,
+        430,
+        455,
+        600
+      ],
+      "placed_bounds": [
+        300,
+        1147,
+        561,
+        1321
+      ],
+      "uniform_scale": 0.221750212404418,
+      "rotation_degrees": 0
+    },
+    "hand-front-grip": {
+      "target_box_in_reference": [
+        170,
+        450,
+        365,
+        645
+      ],
+      "placed_bounds": [
+        212,
+        1180,
+        433,
+        1362
+      ],
+      "uniform_scale": 0.297442799461642,
+      "rotation_degrees": 0
+    },
+    "arm-back-upper": {
+      "target_box_in_reference": [
+        875,
+        510,
+        1120,
+        710
+      ],
+      "placed_bounds": [
+        1013,
+        1252,
+        1291,
+        1431
+      ],
+      "uniform_scale": 0.24645390070921985,
+      "rotation_degrees": 20
+    },
+    "arm-back-lower": {
+      "target_box_in_reference": [
+        1080,
+        490,
+        1330,
+        735
+      ],
+      "placed_bounds": [
+        1245,
+        1234,
+        1529,
+        1455
+      ],
+      "uniform_scale": 0.3021276595744681,
+      "rotation_degrees": 0
+    },
+    "arm-back-lower-grip": {
+      "target_box_in_reference": [
+        1080,
+        490,
+        1330,
+        735
+      ],
+      "placed_bounds": [
+        1245,
+        1215,
+        1529,
+        1475
+      ],
+      "uniform_scale": 0.44583987441130296,
+      "rotation_degrees": 40
+    },
+    "arm-back-lower-pinch": {
+      "target_box_in_reference": [
+        1080,
+        490,
+        1330,
+        735
+      ],
+      "placed_bounds": [
+        1272,
+        1206,
+        1501,
+        1484
+      ],
+      "uniform_scale": 0.35068912710566613,
+      "rotation_degrees": 46
+    },
+    "leg-front-upper": {
+      "target_box_in_reference": [
+        271,
+        721,
+        726,
+        1016
+      ],
+      "placed_bounds": [
+        359,
+        1455,
+        813,
+        1815
+      ],
+      "uniform_scale": 0.42992424242424243,
+      "rotation_degrees": 0
+    },
+    "leg-front-lower": {
+      "target_box_in_reference": [
+        117,
+        948,
+        417,
+        1213
+      ],
+      "placed_bounds": [
+        164,
+        1726,
+        482,
+        2027
+      ],
+      "uniform_scale": 0.34868421052631576,
+      "rotation_degrees": 0
+    },
+    "leg-back-upper": {
+      "target_box_in_reference": [
+        745,
+        735,
+        1110,
+        960
+      ],
+      "placed_bounds": [
+        896,
+        1484,
+        1247,
+        1739
+      ],
+      "uniform_scale": 0.3046875,
+      "rotation_degrees": 0
+    },
+    "leg-back-lower": {
+      "target_box_in_reference": [
+        880,
+        910,
+        1210,
+        1135
+      ],
+      "placed_bounds": [
+        1048,
+        1682,
+        1364,
+        1937
+      ],
+      "uniform_scale": 0.3619702176403207,
+      "rotation_degrees": 0
+    },
+    "head-neutral": {
+      "target_box_in_reference": [
+        510,
+        0,
+        1245,
+        540
+      ],
+      "placed_bounds": [
+        628,
+        650,
+        1401,
+        1263
+      ],
+      "uniform_scale": 0.6377887788778878,
+      "rotation_degrees": 0
+    },
+    "head-snarl": {
+      "target_box_in_reference": [
+        510,
+        0,
+        1245,
+        540
+      ],
+      "placed_bounds": [
+        620,
+        650,
+        1411,
+        1263
+      ],
+      "uniform_scale": 0.6297770700636943,
+      "rotation_degrees": 0
+    },
+    "head-hurt": {
+      "target_box_in_reference": [
+        510,
+        0,
+        1245,
+        540
+      ],
+      "placed_bounds": [
+        630,
+        650,
+        1401,
+        1263
+      ],
+      "uniform_scale": 0.6371900826446281,
+      "rotation_degrees": 0
+    },
+    "head-neutral-r": {
+      "target_box_in_reference": [
+        510,
+        0,
+        1245,
+        540
+      ],
+      "placed_bounds": [
+        614,
+        650,
+        1415,
+        1263
+      ],
+      "uniform_scale": 0.689328743545611,
+      "rotation_degrees": 0
+    },
+    "head-snarl-r": {
+      "target_box_in_reference": [
+        510,
+        0,
+        1245,
+        540
+      ],
+      "placed_bounds": [
+        609,
+        650,
+        1421,
+        1263
+      ],
+      "uniform_scale": 0.6761032472939217,
+      "rotation_degrees": 0
+    },
+    "head-hurt-r": {
+      "target_box_in_reference": [
+        510,
+        0,
+        1245,
+        540
+      ],
+      "placed_bounds": [
+        606,
+        650,
+        1425,
+        1263
+      ],
+      "uniform_scale": 0.7998046875,
+      "rotation_degrees": 0
+    }
+  }
+}
