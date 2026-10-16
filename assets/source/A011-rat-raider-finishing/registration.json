@@ -1,0 +1,358 @@
+{
+  "gear-hood": {
+    "input": "head-neutral",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-35c1b390-f7cd-4fff-b3f2-f4126a931488.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-hood. Image 1 is ONLY an alignment template, a 1024 square crop of the approved rat head. Image 2 is the OLD gear design reference, to redraw for image 1. A patched muted olive archer hood with two LARGE ear slits. Hood cloth arches between ears, narrow cheek side panels outside the face. Leave the ENTIRE eyes muzzle mouth chin and both big ears as transparent holes. No lower chin strap. Match the reference old hood design but refit to this MUCH wider head. Paint ONLY the isolated gear exactly where it would sit on image 1, at the SAME scale and position in a 1024x1024 canvas. Do not draw any rat, fur, skin, ears, eyes or face. Everything except the new gear must be transparent, including ear holes and face opening. Warm painted cartoon, bold dark outlines, upper-left light, no shadow, no text. The rat head itself must NOT be regenerated.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-neutral.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-hood.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-helmet": {
+    "input": "head-neutral",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-bf94eafb-4927-43dd-8e43-e0ad9d752c0e.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-helmet. Image 1 is ONLY an alignment template, a 1024 square crop of the approved rat head. Image 2 is the OLD gear design reference, to redraw for image 1. A battered steel spearman open helmet, low domed skull cap between the ears, bronze rivets, swept small brow lip. Two large open ear cutouts. Keep entire eyes and face uncovered. Match old helmet design refitted to this broad head. Paint ONLY the isolated gear exactly where it would sit on image 1, at the SAME scale and position in a 1024x1024 canvas. Do not draw any rat, fur, skin, ears, eyes or face. Everything except the new gear must be transparent, including ear holes and face opening. Warm painted cartoon, bold dark outlines, upper-left light, no shadow, no text. The rat head itself must NOT be regenerated.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-neutral.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-helmet.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-captain-hat": {
+    "input": "head-neutral",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-bbf36647-5bcd-44c6-8788-b0a36621968b.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-captain-hat. Image 1 is ONLY an alignment template, a 1024 square crop of the approved rat head. Image 2 is the OLD gear design reference, to redraw for image 1. A weathered dark brown captain tricorn, gold piping, one golden feather sweeping upper left. A low brim across forehead ABOVE the eyes; leave both giant ears mostly visible through cutouts. Match old hat design fitted to this broad head. Paint ONLY the isolated gear exactly where it would sit on image 1, at the SAME scale and position in a 1024x1024 canvas. Do not draw any rat, fur, skin, ears, eyes or face. Everything except the new gear must be transparent, including ear holes and face opening. Warm painted cartoon, bold dark outlines, upper-left light, no shadow, no text. The rat head itself must NOT be regenerated.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-neutral.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-captain-hat.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-hood-back": {
+    "input": "head-back",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-6fe7ed17-8eee-4d46-a59b-9ca8e1db285c.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-hood-back. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. Rear view of muted olive patched archer hood, two huge OPEN ear slits matching the template ears. Cover only back skull between and below ears. No shoulders or body. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-back.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-hood-back.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-helmet-back": {
+    "input": "head-back",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-c23e9cca-faaf-419e-92a7-3fb50709457e.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-helmet-back. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. BACK VIEW of battered steel skull cap, warm bronze rivets, two huge ear slots matching the template. No face, no body, no ears drawn. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-back.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-helmet.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-captain-hat-back": {
+    "input": "head-back",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-6bb18765-0cef-45bc-b3c2-ec93b793c2f9.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-captain-hat-back. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. BACK VIEW of dark brown tricorn captain hat with gold piping and golden feather upper left. Ears remain uncovered. Match old hat design. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-back.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-captain-hat.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-jerkin": {
+    "input": "torso",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-2cb181d6-d756-476d-a224-ae49c5dccdae.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-jerkin. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. Broad stocky sleeveless quilted dark leather armoured jerkin, two bronze buckle fasteners. Fit exactly over this torso. Open neckline leaves the red scarf exposed. No arms or fur. Garment extends to upper belt, covering cream belly. Old design refitted to stocky torso. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-torso.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-jerkin.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      350,
+      850
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-jerkin-side": {
+    "input": "torso-side",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-fc5690b4-0a31-46b8-ae0a-b3f8c728bcb7.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-jerkin-side. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. SIDE VIEW facing right of sleeveless quilted dark leather armoured jerkin with bronze buckles. Fit the narrower side torso exactly. Transparent arm opening at left shoulder, open neckline leaves scarf exposed. Cover cream belly. No arm or fur. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-torso-side.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-jerkin.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      350,
+      850
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-jerkin-back": {
+    "input": "torso-back",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-4155fba2-38a7-41bb-b58b-70bbb1f01e6f.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-jerkin-back. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. BACK VIEW sleeveless quilted dark leather armoured jerkin with bronze buckle straps. Fit this stocky rear torso exactly, from shoulder top to just above belt; transparent arm openings. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-torso-back.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-jerkin-back.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      350,
+      850
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-sash": {
+    "input": "torso",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-3b17926a-deba-49a1-9f6e-d91899346c0d.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-sash. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. Wide crimson captain waist sash, folded red cloth with one golden buckle and short ragged hanging knot on left. Wrap exactly around this broad torso's EXISTING belt at y=600 to 710 in 1024 crop. No other torso clothing or body. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-torso.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-sash.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      350,
+      850
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-sash-side": {
+    "input": "torso-side",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-727a6ba9-c5b7-41ad-a1e7-c6415a5b7fd7.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-sash-side. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. SIDE VIEW crimson captain waist sash at the existing waist belt y=650 to 760 of this crop, follows narrow side waist. Golden buckle toward right, hanging knot on left. Only waist cloth. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-torso-side.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-sash.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      350,
+      850
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-sash-back": {
+    "input": "torso-back",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-26d90ec2-773a-43fd-b0ee-3b422ef6863b.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-sash-back. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. BACK VIEW crimson captain waist sash wrapping around existing belt at y=500 to 650 in crop. Folded red cloth and short hanging knot at right, NO front buckle on rear. Only waist cloth. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-torso-back.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-sash.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      350,
+      850
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-quiver": {
+    "input": "torso",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-24d12945-0a44-49e6-bdfb-310c9c91d732.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay gear-quiver. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part. Image 2 is the OLD gear design reference. Brown leather archer quiver with three pale feathered arrows. Fit behind template torso on LEFT: quiver extends diagonally from crop x=120,y=270 to x=420,y=680; arrow fletching rises to y=60 left of shoulder. Only quiver and arrows, no straps across the front. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-torso.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A008-rat-gear-layers/gear-quiver.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      350,
+      850
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "detail-eyepatch": {
+    "input": "head-neutral",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-af27970a-35fe-438a-8931-d7644e0869c1.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay detail-eyepatch. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part.  A small dark brown oval leather eyepatch with thin strap, sized to cover only the big near eye at template x=570,y=600. Patch about 120 wide by 130 tall; thin strap leads toward left ear base and right brow. Keep muzzle free. ONLY eyepatch and strap. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-neutral.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "detail-scar2": {
+    "input": "head-neutral",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-49ee932d-1bd5-4d72-89e5-7950a59fb6fd.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay detail-scar2. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part.  A tiny second scar: two salmon healed slash marks with dark edges, on the FAR RIGHT cheek at template x=733,y=674, beside far eye and above nose. About 45x35 pixels. No eye, no fur drawn. ONLY scar strokes. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-neutral.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "detail-ear-notch": {
+    "input": "head-neutral",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-56a44050-9db5-4bda-aa3a-56e884bbe27f.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay detail-ear-notch. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part.  A small dark healed torn-ear notch detail on OUTER LEFT edge of near big ear at template x=155,y=450. Irregular dark V shaped split with salmon inner rim. About 45x55 pixels. ONLY scar/torn fold marking; don't paint background or an ear. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-neutral.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "detail-earring": {
+    "input": "head-neutral",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-2b168af5-bd16-4d3f-80f5-a771a9fef81f.png",
+    "prompt": "Use case: precise-object-edit. Game cutout overlay detail-earring. Image 1 is ONLY an alignment template: a 1024x1024 crop of the approved rat part.  One small thick golden hoop earring with dark outline and upper-left glint, hanging from lower near ear at template x=225,y=544. About 65x85 pixels. ONLY gold hoop with transparent center; no rat ear drawn. Paint ONLY the isolated overlay exactly where it sits on image 1 at identical scale and position in a 1024x1024 canvas. Do not draw the underlying rat or existing clothing. Everything except the requested overlay is genuinely transparent, including openings. Warm painted cartoon, bold dark outlines, upper-left light, no ground shadow, no text. Do NOT regenerate the rat.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-neutral.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-hood-hurt": {
+    "input": "head-hurt",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-a5e2a805-40ad-4cce-b8d9-3c9646b0db4e.png",
+    "prompt": "Use case: precise-object-edit. Image 1 is a 1024 square alignment template of the approved rat HURT head. Image 2 is the already approved-design gear-hood isolated overlay for neutral. Redraw ONLY this same gear to fit the HURT head exactly: ears are smaller and lie lower, eyes are squeezed shut, cheek and muzzle flare out. Keep the same olive hood / steel helmet / brown gold-feather captain hat design as image 2. Ear holes must align to image 1. Hood must have an EXTRA WIDE open face aperture so no cloth crosses mouth teeth or chin. Helmet and hat sit ABOVE eyebrows and leave face fully clear. ONLY isolated gear on transparent canvas at exact template position and scale. No rat pixels, fur, eyes, mouth or ears drawn; no text or shadow. Warm painted cartoon and bold outlines, upper-left light.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-hurt.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/gear-hood.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-helmet-hurt": {
+    "input": "head-hurt",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-e501a541-ee96-433a-a0b1-ba3d69ad443c.png",
+    "prompt": "Use case: precise-object-edit. Game cutout gear. Draw ONLY ONE STEEL HELMET. No hood, no hat, no feather, no cloth. A battered open steel dome with riveted brow and two large ear cutouts. The rim must stay ABOVE the squeezed eyebrows and leave the muzzle free. Image 1 is the approved HURT-head alignment template. Image 2 is the ONLY gear design to draw. Refit that one piece to image 1, preserving its design. Return an isolated transparent overlay at exactly the template's position and scale in a square canvas. All rat pixels and face pixels must be absent: no ears, no fur, no body. Bold cartoon outlines, upper-left painted light. No text.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-hurt.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/gear-helmet.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  },
+  "gear-captain-hat-hurt": {
+    "input": "head-hurt",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-639d1fb6-0a9f-4c8f-b6c0-d3a4c87d1d78.png",
+    "prompt": "Use case: precise-object-edit. Game cutout gear. Draw ONLY ONE BROWN TRICORN HAT WITH GOLDEN FEATHER. No hood, no helmet, no olive cloth, no scarf. Narrow curved gold-edged brim ABOVE the eyebrows, ears uncovered, golden feather sweeps upper left. Image 1 is the approved HURT-head alignment template. Image 2 is the ONLY gear design to draw. Refit that one piece to image 1, preserving its design. Return an isolated transparent overlay at exactly the template's position and scale in a square canvas. All rat pixels and face pixels must be absent: no ears, no fur, no body. Bold cartoon outlines, upper-left painted light. No text.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-hurt.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/gear-captain-hat.png"
+    ],
+    "transparent_background": true,
+    "canvas_translation": [
+      500,
+      400
+    ],
+    "generated_size": [
+      1254,
+      1254
+    ]
+  }
+}

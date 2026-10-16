@@ -1,0 +1,32 @@
+{
+  "gear-hood-hurt": {
+    "input": "head-hurt",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-a5e2a805-40ad-4cce-b8d9-3c9646b0db4e.png",
+    "prompt": "Use case: precise-object-edit. Image 1 is a 1024 square alignment template of the approved rat HURT head. Image 2 is the already approved-design gear-hood isolated overlay for neutral. Redraw ONLY this same gear to fit the HURT head exactly: ears are smaller and lie lower, eyes are squeezed shut, cheek and muzzle flare out. Keep the same olive hood / steel helmet / brown gold-feather captain hat design as image 2. Ear holes must align to image 1. Hood must have an EXTRA WIDE open face aperture so no cloth crosses mouth teeth or chin. Helmet and hat sit ABOVE eyebrows and leave face fully clear. ONLY isolated gear on transparent canvas at exact template position and scale. No rat pixels, fur, eyes, mouth or ears drawn; no text or shadow. Warm painted cartoon and bold outlines, upper-left light.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-hurt.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/gear-hood.png"
+    ],
+    "transparent_background": true
+  },
+  "gear-helmet-hurt": {
+    "input": "head-hurt",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-a3323051-53e6-431e-acf6-8f74381a03bc.png",
+    "prompt": "Use case: precise-object-edit. Image 1 is a 1024 square alignment template of the approved rat HURT head. Image 2 is the already approved-design gear-helmet isolated overlay for neutral. Redraw ONLY this same gear to fit the HURT head exactly: ears are smaller and lie lower, eyes are squeezed shut, cheek and muzzle flare out. Keep the same olive hood / steel helmet / brown gold-feather captain hat design as image 2. Ear holes must align to image 1. Hood must have an EXTRA WIDE open face aperture so no cloth crosses mouth teeth or chin. Helmet and hat sit ABOVE eyebrows and leave face fully clear. ONLY isolated gear on transparent canvas at exact template position and scale. No rat pixels, fur, eyes, mouth or ears drawn; no text or shadow. Warm painted cartoon and bold outlines, upper-left light.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-hurt.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/gear-helmet.png"
+    ],
+    "transparent_background": true
+  },
+  "gear-captain-hat-hurt": {
+    "input": "head-hurt",
+    "path": "/Users/johniadarola/.codex/generated_images/01a14320-1d7d-7b20-8254-21d65f66a60a/exec-cca5954a-6e0a-4fd5-83c0-bcd5f7631126.png",
+    "prompt": "Use case: precise-object-edit. Image 1 is a 1024 square alignment template of the approved rat HURT head. Image 2 is the already approved-design gear-captain-hat isolated overlay for neutral. Redraw ONLY this same gear to fit the HURT head exactly: ears are smaller and lie lower, eyes are squeezed shut, cheek and muzzle flare out. Keep the same olive hood / steel helmet / brown gold-feather captain hat design as image 2. Ear holes must align to image 1. Hood must have an EXTRA WIDE open face aperture so no cloth crosses mouth teeth or chin. Helmet and hat sit ABOVE eyebrows and leave face fully clear. ONLY isolated gear on transparent canvas at exact template position and scale. No rat pixels, fur, eyes, mouth or ears drawn; no text or shadow. Warm painted cartoon and bold outlines, upper-left light.",
+    "referenced_image_paths": [
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/input-head-hurt.png",
+      "/Users/johniadarola/Projects/cloak-and-claw-art/assets/source/A011-rat-raider-finishing/gear-captain-hat.png"
+    ],
+    "transparent_background": true
+  }
+}

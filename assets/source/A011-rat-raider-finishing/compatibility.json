@@ -1,0 +1,112 @@
+{
+  "gear-hood": {
+    "on": "head",
+    "views": {
+      "head-neutral": "gear-hood",
+      "head-attack": "gear-hood",
+      "head-hurt": "gear-hood-hurt",
+      "head-effort": "gear-hood",
+      "head-ko": "gear-hood",
+      "head-back": "gear-hood-back",
+      "head": "gear-hood"
+    }
+  },
+  "gear-helmet": {
+    "on": "head",
+    "views": {
+      "head-neutral": "gear-helmet",
+      "head-attack": "gear-helmet",
+      "head-hurt": "gear-helmet-hurt",
+      "head-effort": "gear-helmet",
+      "head-ko": "gear-helmet",
+      "head-back": "gear-helmet-back",
+      "head": "gear-helmet"
+    }
+  },
+  "gear-captain-hat": {
+    "on": "head",
+    "views": {
+      "head-neutral": "gear-captain-hat",
+      "head-attack": "gear-captain-hat",
+      "head-hurt": "gear-captain-hat-hurt",
+      "head-effort": "gear-captain-hat",
+      "head-ko": "gear-captain-hat",
+      "head-back": "gear-captain-hat-back",
+      "head": "gear-captain-hat"
+    }
+  },
+  "detail-eyepatch": {
+    "on": "head",
+    "views": {
+      "head-neutral": "detail-eyepatch",
+      "head-attack": "detail-eyepatch",
+      "head-hurt": "detail-eyepatch-hurt",
+      "head-effort": "detail-eyepatch",
+      "head-ko": "detail-eyepatch",
+      "head-back": "detail-eyepatch-back",
+      "head": "detail-eyepatch"
+    }
+  },
+  "detail-scar2": {
+    "on": "head",
+    "views": {
+      "head-neutral": "detail-scar2",
+      "head-attack": "detail-scar2",
+      "head-hurt": "detail-scar2-hurt",
+      "head-effort": "detail-scar2",
+      "head-ko": "detail-scar2",
+      "head-back": "detail-scar2-back",
+      "head": "detail-scar2"
+    }
+  },
+  "detail-ear-notch": {
+    "on": "head",
+    "views": {
+      "head-neutral": "detail-ear-notch",
+      "head-attack": "detail-ear-notch",
+      "head-hurt": "detail-ear-notch-hurt",
+      "head-effort": "detail-ear-notch",
+      "head-ko": "detail-ear-notch",
+      "head-back": "detail-ear-notch-back",
+      "head": "detail-ear-notch"
+    }
+  },
+  "detail-earring": {
+    "on": "head",
+    "views": {
+      "head-neutral": "detail-earring",
+      "head-attack": "detail-earring",
+      "head-hurt": "detail-earring-hurt",
+      "head-effort": "detail-earring",
+      "head-ko": "detail-earring",
+      "head-back": "detail-earring-back",
+      "head": "detail-earring"
+    }
+  },
+  "gear-jerkin": {
+    "on": "torso",
+    "views": {
+      "torso": "gear-jerkin",
+      "torso-side": "gear-jerkin-side",
+      "torso-back": "gear-jerkin-back"
+    }
+  },
+  "gear-sash": {
+    "on": "torso",
+    "views": {
+      "torso": "gear-sash",
+      "torso-side": "gear-sash-side",
+      "torso-back": "gear-sash-back"
+    }
+  },
+  "gear-quiver": {
+    "on": "torso",
+    "band": 90,
+    "views": {
+      "torso": "gear-quiver",
+      "torso-side": "gear-quiver",
+      "torso-back": "gear-quiver"
+    },
+    "note": "Behind torso; shared rigid quiver. Rear torso may occlude most of the tube."
+  }
+}

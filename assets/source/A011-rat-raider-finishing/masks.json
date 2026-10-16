@@ -1,0 +1,494 @@
+{
+  "pelvis-mask": {
+    "on": "pelvis",
+    "img": "pelvis-mask.png",
+    "selected_pixels": 30799,
+    "empty": false
+  },
+  "pelvis-fur-mask": {
+    "on": "pelvis",
+    "img": "pelvis-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "torso-mask": {
+    "on": "torso",
+    "img": "torso-mask.png",
+    "selected_pixels": 47300,
+    "empty": false
+  },
+  "torso-fur-mask": {
+    "on": "torso",
+    "img": "torso-fur-mask.png",
+    "selected_pixels": 21654,
+    "empty": false
+  },
+  "head-mask": {
+    "on": "head",
+    "img": "head-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-fur-mask": {
+    "on": "head",
+    "img": "head-fur-mask.png",
+    "selected_pixels": 177619,
+    "empty": false
+  },
+  "arm-front-upper-mask": {
+    "on": "arm-front-upper",
+    "img": "arm-front-upper-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "arm-front-upper-fur-mask": {
+    "on": "arm-front-upper",
+    "img": "arm-front-upper-fur-mask.png",
+    "selected_pixels": 28198,
+    "empty": false
+  },
+  "arm-front-lower-mask": {
+    "on": "arm-front-lower",
+    "img": "arm-front-lower-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "arm-front-lower-fur-mask": {
+    "on": "arm-front-lower",
+    "img": "arm-front-lower-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-front-mask": {
+    "on": "hand-front",
+    "img": "hand-front-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-front-fur-mask": {
+    "on": "hand-front",
+    "img": "hand-front-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "arm-back-upper-mask": {
+    "on": "arm-back-upper",
+    "img": "arm-back-upper-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "arm-back-upper-fur-mask": {
+    "on": "arm-back-upper",
+    "img": "arm-back-upper-fur-mask.png",
+    "selected_pixels": 12001,
+    "empty": false
+  },
+  "arm-back-lower-mask": {
+    "on": "arm-back-lower",
+    "img": "arm-back-lower-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "arm-back-lower-fur-mask": {
+    "on": "arm-back-lower",
+    "img": "arm-back-lower-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-mask": {
+    "on": "hand-back",
+    "img": "hand-back-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-fur-mask": {
+    "on": "hand-back",
+    "img": "hand-back-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "leg-front-upper-mask": {
+    "on": "leg-front-upper",
+    "img": "leg-front-upper-mask.png",
+    "selected_pixels": 45943,
+    "empty": false
+  },
+  "leg-front-upper-fur-mask": {
+    "on": "leg-front-upper",
+    "img": "leg-front-upper-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "leg-front-lower-mask": {
+    "on": "leg-front-lower",
+    "img": "leg-front-lower-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "leg-front-lower-fur-mask": {
+    "on": "leg-front-lower",
+    "img": "leg-front-lower-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "foot-front-mask": {
+    "on": "foot-front",
+    "img": "foot-front-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "foot-front-fur-mask": {
+    "on": "foot-front",
+    "img": "foot-front-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "leg-back-upper-mask": {
+    "on": "leg-back-upper",
+    "img": "leg-back-upper-mask.png",
+    "selected_pixels": 46068,
+    "empty": false
+  },
+  "leg-back-upper-fur-mask": {
+    "on": "leg-back-upper",
+    "img": "leg-back-upper-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "leg-back-lower-mask": {
+    "on": "leg-back-lower",
+    "img": "leg-back-lower-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "leg-back-lower-fur-mask": {
+    "on": "leg-back-lower",
+    "img": "leg-back-lower-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "foot-back-mask": {
+    "on": "foot-back",
+    "img": "foot-back-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "foot-back-fur-mask": {
+    "on": "foot-back",
+    "img": "foot-back-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "tail-mask": {
+    "on": "tail",
+    "img": "tail-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "tail-fur-mask": {
+    "on": "tail",
+    "img": "tail-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "scarf-tail-mask": {
+    "on": "scarf-tail",
+    "img": "scarf-tail-mask.png",
+    "selected_pixels": 28010,
+    "empty": false
+  },
+  "scarf-tail-fur-mask": {
+    "on": "scarf-tail",
+    "img": "scarf-tail-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-neutral-mask": {
+    "on": "head-neutral",
+    "img": "head-neutral-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-neutral-fur-mask": {
+    "on": "head-neutral",
+    "img": "head-neutral-fur-mask.png",
+    "selected_pixels": 177619,
+    "empty": false
+  },
+  "head-attack-mask": {
+    "on": "head-attack",
+    "img": "head-attack-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-attack-fur-mask": {
+    "on": "head-attack",
+    "img": "head-attack-fur-mask.png",
+    "selected_pixels": 161390,
+    "empty": false
+  },
+  "head-hurt-mask": {
+    "on": "head-hurt",
+    "img": "head-hurt-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-hurt-fur-mask": {
+    "on": "head-hurt",
+    "img": "head-hurt-fur-mask.png",
+    "selected_pixels": 185776,
+    "empty": false
+  },
+  "head-effort-mask": {
+    "on": "head-effort",
+    "img": "head-effort-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-effort-fur-mask": {
+    "on": "head-effort",
+    "img": "head-effort-fur-mask.png",
+    "selected_pixels": 168727,
+    "empty": false
+  },
+  "head-ko-mask": {
+    "on": "head-ko",
+    "img": "head-ko-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-ko-fur-mask": {
+    "on": "head-ko",
+    "img": "head-ko-fur-mask.png",
+    "selected_pixels": 174783,
+    "empty": false
+  },
+  "head-back-mask": {
+    "on": "head-back",
+    "img": "head-back-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "head-back-fur-mask": {
+    "on": "head-back",
+    "img": "head-back-fur-mask.png",
+    "selected_pixels": 179927,
+    "empty": false
+  },
+  "torso-side-mask": {
+    "on": "torso-side",
+    "img": "torso-side-mask.png",
+    "selected_pixels": 29280,
+    "empty": false
+  },
+  "torso-side-fur-mask": {
+    "on": "torso-side",
+    "img": "torso-side-fur-mask.png",
+    "selected_pixels": 29092,
+    "empty": false
+  },
+  "torso-back-mask": {
+    "on": "torso-back",
+    "img": "torso-back-mask.png",
+    "selected_pixels": 11130,
+    "empty": false
+  },
+  "torso-back-fur-mask": {
+    "on": "torso-back",
+    "img": "torso-back-fur-mask.png",
+    "selected_pixels": 31429,
+    "empty": false
+  },
+  "hand-front-open-mask": {
+    "on": "hand-front-open",
+    "img": "hand-front-open-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-front-open-fur-mask": {
+    "on": "hand-front-open",
+    "img": "hand-front-open-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-front-fist-mask": {
+    "on": "hand-front-fist",
+    "img": "hand-front-fist-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-front-fist-fur-mask": {
+    "on": "hand-front-fist",
+    "img": "hand-front-fist-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-front-grip-mask": {
+    "on": "hand-front-grip",
+    "img": "hand-front-grip-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-front-grip-fur-mask": {
+    "on": "hand-front-grip",
+    "img": "hand-front-grip-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-open-mask": {
+    "on": "hand-back-open",
+    "img": "hand-back-open-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-open-fur-mask": {
+    "on": "hand-back-open",
+    "img": "hand-back-open-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-fist-mask": {
+    "on": "hand-back-fist",
+    "img": "hand-back-fist-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-fist-fur-mask": {
+    "on": "hand-back-fist",
+    "img": "hand-back-fist-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-grip-mask": {
+    "on": "hand-back-grip",
+    "img": "hand-back-grip-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-grip-fur-mask": {
+    "on": "hand-back-grip",
+    "img": "hand-back-grip-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-pinch-mask": {
+    "on": "hand-back-pinch",
+    "img": "hand-back-pinch-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "hand-back-pinch-fur-mask": {
+    "on": "hand-back-pinch",
+    "img": "hand-back-pinch-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-hood-mask": {
+    "on": "gear-hood",
+    "img": "gear-hood-mask.png",
+    "selected_pixels": 127782,
+    "empty": false
+  },
+  "gear-hood-fur-mask": {
+    "on": "gear-hood",
+    "img": "gear-hood-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-hood-back-mask": {
+    "on": "gear-hood-back",
+    "img": "gear-hood-back-mask.png",
+    "selected_pixels": 80801,
+    "empty": false
+  },
+  "gear-hood-back-fur-mask": {
+    "on": "gear-hood-back",
+    "img": "gear-hood-back-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-jerkin-mask": {
+    "on": "gear-jerkin",
+    "img": "gear-jerkin-mask.png",
+    "selected_pixels": 137354,
+    "empty": false
+  },
+  "gear-jerkin-fur-mask": {
+    "on": "gear-jerkin",
+    "img": "gear-jerkin-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-jerkin-side-mask": {
+    "on": "gear-jerkin-side",
+    "img": "gear-jerkin-side-mask.png",
+    "selected_pixels": 64236,
+    "empty": false
+  },
+  "gear-jerkin-side-fur-mask": {
+    "on": "gear-jerkin-side",
+    "img": "gear-jerkin-side-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-jerkin-back-mask": {
+    "on": "gear-jerkin-back",
+    "img": "gear-jerkin-back-mask.png",
+    "selected_pixels": 159381,
+    "empty": false
+  },
+  "gear-jerkin-back-fur-mask": {
+    "on": "gear-jerkin-back",
+    "img": "gear-jerkin-back-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-sash-mask": {
+    "on": "gear-sash",
+    "img": "gear-sash-mask.png",
+    "selected_pixels": 81592,
+    "empty": false
+  },
+  "gear-sash-fur-mask": {
+    "on": "gear-sash",
+    "img": "gear-sash-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-sash-side-mask": {
+    "on": "gear-sash-side",
+    "img": "gear-sash-side-mask.png",
+    "selected_pixels": 50065,
+    "empty": false
+  },
+  "gear-sash-side-fur-mask": {
+    "on": "gear-sash-side",
+    "img": "gear-sash-side-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-sash-back-mask": {
+    "on": "gear-sash-back",
+    "img": "gear-sash-back-mask.png",
+    "selected_pixels": 72205,
+    "empty": false
+  },
+  "gear-sash-back-fur-mask": {
+    "on": "gear-sash-back",
+    "img": "gear-sash-back-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  },
+  "gear-hood-hurt-mask": {
+    "on": "gear-hood-hurt",
+    "img": "gear-hood-hurt-mask.png",
+    "selected_pixels": 106381,
+    "empty": false
+  },
+  "gear-hood-hurt-fur-mask": {
+    "on": "gear-hood-hurt",
+    "img": "gear-hood-hurt-fur-mask.png",
+    "selected_pixels": 0,
+    "empty": true
+  }
+}
