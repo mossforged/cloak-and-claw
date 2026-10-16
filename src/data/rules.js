@@ -2,7 +2,11 @@
 export const RULES = {
   gravity: 0.55,
   depthHit: 16,           // default: max depth (y) gap at which a hit still connects
-  maxAttackers: 1,        // how many enemies may commit to attacking at once (fairness)
+  maxAttackers: 1,        // how many enemies may commit to attacking at once (fairness); also the most on any one hero
+  maxAttackersPerHero: 1, // T021: each extra living hero adds this many to the global limit (1 hero = maxAttackers exactly)
+  // T021 enemy targeting with several heroes (sim/ai.js): cost = |dx| + lane * |dy| + crowd * (other enemies on that hero);
+  // a target is kept `stick` frames, and only swapped for one cheaper by more than `margin`. One hero: always him.
+  targeting: { stick: 90, lane: 2, crowd: 120, margin: 60 },
   hurtFriction: 0.85,     // knockback slowdown per frame while hurt
   knockdown: { vz: 6.5, vx: 4.5, downFrames: 45, getupFrames: 18, invulnAfter: 30 },
   waveDelay: 90,

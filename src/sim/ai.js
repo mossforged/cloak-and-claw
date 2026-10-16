@@ -1,16 +1,39 @@
-// Enemy brains. Writes f.control just like the keyboard does for the player.
-// "brawler": hovers at a distance; takes an attack token (RULES.maxAttackers) to step in and swing.
-// "archer" (T011): keeps `range` away in the player's lane (backs off when he comes closer), takes a token like a
+// Enemy brains. Writes f.control just like the keyboard does for a hero.
+// Each enemy goes after one hero (T021, `ai.target`, `pickTarget`): with one hero always him; with more, the cheapest by
+// distance + lane gap + how many others already chase him, kept for a while (RULES.targeting). Attack tokens stay global:
+// at most `attackLimit(w)` at once (RULES.maxAttackers, + maxAttackersPerHero per extra living hero) and maxAttackers on any one hero.
+// "brawler": hovers at a distance; takes an attack token to step in and swing.
+// "archer" (T011): keeps `range` away in his target's lane (backs off when he comes closer), takes a token like a
 // brawler (so drawing the bow counts toward maxAttackers) and shoots once within `slack` of his spot, or when cornered
 // within `flee`; never while his last arrow is still flying.
 import { RULES } from '../data/rules.js';
 import { HELPLESS } from './fighter.js';
 import { inFlight } from './shots.js';
+import { heroesUp } from './heroes.js';
 
 const tokensInUse = (w) => w.fighters.filter((f) => f.ai?.token).length;
+const tokensOn = (w, h) => w.fighters.filter((f) => f.ai?.token && f.ai.target === h.slot).length;
+export const attackLimit = (w) => RULES.maxAttackers + (RULES.maxAttackersPerHero ?? 0) * Math.max(0, heroesUp(w).length - 1);
+const mayAttack = (w, h) => tokensInUse(w) < attackLimit(w) && (w.heroes.length < 2 || tokensOn(w, h) < RULES.maxAttackers);
+
+// The hero this enemy goes after (ai.target = his slot). One hero: him, alive or not (the old behaviour). Uses no rng.
+export function pickTarget(f, w) {
+  const ai = f.ai, H = w.heroes;
+  if (H.length < 2) { ai.target = 0; return H[0]; }
+  const up = heroesUp(w), T = RULES.targeting, cur = H[ai.target];
+  if (!up.length) return cur ?? H[0];
+  const keep = up.includes(cur);
+  if (keep && (ai.token || --ai.targetT > 0)) return cur;   // never switch mid-attack
+  const cost = (h) => Math.abs(h.x - f.x) + T.lane * Math.abs(h.y - f.y) +
+    T.crowd * w.fighters.filter((e) => e !== f && e.ai?.target === h.slot && e.state !== 'dead').length;
+  const best = up.reduce((a, b) => (cost(b) < cost(a) ? b : a));
+  if (!keep || cost(best) < cost(cur) - T.margin) { ai.token = ai.token && best === cur; ai.target = best.slot; }
+  ai.targetT = T.stick;
+  return H[ai.target];
+}
 
 export function thinkAI(f, w) {
-  const ai = f.ai, cfg = f.def.ai, c = f.control, p = w.player, fl = w.bounds;
+  const ai = f.ai, cfg = f.def.ai, c = f.control, p = pickTarget(f, w), fl = w.bounds;
   c.attack = false; c.jump = false; c.face = 0;
 
   if (HELPLESS.includes(f.state)) { ai.token = false; ai.attacked = false; return; }
@@ -29,7 +52,7 @@ export function thinkAI(f, w) {
   if (--ai.wait <= 0) {
     ai.wait = w.rng.int(...cfg.think);
     ai.yOff = w.rng.range(-35, 35);
-    if (!ai.token && ai.cool <= 0 && tokensInUse(w) < RULES.maxAttackers && w.rng.next() < cfg.aggression) ai.token = true;
+    if (!ai.token && ai.cool <= 0 && mayAttack(w, p) && w.rng.next() < cfg.aggression) ai.token = true;
   }
 
   let tx, ty;

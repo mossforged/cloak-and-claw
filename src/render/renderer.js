@@ -7,6 +7,7 @@ import { drawLayersBack, drawLayersFront } from './layers.js';
 import { drawShadow, drawStandee } from './standee.js';
 import { drawRig } from './rig.js';
 import { RIGS } from '../data/rigs/index.js';
+import { JUICE } from '../data/juice.js';
 import { drawHud, drawPaused } from './hud.js';
 import { drawDebug } from './debug.js';
 import { createEffects } from './effects.js';
@@ -42,8 +43,11 @@ export function createRenderer(ctx, assets) {
         if (f.kind === 'shot') { drawShot(ctx, f, assets); continue; }   // arrows (T011)
         if (!f.team) { if (f.def.kind) drawItem(ctx, f, assets, time); else drawProp(ctx, f, assets, world.frame); continue; }   // props, flying items
         const rig = opts.rig !== false && RIGS[f.def.art.rig];   // R toggles rig vs standee
-        if (rig) drawRig(ctx, f, rig, assets, time, fx.flashOf(f.id), f.def.team === 'hero' ? opts.pose : null);
+        const tint = f.slot > 0 && JUICE.heroes.filter[f.slot];   // T021: heroes on slots 1, 2 tinted
+        if (tint) { ctx.save(); ctx.filter = tint; }
+        if (rig) drawRig(ctx, f, rig, assets, time, fx.flashOf(f.id), f.slot != null ? opts.poses?.[f.slot] ?? null : null);
         else drawStandee(ctx, f, assets, time, fx.flashOf(f.id));
+        if (tint) ctx.restore();
       }
       fx.draw(ctx);
       pfx.draw(ctx);

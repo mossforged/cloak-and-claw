@@ -1,51 +1,27 @@
-// Keyboard + gamepad -> one control object per sim step:
+// Keyboard + gamepads -> one control object per player slot per sim step (T021; mapping in core/slots.js).
+// readControls() = [slot0, slot1, slot2]; slot 0 = keyboard + first gamepad, as before:
 // { mx, my, attack, jump, grab, start, debug, pause, rig, cast, block, blockTap }  (mx/my are -1..1; buttons are "pressed this step",
 // except block = held; blockTap = block pressed this step, used as the run-log download on the game-over screen)
-import { KEYS, PAD } from '../data/controls.js';
+import { keyAction, readSlots } from './slots.js';
 
 const held = new Set();      // key codes held
-const pressed = new Set();   // action names pressed since last read
-let padPrev = {};
+const pressed = new Set();   // key codes pressed since last read
+const padPrev = [];          // per slot: pad buttons last step
 
 export function initInput() {
   addEventListener('keydown', (e) => {
-    const action = KEYS[e.code];
-    if (!action) return;
+    if (!keyAction(e.code)) return;
     e.preventDefault();
-    if (!e.repeat) pressed.add(action);
+    if (!e.repeat) pressed.add(e.code);
     held.add(e.code);
   });
   addEventListener('keyup', (e) => held.delete(e.code));
   addEventListener('blur', () => held.clear());
 }
 
-const isHeld = (action) => [...held].some((c) => KEYS[c] === action);
-
-function readPad(ctl) {
-  const pad = navigator.getGamepads?.().find((p) => p);
-  if (!pad) return;
-  const [ax, ay] = pad.axes;
-  if (Math.abs(ax) > PAD.deadzone) ctl.mx = Math.sign(ax);
-  if (Math.abs(ay) > PAD.deadzone) ctl.my = Math.sign(ay);
-  const b = (i) => pad.buttons[i]?.pressed;
-  if (b(14)) ctl.mx = -1; if (b(15)) ctl.mx = 1; if (b(12)) ctl.my = -1; if (b(13)) ctl.my = 1;
-  for (const action of ['attack', 'jump', 'grab', 'start', 'block']) {
-    const now = PAD[action].some(b);
-    if (now && !padPrev[action]) ctl[action === 'block' ? 'blockTap' : action] = true;
-    padPrev[action] = now;
-  }
-  if (PAD.block.some(b)) ctl.block = true;
-}
-
-export function readControl() {
-  const ctl = {
-    mx: (isHeld('right') ? 1 : 0) - (isHeld('left') ? 1 : 0),
-    my: (isHeld('down') ? 1 : 0) - (isHeld('up') ? 1 : 0),
-  };
-  for (const a of ['attack', 'jump', 'grab', 'start', 'debug', 'pause', 'rig', 'cast']) ctl[a] = pressed.has(a);
-  ctl.block = isHeld('block');
-  ctl.blockTap = pressed.has('block');
+export function readControls() {
+  const out = readSlots(held, pressed, navigator.getGamepads?.() ?? [], padPrev);
   pressed.clear();
-  readPad(ctl);
-  return ctl;
+  return out;
 }
+

@@ -7,6 +7,7 @@ export default {
   backdrop: { sky: ['#6fb0e6', '#d6ecf8'], horizon: 400, sea: ['#4d93c4', '#1c4f7c'] },
   floor: { left: 30, right: 4409, top: 390, bottom: 510 },   // walkable belt over the whole stage; the camera narrows it to the screen
   playerStart: { x: 260, y: 450 },
+  heroStarts: [{ x: 260, y: 450 }, { x: 200, y: 412 }, { x: 200, y: 490 }],   // T021: per player slot (slot 0 = playerStart), staggered in depth
   // camera (sim/camera.js): view width 960 (config VIEW); follows the player once he passes `follow` px from the screen's
   // left edge, never scrolls back, at most catchUp px/frame (hero walks 2.7); `edge` = how far inside the screen edges
   // fighters are kept; length = stage width.

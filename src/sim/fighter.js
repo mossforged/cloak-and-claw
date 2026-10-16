@@ -22,7 +22,7 @@ export function createFighter(def, x, y, opts = {}) {
     grab: null, heldBy: null, thrower: null,   // grab/throw (sim/grab.js)
     weapon: null, pickup: null, moveKey: null, // held weapon + pickup in progress (sim/weapons.js); key of the current move
     control: { mx: 0, my: 0, attack: false, jump: false },
-    ai: opts.ai ? { mode: 'hover', wait: 0, cool: 30, token: false, yOff: 0, attacked: false } : null,
+    ai: opts.ai ? { mode: 'hover', wait: 0, cool: 30, token: false, yOff: 0, attacked: false, target: null, targetT: 0 } : null,
     entering: !!opts.entering, remove: false,
   };
 }

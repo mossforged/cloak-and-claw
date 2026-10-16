@@ -5,6 +5,7 @@ export default {
   backdrop: { sky: ['#6fb0e6', '#d6ecf8'], horizon: 400, sea: ['#4d93c4', '#1c4f7c'] },
   floor: { left: 30, right: 930, top: 400, bottom: 463 },   // walkable belt: the open stone floor only (toggle debug with ` to see it)
   playerStart: { x: 260, y: 432 },
+  heroStarts: [{ x: 260, y: 432 }, { x: 200, y: 410 }, { x: 200, y: 456 }],   // T021: per player slot (slot 0 = playerStart), staggered in depth
   // breakables (data/props): type, x, y on the belt; drops overrides the prop's own (item id, { id: weight } or null)
   props: [
     { type: 'crate', x: 470, y: 412, drops: 'plank-club' },
