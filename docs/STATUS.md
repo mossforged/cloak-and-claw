@@ -54,6 +54,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 code: T020 on branch `t020-rat-weapons-holds`: A012 spear/bow/arrow + near pinch hand imported; weapons turn so the handle runs through the fist (rig slot axes, measured on A010's hands, x item `gripEnd`): cutlass 6 deg off before, now in line in every pose; spearman's far fist closes round the shaft over it (solved, not iterated); archer draws to the jaw (bow arm out level, bow upright, 44 px draw); spear/bow lie flat on the floor. Bot runs identical (sim untouched); 20/20 tests (new tests/weapon-hold.test.mjs).
+2026-10-16 code: T020 notes: arrow 50 -> 69 px nocked (needed past the bow at a full draw), flight size kept (~75 px, JUICE.shot.size 1.5 -> 1.1); the mouse's floor weapons also follow his fist now (cutlass turns 11 deg, club 5, fish 8 vs before). New tools/hold-sheet.html; screens docs/screens/T020/. Build `t020 rat weapons v1`.
 2026-10-16 lead: merged T019 round 2 (user: individual looks weren't showing at game size -> wider palettes, more face details, fur range 0.12; user approved v2).
 2026-10-16 lead: merged T019 (CI green, sim change only hands each spawn its look; 19/19 tests) so Code isn't blocked; its look check folds into T020's play check. Wrote A013 (Mouse Fighter to the rig standard).
 2026-10-16 lead: user testing T019: the cutlass angle doesn't match the fist ("doesn't look like it's being held") -> added to T020 (slot axis per grip hand, handle axis per item, aligned in every pose). Enemy overlap parked.

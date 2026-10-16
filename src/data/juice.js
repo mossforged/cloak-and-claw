@@ -20,14 +20,14 @@ export const JUICE = {
   // props + items (T010): a hit shudders the prop for `wobble` frames and throws chips; a break throws its debris
   // (debrisSpeed px/frame out, debrisLift up; they tumble, bounce, lie for debrisLife frames and fade) with a crunch flash.
   props: { hitstop: 3, shake: 2.5, breakHitstop: 6, breakShake: 8, wobble: 12, chips: 8, debrisSpeed: 6, debrisLift: 8.5, debrisLife: 80, flashR: 60 },
-  items: { glow: 0.6, ghosts: 3, ringR: 26, sparkles: 8 },   // floor glow under pickups; ghosts behind a tossed weapon; eat/pickup pop
+  items: { glow: 0.6, glowMax: 90, ghosts: 3, ringR: 26, sparkles: 8 },   // floor glow under pickups (glowMax: widest px, for a spear/bow lying turned, T020); ghosts behind a tossed weapon; eat/pickup pop
   weaponBreak: { hitstop: 6, shake: 6, life: 40 },
   // jump squat (T014, render only; see fighters' jumpSquatMode): legs extend from the crouch over `rise` frames after take-off
   // (A and B); both squash on landing (A since T011) for `land` frames, `landDepth` of the full crouch. Standee: squashX/squashY at full crouch.
   jumpSquat: { rise: 5, land: 8, landDepth: 0.7, squashX: 1.1, squashY: 0.82 },
   // arrows in flight (T011, render/shots.js): drawn `size` x the nocked arrow so they read at a glance, with a light
   // `glow` (blur px) round them and a speed streak `streak` px long behind (`width`, `alpha`)
-  shot: { size: 1.5, glow: 7, streak: 60, width: 3, alpha: 0.6 },
+  shot: { size: 1.1, glow: 7, streak: 60, width: 3, alpha: 0.6 },   // T020: size 1.5 -> 1.1, the A012 arrow is longer (same ~75 px in flight)
   // bracing breath while blocking (T015, standee; the rig's loop is data/rigs/*-brace.js): fade-in frames (after entering
   // block or a blocked hit), s per breath, squash = height gained on the in-breath (width gives back half), lean = rad in
   brace: { fade: 14, breath: 1.4, squash: 0.02, lean: 0.012 },

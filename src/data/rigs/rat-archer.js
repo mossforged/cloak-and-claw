@@ -10,14 +10,14 @@ export default {
   ...rat, id: 'rat-archer',
   poses: {
     ...base,
-    stance: { ...base.stance, torso: 0, head: -2, ...arms(-60, -40, -20, 0), 'hand-back': 0 },
-    idle: { ...base.idle, torso: [0, 1.5, 0], head: [-2, 2, 0.15], 'arm-front-upper': -60, 'arm-back-upper': [-20, 2, 0.1], 'hand-back': 0 },
+    stance: { ...base.stance, torso: 0, head: -2, ...arms(-60, -40, -20, 0), 'hand-back': 17 },
+    idle: { ...base.idle, torso: [0, 1.5, 0], head: [-2, 2, 0.15], 'arm-front-upper': -60, 'arm-back-upper': [-20, 2, 0.1], 'hand-back': 17 },
     walk: { ...base.walk, 'arm-front-upper': -60, 'arm-back-upper': [-20, 4, 0], swap: {} },
     hurt: { ...base.hurt, ...arms(30, 20, -10, 20) },
     moves: {
       bowShot: {   // windup = the draw (string to the cheek), bow arm locked out; strike = the loose, string hand flicks back
-        windup: { swap: { head: 'head-effort' }, head: -2, dx: -2, ...arms(-90, -60, -22, 0), ...DRAW },
-        strike: { swap: { head: 'head-attack' }, head: -4, dx: 1, ...arms(-70, -100, -20, 0), ...DRAW },
+        windup: { swap: { head: 'head-effort' }, head: 5, dx: -2, ...arms(90, -150, -68, 15), 'hand-back': 51, ...DRAW },
+        strike: { swap: { head: 'head-attack' }, head: 0, dx: 1, ...arms(110, -90, -68, 15), 'hand-back': 51, ...DRAW },
       },
     },
   },
