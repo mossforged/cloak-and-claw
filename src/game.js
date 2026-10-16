@@ -10,6 +10,7 @@ import { createJuice } from './render/juice.js';
 import { bus } from './core/events.js';
 import { createRunLog, summaryLines } from './log/runlog.js';
 import { saveRun, downloadRuns } from './log/store.js';
+import { setupWalkTest } from './render/walk-test.js';   // TEMPORARY (T018 round 2): V cycles the rat walks
 
 // ?stage=harbor-market loads the old arena (T013); default START_STAGE
 const STAGE = (() => { const id = new URLSearchParams(location.search).get('stage'); return STAGES[id] ? id : START_STAGE; })();
@@ -17,6 +18,7 @@ const STAGE = (() => { const id = new URLSearchParams(location.search).get('stag
 export function createGame(ctx, assets) {
   let world = createWorld(STAGE, START_HERO);
   const renderer = createRenderer(ctx, assets);
+  setupWalkTest();
   const juice = createJuice();
   const opts = { debug: new URLSearchParams(location.search).has('debug'), paused: false, rig: true, pose: null, runLines: null };
   const view = { pose: null, left: 0 };   // C test pose (render-only)

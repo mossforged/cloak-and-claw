@@ -5,6 +5,8 @@
 // -75 + pelvis + torso + arm-front-upper + arm-front-lower + hand-front (the slot's rest, rigs/rat-raider.js).
 // Hands: the near hand grips the weapon (its default drawing); the far hand is open (default) idle/hurt, a fist walking
 // and striking. Spearman and archer (rigs/rat-spearman.js, rat-archer.js) override the arms and add their kit moves.
+import { walkOf, WALK_DEFAULT } from './rat-raider-walks.js';
+
 const HURT = { head: 'head-hurt', 'hand-back': 'hand-back-open' };
 const FALL = { head: 'head-hurt', 'hand-back': 'hand-back-open', 'hand-front': 'hand-front-open' };
 
@@ -17,12 +19,8 @@ export default {
     'arm-front-upper': [0, 2.5, 0.1], 'hand-front': [0, 3, 0.2], 'arm-back-upper': [0, 3, 0.1], 'hand-back': [0, 6, 0.3],
     tail: [0, 10, 0.3], 'scarf-tail': [0, 7, 0.55],
   },
-  // Scuttle: quick short steps, hips dropped 9 px into a deeper crouch (walk 2.0 px/frame). Legs solved by 2-bone IK on an
-  // ankle path (planted sweep back, lifted arc forward) and fitted to one wave per joint; feet kept level; tests/rat-rig
-  // checks they don't skate or sink.
-  walk: { speed: 2.8, swap: { 'hand-back': 'hand-back-fist' }, dy: 5, torso: [10, 2, 0, 2], head: [-10, 2, 0.1, 2],
-    'leg-front-upper': [19.5, 4.4, 0.55], 'leg-front-lower': [-72.7, 45.5, 0.769], 'foot-front': [53.3, 46.5, 0.254],
-    'leg-back-upper': [-23.6, 17, 0.3], 'leg-back-lower': [88.9, 42.1, 0.201], 'foot-back': [-65.3, 56.8, 0.729],
+  // Walk: cadence, hips, lean and legs come from the variant picked (rigs/rat-raider-walks.js, T018 round 2).
+  walk: { ...walkOf(WALK_DEFAULT), swap: { 'hand-back': 'hand-back-fist' },
     'arm-back-upper': [0, 10, 0], 'arm-front-upper': [0, 6, 0.5], tail: [4, 12, 0.25], 'scarf-tail': [8, 8, 0.4, 2] },
   jump: {
     torso: -4, head: -6,
