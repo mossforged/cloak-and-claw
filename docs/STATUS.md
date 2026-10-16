@@ -28,7 +28,7 @@
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
-- Weapon drops for the other rats (rule 2026-10-16: drop = what they held): spearman could drop his spear as a floor weapon; archer's bow is not a melee weapon (drop nothing, or arrows as a throwable). Decide with Stage 4 enemies.
+- Weapon drops for the other rats: drops are optional (keep the floor uncluttered), but a drop is always the weapon held (decision 2026-10-16). Whether the spearman ever drops his spear: decide with Stage 4 enemies.
 - **Heavy throwables by size** (user, 2026-10-15): the biggest breakables (barrels, big crates) can be picked up and thrown only by big animals (e.g. a badger hero; a brute enemy hurling a barrel at the player). Mouse-sized heroes can only smash them. Props get a `weight` and fighters a `size`/`strength` in data; ties into the species x size hook. For Stage 4 (brute enemy) and Stage 8 (second, bigger hero).
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
 - Touch controls for phone play (Stage 5).
