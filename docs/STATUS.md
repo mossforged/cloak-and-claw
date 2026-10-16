@@ -6,7 +6,7 @@
 1. **Code:** T016 (rig bench: fit overlay over the master + standard motion strip, straight from Art's source folder).
 2. **Art:** A010 (bring A009 up to the rig standard; head set **R**). Runs in parallel with T016.
 3. **User:** confirm two T013 calls (camera never scrolls back; the stage loop jumps to the start). Then judge A010 (does the reassembled rat match? sword right?) and its motion strip in the bench.
-4. **After A009 is approved:** a gear refit art task (hood, helmet, hat on the chosen head), then a code task to import A009 into the rat rig.
+4. **After A010 passes the fit check and motion strip:** Code imports the new rat into the game; then Art does the finishing set (recolour masks, face-detail overlays, hood/helmet/hat refit on head R).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
