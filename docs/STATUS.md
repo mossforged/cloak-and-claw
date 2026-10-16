@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T017 weapon feel (merged 2026-10-16; user: "weapons all feel good"). Last art task: A010 new rat to the rig standard (merged 2026-10-16).
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T017 weapon feel (merged 2026-10-16; user: "weapons all feel good"). Last art task: A011 rat finishing set (merged 2026-10-16; user: "very cool").
 
 ## Next
-1. **Code:** T018 (import the new rat into the game for all three rat types; holds the cutlass he drops).
-2. **Art:** A011 (finishing set: gear refit, recolour masks, face details) on the merged A010 rat.
-3. **User:** judge T018 (new rat in game) and A011 (gear and crowd variety).
+1. **Code:** T018 (new rat in game; in progress), then T019 (real gear for archer/spearman + random face details, tints and size per rat).
+2. **Art:** idle (rat finished: A010 + A011). Next art candidates: spear/bow redrawn to match the new rat, or the next enemy body under the rig standard (lead to propose).
+3. **User:** judge T018 (new rat in game), then T019 (gear and crowd variety in a fight).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -20,8 +20,8 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T018-import-new-rat.md`.
-- Art: `docs/tasks/A011-rat-raider-finishing-set.md`.
+- Code: `docs/tasks/T018-import-new-rat.md`, then `T019-rat-gear-and-variety.md`.
+- Art: none queued.
 
 ## Open questions (for the user)
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
@@ -50,6 +50,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged A011 (user: "very cool"); wrote T019 (gear + individual variety in game, muted earthy tint palette by default). Art idle.
 2026-10-16 lead: reviewed A011 (branch `a011-rat-raider-finishing`, 136 files / 35 MB, scope clean): gear refit on all six heads and three torso views, 4 face details, 82 masks, rig-source overlays. Waiting for the user's look. Repo: assets/source 117 MB, pack ~159 MB (LFS threshold in decisions: ~200 MB of sources).
 2026-10-16 lead: merged T017 (weapon feel, render only; bot runs identical; 18/18 tests; user OK after 5 rounds). T018 gets two small extras: remove committed tools/__pycache__, split the over-long mouse poses file.
 2026-10-16 lead: merged A010 (17 parts, 15 swaps, rig-source.json; the A003 cutlass fits the grip; 17/17 tests). T018 can start after T017. Note for T018: a thin slot seam shows in the enlarged grip hand; check at game size.

@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 A011 rat gear and crowd variety
+User: "very cool".
+
 ## 2026-10-16 T017 weapon feel
 User: weapons all feel good. Fish: it "juts out stiff" -> "not exactly drooping toward the ground" -> wants it floppier in motion but flung straight at the strike ("like gravity is throwing it outward"); picked fish sag 0.24 in the lab. Parked: block shuffle has no footwork (boots slide while blocking).
 

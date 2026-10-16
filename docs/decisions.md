@@ -48,3 +48,4 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-16 Weapons: whenever an enemy drops a weapon, it is the same weapon it was holding (user). The Rat Raider holds the A003 rat cutlass item (the floor weapon), not a separate rig sword; A010's sword drawing is dropped.
 - 2026-10-16 A010 rat (head R) look approved (user: "much better, much closer to the standee"); passes G2 and the bench motion strip. Next: A011 finishing set (gear refit, masks, face details) and T018 import.
 - 2026-10-16 Clarifies the weapon-drop rule: enemies don't have to drop their weapons (we don't want the floor flooded with weapons); but when one does drop a weapon, it is the same weapon it was holding. (User.)
+- 2026-10-16 A011 rat finishing set approved (user: "very cool"). In game, cloth tints default to a muted, earthy palette (lead's call; adjustable in the lab) so varied rats stay in the art bible's world.
