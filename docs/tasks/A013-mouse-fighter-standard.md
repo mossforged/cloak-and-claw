@@ -27,3 +27,19 @@ Do **G1 (master) and G2 (parts) in one delivery**, as A010 did for the rat; the 
 - Human: is this our hero?
 
 Out of scope: recolour masks and face details (he's unique), new moves, importing (Code does that after approval).
+
+## Addendum (lead, 2026-10-16, after the user's review): one more foot, same branch
+User: "it looks good." One note: "in his stance, his forward foot points forward, which is good. his back foot also points forward, whereas in the standee it's more toward the camera."
+In the standee the back foot is turned out toward the viewer (about 45 degrees), the classic braced fighting stance; in the master both feet point forward, which reads more like walking.
+Fix with a swap, not a new master (that's what separate feet are for):
+1. **`foot-back-out.png`**: the back boot turned out toward the camera as in the standee (toes pointing down-left of forward, sole partly hidden), same canvas, **same ankle pivot** as `foot-back`. Paint it as a turned view of the same boot (cuff, buckle, toes), not a new design.
+2. Optional, only if it reads better: `foot-front-out.png` (slightly turned) for very wide stances.
+3. Add it to `rig-source.json` swaps (`of: "foot-back"`), and a small review: the master stance with `foot-back` vs `foot-back-out` beside the standee, at full size and game size.
+Code then uses the turned-out back foot in stance, idle, block and other planted poses, and the forward foot when walking.
+
+## Addendum 2 (lead, 2026-10-16): wrong foot, the lead's wording
+User: the new drawing turned his **left** foot (far side, the leading foot, which correctly points forward), but it's his **right** foot (near side, camera side, the trailing foot) that turns toward the camera in the standee.
+The mistake was in addendum 1: it said "back foot" meaning the trailing foot in his stance, but in the rig standard `foot-back` means the **far** foot. In this stance the trailing foot is the **near** one, `foot-front`.
+1. Make **`foot-front-out.png`**: the **near** (right, camera-side) boot turned out toward the camera as in the standee, same canvas, **same ankle pivot as `foot-front`**, a turned view of the same boot.
+2. Remove `foot-back-out` from `rig-source.json` (keep or delete the file; it's unused). Add the swap `foot-front-out` (`of: "foot-front"`).
+3. Review as before: standee, master with `foot-front`, master with `foot-front-out`, full size and game size.

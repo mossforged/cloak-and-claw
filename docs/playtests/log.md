@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 A013 Mouse Fighter to the rig standard
+User: "it looks good." "In his stance, his forward foot points forward, which is good. His back foot also points forward, whereas in the standee it's more toward the camera." -> A013 addendum (turned-out back foot swap for planted poses).
+
 ## 2026-10-16 T019 rat looks in game
 User: "not sure the individual customization is happening" (looks too alike at game size) -> round 2 widened palettes and face details; user approved v2.
 
