@@ -50,6 +50,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 code: T018 round 3 (user: C best, more upright?): V now cycles C, D (C + torso 8 deg more upright, default), E (+ hips at master height), F (tallest: hips 2 px above master, 2.0 steps/s). Far leg is the limit: higher hips need shorter steps. Build v3; 18/18 tests.
 2026-10-16 code: T018 round 2 (user: walk "very scuttly" next to the upright mouse): three walk variants in rigs/rat-raider-walks.js, V cycles them in game (temporary, label bottom-left): A round-1 scuttle, B stride (2.0 steps/s, longer steps, stance lean), C upright (1.8 steps/s, torso back past the hunch; default). Build v2; 18/18 tests, bot runs identical.
 2026-10-16 code: T018 on branch `t018-import-new-rat`: A010 imported via tools/rig_from_source.py (uniform scale, no fudges), rat poses rewritten on the standard names (master crouch, IK-fitted scuttle, hand swaps), raider holds and drops the same rat-cutlass item, grip IK places hand parts; spearman/archer tinted (A008 gear hidden until A011). Bot runs identical; 18/18 tests.
 2026-10-16 code: T018 notes: A010 has no near pinch hand (archer borrows the far one turned 180 deg; ask A011); the bench's standard strip still rolls the head in knockdown/down (game poses don't). Screens in docs/screens/T018/; human look check open.
