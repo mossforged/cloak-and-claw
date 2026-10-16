@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T018 new rat in game (merged 2026-10-16). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T019 rat gear + individual looks (merged 2026-10-16). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
 
 ## Next
-1. **Code:** T019 (rat gear + individual variety), then T020 (weapons held right: cutlass in line with the fist; new spear/bow; spearman's far hand on the shaft; archer full draw to the ear).
-2. **Art:** idle (rat roster art complete: A010, A011, A012). Next: the next enemy body under the rig standard (lead to propose).
-3. **User:** judge T019 (gear and crowd variety), then T020 (spear and bow holds).
+1. **Code:** T020 (weapons held right: cutlass in line with the fist; new spear/bow; spearman's far hand on the shaft; archer full draw to the ear).
+2. **Art:** A013 (Mouse Fighter to the rig standard: master + parts, like the rat). Foundational: the hero is seen most and the last old-style rig.
+3. **User:** judge T020 (and T019's look in the same play: individuals? colours right?); A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools) (spear and bow holds).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -20,10 +20,11 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T019-rat-gear-and-variety.md`, then `T020-rat-weapons-and-holds.md`.
-- Art: none queued.
+- Code: `docs/tasks/T020-rat-weapons-and-holds.md`.
+- Art: `docs/tasks/A013-mouse-fighter-standard.md`.
 
 ## Open questions (for the user)
+- **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook, (2) multi-hero engine (17 single-player assumptions in 9 files), (3) run loop in grey box (growth, coins/food, shop, lives), (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
@@ -52,6 +53,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T019 (CI green, sim change only hands each spawn its look; 19/19 tests) so Code isn't blocked; its look check folds into T020's play check. Wrote A013 (Mouse Fighter to the rig standard).
 2026-10-16 lead: user testing T019: the cutlass angle doesn't match the fist ("doesn't look like it's being held") -> added to T020 (slot axis per grip hand, handle axis per item, aligned in every pose). Enemy overlap parked.
 2026-10-16 lead: merged A012 (weapons are cleaner, bolder versions of A004's designs; near pinch reads as a fist up close). User on the review mock-ups: "the spearman's missing an arm", the archer "could be drawing the string back further": both are rig poses -> T020.
 2026-10-16 lead: wrote A012 (spear/bow/arrow redraw + near pinch hand), user's pick.
