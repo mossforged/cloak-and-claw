@@ -1,0 +1,9 @@
+{
+  "readerErrors": [],
+  "missingStandardParts": [],
+  "partCount": 17,
+  "swapCount": 18,
+  "sampledMotionFrames": 289,
+  "allMatricesFinite": true,
+  "note": "Reader/layout compatibility only; visual motion approval remains G3. Source reader does not forward whole-arm hide/carry extension fields, so Code must apply them during import."
+}

@@ -1,0 +1,520 @@
+{
+  "viewsAndSwaps": {
+    "head-attack": {
+      "anchor": [
+        0,
+        0
+      ],
+      "atRawMaster": [
+        310,
+        324
+      ],
+      "uniformScale": 0.7902912621359224,
+      "rotationDegrees": 0
+    },
+    "head-hurt": {
+      "anchor": [
+        0,
+        0
+      ],
+      "atRawMaster": [
+        310,
+        324
+      ],
+      "uniformScale": 0.8255578093306288,
+      "rotationDegrees": 0
+    },
+    "head-effort": {
+      "anchor": [
+        0,
+        0
+      ],
+      "atRawMaster": [
+        310,
+        324
+      ],
+      "uniformScale": 0.8409090909090909,
+      "rotationDegrees": 0
+    },
+    "head-ko": {
+      "anchor": [
+        0,
+        0
+      ],
+      "atRawMaster": [
+        310,
+        324
+      ],
+      "uniformScale": 0.8156312625250501,
+      "rotationDegrees": 0
+    },
+    "hand-front-open": {
+      "anchor": [
+        345.8,
+        186.0
+      ],
+      "atRawMaster": [
+        299,
+        724
+      ],
+      "uniformScale": 0.535483870967742,
+      "rotationDegrees": 0
+    },
+    "hand-front-fist": {
+      "anchor": [
+        283.92,
+        142.79999999999998
+      ],
+      "atRawMaster": [
+        299,
+        724
+      ],
+      "uniformScale": 0.592436974789916,
+      "rotationDegrees": 0
+    },
+    "hand-back-open": {
+      "anchor": [
+        35.01,
+        186.62
+      ],
+      "atRawMaster": [
+        775,
+        895
+      ],
+      "uniformScale": 0.5514950166112956,
+      "rotationDegrees": 0
+    },
+    "hand-back-fist": {
+      "anchor": [
+        26.91,
+        147.56
+      ],
+      "atRawMaster": [
+        775,
+        895
+      ],
+      "uniformScale": 0.592436974789916,
+      "rotationDegrees": 0
+    },
+    "hand-back-grip": {
+      "anchor": [
+        30.06,
+        171.12
+      ],
+      "atRawMaster": [
+        775,
+        895
+      ],
+      "uniformScale": 0.5108695652173914,
+      "rotationDegrees": 0
+    },
+    "head-back": {
+      "anchor": [
+        331.17999999999995,
+        368
+      ],
+      "atRawMaster": [
+        649,
+        724
+      ],
+      "uniformScale": 1.1059782608695652,
+      "rotationDegrees": 0
+    },
+    "torso-back": {
+      "anchor": [
+        254.24000000000004,
+        306.86
+      ],
+      "atRawMaster": [
+        575,
+        945
+      ],
+      "uniformScale": 0.9388646288209607,
+      "rotationDegrees": 0
+    },
+    "torso-side": {
+      "anchor": [
+        351.54,
+        336.42
+      ],
+      "atRawMaster": [
+        575,
+        945
+      ],
+      "uniformScale": 0.8052434456928839,
+      "rotationDegrees": 0
+    },
+    "arm-front-raised": {
+      "anchor": [
+        94.0,
+        487.62
+      ],
+      "atRawMaster": [
+        465,
+        785
+      ],
+      "uniformScale": 0.46,
+      "rotationDegrees": 0
+    },
+    "arm-back-guard": {
+      "anchor": [
+        323.7,
+        291.84000000000003
+      ],
+      "atRawMaster": [
+        744,
+        800
+      ],
+      "uniformScale": 0.5,
+      "rotationDegrees": 0
+    }
+  },
+  "hiddenFillLimits": {
+    "head": {
+      "joints": [
+        [
+          649,
+          724
+        ]
+      ],
+      "allowedRadiusRaw": 30
+    },
+    "torso": {
+      "joints": [
+        [
+          575,
+          945
+        ],
+        [
+          649,
+          724
+        ],
+        [
+          465,
+          785
+        ],
+        [
+          744,
+          800
+        ],
+        [
+          442,
+          695
+        ]
+      ],
+      "allowedRadiusRaw": 55
+    },
+    "pelvis": {
+      "joints": [
+        [
+          570,
+          1000
+        ],
+        [
+          575,
+          945
+        ],
+        [
+          459,
+          1046
+        ],
+        [
+          708,
+          1065
+        ],
+        [
+          352,
+          1042
+        ]
+      ],
+      "allowedRadiusRaw": 55
+    },
+    "arm-front-upper": {
+      "joints": [
+        [
+          465,
+          785
+        ],
+        [
+          351,
+          747
+        ]
+      ],
+      "allowedRadiusRaw": 42
+    },
+    "arm-front-lower": {
+      "joints": [
+        [
+          351,
+          747
+        ],
+        [
+          299,
+          724
+        ]
+      ],
+      "allowedRadiusRaw": 42
+    },
+    "hand-front": {
+      "joints": [
+        [
+          299,
+          724
+        ]
+      ],
+      "allowedRadiusRaw": 30
+    },
+    "arm-back-upper": {
+      "joints": [
+        [
+          744,
+          800
+        ],
+        [
+          770,
+          868
+        ]
+      ],
+      "allowedRadiusRaw": 42
+    },
+    "arm-back-lower": {
+      "joints": [
+        [
+          770,
+          868
+        ],
+        [
+          775,
+          895
+        ]
+      ],
+      "allowedRadiusRaw": 42
+    },
+    "hand-back": {
+      "joints": [
+        [
+          775,
+          895
+        ]
+      ],
+      "allowedRadiusRaw": 30
+    },
+    "leg-front-upper": {
+      "joints": [
+        [
+          459,
+          1046
+        ],
+        [
+          352,
+          1149
+        ]
+      ],
+      "allowedRadiusRaw": 45
+    },
+    "leg-front-lower": {
+      "joints": [
+        [
+          352,
+          1149
+        ],
+        [
+          335,
+          1217
+        ]
+      ],
+      "allowedRadiusRaw": 45
+    },
+    "foot-front": {
+      "joints": [
+        [
+          335,
+          1217
+        ]
+      ],
+      "allowedRadiusRaw": 30
+    },
+    "leg-back-upper": {
+      "joints": [
+        [
+          708,
+          1065
+        ],
+        [
+          747,
+          1159
+        ]
+      ],
+      "allowedRadiusRaw": 45
+    },
+    "leg-back-lower": {
+      "joints": [
+        [
+          747,
+          1159
+        ],
+        [
+          752,
+          1220
+        ]
+      ],
+      "allowedRadiusRaw": 45
+    },
+    "foot-back": {
+      "joints": [
+        [
+          752,
+          1220
+        ]
+      ],
+      "allowedRadiusRaw": 30
+    },
+    "tail": {
+      "joints": [
+        [
+          352,
+          1042
+        ]
+      ],
+      "allowedRadiusRaw": 30
+    },
+    "scarf-tail": {
+      "joints": [
+        [
+          442,
+          695
+        ]
+      ],
+      "allowedRadiusRaw": 30
+    }
+  },
+  "weaponExclusionPolygons": {
+    "sword-top": [
+      [
+        0,
+        0
+      ],
+      [
+        310,
+        0
+      ],
+      [
+        310,
+        606
+      ],
+      [
+        295,
+        630
+      ],
+      [
+        257,
+        650
+      ],
+      [
+        211,
+        665
+      ],
+      [
+        164,
+        680
+      ],
+      [
+        118,
+        683
+      ],
+      [
+        84,
+        665
+      ],
+      [
+        80,
+        610
+      ],
+      [
+        0,
+        610
+      ]
+    ],
+    "sword-pommel": [
+      [
+        225,
+        779
+      ],
+      [
+        253,
+        768
+      ],
+      [
+        282,
+        760
+      ],
+      [
+        311,
+        777
+      ],
+      [
+        318,
+        804
+      ],
+      [
+        294,
+        826
+      ],
+      [
+        258,
+        828
+      ],
+      [
+        233,
+        815
+      ]
+    ],
+    "shield": [
+      [
+        880,
+        665
+      ],
+      [
+        965,
+        680
+      ],
+      [
+        1019,
+        740
+      ],
+      [
+        1024,
+        830
+      ],
+      [
+        1024,
+        1100
+      ],
+      [
+        835,
+        1100
+      ],
+      [
+        798,
+        990
+      ],
+      [
+        786,
+        910
+      ],
+      [
+        783,
+        820
+      ],
+      [
+        794,
+        755
+      ],
+      [
+        821,
+        700
+      ]
+    ]
+  },
+  "note": "Raw-master coordinates unless named canvas; uniform scale and rigid rotations only."
+}

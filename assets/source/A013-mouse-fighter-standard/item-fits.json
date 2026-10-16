@@ -1,0 +1,54 @@
+{
+  "coordinateSpace": "Full PNG source pixels, top-left origin; item coordinates refer to unchanged A002 PNGs; hand and canvas values refer to A013 1536x2304 canvas.",
+  "sword": {
+    "img": "../A002-mouse-fighter-rig-3q/sword.png",
+    "grip": [
+      413,
+      799
+    ],
+    "handleAxis": [
+      [
+        460,
+        761
+      ],
+      [
+        356,
+        848
+      ]
+    ],
+    "hand": "hand-front-grip",
+    "canvasGrip": [
+      363,
+      1300
+    ],
+    "sourceToCanvasScale": 1.274787535410765,
+    "rotationDegrees": -248.75313598385486,
+    "band": 830
+  },
+  "shield": {
+    "img": "../A002-mouse-fighter-rig-3q/shield.png",
+    "strapGrip": [
+      949,
+      701
+    ],
+    "strapAxis": [
+      [
+        949,
+        666
+      ],
+      [
+        949,
+        736
+      ]
+    ],
+    "hand": "hand-back-shield",
+    "canvasGrip": [
+      1155,
+      1508
+    ],
+    "sourceToCanvasScale": 1.1473087818696885,
+    "rotationDegrees": 0,
+    "band": 150
+  },
+  "note": "Rigid static fit previews. Existing item art is neither repainted nor copied. Shield rim covers the outer fist fingers; the inner fingers remain visible. Runtime item points must subtract trim origin and apply import scale."
+}

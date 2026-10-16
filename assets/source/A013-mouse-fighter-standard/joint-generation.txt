@@ -1,0 +1,3 @@
+Generated images are saved to /Users/johniadarola/.codex/generated_images/01a14535-cd6e-7d90-8c62-aef40591f0e6 as /Users/johniadarola/.codex/generated_images/01a14535-cd6e-7d90-8c62-aef40591f0e6/exec-36fc3fb5-645f-41d7-921e-525b715ae30a.png by default.
+If you need to use a generated image at another path, copy it and leave the original in place unless the user explicitly asks you to delete it.
+The generated image is already displayed to the user. There is no need to render it in the final response as a Markdown image or file link.
