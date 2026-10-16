@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 T022 helping in the fight
+User couldn't get a potion in v1 (the AI ally fetched them all first) -> v2: ally leaves floor potions to players, more drops. Final: "all of that is good to go and works". Downed works; revive time and health back still to balance.
+
 ## 2026-10-16 Mouse Fighter attacks (note for the next animation pass)
 User: "the mouse fighter doesn't move his legs when he attacks at all, we might want to look into that for dynamism." -> added to T023 (footwork on every attack while re-posing on the new rig).
 

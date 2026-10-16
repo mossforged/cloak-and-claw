@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T021 multi-hero engine (merged 2026-10-16; user play check open). Last art task: A013 Mouse Fighter to the rig standard (merged 2026-10-16).
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T022 helping in the fight (merged 2026-10-16; user: "all of that is good to go and works"). Last art task: A013 Mouse Fighter to the rig standard (merged 2026-10-16).
 
 ## Next
-1. **Code:** T022 (AI ally + revive + potion toss), then T023 (import the new Mouse Fighter).
+1. **Code:** T023 (import the new Mouse Fighter).
 2. **Art:** idle (Mouse Fighter A013 merged). Next art waits on the home-loop design (rescued folk, stronghold) or a new enemy body.
-3. **User:** play-check T021 (one player unchanged? two players with a second pad or `?heroes=2&keys2`), T022 (helping verbs), T023 (new mouse in game). Design talk: the home loop (what rescued folk give, resources, gear slots).
+3. **User:** play-check T021 (one player unchanged? two players with a second pad or `?heroes=2&keys2`), T023 (new mouse in game). Design talk: the home loop (what rescued folk give, resources, gear slots).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -20,7 +20,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T022-allies-revive-potions.md`, then `T023-import-new-mouse.md`.
+- Code: `docs/tasks/T023-import-new-mouse.md`.
 - Art: none queued.
 
 ## Open questions (for the user)
@@ -30,6 +30,7 @@
 - **Hook decided (2026-10-16): community and helping** (see game brief). Settled: AI allies; mission -> home -> mission; first helping verbs = revive + potion toss (T022). Still open: what failure costs.
 
 ## Parked
+- Helping balance (T022): downed time, revive hold time and health back still to tune (lab: Helping). Potion drops only with 2+ heroes for now.
 - Heroes can stand on top of each other (no hero-hero separation, T021). Fold into the enemy-spacing fix (same `separate()` rework).
 - T021 test hero's tint also turns his red bandana green (cosmetic; a proper second hero replaces him).
 - Floor/item shadows look "a bit abstract" (user, T020). A small render pass later.
@@ -59,6 +60,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T022 (user approved v2; ally leaves floor potions to players; 22/22 tests; solo bot numbers identical). Next: T023, then the combatant standard.
 2026-10-16 lead: user: gear mostly agreed (significance a goal, not a rule); downed allies wounded for a mission or no cost, to be tested; combatant standard agreed (after T022/T023).
 2026-10-16 lead: user answered the study's questions -> `docs/design/home-loop.md` (living home-loop design) + decisions. User: standards before more heroes/enemies.
 2026-10-16 lead: user note: mouse attacks have no leg movement -> added footwork (weight shift, lunge step, settle) to T023.
