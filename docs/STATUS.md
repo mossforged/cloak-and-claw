@@ -3,7 +3,7 @@
 **Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T020 rat weapons held right (merged 2026-10-16; user: "it looks good to me"). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
 
 ## Next
-1. **Code:** T021 (engine supports more than one hero: `w.heroes`, per-slot input, AI targets a hero, camera for several, HUD per hero; one-player game unchanged). Then the Mouse Fighter import once A013 merges.
+1. **Code:** T021 (multi-hero engine), then T022 (AI ally + pick up a downed friend + toss potions), then the Mouse Fighter import once A013 merges.
 2. **Art:** A013 (Mouse Fighter to the rig standard: master + parts, like the rat). Foundational: the hero is seen most and the last old-style rig.
 3. **User:** A013 (is this our hero?). Then the foundations talk (hook, multi-hero engine, run loop, content tools).
 
@@ -20,13 +20,13 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T021-multi-hero-engine.md`.
+- Code: `docs/tasks/T021-multi-hero-engine.md`, then `T022-allies-revive-potions.md`.
 - Art: `docs/tasks/A013-mouse-fighter-standard.md`.
 
 ## Open questions (for the user)
-- **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook (**decided 2026-10-16**), (2) multi-hero engine (**started: T021, user 2026-10-16**), (3) run loop in grey box (growth, coins/food, shop, lives), (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
+- **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook (**decided 2026-10-16**), (2) multi-hero engine (**started: T021, user 2026-10-16**), (3) run loop in grey box, now shaped by the hook: mission -> rescue/rewards -> home (place the rescued, spend resources, slot gear) -> next mission, (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
-- **Hook decided (2026-10-16): community and helping** (see game brief). Open details: solo play with AI allies?; mission structure; helping verbs in combat; what failure costs.
+- **Hook decided (2026-10-16): community and helping** (see game brief). Settled: AI allies; mission -> home -> mission; first helping verbs = revive + potion toss (T022). Still open: what failure costs.
 
 ## Parked
 - Floor/item shadows look "a bit abstract" (user, T020). A small render pass later.
@@ -56,6 +56,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user settled hook details (AI allies; mission/home loop; revive + potion toss first). Wrote T022.
 2026-10-16 lead: user set the hook: community and helping (fallen world, rescue missions, a ruined stronghold rebuilt by the rescued, co-op heroes helping each other). Game brief + decisions updated.
 2026-10-16 lead: user chose to do the multi-hero engine change now -> wrote T021.
 2026-10-16 lead: merged T020 (4 rounds; user picked the cutlass orientation and spear hold E; 20/20 tests). Mouse floor weapons now follow his fist too.
