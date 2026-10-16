@@ -1,6 +1,6 @@
 // T020: weapons held right. In every rat pose (and the mouse with each floor weapon) the held weapon's handle axis
 // (art grip -> gripEnd) runs along the grip hand's slot axis (rig.axes) on screen; the spearman's near fist is on `grip`
-// and his far fist on `grip2`, closed round the shaft (its ring axis along it) and drawn above the spear; the archer's
+// and his far fist on the shaft (at `grip2`, sliding back only where out of reach), closed round the shaft (its ring axis along it) and drawn above the spear; the archer's
 // pinch hand reaches the drawn string, which full draw brings to the jaw anchor, with the arrow sticking out past the
 // bow; the A012 near pinch drawing is used (no borrowed far hand); weapons with `floor` lie flat on the floor.
 import { FIGHTERS } from '../src/data/fighters/index.js';
@@ -73,10 +73,14 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   for (const [label, fi] of poses(def, null)) {
     const L = layoutOf(rig, fi), spear = L.find((e) => e.name === 'held'), far = L.find((e) => e.name === 'hand-back'), near = L.find((e) => e.name === 'hand-front');
     const dn = dist(apply(spear.m, K.art.grip), apply(near.base, rig.slots['two-hand'].attach));
-    const df = dist(apply(spear.m, K.art.grip2), apply(far.base, G.ik.hand));
-    check(dn < 0.01 && df < 2, `spearman ${label}: near fist on grip (${dn.toFixed(2)} px), far fist on grip2 (${df.toFixed(2)} px)`);
-    const shaft = deg(lin(spear.m, [0, -1])), ring = deg(lin(far.base, [Math.cos(G.align * D), Math.sin(G.align * D)]));
-    const e = Math.abs(wrap(shaft - ring)), e2 = Math.min(e, 180 - e);
+    // far fist: on the shaft line, at grip2 standing; elsewhere it may slide back toward the near fist (out of reach)
+    const ring = apply(far.base, G.ik.hand), g1 = apply(spear.m, K.art.grip), g2 = apply(spear.m, K.art.grip2);
+    const u = [(g2[0] - g1[0]) / dist(g1, g2), (g2[1] - g1[1]) / dist(g1, g2)], rel = [ring[0] - g1[0], ring[1] - g1[1]];
+    const off = Math.abs(rel[0] * u[1] - rel[1] * u[0]), along = rel[0] * u[0] + rel[1] * u[1], slid = dist(g1, g2) - along;
+    check(dn < 0.01 && off < 1.5 && slid > -1.5 && along > 15, `spearman ${label}: near fist on grip (${dn.toFixed(2)} px), far fist on the shaft (${off.toFixed(2)} px off, ${slid.toFixed(1)} px short of grip2)`);
+    if (label === 'idle') check(slid < 1.5, `spearman ${label}: far fist reaches out to grip2 (${slid.toFixed(1)} px short)`);
+    const shaft = deg(lin(spear.m, [0, -1])), fist = deg(lin(far.base, [Math.cos(G.align * D), Math.sin(G.align * D)]));
+    const e = Math.abs(wrap(shaft - fist)), e2 = Math.min(e, 180 - e);
     check(e2 < 3, `spearman ${label}: far fist closed round the shaft (${e2.toFixed(1)} deg off)`);
     check(far.order > spear.order && near.order > spear.order, `spearman ${label}: both fists drawn over the spear`);
   }

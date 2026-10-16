@@ -106,7 +106,8 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const spear = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-back');
     check(spear?.img === K.art.img && hand.swap === 'hand-back-grip', `spearman ${label}: spear in hand, far hand gripping`);
     const s = rig.parts['hand-back'].swaps['hand-back-grip'], at = apply(hand.m, [G.ik.hand[0] - s.offset[0], G.ik.hand[1] - s.offset[1]]);
-    const d = dist(at, apply(spear.m, K.art.grip2));
+    const g1 = apply(spear.m, K.art.grip), g2 = apply(spear.m, K.art.grip2), L2 = dist(g1, g2);   // on the shaft line (T020: may slide back)
+    const d = Math.abs((at[0] - g1[0]) * (g2[1] - g1[1]) - (at[1] - g1[1]) * (g2[0] - g1[0])) / L2;
     check(d < 2, `spearman ${label}: far hand on the shaft (${d.toFixed(2)} px off)`);
     const dir = Math.atan2(-spear.m[3], -spear.m[2]) * 180 / Math.PI;   // image up (the point) on screen: 0 = forward, - = up
     if (label === 'stance') check(dir < 0 && dir > -25, `spearman stance: point angled slightly up (${dir.toFixed(0)} deg)`);

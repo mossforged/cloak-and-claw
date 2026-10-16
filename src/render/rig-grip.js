@@ -55,18 +55,23 @@ function axesOf(L, held, G) {
   return [ang([0, 0], lin(w, [A.gripEnd[0] - A.grip[0], A.gripEnd[1] - A.grip[1]])), ang([0, 0], lin(h, [Math.cos(G.align * D), Math.sin(G.align * D)])), h];
 }
 // Solved in one go: the fist's axis goes along the shaft (the smaller turn, or the other way round if the arm can't
-// reach the wrist spot for that one: the ring holds either way); the arm is IK'd to put the wrist where the turned
+// reach the wrist spot for that one: the ring holds either way; or as `G.wrist` says: forearm 'above' / 'below' the
+// shaft); out of reach, the fist slides along the shaft toward the other hand; the arm is IK'd to put the wrist where the turned
 // fist's ring sits on the target, then the fist turns about the wrist onto the shaft line.
 function alignGrip(rig, joints, swap, held, G, target) {
   const end = G.ik.end, pivot = rig.parts[end].pivot, wrist = { ...G.ik, hand: pivot };
   let L = layoutRig(rig, joints, swap, held);
-  const [shaft, axis] = axesOf(L, held, G), T = target(L), P = at(rig, L, end, pivot), R = at(rig, L, end, G.ik.hand);
-  let d = wrap(shaft - axis);
+  const [shaft, axis] = axesOf(L, held, G), T0 = target(L), P = at(rig, L, end, pivot), R = at(rig, L, end, G.ik.hand);
+  let d = wrap(shaft - axis), T = T0;
   if (Math.abs(d) > 90) d = wrap(d + 180);
   const v = [R[0] - P[0], R[1] - P[1]], wristAt = (t) => [T[0] - (Math.cos(t * D) * v[0] - Math.sin(t * D) * v[1]), T[1] - (Math.sin(t * D) * v[0] + Math.cos(t * D) * v[1])];
   const S = at(rig, L, G.ik.arm[0], rig.parts[G.ik.arm[0]].pivot), E = at(rig, L, G.ik.arm[1], rig.parts[G.ik.arm[1]].pivot);
   const len = dist(S, E) + dist(E, P), out = (t) => dist(S, wristAt(t)) - len;
-  if (out(d) > 0 && out(d + 180) < out(d)) d = wrap(d + 180);
+  if (G.wrist) { if ((wristAt(d)[1] > T[1]) !== (G.wrist === 'below')) d = wrap(d + 180); }   // the forearm from below / above the shaft
+  else if (out(d) > 0 && out(d + 180) < out(d)) d = wrap(d + 180);
+  // out of reach: the fist slides back along the shaft (toward the other hand's grip) until the arm reaches
+  const back = [Math.cos(shaft * D), Math.sin(shaft * D)];
+  for (let k = 1; out(d) > 0 && k <= 80; k++) T = [T0[0] - back[0] * k, T0[1] - back[1] * k];
   const goal = axis + d;   // the fist axis' screen angle when done
   let j = joints;
   for (let i = 0; i < 2; i++) j = reach(rig, j, swap, held, wrist, () => wristAt(d));
