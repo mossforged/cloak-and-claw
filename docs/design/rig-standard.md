@@ -2,7 +2,19 @@
 
 Every rigged character follows this. Art packets cite it and only list what differs. Background and sources: `docs/studies/2026-10-16-how-pros-build-2d-rigs.md`.
 
-**Status: PROPOSED (lead, 2026-10-16), waiting for the user's yes.** Mouse Fighter predates it and is not retrofitted until a move needs it.
+**Status:** purpose agreed with the user (2026-10-16); the rules below are PROPOSED until the user approves them. Mouse Fighter predates it and is not retrofitted until a move needs it.
+
+## 0. Purpose (agreed with the user, 2026-10-16)
+Every rule below must serve one of these. A rule that serves none gets cut.
+1. **Faithful:** a rigged character matches its approved art (the standee) on the first try.
+2. **Modular variety at low cost:** recolours, clothing, helmets and hats, weapons and magic swap onto shared bodies without redrawing the character.
+3. **Whole roster:** every enemy goes through it, so the cast stays consistent.
+4. **Judged in motion:** the user judges at a few fixed checkpoints, in motion, not from static mock-ups. (How much of the user's time per character: still open.)
+5. **Quality bar:** between "good enough to test without being put off" and Vanillaware polish.
+6. **Doable:** tens of images per character, not hundreds of frames.
+7. **Scope:** built for Cloak & Claw; if it works, it becomes a reusable skill for other games.
+
+Not chosen: sprite sheets (frame-by-frame, as in Golden Axe or Streets of Rage 4). Each frame is a fresh image, so AI-generated frames drift; every helmet or weapon would have to be redrawn in every frame; and the image count runs to hundreds. Frames are used only for short effects (section 7b).
 
 ## 1. The four gates (in order; nothing skips ahead)
 
@@ -45,8 +57,9 @@ Same canvas; each swap shares its part's pivot so it drops in place.
 | `head` | `neutral`, `attack` (shout or snarl), `hurt`, `effort` (gritted, bracing), `ko` (eyes shut or dazed), `back` (back of the head) |
 | `torso` | `three-quarter` (default), `side` (turned side-on, for horizontal cuts), `back` |
 | feet | `flat` (default); `toe` (push-off) optional |
+| arms (casters and big moves) | `arm-front-raised` (whole raised arm, carries the held item), `arm-back-guard` or `arm-back-reach` (whole arm thrust forward, open palm, for casting at a target): only for characters that cast or block |
 
-That's about 18 base parts and 14 to 16 swaps, roughly **35 images per character**: still small next to Don't Starve's ~155 or Streets of Rage 4's ~1,000 frames.
+That's about 18 base parts and 14 to 18 swaps, roughly **35 images per character**: still small next to Don't Starve's ~155 or Streets of Rage 4's ~1,000 frames.
 
 **Key drawings** (whole limbs or poses drawn for one move, like A006's raised arm) are **not** in the base kit. They are ordered only after G3 shows the rig can't sell a move. Each one is listed in the character's pose budget (section 9).
 
@@ -66,6 +79,13 @@ That's about 18 base parts and 14 to 16 swaps, roughly **35 images per character
 - Gear overlays are drawn **over the approved master** (head and torso as they will be in game), after G3.
 - Each gear piece must fit every head swap; deliver named variants where it can't (`gear-helmet-hurt.png`).
 - **Colour variants by tint in code:** mark recolourable regions (clothes, bandana) as a separate grey mask layer per part (`torso-mask.png`) so code can tint them without repainting.
+
+## 7b. Effects and magic
+A spell or special move is three separate things, so one effect serves many characters:
+1. **Pose** from the rig: a cast uses the `effort` head plus a raised or reaching arm from the swap library.
+2. **Effect art,** drawn separately and never painted onto a body part: a short frame sequence (4 to 8 frames: charge, burst, projectile loop, impact) or a single glowing part the code scales, spins and fades. Glows and sparks are drawn on transparent/green, meant for **additive** blending (as Vanillaware draws its glows).
+3. **Colour** by tint in code, so one drawing serves several schools of magic or enemy types (a fireball tinted blue becomes frost).
+Effects attach to a named point on the rig (`hand-front` tip, weapon tip, chest), the same way held weapons use grip points.
 
 ## 8. Rig bench and motion test (G2, G3; code builder's tool)
 - **Fit overlay:** load the source parts and `part-layout.json`, assemble at rest, and draw them over the faded master; flag drift in proportion or position.
