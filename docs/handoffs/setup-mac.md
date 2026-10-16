@@ -12,6 +12,14 @@ for d in cloak-and-claw cloak-and-claw-art; do
 done
 ```
 
+Large-file storage (once; source art from A014 on is stored with Git LFS):
+```
+brew install git-lfs        # or download from https://git-lfs.com if Homebrew isn't installed
+git lfs install
+for d in cloak-and-claw cloak-and-claw-art; do git -C ~/Projects/$d lfs install; done
+```
+Check: `git lfs version` prints a version.
+
 Shortcuts (run once, then open a new Terminal window):
 ```
 cat >> ~/.zshrc <<'X'

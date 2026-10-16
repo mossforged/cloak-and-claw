@@ -2,7 +2,7 @@
 
 ## IDs and folders
 - Every asset request has an ID: `A001`, `A002`... An ID is never reused; a revision is `A001-02`.
-- Art delivers **only** to `assets/source/<ID>-<slug>/`, e.g. `assets/source/A001-mouse-fighter-rig/`.
+- Art delivers **only** to `assets/source/<ID>-<slug>/`, e.g. `assets/source/A001-mouse-fighter-rig/`. From A014 on, source images there are stored with Git LFS (`.gitattributes`); `review*.png` and text files stay in normal git. No raw `generated/` folders.
 - Code turns sources into game-ready files in `assets/art/` (keying with `tools/key_green.py`, trimming, resizing) and wires the data. Art never writes to `assets/art/` or `src/`.
 
 ## Each delivery folder contains

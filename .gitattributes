@@ -1,0 +1,17 @@
+# Source art images are stored with Git LFS from A014 onward (decision 2026-10-16).
+# Needs git-lfs installed on the machine that commits them (docs/handoffs/setup-mac.md).
+# Text files (json, md, py) and game-ready art (assets/art/) stay in normal git.
+assets/source/**/*.png  filter=lfs diff=lfs merge=lfs -text
+assets/source/**/*.jpg  filter=lfs diff=lfs merge=lfs -text
+assets/source/**/*.jpeg filter=lfs diff=lfs merge=lfs -text
+assets/source/**/*.webp filter=lfs diff=lfs merge=lfs -text
+assets/source/**/*.psd  filter=lfs diff=lfs merge=lfs -text
+
+# Folders delivered before the switch stay in normal git (never converted).
+assets/source/A00[1-8]-*/**   -filter -diff -merge
+assets/source/A01[0-3]-*/**   -filter -diff -merge
+assets/source/BIBLE-items/**  -filter -diff -merge
+
+# Review sheets stay in normal git so the lead can review from a cloud session.
+assets/source/**/review*.png  -filter -diff -merge
+assets/source/**/review*.jpg  -filter -diff -merge
