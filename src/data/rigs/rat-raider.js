@@ -10,17 +10,28 @@
 //   new part `held` on `parent` at `attach` (parent px), drawn at `order`, turned `rest` degrees from the item's own
 //   forward (its art.rest) in the hand's frame, or `upright` (keeps its own angle whatever the hand does: the bow).
 //   Cutlass and spear sit in the near grip hand's shaft slot (A010 cutlass-grip-check: canvas [330, 1274], handle
-//   drawn just behind the hand, the A003 item turned -75 degrees in the master pose); the bow goes through the far grip
-//   hand's hole (canvas [1442, 1314]), held out in front.
+//   drawn just behind the hand); the bow goes through the far grip hand's hole (canvas [1443, 1365]), held out in front.
+// axes (T020): slot axis per grip type, degrees in the slot parent's px, pointing to the weapon's head (render/rig.js
+//   restIn turns the item so its handle runs along it). Near grip hand: its slot is cut straight up the fist (-90,
+//   measured on A010 hand-front-grip). Far grip hand: a ring of claws, the handle across the forearm (wrist -> ring
+//   centre is 2 degrees, so -88: the bow stands straight up with the hand level). T020 round 2: the cutlass sits 10 deg back
+//   of the cut slot (user's pick by eye: the knuckle rows lean). flip 'hold': the item drawn flipped across that axis
+//   except during a move (render/rig.js heldOf).
 // grips: per grip type, the hand swaps it puts on, and IK (render/rig-grip.js): ik.arm = [upper, lower] joints it bends;
 //   ik.end = the part whose point ik.hand (that part's own px) must reach ik.to on the weapon art (spear `grip2`, bow
 //   `nock`); arrow / string = draw order of a nocked arrow and the drawn string (in front of the body).
+//   T020: align = the IK hand's own axis (its px), turned to lie along the shaft (two-hand: the far fist closes round
+//   it); order = draw orders while gripping (the far fist in front of the spear, fingers over the shaft); anchor = the
+//   full-draw point { part, at (its px) }: the bow is drawn back to it (the ear) instead of the item's `pull`.
 // overlays / views / masks (T019): A011 gear, face details and recolour masks (rigs/rat-raider-gear.js, generated);
 //   which groups a rat wears = its fighter's art.gear + its look's detail (data/looks.js), drawn by render/looks.js.
 import { OVERLAYS, VIEWS, MASKS } from './rat-raider-gear.js';
 
 const P = 'assets/art/enemies/rat-raider/rig/';
 const SLOT = [55.2, 50.8];   // the near grip hand's shaft slot, hand-front px
+const RING = [64.8, 62.1];   // the far grip hand's ring of claws (shaft hole), hand-back px
+const PINCH = [31.2, 17.2];  // A012 near pinch: thumb and finger meet (canvas [270, 1190]), hand-front px
+const EAR = [132, 198];      // full draw: string to the jaw line, under the cheek behind the mouth (head px)
 
 export default {
   id: 'rat-raider',
@@ -28,14 +39,16 @@ export default {
   rootY: 43.144,    // pelvis pivot height above the feet in the master crouch (screen px)
   overlays: OVERLAYS, views: VIEWS, masks: MASKS,
   slots: {
-    'one-hand': { parent: 'hand-front', attach: SLOT, order: 830, rest: -75 },
-    'two-hand': { parent: 'hand-front', attach: SLOT, order: 830, rest: -75 },
-    bow: { parent: 'hand-back', attach: [64.8, 62.1], order: 125, upright: true },
+    'one-hand': { parent: 'hand-front', attach: SLOT, order: 830, flip: 'hold' },   // T020 r4: flipped while holding, as drawn when swinging (user's pick)
+    'two-hand': { parent: 'hand-front', attach: SLOT, order: 830 },
+    bow: { parent: 'hand-back', attach: RING, order: 125 },
   },
+  axes: { 'one-hand': -100, 'two-hand': -90, bow: -88 },   // one-hand: the user's pick J (10 deg back of the cut slot: lines up with the knuckles)
   grips: {
-    'two-hand': { swap: { 'hand-back': 'hand-back-grip' }, ik: { arm: ['arm-back-upper', 'arm-back-lower'], end: 'hand-back', hand: [64.8, 62.1], to: 'grip2' } },
-    bow: { swap: { 'hand-back': 'hand-back-grip', 'hand-front': 'hand-front-pinch' }, arrow: 810, string: 805,
-      ik: { arm: ['arm-front-upper', 'arm-front-lower'], end: 'hand-front', hand: [5.6, 61.2], to: 'nock' } },
+    'two-hand': { swap: { 'hand-back': 'hand-back-grip' }, align: -88, order: { 'hand-back': 845 },
+      ik: { arm: ['arm-back-upper', 'arm-back-lower'], end: 'hand-back', hand: RING, to: 'grip2' } },
+    bow: { swap: { 'hand-back': 'hand-back-grip', 'hand-front': 'hand-front-pinch' }, arrow: 810, string: 805, anchor: { part: 'head', at: EAR },
+      ik: { arm: ['arm-front-upper', 'arm-front-lower'], end: 'hand-front', hand: PINCH, to: 'nock' } },
   },
   parts: {
     'pelvis': { img: P + 'pelvis.png', pivot: [108.8, 44.0], order: 400 },
@@ -44,9 +57,8 @@ export default {
     'arm-front-upper': { img: P + 'arm-front-upper.png', parent: 'torso', attach: [83.6, 58.0], pivot: [86.8, 46.0], order: 590 },
     'arm-front-lower': { img: P + 'arm-front-lower.png', parent: 'arm-front-upper', attach: [20.8, 70.0], pivot: [43.6, 47.2], order: 820 },
     'hand-front': { img: P + 'hand-front.png', parent: 'arm-front-lower', attach: [7.6, 61.2], pivot: [87.2, 45.2], order: 840, swaps: { 'hand-front-open': { img: P + 'hand-front-open.png', offset: [-6.8, -14.0] }, 'hand-front-fist': { img: P + 'hand-front-fist.png', offset: [10.8, 9.2] }, 'hand-front-grip': { img: P + 'hand-front-grip.png', offset: [0.0, 0.0] },
-      // T018 stopgap: A010 has a pinch only for the far hand; the near string hand borrows it turned 180 degrees (scale -1),
-      // its wrist on this hand's wrist. A near pinch drawing is for A011.
-      'hand-front-pinch': { img: P + 'hand-back-pinch.png', offset: [101.6, 83.2], scale: -1 } } },
+      // T020: A012's near pinch (A010 canvas, keyed x0.4 like the rest; trim [194, 1147])
+      'hand-front-pinch': { img: P + 'hand-front-pinch.png', offset: [0.8, 0.0] } } },
     'arm-back-upper': { img: P + 'arm-back-upper.png', parent: 'torso', attach: [267.6, 118.0], pivot: [32.4, 22.0], order: 110 },
     'arm-back-lower': { img: P + 'arm-back-lower.png', parent: 'arm-back-upper', attach: [77.6, 40.0], pivot: [21.2, 30.8], order: 120 },
     'hand-back': { img: P + 'hand-back.png', parent: 'arm-back-lower', attach: [50.0, 30.8], pivot: [12.0, 60.4], order: 130, swaps: { 'hand-back-open': { img: P + 'hand-back-open.png', offset: [0.0, 0.0] }, 'hand-back-fist': { img: P + 'hand-back-fist.png', offset: [0.8, 18.0] }, 'hand-back-grip': { img: P + 'hand-back-grip.png', offset: [0.4, 20.8] }, 'hand-back-pinch': { img: P + 'hand-back-pinch.png', offset: [-2.4, 22.4] } } },

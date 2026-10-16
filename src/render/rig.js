@@ -80,7 +80,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
 // T011: a fighter with a `kit` (enemy weapon kit, items/*.js) holds it whenever he holds nothing else (T018: or the item
 // named by art.held, a look-only weapon: the Rat Raider's cutlass). A slot given as
 // { parent, attach, order, rest?, upright? } adds the weapon as a new part `held` there (upright: the bow stays straight
-// up) instead of replacing a part. grip/kit go to render/rig-grip.js (second hand, bow string).
+// up) instead of replacing a part. grip/kit go to render/rig-grip.js (second hand, bow string). T020: turned by restIn.
 // T018: once a knocked-out fighter has dropped his kit (f.dropped, def.drop = that item), his hand is empty: what he
 // swung is what lies on the floor.
 export function heldOf(f, rig, sheathed = false) {
@@ -92,7 +92,23 @@ export function heldOf(f, rig, sheathed = false) {
   const slot = typeof spec === 'string' ? spec : 'held', kit = W.def, grip = kit.grip;
   if (W.broken || (!f.weapon && f.dropped && f.def.drop?.item === kit.id)) return { slot, part: null, grip, kit };
   const A = kit.art, mount = typeof spec === 'string' ? {} : spec;   // T018: a slot's own `rest` turns the item in the hand
-  return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: (mount.rest ?? 0) + (A.rest ?? 0), scale: A.px / rig.scale } };
+  const k = A.px / rig.scale, ax = rig.axes?.[grip];
+  // T020: a slot with flip 'hold' draws the item flipped across the handle axis while not attacking (the raider's
+  // cutlass: tip curving back as he holds it, as drawn once he swings; user's pick). Reflection across angle ax =
+  // flip y, then turn rest - 2 ax: the handle stays in the fist.
+  if (mount.flip === 'hold' && !f.move && ax != null) return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit) - 2 * ax, scale: [k, -k] } };
+  return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit), scale: k } };
+}
+
+// T020: the handle runs through the fist. rig.axes[grip type] = the slot axis: the direction (degrees, in the slot
+// parent's own px) the closed hand holds a handle, pointing out toward the weapon's head; art.gripEnd = a point along
+// the item's handle from its grip toward its head. The item is turned so the two match; the pose then turns hand and
+// weapon together. Without both: the slot's and item's `rest` as before.
+export const handleAngle = (A) => Math.atan2(A.gripEnd[1] - A.grip[1], A.gripEnd[0] - A.grip[0]) / D;
+export function restIn(rig, kit) {
+  const ax = rig.axes?.[kit.grip], A = kit.art, spec = rig.slots?.[kit.grip];
+  if (ax != null && A.gripEnd) return ax - handleAngle(A);
+  return (typeof spec === 'string' ? 0 : spec?.rest ?? 0) + (A.rest ?? 0);
 }
 
 let buf, tintBuf;

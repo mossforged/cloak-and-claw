@@ -1,0 +1,68 @@
+<!doctype html>
+<!-- Hold sheet (T020): rats and the mouse drawn by the game's own rig renderer (gear, looks, held weapons, bow string)
+     in chosen move frames, for checking how weapons sit in the hands. Serve the repo root, then /tools/hold-sheet.html.
+     Rows: raider (cutlass), spearman (two-hand spear), archer (draw building, full draw, just after the loose), the mouse
+     with each floor weapon, and every weapon on the floor. ?zoom=2 draws at twice game size; ?dots marks the grip points. -->
+<meta charset="utf-8">
+<base href="../">
+<title>Hold sheet</title>
+<style>body { margin: 0; background: #2b2b30; } canvas { display: block; }</style>
+<canvas id="c"></canvas>
+<script type="module">
+import { loadAssets, collectArtPaths } from './src/core/assets.js';
+import { createRng } from './src/core/rng.js';
+import { FIGHTERS } from './src/data/fighters/index.js';
+import { RIGS } from './src/data/rigs/index.js';
+import { ITEMS } from './src/data/items/index.js';
+import { STAGES } from './src/data/stages/index.js';
+import { createFighter, setState } from './src/sim/fighter.js';
+import { movesOf } from './src/sim/weapons.js';
+import { pickLook } from './src/sim/looks.js';
+import { drawRig } from './src/render/rig.js';
+import { drawItem } from './src/render/props.js';
+import { drawShot, drawShotShadow } from './src/render/shots.js';
+
+const Q = new URLSearchParams(location.search), Z = +(Q.get('zoom') ?? 2);
+const W = 1180, H = 640, c = document.getElementById('c'), ctx = c.getContext('2d');
+c.width = W * Z; c.height = H * Z;
+const shotArt = Object.values(ITEMS).flatMap((d) => Object.values(d.moves ?? {}).map((m) => m.shot?.art.img).filter(Boolean));
+const assets = await loadAssets([...collectArtPaths(FIGHTERS, RIGS, ITEMS, STAGES), ...shotArt]);
+const bg = assets.get(STAGES['harbor-market'].art?.img ?? STAGES['harbor-market'].art);
+
+// cell: [fighter id, x, y, what, label]; what = 'idle' | 'walk' | '<move>:<share of the move 0..1>' | 'hurt'
+// (share: windup ends at windup/(total), e.g. 'windup' / 'strike' / 'after' shortcuts below)
+const at = (m, k) => (k === 'windup' ? m.windup - 1 : k === 'mid' ? Math.round(m.windup * 0.5) : k === 'strike' ? m.windup + m.active - 1 : k === 'after' ? m.windup + m.active + 3 : +k);
+function fighter(id, x, y, what, weapon) {
+  const f = createFighter(FIGHTERS[id], x, y, { facing: 1 });
+  f.look = pickLook(f.def, createRng(7));
+  if (weapon) f.weapon = { def: ITEMS[weapon], uses: 9, hit: false, broken: false };
+  const [a, b] = what.split(':');
+  if (b) { const m = movesOf(f)[a]; setState(f, 'attack'); Object.assign(f, { move: m, moveKey: a, mf: at(m, b) }); }
+  else setState(f, a);
+  f.t = 30; f.stun = 31;   // hurt: settled pose, no jolt
+  return f;
+}
+const cells = [];
+const row = (y, id, whats, weapon) => whats.forEach((w, i) => cells.push([fighter(id, 75 + i * 165, y, w, weapon), weapon ? `${weapon.slice(0, 6)} ${w}` : `${id.slice(4)} ${w}`]));
+row(150, 'rat-raider', ['idle', 'walk', 'ratSlash:windup', 'ratSlash:strike', 'hurt']);
+row(300, 'rat-spearman', ['idle', 'walk', 'spearThrust:windup', 'spearThrust:strike', 'hurt']);
+row(450, 'rat-archer', ['idle', 'bowShot:mid', 'bowShot:windup', 'bowShot:after', 'hurt']);
+const mouse = [['rat-cutlass', 'cut1:windup'], ['rat-cutlass', 'cut1:strike'], ['plank-club', 'idle'], ['big-fish', 'idle']];
+mouse.forEach(([w, what], i) => cells.push([fighter('mouse-fighter', 920 + (i % 2) * 150, 150 + Math.floor(i / 2) * 150, what, w), `${w.slice(0, 6)} ${what}`]));
+const items = ['rat-cutlass', 'rat-spear', 'rat-bow', 'plank-club', 'big-fish'].map((id, i) => ({ id: i, def: ITEMS[id], x: 120 + i * 170, y: 600, z: 0, state: 'floor', life: 1e6, spin: 0 }));
+
+const bowShot = ITEMS['rat-bow'].moves.bowShot.shot;
+const shots = [1, -1].map((facing, i) => ({ def: bowShot, x: 960 + i * 150, y: 530, z: bowShot.z, facing }));
+const T = 3 * Math.PI / 80;   // a moment where the windup telegraph flash is off
+function frame() {
+  ctx.setTransform(Z, 0, 0, Z, 0, 0);
+  ctx.fillStyle = '#6b5a48'; ctx.fillRect(0, 0, W, H);
+  if (bg?.width) { ctx.globalAlpha = 0.45; ctx.drawImage(bg, 0, 0, W, H); ctx.globalAlpha = 1; }
+  ctx.font = '11px sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#f2e6d0';
+  for (const it of items) { drawItem(ctx, it, assets, 0); ctx.fillText(it.def.id, it.x, it.y + 22); }
+  for (const sh of shots) { drawShotShadow(ctx, sh); drawShot(ctx, sh, assets); ctx.fillText(`arrow in flight (${sh.facing > 0 ? 'right' : 'left'})`, sh.x, sh.y + 14); }
+  for (const [f, label] of cells) { drawRig(ctx, f, RIGS[f.def.art.rig], assets, T); ctx.fillText(label, f.x, f.y + 14); }
+}
+frame();   // still poses: one draw
+window.sheet = { cells, items };
+</script>

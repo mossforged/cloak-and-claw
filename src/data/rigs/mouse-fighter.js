@@ -21,6 +21,7 @@ export default {
   scale: 0.29,      // part px -> screen px
   rootY: 33,        // hip height above the feet, screen px, in the stance pose
   slots: { 'one-hand': 'sword' },
+  axes: { 'one-hand': 2.4 },   // T020: his fist's handle axis = his own sword's handle (146.4 deg in sword.png) turned by its rest
   parts: {
     torso: { img: P + 'torso.png', pivot: [100, 150], order: 9,
       swaps: {

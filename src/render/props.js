@@ -26,7 +26,9 @@ export function drawProp(ctx, p, assets, frame) {
 
 // Items lying on the floor get a soft glow under them so they read as pickups; weapons blink before they vanish.
 export function drawItem(ctx, it, assets, time) {
-  const A = it.def.art, img = assets.get(A.img), [w, h] = sizeOf(img, A.px), I = JUICE.items;
+  const A = it.def.art, img = assets.get(A.img), [w0, h] = sizeOf(img, A.px), I = JUICE.items;
+  const turn = (A.floor ?? 0) * Math.PI / 180, c = Math.abs(Math.cos(turn)), s = Math.abs(Math.sin(turn));
+  const fh = w0 * s + h * c, w = turn ? Math.min(JUICE.items.glowMax, w0 * c + h * s) : w0;   // its footprint once turned (glow, shadow; long spear capped)
   if (it.state === 'floor' && it.def.kind === 'weapon' && it.life < RULES.items.blink && it.life % 10 < 5) return;
   ctx.save();
   if (it.state === 'floor') {
@@ -40,15 +42,16 @@ export function drawItem(ctx, it, assets, time) {
   if (it.state === 'fly') {   // a few fading ghosts behind the spinning weapon
     for (let i = I.ghosts; i >= 1; i--) {
       ctx.globalAlpha = 0.18 * (1 - i / (I.ghosts + 1));
-      piece(ctx, img, it.x - it.vx * i * 1.4, it.y - it.z, w, h, it.spin - it.dir * it.def.toss.spin * i);
+      piece(ctx, img, it.x - it.vx * i * 1.4, it.y - it.z, w0, h, it.spin + turn - it.dir * it.def.toss.spin * i);
     }
     ctx.globalAlpha = 1;
   }
   if (it.state === 'floor') {   // lying flat, a little tilted; weapons point the way they were dropped
-    ctx.translate(it.x, it.y - h * 0.3);
+    ctx.translate(it.x, it.y - fh * 0.3);
     if (it.def.kind === 'weapon') { ctx.rotate(-0.08); ctx.scale(1, 0.8); }
-    ctx.drawImage(img, -w / 2, -h / 2, w, h);
-  } else piece(ctx, img, it.x, it.y - it.z - h * 0.3, w, h, it.spin);
+    ctx.rotate(turn);   // T020: art.floor turns an upright drawing (spear, bow) to lie along the floor
+    ctx.drawImage(img, -w0 / 2, -h / 2, w0, h);
+  } else piece(ctx, img, it.x, it.y - it.z - fh * 0.3, w0, h, it.spin + turn);
   ctx.restore();
 }
 

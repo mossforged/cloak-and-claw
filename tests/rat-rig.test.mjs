@@ -106,7 +106,8 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const spear = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-back');
     check(spear?.img === K.art.img && hand.swap === 'hand-back-grip', `spearman ${label}: spear in hand, far hand gripping`);
     const s = rig.parts['hand-back'].swaps['hand-back-grip'], at = apply(hand.m, [G.ik.hand[0] - s.offset[0], G.ik.hand[1] - s.offset[1]]);
-    const d = dist(at, apply(spear.m, K.art.grip2));
+    const g1 = apply(spear.m, K.art.grip), g2 = apply(spear.m, K.art.grip2), L2 = dist(g1, g2);   // on the shaft line (T020: may slide back)
+    const d = Math.abs((at[0] - g1[0]) * (g2[1] - g1[1]) - (at[1] - g1[1]) * (g2[0] - g1[0])) / L2;
     check(d < 2, `spearman ${label}: far hand on the shaft (${d.toFixed(2)} px off)`);
     const dir = Math.atan2(-spear.m[3], -spear.m[2]) * 180 / Math.PI;   // image up (the point) on screen: 0 = forward, - = up
     if (label === 'stance') check(dir < 0 && dir > -25, `spearman stance: point angled slightly up (${dir.toFixed(0)} deg)`);
@@ -114,8 +115,8 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   }
 }
 
-// Archer: bow upright through the far grip hand; near (pinch) hand on the string's nock, pulled back `pull` at full
-// draw; string + nocked arrow only while drawing. Not drawing: the near arm stays as posed.
+// Archer: bow upright through the far grip hand; near (pinch) hand on the string's nock (drawn to the ear at full draw:
+// tests/weapon-hold.test.mjs); string + nocked arrow only while drawing. Not drawing: the near arm stays as posed.
 {
   const def = FIGHTERS['rat-archer'], rig = RIGS['rat-archer'], K = ITEMS['rat-bow'], G = rig.grips.bow, m = def.moves.bowShot;
   for (const [label, f, k] of [['stance', { state: 'idle' }, 0], ['full draw', { state: 'attack', move: m, moveKey: 'bowShot', mf: m.windup - 1 }, 1],
@@ -125,9 +126,9 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const bow = L.find((e) => e.name === 'held'), near = L.find((e) => e.name === 'hand-front'), far = L.find((e) => e.name === 'hand-back');
     check(bow?.img === K.art.img && far.swap === 'hand-back-grip' && near.swap === 'hand-front-pinch', `archer ${label}: bow in the far grip hand, near hand pinching`);
     check(Math.abs(Math.atan2(bow.m[1], bow.m[0])) < 0.01, `archer ${label}: bow upright`);
-    const s = rig.parts['hand-front'].swaps['hand-front-pinch'], pinch = apply(near.m, [(G.ik.hand[0] - s.offset[0]) / s.scale, (G.ik.hand[1] - s.offset[1]) / s.scale]);
-    const pulled = k > 0.9 ? K.art.pull * (1 - (1 / m.windup) ** 2) : 0;
-    const d = dist(pinch, apply(bow.m, [K.art.nock[0] - pulled, K.art.nock[1]]));
+    const s = rig.parts['hand-front'].swaps['hand-front-pinch'], sk = s.scale ?? 1;
+    const pinch = apply(near.m, [(G.ik.hand[0] - s.offset[0]) / sk, (G.ik.hand[1] - s.offset[1]) / sk]);
+    const d = k ? dist(pinch, L.find((e) => e.line).line[1]) : 0;   // T020: on the drawn string's nock point
     if (k) check(d < 2, `archer ${label}: near hand on the string (${d.toFixed(2)} px off)`);
     else check(L.find((e) => e.name === 'arm-front-upper').m.every((v, i) => Math.abs(v - layoutRig(rig, tp.joints, tp.swap).find((e) => e.name === 'arm-front-upper').m[i]) < 1e-9), `archer ${label}: near arm as posed (not drawing)`);
     const drawn = label === 'full draw';
