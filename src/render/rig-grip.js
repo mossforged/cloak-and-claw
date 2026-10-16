@@ -1,5 +1,5 @@
-// Weapon grips on a rig (T011): a held kit whose grip type has an entry in `rig.grips` (two-hand spear, bow) swaps the
-// far forearm to a closed fist and bends one arm with 2-bone IK so its hand lands on a point of the weapon art: `grip2`
+// Weapon grips on a rig (T011): a held kit whose grip type has an entry in `rig.grips` (two-hand spear, bow) swaps in
+// its hand drawings (T018: the far `hand-back` grip or pinch) and bends one arm with 2-bone IK so its hand lands on a point of the weapon art: `grip2`
 // on a spear shaft, or the bow's `nock` pulled back by how far the bow is drawn (the hand reaches it as the draw starts). A bow also gets its drawn string (two
 // lines from the tips to the hand) and, while drawing, the shot's arrow nocked on it. Drawing only; pure (tests use it).
 import { layoutRig } from './rig.js';
@@ -25,11 +25,12 @@ export function drawOf(f) {
   return ph === 'windup' ? 1 - (1 - p) ** 2 : 0;
 }
 
-// Joints with `upper`/`lower` bent so `hand` (lower's own px) reaches the target point (screen px) of `targetOf(L)`.
+// Joints with `upper`/`lower` bent so `hand` (in `ik.end`'s own px: a hand part riding on the lower arm, T018; default
+// the lower arm itself) reaches the target point (screen px) of `targetOf(L)`.
 // Keeps the elbow on the side the pose bends it. Also plants a leg (T015 brace: `hand` = the sole point).
 export function reach(rig, joints, swap, held, ik, targetOf) {
-  const [up, lo] = ik.arm, j = { ...joints };
-  const pts = (L) => [at(rig, L, up, rig.parts[up].pivot), at(rig, L, lo, rig.parts[lo].pivot), at(rig, L, lo, ik.hand)];
+  const [up, lo] = ik.arm, end = ik.end ?? lo, j = { ...joints };
+  const pts = (L) => [at(rig, L, up, rig.parts[up].pivot), at(rig, L, lo, rig.parts[lo].pivot), at(rig, L, end, ik.hand)];
   let L = layoutRig(rig, j, swap, held);
   const T = targetOf(L), [S, E, H] = pts(L), m = L.find((x) => x.name === up).m;
   const flip = Math.sign(m[0] * m[3] - m[1] * m[2]) || 1;   // a mirrored body (sx < 0) turns the other way
@@ -58,11 +59,11 @@ export function gripLayout(rig, joints, swap, held, f) {
   const L = layoutRig(rig, j, sw, held).filter((e) => !G.hide?.includes(e.name));
   if (!A.tips || k <= 0) return L;
   const bow = L.find((x) => x.name === held.slot), N = weaponPt(L, to);
-  const out = [...L, { name: 'string', order: bow.order + 0.1, line: [weaponPt(L, A.tips[0]), N, weaponPt(L, A.tips[1])] }];
+  const out = [...L, { name: 'string', order: G.string ?? bow.order + 0.1, line: [weaponPt(L, A.tips[0]), N, weaponPt(L, A.tips[1])] }];
   const S = f.move.shot.art, th = Math.atan2(bow.m[1], bow.m[0]), c = Math.cos(th), s = Math.sin(th), px = S.px;
   // arrow: its nock (art.nock, on the point-up image) on the string, pointing along the bow's forward axis
   const m = [-s * px, c * px, -c * px, -s * px, 0, 0], [nx, ny] = apply(m, ...S.nock);
   m[4] = N[0] - nx; m[5] = N[1] - ny;
-  out.push({ name: 'arrow', order: rig.parts[G.ik.arm[1]].order - 0.5, img: S.img, m });
+  out.push({ name: 'arrow', order: G.arrow ?? rig.parts[G.ik.arm[1]].order - 0.5, img: S.img, m });
   return out.sort((a, b) => a.order - b.order);
 }

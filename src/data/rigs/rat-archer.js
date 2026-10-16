@@ -1,24 +1,25 @@
-// Rat Archer rig (T011): the Rat Raider rig + A008 hood and quiver, holding the bow kit (items/rat-bow.js): bow upright in
-// the far fist held out in front; the near hand rests on the string, draws it to his cheek over the windup (IK + string,
-// render/rig-grip.js) and lets go on the shot. Near arm angles here only pick the elbow's bend.
-import rat, { GEAR } from './rat-raider.js';
+// Rat Archer rig (T018): the A010 Rat Raider rig holding the bow kit (items/rat-bow.js): bow upright through the far grip
+// hand's hole, held out in front; the near hand (pinch) rests on the string, draws it to his cheek over the windup (IK +
+// string, render/rig-grip.js) and lets go on the shot. Near arm angles here only pick the elbow's bend.
+// tint: stopgap until A011's refitted hood and quiver (A008's gear was drawn for the old head; hidden): green clothes.
+import rat from './rat-raider.js';
 import base from './rat-raider-poses.js';
 
 const arms = (a, b, c, d) => ({ 'arm-front-upper': a, 'arm-front-lower': b, 'arm-back-upper': c, 'arm-back-lower': d });
+const DRAW = { 'arm-front-upper.order': 815, 'hand-front.order': 845 };   // the string arm in front of the body
 export default {
   ...rat, id: 'rat-archer',
-  parts: { ...rat.parts, hood: GEAR.hood, quiver: GEAR.quiver },
+  tint: { color: '#3f6b2e', alpha: 0.45, parts: ['torso', 'pelvis', 'leg-front-upper', 'leg-back-upper', 'scarf-tail'] },
   poses: {
     ...base,
-    stance: { ...base.stance, torso: 12, head: -8, 'leg-back-upper': -74, 'leg-back-lower': 94, 'leg-front-upper': 50, 'leg-front-lower': -82, ...arms(-60, -30, -45, -80) },
-    idle: { ...base.idle, torso: [12, 2, 0], head: [-8, 3, 0.15], 'arm-front-upper': -60, 'arm-back-upper': [-45, 3, 0.1], 'arm-back-lower': -80 },
-    walk: { ...base.walk, dy: [-4, 2, 0.75, 2], torso: [16, 2, 0, 2],
-      'leg-back-upper': [-74, 32.5, 0], 'leg-back-lower': [94, 23, 0.8], 'leg-front-upper': [50, 30.5, 0.5], 'leg-front-lower': [-82, 19, 0.3], head: [-10, 2, 0.1, 2], 'arm-front-upper': -60, 'arm-back-upper': [-45, 6, 0] },
-    hurt: { ...base.hurt, ...arms(30, -100, -40, -40) },
+    stance: { ...base.stance, torso: 0, head: -2, ...arms(-60, -40, -20, 0), 'hand-back': 0 },
+    idle: { ...base.idle, torso: [0, 1.5, 0], head: [-2, 2, 0.15], 'arm-front-upper': -60, 'arm-back-upper': [-20, 2, 0.1], 'hand-back': 0 },
+    walk: { ...base.walk, 'arm-front-upper': -60, 'arm-back-upper': [-20, 4, 0], swap: {} },
+    hurt: { ...base.hurt, ...arms(30, 20, -10, 20) },
     moves: {
-      bowShot: {   // windup = the draw (string to the cheek), bow arm locked out; strike = the loose, string hand flicks back; legs stay planted
-        windup: { head: -4, dx: -2, ...arms(-50, -60, -45, -76) },
-        strike: { head: -6, dx: 1, ...arms(-40, -120, -43, -78) },
+      bowShot: {   // windup = the draw (string to the cheek), bow arm locked out; strike = the loose, string hand flicks back
+        windup: { swap: { head: 'head-effort' }, head: -2, dx: -2, ...arms(-90, -60, -22, 0), ...DRAW },
+        strike: { swap: { head: 'head-attack' }, head: -4, dx: 1, ...arms(-70, -100, -20, 0), ...DRAW },
       },
     },
   },

@@ -1,26 +1,26 @@
-// Rat Spearman rig (T011): the Rat Raider rig + A008 helmet and jerkin, holding the spear kit (items/rat-spear.js) in the
-// two-hand grip: near fist low by the hip near the butt (the `sword` slot), far fist on the shaft (IK, render/rig-grip.js),
-// point angled slightly up at the enemy. The far arm's angles here only pick the elbow's bend; IK sets the rest.
-// Spear direction on screen (0 = forward, - = up) = torso + arm-front-upper + arm-front-lower + sword.
-import rat, { GEAR } from './rat-raider.js';
+// Rat Spearman rig (T018): the A010 Rat Raider rig holding the spear kit (items/rat-spear.js) in the two-hand grip: near
+// grip hand low by the hip near the butt (slot in rigs/rat-raider.js), far grip hand closed on the shaft (IK,
+// render/rig-grip.js), point angled slightly up at the enemy. The far arm's angles here only pick the elbow's bend.
+// Spear direction on screen (0 = forward, - = up) = -75 + torso + arm-front-upper + arm-front-lower + hand-front.
+// tint: stopgap until A011's refitted helmet and jerkin (A008's gear was drawn for the old head; hidden): steel-blue clothes.
+import rat from './rat-raider.js';
 import base from './rat-raider-poses.js';
 
-const arms = (a, b, c, d, s) => ({ 'arm-front-upper': a, 'arm-front-lower': b, 'arm-back-upper': c, 'arm-back-lower': d, sword: s });
+const arms = (a, b, h, c, d) => ({ 'arm-front-upper': a, 'arm-front-lower': b, 'hand-front': h, 'arm-back-upper': c, 'arm-back-lower': d });
+const FRONT = { 'arm-front-upper.order': 815, 'hand-back.order': 845 };   // spear arm in front of the body; far fist over the shaft
 export default {
   ...rat, id: 'rat-spearman',
-  parts: { ...rat.parts, helmet: GEAR.helmet, jerkin: GEAR.jerkin },
+  tint: { color: '#3d5c8a', alpha: 0.45, parts: ['torso', 'pelvis', 'leg-front-upper', 'leg-back-upper', 'scarf-tail'] },
   poses: {
     ...base,
-    stance: { ...base.stance, ...arms(-12, -66, -60, -60, 44) },   // spear -8 (point slightly up), near fist at the hip
-    idle: { ...base.idle, 'arm-front-upper': [-12, 3, 0.1], 'arm-back-upper': [-60, 3, 0.1], 'arm-back-lower': -60 },
-    walk: { ...base.walk, speed: 1.7, 'arm-front-upper': [-12, 4, 0.5], 'arm-back-upper': [-60, 4, 0] },
-    hurt: { ...base.hurt, ...arms(30, -100, -40, -60, 60) },
-    knockdown: { ...base.knockdown, ...arms(-60, -20, -100, -10, 80) },
+    stance: { ...base.stance, ...arms(-80, -59, -162, 20, 20), ...FRONT },   // spear -10 (point slightly up), near fist at the hip
+    idle: { ...base.idle, 'arm-front-upper': [-80, 3, 0.1], 'hand-front': -162, 'arm-back-upper': [20, 3, 0.1], 'hand-back': 0 },
+    walk: { ...base.walk, 'arm-front-upper': [-80, 4, 0.5], 'arm-back-upper': [20, 4, 0], swap: {} },
+    hurt: { ...base.hurt, ...arms(-40, -70, -150, 20, 20), ...FRONT },
     moves: {
       spearThrust: {   // draws the spear back along his side (long telegraph), then drives it straight out at the enemy
-        windup: { swap: { head: 'head-snarl' }, torso: 6, head: -6, dx: -4, ...arms(10, -70, -30, -60, 55),
-          'leg-back-upper': -68, 'leg-back-lower': 86, 'leg-front-upper': 46, 'leg-front-lower': -87, tail: 20 },
-        strike: { swap: { head: 'head-snarl' }, torso: 22, head: -14, ...arms(-45, -55, -70, -40, 73), tail: -25 },   // arms drive, body stays back
+        windup: { swap: { head: 'head-effort' }, torso: -4, head: -2, dx: -4, ...arms(-50, -80, -154, 20, 30), ...FRONT, tail: 20 },
+        strike: { swap: { head: 'head-attack' }, torso: 14, head: -12, dx: 2, ...arms(-80, -45, -162, 20, 20), ...FRONT, tail: -25 },
       },
     },
   },
