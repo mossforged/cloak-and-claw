@@ -191,7 +191,7 @@ export const LAB_SCHEMA = [
     title: 'Stage (Harbor Run, scrolling)', file: 'src/data/stages/harbor-run.js',
     fields: [
       ['layers.floor.shade', 0, 0.6, 0.01], ['layers.far.parallax', 0, 1, 0.01], ['layers.frontParallax', 1, 1.5, 0.01],
-      ['layers.fade', 0, 1, 0.05], ['camera.follow', 200, 700, 5], ['camera.edge', 0, 120, 1],
+      ['layers.fade', 0, 1, 0.05], ['camera.follow', 200, 700, 5], ['camera.catchUp', 1, 20, 0.5], ['camera.edge', 0, 120, 1],
       ['floor.top', 300, 540, 1], ['floor.bottom', 300, 540, 1],
       { path: 'enemyCap', min: 1, max: 8, step: 1, file: 'src/data/rules.js' }, { path: 'zoneStagger', min: 1, max: 120, step: 1, file: 'src/data/rules.js' },
     ],

@@ -24,7 +24,8 @@ export function createRenderer(ctx, assets) {
       ctx.imageSmoothingQuality = 'high';
       drawBackdrop(ctx, world.stage, VIEW, time);
       ctx.save();
-      ctx.translate(juice.ox, juice.oy);
+      const layered = !!world.stage.layers;   // T013: whole-pixel shake on layered stages, so tile edges never open a seam
+      ctx.translate(layered ? Math.round(juice.ox) : juice.ox, layered ? Math.round(juice.oy) : juice.oy);
       const camX = Math.round(world.cam?.x ?? 0);
       if (world.stage.layers) drawLayersBack(ctx, world.stage, camX, assets, VIEW);
       else drawStage(ctx, world.stage, assets);

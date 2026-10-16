@@ -31,7 +31,7 @@ export function drawLayersBack(ctx, stage, camX, assets, view) {
     ctx.drawImage(img, s.x - camX, L.back.base - h, s.w, h);
   }
   const fl = assets.get(L.floor.src), tw = fl.width;
-  for (let x = -(camX % tw); x < view.w; x += tw) ctx.drawImage(fl, x, L.floor.y);
+  for (let x = -(camX % tw); x < view.w; x += tw) ctx.drawImage(fl, x, L.floor.y, tw + 1, fl.height);   // 1 px overlap: no hairline
   if (L.floor.shade) { ctx.fillStyle = `rgba(0,0,0,${L.floor.shade})`; ctx.fillRect(0, L.floor.y, view.w, fl.height); }
   for (const d of L.decor) if (d.layer === 'back') drawPiece(ctx, L, d, d.x - camX, assets, 1);
 }

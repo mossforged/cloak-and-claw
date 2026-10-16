@@ -44,7 +44,7 @@ export function phaseOf(f) {
 }
 
 export function startMove(f, key) {
-  f.move = movesOf(f)[key]; f.moveKey = key;
+  f.move = movesOf(f)[key] ?? f.def.moves[key]; f.moveKey = key;   // a kit without the move (jumpSlash with a cutlass) = the fighter's own
   if (f.weapon) f.weapon.hit = false;
   f.mf = 0; f.queued = false; f.bounced = false; f.hitList.clear();
   if (f.control.mx) f.facing = Math.sign(f.control.mx);

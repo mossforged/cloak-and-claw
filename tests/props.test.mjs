@@ -253,5 +253,17 @@ for (const seed of [1, 2, 3]) {
   check(events.propBreak.length === 3 && events.pickup.length > 0, 'weapon bot broke every prop and used weapons');
 }
 
+// 11. Jump attack while holding a kit without its own airAttack (cutlass, club, fish) = the fighter's jumpSlash
+// (this used to throw every frame and freeze the game, T013 report)
+for (const id of Object.keys(ITEMS).filter((k) => ITEMS[k].kind === 'weapon' && ITEMS[k].moves && !ITEMS[k].airAttack)) {
+  const w = world({ props: null }); hold(w, id);
+  let err = null, key = null;
+  try {
+    stepWorld(w, C({ jump: true }));
+    for (let i = 0; i < 40; i++) { stepWorld(w, C({ attack: i === 8 })); key ??= w.player.move && w.player.moveKey; }
+  } catch (e) { err = e.message; }
+  check(!err && key === FIGHTERS['mouse-fighter'].airAttack, `jump attack holding ${id}: own ${FIGHTERS['mouse-fighter'].airAttack} (got ${err ?? key})`);
+}
+
 console.log(fails ? `${fails} failures` : 'ALL OK');
 process.exit(fails ? 1 : 0);

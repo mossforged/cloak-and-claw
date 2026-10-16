@@ -8,8 +8,9 @@ export default {
   floor: { left: 30, right: 4409, top: 390, bottom: 510 },   // walkable belt over the whole stage; the camera narrows it to the screen
   playerStart: { x: 260, y: 450 },
   // camera (sim/camera.js): view width 960 (config VIEW); follows the player once he passes `follow` px from the screen's
-  // left edge, never scrolls back; `edge` = how far inside the screen edges fighters are kept; length = stage width.
-  camera: { length: 4439, follow: 460, edge: 30 },
+  // left edge, never scrolls back, at most catchUp px/frame (hero walks 2.7); `edge` = how far inside the screen edges
+  // fighters are kept; length = stage width.
+  camera: { length: 4439, follow: 460, edge: 30, catchUp: 4 },
   layers: {
     far: { src: A + 'far.webp', x: 0, y: 92, parallax: 0.3 },
     // back segments: images end to end in `sequence`, each overlapping the last by `overlap` px; bottom edge at `base`

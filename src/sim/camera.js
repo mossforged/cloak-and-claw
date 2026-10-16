@@ -2,7 +2,8 @@
 // w.bounds = the belt fighters, items and arrows are kept inside. An arena stage (no `camera`) uses stage.floor itself,
 // so it gives exactly the old result. A scrolling stage narrows the floor to the screen: `edge` px inside the camera's
 // view. The camera follows the player once he passes `follow` px from the screen's left edge, only forward, never past
-// the stage's length, and stops at a zone's lock point (sim/zones.js sets cam.locked).
+// the stage's length, and stops at a zone's lock point (sim/zones.js sets cam.locked). It moves at most `catchUp`
+// px per frame, so after a zone unlocks with the player far right it glides over instead of snapping.
 import { VIEW } from '../config.js';
 
 export function createCamera(stage) {
@@ -21,7 +22,7 @@ export function stepCamera(w) {
     const next = w.stage.zones[w.run.zone];
     const stop = Math.min(maxCamX(w.stage), next ? lockX(next) : Infinity);
     const want = w.player.x - C.follow;
-    if (want > cam.x) cam.x = Math.min(want, stop);
+    if (want > cam.x) cam.x = Math.min(want, stop, cam.x + C.catchUp);
   }
   fitBounds(w);
 }
