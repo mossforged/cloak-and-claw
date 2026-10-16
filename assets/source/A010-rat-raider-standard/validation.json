@@ -1,0 +1,30 @@
+{
+  "checks_passed": [
+    "33 required parts/swaps present; canvas 1536 x 2304",
+    "exact green corners and unclipped foreground bounds",
+    "all swaps share base pivots",
+    "neutral head alias identical",
+    "R hurt head unchanged from A009",
+    "approved reference unchanged from A009",
+    "review game panel 960 x 540",
+    "no raw generated folder or alternate head sets"
+  ],
+  "part_count": 33,
+  "body_pixel_comparison": {
+    "region": "master foreground, x=501..1289, y=1281..2303; excludes selected head, near paw and sword",
+    "match_within_2_rgb_levels_percent": 100.0
+  },
+  "source_folder_bytes": 20950722,
+  "human_gate": "Rat look and bench motion approved per lead A010 addendum dated 2026-10-16.",
+  "addendum": {
+    "rig_source_parts": 17,
+    "rig_source_swaps": 15,
+    "sword_excluded": true,
+    "bench_reader_errors": [],
+    "missing_standard_parts": [],
+    "sampled_strip_frames_with_finite_connected_joints": 289,
+    "draft_importer": "passed; all output directed to /private/tmp/a010-addendum-import",
+    "grip_check": "A003 item handle fits behind unchanged hand at canvas shaft slot [330,1274]; see cutlass-grip-check.png and .json",
+    "original_artwork": "unchanged; sword.png retained as rejected provenance"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "source_item": "assets/source/A003-harbor-props/rat-cutlass.png",
+  "game_item": "assets/art/items/rat-cutlass.png",
+  "item_grip_px": [
+    48,
+    56
+  ],
+  "item_game_scale": 0.36,
+  "rat_height_px": 136,
+  "rat_source_top": 650,
+  "rat_floorY": 1997,
+  "hand_slot_canvas": [
+    330,
+    1274
+  ],
+  "wrist_pivot_canvas": [
+    410,
+    1260
+  ],
+  "weapon_draw_band": 830,
+  "hand_draw_band": 840,
+  "preview_rotation_degrees": -75,
+  "source_pixels_per_item_pixel": 3.5655882352941175,
+  "note": "Uniform item scaling and rigid rotation only. Weapon is drawn behind the unchanged hand; fingers occlude the wider handle while the narrow slot shows it. This is source review, not runtime pose implementation."
+}
