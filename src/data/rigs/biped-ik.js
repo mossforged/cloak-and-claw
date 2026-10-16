@@ -25,14 +25,15 @@ const wrap = (a) => near(a, 0);
 // From a part's pivot to a child's attach point, in the part's own px (at rest 0 = the master pose).
 const bone = (rig, child) => { const c = rig.parts[child], p = rig.parts[c.parent]; return sub(c.attach, p.pivot); };
 
-// World turns (sum of joints up the chain) -> screen points of part pivots, feet at 0,0.
+// World turns (sum of joints up the chain) -> screen points of part pivots, feet at 0,0. A parent's `<part>.sx/.sy`
+// scales where its children attach (render/rig.js shape), e.g. a narrowed pelvis brings the hips together.
 function placer(rig, j, R) {
   const at = {};
   const of = (n) => {
     if (at[n]) return at[n];
     const p = rig.parts[n];
     if (!p.parent) return (at[n] = [j.dx ?? 0, (j.dy ?? 0) - rig.rootY]);
-    const o = of(p.parent), v = turn(R(p.parent), bone(rig, n));
+    const b = bone(rig, n), v = turn(R(p.parent), [b[0] * (j[`${p.parent}.sx`] ?? 1), b[1] * (j[`${p.parent}.sy`] ?? 1)]), o = of(p.parent);
     return (at[n] = [o[0] + rig.scale * v[0], o[1] + rig.scale * v[1]]);
   };
   return of;
@@ -109,8 +110,10 @@ export function fitWave(vals, H = 3) {
 // `lift` px (swing half); front and back half a cycle apart. dy = hips lowered (px). gather 0..1 = how far each stride's
 // centre moves from under its own hip toward the middle of the two (wide 3/4 hips: 0 keeps each leg sweeping round its
 // own spot, so the near foot never passes the far one; 1 = both feet step through under the body). Returns waves (lists of harmonics) for the leg joints.
-export function walkWaves(rig, { speed, walk, lift, dy = 0, reach = 0, gather = 0, N = 48 }) {
-  const half = walk / speed / 4, x0 = (s) => masterAt(rig, `leg-${s}-upper`)[0], mid = (x0('front') + x0('back')) / 2;
+// stride = px the planted foot sweeps (default walk / speed / 2: no skating); shorter = the boot slides a little.
+// body = other pose channels held through the walk (e.g. 'pelvis.sx' narrowing the hips): the legs are fitted under it.
+export function walkWaves(rig, { speed, walk, lift, dy = 0, reach = 0, gather = 0, stride, body = {}, N = 48 }) {
+  const half = (stride ?? walk / speed / 2) / 2, x0 = (s) => placer(rig, body, () => 0)(`leg-${s}-upper`)[0], mid = (x0('front') + x0('back')) / 2;
   const hip = (s) => x0(s) + gather * (mid - x0(s)) + reach;
   const ankle = (s, u) => {
     if (u < 0.5) return [hip(s) + half - 4 * half * u, 0, 0];
@@ -120,7 +123,7 @@ export function walkWaves(rig, { speed, walk, lift, dy = 0, reach = 0, gather = 
   const out = {}, keys = ['leg-front-upper', 'leg-front-lower', 'foot-front', 'leg-back-upper', 'leg-back-lower', 'foot-back'];
   const series = Object.fromEntries(keys.map((k) => [k, []]));
   for (let i = 0; i < N; i++) {
-    const u = i / N, j = pose(rig, { dy, feet: { front: ankle('front', u), back: ankle('back', (u + 0.5) % 1) } });
+    const u = i / N, j = pose(rig, { ...body, dy, feet: { front: ankle('front', u), back: ankle('back', (u + 0.5) % 1) } });
     for (const k of keys) series[k].push(near(j[k], series[k].at(-1) ?? j[k]));
   }
   for (const k of keys) out[k] = fitWave(series[k]);

@@ -19,6 +19,7 @@ import { ACTION_POSES } from './mouse-fighter-action-poses.js';
 import { F0, B0, OUT, PLANT, P } from './mouse-fighter-feet.js';
 
 const ATTACK = { head: 'head-attack' };
+export const WALK = { speed: 2.6, walk: 162, lift: 6, dy: 3, stride: 26, body: { 'pelvis.sx': 0.4 } };   // walkWaves options (walk = his sim walk px/s)
 
 export default {
   timing: {
@@ -38,15 +39,16 @@ export default {
     'arm-front-upper': [0, 3, 0.1], 'hand-front': [0, 2, 0.2], 'arm-back-upper': [0, 3, 0.1], 'hand-back': [0, 1.5, 0.3],
     tail: [0, 9, 0.3], 'scarf-tail': [0, 4, 0.55], 'scarf-tail-2': [-22, 6, 0.75],
   },
-  // Walk: 2.1 strides/s, both strides centred 0.6 of the way in from each hip (user T023 round 2: on the wide 3/4 hips
-  // each leg sweeping round its own spot looked locked, near foot always trailing), hips 6 px down so the straight-ish
-  // legs reach a stride that matches his walk speed (2.7 px/frame);
-  // legs by IK on an ankle path (planted sweep back, lifted arc forward), one wave per joint (tests/rig.test.mjs: no
-  // skating, no sinking). Forward near boot. Sword carried up and ready (as in the stance), swinging a little in step.
+  // Walk (T023 round 3, variant B of tools/walk-lab.html): A013's legs are drawn for the wide 3/4 stance (near leg ~28 px
+  // hip to ankle, far ~21), so walking on those hips splays the long near leg round the short far one: a crab scuttle
+  // (user). The pelvis is narrowed (pelvis.sx: the hip joints move in, the leg drawings are unchanged) so both feet step
+  // through under the body, upright, hips 3 px down, 2.6 strides/s. The far leg reaches a 26 px planted sweep (the body
+  // moves ~31 px meanwhile: the boots slide a little). Legs by IK on an ankle path (planted sweep back, lifted arc
+  // forward), 3 harmonics per joint. Forward near boot. Sword carried up and ready, swinging a little in step.
   walk: {
-    speed: 2.1,
-    ...walkWaves(rig, { speed: 2.1, walk: 162, lift: 6, dy: 6, gather: 0.6 }),
-    dy: [6, 1, 0.75, 2], torso: [4, 1.5, 0, 2], head: [-4, 1.5, 0.1, 2],
+    speed: 2.6,
+    ...walkWaves(rig, WALK),
+    'pelvis.sx': WALK.body['pelvis.sx'], dy: [3, 1, 0.75, 2], torso: [0, 1.5, 0, 2], head: [0, 1.5, 0.1, 2],
     'arm-front-upper': [4, 9, 0.5], 'arm-front-lower': [0, 6, 0.6], 'arm-back-upper': [0, 7, 0], 'hand-back': [0, 3, 0.1],
     tail: [5, 12, 0.25], 'scarf-tail': [-4, 4, 0.4, 2], 'scarf-tail-2': [-18, 8, 0.6, 2],
   },

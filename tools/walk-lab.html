@@ -1,0 +1,42 @@
+<!doctype html>
+<!-- Walk comparer (T023): the hero's walk variants side by side, moving across the floor at his sim walk speed so skating
+     and cadence show. Variants: tools/walk-variants.js.
+     Serve the repo root, open /tools/walk-lab.html (?t=<s> freezes time for screenshots, ?zoom=2). -->
+<meta charset="utf-8">
+<title>Walk lab</title>
+<style>body { margin: 0; background: #6e6e76; } canvas { display: block; }</style>
+<canvas id="c"></canvas>
+<script type="module">
+import { FIGHTERS } from '../src/data/fighters/index.js';
+import { RIGS } from '../src/data/rigs/index.js';
+import { targetPose } from '../src/render/rig-pose.js';
+import { layoutRig } from '../src/render/rig.js';
+import { walkWaves } from '../src/data/rigs/biped-ik.js';
+import { VARIANTS } from './walk-variants.js';
+
+const q = new URLSearchParams(location.search), Z = +(q.get('zoom') ?? 2);
+const def = FIGHTERS['mouse-fighter'], base = RIGS[def.art.rig], walk = def.move.walk * 60;
+const rigs = Object.entries(VARIANTS).map(([k, v]) => {
+  const pose = v.game ? base.poses.walk : { ...v.pose, ...walkWaves(base, { walk, ...v.legs }), speed: v.legs.speed };
+  return [k, v.label, { ...base, poses: { ...base.poses, walk: pose } }];
+});
+const imgs = {}, paths = new Set();
+for (const p of Object.values(base.parts)) { paths.add(p.img); for (const s of Object.values(p.swaps ?? {})) paths.add(s.img); }
+await Promise.all([...paths].map((p) => new Promise((res) => { const i = new Image(); i.onload = () => { imgs[p] = i; res(); }; i.onerror = res; i.src = '../' + p; })));
+
+const W = 900, RH = 175, c = document.getElementById('c'), g = c.getContext('2d');
+c.width = W * Z; c.height = rigs.length * RH * Z;
+function draw(t) {
+  g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, c.width, c.height); g.font = `${12 * Z}px sans-serif`;
+  rigs.forEach(([k, label, rig], i) => {
+    const oy = (i * RH + 150) * Z, x = 60 + ((t * walk) % (W - 120));
+    g.setTransform(1, 0, 0, 1, 0, 0); g.fillStyle = '#ffffff33'; g.fillRect(0, oy, W * Z, Z);
+    for (let m = 0; m < W; m += 40) g.fillRect(m * Z, oy, Z, 4 * Z);   // fixed floor ticks: boots should stay put on them
+    g.fillStyle = '#fff'; g.fillText(`${k}: ${label}`, 8 * Z, (i * RH + 16) * Z);
+    const { joints, swap } = targetPose({ def, state: 'walk', t: t * 60, mf: 0, move: null }, rig, 0);
+    for (const { img, m } of layoutRig(rig, joints, swap)) { g.setTransform(Z, 0, 0, Z, x * Z, oy); g.transform(...m); if (imgs[img]) g.drawImage(imgs[img], 0, 0); }
+  });
+}
+if (q.has('t')) { draw(+q.get('t')); document.title = 'ready'; }
+else { const t0 = performance.now(); const loop = (now) => { draw((now - t0) / 1000); requestAnimationFrame(loop); }; requestAnimationFrame(loop); }
+</script>
