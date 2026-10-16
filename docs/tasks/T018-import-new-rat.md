@@ -15,6 +15,10 @@ The new rat (A010, head R) passed the look check in the rig bench. The user: "he
 7. The grip hand has a cut slot for the handle; check at game size that the seam doesn't show around the cutlass (A010's `cutlass-grip-check.png`).
 8. Bench fixture stays; `rig-bench.html?src=A010-rat-raider-standard` must still work.
 
+## Small extras (separate commits, first)
+- `tools/__pycache__/` is committed on main: remove it from the repo and add `__pycache__/` to `.gitignore`.
+- `src/data/rigs/mouse-fighter-poses.js` is over the ~200-line rule (221): split it (e.g. kit poses into their own file) with no behaviour change.
+
 ## Acceptance
 - Headless: `npm test` passes; sim unchanged (bot numbers identical: this is art and poses only); rig tests updated for the new part list (every pose names only existing parts; the cutlass attaches at the hand grip; the KO drop is the same item id).
 - Windowed (JPG) in `docs/screens/T018/`: the three rat types crouched beside Mouse Fighter; a rat mid-swing with the cutlass; a KO with the dropped cutlass on the floor; hurt and knockdown; spearman thrust and archer draw with the new hands.

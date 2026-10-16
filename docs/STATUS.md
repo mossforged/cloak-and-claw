@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T016 rig bench (merged 2026-10-16). Last art task: A010 new rat to the rig standard (merged 2026-10-16).
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T017 weapon feel (merged 2026-10-16; user: "weapons all feel good"). Last art task: A010 new rat to the rig standard (merged 2026-10-16).
 
 ## Next
-1. **Code:** T017 (weapon feel), then T018 (import the new rat into the game for all three rat types; holds the cutlass he drops).
+1. **Code:** T018 (import the new rat into the game for all three rat types; holds the cutlass he drops).
 2. **Art:** A011 (finishing set: gear refit, recolour masks, face details) on the merged A010 rat.
-3. **User:** judge T017 (weapon feel), then T018 (new rat in game) and A011 (gear and crowd variety).
+3. **User:** judge T018 (new rat in game) and A011 (gear and crowd variety).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -20,7 +20,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T017-weapon-feel.md`, then `T018-import-new-rat.md` (needs A010 merged).
+- Code: `docs/tasks/T018-import-new-rat.md`.
 - Art: `docs/tasks/A011-rat-raider-finishing-set.md`.
 
 ## Open questions (for the user)
@@ -28,6 +28,7 @@
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
+- Fish slap lands mid-spin while he faces away (timing comes from the unchanged hitbox, T017). Revisit in a later feel pass if it reads wrong.
 - Weapon drops for the other rats: drops are optional (keep the floor uncluttered), but a drop is always the weapon held (decision 2026-10-16). Whether the spearman ever drops his spear: decide with Stage 4 enemies.
 - **Heavy throwables by size** (user, 2026-10-15): the biggest breakables (barrels, big crates) can be picked up and thrown only by big animals (e.g. a badger hero; a brute enemy hurling a barrel at the player). Mouse-sized heroes can only smash them. Props get a `weight` and fighters a `size`/`strength` in data; ties into the species x size hook. For Stage 4 (brute enemy) and Stage 8 (second, bigger hero).
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
@@ -49,6 +50,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T017 (weapon feel, render only; bot runs identical; 18/18 tests; user OK after 5 rounds). T018 gets two small extras: remove committed tools/__pycache__, split the over-long mouse poses file.
 2026-10-16 lead: merged A010 (17 parts, 15 swaps, rig-source.json; the A003 cutlass fits the grip; 17/17 tests). T018 can start after T017. Note for T018: a thin slot seam shows in the enlarged grip hand; check at game size.
 2026-10-16 lead: user approved the A010 rat; sword rejected (blade unfinished) -> rule: enemies hold the weapon they drop (rat holds the A003 cutlass). A010 addendum (rig-source.json, no sword), wrote A011 (finishing set) and T018 (import).
 2026-10-16 lead: reviewed A010 (branch `a010-rat-raider-standard`, 21 MB, scope clean). Bench (on a lead-converted rig-source.json): master uncovered 2.8%, parts outside 3.5% (mouse: 12.7% / 10.3%); motion strip reads well. Gaps: no `rig-source.json` (Art to add from its part-layout.json before merge); front upper arm in band 590 (exception, watch in motion). Waiting for the user's G2/G3 look.

@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 T017 weapon feel
+User: weapons all feel good. Fish: it "juts out stiff" -> "not exactly drooping toward the ground" -> wants it floppier in motion but flung straight at the strike ("like gravity is throwing it outward"); picked fish sag 0.24 in the lab. Parked: block shuffle has no footwork (boots slide while blocking).
+
 ## 2026-10-16 A010 rat in the rig bench
 User: "he looks much better. much closer to the standee." The cutlass "looks wrong... the blade doesn't extend all the way along one edge to the hilt... like it wasn't fully drawn"; also not sure the standee's blade is a cutlass. On using the dropped cutlass: "whenever possible if they're going to drop a weapon it should be consistent with what they were holding."
 
