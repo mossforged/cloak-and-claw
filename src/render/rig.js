@@ -1,10 +1,11 @@
 // Draws a fighter as a cutout rig: parts in a hierarchy, posed by rig-pose.js, drawn into a
 // buffer that is then placed like a standee (same lean/squash/flip, shadow, flash and tints).
 import { phaseOf } from '../sim/fighter.js';
-import { poseOf, BLOCK_LEAN } from './standee.js';
+import { poseOf, BLOCK_LEAN, braceOf } from './standee.js';
 import { rigJoints, drawLayer, squatLayer } from './rig-pose.js';
 import { squatOf } from './jump-squat.js';
 import { gripLayout } from './rig-grip.js';
+import { braceLayer } from './brace.js';
 import { ITEMS } from '../data/items/index.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
@@ -105,7 +106,9 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   // sword draw after a held weapon is thrown or breaks (not when swapped at a pickup or knocked loose)
   if (mem.hadWeapon && !f.weapon && ['idle', 'walk', 'toss', 'attack', 'jumpStart', 'jump', 'block'].includes(f.state)) mem.drawT0 = time;
   mem.hadWeapon = !!f.weapon;
-  const joints = drawLayer(rig, time, mem, squatLayer(rig, rigJoints(f, rig, time, mem, pose), pose ? 0 : squatOf(f, time)));   // T014 jump squat crouch
+  let joints = rigJoints(f, rig, time, mem, pose);
+  if (!pose) joints = mem.last = braceLayer(rig, f, joints, time, mem, mem.swap);   // T015 bracing loop (kept in mem.last: no pop on leaving block)
+  joints = drawLayer(rig, time, mem, squatLayer(rig, joints, pose ? 0 : squatOf(f, time)));   // T014 jump squat crouch
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
@@ -121,7 +124,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
   if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
   if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss' || f.state === 'pickup') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
-  if (f.state === 'block') { p.rot -= BLOCK_LEAN; p.sx = p.sy = 1; }   // the block pose leans and crouches; keep only the jolt
+  if (f.state === 'block') { p.rot -= BLOCK_LEAN + braceOf(f, time).rot; p.sx = p.sy = 1; }   // the block pose leans and crouches (and the brace loop breathes); keep only the jolt
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;
   if (f.invuln > 0 && f.state === 'idle') alpha = f.invuln % 6 < 3 ? 1 : 0.55;

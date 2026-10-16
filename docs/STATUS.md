@@ -1,12 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T013 scrolling Harbor Market (merged 2026-10-16; user passed the play check). Last art task: A008 rat gear (merged). Queued: A009 rat parts redrawn from the standee.
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T016 rig bench (merged 2026-10-16). Last art task: A008 rat gear (merged). Queued: A009 rat parts redrawn from the standee.
 
 ## Next
-1. **Code:** T015 (subtle bracing motion while blocking). Next after it: the rig bench (fit overlay + motion strip), packet to come.
-2. **Art:** A010 (bring A009 up to the rig standard: hip, feet, hands library, the standee's cutlass, remaining heads, side torso, back view, measured pivots). Starts once the user picks head S or R.
-3. **User:** approve or change the rig standard's rules; confirm two T013 calls (camera never scrolls back; the stage loop jumps to the start); judge T015.
-4. **After A009 is approved:** a gear refit art task (hood, helmet, hat on the chosen head), then a code task to import A009 into the rat rig.
+1. **Code:** T017 (weapon feel), then T018 (import the new rat into the game for all three rat types; holds the cutlass he drops).
+2. **Art:** finish A010 (addendum: add `rig-source.json`; sword dropped in favour of the cutlass item), then A011 (gear refit, recolour masks, face details).
+3. **User:** judge T017 (weapon feel), then T018 (new rat in game) and A011 (gear and crowd variety).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -21,14 +20,15 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T015-block-brace-idle.md`. Run the game with `tools/Play.command`.
-- Art: nothing until the rig standard is agreed. A009 is on hold (don't start it).
+- Code: `docs/tasks/T017-weapon-feel.md`, then `T018-import-new-rat.md` (needs A010 merged).
+- Art: A010 addendum (same branch), then `docs/tasks/A011-rat-raider-finishing-set.md`.
 
 ## Open questions (for the user)
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
+- Weapon drops for the other rats: drops are optional (keep the floor uncluttered), but a drop is always the weapon held (decision 2026-10-16). Whether the spearman ever drops his spear: decide with Stage 4 enemies.
 - **Heavy throwables by size** (user, 2026-10-15): the biggest breakables (barrels, big crates) can be picked up and thrown only by big animals (e.g. a badger hero; a brute enemy hurling a barrel at the player). Mouse-sized heroes can only smash them. Props get a `weight` and fighters a `size`/`strength` in data; ties into the species x size hook. For Stage 4 (brute enemy) and Stage 8 (second, bigger hero).
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
 - Touch controls for phone play (Stage 5).
@@ -49,7 +49,17 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user approved the A010 rat; sword rejected (blade unfinished) -> rule: enemies hold the weapon they drop (rat holds the A003 cutlass). A010 addendum (rig-source.json, no sword), wrote A011 (finishing set) and T018 (import).
+2026-10-16 lead: reviewed A010 (branch `a010-rat-raider-standard`, 21 MB, scope clean). Bench (on a lead-converted rig-source.json): master uncovered 2.8%, parts outside 3.5% (mouse: 12.7% / 10.3%); motion strip reads well. Gaps: no `rig-source.json` (Art to add from its part-layout.json before merge); front upper arm in band 590 (exception, watch in motion). Waiting for the user's G2/G3 look.
+2026-10-16 lead: wrote T017 (weapon feel pass, render only) to keep Code busy while Art does A010.
+2026-10-16 lead: merged T016 (rig bench + biped strip + mouse fixture + draft importer; 17/17 tests, CI green). Bench on the mouse confirms A002's known drift (12.7% of master uncovered; sword 44% and front shin 23% outside). Standard section 8 now names rig-source.json.
+2026-10-15 code: T016 on branch `t016-rig-bench`: `tools/rig-bench.html` (G2 fit overlay + difference view + mismatch score; G3 standard strip from new `src/data/rigs/biped-poses.js`, live beside the standee and 1x over Harbor Market, PNG export), draft importer `tools/rig_from_source.py`, mouse fixture (A002 canvas). Game unchanged.
+2026-10-15 code: T016 17/17 tests (new tests/rig-bench.test.mjs). Screens docs/screens/T016/. Human check open: open `/tools/rig-bench.html?fixture=mouse-fighter`: sensible fit view and strip? (A010 is the real test.)
+2026-10-16 lead: merged T015 (render-only bracing loop; 16/16 tests). User picked head **R** for the rat. Wrote T016 (rig bench) and the `rig-source.json` format (rig standard section 5); A010 updated to deliver it.
 2026-10-16 lead: agents renamed Code and Art in all guides. User: A009 "a big step forward", but its sword looks worse than the standee's. Wrote A010 (A009 to the standard; drops A009's 32 MB raw outputs; A009 branch not merged). Added individual enemy variety (face details, tints, gear picks) to the rig standard.
+2026-10-15 code: T015 human check done (user): "he looks braced". Ready for lead review.
+2026-10-15 code: T015 on branch `t015-block-brace`: render-only bracing loop while blocking (src/render/brace.js, numbers in src/data/rigs/mouse-fighter-brace.js + JUICE.brace, lab section): breath lifts head/shoulders ~1.4 px, shield lags it, sword twitches, hips sway 1 px with boots planted by leg IK; none in blockstun, eases in; sway rests while shuffle-walking; standee breathes too.
+2026-10-15 code: T015 tests/brace.test.mjs (3 s of block: no sim change, boots planted); 16/16 pass. Filmstrip docs/screens/T015/. Human check open: hold block a few seconds: braced and alive, not frozen or jittery?
 2026-10-16 lead: rig standard approved by the user. A009 arrived (built from the old packet before approval): a big step toward the standee; under review as the rat master + first parts. Its `generated/` raw outputs (32 MB) should be dropped before merge (repo .git ~205 MB).
 2026-10-16 lead: merged T013 (harbor-run scrolling stage; 15/15 tests; user passed the play check). Builder also fixed a T010 freeze (jump attack while holding a floor weapon), with a test. Belt depth settled at 120 px on the scrolling stage. Wrote T015 (bracing motion, user idea).
 2026-10-16 lead: study "How pros build 2D rigs" + proposed rig standard (separate hands, feet, pelvis; planned swap library; master-first, cut-not-regenerate; four gates with a motion test). A009 on hold pending the user's yes. T013 waiting for the user's play check.

@@ -67,7 +67,15 @@ That's about 18 base parts and 14 to 18 swaps, roughly **35 images per character
 1. **Cut, don't regenerate.** Each part is cut from the master along its joint lines. Use the image tool only to **paint in what was hidden** (shoulder under the sleeve, thigh under the tunic, the hip behind the near leg). A limb must never be generated from scratch, because separate generations drift into a different character.
 2. **Hidden areas painted** at least one joint-width past the visible edge.
 3. **Round joints:** the overlapping end is close to a circle around the pivot, with the outline continuing past the overlap so it never breaks when bent.
-4. **Pivots marked:** each part's pivot and its attach point on the parent go in `part-layout.json` as **measured canvas points**, not estimates.
+4. **Pivots marked in `rig-source.json`** (one per delivery), as **measured canvas points**, not estimates. Because every part sits on the shared canvas exactly where it is in the master, a joint is one canvas point shared by parent and child:
+   ```
+   { "canvas": [1536, 2304], "master": "reference.png", "floorY": 2190,
+     "parts": { "pelvis": { "img": "pelvis.png", "parent": null, "pivot": [760, 1640], "band": 400 },
+                "leg-front-upper": { "img": "leg-front-upper.png", "parent": "pelvis", "pivot": [700, 1660], "band": 500 } },
+     "swaps": { "hand-front-grip": { "img": "hand-front-grip.png", "of": "hand-front" } },
+     "overlays": { "detail-eyepatch": { "img": "detail-eyepatch.png", "on": "head" } } }
+   ```
+   `pivot` = the joint where the part meets its parent (the root part's pivot is its centre of rotation). Swaps share their part's pivot. `band` = draw-order band (section 6). Code's rig bench (`tools/rig-bench.html?src=<ID>-<slug>`) and importer (`tools/rig_from_source.py`) read this file. Optional `dir`: a folder for the images when the file lives elsewhere (Code's test fixtures); Art's deliveries leave it out.
 5. **Uniform scale only.** No stretching. If the rig needs a size fudge over 5% on any part, the art goes back.
 6. **Swaps share the pivot** of the part they replace (same joint point on the canvas).
 7. Light from upper left, bold dark outline, no ground shadow (style contract).
@@ -96,7 +104,7 @@ A spell or special move is three separate things, so one effect serves many char
 Effects attach to a named point on the rig (`hand-front` tip, weapon tip, chest), the same way held weapons use grip points.
 
 ## 8. Rig bench and motion test (G2, G3; Code's tool)
-- **Fit overlay:** load the source parts and `part-layout.json`, assemble at rest, and draw them over the faded master; flag drift in proportion or position.
+- **Fit overlay:** load the source parts and `rig-source.json`, assemble at rest, and draw them over the faded master; flag drift in proportion or position.
 - **Standard motion strip:** stance, idle breath, walk cycle, attack (windup, strike, follow-through), hurt, knockdown, get-up; played live at game size beside the standee, with an exported strip image for the review.
 - The user judges G3 here, in motion, before anything is imported into the game.
 

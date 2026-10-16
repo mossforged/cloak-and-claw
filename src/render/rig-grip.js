@@ -12,7 +12,7 @@ const wrap = (d) => ((d + 540) % 360) - 180;
 const dist = (a, b) => Math.hypot(b[0] - a[0], b[1] - a[1]);
 
 // A part's own px (pivot space) on screen, whichever drawing (swap) it shows.
-function at(rig, L, name, xy) {
+export function at(rig, L, name, xy) {
   const e = L.find((x) => x.name === name), s = e.swap && rig.parts[name].swaps[e.swap];
   const k = s?.scale ?? 1, o = s?.offset ?? [0, 0];
   return apply(e.m, ...(s ? [(xy[0] - o[0]) / k, (xy[1] - o[1]) / k] : xy));
@@ -26,8 +26,8 @@ export function drawOf(f) {
 }
 
 // Joints with `upper`/`lower` bent so `hand` (lower's own px) reaches the target point (screen px) of `targetOf(L)`.
-// Keeps the elbow on the side the pose bends it.
-function reach(rig, joints, swap, held, ik, targetOf) {
+// Keeps the elbow on the side the pose bends it. Also plants a leg (T015 brace: `hand` = the sole point).
+export function reach(rig, joints, swap, held, ik, targetOf) {
   const [up, lo] = ik.arm, j = { ...joints };
   const pts = (L) => [at(rig, L, up, rig.parts[up].pivot), at(rig, L, lo, rig.parts[lo].pivot), at(rig, L, lo, ik.hand)];
   let L = layoutRig(rig, j, swap, held);

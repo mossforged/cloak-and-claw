@@ -28,5 +28,8 @@ export const JUICE = {
   // arrows in flight (T011, render/shots.js): drawn `size` x the nocked arrow so they read at a glance, with a light
   // `glow` (blur px) round them and a speed streak `streak` px long behind (`width`, `alpha`)
   shot: { size: 1.5, glow: 7, streak: 60, width: 3, alpha: 0.6 },
+  // bracing breath while blocking (T015, standee; the rig's loop is data/rigs/*-brace.js): fade-in frames (after entering
+  // block or a blocked hit), s per breath, squash = height gained on the in-breath (width gives back half), lean = rad in
+  brace: { fade: 14, breath: 1.4, squash: 0.02, lean: 0.012 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
 };
