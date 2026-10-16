@@ -3,7 +3,7 @@
 **Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T018 new rat in game (merged 2026-10-16). Last art task: A012 rat spear, bow, arrow + near pinch hand (merged 2026-10-16).
 
 ## Next
-1. **Code:** T019 (rat gear + individual variety), then T020 (new spear/bow in game; spearman's far hand visibly on the shaft; archer full draw to the ear).
+1. **Code:** T019 (rat gear + individual variety), then T020 (weapons held right: cutlass in line with the fist; new spear/bow; spearman's far hand on the shaft; archer full draw to the ear).
 2. **Art:** idle (rat roster art complete: A010, A011, A012). Next: the next enemy body under the rig standard (lead to propose).
 3. **User:** judge T019 (gear and crowd variety), then T020 (spear and bow holds).
 
@@ -28,6 +28,7 @@
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
+- Enemy spacing: two rats can stand almost on top of each other (seen in T019 testing). `separate()` in sim/ai.js uses hard-coded 34 px / 0.6 push, tuned for the old skinny rats: base it on body width, push harder than the walk, spread waiting rats around the player, numbers in data.
 - Rig bench's generic strip rolls the head in knockdown/down (game poses are fine; T018). Fix when the bench is next touched.
 - Fish slap lands mid-spin while he faces away (timing comes from the unchanged hitbox, T017). Revisit in a later feel pass if it reads wrong.
 - Weapon drops for the other rats: drops are optional (keep the floor uncluttered), but a drop is always the weapon held (decision 2026-10-16). Whether the spearman ever drops his spear: decide with Stage 4 enemies.
@@ -51,6 +52,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user testing T019: the cutlass angle doesn't match the fist ("doesn't look like it's being held") -> added to T020 (slot axis per grip hand, handle axis per item, aligned in every pose). Enemy overlap parked.
 2026-10-16 lead: merged A012 (weapons are cleaner, bolder versions of A004's designs; near pinch reads as a fist up close). User on the review mock-ups: "the spearman's missing an arm", the archer "could be drawing the string back further": both are rig poses -> T020.
 2026-10-16 lead: wrote A012 (spear/bow/arrow redraw + near pinch hand), user's pick.
 2026-10-16 lead: merged T018 (A010 rat in game for all three types, uniform scale, standard part names, holds/drops the same cutlass; user picked upright walk F; bot runs identical; 18/18 tests; pycache removed; mouse poses split).

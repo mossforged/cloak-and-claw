@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 T019 testing: cutlass grip
+User: "the sword angle doesn't match the grip angle. the sword is more upright so it doesn't look like it's being held." -> T020.
+
 ## 2026-10-16 A012 rat spear and bow (review mock-ups)
 User: "the spearman's missing an arm?" (far hand hidden, spear held one-handed) and "the archer rat could be drawing the string back further maybe?" -> T020 (far hand drawn over the shaft; full draw to the ear).
 
