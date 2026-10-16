@@ -5,8 +5,6 @@
 // -75 + pelvis + torso + arm-front-upper + arm-front-lower + hand-front (the slot's rest, rigs/rat-raider.js).
 // Hands: the near hand grips the weapon (its default drawing); the far hand is open (default) idle/hurt, a fist walking
 // and striking. Spearman and archer (rigs/rat-spearman.js, rat-archer.js) override the arms and add their kit moves.
-import { walkOf, WALK_DEFAULT } from './rat-raider-walks.js';
-
 const HURT = { head: 'head-hurt', 'hand-back': 'hand-back-open' };
 const FALL = { head: 'head-hurt', 'hand-back': 'hand-back-open', 'hand-front': 'hand-front-open' };
 
@@ -19,8 +17,13 @@ export default {
     'arm-front-upper': [0, 2.5, 0.1], 'hand-front': [0, 3, 0.2], 'arm-back-upper': [0, 3, 0.1], 'hand-back': [0, 6, 0.3],
     tail: [0, 10, 0.3], 'scarf-tail': [0, 7, 0.55],
   },
-  // Walk: cadence, hips, lean and legs come from the variant picked (rigs/rat-raider-walks.js, T018 round 2).
-  walk: { ...walkOf(WALK_DEFAULT), swap: { 'hand-back': 'hand-back-fist' },
+  // Walk (T018 round 3, user's pick "F tallest" over the round-1 scuttle): 2.0 steps/s, hips 2 px above the master crouch,
+  // torso leaned back to stand tall (head tipped to keep the face level). Legs: 2-bone IK on an ankle path (planted sweep
+  // back, lifted arc forward) fitted to one wave per joint, feet kept level; the far leg is short, so higher hips would
+  // need shorter (scuttlier) steps. tests/rat-rig.test.mjs checks the feet don't skate or sink.
+  walk: { speed: 2.0, swap: { 'hand-back': 'hand-back-fist' }, dy: -2, torso: [-18, 1.5, 0, 2], head: [13, 1.5, 0.1, 2],
+    'leg-front-upper': [-7.9, 26.8, 0.744], 'leg-front-lower': [-108.7, 36.4, 0.795], 'foot-front': [116.6, 62.4, 0.273],
+    'leg-back-upper': [12.7, 34.6, 0.266], 'leg-back-lower': [69.8, 18.1, 0.982], 'foot-back': [-82.6, 35.4, 0.683],
     'arm-back-upper': [0, 10, 0], 'arm-front-upper': [0, 6, 0.5], tail: [4, 12, 0.25], 'scarf-tail': [8, 8, 0.4, 2] },
   jump: {
     torso: -4, head: -6,

@@ -11,7 +11,6 @@ import { targetPose, jointsOfRig } from '../src/render/rig-pose.js';
 import { heldOf, layoutRig } from '../src/render/rig.js';
 import { gripLayout } from '../src/render/rig-grip.js';
 import { BIPED_PARTS } from '../src/data/rigs/biped-poses.js';
-import { WALKS, walkOf } from '../src/data/rigs/rat-raider-walks.js';
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
@@ -63,23 +62,17 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   onFloor(lay(fighter({})), 2, 'stance');
   for (const [key, m] of Object.entries(def.moves)) for (const mf of [m.windup, m.windup + m.active - 1]) onFloor(lay(fighter({ state: 'attack', move: m, moveKey: key, mf })), 2, `${key}@${mf}`);
 
-  // walk (every variant, T018 round 2): feet never sink under their floor and the planted foot sweeps back as far as
-  // the body moves (no skating)
-  const keep = { ...P.walk };
-  for (const v of Object.keys(WALKS)) {
-    Object.assign(P.walk, walkOf(v));
-    const need = def.move.walk * 60 / P.walk.speed / 2;
-    for (const n of Object.keys(SOLE)) {
-      let lo = Infinity, hi = -Infinity, sink = -Infinity;
-      for (let i = 0; i < 60; i++) {
-        const s = soles(lay(fighter({ state: 'walk', t: i / P.walk.speed })))[n], x = (s[0][0] + s[1][0]) / 2;
-        lo = Math.min(lo, x); hi = Math.max(hi, x); sink = Math.max(sink, ...s.map((p, j) => p[1] - floor[n][j][1]));
-      }
-      check(sink < 3, `${id} walk ${v} ${n}: never sinks (deepest ${sink.toFixed(1)} px under)`);
-      check(Math.abs((hi - lo) / need - 1) < 0.25, `${id} walk ${v} ${n}: stride ${(hi - lo).toFixed(1)} px ~ ${need.toFixed(1)} (no skating)`);
+  // walk: feet never sink under their floor and the planted foot sweeps back as far as the body moves (no skating)
+  const need = def.move.walk * 60 / P.walk.speed / 2;
+  for (const n of Object.keys(SOLE)) {
+    let lo = Infinity, hi = -Infinity, sink = -Infinity;
+    for (let i = 0; i < 60; i++) {
+      const s = soles(lay(fighter({ state: 'walk', t: i / P.walk.speed })))[n], x = (s[0][0] + s[1][0]) / 2;
+      lo = Math.min(lo, x); hi = Math.max(hi, x); sink = Math.max(sink, ...s.map((p, j) => p[1] - floor[n][j][1]));
     }
+    check(sink < 3, `${id} walk ${n}: never sinks (deepest ${sink.toFixed(1)} px under)`);
+    check(Math.abs((hi - lo) / need - 1) < 0.25, `${id} walk ${n}: stride ${(hi - lo).toFixed(1)} px ~ ${need.toFixed(1)} (no skating)`);
   }
-  Object.assign(P.walk, keep);
 }
 
 // Raider: holds the rat-cutlass item art (the one he drops) with its grip on the near hand's slot; the strike swings
