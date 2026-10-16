@@ -134,6 +134,22 @@ export const LAB_SCHEMA = [
   weaponMoves('Plank club moves', 'src/data/moves/plank-club.js'),
   weaponMoves('Big fish moves', 'src/data/moves/big-fish.js'),
   {
+    title: 'Weapon feel (T017, look only)', file: 'src/data/items/big-fish.js',
+    fields: [
+      { path: 'feel.wobble.period', min: 0.05, max: 0.6, step: 0.01, label: 'fish wobble period (s)' },
+      { path: 'feel.wobble.damping', min: 0.02, max: 1, step: 0.01, label: 'fish wobble damping' },
+      { path: 'feel.wobble.gain', min: 0, max: 2, step: 0.05, label: 'fish wobble gain' },
+      { path: 'feel.wobble.bob', min: 0, max: 1, step: 0.01, label: 'fish wobble from bob' },
+      { path: 'feel.wobble.max', min: 0, max: 60, step: 1, label: 'fish wobble max (deg)' },
+      { path: 'feel.squash.amount', min: 0, max: 0.6, step: 0.01, label: 'fish slap squash' },
+      { path: 'feel.squash.time', min: 0.1, max: 1.2, step: 0.05, label: 'fish squash time (s)' },
+      { path: 'club1.fx.dust', min: 0, max: 20, step: 1, file: 'src/data/moves/plank-club.js', label: 'club1 dust puffs' },
+      { path: 'club1.fx.shake', min: 0, max: 10, step: 0.5, file: 'src/data/moves/plank-club.js', label: 'club1 extra shake' },
+      { path: 'club2.fx.dust', min: 0, max: 20, step: 1, file: 'src/data/moves/plank-club.js', label: 'club2 dust puffs' },
+      { path: 'club2.fx.shake', min: 0, max: 10, step: 0.5, file: 'src/data/moves/plank-club.js', label: 'club2 extra shake' },
+    ],
+  },
+  {
     title: 'Rules', file: 'src/data/rules.js',
     fields: [
       ['gravity', 0.1, 2, 0.01], ['depthHit', 2, 60, 1], ['maxAttackers', 0, 6, 1],

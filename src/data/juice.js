@@ -31,5 +31,9 @@ export const JUICE = {
   // bracing breath while blocking (T015, standee; the rig's loop is data/rigs/*-brace.js): fade-in frames (after entering
   // block or a blocked hit), s per breath, squash = height gained on the in-breath (width gives back half), lean = rad in
   brace: { fade: 14, breath: 1.4, squash: 0.02, lean: 0.012 },
+  // weapon feel (T017): a heavy weapon's hit (move.fx.dust puffs) kicks up dust at the target's feet (spread px each side,
+  // speed px/frame out, r px, life frames, colour); drops = water flicked off the fish on its swing (from dx behind / dy above his feet)
+  impactDust: { spread: 30, speed: 3.4, r: 16, life: 32, color: '150,118,84' },   // color: rgb, darker than landing dust so it reads on stone
+  drops: { dx: 10, dy: 50, speed: 6, spread: 2.2, gravity: 0.45, life: 28 },
   koHitstop: 6, koShake: 6, heavyLandShake: 3,
 };

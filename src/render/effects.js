@@ -10,7 +10,14 @@ export function createEffects() {
   const flashes = new Map();   // fighter id -> frames of white flash left
   const add = (e) => list.push({ t: 0, ...e });
 
-  bus.on('swing', ({ f, move }) => { if (move.fx?.slash) add({ type: 'slash', f, ...move.fx.slash, life: JUICE.slash.life }); });
+  bus.on('swing', ({ f, move }) => {
+    if (move.fx?.slash) add({ type: 'slash', f, ...move.fx.slash, life: JUICE.slash.life });
+    const W = JUICE.drops;   // T017: water flicked off the fish
+    for (let i = 0; i < (move.fx?.drops ?? 0); i++) {
+      const a = -Math.PI / 2 + (Math.random() - 0.5) * W.spread, s = W.speed * (0.5 + Math.random());
+      add({ type: 'drop', x: f.x - f.facing * W.dx, y: f.y - f.z - W.dy, vx: Math.cos(a) * s - f.facing * 1.5, vy: Math.sin(a) * s, g: W.gravity, life: W.life, r: 1.5 + Math.random() * 2 });
+    }
+  });
   bus.on('hit', ({ target, damage, x, y, z, ko, move }) => {
     flashes.set(target.id, JUICE.flashFrames);
     const S = JUICE.sparks, big = ko || move.knockdown;
@@ -20,6 +27,11 @@ export function createEffects() {
     }
     add({ type: 'ring', x, y: y - z, life: 10, r: big ? 46 : 28 });
     add({ type: 'num', x, y: y - z - 20, text: String(damage), hero: target.team === 'hero', big, life: JUICE.numbers.life });
+    const P = JUICE.impactDust;   // T017: a heavy weapon's dust puff at the target's feet (move.fx.dust puffs)
+    for (let i = 0; i < (move.fx?.dust ?? 0); i++) {
+      const side = i % 2 ? 1 : -1;
+      add({ type: 'dust', x: target.x + side * Math.random() * P.spread, y: target.y, vx: side * P.speed * (0.4 + Math.random()), life: P.life, r: P.r * (0.6 + Math.random() * 0.6), color: P.color, a: 0.8 });
+    }
   });
   bus.on('block', ({ target, damage, x, y, z }) => {
     const B = JUICE.block, out = target.facing, sy = y - z;   // sparks fly out of the shield face, toward the attacker
@@ -67,7 +79,7 @@ export function createEffects() {
         e.t++;
         if (e.type === 'trail') trailStep(e);
         if (e.vx !== undefined) { e.x += e.vx; e.vx *= 0.88; }
-        if (e.vy !== undefined) { e.y += e.vy; e.vy *= 0.88; }
+        if (e.vy !== undefined) { e.y += e.vy; e.vy = e.g ? e.vy + e.g : e.vy * 0.88; }   // g: falling (water drops)
       }
       list = list.filter((e) => e.t < e.life);
     },
@@ -176,8 +188,12 @@ const DRAW = {
     ctx.fillStyle = e.hero ? '#ff5a4e' : e.big ? '#ffd23f' : '#fff'; ctx.fillText(e.text, 0, 0);
     ctx.restore();
   },
+  drop(ctx, e, k) {
+    ctx.fillStyle = `rgba(190,230,255,${0.9 * (1 - k)})`;
+    ctx.beginPath(); ctx.ellipse(e.x, e.y, e.r, e.r * 1.5, Math.atan2(e.vy, e.vx) + Math.PI / 2, 0, Math.PI * 2); ctx.fill();
+  },
   dust(ctx, e, k) {
-    ctx.fillStyle = `rgba(214,190,150,${0.55 * (1 - k)})`;
+    ctx.fillStyle = `rgba(${e.color ?? '214,190,150'},${(e.a ?? 0.55) * (1 - k)})`;
     ctx.beginPath(); ctx.arc(e.x, e.y - k * 14, e.r * (0.6 + k), 0, Math.PI * 2); ctx.fill();
   },
 };

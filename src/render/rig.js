@@ -6,6 +6,7 @@ import { rigJoints, drawLayer, squatLayer } from './rig-pose.js';
 import { squatOf } from './jump-squat.js';
 import { gripLayout } from './rig-grip.js';
 import { braceLayer } from './brace.js';
+import { feelLayer } from './weapon-feel.js';
 import { ITEMS } from '../data/items/index.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
@@ -109,6 +110,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   let joints = rigJoints(f, rig, time, mem, pose);
   if (!pose) joints = mem.last = braceLayer(rig, f, joints, time, mem, mem.swap);   // T015 bracing loop (kept in mem.last: no pop on leaving block)
   joints = drawLayer(rig, time, mem, squatLayer(rig, joints, pose ? 0 : squatOf(f, time)));   // T014 jump squat crouch
+  if (!pose) joints = feelLayer(rig, f, joints, time, mem);   // T017 held weapon wobble / impact squash
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
