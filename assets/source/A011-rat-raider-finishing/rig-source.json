@@ -1,0 +1,863 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "master": "../A010-rat-raider-standard/reference.png",
+  "floorY": 1997,
+  "fighter": "rat-raider",
+  "note": "A011 overlay extension of unchanged A010. Relative image paths deliberately reuse the approved parts. Source overlays align at [0,0]; do not re-center trimmed overlays. See compatibility.json for view selection. Static source fit reviewed; G4 human look and in-motion review remain pending.",
+  "parts": {
+    "pelvis": {
+      "img": "../A010-rat-raider-standard/pelvis.png",
+      "parent": null,
+      "pivot": [
+        850,
+        1570
+      ],
+      "band": 400
+    },
+    "torso": {
+      "img": "../A010-rat-raider-standard/torso.png",
+      "parent": "pelvis",
+      "pivot": [
+        850,
+        1490
+      ],
+      "band": 600
+    },
+    "head": {
+      "img": "../A010-rat-raider-standard/head.png",
+      "parent": "torso",
+      "pivot": [
+        910,
+        1218
+      ],
+      "band": 700
+    },
+    "arm-front-upper": {
+      "img": "../A010-rat-raider-standard/arm-front-upper.png",
+      "parent": "torso",
+      "pivot": [
+        665,
+        1165
+      ],
+      "band": 590
+    },
+    "arm-front-lower": {
+      "img": "../A010-rat-raider-standard/arm-front-lower.png",
+      "parent": "arm-front-upper",
+      "pivot": [
+        500,
+        1225
+      ],
+      "band": 820
+    },
+    "hand-front": {
+      "img": "../A010-rat-raider-standard/hand-front.png",
+      "parent": "arm-front-lower",
+      "pivot": [
+        410,
+        1260
+      ],
+      "band": 840
+    },
+    "arm-back-upper": {
+      "img": "../A010-rat-raider-standard/arm-back-upper.png",
+      "parent": "torso",
+      "pivot": [
+        1125,
+        1315
+      ],
+      "band": 110
+    },
+    "arm-back-lower": {
+      "img": "../A010-rat-raider-standard/arm-back-lower.png",
+      "parent": "arm-back-upper",
+      "pivot": [
+        1238,
+        1360
+      ],
+      "band": 120
+    },
+    "hand-back": {
+      "img": "../A010-rat-raider-standard/hand-back.png",
+      "parent": "arm-back-lower",
+      "pivot": [
+        1310,
+        1360
+      ],
+      "band": 130
+    },
+    "leg-front-upper": {
+      "img": "../A010-rat-raider-standard/leg-front-upper.png",
+      "parent": "pelvis",
+      "pivot": [
+        742,
+        1585
+      ],
+      "band": 510
+    },
+    "leg-front-lower": {
+      "img": "../A010-rat-raider-standard/leg-front-lower.png",
+      "parent": "leg-front-upper",
+      "pivot": [
+        442,
+        1748
+      ],
+      "band": 520
+    },
+    "foot-front": {
+      "img": "../A010-rat-raider-standard/foot-front.png",
+      "parent": "leg-front-lower",
+      "pivot": [
+        337,
+        1842
+      ],
+      "band": 530
+    },
+    "leg-back-upper": {
+      "img": "../A010-rat-raider-standard/leg-back-upper.png",
+      "parent": "pelvis",
+      "pivot": [
+        1004,
+        1570
+      ],
+      "band": 210
+    },
+    "leg-back-lower": {
+      "img": "../A010-rat-raider-standard/leg-back-lower.png",
+      "parent": "leg-back-upper",
+      "pivot": [
+        1115,
+        1740
+      ],
+      "band": 220
+    },
+    "foot-back": {
+      "img": "../A010-rat-raider-standard/foot-back.png",
+      "parent": "leg-back-lower",
+      "pivot": [
+        1165,
+        1825
+      ],
+      "band": 230
+    },
+    "tail": {
+      "img": "../A010-rat-raider-standard/tail.png",
+      "parent": "pelvis",
+      "pivot": [
+        480,
+        1575
+      ],
+      "band": 300
+    },
+    "scarf-tail": {
+      "img": "../A010-rat-raider-standard/scarf-tail.png",
+      "parent": "torso",
+      "pivot": [
+        720,
+        1040
+      ],
+      "band": 550
+    }
+  },
+  "swaps": {
+    "head-neutral": {
+      "img": "../A010-rat-raider-standard/head-neutral.png",
+      "of": "head"
+    },
+    "head-attack": {
+      "img": "../A010-rat-raider-standard/head-attack.png",
+      "of": "head"
+    },
+    "head-hurt": {
+      "img": "../A010-rat-raider-standard/head-hurt.png",
+      "of": "head"
+    },
+    "head-effort": {
+      "img": "../A010-rat-raider-standard/head-effort.png",
+      "of": "head"
+    },
+    "head-ko": {
+      "img": "../A010-rat-raider-standard/head-ko.png",
+      "of": "head"
+    },
+    "head-back": {
+      "img": "../A010-rat-raider-standard/head-back.png",
+      "of": "head"
+    },
+    "torso-side": {
+      "img": "../A010-rat-raider-standard/torso-side.png",
+      "of": "torso"
+    },
+    "torso-back": {
+      "img": "../A010-rat-raider-standard/torso-back.png",
+      "of": "torso"
+    },
+    "hand-front-open": {
+      "img": "../A010-rat-raider-standard/hand-front-open.png",
+      "of": "hand-front"
+    },
+    "hand-front-fist": {
+      "img": "../A010-rat-raider-standard/hand-front-fist.png",
+      "of": "hand-front"
+    },
+    "hand-front-grip": {
+      "img": "../A010-rat-raider-standard/hand-front-grip.png",
+      "of": "hand-front"
+    },
+    "hand-back-open": {
+      "img": "../A010-rat-raider-standard/hand-back-open.png",
+      "of": "hand-back"
+    },
+    "hand-back-fist": {
+      "img": "../A010-rat-raider-standard/hand-back-fist.png",
+      "of": "hand-back"
+    },
+    "hand-back-grip": {
+      "img": "../A010-rat-raider-standard/hand-back-grip.png",
+      "of": "hand-back"
+    },
+    "hand-back-pinch": {
+      "img": "../A010-rat-raider-standard/hand-back-pinch.png",
+      "of": "hand-back"
+    }
+  },
+  "overlays": {
+    "gear-hood": {
+      "img": "gear-hood.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-helmet": {
+      "img": "gear-helmet.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-captain-hat": {
+      "img": "gear-captain-hat.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-hood-back": {
+      "img": "gear-hood-back.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-helmet-back": {
+      "img": "gear-helmet-back.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-captain-hat-back": {
+      "img": "gear-captain-hat-back.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-jerkin": {
+      "img": "gear-jerkin.png",
+      "on": "torso",
+      "band": 650
+    },
+    "gear-jerkin-side": {
+      "img": "gear-jerkin-side.png",
+      "on": "torso",
+      "band": 650
+    },
+    "gear-jerkin-back": {
+      "img": "gear-jerkin-back.png",
+      "on": "torso",
+      "band": 650
+    },
+    "gear-sash": {
+      "img": "gear-sash.png",
+      "on": "torso",
+      "band": 650
+    },
+    "gear-sash-side": {
+      "img": "gear-sash-side.png",
+      "on": "torso",
+      "band": 650
+    },
+    "gear-sash-back": {
+      "img": "gear-sash-back.png",
+      "on": "torso",
+      "band": 650
+    },
+    "gear-quiver": {
+      "img": "gear-quiver.png",
+      "on": "torso",
+      "band": 90
+    },
+    "detail-eyepatch": {
+      "img": "detail-eyepatch.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-scar2": {
+      "img": "detail-scar2.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-ear-notch": {
+      "img": "detail-ear-notch.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-earring": {
+      "img": "detail-earring.png",
+      "on": "head",
+      "band": 740
+    },
+    "gear-hood-hurt": {
+      "img": "gear-hood-hurt.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-helmet-hurt": {
+      "img": "gear-helmet-hurt.png",
+      "on": "head",
+      "band": 750
+    },
+    "gear-captain-hat-hurt": {
+      "img": "gear-captain-hat-hurt.png",
+      "on": "head",
+      "band": 750
+    },
+    "detail-eyepatch-hurt": {
+      "img": "detail-eyepatch-hurt.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-eyepatch-back": {
+      "img": "detail-eyepatch-back.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-scar2-hurt": {
+      "img": "detail-scar2-hurt.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-scar2-back": {
+      "img": "detail-scar2-back.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-ear-notch-hurt": {
+      "img": "detail-ear-notch-hurt.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-ear-notch-back": {
+      "img": "detail-ear-notch-back.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-earring-hurt": {
+      "img": "detail-earring-hurt.png",
+      "on": "head",
+      "band": 740
+    },
+    "detail-earring-back": {
+      "img": "detail-earring-back.png",
+      "on": "head",
+      "band": 740
+    }
+  },
+  "masks": {
+    "pelvis-mask": {
+      "on": "pelvis",
+      "img": "pelvis-mask.png",
+      "selected_pixels": 30799,
+      "empty": false
+    },
+    "pelvis-fur-mask": {
+      "on": "pelvis",
+      "img": "pelvis-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "torso-mask": {
+      "on": "torso",
+      "img": "torso-mask.png",
+      "selected_pixels": 47300,
+      "empty": false
+    },
+    "torso-fur-mask": {
+      "on": "torso",
+      "img": "torso-fur-mask.png",
+      "selected_pixels": 21654,
+      "empty": false
+    },
+    "head-mask": {
+      "on": "head",
+      "img": "head-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-fur-mask": {
+      "on": "head",
+      "img": "head-fur-mask.png",
+      "selected_pixels": 177619,
+      "empty": false
+    },
+    "arm-front-upper-mask": {
+      "on": "arm-front-upper",
+      "img": "arm-front-upper-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "arm-front-upper-fur-mask": {
+      "on": "arm-front-upper",
+      "img": "arm-front-upper-fur-mask.png",
+      "selected_pixels": 28198,
+      "empty": false
+    },
+    "arm-front-lower-mask": {
+      "on": "arm-front-lower",
+      "img": "arm-front-lower-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "arm-front-lower-fur-mask": {
+      "on": "arm-front-lower",
+      "img": "arm-front-lower-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-front-mask": {
+      "on": "hand-front",
+      "img": "hand-front-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-front-fur-mask": {
+      "on": "hand-front",
+      "img": "hand-front-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "arm-back-upper-mask": {
+      "on": "arm-back-upper",
+      "img": "arm-back-upper-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "arm-back-upper-fur-mask": {
+      "on": "arm-back-upper",
+      "img": "arm-back-upper-fur-mask.png",
+      "selected_pixels": 12001,
+      "empty": false
+    },
+    "arm-back-lower-mask": {
+      "on": "arm-back-lower",
+      "img": "arm-back-lower-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "arm-back-lower-fur-mask": {
+      "on": "arm-back-lower",
+      "img": "arm-back-lower-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-mask": {
+      "on": "hand-back",
+      "img": "hand-back-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-fur-mask": {
+      "on": "hand-back",
+      "img": "hand-back-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "leg-front-upper-mask": {
+      "on": "leg-front-upper",
+      "img": "leg-front-upper-mask.png",
+      "selected_pixels": 45943,
+      "empty": false
+    },
+    "leg-front-upper-fur-mask": {
+      "on": "leg-front-upper",
+      "img": "leg-front-upper-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "leg-front-lower-mask": {
+      "on": "leg-front-lower",
+      "img": "leg-front-lower-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "leg-front-lower-fur-mask": {
+      "on": "leg-front-lower",
+      "img": "leg-front-lower-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "foot-front-mask": {
+      "on": "foot-front",
+      "img": "foot-front-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "foot-front-fur-mask": {
+      "on": "foot-front",
+      "img": "foot-front-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "leg-back-upper-mask": {
+      "on": "leg-back-upper",
+      "img": "leg-back-upper-mask.png",
+      "selected_pixels": 46068,
+      "empty": false
+    },
+    "leg-back-upper-fur-mask": {
+      "on": "leg-back-upper",
+      "img": "leg-back-upper-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "leg-back-lower-mask": {
+      "on": "leg-back-lower",
+      "img": "leg-back-lower-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "leg-back-lower-fur-mask": {
+      "on": "leg-back-lower",
+      "img": "leg-back-lower-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "foot-back-mask": {
+      "on": "foot-back",
+      "img": "foot-back-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "foot-back-fur-mask": {
+      "on": "foot-back",
+      "img": "foot-back-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "tail-mask": {
+      "on": "tail",
+      "img": "tail-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "tail-fur-mask": {
+      "on": "tail",
+      "img": "tail-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "scarf-tail-mask": {
+      "on": "scarf-tail",
+      "img": "scarf-tail-mask.png",
+      "selected_pixels": 28010,
+      "empty": false
+    },
+    "scarf-tail-fur-mask": {
+      "on": "scarf-tail",
+      "img": "scarf-tail-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-neutral-mask": {
+      "on": "head-neutral",
+      "img": "head-neutral-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-neutral-fur-mask": {
+      "on": "head-neutral",
+      "img": "head-neutral-fur-mask.png",
+      "selected_pixels": 177619,
+      "empty": false
+    },
+    "head-attack-mask": {
+      "on": "head-attack",
+      "img": "head-attack-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-attack-fur-mask": {
+      "on": "head-attack",
+      "img": "head-attack-fur-mask.png",
+      "selected_pixels": 161390,
+      "empty": false
+    },
+    "head-hurt-mask": {
+      "on": "head-hurt",
+      "img": "head-hurt-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-hurt-fur-mask": {
+      "on": "head-hurt",
+      "img": "head-hurt-fur-mask.png",
+      "selected_pixels": 185776,
+      "empty": false
+    },
+    "head-effort-mask": {
+      "on": "head-effort",
+      "img": "head-effort-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-effort-fur-mask": {
+      "on": "head-effort",
+      "img": "head-effort-fur-mask.png",
+      "selected_pixels": 168727,
+      "empty": false
+    },
+    "head-ko-mask": {
+      "on": "head-ko",
+      "img": "head-ko-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-ko-fur-mask": {
+      "on": "head-ko",
+      "img": "head-ko-fur-mask.png",
+      "selected_pixels": 174783,
+      "empty": false
+    },
+    "head-back-mask": {
+      "on": "head-back",
+      "img": "head-back-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "head-back-fur-mask": {
+      "on": "head-back",
+      "img": "head-back-fur-mask.png",
+      "selected_pixels": 179927,
+      "empty": false
+    },
+    "torso-side-mask": {
+      "on": "torso-side",
+      "img": "torso-side-mask.png",
+      "selected_pixels": 29280,
+      "empty": false
+    },
+    "torso-side-fur-mask": {
+      "on": "torso-side",
+      "img": "torso-side-fur-mask.png",
+      "selected_pixels": 29092,
+      "empty": false
+    },
+    "torso-back-mask": {
+      "on": "torso-back",
+      "img": "torso-back-mask.png",
+      "selected_pixels": 11130,
+      "empty": false
+    },
+    "torso-back-fur-mask": {
+      "on": "torso-back",
+      "img": "torso-back-fur-mask.png",
+      "selected_pixels": 31429,
+      "empty": false
+    },
+    "hand-front-open-mask": {
+      "on": "hand-front-open",
+      "img": "hand-front-open-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-front-open-fur-mask": {
+      "on": "hand-front-open",
+      "img": "hand-front-open-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-front-fist-mask": {
+      "on": "hand-front-fist",
+      "img": "hand-front-fist-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-front-fist-fur-mask": {
+      "on": "hand-front-fist",
+      "img": "hand-front-fist-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-front-grip-mask": {
+      "on": "hand-front-grip",
+      "img": "hand-front-grip-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-front-grip-fur-mask": {
+      "on": "hand-front-grip",
+      "img": "hand-front-grip-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-open-mask": {
+      "on": "hand-back-open",
+      "img": "hand-back-open-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-open-fur-mask": {
+      "on": "hand-back-open",
+      "img": "hand-back-open-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-fist-mask": {
+      "on": "hand-back-fist",
+      "img": "hand-back-fist-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-fist-fur-mask": {
+      "on": "hand-back-fist",
+      "img": "hand-back-fist-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-grip-mask": {
+      "on": "hand-back-grip",
+      "img": "hand-back-grip-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-grip-fur-mask": {
+      "on": "hand-back-grip",
+      "img": "hand-back-grip-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-pinch-mask": {
+      "on": "hand-back-pinch",
+      "img": "hand-back-pinch-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "hand-back-pinch-fur-mask": {
+      "on": "hand-back-pinch",
+      "img": "hand-back-pinch-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-hood-mask": {
+      "on": "gear-hood",
+      "img": "gear-hood-mask.png",
+      "selected_pixels": 127782,
+      "empty": false
+    },
+    "gear-hood-fur-mask": {
+      "on": "gear-hood",
+      "img": "gear-hood-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-hood-back-mask": {
+      "on": "gear-hood-back",
+      "img": "gear-hood-back-mask.png",
+      "selected_pixels": 80801,
+      "empty": false
+    },
+    "gear-hood-back-fur-mask": {
+      "on": "gear-hood-back",
+      "img": "gear-hood-back-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-jerkin-mask": {
+      "on": "gear-jerkin",
+      "img": "gear-jerkin-mask.png",
+      "selected_pixels": 137354,
+      "empty": false
+    },
+    "gear-jerkin-fur-mask": {
+      "on": "gear-jerkin",
+      "img": "gear-jerkin-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-jerkin-side-mask": {
+      "on": "gear-jerkin-side",
+      "img": "gear-jerkin-side-mask.png",
+      "selected_pixels": 64236,
+      "empty": false
+    },
+    "gear-jerkin-side-fur-mask": {
+      "on": "gear-jerkin-side",
+      "img": "gear-jerkin-side-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-jerkin-back-mask": {
+      "on": "gear-jerkin-back",
+      "img": "gear-jerkin-back-mask.png",
+      "selected_pixels": 159381,
+      "empty": false
+    },
+    "gear-jerkin-back-fur-mask": {
+      "on": "gear-jerkin-back",
+      "img": "gear-jerkin-back-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-sash-mask": {
+      "on": "gear-sash",
+      "img": "gear-sash-mask.png",
+      "selected_pixels": 81592,
+      "empty": false
+    },
+    "gear-sash-fur-mask": {
+      "on": "gear-sash",
+      "img": "gear-sash-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-sash-side-mask": {
+      "on": "gear-sash-side",
+      "img": "gear-sash-side-mask.png",
+      "selected_pixels": 50065,
+      "empty": false
+    },
+    "gear-sash-side-fur-mask": {
+      "on": "gear-sash-side",
+      "img": "gear-sash-side-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-sash-back-mask": {
+      "on": "gear-sash-back",
+      "img": "gear-sash-back-mask.png",
+      "selected_pixels": 72205,
+      "empty": false
+    },
+    "gear-sash-back-fur-mask": {
+      "on": "gear-sash-back",
+      "img": "gear-sash-back-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    },
+    "gear-hood-hurt-mask": {
+      "on": "gear-hood-hurt",
+      "img": "gear-hood-hurt-mask.png",
+      "selected_pixels": 106381,
+      "empty": false
+    },
+    "gear-hood-hurt-fur-mask": {
+      "on": "gear-hood-hurt",
+      "img": "gear-hood-hurt-fur-mask.png",
+      "selected_pixels": 0,
+      "empty": true
+    }
+  }
+}

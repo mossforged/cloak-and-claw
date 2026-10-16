@@ -1,0 +1,67 @@
+{
+  "gear-sash": {
+    "uniform_scale": 0.85,
+    "crop_before_fit": [
+      526,
+      1255,
+      1190,
+      1749
+    ],
+    "top_left_after_fit": [
+      527,
+      1390
+    ]
+  },
+  "gear-sash-side": {
+    "uniform_scale": 0.64,
+    "crop_before_fit": [
+      539,
+      1245,
+      1180,
+      1712
+    ],
+    "top_left_after_fit": [
+      650,
+      1470
+    ]
+  },
+  "gear-sash-back": {
+    "uniform_scale": 1.0,
+    "crop_before_fit": [
+      578,
+      1228,
+      1148,
+      1604
+    ],
+    "top_left_after_fit": [
+      560,
+      1340
+    ]
+  },
+  "gear-jerkin-side": {
+    "uniform_scale": 0.85,
+    "crop_before_fit": [
+      669,
+      1108,
+      1111,
+      1633
+    ],
+    "top_left_after_fit": [
+      680,
+      1120
+    ]
+  },
+  "gear-jerkin-back": {
+    "uniform_scale": 1.0,
+    "crop_before_fit": [
+      591,
+      1019,
+      1135,
+      1617
+    ],
+    "top_left_after_fit": [
+      570,
+      1040
+    ]
+  }
+}

@@ -1,0 +1,403 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "parts_reused": 17,
+  "swaps_reused": 15,
+  "overlays": {
+    "gear-hood": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        657,
+        645,
+        1360,
+        1301
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-helmet": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        641,
+        660,
+        1387,
+        1130
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-captain-hat": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        606,
+        460,
+        1445,
+        1047
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-hood-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        792,
+        757,
+        1323,
+        1226
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-helmet-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        729,
+        687,
+        1385,
+        1159
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-captain-hat-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        662,
+        645,
+        1378,
+        1138
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-jerkin": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        569,
+        1014,
+        1146,
+        1648
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-jerkin-side": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        680,
+        1120,
+        1056,
+        1566
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-jerkin-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        570,
+        1040,
+        1114,
+        1638
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-sash": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        527,
+        1390,
+        1091,
+        1810
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-sash-side": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        650,
+        1470,
+        1060,
+        1769
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-sash-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        560,
+        1340,
+        1130,
+        1716
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-quiver": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        391,
+        917,
+        942,
+        1684
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-eyepatch": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        824,
+        748,
+        1305,
+        1091
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-scar2": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        1231,
+        1068,
+        1329,
+        1141
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-ear-notch": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        640,
+        877,
+        708,
+        957
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-earring": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        720,
+        965,
+        824,
+        1118
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-hood-hurt": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        664,
+        636,
+        1420,
+        1271
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-helmet-hurt": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        640,
+        655,
+        1413,
+        1150
+      ],
+      "intentionally_hidden": false
+    },
+    "gear-captain-hat-hurt": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        545,
+        451,
+        1468,
+        1061
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-eyepatch-hurt": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        799,
+        713,
+        1280,
+        1056
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-eyepatch-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": null,
+      "intentionally_hidden": true
+    },
+    "detail-scar2-hurt": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        1186,
+        1038,
+        1284,
+        1111
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-scar2-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": null,
+      "intentionally_hidden": true
+    },
+    "detail-ear-notch-hurt": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        650,
+        847,
+        718,
+        927
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-ear-notch-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        705,
+        907,
+        773,
+        987
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-earring-hurt": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        715,
+        900,
+        819,
+        1053
+      ],
+      "intentionally_hidden": false
+    },
+    "detail-earring-back": {
+      "size": [
+        1536,
+        2304
+      ],
+      "mode": "RGBA",
+      "visible_bounds": [
+        785,
+        995,
+        889,
+        1148
+      ],
+      "intentionally_hidden": false
+    }
+  },
+  "mask_files": 82,
+  "nonempty_masks": 28,
+  "missing_required_files": [],
+  "same_canvas": true,
+  "masks_within_parent_alpha": true,
+  "all_view_mappings_resolve": true,
+  "review_game_size": [
+    960,
+    540
+  ],
+  "note": "Static source integrity and fit review only. The current bench does not animate overlays. G4 human look and moving gear review remain open."
+}
