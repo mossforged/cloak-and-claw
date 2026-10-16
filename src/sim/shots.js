@@ -1,7 +1,7 @@
 // Projectiles (T011): arrows. A move with a `shot` (data/moves/rat-bow.js) looses one on its first active frame; it flies
 // straight along the shooter's facing in his lane (y) at shot.z, hits the first opposing fighter whose hurtbox it
 // crosses within shot.depth of its lane, and is gone. A blocker facing it stops it (sim/combat.js block: chip, pushback).
-// It drops (gone) after shot.range px or off the floor. w.shots; s.owner = the shooter (AI: one arrow in flight each).
+// It drops (gone) after shot.range px or 60 px past the walkable bounds (on a scrolling stage: just off screen). w.shots; s.owner = the shooter (AI: one arrow in flight each).
 import { bus } from '../core/events.js';
 import { applyHit, vulnerable, hurtboxOf } from './combat.js';
 
@@ -22,7 +22,7 @@ export function fireShots(w) {
 export const inFlight = (w, f) => w.shots.some((s) => s.owner === f);
 
 export function stepShots(w) {
-  const fl = w.stage.floor;
+  const fl = w.bounds;
   for (const s of w.shots) {
     const S = s.def, x0 = s.x;
     s.x += s.vx; s.flown += Math.abs(s.vx); s.t++;

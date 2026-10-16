@@ -11,6 +11,7 @@ import ratRaider from './fighters/rat-raider.js';
 import { RULES } from './rules.js';
 import { JUICE } from './juice.js';
 import harborMarket from './stages/harbor-market.js';
+import harborRun from './stages/harbor-run.js';
 import ratCutlass from './items/rat-cutlass.js';
 import plankClub from './items/plank-club.js';
 import bigFish from './items/big-fish.js';
@@ -38,6 +39,7 @@ export const ROOTS = {
   'src/data/rules.js': RULES,
   'src/data/juice.js': JUICE,
   'src/data/stages/harbor-market.js': harborMarket,
+  'src/data/stages/harbor-run.js': harborRun,
   'src/data/items/rat-cutlass.js': ratCutlass,
   'src/data/items/plank-club.js': plankClub,
   'src/data/items/big-fish.js': bigFish,
@@ -183,6 +185,15 @@ export const LAB_SCHEMA = [
     fields: [
       ['floor.top', 250, 540, 1], ['floor.bottom', 250, 540, 1], ['floor.left', 0, 480, 1], ['floor.right', 480, 960, 1],
       ['art.x', -800, 200, 1], ['art.y', -600, 200, 1], ['art.w', 900, 2600, 10],
+    ],
+  },
+  {
+    title: 'Stage (Harbor Run, scrolling)', file: 'src/data/stages/harbor-run.js',
+    fields: [
+      ['layers.floor.shade', 0, 0.6, 0.01], ['layers.floor.backfill', 0, 120, 1], ['layers.floor.backfillShade', 0, 1, 0.01], ['layers.far.parallax', 0, 1, 0.01], ['layers.frontParallax', 1, 1.5, 0.01],
+      ['layers.fade', 0, 1, 0.05], ['camera.follow', 200, 700, 5], ['camera.catchUp', 1, 20, 0.5], ['camera.edge', 0, 120, 1],
+      ['floor.top', 300, 540, 1], ['floor.bottom', 300, 540, 1],
+      { path: 'enemyCap', min: 1, max: 8, step: 1, file: 'src/data/rules.js' }, { path: 'zoneStagger', min: 1, max: 120, step: 1, file: 'src/data/rules.js' },
     ],
   },
 ];

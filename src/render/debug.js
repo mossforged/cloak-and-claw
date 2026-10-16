@@ -1,10 +1,14 @@
-// Debug overlay (toggle with `): floor belt, hurtboxes (green), live hitboxes (red), feet anchors, state labels.
+// Debug overlay (toggle with `): floor belt (scrolling stage, T013: walkable bounds, zone lock screens + markers, back
+// segment joins, camera), hurtboxes (green), live hitboxes (red), feet anchors, state labels.
 import { hitboxOf, hurtboxOf } from '../sim/combat.js';
 import { RULES } from '../data/rules.js';
+import { joinsOf } from './layers.js';
 
-export function drawDebug(ctx, world, juice) {
-  const fl = world.stage.floor;
+export function drawDebug(ctx, world, juice, camX = 0) {
+  const fl = world.bounds;
   ctx.save();
+  ctx.translate(-camX, 0);
+  if (world.stage.layers) drawScroll(ctx, world);
   ctx.strokeStyle = 'rgba(80,200,255,0.9)'; ctx.setLineDash([6, 4]); ctx.lineWidth = 1.5;
   ctx.strokeRect(fl.left, fl.top, fl.right - fl.left, fl.bottom - fl.top);
   ctx.setLineDash([]);
@@ -37,9 +41,31 @@ export function drawDebug(ctx, world, juice) {
     ctx.fillStyle = '#000'; ctx.fillRect(f.x - 4, f.y + 6, label.length * 7.3, 14);
     ctx.fillStyle = '#fff'; ctx.fillText(label, f.x - 2, f.y + 17);
   }
-  ctx.fillStyle = '#000'; ctx.fillRect(8, 500, 460, 32);
+  ctx.translate(camX, 0);
+  const cam = world.cam ? `   camera x ${world.cam.x.toFixed(0)}${world.cam.locked ? ' LOCKED' : ''} loop ${world.run.loop} queue ${world.run.queue.length}` : '';
+  ctx.fillStyle = '#000'; ctx.fillRect(8, 500, cam ? 760 : 460, 32);
   ctx.fillStyle = '#ff0';
   ctx.fillText(`frame ${world.frame}  wave ${world.wave}  fighters ${world.fighters.length}  attackers ${world.fighters.filter((f) => f.ai?.token).length}/${RULES.maxAttackers}`, 14, 514);
-  ctx.fillText(`hitstop ${juice.freeze}  shake ${juice.shake.toFixed(1)}   (* = has attack token)`, 14, 528);
+  ctx.fillText(`hitstop ${juice.freeze}  shake ${juice.shake.toFixed(1)}   (* = has attack token)${cam}`, 14, 528);
   ctx.restore();
+}
+
+// Scrolling stage: joins (magenta), zone lock screens (orange; solid = locked) with their centre x, the stage end.
+function drawScroll(ctx, world) {
+  const s = world.stage, fl = s.floor;
+  ctx.lineWidth = 2; ctx.font = '12px monospace';
+  for (const j of joinsOf(s)) {
+    ctx.strokeStyle = 'rgba(255,60,255,0.9)'; ctx.beginPath(); ctx.moveTo(j, 0); ctx.lineTo(j, fl.bottom); ctx.stroke();
+    ctx.fillStyle = '#ff7cff'; ctx.fillText(`join ${j}`, j + 4, 14);
+  }
+  s.zones.forEach((z, i) => {
+    const on = world.run.locked && world.run.zone === i;
+    ctx.strokeStyle = on ? 'rgba(255,150,40,1)' : 'rgba(255,150,40,0.6)'; ctx.setLineDash(on ? [] : [10, 6]);
+    ctx.strokeRect(z.x - 480 + 3, 30, 954, fl.bottom - 30);
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(z.x, fl.top - 20); ctx.lineTo(z.x, fl.bottom + 20); ctx.stroke();
+    ctx.fillStyle = '#ffa040'; ctx.fillText(`zone ${i + 1} x${z.x} ${z.enemies.length} rats${i < world.run.zone ? ' (clear)' : ''}`, z.x - 70, fl.top - 26);
+  });
+  ctx.strokeStyle = '#7cff7c'; ctx.beginPath(); ctx.moveTo(s.end, fl.top); ctx.lineTo(s.end, fl.bottom); ctx.stroke();
+  ctx.fillStyle = '#7cff7c'; ctx.fillText('end (loop)', s.end - 30, fl.bottom + 14);
 }

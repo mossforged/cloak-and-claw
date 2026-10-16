@@ -44,7 +44,7 @@ export function phaseOf(f) {
 }
 
 export function startMove(f, key) {
-  f.move = movesOf(f)[key]; f.moveKey = key;
+  f.move = movesOf(f)[key] ?? f.def.moves[key]; f.moveKey = key;   // a kit without the move (jumpSlash with a cutlass) = the fighter's own
   if (f.weapon) f.weapon.hit = false;
   f.mf = 0; f.queued = false; f.bounced = false; f.hitList.clear();
   if (f.control.mx) f.facing = Math.sign(f.control.mx);
@@ -148,7 +148,7 @@ export function updateFighter(f, world) {
   // physics
   f.x += f.vx; f.y += f.vy;
   if (f.z > 0 || f.vz > 0) { f.z += f.vz; if (f.z <= 0) land(f); }
-  const fl = world.stage.floor;
+  const fl = world.bounds;
   if (!f.entering) {
     const x = Math.max(fl.left, Math.min(fl.right, f.x));
     if (RULES.wallBounce && x !== f.x && BOUNCY.includes(f.state) && Math.sign(f.vx) === Math.sign(f.x - x)) f.vx = -f.vx * RULES.wallBounce;

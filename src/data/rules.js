@@ -5,7 +5,9 @@ export const RULES = {
   maxAttackers: 1,        // how many enemies may commit to attacking at once (fairness)
   hurtFriction: 0.85,     // knockback slowdown per frame while hurt
   knockdown: { vz: 6.5, vx: 4.5, downFrames: 45, getupFrames: 18, invulnAfter: 30 },
-  waveDelay: 90,          // frames between clearing a wave and the next arriving
+  waveDelay: 90,
+  // scrolling stages (T013): at most enemyCap enemies on screen; a zone's rats walk in zoneStagger frames apart
+  enemyCap: 5, zoneStagger: 24,          // frames between clearing a wave and the next arriving
   deadLinger: 50,         // frames a defeated enemy blinks before vanishing
   wallBounce: 0.5,        // thrown / knocked-down fighters hitting the floor's side edge bounce back at this share of their speed
   // floor items (T010): gravity on items popping out of crates / dropped weapons; flyGravity on a tossed weapon;

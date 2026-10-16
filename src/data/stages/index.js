@@ -1,2 +1,3 @@
 import harborMarket from './harbor-market.js';
-export const STAGES = { [harborMarket.id]: harborMarket };
+import harborRun from './harbor-run.js';
+export const STAGES = { [harborMarket.id]: harborMarket, [harborRun.id]: harborRun };

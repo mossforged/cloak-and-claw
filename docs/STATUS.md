@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T011 rat rig + weapon kits (merged 2026-10-15; rat look is a stopgap). Last art task: A008 rat gear (merged). Queued: A009 rat parts redrawn from the standee.
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T013 scrolling Harbor Market (merged 2026-10-16; user passed the play check). Last art task: A008 rat gear (merged). Queued: A009 rat parts redrawn from the standee.
 
 ## Next
-1. **Code builder:** T013 (scrolling Harbor Market).
+1. **Code builder:** T015 (subtle bracing motion while blocking). Next after it: the rig bench, once the rig standard is approved.
 2. **Art builder: ON HOLD.** A009 waits for the rig standard (study 2026-10-16); it will be rewritten to the standard's first gate (the rat master) once the user agrees.
-3. **User:** judges T013's look and feel; judges A009 (does it match the standee? head S or R?).
+3. **User:** approve or change the rig standard's rules; confirm two T013 calls (camera never scrolls back; the stage loop jumps to the start); judge T015.
 4. **After A009 is approved:** a gear refit art task (hood, helmet, hat on the chosen head), then a code task to import A009 into the rat rig.
 
 ## Stage plan
@@ -21,7 +21,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T013-harbor-scrolling-stage.md` (A007 layers as the first scrolling stage). Run the game with `tools/Play.command` or `tools/serve.py` (no stale cache).
+- Code: `docs/tasks/T015-block-brace-idle.md`. Run the game with `tools/Play.command`.
 - Art: nothing until the rig standard is agreed. A009 is on hold (don't start it).
 
 ## Open questions (for the user)
@@ -36,7 +36,7 @@
 - Bramble Brute as the first boss.
 - Rig follow-ups (A006 covers most; still to add later: a raised-knee leg and a gripping hand on the sword arm for the grab knee, from T009): shield drawn facing the viewer, a raised-guard shield arm, a gritted-teeth bracing head (T007); a torso turned side-on a torso turned side-on / raised-arm torso so slash2 can be a true horizontal cut and the cast pose stops looking awkward (same root cause); feet ~5 px off the floor in knockdown and slash3 strike poses; optional shared shading layer over the assembled rig.
 - Lab boot code duplicates `src/main.js` (T001 note); merge the two if the lab grows in Stage 3.
-- Belt depth: the Harbor Market art only allows a 63 px belt (packet asked 85+). User: "we might need to eventually return to belt depth and then get the art to match the goal." Plan: when stages become layered (Stage 5), set the target belt depth first and brief the stage art to it. Also: feet overlap two front dock posts slightly; fighters look a bit smaller after the zoom.
+- Harbor run (T013): a stone strip is drawn behind the bottom of the market art so the sea doesn't show along the lane; a stand-in until stage art has a proper ground edge. Brief future stage art with a clean ground edge.
 - Companion / pet that fights alongside you (Castle Crashers' animal orbs). User likes it.
 - Co-op party of up to **three** players (user), not just two; plan Stage 8 and belt depth for it.
 - **Weapon kits** (decision 2026-10-15): the rat's grip hands, spear, bow and arrow were folded into A004; after it, a code task for weapon kits on the rig.
@@ -49,7 +49,15 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T013 (harbor-run scrolling stage; 15/15 tests; user passed the play check). Builder also fixed a T010 freeze (jump attack while holding a floor weapon), with a test. Belt depth settled at 120 px on the scrolling stage. Wrote T015 (bracing motion, user idea).
 2026-10-16 lead: study "How pros build 2D rigs" + proposed rig standard (separate hands, feet, pelvis; planned swap library; master-first, cut-not-regenerate; four gates with a motion test). A009 on hold pending the user's yes. T013 waiting for the user's play check.
+2026-10-15 code: T013 human check done (user): sea strip fixed, joins not noticeable ("the background images seem smooth"), parallax good, no freeze. Ready for lead review.
+2026-10-15 code: T013 round 3: user confirmed no freeze, parallax good. Blue sea strip between the back art's uneven feet and the lane: stone backfill (40 px of the floor tile, darkened 0.35) drawn behind the back segments (`layers.floor.backfill`, lab sliders). Segment/join screens retaken.
+2026-10-15 code: T013 user check: lines and unlock shudder confirmed gone (round 2). Golden Axe feel / joins question still for the user.
+2026-10-15 code: T013 round 2 (user playtest): freeze before fight 3 = jump attack while holding a cutlass/club/fish threw every frame (T010 bug, also on the arena): startMove falls back to the fighter's own move. Black lines while hitting = fractional shake opening floor tile edges: whole-pixel shake on layered stages + 1 px tile overlap. Unlock shudder = camera snapped to the player: now glides at `camera.catchUp` 4 px/frame.
+2026-10-15 code: tests: props #11 (jump attack with every kit), harbor-run: camera never jumps more than catchUp, unlock glide, 20-seed rough-play (grab/jump/block/wander mash) never throws or stalls.
+2026-10-15 code: T013 on branch `t013-harbor-run`: new `harbor-run` scrolling stage (A007 layers as webp, floor tile cross-faded by tools/tile_fade.py), sim/camera.js + sim/zones.js (w.cam, w.run, w.bounds; arena bounds = stage.floor, numbers identical to main), render/layers.js, GO arrow, debug zones/joins, ?stage=harbor-market. tests/harbor-run.test.mjs: bot clears all 4 zones x 3 seeds with all rat types; archer stays on the locked screen.
+2026-10-15 code: T013 joins hidden by posts/lamp on the floor's back edge (front pieces are too low and drift at 1.15x); camera never scrolls back; loop teleports to the start. Lab section added. Screens in docs/screens/T013/; human feel check open.
 2026-10-15 lead: merged T011 (rat rig + weapon kits; spearman and archer in waves 2-3; 14/14 tests, CI green). User agreed: rat look is the drawings, not the rig -> A009 redraws the rat parts from the art-bible standee; T013 next for code.
 2026-10-15 code: T011 round 2: game froze at wave 2 for the user = Chrome kept a stale `fighters/index.js` from the plain `http.server` (not a code bug). Added `tools/Play.command` (double-click; no-cache server on port 8100). User: spear and bow rats "do feel different"; but the rats "don't match the original standee in quality", not crouching, "arms and legs are skinny".
 2026-10-15 code: applied mock-up variant C (docs/screens/T011/5-*.jpg, user agreed) as a stopgap: legs ~1.5x thicker / 0.75x shorter, arms 1.4x, head 1.15x, torso 1.1x, hips lower, feet closer (legs re-solved, walk retuned). Build "t011 rat kits v2". **Lead decision:** matching the standee needs rat parts drawn to its proportions (cut from the standee drawing), or rats as pose-swap standees instead of a rig.
