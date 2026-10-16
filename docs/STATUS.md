@@ -49,6 +49,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: T015 human check done (user): "he looks braced". Ready for lead review.
 2026-10-15 code: T015 on branch `t015-block-brace`: render-only bracing loop while blocking (src/render/brace.js, numbers in src/data/rigs/mouse-fighter-brace.js + JUICE.brace, lab section): breath lifts head/shoulders ~1.4 px, shield lags it, sword twitches, hips sway 1 px with boots planted by leg IK; none in blockstun, eases in; sway rests while shuffle-walking; standee breathes too.
 2026-10-15 code: T015 tests/brace.test.mjs (3 s of block: no sim change, boots planted); 16/16 pass. Filmstrip docs/screens/T015/. Human check open: hold block a few seconds: braced and alive, not frozen or jittery?
 2026-10-16 lead: rig standard approved by the user. A009 arrived (built from the old packet before approval): a big step toward the standee; under review as the rat master + first parts. Its `generated/` raw outputs (32 MB) should be dropped before merge (repo .git ~205 MB).
