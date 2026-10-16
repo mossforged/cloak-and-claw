@@ -14,6 +14,7 @@ import { createEffects } from './effects.js';
 import { createPropFx } from './prop-fx.js';
 import { drawProp, drawPropShadow, drawItem } from './props.js';
 import { drawShot, drawShotShadow } from './shots.js';
+import { drawHelping } from './helping.js';
 
 export function createRenderer(ctx, assets) {
   const fx = createEffects(), pfx = createPropFx(assets);
@@ -49,6 +50,7 @@ export function createRenderer(ctx, assets) {
         else drawStandee(ctx, f, assets, time, fx.flashOf(f.id));
         if (tint) ctx.restore();
       }
+      drawHelping(ctx, world, assets, time);   // T022: downed timer, revive ring, potion in hand
       fx.draw(ctx);
       pfx.draw(ctx);
       ctx.restore();

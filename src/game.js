@@ -18,6 +18,8 @@ const STAGE = STAGES[Q.get('stage')] ? Q.get('stage') : START_STAGE;
 // T021 test: ?heroes=2 (or 3) adds Mouse Fighters on player slots 1, 2 (tinted, render/hero-tint.js): gamepads 2 and 3,
 // or ?keys2 for the second keyboard layout (arrows + numpad). Not in normal play yet.
 const HEROES = Array(Math.max(1, Math.min(3, +Q.get('heroes') || 1))).fill(START_HERO);
+// T022: ?ally=1 adds an AI ally (a tinted Mouse Fighter, sim/ally.js) on the next free slot. Off in normal play for now.
+if (Q.get('ally') === '1' && HEROES.length < 3) HEROES.push({ id: START_HERO, ally: true });
 if (Q.has('keys2')) KEYBOARD2.on = true;
 const newWorld = () => createWorld(STAGE, HEROES);
 

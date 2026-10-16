@@ -7,6 +7,7 @@ import { RIGS } from '../src/data/rigs/index.js';
 import { jointsOfRig } from '../src/render/rig-pose.js';
 import { ITEMS } from '../src/data/items/index.js';
 import { PROPS } from '../src/data/props/index.js';
+import { RULES } from '../src/data/rules.js';
 import { segmentsOf, joinsOf } from '../src/render/layers.js';
 
 let fails = 0;
@@ -54,12 +55,16 @@ for (const [id, s] of Object.entries(STAGES)) {
     check(s.end > xs.at(-1) && s.end <= fl.right, `stage ${id}: end after the last zone, on the floor`);
   }
 }
+// T022: potion drop chances name real props / fighters
+for (const [id, p] of Object.entries(RULES.potions.drops)) if (id !== 'solo') check((PROPS[id] || FIGHTERS[id]) && p >= 0 && p <= 1, `potion drop ${id}: a prop or fighter, chance 0..1`);
+
 // Items, weapon kits and props (T010)
 const dropIds = (d) => (!d ? [] : typeof d === 'string' ? [d] : Object.keys(d));
 for (const [id, it] of Object.entries(ITEMS)) {
-  check(it.id === id && ['weapon', 'food'].includes(it.kind), `item ${id}: id and kind`);
+  check(it.id === id && ['weapon', 'food', 'potion'].includes(it.kind), `item ${id}: id and kind`);
   check(existsSync(it.art.img) && it.art.px > 0, `item ${id}: art exists, px set`);
   if (it.kind === 'food') check(it.heal > 0, `item ${id}: heal`);
+  if (it.kind === 'potion') check(it.heal > 0 && it.splash?.x > 0 && it.splash?.y > 0, `item ${id}: potion heal and splash`);
   if (it.kind !== 'weapon') continue;
   check(it.durability > 0 && it.toss?.damage > 0 && it.art.grip?.length === 2, `item ${id}: durability, toss, grip point`);
   check(it.moves[it.attack] && (!it.airAttack || it.moves[it.airAttack]), `item ${id}: attack move exists`);

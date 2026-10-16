@@ -1,8 +1,9 @@
 // Player slots (T021): key codes and gamepads -> one control object per slot. Pure (runs in Node); input.js feeds it.
 // Slot 0 = KEYS + the first connected pad (exactly the old single-player controls); slots 1, 2 = the second and third
 // pads. The optional second keyboard layout (KEYS2, KEYBOARD2.on) drives slot 1 and takes its keys away from slot 0.
-// A control: { mx, my, attack, jump, grab, start, block, blockTap } (+ debug pause rig cast on slot 0). mx/my -1..1;
-// buttons = pressed this step, block = held, blockTap = block pressed this step.
+// A control: { mx, my, attack, jump, grab, start, block, blockTap, grabHeld, use } (+ debug pause rig cast on slot 0). mx/my -1..1;
+// buttons = pressed this step, block = held, blockTap = block pressed this step; T022: grabHeld = grab held, use = use
+// held (both also true on the step of a press, so a tap shorter than a step still counts once).
 import { KEYS, KEYS2, KEYBOARD2, PAD } from '../data/controls.js';
 
 export const SLOTS = 3;
@@ -21,6 +22,8 @@ function fromKeys(slot, held, pressed, two) {
   for (const a of slot === 0 ? [...BUTTONS, ...VIEW_KEYS] : BUTTONS) ctl[a] = has(pressed, a);
   ctl.block = has(held, 'block');
   ctl.blockTap = has(pressed, 'block');
+  ctl.grabHeld = ctl.grab || has(held, 'grab');
+  ctl.use = has(held, 'use') || has(pressed, 'use');
   return ctl;
 }
 
@@ -37,6 +40,8 @@ export function padInto(ctl, pad, prev) {
     prev[action] = now;
   }
   if (PAD.block.some(b)) ctl.block = true;
+  if (PAD.grab.some(b)) ctl.grabHeld = true;
+  if (PAD.use.some(b)) ctl.use = true;
 }
 
 // held/pressed: Sets of key codes; pads: navigator.getGamepads() (nulls skipped, connected pads in order = slots);

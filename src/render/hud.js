@@ -3,6 +3,7 @@
 import { bus } from '../core/events.js';
 import { BUILD } from '../config.js';
 import { JUICE } from '../data/juice.js';
+import { RULES } from '../data/rules.js';
 
 const HUD_STEP = 320;   // px between hero panels along the top (T021)
 
@@ -38,12 +39,19 @@ function drawHero(ctx, h, assets, multi) {
   ctx.save(); ctx.beginPath(); ctx.arc(x + 52, 50, 34, 0, Math.PI * 2);
   ctx.fillStyle = '#f3e6c8'; ctx.fill(); ctx.lineWidth = 5; ctx.strokeStyle = multi ? JUICE.heroes.tag[h.slot] : '#2a1630'; ctx.stroke(); ctx.clip();
   if (h.slot > 0 && tint) ctx.filter = tint;
-  if (h.state === 'dead' && multi) ctx.globalAlpha = 0.45;
+  if ((h.state === 'dead' || h.state === 'downed') && multi) ctx.globalAlpha = 0.45;
   ctx.drawImage(img, 0, 0, img.width, img.height * 0.55, x + 6, 14, 92, 92 * 0.55 * img.height / img.width);
   ctx.restore();
-  text(ctx, multi ? `P${h.slot + 1} ${h.def.name}` : h.def.name, x + 96, 34, 22, multi ? JUICE.heroes.tag[h.slot] : '#fff');
+  const tag = h.controller?.kind === 'ai' ? 'Ally' : `P${h.slot + 1}`;   // T022: the AI ally's panel
+  text(ctx, multi ? `${tag} ${h.def.name}` : h.def.name, x + 96, 34, 22, multi ? JUICE.heroes.tag[h.slot] : '#fff');
   bar(ctx, x + 96, 44, 220, 16, k, lk, k > 0.3 ? '#5fd35a' : '#ff5a4e');
   if (multi && h.state === 'dead') text(ctx, 'Down', x + 206, 59, 16, '#ff9a6a', 'center');
+  if (h.state === 'downed') text(ctx, `Downed ${Math.ceil(h.downT / 60)}`, x + 206, 59, 16, h.downT < RULES.downed.frames * JUICE.help.timer.warn ? '#ff5a4e' : '#ffe9a8', 'center');
+  if (h.potion) {   // T022: the potion slot
+    const pi = assets.get(h.potion.art.img), ph = 30, pw = pi.width * ph / pi.height;
+    ctx.fillStyle = 'rgba(42,22,48,0.75)'; ctx.beginPath(); ctx.roundRect(x + 290, 64, 30, 34, 8); ctx.fill();
+    ctx.drawImage(pi, x + 305 - pw / 2, 66, pw, ph);
+  }
   if (h.weapon && !h.weapon.broken) {   // T010: held weapon + hits left
     const W = h.weapon, img = assets.get(W.def.art.img), w = 46, ih = img.height * w / img.width;
     ctx.fillStyle = 'rgba(42,22,48,0.75)'; ctx.beginPath(); ctx.roundRect(x + 92, 66, 54, 28, 8); ctx.fill();
@@ -73,6 +81,7 @@ export function drawHud(ctx, world, assets, view, runLines = null, camX = 0) {
   if (world.frame < 600 && !world.over) {
     ctx.globalAlpha = world.frame > 480 ? (600 - world.frame) / 120 : 1;
     text(ctx, 'Move: WASD   Attack: J   Jump: K   Block: hold L   Grab, pick up, throw weapon: H   Pause: P', view.w / 2, view.h - 18, 18, '#fff', 'center');
+    if (multi) text(ctx, 'Pick up a downed friend: hold H by him   Potion: tap U to toss, hold U to drink', view.w / 2, view.h - 42, 18, '#ffe9a8', 'center');
     ctx.globalAlpha = 1;
   }
   if (world.over) {

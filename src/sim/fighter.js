@@ -1,6 +1,7 @@
 // Fighter entity + state machine. Pure logic: no drawing, no DOM.
 // States: idle walk block jumpStart jump attack hurt knockdown down getup dead, plus grab/throw (sim/grab.js):
-// grabbing throw (holder), grabbed thrown (held / flying body); toss, pickup (held weapons, sim/weapons.js).
+// grabbing throw (holder), grabbed thrown (held / flying body); toss, pickup (held weapons, sim/weapons.js);
+// T022: downed, revive (sim/revive.js), potion potionToss drink (sim/potions.js).
 // Every fighter is driven by f.control = { mx, my, attack, jump, block?, grab?, face? } (set by input or AI).
 // block (held) only works for fighters whose def has a `block` config.
 // Jump squat (T014 A/B test): with def.jumpSquatMode 'A' a jump first crouches in `jumpStart` for def.move.jumpSquat frames
@@ -9,6 +10,8 @@ import { RULES } from '../data/rules.js';
 import { bus } from '../core/events.js';
 import { stepGrabbing, stepThrow, landThrown } from './grab.js';
 import { movesOf, attackOf, airAttackOf, pressGrab, stepToss, stepPickup, settleWeapon } from './weapons.js';
+import { canGoDown, goDown, stepDowned, stepRevive } from './revive.js';
+import { startPotion, stepPotion } from './potions.js';
 
 let nextId = 1;
 
@@ -21,6 +24,7 @@ export function createFighter(def, x, y, opts = {}) {
     move: null, mf: 0, queued: false, squatAttack: false, hitList: new Set(), bounced: false,
     grab: null, heldBy: null, thrower: null,   // grab/throw (sim/grab.js)
     weapon: null, pickup: null, moveKey: null, // held weapon + pickup in progress (sim/weapons.js); key of the current move
+    potion: null, revive: null, downT: 0,      // T022: carried potion's def; friend being picked up; downed frames left
     control: { mx: 0, my: 0, attack: false, jump: false },
     ai: opts.ai ? { mode: 'hover', wait: 0, cool: 30, token: false, yOff: 0, attacked: false, target: null, targetT: 0 } : null,
     entering: !!opts.entering, remove: false,
@@ -28,7 +32,7 @@ export function createFighter(def, x, y, opts = {}) {
 }
 
 export const ACTIVE_STATES = ['idle', 'walk'];
-export const HELPLESS = ['hurt', 'knockdown', 'down', 'getup', 'dead', 'grabbed', 'thrown'];   // all but 'hurt' can't be hit
+export const HELPLESS = ['hurt', 'knockdown', 'down', 'getup', 'dead', 'grabbed', 'thrown', 'downed'];   // all but 'hurt' can't be hit
 const BOUNCY = ['thrown', 'knockdown', 'down'];   // bounce off the floor's side edges (RULES.wallBounce)
 export const canAct = (f) => ACTIVE_STATES.includes(f.state);
 
@@ -82,6 +86,7 @@ export function updateFighter(f, world) {
     case 'idle': case 'walk': {
       if (c.block && d.block) { setState(f, 'block'); f.stun = 0; f.vx = f.vy = 0; break; }
       if (c.attack && attackOf(f)) { startMove(f, attackOf(f)); break; }
+      if (c.use && f.potion) { startPotion(f); break; }
       if (c.grab && pressGrab(f, world)) break;
       f.vx = c.mx * d.move.walk * sp;
       f.vy = c.my * d.move.depth * sp;
@@ -128,6 +133,9 @@ export function updateFighter(f, world) {
     case 'throw': stepThrow(f, world); break;
     case 'toss': stepToss(f, world); break;
     case 'pickup': stepPickup(f, world); break;
+    case 'revive': stepRevive(f, world); break;
+    case 'downed': stepDowned(f, world); break;
+    case 'potion': case 'potionToss': case 'drink': stepPotion(f, world); break;
     case 'grabbed':   // positioned by the holder; freed if the holder let go without saying so
       f.vx = f.vy = 0;
       if (f.heldBy?.grab?.target !== f) { f.heldBy = null; f.z = 0; setState(f, 'idle'); }
@@ -135,7 +143,8 @@ export function updateFighter(f, world) {
     case 'down':
       f.vx *= 0.8;
       if (f.t >= K.downFrames) {
-        if (f.hp <= 0) { setState(f, 'dead'); bus.emit('defeated', { f }); }
+        if (f.hp <= 0 && canGoDown(f, world)) goDown(f);
+        else if (f.hp <= 0) { setState(f, 'dead'); bus.emit('defeated', { f }); }
         else { setState(f, 'getup'); f.invuln = K.getupFrames + K.invulnAfter; }
       }
       break;

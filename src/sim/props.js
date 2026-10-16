@@ -2,12 +2,14 @@
 // Props (w.props): obstacles on the belt that hero-team swings, thrown bodies and tossed weapons break after `hp` hits;
 // on break they drop their contents (an item id or a weighted pick, rolled on w.itemRng so the fight's rng is untouched).
 // Items (w.items): `pop` (falling, can't be picked up), `floor` (lying; weapons vanish after floorLife), `fly` (a tossed
-// weapon: the first enemy or prop it touches is hit, then it bounces off and drops). Held weapons: sim/weapons.js.
+// weapon: the first enemy or prop it touches is hit, then it bounces off and drops), `lob` (a tossed potion, T022:
+// sim/potions.js; heals a hero where it lands, else lies on the floor). Crates/enemies may also drop a potion (dropPotion). Held weapons: sim/weapons.js.
 import { RULES } from '../data/rules.js';
 import { PROPS } from '../data/props/index.js';
 import { ITEMS } from '../data/items/index.js';
 import { bus } from '../core/events.js';
 import { applyHit, vulnerable, hitboxOf } from './combat.js';
+import { dropPotion, landPotion } from './potions.js';
 
 let nextId = 1;
 
@@ -45,6 +47,7 @@ function damageProp(w, p, by, x, z) {
   bus.emit('propBreak', { by, prop: p, x: p.x, y: p.y });
   const id = pick(p.drops, w.itemRng);
   if (id) spawnItem(w, id, p.x, p.y + 1, p.def.body.h * 0.4);
+  dropPotion(w, p.def.id, p.x, p.y + 2, p.def.body.h * 0.5);   // T022
 }
 
 const touches = (p, x0, x1, y, depth, z0) => !p.broken && x1 >= p.x - p.def.body.w / 2 && x0 <= p.x + p.def.body.w / 2
@@ -123,6 +126,7 @@ export function stepItems(w) {
   for (const it of w.items) {
     if (it.state === 'floor') { if (it.def.kind === 'weapon' && --it.life <= 0) it.gone = true; continue; }
     it.x += it.vx; it.z += it.vz;
+    if (it.vy) it.y += it.vy;   // a lobbed potion (T022) crosses lanes
     it.vz -= it.state === 'fly' ? I.flyGravity : I.gravity;
     it.spin += it.state === 'fly' ? it.dir * it.def.toss.spin : it.vx * 0.04;
     if (it.state === 'fly' && flyHit(w, it)) {
@@ -130,7 +134,8 @@ export function stepItems(w) {
       it.state = 'pop'; it.vx = -it.vx * 0.2; it.vz = 4;
     }
     if (it.x < fl.left || it.x > fl.right) { it.x = Math.max(fl.left, Math.min(fl.right, it.x)); it.vx = -it.vx * 0.3; if (it.state === 'fly') it.state = 'pop'; }
-    if (it.z <= 0) { it.z = 0; it.vx = it.vz = 0; it.state = 'floor'; it.thrower = null; it.life = I.floorLife; bus.emit('itemLand', { item: it }); }
+    if (it.z <= 0 && it.state === 'lob' && landPotion(w, it)) continue;
+    if (it.z <= 0) { it.z = 0; it.vy = 0; it.vx = it.vz = 0; it.state = 'floor'; it.thrower = null; it.life = I.floorLife; bus.emit('itemLand', { item: it }); }
   }
   w.items = w.items.filter((it) => !it.gone);
 }
@@ -141,5 +146,10 @@ export function dropOnKO(w) {
     if (f.hp > 0 || f.dropped || !f.def.drop) continue;
     f.dropped = true;
     if (w.itemRng.next() < f.def.drop.chance) spawnItem(w, f.def.drop.item, f.x, f.y, 50, { vx: -f.facing * 1.5, vz: 4.5 });
+  }
+  for (const f of w.fighters) {   // T022: some enemies also drop a potion (any enemy, with or without a weapon drop)
+    if (f.hp > 0 || f.potionRolled || f.team !== 'enemy') continue;
+    f.potionRolled = true;
+    dropPotion(w, f.def.id, f.x, f.y, 50);
   }
 }

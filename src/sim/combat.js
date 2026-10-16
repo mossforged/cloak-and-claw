@@ -4,6 +4,7 @@ import { bus } from '../core/events.js';
 import { phaseOf, setState, HELPLESS } from './fighter.js';
 import { releaseGrab } from './grab.js';
 import { wearWeapon } from './weapons.js';
+import { stopRevive } from './revive.js';
 
 export function hitboxOf(f) {
   if (!f.move?.hitbox || phaseOf(f)[0] !== 'active') return null;   // shot moves have no hitbox (sim/shots.js)
@@ -55,7 +56,9 @@ function applyBlock(a, t, m, at) {
 export function applyHit(a, t, m, world, at) {
   if (blocks(a, t)) return applyBlock(a, t, m, at);
   if (t.grab) releaseGrab(t);   // a hit on the holder drops the grab (T009)
-  const dmg = Math.max(1, Math.round(m.damage + (a.def.stats.power ?? 0) - (t.def.stats.defense ?? 0)));
+  if (t.revive) stopRevive(t, 'hit');   // T022: a hit stops a friend's pick-up
+  const base = m.damage + (a.def.stats.power ?? 0) - (t.def.stats.defense ?? 0);
+  const dmg = Math.max(1, Math.round(a.dmgScale ? base * a.dmgScale : base));   // T022: an AI ally hits softer (ALLY.damage)
   t.hp = Math.max(0, t.hp - dmg);
   t.lastHit = world.frame;
   const targetPhase = phaseOf(t)[0];   // for the run log: was the target mid-windup?

@@ -39,6 +39,13 @@ export function drawItem(ctx, it, assets, time) {
   const kz = Math.max(0.4, 1 - it.z / 160);
   ctx.fillStyle = `rgba(20,12,30,${0.3 * kz})`;
   ctx.beginPath(); ctx.ellipse(it.x, it.y, w * 0.42 * kz, w * 0.1 * kz, 0, 0, Math.PI * 2); ctx.fill();
+  if (it.state === 'lob') {   // T022: a tossed potion leaves a short green glow trail along its arc
+    for (let i = JUICE.help.ghosts; i >= 1; i--) {
+      const gz = it.z - (it.vz + RULES.items.gravity * i / 2) * i * 1.6;
+      ctx.fillStyle = `rgba(140,255,130,${0.32 * (1 - i / (JUICE.help.ghosts + 1))})`;
+      ctx.beginPath(); ctx.arc(it.x - it.vx * i * 1.6, it.y - (it.vy ?? 0) * i * 1.6 - gz - fh * 0.3, 9 - i, 0, Math.PI * 2); ctx.fill();
+    }
+  }
   if (it.state === 'fly') {   // a few fading ghosts behind the spinning weapon
     for (let i = I.ghosts; i >= 1; i--) {
       ctx.globalAlpha = 0.18 * (1 - i / (I.ghosts + 1));

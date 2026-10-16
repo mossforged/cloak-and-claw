@@ -67,8 +67,8 @@ function grabPose(f, poses, S, time) {
 }
 
 // Weapon toss (T010): `toss` over def.toss.wind frames, then `tossRelease` easing back to idle over the recovery.
-function tossPose(f, poses, S, time) {
-  const P = (k) => evalPose(poses[k], S, 0), T = f.def.toss;
+function tossPose(f, poses, S, time, T = f.def.toss) {
+  const P = (k) => evalPose(poses[k], S, 0);
   if (f.t < T.wind) return { key: 'toss', joints: mix(evalPose(poses.idle, S, time), P('toss'), easeOut(f.t / T.wind)), swap: swapOf(poses.toss) };
   const k = (f.t - T.wind) / T.recovery;
   return { key: 'tossRelease', joints: mix(P('tossRelease'), evalPose(poses.idle, S, time), easeInOut(Math.max(0, k * 1.4 - 0.4))),
@@ -155,7 +155,10 @@ export function targetPose(f, rig, time, override) {
     case 'grabbed': case 'thrown': if (poses.held) return named('held'); break;   // T011: a rig with a `held` pose (rats)
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
-    case 'down': case 'dead': return named('down');
+    case 'down': case 'dead': case 'downed': return named('down');
+    case 'revive': if (poses.reach) return named('reach'); break;   // T022: crouched, hand down to his friend
+    case 'potionToss': if (poses.toss) return tossPose(f, poses, S, time, RULES.potions); break;
+    case 'drink': if (poses.cast) return named('cast'); break;
     case 'getup': {
       const k = easeInOut(Math.min(1, f.t / RULES.knockdown.getupFrames));
       return { key: 'getup', joints: mix(evalPose(poses.down, S, 0), evalPose(poses.getup, S, 0), Math.min(1, k * 1.6)), swap: swapOf(poses.getup) };
