@@ -34,10 +34,10 @@ export const ACTION_POSES = {
     feet: { front: [F0 + 6, 0, 0], back: [B0 - 6, 0, 0] }, tail: 30, 'scarf-tail': 5,
   }),
   throwRelease: P({
-    swap: { ...ATTACK, 'hand-back': 'hand-back-open' },
-    torso: 14, head: 10, dx: 4, dy: 3, hand: { off: [26.9, 6.2], dir: 3 }, shield: { off: [-2, 24], turn: 2 },
+    swap: { ...ATTACK, 'hand-back': 'hand-back-open', ...OUT },
+    torso: 14, head: 10, dx: 4, dy: 6, hand: { off: [26.9, 6.2], dir: 3 }, shield: { off: [-2, 24], turn: 2 },
     'arm-front-upper.order': 805, 'arm-front-lower.order': 806,
-    feet: { front: [F0 - 8, 3, -15], back: [B0 + 8, 0, 0] }, tail: -25, 'scarf-tail': -10,
+    feet: { front: [F0 - 3, 0, 0], back: [B0 + 8, 0, 0] }, tail: -25, 'scarf-tail': -10,
   }),
   // Weapon toss (T010, H while holding a floor weapon): toss = cocked back overhead, tossRelease = arm whipped forward,
   // the hand opens once it lets go (rig emptyHand). Wind lasts def.toss.wind frames, then the release eases back to idle over toss.recovery.
@@ -47,10 +47,10 @@ export const ACTION_POSES = {
     feet: { front: [F0, 0, 0], back: [B0 - 3, 3, 12] }, tail: 15, 'scarf-tail': 5,
   }),
   tossRelease: P({
-    swap: ATTACK,
-    torso: 12, head: 8, dx: 4, dy: 3, hand: { off: [27.2, 5.3], dir: 1 }, shield: { off: [-18, 26], turn: 2 },
+    swap: { ...ATTACK, ...OUT },
+    torso: 12, head: 8, dx: 4, dy: 6, hand: { off: [27.2, 5.3], dir: 1 }, shield: { off: [-18, 26], turn: 2 },
     'arm-front-upper.order': 805, 'arm-front-lower.order': 806,
-    feet: { front: [F0 - 8, 3, -15], back: [B0 + 8, 0, 0] }, tail: -20, 'scarf-tail': -9,
+    feet: { front: [F0 - 3, 0, 0], back: [B0 + 8, 0, 0] }, tail: -20, 'scarf-tail': -9,
   }),
   // Weapon pickup (T010 round 2): stow = sword arm swept back to the hip, blade down and behind (sheathing it, or
   // flicking the held weapon away); reach = crouched, leaning in, hand down at the weapon on the floor in front.

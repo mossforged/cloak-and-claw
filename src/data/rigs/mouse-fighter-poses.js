@@ -6,10 +6,11 @@
 // dir to the next's the way the numbers run), the shield fist from its shoulder, and the ankles (x, lift, tilt) planted
 // by leg IK; the moves came from the old A002 poses (fist and blade where they were), then got real footwork (T023).
 // The sword is rigid in the fist ('sword' stays 0; its direction is the hand's): the handle always runs through the slot.
-// Footwork: planted poses stand on the turned-out near boot (`foot-front-out`); walking, jumping and lunging on the
+// Footwork: planted poses and strikes stand on the turned-out near boot (`foot-front-out`); walking and jumping on the
 // forward one. Attacks: windup sits back on the trailing (near) leg and lightens the leading (far) foot; the strike
-// steps the leading foot in while the trailing boot stays where it was on the floor (the sim's lunge carries the body:
-// in the rig's frame that boot slides back by the lunge); recovery settles to the stance.
+// steps the leading foot in while the trailing boot stays flat and turned out where it was on the floor, a braced lunge
+// (user T023 round 2: never toes-up behind him). The sim's lunge carries the body: in the rig's frame that boot slides
+// back by the lunge; recovery settles to the stance.
 // swap: { part: swap name } switches a part's drawing for that pose or move phase (rigs/mouse-fighter.js `swaps`).
 import rig from './mouse-fighter.js';
 import { pose, walkWaves } from './biped-ik.js';
@@ -37,12 +38,14 @@ export default {
     'arm-front-upper': [0, 3, 0.1], 'hand-front': [0, 2, 0.2], 'arm-back-upper': [0, 3, 0.1], 'hand-back': [0, 1.5, 0.3],
     tail: [0, 9, 0.3], 'scarf-tail': [0, 4, 0.55], 'scarf-tail-2': [-22, 6, 0.75],
   },
-  // Walk: 2.1 strides/s, hips 6 px down so the straight-ish legs reach a stride that matches his walk speed (2.7 px/frame);
+  // Walk: 2.1 strides/s, both strides centred 0.6 of the way in from each hip (user T023 round 2: on the wide 3/4 hips
+  // each leg sweeping round its own spot looked locked, near foot always trailing), hips 6 px down so the straight-ish
+  // legs reach a stride that matches his walk speed (2.7 px/frame);
   // legs by IK on an ankle path (planted sweep back, lifted arc forward), one wave per joint (tests/rig.test.mjs: no
   // skating, no sinking). Forward near boot. Sword carried up and ready (as in the stance), swinging a little in step.
   walk: {
     speed: 2.1,
-    ...walkWaves(rig, { speed: 2.1, walk: 162, lift: 6, dy: 6 }),
+    ...walkWaves(rig, { speed: 2.1, walk: 162, lift: 6, dy: 6, gather: 0.6 }),
     dy: [6, 1, 0.75, 2], torso: [4, 1.5, 0, 2], head: [-4, 1.5, 0.1, 2],
     'arm-front-upper': [4, 9, 0.5], 'arm-front-lower': [0, 6, 0.6], 'arm-back-upper': [0, 7, 0], 'hand-back': [0, 3, 0.1],
     tail: [5, 12, 0.25], 'scarf-tail': [-4, 4, 0.4, 2], 'scarf-tail-2': [-18, 8, 0.6, 2],
@@ -53,16 +56,20 @@ export default {
     'arm-front-upper.order': 805, 'arm-front-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
     torso: 18, head: -6, dy: 12, hand: { off: [-13.1, 23.2], dir: 32 }, shield: { off: [-1.8, 24] },
     feet: PLANT, tail: -15, 'scarf-tail': -7 }),
-  block: P({   // whole guard arm thrust out at chest height carrying the shield; effort head; sword cocked high, ready to answer;
-    // crouched on planted boots (turned-out near boot)
-    'arm-front-upper.order': 805, 'arm-front-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
-    swap: { 'arm-back-upper': 'arm-back-guard', head: 'head-effort', ...OUT },
-    torso: 14, head: -2, dy: 8, 'arm-back-upper': -10, hand: { off: [-0.6, 13.2], dir: -92 },
+  block: P({   // shield thrust out at chest height, face to the camera, his head peering over the rim (the old A002 block's
+    // look, user T023 round 2: the whole guard arm turned it edge-on behind his body); effort head; sword cocked high,
+    // ready to answer; crouched on planted boots (turned-out near boot). Both arms over the tunic.
+    'arm-front-upper.order': 805, 'arm-front-lower.order': 806,
+    'arm-back-upper.order': 808, 'arm-back-lower.order': 809, 'hand-back.order': 811, 'shield.order': 812,
+    swap: { head: 'head-effort', ...OUT },
+    torso: 14, head: -2, dy: 8, hand: { off: [-0.6, 13.2], dir: -92 }, shield: { off: [14, 0], turn: -8 },
     feet: PLANT, tail: -20, 'scarf-tail': -9 }),
   blockHit: P({   // on a blocked hit (blockstun): the shield is shoved further out at the attacker and eases back
-    'arm-front-upper.order': 805, 'arm-front-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
-    swap: { 'arm-back-upper': 'arm-back-guard', head: 'head-effort', ...OUT },
-    torso: 19, head: 0, dy: 9, 'arm-back-upper': -2, 'shield.sx': 1.14, 'shield.sy': 1.14, hand: { off: [-1.8, 13.1], dir: -87 },
+    'arm-front-upper.order': 805, 'arm-front-lower.order': 806,
+    'arm-back-upper.order': 808, 'arm-back-lower.order': 809, 'hand-back.order': 811, 'shield.order': 812,
+    swap: { head: 'head-effort', ...OUT },
+    torso: 19, head: 0, dy: 9, 'shield.sx': 1.14, 'shield.sy': 1.14, hand: { off: [-1.8, 13.1], dir: -87 },
+    shield: { off: [18, 1], turn: -4 },
     feet: PLANT, tail: -25, 'scarf-tail': -10 }),
   hurt: P({   // snapped back: head thrown back wincing, sword arm flung down, open far hand, weight on the heels
     'arm-front-upper.order': 805, 'arm-front-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
@@ -96,9 +103,9 @@ export default {
     slash1: {   // overhead chop: sits back with the blade up behind, then steps in and chops forward-down
       windup: P({ swap: OUT, torso: -12, head: -2, dy: 3, hand: { off: [-20.4, -16.1], dir: -120 }, shield: { off: [11.7, -8.7] },
         feet: { front: [F0, 0, 0], back: [B0 - 3, 3, 12] }, 'scarf-tail': 4 }),
-      strike: P({ swap: ATTACK, torso: 4, head: 8, dx: 2, dy: 3, pelvis: 4, hand: { off: [24.8, 11.8], dir: 30 }, shield: { off: [-4.5, 26.5] },
+      strike: P({ swap: { ...ATTACK, ...OUT }, torso: 4, head: 8, dx: 2, dy: 6, pelvis: 4, hand: { off: [24.8, 11.8], dir: 30 }, shield: { off: [-4.5, 26.5] },
         'arm-front-upper.order': 805, 'arm-front-lower.order': 806,   // the arm crosses in front of the tunic
-        feet: { front: [F0 - 9, 2, -15], back: [B0 + 6, 0, 0] }, 'scarf-tail': -7, tail: -15 }),
+        feet: { front: [F0 - 5, 0, 0], back: [B0 + 6, 0, 0] }, 'scarf-tail': -7, tail: -15 }),
     },
     slash2: {   // spin slash: twists away (body narrowed = turning), faces the other way for the first two active frames
       // (mirrored, back torso and back of the head, blade trailing), then comes round with the blade flat out (side torso).
@@ -108,9 +115,9 @@ export default {
       through: P({ swap: { torso: 'torso-back', head: 'head-back' }, sx: -1, torso: -4, head: 0, dy: 3,
         hand: { off: [24.7, 0], dir: 180 }, shield: { off: [-12, 6] }, 'sword.sx': 0.55,
         feet: { front: [F0 + 8, 0, 0], back: [B0 - 8, 0, 0] }, tail: 30, 'scarf-tail': 5 }),
-      strike: P({ swap: { ...ATTACK, torso: 'torso-side' }, torso: 6, head: 6, dx: 2, dy: 3, hand: { off: [27.6, -0.9], dir: 0 },
+      strike: P({ swap: { ...ATTACK, torso: 'torso-side', ...OUT }, torso: 6, head: 6, dx: 2, dy: 6, hand: { off: [27.6, -0.9], dir: 0 },
         shield: { off: [-0.5, 24.2] }, 'arm-front-upper.order': 805, 'arm-front-lower.order': 806,
-        feet: { front: [F0 - 9, 2, -15], back: [B0 + 6, 0, 0] }, 'scarf-tail': -6, tail: -12 }),
+        feet: { front: [F0 - 5, 0, 0], back: [B0 + 6, 0, 0] }, 'scarf-tail': -6, tail: -12 }),
     },
     slash3: {   // big wind-back (turned side-on, effort face, deep on the back leg), full swing over the top with a long
       // stride in: knocks down
@@ -118,16 +125,16 @@ export default {
         hand: { off: [-11.8, -24], dir: -150 }, shield: { off: [13.1, -19.1] },
         'arm-front-upper.order': 650, 'arm-front-lower.order': 651,   // the arm comes out of the side torso's sleeve
         feet: { front: [F0 - 2, 0, 0], back: [B0 - 6, 5, 18] }, 'scarf-tail': 5, tail: 20 }),
-      strike: P({ swap: ATTACK, torso: 14, head: 10, dx: 4, dy: 8, pelvis: 6, hand: { off: [19.3, 19.6], dir: 60 }, shield: { off: [-24, 26] },
+      strike: P({ swap: { ...ATTACK, ...OUT }, torso: 14, head: 10, dx: 4, dy: 11, pelvis: 6, hand: { off: [19.3, 19.6], dir: 60 }, shield: { off: [-24, 26] },
         'arm-front-upper.order': 805, 'arm-front-lower.order': 806,
-        feet: { front: [F0 - 18, 3, -25], back: [B0 + 14, 0, 0] }, 'scarf-tail': -12, tail: -30 }),
+        feet: { front: [F0 - 6, 0, 0], back: [B0 + 14, 0, 0] }, 'scarf-tail': -12, tail: -30 }),
     },
     jumpSlash: {   // airborne: blade from straight up, down through the front; legs tuck in the windup, kick out on the cut
       windup: P({ torso: -14, head: 0, hand: { off: [-19.3, -18.5], dir: -90 }, shield: { off: [9.6, -14] },
         feet: { front: [-22, 18, 10], back: [12, 20, 20] }, tail: 25, 'scarf-tail': 5 }),
       strike: P({ swap: ATTACK, torso: 14, head: 10, hand: { off: [-2.3, 27.5], dir: 120 }, shield: { off: [6.3, 16.5] },
         'arm-front-upper.order': 805, 'arm-front-lower.order': 806,
-        feet: { front: [-34, 8, -20], back: [32, 6, 10] }, 'scarf-tail': 5 }),
+        feet: { front: [-34, 8, 20], back: [32, 6, 10] }, 'scarf-tail': 5 }),
     },
   },
 };

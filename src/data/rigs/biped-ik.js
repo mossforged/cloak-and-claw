@@ -106,9 +106,12 @@ export function fitWave(vals, H = 3) {
 }
 
 // Walk legs: speed cycles/s, walk px/s; each ankle sweeps back under its hip (planted half) and arcs forward lifted
-// `lift` px (swing half); front and back half a cycle apart. dy = hips lowered (px). Returns waves (lists of harmonics) for the leg joints.
-export function walkWaves(rig, { speed, walk, lift, dy = 0, reach = 0, N = 48 }) {
-  const half = walk / speed / 4, hip = (s) => masterAt(rig, `leg-${s}-upper`)[0] + reach;
+// `lift` px (swing half); front and back half a cycle apart. dy = hips lowered (px). gather 0..1 = how far each stride's
+// centre moves from under its own hip toward the middle of the two (wide 3/4 hips: 0 keeps each leg sweeping round its
+// own spot, so the near foot never passes the far one; 1 = both feet step through under the body). Returns waves (lists of harmonics) for the leg joints.
+export function walkWaves(rig, { speed, walk, lift, dy = 0, reach = 0, gather = 0, N = 48 }) {
+  const half = walk / speed / 4, x0 = (s) => masterAt(rig, `leg-${s}-upper`)[0], mid = (x0('front') + x0('back')) / 2;
+  const hip = (s) => x0(s) + gather * (mid - x0(s)) + reach;
   const ankle = (s, u) => {
     if (u < 0.5) return [hip(s) + half - 4 * half * u, 0, 0];
     const k = (u - 0.5) * 2, e = k * k * (3 - 2 * k);

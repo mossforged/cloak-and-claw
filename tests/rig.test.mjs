@@ -61,11 +61,12 @@ const flat = (name, tp, eps = 1) => { for (const [ft, y] of Object.entries(soles
 flat('idle', targetPose(fighter({}), rig, 0));
 
 // Block (shield-wall crouch): both boots stay on the floor.
-// Block (T012): guard arm + angled shield + brace head; the shield rides on the guard arm's fist; blockstun shoves it out.
+// Block (T023 round 2): shield face to the camera in front of the body (over the torso and head), effort head; blockstun shoves it out.
 {
   const bp = targetPose(fighter({ state: 'block' }), rig, 0), L = layoutRig(rig, bp.joints, bp.swap);
-  check(bp.swap['arm-back-upper'] === 'arm-back-guard' && bp.swap.head === 'head-effort', 'block: whole guard arm, effort head');
-  check(!L.some((e) => e.name === 'arm-back-lower' || e.name === 'hand-back'), 'block: forearm and hand hidden under the whole guard arm');
+  const ord = (n) => L.find((e) => e.name === n).order;
+  check(!bp.swap['arm-back-upper'] && bp.swap.head === 'head-effort', 'block: shield on the jointed arm (not the edge-on guard arm), effort head');
+  check(ord('shield') > ord('torso') && ord('shield') > ord('head'), 'block: shield drawn in front of the body');
   const hit = targetPose(fighter({ state: 'block', t: 1, stun: 12 }), rig, 0);
   check(hit.key === 'block' && hit.joints['shield.sx'] > bp.joints['shield.sx'] + 0.08, 'blocked hit: shield shoved out (bigger), same pose key');
   const late = targetPose(fighter({ state: 'block', t: 12, stun: 12 }), rig, 0);
@@ -92,7 +93,7 @@ const footOf = (pose) => pose.swap?.['foot-front'] ?? 'foot-front';
 for (const k of ['idle', 'block', 'blockHit', 'cast', 'grabbing', 'stow', 'reach']) check(footOf(P[k]) === 'foot-front-out', `${k}: planted on the turned-out near boot`);
 for (const [k, m] of Object.entries(P.moves)) if (!def.moves[k].air) check(footOf(m.windup) === 'foot-front-out' || k === 'slash2', `${k} windup: planted (turned-out near boot)`);
 for (const k of ['walk', 'jump']) check(footOf(P[k]) === 'foot-front', `${k}: forward near boot`);
-for (const [k, m] of Object.entries(P.moves)) check(footOf(m.strike) === 'foot-front', `${k} strike: forward near boot (lunging)`);
+// (T023 round 2: strikes stand on the turned-out trailing boot: tests/mouse-footwork.test.mjs)
 // Attacks move the legs (render only): the leading (far) boot steps in on the strike, the trailing one pushes back.
 for (const [k, m] of Object.entries(P.moves)) {
   if (def.moves[k].air) continue;
