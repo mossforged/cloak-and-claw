@@ -1,0 +1,27 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "extends": "../A010-rat-raider-standard/rig-source.json",
+  "master": "reference.png",
+  "floorY": 1997,
+  "parts": {
+    "hand-front": {
+      "img": "../A010-rat-raider-standard/hand-front.png",
+      "parent": "arm-front-lower",
+      "pivot": [
+        410,
+        1260
+      ],
+      "band": 840
+    }
+  },
+  "swaps": {
+    "hand-front-pinch": {
+      "img": "hand-front-pinch.png",
+      "of": "hand-front"
+    }
+  },
+  "note": "Swap extension only; merge swaps into A010/A011. Original wrist pivot [410,1260]. Pinch contact [270,1190] on this canvas. Cuff and lower visible fingers retained from A010; generated local thumb/index and hidden palm patch."
+}
