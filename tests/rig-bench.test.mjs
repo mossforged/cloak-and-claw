@@ -1,4 +1,4 @@
-// T016 rig bench: the mouse fixture builds a rig whose joints stay joined (at rest on the master's points, and in every
+// T016 rig bench: the old (A002) mouse fixture builds a rig whose joints stay joined (at rest on the master's points, and in every
 // strip pose); biped-poses names only standard parts; missing standard parts are skipped but still turn their children;
 // the draft importer (tools/rig_from_source.py) writes a rig with the same joints.
 import { readFileSync, mkdtempSync, existsSync } from 'node:fs';
@@ -16,7 +16,7 @@ const ok = (cond, msg) => { if (!cond) { failed++; console.log('FAIL', msg); } }
 const near = (a, b, eps = 1e-6) => Math.abs(a[0] - b[0]) < eps && Math.abs(a[1] - b[1]) < eps;
 const apply = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 
-const url = 'tools/fixtures/mouse-fighter.rig-source.json';
+const url = 'tools/fixtures/mouse-fighter-a002.rig-source.json';   // T023: the old A002 mouse (no pelvis/hands/feet)
 const src = readSource(JSON.parse(readFileSync(join(root, url), 'utf8')), url);
 ok(src.errors.length === 0, `fixture reads cleanly: ${src.errors}`);
 ok(src.root === 'torso', 'mouse root is the torso');
@@ -103,6 +103,32 @@ else {
     for (const [n, p] of Object.entries(src.parts)) {
       const at = apply(L[n].m, drafted.parts[n].pivot), want = rig.canvasToScreen(p.pivot);
       ok(near(at, [want[0], want[1]], 0.6), `imported ${n} joint on the master's point (${at.map((v) => v.toFixed(2))} vs ${want.map((v) => v.toFixed(2))})`);
+    }
+  }
+}
+
+// T023: the bench's mouse fixture is the A013 mouse in game: on the standard (nothing missing, pelvis root), and its
+// whole-arm swaps' extra fields reach the importer's output (hide, item grip, slot axis) as in the game rig.
+{
+  const u = 'tools/fixtures/mouse-fighter.rig-source.json', s13 = readSource(JSON.parse(readFileSync(join(root, u), 'utf8')), u);
+  ok(s13.errors.length === 0 && s13.root === 'pelvis' && s13.missing.length === 0, `A013 fixture: on the standard (${s13.errors} / missing ${s13.missing})`);
+  for (const p of Object.values(s13.parts)) ok(existsSync(join(root, p.img)), `A013 image exists: ${p.img}`);
+  const r13 = buildRig(s13, { top: 0, height: 130 }), R = Object.fromEntries(layoutRig(r13, {}, {}).map((e) => [e.name, e]));
+  for (const [n, p] of Object.entries(s13.parts)) if (p.parent) ok(near(apply(R[n].m, r13.parts[n].pivot), apply(R[p.parent].m, r13.parts[n].attach)), `A013 ${n}: joint on parent's joint at rest`);
+  if (py.status === 0) {
+    const out = mkdtempSync(join(tmpdir(), 'rig-import-'));
+    const r = spawnSync('python3', ['tools/rig_from_source.py', u, '--id', 'mouse-13', '--art', join(out, 'art'), '--out', join(out, 'mouse-13.js'), '--height', '130'], { cwd: root, encoding: 'utf8' });
+    ok(r.status === 0, `importer runs on A013: ${r.stderr}`);
+    if (r.status === 0) {
+      const d = (await import(pathToFileURL(join(out, 'mouse-13.js')))).default;
+      const game = (await import(pathToFileURL(join(root, 'src/data/rigs/mouse-fighter.js')))).default;
+      for (const [part, sw] of [['arm-front-upper', 'arm-front-raised'], ['arm-back-upper', 'arm-back-guard']]) {
+        const a = d.parts[part].swaps[sw], g = game.parts[part].swaps[sw];
+        ok(a.hide?.length === 2 && near(a.grip, g.grip, 0.01) && a.axis === g.axis, `importer keeps ${sw}'s hide / grip / axis (as in the game rig)`);
+      }
+      for (const [n, h] of Object.entries(d.hands ?? {})) ok(game.hands[n] && near(h.at, game.hands[n].at, 0.01) && h.axis === game.hands[n].axis, `importer writes grip hand ${n} (as in the game rig)`);
+      ok(Object.keys(d.hands ?? {}).length === 3, 'importer writes the three grip hands');
+      ok(Math.abs(d.scale - game.scale) < 1e-4 && Math.abs(d.rootY - game.rootY) < 1e-3, 'game rig scale/rootY = importer output at 130 px');
     }
   }
 }

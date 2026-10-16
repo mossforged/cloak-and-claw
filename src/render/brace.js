@@ -37,7 +37,8 @@ export function braceLayer(rig, f, joints, time, mem = {}, swap = {}) {
   o.head = joints.head - B.head * w * breath;                                    // chin lifts a touch as he breathes in
   o['arm-back-upper'] = joints['arm-back-upper'] + B.arm * w * late;
   o.shield = joints.shield + B.shield * w * late;
-  o.sword = joints.sword + B.sword * w * (0.6 * wave(B.twitch[0]) + 0.4 * wave(B.twitch[1], 0.3));
+  const sj = B.swordJoint ?? 'sword';   // T023: the part that twitches (the sword hand, so the handle stays in the fist)
+  o[sj] = joints[sj] + B.sword * w * (0.6 * wave(B.twitch[0]) + 0.4 * wave(B.twitch[1], 0.3));
   const hips = B.hips * w * mem.swayW * wave(B.sway, 0.1);
   if (!hips) return o;
   o.dx = joints.dx + hips;

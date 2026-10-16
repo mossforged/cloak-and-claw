@@ -2,6 +2,7 @@
 // and eases from the last drawn pose into a new one. Pure (no DOM), so tests can run it.
 // Channels: '<part>' angle, 'dx'/'dy' root offset, 'sx' whole-body width (-1 = mirrored, e.g. mid-spin), and per part '<part>.sx' / '<part>.sy'
 // (stretch across/along the bone, 1 = as drawn, negative flips) and '<part>.order' (draw order).
+// A value: a number, a wave [base, amp, phase 0..1, harmonic], or (T023) a list of waves that add up.
 // Part swaps: a pose's `swap: { <part>: '<swap name>' }` picks one of the part's `swaps` images.
 // Swaps don't blend: they switch the moment the pose (or move phase) that names them starts.
 import { phaseOf } from '../sim/fighter.js';
@@ -26,7 +27,9 @@ function evalPose(pose, stance, t) {
   const out = { ...stance };
   for (const [k, v] of Object.entries(pose ?? {})) {
     if (k === 'speed' || k === 'swap') continue;
-    out[k] = Array.isArray(v) ? v[0] + v[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (v[3] ?? 1) + (v[2] ?? 0))) : v;
+    const wave = (w) => w[0] + w[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (w[3] ?? 1) + (w[2] ?? 0)));
+    // T023: a list of waves adds up (harmonics fitted to an IK leg path)
+    out[k] = !Array.isArray(v) ? v : Array.isArray(v[0]) ? v.reduce((a, w) => a + wave(w), 0) : wave(v);
   }
   return out;
 }
@@ -86,13 +89,13 @@ function pickupPose(f, poses, S, time) {
 // Sword draw (T010 round 2): an arm-only layer over whatever pose he is in, after a floor weapon leaves his hand
 // (thrown or broken). The arm sweeps to the `stow` arm (sword still sheathed: mem.sheathed) and back up with the sword.
 // Starts when drawRig sets mem.drawT0. Returns the layered joints (mem.last is left unlayered for blending).
-const ARM = ['arm-front-upper', 'arm-front-lower', 'sword'];
+const ARM = ['arm-front-upper', 'arm-front-lower', 'hand-front', 'sword'];   // T023: + the hand (A013 rigs turn the sword with it)
 export function drawLayer(rig, time, mem, joints) {
   const dur = rig.poses.timing.drawSword, k = mem.drawT0 === undefined ? 1 : (time - mem.drawT0) / dur;
   mem.sheathed = k < 0.5;
   if (k >= 1 || !rig.poses.stow) return joints;
   const w = k < 0.5 ? easeOut(k * 2) : 1 - easeInOut((k - 0.5) * 2), out = { ...joints };
-  for (const j of ARM) out[j] = lerp(joints[j], rig.poses.stow[j], w);
+  for (const j of ARM) if (j in joints) out[j] = lerp(joints[j], rig.poses.stow[j] ?? joints[j], w);
   return out;
 }
 

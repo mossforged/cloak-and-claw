@@ -8,7 +8,7 @@ import { targetPose, squatLayer } from '../src/render/rig-pose.js';
 import { layoutRig } from '../src/render/rig.js';
 import { squatOf } from '../src/render/jump-squat.js';
 import { botControl } from './bot.mjs';
-import { readFileSync } from 'node:fs';
+import { soles } from './rig-soles.mjs';
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
@@ -85,13 +85,7 @@ def.jumpSquatMode = saved;
 
 // Rig crouch: both boots flat on the floor at full crouch (same check as block / reach in rig.test.mjs).
 const rig = RIGS[def.art.rig];
-const soleY = (part) => readFileSync(rig.parts[part].img).readUInt32BE(20) - 3;
-const L = layoutRig(rig, squatLayer(rig, targetPose(fake({}), rig, 0).joints, 1));
-for (const leg of ['leg-front-lower', 'leg-back-lower']) {
-  const m = L.find((e) => e.name === leg).m, [x, y] = [rig.parts[leg].pivot[0], soleY(leg)];
-  const sy = m[1] * x + m[3] * y + m[5];
-  check(Math.abs(sy) < 4, `jumpSquat: ${leg} boot sole on the floor (y=${sy.toFixed(1)})`);
-}
+for (const [foot, sy] of Object.entries(soles(rig, squatLayer(rig, targetPose(fake({}), rig, 0).joints, 1)))) check(Math.abs(sy) < 2, `jumpSquat: ${foot} sole on the floor (y=${sy.toFixed(1)})`);
 
 console.log(fails ? `${fails} failures` : 'ALL OK');
 process.exit(fails ? 1 : 0);

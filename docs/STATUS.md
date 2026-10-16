@@ -60,6 +60,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 code: T023 v1 on `t023-new-mouse`: A013 imported (uniform x0.259, 130 px, no fudges), sword/shield as gear items in the grip fists, every move re-posed with IK + attack footwork; 22/22 tests, bot numbers identical. Screens in `docs/screens/T023/`.
+2026-10-16 code: T023 for the lead: A013's scarf tail is two painted pieces (the arm hid the gap); split + joined as a stopgap, needs an Art fix. Stance is now the standee's raised-sword guard, so recoveries re-cock the blade (user to judge).
 2026-10-16 lead: merged T022 (user approved v2; ally leaves floor potions to players; 22/22 tests; solo bot numbers identical). Next: T023, then the combatant standard.
 2026-10-16 lead: user: gear mostly agreed (significance a goal, not a rule); downed allies wounded for a mission or no cost, to be tested; combatant standard agreed (after T022/T023).
 2026-10-16 lead: user answered the study's questions -> `docs/design/home-loop.md` (living home-loop design) + decisions. User: standards before more heroes/enemies.

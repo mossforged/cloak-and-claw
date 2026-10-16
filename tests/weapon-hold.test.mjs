@@ -51,19 +51,28 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   check(worst < 2, `${id}: ${K.id} handle along the fist's slot in every pose (worst ${worst.toFixed(2)} deg, ${where})`);
 }
 
-// The mouse with each floor weapon: its handle where his own sword's handle is (146.4 deg in sword.png, the drawing
-// his fist was made round), in the same pose.
+// T023: the mouse's own sword (a gear item in his grip fist) and every floor weapon: the handle runs along the slot of
+// the fist holding it, in every pose (the whole raised arm's fist has its own slot axis, A013 slotDirection), and the
+// test poses (cast, toss, grab, stow) too.
 {
-  const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig], SWORD = 146.4 * D;
-  for (const K of Object.values(ITEMS).filter((k) => k.grip === 'one-hand')) {
+  const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig], RA = rig.parts['arm-front-upper'].swaps['arm-front-raised'];
+  const named = ['cast', 'grabbing', 'knee', 'throwWind', 'throwRelease', 'toss', 'stow', 'block'];
+  for (const K of [ITEMS['mouse-sword'], ...Object.values(ITEMS).filter((k) => k.grip === 'one-hand' && k.kind === 'weapon')]) {
+    const weapon = K.kind === 'weapon' ? { def: K, uses: 5, hit: false, broken: false } : null;
     let worst = 0, where = '';
-    for (const [label, fi] of poses(def, { def: K, uses: 5, hit: false, broken: false })) {
-      const tp = targetPose(fi, rig, 0), held = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi).find((e) => e.name === 'sword');
-      const own = layoutRig(rig, tp.joints, tp.swap).find((e) => e.name === 'sword');
-      const e = Math.abs(wrap(deg(lin(held.m, [K.art.gripEnd[0] - K.art.grip[0], K.art.gripEnd[1] - K.art.grip[1]])) - deg(lin(own.m, [Math.cos(SWORD), Math.sin(SWORD)]))));
+    const list = [...poses(def, weapon), ...named.map((n) => [n, { def, state: 'idle', t: 0, mf: 0, move: null, weapon, hp: 10, override: n }])];
+    for (const [label, fi] of list) {
+      const tp = targetPose(fi, rig, 0, fi.override), L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
+      if (tp.joints['sword.sx'] !== 1 || tp.joints['sword.sy'] !== 1) continue;   // the spin's foreshortened blade (slash2 / fish slap) skews on purpose
+      const raised = tp.swap['arm-front-upper'] === 'arm-front-raised';
+      const fist = L.find((e) => e.name === (raised ? 'arm-front-upper' : 'hand-front')), sw = L.find((e) => e.name === 'sword');
+      const ax = (raised ? RA.axis : rig.axes['one-hand']) * D, m = raised ? fist.m : fist.base;
+      const e = Math.abs(wrap(deg(lin(sw.m, [K.art.gripEnd[0] - K.art.grip[0], K.art.gripEnd[1] - K.art.grip[1]])) - deg(lin(m, [Math.cos(ax), Math.sin(ax)]))));
+      const gap = dist(apply(sw.m, sw.p.pivot), raised ? apply(m, RA.grip) : at(rig, L, 'hand-front', rig.hands['hand-front-grip'].at));
       if (e > worst) { worst = e; where = label; }
+      if (gap > 0.01) { worst = Math.max(worst, 99); where = `${label} (grip ${gap.toFixed(2)} px off the slot)`; }
     }
-    check(worst < 2, `mouse: ${K.id} handle along his fist (worst ${worst.toFixed(2)} deg, ${where})`);
+    check(worst < 2, `mouse: ${K.id} handle along his fist's slot, grip on it (worst ${worst.toFixed(2)} deg, ${where})`);
   }
 }
 
