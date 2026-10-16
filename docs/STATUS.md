@@ -1,11 +1,11 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T020 rat weapons held right (merged 2026-10-16; user: "it looks good to me"). Last art task: A013 Mouse Fighter to the rig standard (merged 2026-10-16).
+**Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T021 multi-hero engine (merged 2026-10-16; user play check open). Last art task: A013 Mouse Fighter to the rig standard (merged 2026-10-16).
 
 ## Next
-1. **Code:** T021 (multi-hero engine), then T022 (AI ally + revive + potion toss), then T023 (import the new Mouse Fighter).
+1. **Code:** T022 (AI ally + revive + potion toss), then T023 (import the new Mouse Fighter).
 2. **Art:** idle (Mouse Fighter A013 merged). Next art waits on the home-loop design (rescued folk, stronghold) or a new enemy body.
-3. **User:** judge T021 (two players), T022 (helping verbs), T023 (new mouse in game). Design talk: the home loop (what rescued folk give, resources, gear slots).
+3. **User:** play-check T021 (one player unchanged? two players with a second pad or `?heroes=2&keys2`), T022 (helping verbs), T023 (new mouse in game). Design talk: the home loop (what rescued folk give, resources, gear slots).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -20,7 +20,7 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T021-multi-hero-engine.md`, then `T022-allies-revive-potions.md`, then `T023-import-new-mouse.md`.
+- Code: `docs/tasks/T022-allies-revive-potions.md`, then `T023-import-new-mouse.md`.
 - Art: none queued.
 
 ## Open questions (for the user)
@@ -29,6 +29,8 @@
 - **Hook decided (2026-10-16): community and helping** (see game brief). Settled: AI allies; mission -> home -> mission; first helping verbs = revive + potion toss (T022). Still open: what failure costs.
 
 ## Parked
+- Heroes can stand on top of each other (no hero-hero separation, T021). Fold into the enemy-spacing fix (same `separate()` rework).
+- T021 test hero's tint also turns his red bandana green (cosmetic; a proper second hero replaces him).
 - Floor/item shadows look "a bit abstract" (user, T020). A small render pass later.
 - User question (T020): should weapons be drawn with the hands as part of them for correct grips? Lead's answer: no as the default (one weapon then needs a drawing per body and per grip, which breaks the floor-weapon = held-weapon rule and the kit system); instead keep separate grip hands and use weapon-specific hand swaps only where a grip can't be faked (as `hand-front-pinch`). Revisit if grips keep fighting us.
 - Rat variety beyond T019's limits (Code's offer): different fur colours per rat and a bigger size range than +-4%. Only if crowds still look samey.
@@ -56,6 +58,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: merged T021 (w.heroes, per-slot input, sticky enemy targets with per-hero tokens, camera for several heroes, HUD per hero; one-hero bot numbers identical; 21/21 tests; CI green). User play check still to do; merged so T022 can build on it.
 2026-10-16 lead: user approved A013 addendum 2 ("that's correct!"); merged A013; wrote T023 (import the new mouse, after T021/T022).
 2026-10-16 lead: user settled hook details (AI allies; mission/home loop; revive + potion toss first). Wrote T022.
 2026-10-16 code: T021 on branch `t021-multi-hero`: `w.heroes` (slot, controller; `w.player` = deprecated alias), per-slot input (slot 0 = keyboard + pad 1 as before; pads 2, 3; optional arrows+numpad layout `?keys2`), enemies pick a sticky target hero (tokens global, scale per hero, max 1 per hero), camera follows the heroes' centre and holds the leader at the edge, game over when all down, HUD/debug/run log/C pose per hero. Test hero: `?heroes=2` (tinted Mouse Fighter). One-hero bot numbers identical to main in every test; 21/21 tests (new tests/multi-hero.test.mjs). Build `t021 multi-hero v1`.
