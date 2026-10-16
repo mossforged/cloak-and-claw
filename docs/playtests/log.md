@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 T015 bracing loop
+User: "he looks braced" (check passed).
+
 ## 2026-10-16 A009 rat redrawn from the standee
 User: "this is a big step forward... although the sword doesn't look as good in A009 assembled than in the art bible standee." Asked that several enemies of one type (e.g. three rat archers) not look identical -> individual variety in the rig standard (7a).
 Lead: A009 used A004's old sword in its review; A010 redraws the standee's cutlass.

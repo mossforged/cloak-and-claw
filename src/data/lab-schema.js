@@ -26,6 +26,7 @@ import ratSpearman from './fighters/rat-spearman.js';
 import ratArcher from './fighters/rat-archer.js';
 import { RAT_SPEAR } from './moves/rat-spear.js';
 import { RAT_BOW } from './moves/rat-bow.js';
+import mouseFighterBrace from './rigs/mouse-fighter-brace.js';
 
 export const ROOTS = {
   'src/data/moves/mouse-sword.js': MOUSE_SWORD,
@@ -50,6 +51,7 @@ export const ROOTS = {
   'src/data/moves/cutlass.js': CUTLASS,
   'src/data/moves/plank-club.js': PLANK_CLUB,
   'src/data/moves/big-fish.js': BIG_FISH,
+  'src/data/rigs/mouse-fighter-brace.js': mouseFighterBrace,
 };
 // One pick section per floor weapon's moves (T010).
 const weaponMoves = (title, file) => ({
@@ -86,6 +88,16 @@ export const LAB_SCHEMA = [
     fields: [
       ['block.walkSpeed', 0, 3, 0.1], ['block.chip', 0, 20, 1], ['block.pushback', 0, 10, 0.1], ['block.stun', 0, 40, 1],
       ['block.attackerPush', 0, 10, 0.1], ['block.hitstop', 0, 20, 1], ['block.shake', 0, 15, 0.5],
+    ],
+  },
+  {
+    title: 'Hero bracing loop (T015, while blocking)', file: 'src/data/rigs/mouse-fighter-brace.js',
+    fields: [
+      ['fade', 1, 40, 1], ['breath', 0.5, 3, 0.05], ['chest', 0, 0.1, 0.005], ['head', 0, 6, 0.1],
+      ['shield', 0, 6, 0.1], ['arm', 0, 6, 0.1], ['lag', 0, 0.5, 0.01],
+      ['sway', 1, 6, 0.1], ['hips', 0, 4, 0.1], ['swayFade', 1, 40, 1], ['sword', 0, 8, 0.1],
+      { path: 'brace.squash', min: 0, max: 0.08, step: 0.005, file: 'src/data/juice.js', label: 'standee breath squash' },
+      { path: 'brace.lean', min: 0, max: 0.06, step: 0.002, file: 'src/data/juice.js', label: 'standee breath lean' },
     ],
   },
   {

@@ -6,10 +6,18 @@ import { JUICE } from '../data/juice.js';
 import { silhouette } from './tint.js';
 import { drawHeldStandee } from './props.js';
 import { squatOf, squashOf } from './jump-squat.js';
+import { braceWeight } from './brace.js';
 
 const ZERO = { rot: 0, sx: 1, sy: 1, dx: 0, dy: 0, cy: 0 };   // cy: turn around this height above the feet (0 = feet)
 export const BLOCK_LEAN = 0.08;   // standee's forward lean while blocking (the rig's joints lean on their own)
 const lerp = (a, b, t) => a + (b - a) * t;
+
+// T015: the standee's breath while blocking (JUICE.brace): taller and leaning in a touch on the in-breath, same cycle and
+// fade-in as the rig's loop (none during blockstun). The rig keeps only the jolt, so it takes this back out (rig.js).
+export function braceOf(f, time) {
+  const B = JUICE.brace, w = braceWeight(f, B), b = Math.sin(2 * Math.PI * time / B.breath);
+  return { rot: B.lean * w * b, squash: B.squash * w * (b + 1) / 2 };
+}
 const easeOut = (t) => 1 - (1 - t) ** 3;
 const mix = (a, b, t) => {
   a = { ...ZERO, ...a }; b = { ...ZERO, ...b };
@@ -29,9 +37,9 @@ export function poseOf(f, time) {
   switch (f.state) {
     case 'idle': { const b = Math.sin(time * 3 + f.id) * 0.018; return { ...ZERO, sy: 1 + b, sx: 1 - b }; }
     case 'walk': { const s = Math.sin(f.t * 0.24); return { ...ZERO, dy: -Math.abs(s) * 5, rot: s * 0.05 }; }
-    case 'block': {   // braced forward into the shield, crouched; jolts back on a blocked hit (blockstun)
-      const k = f.t < f.stun ? 1 - f.t / f.stun : 0;
-      return { ...ZERO, rot: BLOCK_LEAN - 0.2 * k, dx: -6 * k, sx: 1.03, sy: 0.96 };
+    case 'block': {   // braced forward into the shield, crouched; jolts back on a blocked hit (blockstun); breathes (T015)
+      const k = f.t < f.stun ? 1 - f.t / f.stun : 0, b = braceOf(f, time);
+      return { ...ZERO, rot: BLOCK_LEAN - 0.2 * k + b.rot, dx: -6 * k, sx: 1.03 * (1 - b.squash / 2), sy: 0.96 * (1 + b.squash) };
     }
     case 'toss': {   // winds back, then pitches forward as the weapon leaves the hand
       const T = f.def.toss, k = f.t < T.wind ? f.t / T.wind : Math.max(0, 1 - (f.t - T.wind) / T.recovery);
