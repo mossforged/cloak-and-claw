@@ -45,3 +45,5 @@ Append-only. A change is a new line that supersedes an older one (say which). Ne
 - 2026-10-16 Rat Raider head set **R** (standee head with a slightly longer muzzle and visible front teeth), from A009's review. (User.)
 - 2026-10-16 Rig deliveries carry a `rig-source.json` (parts, parents, joint points measured on the shared canvas, draw bands, swaps, overlays); Code's rig bench and importer read it (rig standard section 5).
 - 2026-10-16 Scrolling stages: the camera never scrolls back (Golden Axe style); when the stage loops, the player returns to the start (placeholder until a boss or stage exit). (User, from T013.)
+- 2026-10-16 Weapons: whenever an enemy drops a weapon, it is the same weapon it was holding (user). The Rat Raider holds the A003 rat cutlass item (the floor weapon), not a separate rig sword; A010's sword drawing is dropped.
+- 2026-10-16 A010 rat (head R) look approved (user: "much better, much closer to the standee"); passes G2 and the bench motion strip. Next: A011 finishing set (gear refit, masks, face details) and T018 import.

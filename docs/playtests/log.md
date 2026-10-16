@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 A010 rat in the rig bench
+User: "he looks much better. much closer to the standee." The cutlass "looks wrong... the blade doesn't extend all the way along one edge to the hilt... like it wasn't fully drawn"; also not sure the standee's blade is a cutlass. On using the dropped cutlass: "whenever possible if they're going to drop a weapon it should be consistent with what they were holding."
+
 ## 2026-10-16 T015 bracing loop
 User: "he looks braced" (check passed).
 

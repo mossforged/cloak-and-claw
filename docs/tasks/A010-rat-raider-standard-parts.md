@@ -33,3 +33,8 @@ A009 was a big step: the user agrees the rat now reads as the standee's characte
 - Human: does the reassembled rat still match the standee, and does the sword look right now?
 
 Out of scope (later, G4 after the motion test): recolour masks, face-detail overlays (standard 7a), gear refit (hood, helmet, hat), key drawings for big moves, spear/bow redraws.
+
+## Addendum (lead, 2026-10-16, after review): finish on the same branch
+User on the review: the rat "looks much better, much closer to the standee". Look approved (G2 and the bench motion strip). Two fixes, as a follow-up commit on `a010-rat-raider-standard`:
+1. **Add `rig-source.json`** in the standard's format (rig standard section 5, rule 4), generated from your `part-layout.json`: parts (`img`, `parent`, `pivot` = `pivot_canvas`, `band` = `depth`), swaps (entries with `replaces` become `swaps` with `of`), `master`, `floorY` (the baseline). The lead's bench run used exactly this conversion and it worked.
+2. **The sword:** the user found the blade unfinished (the back edge stops short of the guard). **Decision: the rat holds the same cutlass he drops** (`assets/source/A003-harbor-props/rat-cutlass.png`, already in the game as the floor weapon). Leave `sword` out of `rig-source.json` (the weapon is attached by code from the item, like floor weapons) and don't redraw it. Keep `sword.png` in the folder only as provenance, or delete it. Check that `hand-front-grip`'s slot can take the A003 cutlass handle and say so in HANDOFF.

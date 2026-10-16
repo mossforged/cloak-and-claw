@@ -3,10 +3,9 @@
 **Stage 2 (feel pass + crowd tools) wrapping up; Stage 4 (enemy variety) started.** Stage 1 gate passed 2026-10-14 (tag `stage-1`). Last code task: T016 rig bench (merged 2026-10-16). Last art task: A008 rat gear (merged). Queued: A009 rat parts redrawn from the standee.
 
 ## Next
-1. **Code:** T017 (weapon feel: club heavy, fish silly, cutlass quick; render only). After it: import the new rat once A010 passes the bench.
-2. **Art:** A010 (bring A009 up to the rig standard; head set **R**). Runs in parallel with T016.
-3. **User:** judge A010 (does the reassembled rat match? sword right?) and its motion strip in the bench.
-4. **After A010 passes the fit check and motion strip:** Code imports the new rat into the game; then Art does the finishing set (recolour masks, face-detail overlays, hood/helmet/hat refit on head R).
+1. **Code:** T017 (weapon feel), then T018 (import the new rat into the game for all three rat types; holds the cutlass he drops).
+2. **Art:** finish A010 (addendum: add `rig-source.json`; sword dropped in favour of the cutlass item), then A011 (gear refit, recolour masks, face details).
+3. **User:** judge T017 (weapon feel), then T018 (new rat in game) and A011 (gear and crowd variety).
 
 ## Stage plan
 | Stage | What | Gate question for the user |
@@ -21,14 +20,15 @@
 | 8 | Second hero with own move set, local co-op (up to 3 players) | Do two heroes feel truly different? |
 
 ## What builders need now
-- Code: `docs/tasks/T017-weapon-feel.md`.
-- Art: `docs/tasks/A010-rat-raider-standard-parts.md` (head set R).
+- Code: `docs/tasks/T017-weapon-feel.md`, then `T018-import-new-rat.md` (needs A010 merged).
+- Art: A010 addendum (same branch), then `docs/tasks/A011-rat-raider-finishing-set.md`.
 
 ## Open questions (for the user)
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
 - The hook (study 2026-10-15, user thinking it over; tests later): leaning toward AI allies on screen in solo so solo and co-op are one system, plus swap/assist with a slotted benched hero. Merciful Blade out; Kit Brawler undecided. New candidate from the user: **teamwork as the core verb** (revive, tossed potions, cover, rescue, rallies, bonds). Not urgent: revisit once core systems are locked down.
 
 ## Parked
+- Weapon drops for the other rats (rule 2026-10-16: drop = what they held): spearman could drop his spear as a floor weapon; archer's bow is not a melee weapon (drop nothing, or arrows as a throwable). Decide with Stage 4 enemies.
 - **Heavy throwables by size** (user, 2026-10-15): the biggest breakables (barrels, big crates) can be picked up and thrown only by big animals (e.g. a badger hero; a brute enemy hurling a barrel at the player). Mouse-sized heroes can only smash them. Props get a `weight` and fighters a `size`/`strength` in data; ties into the species x size hook. For Stage 4 (brute enemy) and Stage 8 (second, bigger hero).
 - Pose-swap images as a cheap animation upgrade (fallback if the rig disappoints).
 - Touch controls for phone play (Stage 5).
@@ -49,6 +49,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user approved the A010 rat; sword rejected (blade unfinished) -> rule: enemies hold the weapon they drop (rat holds the A003 cutlass). A010 addendum (rig-source.json, no sword), wrote A011 (finishing set) and T018 (import).
 2026-10-16 lead: reviewed A010 (branch `a010-rat-raider-standard`, 21 MB, scope clean). Bench (on a lead-converted rig-source.json): master uncovered 2.8%, parts outside 3.5% (mouse: 12.7% / 10.3%); motion strip reads well. Gaps: no `rig-source.json` (Art to add from its part-layout.json before merge); front upper arm in band 590 (exception, watch in motion). Waiting for the user's G2/G3 look.
 2026-10-16 lead: wrote T017 (weapon feel pass, render only) to keep Code busy while Art does A010.
 2026-10-16 lead: merged T016 (rig bench + biped strip + mouse fixture + draft importer; 17/17 tests, CI green). Bench on the mouse confirms A002's known drift (12.7% of master uncovered; sword 44% and front shin 23% outside). Standard section 8 now names rig-source.json.
