@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-16 T018 new rat in game
+User: the first walk was "very scuttly" next to the upright mouse; C was best of A/B/C, asked for more upright; picked F (the tallest) as the rat walk.
+
 ## 2026-10-16 A011 rat gear and crowd variety
 User: "very cool".
 
