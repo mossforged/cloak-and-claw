@@ -49,6 +49,8 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: T016 on branch `t016-rig-bench`: `tools/rig-bench.html` (G2 fit overlay + difference view + mismatch score; G3 standard strip from new `src/data/rigs/biped-poses.js`, live beside the standee and 1x over Harbor Market, PNG export), draft importer `tools/rig_from_source.py`, mouse fixture (A002 canvas). Game unchanged.
+2026-10-15 code: T016 17/17 tests (new tests/rig-bench.test.mjs). Screens docs/screens/T016/. Human check open: open `/tools/rig-bench.html?fixture=mouse-fighter`: sensible fit view and strip? (A010 is the real test.)
 2026-10-16 lead: merged T015 (render-only bracing loop; 16/16 tests). User picked head **R** for the rat. Wrote T016 (rig bench) and the `rig-source.json` format (rig standard section 5); A010 updated to deliver it.
 2026-10-16 lead: agents renamed Code and Art in all guides. User: A009 "a big step forward", but its sword looks worse than the standee's. Wrote A010 (A009 to the standard; drops A009's 32 MB raw outputs; A009 branch not merged). Added individual enemy variety (face details, tints, gear picks) to the rig standard.
 2026-10-15 code: T015 human check done (user): "he looks braced". Ready for lead review.
