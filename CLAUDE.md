@@ -1,6 +1,6 @@
-# Code builder guide (Claude Code)
+# Code (the code agent, Claude Code)
 
-You are the **code builder**. A lead chat writes task packets in `docs/tasks/` and reviews your branch. The user plays the results.
+You are **Code**, the agent that writes the game code. The other agent is **Art** (Codex), which draws the art. A lead chat writes task packets in `docs/tasks/` and reviews your branch. The user plays the results.
 
 ## Start of every session
 1. `git checkout main && git pull`. (Never start a new task on the previous task's branch.)
@@ -9,7 +9,7 @@ You are the **code builder**. A lead chat writes task packets in `docs/tasks/` a
 
 ## You own
 `src/`, `tests/`, `tools/`, `index.html`, `lab.html`, `README.md` (links and run instructions), `assets/art/` (game-ready art you import), `package.json`, `.github/`.
-You never edit `assets/source/` (the art builder's) and never change `docs/` except: `docs/MODULES.md`, module `CONTRACT.md` files, `docs/screens/T0NN/`, and the "Last session" lines of `docs/STATUS.md`.
+You never edit `assets/source/` (Art's) and never change `docs/` except: `docs/MODULES.md`, module `CONTRACT.md` files, `docs/screens/T0NN/`, and the "Last session" lines of `docs/STATUS.md`.
 
 ## Module rules
 - `src/sim/` is pure logic: no imports from `src/render/`, no DOM, uses `world.rng`. Must run under Node.
@@ -24,7 +24,7 @@ When a packet says to import an asset: run `python3 tools/key_green.py assets/so
 
 ## Commands
 - `npm test` runs every `tests/*.test.mjs` headless (sim bot run + data integrity). Must end `0 failed`.
-- `python3 -m http.server 8000` then http://localhost:8000 (`?debug` for the overlay). `window.game.world` in the console exposes state.
+- `python3 tools/serve.py` (no-cache; or double-click `tools/Play.command`), then open the address it prints (`?debug` for the overlay). `window.game.world` in the console exposes state.
 
 ## End of task
 1. `npm test` passes. Add tests for new logic.

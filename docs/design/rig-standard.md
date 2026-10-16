@@ -20,10 +20,10 @@ Not chosen: sprite sheets (frame-by-frame, as in Golden Axe or Streets of Rage 4
 
 | Gate | Who makes it | What the user judges |
 |---|---|---|
-| **G1 Master** | art builder | Is this the character? (the master beside the standee, at full size and game size) |
-| **G2 Parts** | art builder, then the code builder's rig bench | Do the parts reassemble into the master? (automatic overlay; no visible drift) |
-| **G3 Motion test** | code builder (rig bench, standard strip) | Does it look alive in motion? Which moves need key drawings? |
-| **G4 Libraries and gear** | art builder | Key drawings, gear overlays, colour tints, each checked in motion |
+| **G1 Master** | Art | Is this the character? (the master beside the standee, at full size and game size) |
+| **G2 Parts** | Art, then Code's rig bench | Do the parts reassemble into the master? (automatic overlay; no visible drift) |
+| **G3 Motion test** | Code (rig bench, standard strip) | Does it look alive in motion? Which moves need key drawings? |
+| **G4 Libraries and gear** | Art | Key drawings, gear overlays, colour tints, each checked in motion |
 
 G1 is cheap and catches the expensive mistake (a different character). Don't draw parts before G1 passes.
 
@@ -54,7 +54,7 @@ Same canvas; each swap shares its part's pivot so it drops in place.
 | Part | Required drawings |
 |---|---|
 | `hand-front`, `hand-back` | `open`, `fist`, `grip` (closed round a handle, hole for the shaft), plus `pinch` for bow users. Name: `hand-front-grip.png` |
-| `head` | `neutral`, `attack` (shout or snarl), `hurt`, `effort` (gritted, bracing), `ko` (eyes shut or dazed), `back` (back of the head) |
+| `head` | `neutral`, `attack` (shout or snarl), `hurt`, `effort` (gritted, bracing), `ko` (eyes shut or dazed), `back` (back of the head); plus 3 to 5 face-detail overlays that fit all of them (section 7a) |
 | `torso` | `three-quarter` (default), `side` (turned side-on, for horizontal cuts), `back` |
 | feet | `flat` (default); `toe` (push-off) optional |
 | arms (casters and big moves) | `arm-front-raised` (whole raised arm, carries the held item), `arm-back-guard` or `arm-back-reach` (whole arm thrust forward, open palm, for casting at a target): only for characters that cast or block |
@@ -80,6 +80,14 @@ That's about 18 base parts and 14 to 18 swaps, roughly **35 images per character
 - Each gear piece must fit every head swap; deliver named variants where it can't (`gear-helmet-hurt.png`).
 - **Colour variants by tint in code:** mark recolourable regions (clothes, bandana) as a separate grey mask layer per part (`torso-mask.png`) so code can tint them without repainting.
 
+### 7a. Individual variety (so three archers don't look identical)
+Classic beat 'em ups mostly reuse one drawing per enemy type and tell variants apart by colour and name (Final Fight's thugs are the same sprite in different colours). Our rig can do better cheaply, because a variety piece is one small image that works in every pose. Each enemy spawned picks a combination; code chooses at random from the type's allowed list (seeded, so runs replay the same).
+- **Face details:** small overlays on the head that fit **every expression** of that head (neutral, attack, hurt, effort, KO): eye patch, extra scar, torn or notched ear, whisker style, an earring. 3 to 5 per body, drawn with the head swaps.
+- **Fur and clothing tints:** a slight random shift on the fur and recolourable clothes within a range the type allows (masks from section 7).
+- **Gear picks:** an optional piece from the type's gear list (a cap or no cap, a different belt).
+- **Size:** a small render-only scale change (about plus or minus 4%); hit areas stay the same.
+Enemy types still read at a glance by silhouette and gear (archer hood, spearman helmet); variety only makes members of the same type individual.
+
 ## 7b. Effects and magic
 A spell or special move is three separate things, so one effect serves many characters:
 1. **Pose** from the rig: a cast uses the `effort` head plus a raised or reaching arm from the swap library.
@@ -87,7 +95,7 @@ A spell or special move is three separate things, so one effect serves many char
 3. **Colour** by tint in code, so one drawing serves several schools of magic or enemy types (a fireball tinted blue becomes frost).
 Effects attach to a named point on the rig (`hand-front` tip, weapon tip, chest), the same way held weapons use grip points.
 
-## 8. Rig bench and motion test (G2, G3; code builder's tool)
+## 8. Rig bench and motion test (G2, G3; Code's tool)
 - **Fit overlay:** load the source parts and `part-layout.json`, assemble at rest, and draw them over the faded master; flag drift in proportion or position.
 - **Standard motion strip:** stance, idle breath, walk cycle, attack (windup, strike, follow-through), hurt, knockdown, get-up; played live at game size beside the standee, with an exported strip image for the review.
 - The user judges G3 here, in motion, before anything is imported into the game.

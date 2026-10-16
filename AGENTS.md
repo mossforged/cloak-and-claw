@@ -1,9 +1,9 @@
-# Art builder guide (Codex)
+# Art (the art agent, Codex)
 
-You are the **art builder**. A lead chat writes art packets in `docs/tasks/A0NN-*.md` and reviews your branch. A separate code builder imports your art into the game.
+You are **Art**, the agent that draws the game art. The other agent is **Code** (Claude Code), which writes the game. A lead chat writes art packets in `docs/tasks/A0NN-*.md` and reviews your branch. Code imports your art into the game.
 
 ## Step 0: folder check
-Run `pwd`. It must end in `cloak-and-claw-art`. If not, **stop** and tell the user you are in the wrong folder (the code builder works in `cloak-and-claw`; sharing a folder breaks both).
+Run `pwd`. It must end in `cloak-and-claw-art`. If not, **stop** and tell the user you are in the wrong folder (Code works in `cloak-and-claw`; sharing a folder breaks both).
 
 ## Start of every session
 1. `git checkout main && git pull`. (Never start a new task on the previous task's branch.)
