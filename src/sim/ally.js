@@ -6,7 +6,7 @@
 //     cornered and facing the attacker -> block.
 //  2. a downed friend -> go and pick him up (hold grab), unless an enemy in windup is right by him.
 //  3. potions: toss his to a friend below potionAt; drink it below drinkAt when no enemy is near and no friend needs it;
-//     an empty slot and a potion lying close by -> fetch it.
+//     an empty slot and a potion lying close by -> fetch it, but only once every player-hero already carries one.
 //  4. leash: too far from his player-hero -> walk back to him.
 //  5. fight the nearest enemy not engaging the player-hero: one slash at a time, swingGap apart, never on a reeling enemy.
 //  6. else follow a little behind the player-hero.
@@ -131,7 +131,8 @@ function think(w, h) {
   // 3. potions
   const pot = potionPlan(c, h, w);
   if (pot) return pot;
-  if (!h.potion && canAct(h) && !foes(w).some((e) => Math.abs(e.x - h.x) < A.alone)) {
+  const playersFull = w.heroes.every((o) => o === h || o.controller.kind === 'ai' || !isUp(o) || o.potion);
+  if (!h.potion && playersFull && canAct(h) && !foes(w).some((e) => Math.abs(e.x - h.x) < A.alone)) {   // floor potions are the players' first
     const it = w.items.filter((i) => i.state === 'floor' && i.def.kind === 'potion' && Math.abs(i.x - h.x) < A.fetch && Math.abs(i.y - h.y) < 80);
     if (it.length) {
       const p = nearest(it, h);

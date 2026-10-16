@@ -182,6 +182,18 @@ for (const seed of [1, 2, 3]) {
   check(al.hp === 20 + POT.heal, `alone and low he drinks it (hp ${al.hp})`);
 }
 
+// Ally: floor potions are the player's first (the ally only fetches one once the player carries one)
+{
+  const w = createWorld('harbor-run', ['mouse-fighter', ALLY_HERO], 1), [h0, al] = w.heroes;
+  al.x = h0.x + 100; al.y = h0.y;
+  const it = spawnItem(w, 'health-potion', al.x + 30, al.y, 0, { vx: 0, vz: 0 }); it.state = 'floor';
+  for (let i = 0; i < 120; i++) stepWorld(w, []);
+  check(!al.potion && w.items.includes(it), 'the ally leaves a floor potion for an empty-handed player');
+  h0.potion = POT; al.x = it.x - 60; al.y = it.y;
+  for (let i = 0; i < 180 && !al.potion; i++) stepWorld(w, []);
+  check(al.potion === POT, 'once the player carries one, the ally fetches the next');
+}
+
 // Two scripted heroes + one ally clear harbor-run
 const lane = (h) => (h.slot === 0 ? 455 : 470);
 function heroBot(w, h) {

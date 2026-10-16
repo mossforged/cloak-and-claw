@@ -58,6 +58,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 code: T022 v2: user couldn't get a potion (the AI ally fetched every one first); ally now leaves floor potions to players until they carry one; drops raised (crate 0.5, barrel 0.35, rats 0.15-0.2). User: downed works; revive time / health back to balance.
 2026-10-16 code: T022 helping v1 (branch t022-helping): downed + hold-H revive, carried potions (tap U toss / hold U drink), AI ally on `?ally=1` (dodges telegraphs first, revives, tosses potions, softer hits); potion drops only with 2+ heroes. 22/22 tests; solo bot numbers identical to main.
 2026-10-16 code: screens in docs/screens/T022 (ally fighting, downed ring, revive ring, potion mid-arc). User to feel-check solo with ?ally=1 and two players.
 2026-10-16 lead: study "Mission and home-base games" (4 research tracks; 15 prioritized recommendations: no home timers, every rescue = visible + playable change, ~1 adventurer per 3-4 rescues, one building currency, weapon + ring gear, AI allies with one role each that dodge telegraphs, Winter-at-the-abbey season close, no missable rescues). T022 addendum: ally dodges telegraphs first.

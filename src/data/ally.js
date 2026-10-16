@@ -12,5 +12,5 @@ export const ALLY = {
   rescueSafe: 90,         // px: he holds off a revive while an enemy in windup is this close to the downed friend
   potionAt: 0.45,         // tosses his potion to a hero below this share of max hp (within RULES.potions.reach)
   drinkAt: 0.35, alone: 170,   // drinks it himself below this share when no enemy is within `alone` px and no friend needs it
-  fetch: 160,             // px: walks to a potion on the floor this close when his slot is empty and no enemy is near
+  fetch: 160,             // px: walks to a potion on the floor this close when his slot is empty, no enemy is near and every player already has one
 };

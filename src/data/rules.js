@@ -31,5 +31,5 @@ export const RULES = {
   // at the end). A hit cancels either (the potion is kept). drops: chance a crate / barrel / KO'd enemy (def id) also
   // drops a potion (own rng); solo: false = no potion drops with a lone hero (his old game stays exactly as it was).
   potions: { drinkHold: 24, drink: 26, wind: 8, recovery: 12, flight: 34, z: 64, reach: 420, fallback: 140,
-    drops: { solo: false, crate: 0.35, barrel: 0.25, 'rat-raider': 0.1, 'rat-spearman': 0.1, 'rat-archer': 0.15 } },
+    drops: { solo: false, crate: 0.5, barrel: 0.35, 'rat-raider': 0.15, 'rat-spearman': 0.15, 'rat-archer': 0.2 } },
 };
