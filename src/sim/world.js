@@ -23,6 +23,7 @@ export function createWorld(stageId, heroId, seed = Date.now()) {
     ...createCamera(stage), run: createRun(stage),
     stage, player, fighters: [player], frame: 0, rng: createRng(seed),
     props: createProps(stage), items: [], shots: [], itemRng: createRng(seed * 7 + 13),   // T010: own rng, so loot never shifts the fight's
+    lookRng: createRng(seed * 11 + 5),   // T019: enemy looks (sim/looks.js), render only, own rng
     wave: 0, waveTimer: 40, kos: 0, xp: 0, over: false,
   };
 }

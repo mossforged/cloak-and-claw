@@ -8,6 +8,8 @@ import { gripLayout } from './rig-grip.js';
 import { braceLayer } from './brace.js';
 import { feelLayer, bendSteps, bendStrips } from './weapon-feel.js';
 import { ITEMS } from '../data/items/index.js';
+import { LOOKS } from '../data/looks.js';
+import { gearLayout, gearOf, lookImage } from './looks.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
 const BOX = { w: 300, h: 260, ox: 150, oy: 200 };  // buffer area in screen px; (ox, oy) = feet
@@ -32,7 +34,8 @@ const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[
 // shield onto the drawn fist): the child then hangs off this part, keeping its own joint angle (T012).
 const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 
-// Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order.
+// Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order (`base` = the matrix of the
+// part's own image whichever swap shows: gear overlays ride it, render/looks.js).
 // swap: { part: swap name } from the pose. held: { slot, part } from heldOf (a held weapon replaces the slot part's
 // drawing; part null = empty hand, slot hidden). Pure; tests use it.
 export function layoutRig(rig, joints, swap = {}, held = null) {
@@ -64,7 +67,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
     .map(([name, p]) => {
       const m = mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1]));
       const s = p.swaps?.[swap[name]];
-      return { name, p, order: joints[`${name}.order`] ?? p.order, img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m };
+      return { name, p, order: joints[`${name}.order`] ?? p.order, img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m, base: m };
     })
     .filter((e) => !hidden.has(e.name) && !(held && e.name === held.slot && !held.part))
     .sort((a, b) => a.order - b.order);
@@ -93,20 +96,6 @@ export function heldOf(f, rig, sheathed = false) {
 }
 
 let buf, tintBuf;
-// T018 stopgap tint (rig.tint = { color, alpha, parts }): the named parts (clothes) draw a recoloured copy, made once
-// per image. Removed when A011's gear and masks land.
-const tintCache = new Map();
-function partTint(im, T, name) {
-  if (!T?.parts.includes(name) || !im?.width) return im;
-  const key = `${im.src}|${T.color}|${T.alpha}`;
-  if (!tintCache.has(key)) {
-    const c = document.createElement('canvas'), g = c.getContext('2d');
-    c.width = im.width; c.height = im.height;
-    g.drawImage(im, 0, 0); g.globalCompositeOperation = 'source-atop'; g.globalAlpha = T.alpha; g.fillStyle = T.color; g.fillRect(0, 0, c.width, c.height);
-    tintCache.set(key, c);
-  }
-  return tintCache.get(key);
-}
 const canvas = () => { const c = document.createElement('canvas'); c.width = BOX.w * RES; c.height = BOX.h * RES; return c; };
 
 function tinted(color) {
@@ -133,11 +122,11 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
   const held = heldOf(f, rig, mem.sheathed), B = !pose && held?.part && held.kit.feel?.bend;   // T017: a floppy held weapon
-  for (const { name, img, m, line, p: part } of gripLayout(rig, joints, mem.swap, held, f)) {
+  for (const { name, img, m, line, p: part } of gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f), gearOf(f))) {   // T019 gear
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     if (line) { g.strokeStyle = '#3a2a1e'; g.lineWidth = 0.8; g.beginPath(); line.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke(); continue; }
     g.transform(...m);
-    const im = partTint(assets.get(img), rig.tint, name);
+    const im = lookImage(assets, rig, img, name, f.look);   // T019: tinted per look (cached)
     if (!B || name !== held.slot) { g.drawImage(im, 0, 0); continue; }
     for (const { sx, sw, t } of bendStrips(im.width, im.height, part.pivot, bendSteps(B, m, mem.flop, mem.limp?.x ?? 1))) {
       g.save(); g.transform(...t); g.drawImage(im, sx, 0, sw, im.height, sx, 0, sw, im.height); g.restore();
@@ -156,7 +145,8 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   ctx.globalAlpha = alpha;
   ctx.translate(f.x + p.dx * f.facing, f.y - f.z + p.dy);
   ctx.rotate(p.rot * f.facing);
-  ctx.scale(p.sx * f.facing, p.sy);
+  const k = 1 + (f.look?.size ?? 0) * LOOKS.size;   // T019: render-only size (hit areas unchanged)
+  ctx.scale(p.sx * f.facing * k, p.sy * k);
   const put = (img) => ctx.drawImage(img, -BOX.ox, -BOX.oy, BOX.w, BOX.h);
   put(buf);
   if (f.state === 'hurt' || f.state === 'knockdown') { ctx.globalAlpha = alpha * 0.28; put(tinted('#ff3b30')); }

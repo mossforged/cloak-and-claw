@@ -1,7 +1,6 @@
 // Rat Archer rig (T018): the A010 Rat Raider rig holding the bow kit (items/rat-bow.js): bow upright through the far grip
 // hand's hole, held out in front; the near hand (pinch) rests on the string, draws it to his cheek over the windup (IK +
 // string, render/rig-grip.js) and lets go on the shot. Near arm angles here only pick the elbow's bend.
-// tint: stopgap until A011's refitted hood and quiver (A008's gear was drawn for the old head; hidden): green clothes.
 import rat from './rat-raider.js';
 import base from './rat-raider-poses.js';
 
@@ -9,7 +8,6 @@ const arms = (a, b, c, d) => ({ 'arm-front-upper': a, 'arm-front-lower': b, 'arm
 const DRAW = { 'arm-front-upper.order': 815, 'hand-front.order': 845 };   // the string arm in front of the body
 export default {
   ...rat, id: 'rat-archer',
-  tint: { color: '#3f6b2e', alpha: 0.45, parts: ['torso', 'pelvis', 'leg-front-upper', 'leg-back-upper', 'scarf-tail'] },
   poses: {
     ...base,
     stance: { ...base.stance, torso: 0, head: -2, ...arms(-60, -40, -20, 0), 'hand-back': 0 },

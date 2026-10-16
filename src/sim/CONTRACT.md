@@ -9,6 +9,7 @@
 **Rules:**
 - Never imports from `src/render/`, never touches `window`, `document` or `performance`. Must run in Node (`npm test`).
 - Deterministic given a seed: use `world.rng`, never `Math.random`.
+- Looks (T019, `looks.js`): enemies get a render-only `f.look` at spawn, picked on `world.lookRng` (never `world.rng`), so a run plays out the same with or without looks. No sim code reads `f.look`.
 - Every fighter is driven through `f.control` (input or AI write the same shape). `control.block` (held) only works for fighters whose def has a `block` config; a hit from the side the blocker faces emits `block` instead of `hit`.
 - Grab/throw (`grab.js`) only for fighters whose def has `grab`/`throw` configs, on enemies marked `throwable`. `grabbed` and `thrown` are in `HELPLESS` and can't be hit by moves; only a thrown body hits via `thrownHit`.
 - Props and items (`props.js`, `weapons.js`, T010): only hero-team hits break props; props block fighters on the ground. Loot rolls (crate picks, KO drop chance) use `world.itemRng`, never `world.rng`, so loot never changes the fight. Picking up, eating and tossing only for defs with `pickup` / `toss`; while `f.weapon` is held its kit's moves replace the fighter's (`movesOf`). A stage without `props` and a world where nothing is picked up behave exactly as before T010.

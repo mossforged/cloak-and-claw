@@ -8,6 +8,7 @@ import { FIGHTERS } from '../data/fighters/index.js';
 import { VIEW } from '../config.js';
 import { bus } from '../core/events.js';
 import { createFighter } from './fighter.js';
+import { pickLook } from './looks.js';
 import { createProps } from './props.js';
 import { lockX, fitBounds } from './camera.js';
 
@@ -38,6 +39,7 @@ function spawn(w, id, i) {
   const x = side > 0 ? w.cam.x + VIEW.w + 40 : w.cam.x - 40;
   const y = w.rng.range(b.top + 10, b.bottom - 10);
   const e = createFighter(FIGHTERS[id], x, y, { ai: true, entering: true, facing: -side });
+  e.look = pickLook(e.def, w.lookRng);   // T019: render-only individual look
   if (w.run.loop) e.hp = e.maxHp = Math.round(e.maxHp * (1 + 0.3 * w.run.loop));
   w.fighters.push(e);
 }

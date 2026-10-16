@@ -1,0 +1,70 @@
+<!doctype html>
+<!-- Look sheet (T019): rats drawn by the game's own rig renderer with gear and individual looks (sim/looks.js picks,
+     render/looks.js tints) over the Harbor Market floor. Serve the repo root, then /tools/look-sheet.html.
+     Row 1: a wave of rats as the game picks them (?seed=N, default 1). Row 2: archer and spearman hurt / knockdown /
+     down poses held without the hurt flash (gear follows the head swaps), and one real hurt state. Row 3: back view (head-back + torso-back swaps) with each loadout, plus the
+     captain gear (wired as data, no captain enemy yet). ?look=<detail>,<bandana idx>,<fur -1..1>,<size -1..1> forces one
+     look on every rat (e.g. ?look=detail-eyepatch,2,0.5,0). ?zoom=2 draws at twice game size. -->
+<meta charset="utf-8">
+<base href="../">
+<title>Look sheet</title>
+<style>body { margin: 0; background: #2b2b30; } canvas { display: block; }</style>
+<canvas id="c"></canvas>
+<script type="module">
+import { loadAssets, collectArtPaths } from './src/core/assets.js';
+import { createRng } from './src/core/rng.js';
+import { FIGHTERS } from './src/data/fighters/index.js';
+import { RIGS } from './src/data/rigs/index.js';
+import { ITEMS } from './src/data/items/index.js';
+import { STAGES } from './src/data/stages/index.js';
+import { LOADOUTS, PALETTES, RAT_LOOKS } from './src/data/looks.js';
+import { createFighter, setState } from './src/sim/fighter.js';
+import { pickLook } from './src/sim/looks.js';
+import { drawRig } from './src/render/rig.js';
+
+const Q = new URLSearchParams(location.search), Z = +(Q.get('zoom') ?? 1), seed = +(Q.get('seed') ?? 1);
+const W = 960, H = 540, c = document.getElementById('c'), ctx = c.getContext('2d');
+c.width = W * Z; c.height = H * Z;
+const assets = await loadAssets(collectArtPaths(FIGHTERS, RIGS, ITEMS, STAGES));
+const bg = assets.get(STAGES['harbor-market'].art?.img ?? STAGES['harbor-market'].art);
+
+const forced = Q.get('look')?.split(',');
+const lookOf = (f, rng) => {
+  if (!forced) return pickLook(f.def, rng);
+  const L = pickLook(f.def, createRng(1));
+  return { ...L, detail: forced[0] === 'none' ? null : forced[0], tints: { ...L.tints, bandana: PALETTES.bandana[+forced[1] || 0] }, fur: +forced[2] || 0, size: +forced[3] || 0 };
+};
+const rng = createRng(seed * 11 + 5);
+const rat = (id, x, y, state = 'idle', extra = {}) => {
+  const f = createFighter(FIGHTERS[id], x, y, { facing: -1 });
+  f.look = lookOf(f, rng); setState(f, state); f.t = extra.t ?? 6; Object.assign(f, extra);
+  return f;
+};
+const back = (rig) => ({ ...rig, poses: { ...rig.poses, back: { ...rig.poses.stance, swap: { head: 'head-back', torso: 'torso-back' } } } });
+const captain = { ...FIGHTERS['rat-raider'], art: { ...FIGHTERS['rat-raider'].art, gear: LOADOUTS.captain }, look: RAT_LOOKS.captain };
+
+// [fighter, held pose (a rig pose name, no hurt flash) or null, label]
+const rows = [
+  [['rat-raider', 120], ['rat-archer', 290], ['rat-spearman', 460], ['rat-raider', 630], ['rat-archer', 800]].map(([id, x]) => [rat(id, x, 165), null, id.slice(4)]),
+  [[rat('rat-archer', 120, 345), 'hurt', 'archer hurt'], [rat('rat-spearman', 290, 345), 'hurt', 'spearman hurt'],
+    [rat('rat-archer', 470, 345), 'knockdown', 'archer knockdown'], [rat('rat-spearman', 650, 345), 'down', 'spearman down (KO head)'],
+    [rat('rat-spearman', 840, 345, 'hurt'), null, 'in game: hurt flash']],
+  [[rat('rat-archer', 120, 520), 'back', 'archer back'], [rat('rat-spearman', 290, 520), 'back', 'spearman back'], [rat('rat-raider', 460, 520), 'back', 'raider back'],
+    [Object.assign(rat('rat-raider', 650, 520), { def: captain, look: lookOf({ def: captain }, rng) }), null, 'captain gear (data)'],
+    [Object.assign(rat('rat-raider', 830, 520), { def: captain, look: lookOf({ def: captain }, rng) }), 'back', 'captain back']],
+];
+function frame(time) {
+  ctx.setTransform(Z, 0, 0, Z, 0, 0);
+  ctx.fillStyle = '#6b5a48'; ctx.fillRect(0, 0, W, H);
+  if (bg?.width) { ctx.globalAlpha = 0.5; ctx.drawImage(bg, 0, 0, W, H); ctx.globalAlpha = 1; }
+  ctx.font = '11px sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = '#f2e6d0';
+  for (const row of rows) for (const [f, pose, label] of row) {
+    const rig = RIGS[f.def.art.rig];
+    drawRig(ctx, f, pose ? back(rig) : rig, assets, time / 1000, 0, pose ?? undefined);
+    ctx.fillText(label, f.x, f.y + 14);
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+window.sheet = { rows };
+</script>

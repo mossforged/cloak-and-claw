@@ -27,6 +27,7 @@ import ratArcher from './fighters/rat-archer.js';
 import { RAT_SPEAR } from './moves/rat-spear.js';
 import { RAT_BOW } from './moves/rat-bow.js';
 import mouseFighterBrace from './rigs/mouse-fighter-brace.js';
+import { LOOKS } from './looks.js';
 
 export const ROOTS = {
   'src/data/moves/mouse-sword.js': MOUSE_SWORD,
@@ -52,6 +53,7 @@ export const ROOTS = {
   'src/data/moves/plank-club.js': PLANK_CLUB,
   'src/data/moves/big-fish.js': BIG_FISH,
   'src/data/rigs/mouse-fighter-brace.js': mouseFighterBrace,
+  'src/data/looks.js': LOOKS,
 };
 // One pick section per floor weapon's moves (T010).
 const weaponMoves = (title, file) => ({
@@ -213,6 +215,15 @@ export const LAB_SCHEMA = [
       ['block.glint.life', 1, 60, 1], ['block.glint.delay', 0, 20, 1],
       ['jumpSquat.rise', 0, 15, 1], ['jumpSquat.land', 0, 20, 1], ['jumpSquat.landDepth', 0, 1, 0.05],
       ['jumpSquat.squashX', 1, 1.4, 0.01], ['jumpSquat.squashY', 0.6, 1, 0.01],
+    ],
+  },
+  {
+    title: 'Rat looks (T019, render only)', file: 'src/data/looks.js',
+    fields: [
+      { path: 'sat', min: 0, max: 1.5, step: 0.05, label: 'cloth tint saturation' },
+      { path: 'mix', min: 0, max: 1, step: 0.05, label: 'cloth tint strength' },
+      { path: 'fur', min: 0, max: 0.2, step: 0.01, label: 'fur shift range' },
+      { path: 'size', min: 0, max: 0.1, step: 0.005, label: 'size range (+-)' },
     ],
   },
   {
