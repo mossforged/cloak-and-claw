@@ -8,7 +8,11 @@
 // bend: the weapon is drawn in `segs` slices from the grip to its far end, each turned a little more (a floppy body):
 //   each slice turns `sag` of the way toward straight down (the far end hangs toward the floor), and it takes `flop` of
 //   the wobble as bend instead of a turn at the hand. Drawn by rig.js from bendStrips (mem.flop = the wobble share, deg).
+//   fling: swinging straightens it (thrown outward): limpness eases toward 0 over the windup (`windup` = stiffness reached
+//   by its end), is 0 (fully stiff) from the strike, and lets go over the first `release` of the recovery; going limp
+//   again is a spring (`period` s, `damping`), so it whips down past rest and settles. mem.limp = { x, v }: 1 = limp.
 import { bus } from '../core/events.js';
+import { phaseOf } from '../sim/fighter.js';
 
 const impacts = new WeakMap();   // attacker -> hits landed so far (from 'hit' events)
 bus.on('hit', ({ attacker }) => attacker && impacts.set(attacker, (impacts.get(attacker) ?? 0) + 1));
@@ -48,6 +52,7 @@ export function feelLayer(rig, f, joints, time, mem) {
     out[slot] += a * (1 - flop);
     mem.flop = a * flop;
   }
+  if (F.bend?.fling) stepLimp(F.bend.fling, f, time, mem);
   if (F.squash) {
     const n = impacts.get(f) ?? 0, dt = Math.max(0, Math.min(0.1, time - (mem.sqT ?? time)));
     if (mem.sqAge !== undefined && (!f.move || f.mf !== mem.sqMf)) mem.sqAge += dt;   // frozen in hit-stop
@@ -59,14 +64,34 @@ export function feelLayer(rig, f, joints, time, mem) {
   return out;
 }
 
+// How stiff a swing holds the weapon (0 limp .. 1 stiff) at this point of the move.
+export function stiffOf(G, f) {
+  if (!f.move) return 0;
+  const [ph, p] = phaseOf(f);
+  if (ph === 'windup') return G.windup * p * p;
+  if (ph === 'active') return 1;
+  return Math.max(0, 1 - p / G.release);
+}
+
+// Limpness spring: snaps stiff at once (it is flung straight), goes limp again with a springy overshoot.
+export function stepLimp(G, f, time, mem) {
+  const L = (mem.limp ??= { x: 1, v: 0, t: time, tg: 1 }), target = 1 - stiffOf(G, f), dt = Math.min(0.1, time - L.t);
+  const stiffening = target < L.tg;
+  L.t = time; L.tg = target;
+  if (stiffening && target <= L.x) { L.x = target; L.v = 0; return L.x; }   // only while the swing tightens (not on an overshoot)
+  const w = (2 * Math.PI) / G.period, n = Math.ceil(dt / STEP), h = dt / Math.max(1, n);
+  for (let i = 0; i < n; i++) { L.v += (-w * w * (L.x - target) - 2 * G.damping * w * L.v) * h; L.x += L.v * h; }
+  return L.x;
+}
+
 // Per-slice bend steps (image degrees) for a held weapon drawn with image matrix m: each slice turns `sag` of the way
 // from where the last one points toward straight down on screen (so the far end hangs toward the floor, whatever way it
-// is held or mirrored), plus an even share of the wobble's flop.
-export function bendSteps(B, m, flop = 0) {
+// is held or mirrored), plus an even share of the wobble's flop; all scaled by `limp` (0 = straight, flung out).
+export function bendSteps(B, m, flop = 0, limp = 1) {
   const det = Math.sign(m[0] * m[3] - m[1] * m[2]) || 1, out = [];
   let cur = (Math.atan2(m[1], m[0]) * 180) / Math.PI;   // slice direction on screen, degrees (90 = down)
   for (let i = 0; i < B.segs; i++) {
-    const toDown = ((90 - cur + 540) % 360) - 180, step = toDown * B.sag + (flop * det) / B.segs;
+    const toDown = ((90 - cur + 540) % 360) - 180, step = limp * (toDown * B.sag + (flop * det) / B.segs);   // limp 0 = flung straight
     cur += step; out.push(step * det);   // a mirrored image turns the other way on screen
   }
   return out;

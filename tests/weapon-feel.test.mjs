@@ -7,7 +7,7 @@ import { ITEMS } from '../src/data/items/index.js';
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { targetPose, channelsOf } from '../src/render/rig-pose.js';
-import { feelLayer, stepWobble, squashCurve, bendSteps, bendStrips } from '../src/render/weapon-feel.js';
+import { feelLayer, stepWobble, squashCurve, bendSteps, bendStrips, stiffOf, stepLimp } from '../src/render/weapon-feel.js';
 import { createJuice } from '../src/render/juice.js';
 import { bus } from '../src/core/events.js';
 import { botControl } from './bot.mjs';
@@ -149,6 +149,20 @@ for (const [props, weaponBot] of [[true, true], [false, false]]) {
   const ap = (t, x, y) => [t[0] * x + t[2] * y + t[4], t[1] * x + t[3] * y + t[5]];
   const ok = T.slice(2).every((x, i) => { const [a, b] = ap(T[i + 1].t, x.sx, 46), [c, d] = ap(x.t, x.sx, 46); return Math.hypot(a - c, b - d) < 1e-9; });
   check(ok, 'bend: neighbouring slices meet at the seam on the centre line');
+}
+
+// 5c. Fling: the slap straightens the fish (fully stiff from the strike), then it goes limp again with an overshoot
+{
+  const G = ITEMS['big-fish'].feel.bend.fling, M = ITEMS['big-fish'].moves.fishSlap, at = (mf) => holding('big-fish', { state: 'attack', move: M, mf });
+  check(stiffOf(G, holding('big-fish')) === 0, 'fling: limp when not swinging');
+  check(stiffOf(G, at(M.windup - 1)) > 0.3 && stiffOf(G, at(M.windup - 1)) < 1, 'fling: stiffening through the windup');
+  check(stiffOf(G, at(M.windup)) === 1, 'fling: fully stiff at the strike');
+  const mem = {}; let t = 0, mf = 0, peak = 0, end;
+  for (; mf < M.windup + M.active + M.recovery; mf++, t += 1 / 60) { const x = stepLimp(G, at(mf), t, mem); if (mf === M.windup) check(x === 0, 'fling: limp 0 (straight) the frame it strikes'); }
+  for (let i = 0; i < 60; i++, t += 1 / 60) { end = stepLimp(G, holding('big-fish'), t, mem); peak = Math.max(peak, end); }
+  check(peak > 1.05, `fling: whips down past limp rest after the swing (peak ${peak.toFixed(2)})`);
+  check(Math.abs(end - 1) < 0.05, 'fling: settles limp');
+  check(bendSteps(ITEMS['big-fish'].feel.bend, [1, 0, 0, 1, 0, 0], 10, 0).every((x) => x === 0), 'fling: limp 0 = no bend at all');
 }
 
 // 6. Club hits shake harder than their sim shake (view-only extra); a move without fx.shake shakes as before

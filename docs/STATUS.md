@@ -49,6 +49,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-15 code: T017 round 4 (user: floppier in motion; stiff at the strike "like gravity is throwing it outward"): looser wobble, more of it as bend; the slap flings the fish straight (stiffens over the windup, fully stiff from the strike) and it whips limp again with an overshoot; build v4.
 2026-10-15 code: T017 round 3 (user: fish "not exactly drooping toward the ground"): each slice now turns part of the way toward straight down, so the fish hangs limp nose-to-floor whatever way it is held; build v3.
 2026-10-15 code: T017 round 2 (user: fish "juts out stiff"): the fish is drawn bent in slices from the grip, sagging nose-down by gravity and flopping with the wobble. User: weapons all feel good. Parked for the lead: block shuffle has no footwork (boots pinned while moving in block).
 2026-10-15 code: T017 on branch `t017-weapon-feel` (render only): club shouldered, overhead windup with a held beat, low slam + dust + extra shake; fish dangled with a wobble spring, slap squash (held through hit-stop) + water drops; cutlass shorter wind-back, tighter swooshes. Kit poses in `mouse-fighter-poses.js` `kits`, new `render/weapon-feel.js`, lab section.

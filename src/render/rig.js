@@ -122,7 +122,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
     g.transform(...m);
     const im = assets.get(img);
     if (!B || name !== held.slot) { g.drawImage(im, 0, 0); continue; }
-    for (const { sx, sw, t } of bendStrips(im.width, im.height, part.pivot, bendSteps(B, m, mem.flop))) {
+    for (const { sx, sw, t } of bendStrips(im.width, im.height, part.pivot, bendSteps(B, m, mem.flop, mem.limp?.x ?? 1))) {
       g.save(); g.transform(...t); g.drawImage(im, sx, 0, sw, im.height, sx, 0, sw, im.height); g.restore();
     }
   }
