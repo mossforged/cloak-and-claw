@@ -223,3 +223,7 @@ Use case: precise-object-edit. Correct this near-hand grip drawing only. The gre
 ```
 
 The first arm-back-lower hidden repair returned no image and was retried with the same prompt. Initial shin repairs returned tool errors; their successful retry prompts are included above. The first side torso, rear ears and front grip were replaced by the corrective edits above. Raw attempts remain outside the repository.
+
+## A010 addendum — metadata and existing-item fit only
+
+No image-generation calls or redraws. `rig-source.json` is a field-for-field conversion of the existing measured layout, excluding sword. `cutlass-grip-check.png` uses Pillow for deterministic keying, uniform scaling, rigid rotation and compositing of the unchanged hand/body sources and the already-imported A003 item. Exact attachment/scale settings are in `cutlass-grip-check.json`. Earlier sword prompts and reviews are historical provenance; the canonical manifest uses no sword part.
