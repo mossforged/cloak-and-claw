@@ -4,7 +4,7 @@
 
 ## Next
 1. **Code:** T019 (real gear for archer/spearman + random face details, tints and size per rat).
-2. **Art:** idle (rat finished: A010 + A011). Next art candidates: spear/bow redrawn to match the new rat, or the next enemy body under the rig standard (lead to propose).
+2. **Art:** A012 (spear, bow and arrow redrawn to match the new rat; near pinch hand; measured weapon points).
 3. **User:** judge T019 (gear and crowd variety in a fight).
 
 ## Stage plan
@@ -21,7 +21,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T019-rat-gear-and-variety.md`.
-- Art: none queued.
+- Art: `docs/tasks/A012-rat-spear-bow.md`.
 
 ## Open questions (for the user)
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
@@ -29,7 +29,7 @@
 
 ## Parked
 - Rig bench's generic strip rolls the head in knockdown/down (game poses are fine; T018). Fix when the bench is next touched.
-- A010 has no near-hand pinch: the archer borrows the far pinch turned 180 degrees (T018). Add `hand-front-pinch` with the spear/bow redraw.
+- A010 has no near-hand pinch: the archer borrows the far pinch turned 180 degrees (T018). In A012.
 - Fish slap lands mid-spin while he faces away (timing comes from the unchanged hitbox, T017). Revisit in a later feel pass if it reads wrong.
 - Weapon drops for the other rats: drops are optional (keep the floor uncluttered), but a drop is always the weapon held (decision 2026-10-16). Whether the spearman ever drops his spear: decide with Stage 4 enemies.
 - **Heavy throwables by size** (user, 2026-10-15): the biggest breakables (barrels, big crates) can be picked up and thrown only by big animals (e.g. a badger hero; a brute enemy hurling a barrel at the player). Mouse-sized heroes can only smash them. Props get a `weight` and fighters a `size`/`strength` in data; ties into the species x size hook. For Stage 4 (brute enemy) and Stage 8 (second, bigger hero).
@@ -52,6 +52,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: wrote A012 (spear/bow/arrow redraw + near pinch hand), user's pick.
 2026-10-16 lead: merged T018 (A010 rat in game for all three types, uniform scale, standard part names, holds/drops the same cutlass; user picked upright walk F; bot runs identical; 18/18 tests; pycache removed; mouse poses split).
 2026-10-16 lead: merged A011 (user: "very cool"); wrote T019 (gear + individual variety in game, muted earthy tint palette by default). Art idle.
 2026-10-16 lead: reviewed A011 (branch `a011-rat-raider-finishing`, 136 files / 35 MB, scope clean): gear refit on all six heads and three torso views, 4 face details, 82 masks, rig-source overlays. Waiting for the user's look. Repo: assets/source 117 MB, pack ~159 MB (LFS threshold in decisions: ~200 MB of sources).
