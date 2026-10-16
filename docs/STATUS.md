@@ -24,6 +24,7 @@
 - Art: none queued.
 
 ## Open questions (for the user)
+- **Combatant standard** (heroes + enemies: stats, move sets, AI roles, footwork rules, enemy bench) to draft once T022 and T023 land, then a mission/stage standard. Before any new hero or enemy (user: standards before content).
 - **Foundations before more content** (user, 2026-10-16): lead proposed, in order: (1) decide the hook (**decided 2026-10-16**), (2) multi-hero engine (**started: T021, user 2026-10-16**), (3) run loop in grey box, now shaped by the hook: mission -> rescue/rewards -> home (place the rescued, spend resources, slot gear) -> next mission, (4) content tools (enemy workspace, stage standard). Plus: close the Stage 2 gate, rewrite the stage plan, LFS decision near 200 MB. Waiting for the user.
 - **Rig standard** (`docs/design/rig-standard.md`, proposed 2026-10-16 from the study): adopt it? Then A009 becomes the rat master (G1), and a code task builds the rig bench (fit overlay + motion strip).
 - **Hook decided (2026-10-16): community and helping** (see game brief). Settled: AI allies; mission -> home -> mission; first helping verbs = revive + potion toss (T022). Still open: what failure costs.
@@ -58,6 +59,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user: gear mostly agreed (significance a goal, not a rule); downed allies wounded for a mission or no cost, to be tested; combatant standard agreed (after T022/T023).
 2026-10-16 lead: user answered the study's questions -> `docs/design/home-loop.md` (living home-loop design) + decisions. User: standards before more heroes/enemies.
 2026-10-16 lead: user note: mouse attacks have no leg movement -> added footwork (weight shift, lunge step, settle) to T023.
 2026-10-16 lead: study "Mission and home-base games" (4 research tracks; 15 prioritized recommendations: no home timers, every rescue = visible + playable change, ~1 adventurer per 3-4 rescues, one building currency, weapon + ring gear, AI allies with one role each that dodge telegraphs, Winter-at-the-abbey season close, no missable rescues). T022 addendum: ally dodges telegraphs first.

@@ -25,7 +25,7 @@ Living design doc for the stronghold loop. Background: `docs/studies/2026-10-16-
 - **Hub lines are data rows with conditions** (rescued X, Y went down, Z revived you, boss beaten).
 
 ## Gear (the lead's view on "more gear eventually")
-Agree that gear should grow; the study's lesson isn't "few slots" but **every item matters and reads at a glance** (no stat soup, no appraisal fees). So:
+Agree that gear should grow. User (2026-10-16): mostly agreed; items needn't all be as significant as the lead suggests, but significance is a goal. The study's lesson: every item should read at a glance (no stat soup, no appraisal fees). So:
 - **Start:** weapon + one ring.
 - **Slots unlock as the abbey grows** (a rescued smith, tailor, jeweler): armour or cloak, a charm, a familiar (Castle Crashers' animal orbs fit the world), maybe a second ring. Each unlock is itself a rescue reward.
 - **Each item has one clear effect** shown immediately; fewer, stronger items (Dead Cells).
@@ -33,7 +33,7 @@ Agree that gear should grow; the study's lesson isn't "few slots" but **every it
 - Weapons are the same items whether held or on the floor (decision 2026-10-16).
 
 ## Downed allies (the lead's view)
-Agree with "downed, needs a fix, never killed except by story." Caution: if the fix is a **rare item**, it becomes a second currency and a grind (failures 2 and 3). Proposed instead: a downed ally comes home **wounded** and either sits out the next mission or is tended at once by the abbey's healer (a rescued healer makes it free and instant; before that, it costs a little building currency). Still a real cost, no farming.
+User (2026-10-16): maybe just **wounded for one mission, or maybe no cost at all: test it.** Lead's earlier note kept for the test: Caution: if the fix is a **rare item**, it becomes a second currency and a grind (failures 2 and 3). Proposed instead: a downed ally comes home **wounded** and either sits out the next mission or is tended at once by the abbey's healer (a rescued healer makes it free and instant; before that, it costs a little building currency). Still a real cost, no farming.
 
 ## Open
 - Total cast size; how adventurers are chosen per mission; the first 3-5 rescued folk and what each gives.
