@@ -58,6 +58,7 @@
 - League of Legends-style hero kits (passive + three cooldown abilities + an ultimate, on top of the basic combo), like Dungeon Fighter Online. User is a big LoL fan. Idea only, for Stage 8 heroes; mind button count.
 
 ## Last session
+2026-10-16 lead: user answered the study's questions -> `docs/design/home-loop.md` (living home-loop design) + decisions. User: standards before more heroes/enemies.
 2026-10-16 lead: user note: mouse attacks have no leg movement -> added footwork (weight shift, lunge step, settle) to T023.
 2026-10-16 lead: study "Mission and home-base games" (4 research tracks; 15 prioritized recommendations: no home timers, every rescue = visible + playable change, ~1 adventurer per 3-4 rescues, one building currency, weapon + ring gear, AI allies with one role each that dodge telegraphs, Winter-at-the-abbey season close, no missable rescues). T022 addendum: ally dodges telegraphs first.
 2026-10-16 lead: merged T021 (w.heroes, per-slot input, sticky enemy targets with per-hero tokens, camera for several heroes, HUD per hero; one-hero bot numbers identical; 21/21 tests; CI green). User play check still to do; merged so T022 can build on it.
