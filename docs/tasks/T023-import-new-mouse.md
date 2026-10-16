@@ -13,13 +13,19 @@ The user approved the new Mouse Fighter (A013): one master drawn from his stande
    - **feet:** `foot-front-out` (turned-out **near** foot) in planted poses: stance, idle, block/brace, cast, windups; the forward `foot-front` when walking, jumping and lunging;
    - **hands:** fist or open hand when empty-handed (grab, knee, throws, hurt), grip on weapons, the shield hand on the shield;
    - **heads:** `head-effort` for block/brace and heavy windups, `head-ko` when down, `head-back` and `torso-back` for the spin.
-5. **Depth note from Art:** the near upper arm (band 590) and forearm (580) sit behind the torso (600) at rest to hide the sleeve seam. Check every pose where the sword arm crosses his body (slash1, slash3, cast); if the arm vanishes wrongly, raise its band for those poses (data, per pose).
-6. **Same feel:** timing, hitboxes and sim untouched (bot numbers identical to main). The user should feel the same fighter, drawn better.
-7. Update the rig bench fixture to the new mouse; build label `t023 new mouse v1`.
+5. **Footwork on attacks (user, 2026-10-16):** "the mouse fighter doesn't move his legs when he attacks at all, we might want to look into that for dynamism." While re-posing, give every attack real leg work, render only (timing and hitboxes unchanged):
+   - windup: weight shifts back (rear knee bends, front foot lightens or lifts slightly);
+   - strike: a step or lunge into the hit (front foot slides forward, rear leg drives and straightens), hips turning with the swing;
+   - follow-through/recovery: feet settle back to the planted stance (turned-out near foot);
+   - slash3 / heavy hits: a bigger stride; spin (slash2): feet pivot with the body; jump slash: legs tuck then extend.
+   Feet must not slide on the floor except where the move lunges (the sim's lunge distance is the step length).
+6. **Depth note from Art:** the near upper arm (band 590) and forearm (580) sit behind the torso (600) at rest to hide the sleeve seam. Check every pose where the sword arm crosses his body (slash1, slash3, cast); if the arm vanishes wrongly, raise its band for those poses (data, per pose).
+7. **Same feel:** timing, hitboxes and sim untouched (bot numbers identical to main). The user should feel the same fighter, drawn better.
+8. Update the rig bench fixture to the new mouse; build label `t023 new mouse v1`.
 
 ## Acceptance
 - Headless: `npm test` passes; bot numbers identical; rig tests updated (every pose names only existing parts; the sword's handle axis matches the grip slot in every pose; planted poses use `foot-front-out`, walking uses `foot-front`).
 - Windowed (JPG) in `docs/screens/T023/`: new mouse beside the old one and the standee in stance; the full combo; block; cast; a grab and a throw; hurt, knockdown and down; holding the club and the fish.
-- Human: does he look like the standee in game, and does he still feel the same to play?
+- Human: does he look like the standee in game, does he still feel the same to play, and do his attacks feel more dynamic with the footwork?
 
 Out of scope: new moves, a second hero, mouse face variety, changes to timing or damage.
