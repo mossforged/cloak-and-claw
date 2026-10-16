@@ -9,5 +9,7 @@ export default {
   // feel (T017, view only, render/weapon-feel.js): wobble = a floppy spring on the held fish (period s, damping ratio,
   // gain = share of the hand's change of turn it lags, bob = degrees per px/s of body bob, max degrees);
   // squash = on each slap that lands, squashed by `amount` along its length, then a stretch, settled in `time` s.
-  feel: { wobble: { period: 0.2, damping: 0.16, gain: 0.9, bob: 0.25, max: 28 }, squash: { amount: 0.32, time: 0.45 } },
+  // bend = drawn in `segs` slices that sag `droop` degrees end to end when held level, `flop` = share of the wobble that bends it.
+  feel: { wobble: { period: 0.2, damping: 0.16, gain: 0.9, bob: 0.25, max: 28 }, squash: { amount: 0.32, time: 0.45 },
+    bend: { segs: 10, droop: 30, flop: 0.7 } },
 };

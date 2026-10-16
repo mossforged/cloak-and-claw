@@ -7,7 +7,7 @@ import { ITEMS } from '../src/data/items/index.js';
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { targetPose, channelsOf } from '../src/render/rig-pose.js';
-import { feelLayer, stepWobble, squashCurve } from '../src/render/weapon-feel.js';
+import { feelLayer, stepWobble, squashCurve, bendOf, bendStrips } from '../src/render/weapon-feel.js';
 import { createJuice } from '../src/render/juice.js';
 import { bus } from '../src/core/events.js';
 import { botControl } from './bot.mjs';
@@ -131,6 +131,22 @@ for (const [props, weaponBot] of [[true, true], [false, false]]) {
   feelLayer(rig, g, j, 1, m2); bus.emit('hit', { attacker: g, target: {}, move: {}, damage: 0, x: 0, y: 0, z: 0 });
   feelLayer(rig, g, j, 1.02, m2);
   check(feelLayer(rig, g, j, 1.15, m2)['sword.sx'] < 0.75, 'squash holds through the hit-stop (his swing frozen)');
+}
+
+// 5b. Fish bend (floppy body): sags nose-down when held level either way round, not when hanging; slices join up
+{
+  const B = ITEMS['big-fish'].feel.bend, D = Math.PI / 180;
+  check(bendOf(B, [1, 0, 0, 1, 0, 0]) === B.droop, 'bend: level, pointing forward: full droop (clockwise = nose down)');
+  check(bendOf(B, [-1, 0, 0, 1, 0, 0]) === B.droop, 'bend: mirrored image pointing back: still nose down');
+  check(Math.abs(bendOf(B, [0, 1, -1, 0, 0, 0])) < 1e-9, 'bend: hanging straight down: no sag');
+  check(bendOf(B, [1, 0, 0, 1, 0, 0], 5) === B.droop + 5, 'bend: plus the wobble flop');
+  const S = bendStrips(240, 100, [34, 46], 0, B.segs);
+  check(S.length === B.segs + 1 && S.every((x) => x.t.join() === '1,0,0,1,0,0'), 'bend 0: every slice in place (old look)');
+  const T = bendStrips(240, 100, [34, 46], 30, B.segs), last = T[T.length - 1].t;
+  check(Math.abs(Math.atan2(last[1], last[0]) - 30 * D) < 1e-9, 'bend 30: the far end is turned the full 30 degrees');
+  const ap = (t, x, y) => [t[0] * x + t[2] * y + t[4], t[1] * x + t[3] * y + t[5]];
+  const ok = T.slice(2).every((x, i) => { const [a, b] = ap(T[i + 1].t, x.sx, 46), [c, d] = ap(x.t, x.sx, 46); return Math.hypot(a - c, b - d) < 1e-9; });
+  check(ok, 'bend: neighbouring slices meet at the seam on the centre line');
 }
 
 // 6. Club hits shake harder than their sim shake (view-only extra); a move without fx.shake shakes as before

@@ -5,6 +5,9 @@
 // squash: each hit the holder lands squashes the weapon along its length (`.sx`) and fattens it (`.sy`), then it
 //   stretches back past rest and settles over `time` s. Its clock only runs while his swing moves on, so it holds squashed
 //   through the hit-stop freeze and springs back as he comes round.
+// bend: the weapon is drawn in `segs` slices from the grip to its far end, each turned a little more (a floppy body):
+//   it sags `droop` degrees (end to end) when held level, none when hanging straight, and takes `flop` of the wobble as
+//   bend instead of a turn at the hand. Drawn by rig.js from bendStrips (mem.flop = the wobble share in degrees).
 import { bus } from '../core/events.js';
 
 const impacts = new WeakMap();   // attacker -> hits landed so far (from 'hit' events)
@@ -41,7 +44,9 @@ export function feelLayer(rig, f, joints, time, mem) {
   if (F.wobble) {
     const hand = handAngle(rig, slot, joints) * Math.sign(joints.sx ?? 1), dy = joints.dy ?? 0;
     mem.wob ??= { a: 0, v: 0, t: time, hand, hv: 0, dy, yv: 0 };
-    out[slot] += stepWobble(F.wobble, mem.wob, hand, dy, time);
+    const a = stepWobble(F.wobble, mem.wob, hand, dy, time), flop = F.bend?.flop ?? 0;
+    out[slot] += a * (1 - flop);
+    mem.flop = a * flop;
   }
   if (F.squash) {
     const n = impacts.get(f) ?? 0, dt = Math.max(0, Math.min(0.1, time - (mem.sqT ?? time)));
@@ -50,6 +55,29 @@ export function feelLayer(rig, f, joints, time, mem) {
     Object.assign(mem, { hits: n, sqT: time, sqMf: f.mf });
     const S = F.squash, e = mem.sqAge === undefined ? 0 : S.amount * squashCurve(mem.sqAge / S.time);
     out[`${slot}.sx`] *= 1 - e; out[`${slot}.sy`] *= 1 + e * 0.8;
+  }
+  return out;
+}
+
+// Bend in image degrees for a held weapon drawn with image matrix m: gravity sag (nose toward the floor, whatever way
+// it points or is mirrored) plus the wobble's flop share.
+export function bendOf(B, m, flop = 0) {
+  const det = Math.sign(m[0] * m[3] - m[1] * m[2]) || 1, level = Math.cos(Math.atan2(m[1], m[0]));
+  return det * B.droop * level + flop;
+}
+
+// Slices of an image bent by `deg` degrees in total, from the pivot's x to its right edge (the part behind the grip stays
+// stiff): [{ sx, sw, t }] = source x and width of each slice and its matrix in image px (apply after the part's matrix).
+export function bendStrips(w, h, pivot, deg, segs) {
+  const out = [{ sx: 0, sw: pivot[0] + 1, t: [1, 0, 0, 1, 0, 0] }], step = (deg * Math.PI) / 180 / segs, len = (w - pivot[0]) / segs;
+  let t = [1, 0, 0, 1, 0, 0];
+  for (let i = 0; i < segs; i++) {
+    const x0 = pivot[0] + i * len, c = Math.cos(step), s = Math.sin(step);
+    // t = t * (translate(x0, py) * rotate(step) * translate(-x0, -py))
+    const r = [c, s, -s, c, x0 - c * x0 + s * pivot[1], pivot[1] - s * x0 - c * pivot[1]];
+    t = [t[0] * r[0] + t[2] * r[1], t[1] * r[0] + t[3] * r[1], t[0] * r[2] + t[2] * r[3], t[1] * r[2] + t[3] * r[3],
+      t[0] * r[4] + t[2] * r[5] + t[4], t[1] * r[4] + t[3] * r[5] + t[5]];
+    out.push({ sx: x0, sw: Math.min(len + 1.5, w - x0), t });   // 1.5 px overlap: no seams between slices
   }
   return out;
 }

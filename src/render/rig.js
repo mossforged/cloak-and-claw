@@ -6,7 +6,7 @@ import { rigJoints, drawLayer, squatLayer } from './rig-pose.js';
 import { squatOf } from './jump-squat.js';
 import { gripLayout } from './rig-grip.js';
 import { braceLayer } from './brace.js';
-import { feelLayer } from './weapon-feel.js';
+import { feelLayer, bendOf, bendStrips } from './weapon-feel.js';
 import { ITEMS } from '../data/items/index.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
@@ -115,11 +115,16 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
-  for (const { img, m, line } of gripLayout(rig, joints, mem.swap, heldOf(f, rig, mem.sheathed), f)) {
+  const held = heldOf(f, rig, mem.sheathed), B = !pose && held?.part && held.kit.feel?.bend;   // T017: a floppy held weapon
+  for (const { name, img, m, line, p: part } of gripLayout(rig, joints, mem.swap, held, f)) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     if (line) { g.strokeStyle = '#3a2a1e'; g.lineWidth = 0.8; g.beginPath(); line.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke(); continue; }
     g.transform(...m);
-    g.drawImage(assets.get(img), 0, 0);
+    const im = assets.get(img);
+    if (!B || name !== held.slot) { g.drawImage(im, 0, 0); continue; }
+    for (const { sx, sw, t } of bendStrips(im.width, im.height, part.pivot, bendOf(B, m, mem.flop), B.segs)) {
+      g.save(); g.transform(...t); g.drawImage(im, sx, 0, sw, im.height, sx, 0, sw, im.height); g.restore();
+    }
   }
 
   const p = { ...poseOf(f, time) };
