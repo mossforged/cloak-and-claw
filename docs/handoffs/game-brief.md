@@ -5,7 +5,7 @@ Paste this whole file to any new agent before giving it a task.
 ## Design pillars (the project must always honour these)
 1. **Every hit lands.** Impact carries the feel (hit-stop, shake, knockback, flash, sparks), not animation frame count.
 2. **Fair crowds.** Enemies take turns and telegraph their swings. You lose because you misplayed, never because you were swarmed or one hit wiped you out.
-3. **You grow by fighting.** Like River City Ransom, your fighter visibly gets stronger across a run; a run fits a 30 to 60 minute session.
+3. **You grow by fighting and by the folk you save.** Your heroes get visibly stronger, and every rescue changes what you can do and where you come home to. A session fits 30 to 60 minutes.
 4. **The art stays doable.** Cartoon standees and cutout rigs, not hand-drawn frame animation. This game is also an animation study, so rig experiments are welcome, but the game never waits on them.
 
 ## The hook (user, 2026-10-16; details still open)

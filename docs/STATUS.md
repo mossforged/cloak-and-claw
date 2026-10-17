@@ -1,18 +1,18 @@
 # Status
 
-**Stage 2 (feel pass + crowd tools): gate question with the user. Stage 3 (rig) passed. Stage 4 (standards) started with T023.** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T023 new Mouse Fighter in game. Last art task merged: A013 Mouse Fighter to the rig standard. Plan rewritten around the hook on 2026-10-16 (old plan and older notes in `docs/history.md`).
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 (standards) started with T023.** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T023 new Mouse Fighter in game. Last art task merged: A013 Mouse Fighter to the rig standard. Plan rewritten around the hook on 2026-10-16 (old plan and older notes in `docs/history.md`).
 
 ## Next
 1. **Code:** T024 rig pipeline v1 (near/far names, floor-line rule, stretch test, sockets, A016 import, walk rebuild), then T025 weapon node + grip modes.
 2. **Art:** idle (A016 merged as source; its motion gate runs in T024). Possible A016 addendum after the stretch strip; scarf pieces still owed.
-3. **User:** answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
+3. **User:** play T024 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
 4. **Lead:** review T023; make the rig standard + study a reusable skill (user request); then the combatant standard; pick the stress-test enemies with the user.
 
 ## Stage plan (combat core first, 2026-10-17)
 | Stage | What | Gate question for the user |
 |---|---|---|
 | 1 | Standee combat in one arena (**passed** 2026-10-14) | Is hitting rats fun even with flat standees? |
-| 2 | Feel pass + crowd tools: lab, block, grab/throw, floor weapons, breakables, rat kits, scrolling stage, helping (T001-T022) | Do the combo, block, throws and floor weapons make crowds fun to manage? |
+| 2 | Feel pass + crowd tools: lab, block, grab/throw, floor weapons, breakables, rat kits, scrolling stage, helping (T001-T022) | (**passed** 2026-10-17: "all of those mechanics are fun") |
 | 3 | Cutout rigs + rig standard (**passed**: user "a big improvement"; standard approved 2026-10-16) | Does the rig look alive enough to rig everyone? |
 | 4 | **Repeatable rig pipeline + combatant standard:** new mouse in game (T023); how heroes and enemies are defined (body, stats, moves, AI role, footwork); art-to-game import with automatic checks; shared pose library so a new body gets moves cheaply | Can a new body go from Art's delivery to fighting with little hand work, and does it hold up in motion? |
 | 5 | **Combat variety stress test:** several enemy types chosen to break the pipeline (different bodies, sizes, weapons, abilities), each built through the standard; abilities = rig pose + effect art + tint | Does a 10-minute fight have variety and readable threats, and did each new enemy come in cleanly? |
@@ -27,8 +27,6 @@
 - Art: none queued.
 
 ## Open questions (for the user)
-- **Stage 2 gate** (above). Then the lead tags `stage-2` and `stage-3`.
-- **Pillar 3** ("you grow by fighting... a run fits 30-60 minutes") was written for an arcade run. With mission -> home -> mission, growth comes from rescues and gear too. Reword it? (Lead's suggestion: "You grow by fighting and by the folk you save.")
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
 - **First rescued folk** and what each gives; cast size later.
 
@@ -44,6 +42,7 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: Stage 2 gate passed (user: "yes all of those mechanics are fun and I can't wait to build more once we lock down the rigging"); tags stage-2 + stage-3 queued; pillar 3 reworded (user: yes).
 2026-10-17 lead: merged A016 (six key drawings, LFS working; pivots exact; static game-size panel reads). Art notes: inpaint-only rule not fully met (visible fur/leather repainted), knee-up boot re-registered at x0.7, folded leg compressed, toe-off needs ankle lift; cocked arm reads more raised-and-flexed than wound back. Scarf pieces (packet extra) not delivered. All go to T024's stretch strip and the user's motion check.
 2026-10-17 lead: merged T023 (A013 mouse in game; 3 rounds; user picked walk B as a stopgap; 23/23 tests; bot numbers unchanged). Walk rebuild and pelvis narrowing removal moved to T024. A016 delivered, review next.
 <<<<<<< HEAD
