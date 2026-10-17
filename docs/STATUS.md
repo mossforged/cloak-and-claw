@@ -3,9 +3,9 @@
 **Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T027 model viewer + phone review previews. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
-1. **Code:** T026 round 2 on its branch (draw order, island filter, paint check, taller stance), then re-import A022. Not merged until the user approves in the viewer.
-2. **Art:** A022 rat joint repair (after A021 weapons, which await the user's look).
-3. **User:** review in the viewer when T027 lands; then the rebuilt rat (T026), then A019 in motion.
+1. **Code:** T026 round 2 on its branch (draw order, island filter, paint check, taller stance), then item 6: re-import A022 (merged). Not merged until the user approves in the viewer.
+2. **Art:** idle until T026 is approved (next: A020 torso gear and masks refit).
+3. **User:** the rebuilt rat in the viewer on the phone once T026 round 2 is pushed: one piece of art? natural wrists? weapon holds? no butt-tail gap?
 4. **Lead:** reviews; after the rat passes the flexibility test, plan the mouse rebuild (setup-pose master, parts, key drawings; head, sword and shield carry over).
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> A020 gear/masks + import -> rat flexibility test (new kits and moves, no new body art) -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
@@ -26,7 +26,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T026-import-new-rat.md`.
-- Art: `docs/tasks/A022-rat-joint-repair.md`.
+- Art: none (A020 after the T026 approval).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -45,7 +45,8 @@
 
 ## Last session
 2026-10-17 code: T026 round 2 items 1-5 on `t026-import-new-rat`: near upper arm (and its whole-arm keys) at band 590 under the vest (archer's draw keeps it there, string hand in front); importer drops detached islands (19 cuts cleaned, trim boxes kept); paint check `tests/paint.test.mjs` (rest vs master colour for colour; limit from A010: 0.92% strong, solid region 11 game px^2; new rat 0.41% / 5: passes at rest, its defects are in swaps and turned joints; maps in docs/screens/T026/paint-*.jpg); crouch raised to 134.4 px (was 129.9; A010 137.8); tail-root stretch cells flag the walk gap (6.3 px, known for A022). 31/31 tests. Build `t026 rat import r2`.
-2026-10-17 code: waiting for A022 to re-import (not on origin yet); then views.json again and the user's look in the viewer.
+2026-10-17 lead: merged A022 (rat joint repair: 25 cuts, one piece each; hands slotted, no holes or discs; near shoulder band 590, hands 815/115 under the bracers; tail root under the seat; rest paint diff 3.08% interior, 0.63% above the feet). Watch in motion: shoulder ends past ~90 degrees, the tail-1/tail-2 step. Code: T026 round 2 item 6.
+2026-10-17 lead: merged A021 (user: "yes the weapon designs are good"): dagger, buckler, hand axe, staff, measured grip points; wired in the rat flexibility test.
 2026-10-17 lead: T026 reviewed by the user in the viewer: body/poses better, but hands twisted, weapon holds wrong, shoulder/arm connections pieced together, butt-tail gap, a bit hunched. Causes: A018/A019 hands (punched holes, wrist discs), fur-ball shoulder cap, jagged tail root, stray scraps; lead's "near-circle" wording. A022 (art repair) + T026 round 2 written; rule 5.3 rewritten; paint check added to G2. A021 weapons waiting on the user's look.
 2026-10-17 lead: user widened the flexibility-test items to dagger, shield, axe and staff -> A021 (items only; safe in parallel with T026).
 2026-10-17 code: T026 on `t026-import-new-rat`: rat rebuilt on A018 + A019 (importer `--merge`, A018 sockets, scale 0.25185, no fudge); raider/spearman/archer re-posed from the setup master (crouch, walkCycle walk with toe-off, cocked-arm telegraph, kneeling get-up, folded-leg lying/squat, knee-up jump, raised arm), spearman both fists overhand, torso gear + body masks hidden until A020; A010 rats kept as viewer version `a010`. 30/30 tests; bot numbers identical; stretch: every A010 rat flag cleared, new: near grip/pinch wrist 3-6 px (art). Build `t026 rat import v1`.
