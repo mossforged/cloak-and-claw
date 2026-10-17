@@ -1,0 +1,83 @@
+{
+  "swaps": {
+    "foot-front-toe": {
+      "img": "foot-front-toe.png",
+      "of": "foot-front",
+      "pivot": [
+        477,
+        1937
+      ]
+    },
+    "foot-back-toe": {
+      "img": "foot-back-toe.png",
+      "of": "foot-back",
+      "pivot": [
+        1009,
+        1940
+      ]
+    },
+    "leg-back-folded": {
+      "img": "leg-back-folded.png",
+      "of": "leg-back-upper",
+      "pivot": [
+        953,
+        1743
+      ],
+      "hide": [
+        "leg-back-lower",
+        "foot-back"
+      ]
+    },
+    "leg-front-kneeup": {
+      "img": "leg-front-kneeup.png",
+      "of": "leg-front-upper",
+      "pivot": [
+        635,
+        1719
+      ],
+      "hide": [
+        "leg-front-lower",
+        "foot-front"
+      ]
+    },
+    "leg-front-kneeling": {
+      "img": "leg-front-kneeling.png",
+      "of": "leg-front-upper",
+      "pivot": [
+        635,
+        1719
+      ],
+      "hide": [
+        "leg-front-lower",
+        "foot-front"
+      ]
+    },
+    "arm-front-cocked": {
+      "img": "arm-front-cocked.png",
+      "of": "arm-front-upper",
+      "pivot": [
+        643,
+        1386
+      ],
+      "hide": [
+        "arm-front-lower",
+        "hand-front"
+      ],
+      "itemGrip": [
+        612,
+        1178
+      ],
+      "slotDirection": [
+        [
+          636,
+          1210
+        ],
+        [
+          588,
+          1146
+        ]
+      ],
+      "note": "Whole arm only; attach unchanged sword at itemGrip, blade toward slotDirection[1]. Sword is separate item, as A013 raised arm. Inherit A013 band; inspect torso occlusion in stretch strip."
+    }
+  }
+}
