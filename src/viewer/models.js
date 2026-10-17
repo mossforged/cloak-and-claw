@@ -5,16 +5,16 @@ import { RIGS } from '../data/rigs/index.js';
 import { ITEMS } from '../data/items/index.js';
 import { RAT_LOOKS, PALETTES } from '../data/looks.js';
 import { GRIP_MODE_NAMES } from '../data/grip-modes.js';
-import { SPEAR_HOLDS, withSpearHold } from '../data/rigs/rat-spearman-holds.js';
+import { RAT_A010 } from '../data/rigs/a010/index.js';
 
 export const MODELS = Object.values(FIGHTERS).filter((d) => RIGS[d.art?.rig]).map((d) => d.id);
 export const GRIPS = GRIP_MODE_NAMES;
 export const SIZES = [1, 2, 3];
 export const SPEEDS = [0.25, 0.5, 1];
 
-// Versions of a rig to compare (view only): 'current' is the game's. The spearman's overhand hold variants (T025);
-// an old rig kept beside a new one during an import goes here too.
-const VERSIONS = { 'rat-spearman': Object.fromEntries(Object.keys(SPEAR_HOLDS).map((k) => [k, (rig) => withSpearHold(rig, k)])) };
+// Versions of a rig to compare (view only): 'current' is the game's; an old rig kept beside a new one during an import.
+// T026: 'a010' = the rat family as it was on A010 (rigs/a010/), beside the rebuilt one.
+const VERSIONS = Object.fromEntries(Object.entries(RAT_A010).map(([id, old]) => [id, { a010: () => old }]));
 export const versionsOf = (id) => ['current', ...Object.keys(VERSIONS[FIGHTERS[id].art.rig] ?? {})];
 export function rigOf(id, version = 'current') {
   const r = FIGHTERS[id].art.rig, make = VERSIONS[r]?.[version];

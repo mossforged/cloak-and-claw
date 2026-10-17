@@ -13,7 +13,6 @@ import { gripLayout, at } from '../src/render/rig-grip.js';
 import { movesOf } from '../src/sim/weapons.js';
 import { HOLDERS, holdFrames, holdFrame } from '../tools/bench/hold.js';
 import { GRIP_MODE_NAMES } from '../src/data/grip-modes.js';
-import { SPEAR_HOLDS, withSpearHold } from '../src/data/rigs/rat-spearman-holds.js';
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
@@ -36,12 +35,18 @@ function poses(def, weapon) {
 function layoutOf(rig, fi) { const tp = targetPose(fi, rig, 0); return gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi); }
 
 // Handle axis vs slot axis on screen, for a held item (parts named per slot type).
+// T026: a whole-arm drawing that carries the item (A019 cocked arm) holds it on its own fist's axis; a grip mode's own
+// hand drawing (A018 overhand) on its own slot axis (rig.hands), read as a line (the mode may turn the fist over).
 function axisError(rig, L, K) {
   const spec = rig.slots[K.grip], held = L.find((e) => e.name === 'held');
-  const parent = L.find((e) => e.name === spec.parent);   // rats: the grip hand (rest 0, so its drawing's frame = its bone)
   const handle = lin(held.m, [K.art.gripEnd[0] - K.art.grip[0], K.art.gripEnd[1] - K.art.grip[1]]);
-  const a = rig.axes[K.grip] * D, slot = lin(parent.base, [Math.cos(a), Math.sin(a)]);
-  return Math.abs(wrap(deg(handle) - deg(slot)));
+  const arm = L.find((e) => e.p?.swaps?.[e.swap]?.carry?.held);
+  if (arm) { const a = arm.p.swaps[arm.swap].axis * D; return Math.abs(wrap(deg(handle) - deg(lin(arm.m, [Math.cos(a), Math.sin(a)])))); }
+  const parent = L.find((e) => e.name === spec.parent);   // rats: the grip hand (rest 0, so its drawing's frame = its bone)
+  const own = parent.swap && rig.hands?.[parent.swap] && parent.swap !== 'hand-near-grip' ? rig.hands[parent.swap] : null;
+  const a = (own ? own.axis : rig.axes[K.grip]) * D, slot = lin(parent.base, [Math.cos(a), Math.sin(a)]);
+  const e = Math.abs(wrap(deg(handle) - deg(slot)));
+  return own ? Math.min(e, 180 - e) : e;
 }
 
 for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
@@ -84,8 +89,9 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 {
   const def = FIGHTERS['rat-raider'], rig = RIGS['rat-raider'], m = def.moves.ratSlash;
   const flipped = (o) => { const h = heldOf({ def, state: 'idle', t: 0, mf: 0, move: null, weapon: null, hp: 10, ...o }, rig); return Array.isArray(h.part.scale) && h.part.scale[1] < 0; };
-  check(flipped({}) && flipped({ state: 'walk' }) && flipped({ state: 'hurt' }), 'raider: cutlass flipped while holding');
-  check(!flipped({ state: 'attack', move: m, moveKey: 'ratSlash', mf: 0 }) && !flipped({ state: 'attack', move: m, moveKey: 'ratSlash', mf: m.windup + 2 }), 'raider: cutlass as drawn while swinging');
+  // T026: A018's grip holds the cutlass edge back as drawn (the user's rule: a back-hand blade's edge faces away), so
+  // the T020 flip-while-holding is off: drawn the same way holding and swinging
+  check(![{}, { state: 'walk' }, { state: 'hurt' }, { state: 'attack', move: m, moveKey: 'ratSlash', mf: m.windup + 2 }].some(flipped), 'raider: cutlass as drawn, holding and swinging');
 }
 
 // Spearman: both fists on the shaft line, far fist closed round it and over it.
@@ -93,7 +99,8 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   const def = FIGHTERS['rat-spearman'], rig = RIGS['rat-spearman'], K = ITEMS['rat-spear'], G = rig.grips['two-hand'];
   for (const [label, fi] of poses(def, null)) {
     const L = layoutOf(rig, fi), spear = L.find((e) => e.name === 'held'), far = L.find((e) => e.name === 'hand-far'), near = L.find((e) => e.name === 'hand-near');
-    const dn = dist(apply(spear.m, K.art.grip), apply(near.base, rig.slots['two-hand'].attach));
+    const slot = rig.hands?.[near.swap] && near.swap.endsWith('-overhand') ? rig.hands[near.swap].at : rig.slots['two-hand'].attach;   // T026: overhand drawing's own slot
+    const dn = dist(apply(spear.m, K.art.grip), apply(near.base, slot));
     // far fist: on the shaft line, at grip2 standing; elsewhere it may slide back toward the near fist (out of reach)
     const ring = apply(far.base, G.ik.hand), g1 = apply(spear.m, K.art.grip), g2 = apply(spear.m, K.art.grip2);
     const u = [(g2[0] - g1[0]) / dist(g1, g2), (g2[1] - g1[1]) / dist(g1, g2)], rel = [ring[0] - g1[0], ring[1] - g1[1]];
@@ -135,8 +142,7 @@ for (const K of Object.values(ITEMS).filter((k) => k.kind === 'weapon')) {
 }
 
 // T025 grip test: every item on every body that can hold it, in every grip mode, in every state and move frame, drawn
-// through rigFrame: no hold flags (handle off the fist over 2 px, second fist off the shaft, a grip hand under the weapon);
-// the spearman's overhand variants (?spear=B|C|D) too.
+// through rigFrame: no hold flags (handle off the fist over 2 px, second fist off the shaft, a grip hand under the weapon).
 for (const [body, list] of Object.entries(HOLDERS)) {
   for (const [id, item] of list) for (const mode of GRIP_MODE_NAMES) {
     const bad = [];
@@ -144,16 +150,5 @@ for (const [body, list] of Object.entries(HOLDERS)) {
     check(!bad.length, `${body} ${id} ${item ?? 'own'} ${mode}: no hold flags (${bad.slice(0, 3).join('; ')}${bad.length > 3 ? ` +${bad.length - 3}` : ''})`);
   }
 }
-{
-  const base = RIGS['rat-spearman'];
-  for (const k of Object.keys(SPEAR_HOLDS)) {
-    RIGS['rat-spearman'] = withSpearHold(base, k);
-    const bad = [];
-    for (const [label, f] of holdFrames('rat-spearman', null, true)) for (const x of holdFrame(f).flags) bad.push(`${label}: ${x.text}`);
-    check(!bad.length, `spearman hold ${k}: no hold flags (${bad.slice(0, 3).join('; ')})`);
-  }
-  RIGS['rat-spearman'] = base;
-}
-
 console.log(fails ? `${fails} failures` : 'ALL OK');
 process.exit(fails ? 1 : 0);

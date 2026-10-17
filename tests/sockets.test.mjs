@@ -48,10 +48,10 @@ for (const [id, rig] of Object.entries(RIGS)) {
 check(tipOf({ tip: [1, 2] }).join() === '1,2', 'tipOf: art.tip');
 check(tipOf({ img: 'x', grip: [10, 50], gripEnd: [20, 50] }, () => [100, 100]).join() === '100,50', 'tipOf: along the handle to the edge');
 
-// The game rigs carry the importer's derived sockets (needs python3 + Pillow + numpy).
+// The game rigs carry the importer's sockets (derived, or the source's own: A018; needs python3 + Pillow + numpy).
 const py = spawnSync('python3', ['-c', 'import PIL, numpy'], { encoding: 'utf8' });
 if (py.status !== 0) console.log('NOTE importer socket check skipped: python3 with Pillow + numpy not available');
-else for (const [id, srcDir] of [['mouse-fighter', 'A013-mouse-fighter-standard'], ['rat-raider', 'A010-rat-raider-standard']]) {
+else for (const [id, srcDir] of [['mouse-fighter', 'A013-mouse-fighter-standard'], ['rat-raider', 'A018-rat-parts']]) {
   const r = spawnSync('python3', ['tools/rig_from_source.py', `assets/source/${srcDir}/rig-source.json`, '--id', id, '--sockets'], { encoding: 'utf8' });
   const sk = (0, eval)(`({${r.stdout.trim().replace(/,$/, '')}})`).sockets;
   for (const [n, s] of Object.entries(sk)) check(JSON.stringify(s) === JSON.stringify(RIGS[id].sockets[n]), `${id}: ${n} as derived by the importer`);

@@ -25,10 +25,13 @@ const same = (A, B) => A.length === B.length && A.every((e, i) => e.name === B[i
 
 const fighter = (id, item, o = {}) => ({ def: FIGHTERS[id], state: 'idle', t: 0, mf: 0, move: null, hp: 10, weapon: item ? { def: ITEMS[item], uses: 5, hit: false, broken: false } : null, ...o });
 const CASES = [['rat-spearman', null], ['rat-raider', null], ['rat-archer', null], ['mouse-fighter', null], ['mouse-fighter', 'rat-cutlass'], ['mouse-fighter', 'big-fish']];
-// one frame: joints/swaps from the pose, extra joints laid over them
+// one frame: joints/swaps from the pose, extra joints laid over them. T026: the spearman's own poses place his spear and
+// hold it overhand (rig.holds); these checks start from the unplaced side grip (NONE), checked on its own below.
+const NONE = { 'weapon.at': 0, 'weapon.turn': 0 };
 function frame(id, item, extra = {}, force, o) {
   const f = fighter(id, item, o), rig = RIGS[f.def.art.rig], tp = targetPose(f, rig, 0), held = heldOf(f, rig);
-  const j = { ...tp.joints, ...extra }, L = gripLayout(rig, j, tp.swap, held, f, force);
+  force = { grip: 'side', ...force };
+  const j = { ...tp.joints, ...NONE, ...extra }, L = gripLayout(rig, j, tp.swap, held, f, force);
   const N = nodeOf(rig, held), by = (n) => L.find((e) => e.name === n);
   const W = by(N.slot), H = by(N.hand), A = N.art;
   return { rig, held, N, L, tp, j, f, grip: apply(W.m, A.grip), handle: deg(lin(W.m, [A.gripEnd[0] - A.grip[0], A.gripEnd[1] - A.grip[1]])),
@@ -38,8 +41,9 @@ function frame(id, item, extra = {}, force, o) {
 for (const [id, item] of CASES) {
   const name = `${id}${item ? ` + ${item}` : ''}`;
   // 1. no node channels, side grip: the old frame (a layout with the weapon riding the hand)
-  const a = frame(id, item);
-  check(a.j['weapon.at'] === 0 && a.j['weapon.turn'] === 0, `${name}: no pose places the weapon yet (channels 0)`);
+  const a = frame(id, item), placed = targetPose(fighter(id, item), RIGS[FIGHTERS[id].art.rig], 0).joints;
+  check(id === 'rat-spearman' ? placed['weapon.at'] === 1 && placed['weapon.turn'] === 1 : placed['weapon.at'] === 0 && placed['weapon.turn'] === 0,
+    `${name}: ${id === 'rat-spearman' ? 'his stance places the spear (T026)' : 'no pose places the weapon yet (channels 0)'}`);
   // 2. the node placed exactly where the fist holds it: same frame
   const sx = a.j.sx ?? 1, x = (a.grip[0] - (a.j.dx ?? 0)) / sx, y = a.grip[1] - (a.j.dy ?? 0);
   const b = frame(id, item, { 'weapon.at': 1, 'weapon.turn': 1, 'weapon.x': x, 'weapon.y': y, 'weapon.rot': a.handle });

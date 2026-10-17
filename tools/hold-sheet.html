@@ -3,7 +3,6 @@
      in chosen move frames, for checking how weapons sit in the hands. Serve the repo root, then /tools/hold-sheet.html.
      Rows: raider (cutlass), spearman (two-hand spear), archer (draw building, full draw, just after the loose), the mouse
      with each floor weapon, and every weapon on the floor. ?zoom=2 draws at twice game size; ?dots marks the grip points.
-     T025: ?spear=B (C, D) shows the spearman's overhand hold variants (data/rigs/rat-spearman-holds.js; default E).
      ?modes=mouse (or rat): instead, every item the body holds x every grip mode (side, overhand, underhand, reverse) in
      idle / walk / windup / strike (tools/bench/hold.js), hold flags in red. -->
 <meta charset="utf-8">
@@ -24,11 +23,9 @@ import { pickLook } from './src/sim/looks.js';
 import { drawRig } from './src/render/rig.js';
 import { drawItem } from './src/render/props.js';
 import { drawShot, drawShotShadow } from './src/render/shots.js';
-import { withSpearHold } from './src/data/rigs/rat-spearman-holds.js';
 import { holdCells } from './tools/bench/hold.js';
 
 const Q = new URLSearchParams(location.search), Z = +(Q.get('zoom') ?? 2);
-if (Q.get('spear')) RIGS['rat-spearman'] = withSpearHold(RIGS['rat-spearman'], Q.get('spear'));
 const shotArt = Object.values(ITEMS).flatMap((d) => Object.values(d.moves ?? {}).map((m) => m.shot?.art.img).filter(Boolean));
 const assets = await loadAssets([...collectArtPaths(FIGHTERS, RIGS, ITEMS, STAGES), ...shotArt]);
 const c = document.getElementById('c'), ctx = c.getContext('2d');

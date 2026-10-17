@@ -20,6 +20,10 @@ const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[
 // deg }` turns the carried child's drawing on top (the whole raised arm's fist holds the sword's handle at its own slot axis).
 const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 
+// T026: a rig whose default hand drawing is a fist (A018) names the drawing a hand holding its item puts on
+// (`heldHand: { part: swap }`), unless the pose names that part. No heldHand: swaps as given.
+export const withHeldHand = (rig, swap, held) => (held?.part && rig.heldHand ? { ...rig.heldHand, ...swap } : swap);
+
 // Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order (`base` = the matrix of the
 // part's own image whichever swap shows: gear overlays ride it, render/looks.js).
 // swap: { part: swap name } from the pose. held: { slot, part } from heldOf (a held weapon replaces the slot part's
@@ -29,6 +33,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
   const parts = held?.part ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : { ...rig.parts };
   const hidden = new Set();
   if (held && !held.part && rig.emptyHand) swap = { ...rig.emptyHand, ...swap };   // T023: the empty hand's own drawing
+  swap = withHeldHand(rig, swap, held);
   for (const [name, key] of Object.entries(swap)) {
     const s = parts[name]?.swaps?.[key];
     if (!s) continue;

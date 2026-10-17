@@ -5,6 +5,7 @@
 // The bench reader reads an old-name source exactly as the same source with new names.
 import { readFileSync } from 'node:fs';
 import { RIGS } from '../src/data/rigs/index.js';
+import { RAT_A010 } from '../src/data/rigs/a010/index.js';
 import { nearFar, readSource } from '../tools/bench/source.js';
 
 let failed = 0;
@@ -13,6 +14,11 @@ const url = new URL('./fixtures/t023-rigs-front-back.json', import.meta.url);
 const rename = (v) => (Array.isArray(v) ? v.map(rename) : v && typeof v === 'object'
   ? Object.fromEntries(Object.entries(v).map(([k, x]) => [nearFar(k), rename(x)])) : typeof v === 'string' ? nearFar(v) : v);
 const old = rename(JSON.parse(readFileSync(url, 'utf8')));
+
+// T026: the rats were rebuilt on A018; the A010 rats they replaced are kept (rigs/a010/, art in rig-a010/) and are what
+// this snapshot checks.
+const UNDER_TEST = { ...RIGS, ...RAT_A010 };
+const a010Paths = (o) => JSON.parse(JSON.stringify(o).replaceAll('/rat-raider/rig-a010/', '/rat-raider/rig/'));
 
 // rig id -> paths (dot-separated) T024 added or changed on purpose; ADDED goes for every rig
 const ADDED = ['sockets'];
@@ -23,9 +29,9 @@ const CHANGED = { 'mouse-fighter': ['parts.sword.art', 'parts.shield.art',   // 
   'poses.moves.slash3.windup', 'poses.kits.plank-club.moves.club1.windup', 'poses.kits.plank-club.moves.club2.windup'] };
 const drop = (o, path) => { const ks = path.split('.'), last = ks.pop(), at = ks.reduce((a, k) => a?.[k], o); if (at) delete at[last]; };
 
-for (const [id, r] of Object.entries(RIGS)) {
+for (const [id, r] of Object.entries(UNDER_TEST)) {
   const { overlays, views, masks, ...now } = r;
-  const was = old[id], cur = JSON.parse(JSON.stringify(now));
+  const was = old[id], cur = a010Paths(now);
   check(was, `${id} in the snapshot`);
   if (!was) continue;
   for (const p of [...ADDED, ...CHANGED[id] ?? []]) { drop(was, p); drop(cur, p); }

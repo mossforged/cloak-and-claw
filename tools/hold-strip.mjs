@@ -1,8 +1,7 @@
 // Hold strip (T025): bodies x held items x grip modes, drawn as the game draws them (render/rig.js rigFrame with forced
 // grip modes), headless, as a JPG (tools/stretch_render.py), with each cell's hold flags (tests/weapon-hold.test.mjs's
 // holdFlags) in red. Usage: node tools/hold-strip.mjs <body> <out.jpg> [cell ...]
-//   body: mouse | rat (every item the body can hold, every grip mode, in idle / walk / windup / strike) | spear (the
-//   spearman's hold variants, data/rigs/rat-spearman-holds.js)
+//   body: mouse | rat (every item the body can hold, every grip mode, in idle / walk / windup / strike)
 //   --only <regexp>: only cells whose label matches; --zoom N (default 1.2)
 import { writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
