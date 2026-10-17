@@ -4,26 +4,27 @@
 
 ## Next
 1. **Code:** T023 (import the new Mouse Fighter + attack footwork), in progress.
-2. **Art:** A015 oak stronghold, second concept pass (layouts, true scale, animal-scale cues, bays in three states).
-3. **User:** pick an oak layout from A015 when it lands; answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
-4. **Lead:** review T023; draft the combatant standard (heroes + enemies), then the mission/stage standard.
+2. **Art:** idle. A015 (oak stronghold) on hold with the home loop. Next art: the next body for the rig pipeline.
+3. **User:** answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
+4. **Lead:** review T023; draft the combatant standard and the rig pipeline plan; pick the stress-test enemies with the user.
 
-## Stage plan (hook-based, 2026-10-16)
+## Stage plan (combat core first, 2026-10-17)
 | Stage | What | Gate question for the user |
 |---|---|---|
 | 1 | Standee combat in one arena (**passed** 2026-10-14) | Is hitting rats fun even with flat standees? |
 | 2 | Feel pass + crowd tools: lab, block, grab/throw, floor weapons, breakables, rat kits, scrolling stage, helping (T001-T022) | Do the combo, block, throws and floor weapons make crowds fun to manage? |
 | 3 | Cutout rigs + rig standard (**passed**: user "a big improvement"; standard approved 2026-10-16) | Does the rig look alive enough to rig everyone? |
-| 4 | **Standards before content:** new mouse in game (T023); combatant standard (stats, move sets, AI roles, footwork, enemy bench); one new enemy built through it end to end | Did a new enemy go from idea to fight cleanly, and does it ask you a new question? |
-| 5 | **Run loop in grey box:** one mission with a goal (a rescue) -> a grey-box abbey room (the rescued appear, one decision) -> the next mission; mission/stage standard; failure = retreat and retry for now | After two missions, do you want to go out for the next rescue? |
-| 6 | **Home loop, first slice:** 3-5 rescued folk with one visible and one playable change each, one building currency, weapon + ring gear, a rescued adventurer as AI ally, wounded-ally test | Does coming home feel warm and worth it? |
-| 7 | **Second hero** (bigger animal, own move set, heavy throwables) + co-op of up to 3 played with people; more helping verbs | Do two heroes feel truly different, and is helping each other fun? |
-| 8 | Sound, run logs on the loop, builds for fresh testers | Do new players get it without coaching? |
-| 9 | **First season:** 4-6 hand-made missions with stage art at 120 px depth, Bramble Brute boss, "Winter at the abbey" close, touch controls | Does a season hold together and make you want the next? |
+| 4 | **Repeatable rig pipeline + combatant standard:** new mouse in game (T023); how heroes and enemies are defined (body, stats, moves, AI role, footwork); art-to-game import with automatic checks; shared pose library so a new body gets moves cheaply | Can a new body go from Art's delivery to fighting with little hand work, and does it hold up in motion? |
+| 5 | **Combat variety stress test:** several enemy types chosen to break the pipeline (different bodies, sizes, weapons, abilities), each built through the standard; abilities = rig pose + effect art + tint | Does a 10-minute fight have variety and readable threats, and did each new enemy come in cleanly? |
+| 6 | **Second hero** with own move set and abilities + co-op of up to 3 played with people; more helping verbs | Do two heroes feel truly different, and is helping each other fun? |
+| 7 | Run loop in grey box: mission -> home room -> next mission (**on hold**, user 2026-10-17) | After two missions, do you want to go out for the next rescue? |
+| 8 | Home loop, first slice (**on hold**) | Does coming home feel warm and worth it? |
+| 9 | Sound, run logs, builds for fresh testers | Do new players get it without coaching? |
+| 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
 - Code: `docs/tasks/T023-import-new-mouse.md`.
-- Art: `docs/tasks/A015-oak-stronghold-concepts.md`.
+- Art: none queued (A015 on hold).
 
 ## Open questions (for the user)
 - **Stage 2 gate** (above). Then the lead tags `stage-2` and `stage-3`.
@@ -43,6 +44,7 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: user: hold off on meta progression (home loop, stronghold) until the rig system and core combat are locked down and tested against different enemies and abilities. Stage plan reordered; A015 on hold.
 2026-10-17 lead: user on A014: "I think so far I like the ancient oak" (B). Wrote A015 (B refined: three layouts, hero at 130 px, animal-scale found objects, roots holding the walls, no invented emblems, animal silhouettes).
 2026-10-16 lead: merged A014 (7 JPG sheets, 2.6 MB, scope clean). Art's pick: A for the first home, B the strongest landmark, C the most motion. Lead notes: architecture reads human-scale (needs animal-scale cues); home frames' style is flatter than the art bible; mouse undersized; payoff silhouettes look human; watch post and garden weak at game size. T023 branch pushed, review next.
 2026-10-16 lead: wrote A014 (broad concept sheets for the stronghold home base; user's ask to keep Art busy). Concept packets deliver small JPGs to `docs/concepts/<ID>/` (Art guide updated).

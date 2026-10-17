@@ -1,3 +1,5 @@
+> **On hold (2026-10-17):** the user wants the rig system and core combat locked down before the home loop. Do not start.
+
 # A015 - The oak stronghold: second concept pass (Art)
 
 **Read:** `docs/tasks/A014-stronghold-concepts.md` and its sheets + `HANDOFF.md` in `docs/concepts/A014-stronghold/` (direction **B, the ancient oak**, is the user's favourite so far), `docs/design/home-loop.md`, `docs/style-contract.md`, `docs/concepts/art-bible/contact-sheet.jpg`, `assets/art/stages/harbor-market.png`, `assets/art/heroes/mouse-fighter.png` (the real hero standee, for scale).
