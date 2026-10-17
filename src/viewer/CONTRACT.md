@@ -11,5 +11,6 @@ page (`index.html` / `src/game.js` are never loaded or changed).
 - Sandbox worlds are the viewer's own (`createWorld` + `stepWorld`, no props, no waves); the game's world is never touched.
 - `models.js`, `clips.js`, `sandbox.js`, `state.js` are pure (Node tests: `tests/viewer.test.mjs`); `scene.js`,
   `overlays.js`, `ui.js`, `main.js` are browser only.
-- Compare versions of a rig (old vs new during an import, hold variants) are registered in `models.js` `VERSIONS`, view only.
+- Compare versions of a rig (old vs new during an import) are registered in `models.js` `VERSIONS`, view only; their art
+  is preloaded (`VERSION_RIGS`). T026: `a010` = the rats before the rebuild (`src/data/rigs/a010/`).
 - The URL holds the whole view (`state.js`); a new option = a state field + parse/format + the round-trip test.

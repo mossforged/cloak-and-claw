@@ -38,10 +38,13 @@ function preview(branch) {
   const packetFile = task && git(`ls-tree --name-only ${ref} docs/tasks/`).split('\n').find((f) => f.startsWith(`docs/tasks/${task}-`));
   const packet = packetFile ? packetOf(git(`show ${ref}:${packetFile}`)) : { title: '', human: [] };
   const shots = screens && has(ref, screens) ? git(`ls-tree -r --name-only ${ref} -- ${screens}`).split('\n').filter((f) => IMG.test(f)) : [];
+  // T026: optional docs/screens/<TASK>/views.json = [{ label, q }]: viewer links with the exact state (q = its URL query)
+  let views = [];
+  try { if (screens && has(ref, `${screens}/views.json`)) views = JSON.parse(git(`show ${ref}:${screens}/views.json`)); } catch { views = []; }
   return {
     branch, task, path: `preview/${slug}/`, title: packet.title, human: packet.human,
     packet: packetFile ?? null, time: when(ref), commit: git(`log -1 --format=%h ${ref}`).trim(),
-    subject: git(`log -1 --format=%s ${ref}`).trim().slice(0, 140), viewer: has(ref, 'viewer.html'), screens: shots,
+    subject: git(`log -1 --format=%s ${ref}`).trim().slice(0, 140), viewer: has(ref, 'viewer.html'), screens: shots, views,
   };
 }
 

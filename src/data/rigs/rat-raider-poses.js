@@ -13,7 +13,7 @@ import { pose, masterAt, walkCycle } from './biped-ik.js';
 export const P = (spec) => pose(rig, spec);
 export const NEAR = masterAt(rig, 'foot-near')[0], FAR = masterAt(rig, 'foot-far')[0];
 // the menace crouch: hips 6 px down, trailing (near) boot back, leading (far) boot forward, hunched over
-export const FEET = { near: [NEAR - 13, 0, 0], far: [FAR + 11, 0, 0] };
+export const FEET = { near: [NEAR - 15, 0, 0], far: [FAR + 14, 0, 0] };
 export const CROUCH = { dy: 6, pelvis: 4, torso: 10, head: -12, feet: FEET, tail: -10, 'tail-2': 15, 'tail-3': 20, 'scarf-tail': 0 };
 const CLAW = { 'hand-far': 'hand-far-open' };
 const HURT = { head: 'head-hurt', 'hand-far': 'hand-far-open' };
@@ -24,7 +24,7 @@ const TAIL = (a, b, c) => ({ tail: a, 'tail-2': b, 'tail-3': c });
 // (low at contact, high at passing), toe-off drawings (A019) at the push-off only.
 export const WALK = { speed: 2.0, walk: 120, lift: 5, dy: 5, bob: 1.5, gather: 0.2, heel: 10, strike: 8,
   toe: { near: 'foot-near-toe', far: 'foot-far-toe' } };
-const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: CLAW, hand: { off: [-10, 12], dir: -105 }, shield: { off: [19, 9], turn: -40 } });
+const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: CLAW, hand: { off: [-10, 12], dir: -105 }, shield: { off: [23, 6], turn: -40 } });
 const arm = (k, amp, ph) => [STANCE[k] ?? 0, amp, ph];
 
 export default {
@@ -66,7 +66,7 @@ export default {
   // (A019 folded far leg), near leg straight along the floor
   down: P({
     swap: { ...FALL, head: 'head-ko', 'leg-far-upper': 'leg-far-folded' }, dx: 6, torso: -10, head: 2,
-    hand: { off: [-24, -2], dir: -170 }, shield: { off: [6, 26], turn: 20 },
+    hand: { off: [-24, -2], dir: -100 }, shield: { off: [6, 26], turn: 20 },
     'leg-far-upper': -15, feet: { near: [NEAR - 2, 0, 0] }, ...TAIL(-30, 0, 0), 'scarf-tail': 20 }),
   getup: P({   // up on the near knee (A019 kneeling leg), far boot planted, pushing up into the crouch
     swap: { head: 'head-effort', 'hand-far': 'hand-far-open', 'leg-near-upper': 'leg-near-kneeling' },

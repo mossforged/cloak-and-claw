@@ -15,6 +15,7 @@ export const SPEEDS = [0.25, 0.5, 1];
 // Versions of a rig to compare (view only): 'current' is the game's; an old rig kept beside a new one during an import.
 // T026: 'a010' = the rat family as it was on A010 (rigs/a010/), beside the rebuilt one.
 const VERSIONS = Object.fromEntries(Object.entries(RAT_A010).map(([id, old]) => [id, { a010: () => old }]));
+export const VERSION_RIGS = RAT_A010;   // their art is loaded with the game's
 export const versionsOf = (id) => ['current', ...Object.keys(VERSIONS[FIGHTERS[id].art.rig] ?? {})];
 export function rigOf(id, version = 'current') {
   const r = FIGHTERS[id].art.rig, make = VERSIONS[r]?.[version];

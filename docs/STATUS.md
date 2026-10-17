@@ -44,6 +44,8 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 code: T026 on `t026-import-new-rat`: rat rebuilt on A018 + A019 (importer `--merge`, A018 sockets, scale 0.25185, no fudge); raider/spearman/archer re-posed from the setup master (crouch, walkCycle walk with toe-off, cocked-arm telegraph, kneeling get-up, folded-leg lying/squat, knee-up jump, raised arm), spearman both fists overhand, torso gear + body masks hidden until A020; A010 rats kept as viewer version `a010`. 30/30 tests; bot numbers identical; stretch: every A010 rat flag cleared, new: near grip/pinch wrist 3-6 px (art). Build `t026 rat import v1`.
+2026-10-17 code: T026 for the lead/user: review in the viewer (hub links in docs/screens/T026/views.json); archer kept bow-far / string-near (A019 raised-back far arm can't be the string arm with the bow in front); T025 `?spear=` variants retired; cutlass no longer flipped while held (edge already faces back on A018's grip).
 2026-10-17 lead: Pages deploy works (main + previews live). Merged A019 (nine key drawings + two cut fixes; cocked arm now elbow up and behind; phone copies in docs/screens/A019/); T026 addendum imports it. Toe-off feet drawn steep (ankle lift 98/127 px source): check in the viewer.
 2026-10-17 lead: user set Pages source to GitHub Actions; first publish of main + previews triggered.
 2026-10-17 lead: merged T027 (viewer, Pages previews workflow, reviews.html; 30/30 tests; user: "yes the model viewer is great"). Previews start once the user sets Pages source to GitHub Actions.

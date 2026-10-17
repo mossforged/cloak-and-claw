@@ -77,6 +77,7 @@ function card(p) {
   for (const q of p.human ?? []) kids.push(el('div', { className: 'q' }, [el('b', { textContent: 'Your question' }), q]));
   const links = [];
   if (p.viewer) links.push(link('Open in viewer', base + 'viewer.html', true));
+  for (const v of p.views ?? []) links.push(link(v.label, base + 'viewer.html?' + v.q));   // T026: the task's own viewer states
   links.push(link('Play', base + 'index.html'));
   if (p.packet) links.push(link('Packet', base + p.packet));
   kids.push(el('div', { className: 'links' }, links));
