@@ -4,7 +4,7 @@
 
 ## Next (rig lock-down only; everything else paused)
 1. **Code:** T026 import the rebuilt rat (review it in the viewer, old rat beside the new one).
-2. **Art:** idle until T026 lands (next: A020 rat torso gear + masks, after the body is seen in motion).
+2. **Art:** A021 four weapon items for the flexibility test (dagger, round shield, hand axe, staff). A020 (rat torso gear + masks) after T026.
 3. **User:** review in the viewer when T027 lands; then the rebuilt rat (T026), then A019 in motion.
 4. **Lead:** reviews; after the rat passes the flexibility test, plan the mouse rebuild (setup-pose master, parts, key drawings; head, sword and shield carry over).
 
@@ -26,7 +26,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T026-import-new-rat.md`.
-- Art: none queued (A020 after T026).
+- Art: `docs/tasks/A021-weapon-items.md`.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -44,6 +44,7 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: user widened the flexibility-test items to dagger, shield, axe and staff -> A021 (items only; safe in parallel with T026).
 2026-10-17 lead: Pages deploy works (main + previews live). Merged A019 (nine key drawings + two cut fixes; cocked arm now elbow up and behind; phone copies in docs/screens/A019/); T026 addendum imports it. Toe-off feet drawn steep (ankle lift 98/127 px source): check in the viewer.
 2026-10-17 lead: user set Pages source to GitHub Actions; first publish of main + previews triggered.
 2026-10-17 lead: merged T027 (viewer, Pages previews workflow, reviews.html; 30/30 tests; user: "yes the model viewer is great"). Previews start once the user sets Pages source to GitHub Actions.
