@@ -38,6 +38,8 @@ for i, c in enumerate(cells):
         inv = [A[4] / det, -A[1] / det, (A[1] * A[5] - A[4] * A[2]) / det, -A[3] / det, A[0] / det, (A[3] * A[2] - A[0] * A[5]) / det]
         cell.alpha_composite(im.transform((w, h), Image.AFFINE, inv, resample=Image.BILINEAR))
     d = ImageDraw.Draw(cell)
+    for pl in c.get("strokes") or []:   # T025: thin lines in screen px (the bow string)
+        d.line([(fx + x * Z, fy + y * Z) for x, y in pl], fill=(58, 42, 30), width=max(1, round(0.8 * Z)))
     for x, y in c.get("marks") or []:
         X, Y = fx + x * Z, fy + y * Z
         d.ellipse([X - 6 * Z, Y - 6 * Z, X + 6 * Z, Y + 6 * Z], outline=(255, 60, 50), width=max(1, round(Z)))

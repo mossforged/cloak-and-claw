@@ -2,7 +2,10 @@
 <!-- Hold sheet (T020): rats and the mouse drawn by the game's own rig renderer (gear, looks, held weapons, bow string)
      in chosen move frames, for checking how weapons sit in the hands. Serve the repo root, then /tools/hold-sheet.html.
      Rows: raider (cutlass), spearman (two-hand spear), archer (draw building, full draw, just after the loose), the mouse
-     with each floor weapon, and every weapon on the floor. ?zoom=2 draws at twice game size; ?dots marks the grip points. -->
+     with each floor weapon, and every weapon on the floor. ?zoom=2 draws at twice game size; ?dots marks the grip points.
+     T025: ?spear=B (C, D) shows the spearman's overhand hold variants (data/rigs/rat-spearman-holds.js; default E).
+     ?modes=mouse (or rat): instead, every item the body holds x every grip mode (side, overhand, underhand, reverse) in
+     idle / walk / windup / strike (tools/bench/hold.js), hold flags in red. -->
 <meta charset="utf-8">
 <base href="../">
 <title>Hold sheet</title>
@@ -21,12 +24,34 @@ import { pickLook } from './src/sim/looks.js';
 import { drawRig } from './src/render/rig.js';
 import { drawItem } from './src/render/props.js';
 import { drawShot, drawShotShadow } from './src/render/shots.js';
+import { withSpearHold } from './src/data/rigs/rat-spearman-holds.js';
+import { holdCells } from './tools/bench/hold.js';
 
 const Q = new URLSearchParams(location.search), Z = +(Q.get('zoom') ?? 2);
-const W = 1180, H = 640, c = document.getElementById('c'), ctx = c.getContext('2d');
-c.width = W * Z; c.height = H * Z;
+if (Q.get('spear')) RIGS['rat-spearman'] = withSpearHold(RIGS['rat-spearman'], Q.get('spear'));
 const shotArt = Object.values(ITEMS).flatMap((d) => Object.values(d.moves ?? {}).map((m) => m.shot?.art.img).filter(Boolean));
 const assets = await loadAssets([...collectArtPaths(FIGHTERS, RIGS, ITEMS, STAGES), ...shotArt]);
+const c = document.getElementById('c'), ctx = c.getContext('2d');
+if (Q.get('modes')) {   // T025: items x grip modes grid
+  const cells = holdCells(Q.get('modes')), COLS = 8, CW = 150, CH = 175, W = COLS * CW, H = Math.ceil(cells.length / COLS) * CH;
+  c.width = W * Z; c.height = H * Z;
+  ctx.setTransform(Z, 0, 0, Z, 0, 0); ctx.fillStyle = '#6b6b74'; ctx.fillRect(0, 0, W, H);
+  ctx.font = '9px sans-serif'; ctx.textAlign = 'left';
+  cells.forEach((cell, i) => {
+    const x = (i % COLS) * CW, y = Math.floor(i / COLS) * CH, fx = x + CW / 2, fy = y + CH - 22;
+    for (const p of cell.parts) { const im = assets.get(p.img); ctx.save(); ctx.setTransform(Z, 0, 0, Z, 0, 0); ctx.translate(fx, fy); ctx.transform(...p.m); if (im?.width) ctx.drawImage(im, 0, 0); ctx.restore(); }
+    ctx.strokeStyle = '#3a2a1e'; ctx.lineWidth = 0.8;
+    for (const l of cell.strokes) { ctx.beginPath(); l.forEach(([a, b], k) => (k ? ctx.lineTo(fx + a, fy + b) : ctx.moveTo(fx + a, fy + b))); ctx.stroke(); }
+    ctx.fillStyle = '#f2e6d0'; ctx.fillText(cell.label, x + 3, y + 10);
+    ctx.fillStyle = '#ff7a6e'; cell.flags.forEach((f, k) => ctx.fillText(f.text, x + 3, y + CH - 4 - 10 * k));
+    if (cell.flags.length) { ctx.strokeStyle = '#ff5a50'; ctx.strokeRect(x + 0.5, y + 0.5, CW - 1, CH - 1); }
+  });
+  window.sheet = { cells };
+} else classic();
+
+function classic() {
+const W = 1180, H = 640;
+c.width = W * Z; c.height = H * Z;
 const bg = assets.get(STAGES['harbor-market'].art?.img ?? STAGES['harbor-market'].art);
 
 // cell: [fighter id, x, y, what, label]; what = 'idle' | 'walk' | '<move>:<share of the move 0..1>' | 'hurt'
@@ -65,4 +90,5 @@ function frame() {
 }
 frame();   // still poses: one draw
 window.sheet = { cells, items };
+}
 </script>

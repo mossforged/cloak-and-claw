@@ -11,6 +11,7 @@ import { rigFrame, forceGrip } from '../../src/render/rig.js';
 import { nodeOf } from '../../src/render/weapon-node.js';
 import { movesOf } from '../../src/sim/weapons.js';
 import { GRIP_MODE_NAMES } from '../../src/data/grip-modes.js';
+import { SPEAR_HOLDS, withSpearHold } from '../../src/data/rigs/rat-spearman-holds.js';
 
 export const HOLD_PX = 2;   // how far the handle may leave the fist
 const FIST = 5;             // half a fist's width along its slot (screen px): the handle line is checked out to here
@@ -81,17 +82,34 @@ export function holdFrame(f, modes) {
   return { rig, ...fr, flags: holdFlags(rig, fr.L, fr.held) };
 }
 
-// Strip cells for a body: holders x the sheet's frames x grip modes.
+// Strip cells for a body: holders x the sheet's frames x grip modes; body 'spear': the spearman's hold variants (E = the
+// default, then data/rigs/rat-spearman-holds.js) in the sheet's frames + hurt, each with its own grip modes.
 export function holdCells(body, all = false) {
   const cells = [];
+  if (body === 'spear') {
+    const base = RIGS['rat-spearman'];
+    for (const k of ['E', ...Object.keys(SPEAR_HOLDS)]) {
+      RIGS['rat-spearman'] = withSpearHold(base, k);
+      const frames = [...holdFrames('rat-spearman', null, all), ['hurt', fighterOf(FIGHTERS['rat-spearman'], null, { state: 'hurt', t: 30, stun: 31 })]];
+      for (const [label, f] of frames) cells.push(cellOf(holdFrame(f), `${k} ${SPEAR_HOLDS[k]?.label ?? 'underhand (T020 pick, default)'}: ${label}`, { id: 'rat-spearman', mode: k, frame: label }));
+    }
+    RIGS['rat-spearman'] = base;
+    return cells;
+  }
   for (const [id, item] of HOLDERS[body]) {
     for (const mode of GRIP_MODE_NAMES) for (const [label, f] of holdFrames(id, item, all)) {
-      const fr = holdFrame(f, { grip: mode }), p = fr.p, k = fr.k, c = Math.cos(p.rot), s = Math.sin(p.rot);
-      const V = [p.sx * k * c, p.sx * k * s, -p.sy * k * s, p.sy * k * c, p.dx, p.dy];
       const name = `${id.replace('-fighter', '').replace('rat-', '')} ${item ?? (FIGHTERS[id].kit ?? FIGHTERS[id].art.held ?? 'sword')}`.replace('rat-', '').replace('mouse-', '');
-      cells.push({ label: `${name}: ${mode}, ${label}`, id, item, mode, frame: label, flags: fr.flags.map((x) => ({ ...x, at: apply(V, x.at) })),
-        parts: fr.L.filter((e) => e.m && !e.line).map((e) => ({ img: e.img, m: [V[0] * e.m[0] + V[2] * e.m[1], V[1] * e.m[0] + V[3] * e.m[1], V[0] * e.m[2] + V[2] * e.m[3], V[1] * e.m[2] + V[3] * e.m[3], V[0] * e.m[4] + V[2] * e.m[5] + V[4], V[1] * e.m[4] + V[3] * e.m[5] + V[5]] })) });
+      cells.push(cellOf(holdFrame(f, { grip: mode }), `${name}: ${mode}, ${label}`, { id, item, mode, frame: label }));
     }
   }
   return cells;
+}
+// A drawn frame as a strip cell: parts and the bow string in screen px (feet at 0,0), flags with their points.
+function cellOf(fr, label, o) {
+  const p = fr.p, k = fr.k, c = Math.cos(p.rot), s = Math.sin(p.rot);
+  const V = [p.sx * k * c, p.sx * k * s, -p.sy * k * s, p.sy * k * c, p.dx, p.dy];
+  const mul = (m) => [V[0] * m[0] + V[2] * m[1], V[1] * m[0] + V[3] * m[1], V[0] * m[2] + V[2] * m[3], V[1] * m[2] + V[3] * m[3], V[0] * m[4] + V[2] * m[5] + V[4], V[1] * m[4] + V[3] * m[5] + V[5]];
+  return { label, ...o, flags: fr.flags.map((x) => ({ ...x, at: apply(V, x.at) })),
+    strokes: fr.L.filter((e) => e.line).map((e) => e.line.map((P) => apply(V, P))),   // the bow string
+    parts: fr.L.filter((e) => e.m && !e.line).map((e) => ({ img: e.img, m: mul(e.m) })) };
 }
