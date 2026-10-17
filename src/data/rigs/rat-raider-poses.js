@@ -9,8 +9,10 @@
 // Spearman and archer (rigs/rat-spearman.js, rat-archer.js) override the arms and add their kit moves.
 import rig from './rat-raider.js';
 import { pose, masterAt, walkCycle } from './biped-ik.js';
+import { viewRig } from '../../render/rig-views.js';
 
-export const P = (spec) => pose(rig, spec);
+// T028: a pose that names its views (`view: { torso: 'F' }`) is placed on that view's own joint points
+export const P = (spec) => pose(spec.view ? viewRig(rig, spec.view) : rig, spec);
 export const NEAR = masterAt(rig, 'foot-near')[0], FAR = masterAt(rig, 'foot-far')[0];
 // the menace crouch: hips 3 px down, trailing (near) boot back, leading (far) boot forward, leaning in (T026 r2: raised
 // from 6 px down and 10 / -12 degrees: idle 134.4 px tall, A010 137.8, the master 138; was 129.9)
@@ -79,13 +81,21 @@ export default {
   cast: P({ ...CROUCH, swap: { head: 'head-attack' }, wholeArm: { swap: 'arm-near-raised', dir: 135 },
     shield: { off: [19, 9], turn: -40 } }),
   moves: {
-    ratSlash: {   // long telegraph: rears up with the cutlass wound back behind his head (A019 cocked arm), then a
-      // lunging chop down in front, the trailing boot pushing off on its toe
-      windup: P({ ...CROUCH, swap: { head: 'head-effort', 'hand-far': 'hand-far-fist' }, dx: -2, torso: -8, head: -4,
-        wholeArm: { swap: 'arm-near-cocked', dir: -150 }, shield: { off: [16, 6], turn: -40 },
-        feet: { near: FEET.near, far: [FEET.far[0] - 2, 2, 10] }, ...TAIL(10, 20, 20), 'scarf-tail': 15 }),
-      strike: P({ ...CROUCH, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist', 'foot-near': 'foot-near-toe' }, dx: 4, dy: 9,
-        pelvis: 6, torso: 22, head: -20, hand: { off: [22, 14], dir: 50 }, shield: { off: [6, 20], turn: 10 },
+    ratSlash: {   // T028 the turning slash (rehearsal Slash 1): wind-up turned away (BQ) with the cocked arm (A019) wholly
+      // behind the body, rearing back on the effort head; the swing turns the chest toward the camera (F) and brings the
+      // arm over in front of it: the `through` key (fist over the shoulder, blade up and forward) is the named key where
+      // the depth switches (its swaps from `switchAt` of the swing: the first swing frame keeps the cocked drawing); then a lunging chop down in front on
+      // the trailing toe; recover: F held through the follow-through (timing.swapBack), then back to three-quarter with
+      // the arm under the vest. Until A023: the side torso stands in for F and BQ.
+      switchAt: 0.1,
+      windup: P({ ...CROUCH, view: { torso: 'BQ' }, swap: { head: 'head-effort', 'hand-far': 'hand-far-fist' }, dx: -4, torso: -12, head: 0,
+        wholeArm: { swap: 'arm-near-cocked', dir: -160 }, shield: { off: [22, 10], turn: -50 },
+        feet: { near: FEET.near, far: [FEET.far[0] - 2, 2, 10] }, ...TAIL(15, 20, 20), 'scarf-tail': 20 }),
+      through: P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist' }, dx: 0, dy: 3,
+        pelvis: 4, torso: 6, head: -10, hand: { off: [10, -30], dir: -45 }, shield: { off: [10, 16], turn: 0 },
+        feet: { near: FEET.near, far: FEET.far }, ...TAIL(0, 10, 10), 'scarf-tail': 0 }),
+      strike: P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist', 'foot-near': 'foot-near-toe' }, dx: 5, dy: 9,
+        pelvis: 6, torso: 24, head: -22, hand: { off: [26, 18], dir: 55 }, shield: { off: [-4, 18], turn: 20 },
         feet: { near: [FEET.near[0] - 6, 9.8, 0], far: [FEET.far[0] + 6, 0, 0] }, ...TAIL(-25, -10, 0), 'scarf-tail': -25 }),
     },
   },

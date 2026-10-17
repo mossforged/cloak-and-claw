@@ -55,6 +55,9 @@ export function clipsFor(id, item = 'own') {
   const across = Math.min(cyc * 2, Math.round(620 / def.move.walk));
   add({ key: 'walkAcross', label: 'walk across', group: 'Moves', follow: true, startX: (d) => (d > 0 ? 170 : 790),
     input: (sb, k) => (k < across ? fwd(sb) : {}), done: (sb) => sb.k > across && settled(sb.hero), tail: 30 });
+  // T028: the turn-around through the front view (a rig with an F torso): a short step back, then forward again
+  if (rig.bodyViews?.torso?.F) add({ key: 'turn', label: 'turn around (x2)', group: 'Moves', frames: 130,
+    input: (sb, k) => (k >= 20 && k < 26 ? { mx: -sb.dir } : k >= 80 && k < 86 ? { mx: sb.dir } : {}) });
   if (def.move.jump) add({ key: 'jump', label: 'jump', group: 'Moves', input: (sb, k) => ({ jump: k === 4 }), done: (sb) => sb.k > 8 && settled(sb.hero), tail: 30 });
   if (def.block) {
     add({ key: 'block', label: 'block', group: 'Moves', frames: 120, input: (sb, k) => ({ block: k >= 4 && k < 100 }) });

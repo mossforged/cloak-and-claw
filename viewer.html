@@ -40,6 +40,20 @@
   .row label { display: flex; align-items: center; gap: 8px; flex: 1; }
   .row input[type=range] { flex: 1; height: 40px; accent-color: var(--btn-on); }
   .note { color: var(--dim); font-size: 13px; margin: 6px 0; }
+  /* T028 rehearsal sheet */
+  body.rehearse { display: block; height: auto; overflow: auto; padding: 8px 8px 40px; }
+  .rh h1 { font-size: 18px; margin: 4px 0 6px; }
+  .rh h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--btn-on); margin: 22px 0 6px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  .rh .move { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 6px; margin: 8px 0; }
+  .rh .move h3 { margin: 0 0 6px; color: var(--ink); text-transform: none; letter-spacing: 0; font-size: 14px; }
+  .rh .keys { display: flex; flex-wrap: wrap; gap: 6px; }
+  .rh .key { width: 104px; background: #2a2734; border-radius: 8px; padding: 4px; font-size: 11px; line-height: 1.25; overflow-wrap: anywhere; }
+  .rh .key canvas { display: block; width: 96px; height: 140px; background: #6e6e76; border-radius: 6px; }
+  .rh .key b { display: block; margin-top: 3px; font-size: 12px; }
+  .rh .view { color: #9fd8ff; }
+  .rh .miss { color: #ff8a80; }
+  .rh .ok { color: var(--dim); }
+  .rh .legend { color: var(--dim); font-size: 13px; }
   @media (min-width: 900px) and (min-aspect-ratio: 1/1) {
     body { flex-direction: row; }
     #sheet { width: 400px; height: 100dvh; border-top: 0; border-left: 1px solid var(--line); }
@@ -61,6 +75,9 @@
   <nav id="tabs"></nav>
   <section id="panel"></section>
 </div>
-<script type="module" src="src/viewer/main.js"></script>
+<!-- T028: ?rehearse=<body> opens the move rehearsal sheet (src/viewer/rehearse.js) instead of the viewer -->
+<script type="module">
+  import(new URLSearchParams(location.search).has('rehearse') ? './src/viewer/rehearse.js' : './src/viewer/main.js');
+</script>
 </body>
 </html>

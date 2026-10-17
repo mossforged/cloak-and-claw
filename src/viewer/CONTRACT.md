@@ -14,3 +14,5 @@ page (`index.html` / `src/game.js` are never loaded or changed).
 - Compare versions of a rig (old vs new during an import) are registered in `models.js` `VERSIONS`, view only; their art
   is preloaded (`VERSION_RIGS`). T026: `a010` = the rats before the rebuild (`src/data/rigs/a010/`).
 - The URL holds the whole view (`state.js`); a new option = a state field + parse/format + the round-trip test.
+- T028 rehearsal sheet: `viewer.html?rehearse=<body>` (`rehearse.js`, browser; `rehearse-frames.js`, pure) draws every key of
+  `src/data/rehearsal/<body>.js` with the real rigFrame; a drawing not in the rig yet is a labelled red box, never invented art.

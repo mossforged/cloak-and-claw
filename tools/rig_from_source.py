@@ -12,7 +12,9 @@ source's `grips` (each grip hand's slot centre and direction) become `hands`: { 
 T024: part names are near/far (rig standard section 3). A source that says front/back for limbs, hands and feet (A013,
 A016) is read as near/far, so the output (data and image names) uses the new names; head/torso `back` views keep theirs.
 T026 round 2: every cut loses its detached islands (tools/islands.py: stray scraps apart from the main shape), each one
-dropped listed in the report; --keep-islands <name,...> keeps them on parts drawn in pieces on purpose (e.g. whiskers)."""
+dropped listed in the report; --keep-islands <name,...> keeps them on parts drawn in pieces on purpose (e.g. whiskers).
+T028: the source's view joint points (`anchors`, canvas px, per torso / pelvis drawing; A023) become `bodyViews` (each
+view's drawing, points in that part's own px, the rehearsal's default bands); render/rig-views.js reads them."""
 import argparse, json, math, os, re, sys
 import numpy as np
 from PIL import Image
@@ -118,6 +120,52 @@ def sockets_block(sk, local, pad=""):
     return f"{pad}sockets: {{ {body}, feet: {{ parts: ['foot-near', 'foot-far'] }}, weapon_tip: {{ item: 'tip' }} }},"
 
 
+# T028 views: which view each torso / pelvis drawing is, and the rehearsal's default bands per view
+# (docs/design/rigs/rat-raider-rehearsal.md: S and F near arm in front, BQ near arm behind, B far arm in front and the
+# legs and tail swapped). The source records `anchors` (canvas px) per drawing: top level { drawing: { joint: [x, y] } }
+# or an `anchors` field on the part / swap.
+VIEW_OF = {"torso": "Q", "torso-side": "S", "torso-front": "F", "torso-away": "BQ", "torso-back": "B", "torso-hunched": "H",
+           "torso-lean-back": "LB", "pelvis": "Q", "pelvis-side": "S", "pelvis-front": "F", "pelvis-back": "B"}
+NEAR_FRONT = {"arm-near-upper": 800}
+VIEW_BANDS = {
+    ("torso", "S"): NEAR_FRONT, ("torso", "F"): NEAR_FRONT,
+    ("torso", "BQ"): {"arm-near-upper": 140, "arm-near-lower": 150, "hand-near": 145},
+    ("torso", "B"): {"arm-far-upper": 800, "arm-far-lower": 820, "hand-far": 815, "arm-near-upper": 110, "arm-near-lower": 120, "hand-near": 115},
+    ("pelvis", "B"): {"leg-near-upper": 210, "leg-near-lower": 220, "foot-near": 230, "leg-far-upper": 510, "leg-far-lower": 520,
+                      "foot-far": 530, "tail": 450, "tail-2": 460, "tail-3": 470},
+}
+
+
+def anchors_of(src):
+    out = dict(src.get("anchors") or {})
+    for d in (src.get("parts") or {}), (src.get("swaps") or {}):
+        for n, p in d.items():
+            if p.get("anchors"):
+                out[n] = p["anchors"]
+    return out
+
+
+def views_block(src, local, pad="  "):
+    """T028: bodyViews from the source's anchors (canvas px -> the torso's / pelvis' own px, as attach points)."""
+    views = {}
+    for drawing, A in anchors_of(src).items():
+        slot = drawing.split("-")[0]
+        code = VIEW_OF.get(drawing)
+        if slot not in ("torso", "pelvis") or not code or slot not in src["parts"]:
+            print(f"anchors for {drawing}: not a torso / pelvis view drawing, skipped", file=sys.stderr)
+            continue
+        f = []
+        if drawing != slot:   # a drawing still to come stays a stand-in (the part's own drawing, the new points)
+            f.append(f"swap: '{drawing}'" if drawing in (src.get("swaps") or {}) else f"standIn: '{drawing}'")
+        f.append("anchors: { " + ", ".join(f"{k}: {local(slot, pt)}" for k, pt in A.items()) + " }")
+        if VIEW_BANDS.get((slot, code)):
+            f.append("bands: " + json.dumps(VIEW_BANDS[(slot, code)]).replace('"', "'"))
+        views.setdefault(slot, []).append(f"{code}: {{ " + ", ".join(f) + " }")
+    if not views:
+        return []
+    return [f"{pad}bodyViews: {{"] + [f"{pad}  {slot}: {{ " + ", ".join(v) + " }," for slot, v in views.items()] + [f"{pad}}},"]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("source")
@@ -136,6 +184,8 @@ def main():
         own = lambda d: {k: {**v, "img": os.path.join(fdir, v["img"])} for k, v in (d or {}).items()}
         raw["parts"] = {**raw["parts"], **{k: {**raw["parts"].get(k, {}), **v} for k, v in own(F.get("parts")).items()}}
         raw["swaps"] = {**raw.get("swaps", {}), **own(F.get("swaps"))}
+        if F.get("anchors"):   # T028 (A023): view joint points
+            raw["anchors"] = {**raw.get("anchors", {}), **F["anchors"]}
         if F.get("grips"):   # T026 r2 (A022): a fragment's grips win; a hand socket the base pinned on its old grip goes too
             raw["grips"] = {**raw.get("grips", {}), **F["grips"]}
             for side in {near_far(g["of"])[5:] for g in F["grips"].values()}:
@@ -210,6 +260,7 @@ def main():
             lines.append(f"    '{n}': {{ part: '{g['of']}', at: {local(g['of'], g['center'])}, axis: {axis(g['direction'])} }},")
         lines.append("  },")
     lines.append(sockets_block(source_sockets(src, derive_sockets(src, folder)), local, "  "))
+    lines += views_block(src, local)
     lines += ["};", ""]
     print(f"islands dropped ({len(dropped)} cuts; canvas px):" if dropped else "islands dropped: none")
     for n, isl in dropped.items():

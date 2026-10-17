@@ -1,4 +1,6 @@
 // Rig layout (split out of rig.js, T024): each part's image matrix for a set of joints, swaps and held item. Pure.
+import { applyViews, capTurn, capShows } from './rig-views.js';
+
 const D = Math.PI / 180;
 
 // 2D affine matrices [a, b, c, d, e, f] (same layout as canvas setTransform).
@@ -33,6 +35,8 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
   const parts = held?.part ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : { ...rig.parts };
   const hidden = new Set();
   if (held && !held.part && rig.emptyHand) swap = { ...rig.emptyHand, ...swap };   // T023: the empty hand's own drawing
+  const V = applyViews(rig, parts, swap);   // T028: torso / pelvis views (drawing, joint points, bands); none = as before
+  swap = V.swap;
   swap = withHeldHand(rig, swap, held);
   for (const [name, key] of Object.entries(swap)) {
     const s = parts[name]?.swaps?.[key];
@@ -53,17 +57,24 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
       const pf = frameOf(p.parent);
       // upright parts (the shield) cancel their parents' turn: the pose angle is relative to the rig, not the arm
       const undo = p.upright ? -Math.atan2(pf[1], pf[0]) / D : 0;
-      m = mul(mul(pf, tr(ax, ay)), rot(undo + (joints[name] ?? 0)));
+      m = mul(mul(pf, tr(ax, ay)), rot(undo + (joints[name] ?? 0) + (p.cap ? capTurn(rig, p, joints) : 0)));
     }
     return (frames[name] = m);
   };
+  // T028: a view's band beats the pose's order channel; a cap draws just above its arm; the held item keeps its place
+  // relative to the hand it hangs from when a view moves that hand to another band
+  const orderOf = (name) => V.bands[name] ?? (parts[name].cap ? orderOf(parts[name].parent) + (parts[name].capOrder ?? 5)
+    : joints[`${name}.order`] ?? parts[name].order);
+  const heldBy = held?.part && rig.parts[held.part.parent] ? held.part.parent : null;
+  const orderAt = (name) => (heldBy && name === held.slot && V.bands[heldBy] != null && V.bands[name] == null
+    ? parts[name].order + orderOf(heldBy) - (joints[`${heldBy}.order`] ?? rig.parts[heldBy].order) : orderOf(name));
   return Object.entries(parts)
     .map(([name, p]) => {
       const m = mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1]));
       const s = p.swaps?.[swap[name]];
-      return { name, p, order: joints[`${name}.order`] ?? p.order, img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m, base: m };
+      return { name, p, order: orderAt(name), img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m, base: m };
     })
-    .filter((e) => !hidden.has(e.name) && !(held && e.name === held.slot && !held.part))
+    .filter((e) => !hidden.has(e.name) && !(held && e.name === held.slot && !held.part) && !(e.p.cap && !capShows(orderOf, e.p)))
     .sort((a, b) => a.order - b.order);
 }
 

@@ -1,0 +1,8 @@
+[
+  { "label": "Rehearsal sheet: every move's keys (red = drawing still to come)", "q": "rehearse=rat-raider" },
+  { "label": "Turning slash, slow (wind-up turned away, strike turned toward you)", "q": "f=rat-raider&anim=ratSlash&speed=0.25" },
+  { "label": "Turning slash: new vs old A010 rig side by side", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=a010&speed=0.25" },
+  { "label": "Turn-around through the front view, slow", "q": "f=rat-raider&anim=turn&speed=0.25" },
+  { "label": "Walk across (tail and scarf springs)", "q": "f=rat-raider&anim=walkAcross" },
+  { "label": "Jump (tail springs on the rise and landing)", "q": "f=rat-raider&anim=jump&speed=0.5" }
+]

@@ -43,11 +43,42 @@ const masks = Object.fromEntries(Object.entries(MASKS).filter(([img]) => !img.en
 const BACK = P + 'head-back.png';
 masks[BACK] = { ...masks[BACK], fur: 'assets/art/enemies/rat-raider/masks/head-back-a022-fur-mask.png' };
 
+// T028 views (rehearsal table, rig standard 4 and 6; render/rig-views.js). Anchors in torso px (as `attach`), measured by
+// Code on A018's side and back torsos (A023 brings its own for every view; the importer writes them here). Until A023
+// lands the side torso stands in for F (front) and BQ (turned away); `standIn` names the drawing each one waits for.
+const SIDE = { neck: [152, 62], shoulder_near: [76, 64], shoulder_far: [110, 62], waist: [124, 146], 'scarf-tail': [90, 14] };
+const BACKPT = { neck: [130, 78], shoulder_near: [193, 70], shoulder_far: [40, 68], waist: [126, 149], 'scarf-tail': [110, 10] };
+const NEAR_FRONT = { 'arm-near-upper': 800 };   // near arm wholly in front (forearm 820, hand 815 already are)
+const NEAR_BEHIND = { 'arm-near-upper': 140, 'arm-near-lower': 150, 'hand-near': 145 };
+const FAR_FRONT = { 'arm-far-upper': 800, 'arm-far-lower': 820, 'hand-far': 815, 'arm-near-upper': 110, 'arm-near-lower': 120, 'hand-near': 115 };
+const LEGS_SWAPPED = { 'leg-near-upper': 210, 'leg-near-lower': 220, 'foot-near': 230, 'leg-far-upper': 510, 'leg-far-lower': 520,
+  'foot-far': 530, tail: 450, 'tail-2': 460, 'tail-3': 470 };
+export const BODY_VIEWS = {
+  torso: {
+    Q: {},
+    S: { swap: 'torso-side', anchors: SIDE, bands: NEAR_FRONT },
+    F: { swap: 'torso-side', standIn: 'torso-front', anchors: SIDE, bands: NEAR_FRONT },
+    BQ: { swap: 'torso-side', standIn: 'torso-away', anchors: SIDE, bands: NEAR_BEHIND },
+    B: { swap: 'torso-back', anchors: BACKPT, bands: FAR_FRONT, swaps: { head: 'head-back' } },
+    H: { standIn: 'torso-hunched' },        // three-quarter drawings with their own joint points (A023)
+    LB: { standIn: 'torso-lean-back' },
+  },
+  pelvis: {
+    Q: {},
+    S: { standIn: 'pelvis-side' },
+    F: { standIn: 'pelvis-front' },
+    B: { standIn: 'pelvis-back', bands: LEGS_SWAPPED },
+  },
+};
+
 export default {
   id: 'rat-raider',
   scale: 0.25185,   // part px -> screen px (136 px tall, as the standee and A010)
   rootY: 49.363,    // pelvis pivot height above the feet in the master (screen px)
   overlays: OVERLAYS, views, masks,
+  bodyViews: BODY_VIEWS,
+  springs: { parts: { tail: 0.6, 'tail-2': 0.8, 'tail-3': 1, 'scarf-tail': 0.8 } },   // T028 (gains; numbers in data/rig-motion.js)
+  carry: { order: 660 },   // T028 carry band: over the torso (and its gear), under the near arm
   hands: HANDS,
   heldHand: { 'hand-near': 'hand-near-grip' },
   slots: {
@@ -66,7 +97,8 @@ export default {
   },
   // A018's own sockets (rig-source `sockets`; importer compared them with its derived ones: chest 49 and mouth 114
   // canvas px apart, the rest within 9); feet, weapon_tip: render/sockets.js
-  sockets: { hand_near: { part: 'hand-near', at: [45.0, 26.1] }, hand_far: { part: 'hand-far', at: [45.4, 47.4] }, chest: { part: 'torso', at: [132.0, 101.6] }, head_top: { part: 'head', at: [80.0, 0.8] }, mouth: { part: 'head', at: [276.0, 204.0] }, tail_tip: { part: 'tail-3', at: [4.4, 4.0] }, feet: { parts: ['foot-near', 'foot-far'] }, weapon_tip: { item: 'tip' } },
+  sockets: { hand_near: { part: 'hand-near', at: [45.0, 26.1] }, hand_far: { part: 'hand-far', at: [45.4, 47.4] }, chest: { part: 'torso', at: [132.0, 101.6] }, head_top: { part: 'head', at: [80.0, 0.8] }, mouth: { part: 'head', at: [276.0, 204.0] }, tail_tip: { part: 'tail-3', at: [4.4, 4.0] }, feet: { parts: ['foot-near', 'foot-far'] }, weapon_tip: { item: 'tip' },
+    carry: { between: ['hand_near', 'hand_far'] } },   // T028 carry socket (render/carry.js)
   parts: {
     'pelvis': { img: P + 'pelvis.png', pivot: [106.0, 62.0], order: 400 },
     'torso': { img: P + 'torso.png', parent: 'pelvis', attach: [106.8, 30.8], pivot: [126.4, 150.4], order: 600, swaps: { 'torso-side': { img: P + 'torso-side.png', offset: [41.6, -8.0] }, 'torso-back': { img: P + 'torso-back.png', offset: [12.0, 5.2] } } },

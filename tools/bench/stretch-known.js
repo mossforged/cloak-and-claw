@@ -10,7 +10,15 @@ const RAT_SHOULDER = 'A022 near upper arm (band 590): its hidden end under the v
 const RAT_UP = 'expected: a straight-up near arm under the vest needs arm-near-raised (cast uses it)';
 const RAT_FAR_WRIST = 'A022 far hands (band 115, wrist under the bracer): the hidden wrist end is short; turned or lifted over the shaft (845) the wrist core opens (fix: longer wrist end under the far bracer)';
 const HIP_FAR = 'rounded top on leg-far-upper under the pelvis (opens when the far thigh folds forward: kneel, lying)';
+// T028: the view cells (the side torso standing in for S, F and BQ until A023)
+const RAT_NEAR_WRIST = 'A022 near hand under the bracer at 150 degrees of elbow with the whole near arm in front (view bands): short hidden wrist end (A023 repair list: longer wrist ends)';
 export const KNOWN = {
+  'rat | view torso S: near elbow 150 | arm-near-lower / hand-near': [2.3, RAT_NEAR_WRIST],
+  'rat | view torso F: near elbow 150 | arm-near-lower / hand-near': [2.3, RAT_NEAR_WRIST],
+  'rat | view torso BQ: near elbow 150 | arm-near-lower / hand-near': [2.3, RAT_NEAR_WRIST],
+  'rat | view torso S: Rat Spearman rat-spear | arm-far-lower / hand-far': [5.8, RAT_FAR_WRIST],
+  'rat | view torso F: Rat Spearman rat-spear | arm-far-lower / hand-far': [5.8, RAT_FAR_WRIST],
+  'rat | view torso BQ: Rat Spearman rat-spear | arm-far-lower / hand-far': [5.8, RAT_FAR_WRIST],
   // T026: the rat rebuilt on A018 + A019 + A022 (every A010 rat flag cleared; A022's hands cleared the near wrist flags)
   // T026 r2 + A022 (round 2 re-import)
   'rat | arms straight up | torso / arm-near-upper': [6.8, RAT_UP],

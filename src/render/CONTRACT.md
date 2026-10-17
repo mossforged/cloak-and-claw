@@ -3,7 +3,7 @@
 **Owns:** backdrop, stage art, standees (pose, lean, squash, flash, tint), cutout rigs (part layout, joint poses, blends, held weapons in hand slots), props and floor items, effects (incl. debris), screen shake + hit-stop counters, HUD, debug overlay.
 **Does not own:** gameplay state. Render reads `world` and listens to bus events; it never writes to fighters or world.
 
-**Public API:** `createRenderer(ctx, assets)`, `createJuice()`, `drawStandee`, `drawRig`, `rigFrame`, `rigMemory`, `lastFrame` (T027 viewer), `floorLayer`, `socketOf`, `socketPoints`, `braceLayer`, `layoutRig`, `heldOf`, `restIn`, `handleAngle`, `gripLayout`, `gearLayout`, `tintPixels`, `drawHud`, `drawDebug`, `stepViewPose`, `squatOf`, `feelLayer`.
+**Public API:** `createRenderer(ctx, assets)`, `createJuice()`, `drawStandee`, `drawRig`, `rigFrame`, `rigMemory`, `lastFrame` (T027 viewer), `floorLayer`, `socketOf`, `socketPoints`, `braceLayer`, `layoutRig`, `heldOf`, `restIn`, `handleAngle`, `gripLayout`, `gearLayout`, `tintPixels`, `drawHud`, `drawDebug`, `stepViewPose`, `squatOf`, `feelLayer`, T028: `applyViews`, `viewLayer`, `viewRig`, `springLayer`, `carryLayer`, `carryMotion`.
 
 **Rules:**
 - Look numbers live in `src/data/juice.js`, move `pose`/`fx` blocks in `src/data/moves/` and rig parts/poses in `src/data/rigs/`.
@@ -26,3 +26,4 @@
 - T026: a rig may name `heldHand` (the drawing a hand holding its item puts on: A018's default hands are fists); a grip
   mode's own hand drawing (`<hand>-overhand`) is placed at its own slot (`rig.hands`). Old rigs (no such fields or
   drawings) draw exactly as before.
+- T028 views (`rig-views.js`): a rig's `bodyViews` give the torso and pelvis views (drawing, joint points, draw bands); a pose names them (`view`), and per-part bands (`order`), both switching at once like swaps; the children slide to the new points over `RIG_MOTION.viewBlend`. Shoulder caps show only while their arm draws in front. The turn-around through F when the facing flips, tail and scarf springs (`springs.js`) and the carry socket (`carry.js`) are render memory only. A rig without `bodyViews` / `springs` / `carry` lays out exactly as before (tests/views.test.mjs).

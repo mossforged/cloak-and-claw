@@ -1,7 +1,7 @@
 // T016 rig bench: the old (A002) mouse fixture builds a rig whose joints stay joined (at rest on the master's points, and in every
 // strip pose); biped-poses names only standard parts; missing standard parts are skipped but still turn their children;
 // the draft importer (tools/rig_from_source.py) writes a rig with the same joints.
-import { readFileSync, mkdtempSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join, dirname } from 'node:path';
@@ -129,6 +129,20 @@ else {
       for (const [n, h] of Object.entries(d.hands ?? {})) ok(game.hands[n] && near(h.at, game.hands[n].at, 0.01) && h.axis === game.hands[n].axis, `importer writes grip hand ${n} (as in the game rig)`);
       ok(Object.keys(d.hands ?? {}).length === 3, 'importer writes the three grip hands');
       ok(Math.abs(d.scale - game.scale) < 1e-4 && Math.abs(d.rootY - game.rootY) < 1e-3, 'game rig scale/rootY = importer output at 130 px');
+    }
+    // T028: view joint points (A023 `anchors`, canvas px) -> bodyViews in the part's own px; a drawing still to come
+    // stays a stand-in. The head's own pivot given as the back torso's neck lands on the head's attach point.
+    const J = JSON.parse(readFileSync(join(root, u), 'utf8')), tb = Object.keys(J.swaps ?? {}).find((n) => n.startsWith('torso-'));
+    J.dir = join(root, J.dir ?? dirname(u));
+    J.anchors = { [tb]: { neck: J.parts.head.pivot }, 'pelvis-front': { hip_near: J.parts['leg-front-upper']?.pivot ?? J.parts['leg-near-upper'].pivot } };
+    const out2 = mkdtempSync(join(tmpdir(), 'rig-import-')), u2 = join(out2, 'src.json');
+    writeFileSync(u2, JSON.stringify(J));
+    const r2 = spawnSync('python3', ['tools/rig_from_source.py', u2, '--id', 'mouse-v', '--art', join(out2, 'art'), '--out', join(out2, 'mouse-v.js'), '--height', '130'], { cwd: root, encoding: 'utf8' });
+    ok(r2.status === 0, `importer runs with anchors: ${r2.stderr}`);
+    if (r2.status === 0) {
+      const d = (await import(pathToFileURL(join(out2, 'mouse-v.js')))).default, code = { 'torso-back': 'B', 'torso-side': 'S' }[tb];
+      ok(d.bodyViews?.torso?.[code]?.swap === tb && near(d.bodyViews.torso[code].anchors.neck, d.parts.head.attach, 0.02), `importer: ${tb} neck in torso px (${d.bodyViews?.torso?.[code]?.anchors?.neck})`);
+      ok(d.bodyViews?.pelvis?.F?.standIn === 'pelvis-front' && near(d.bodyViews.pelvis.F.anchors.hip_near, d.parts['leg-near-upper'].attach, 0.02), 'importer: a view still to come stays a stand-in with its points');
     }
   }
 }
