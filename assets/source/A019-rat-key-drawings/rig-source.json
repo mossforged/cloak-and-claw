@@ -1,0 +1,296 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "fighter": "rat-raider",
+  "baseSource": "A018-rat-parts/rig-source.json",
+  "parts": {
+    "arm-near-upper": {
+      "img": "arm-near-upper.png",
+      "parent": "torso",
+      "pivot": [
+        555,
+        1174
+      ],
+      "band": 810,
+      "repairRadius": 130
+    },
+    "leg-far-upper": {
+      "img": "leg-far-upper.png",
+      "parent": "pelvis",
+      "pivot": [
+        899,
+        1520
+      ],
+      "band": 210,
+      "repairRadius": 118
+    }
+  },
+  "swaps": {
+    "arm-near-cocked": {
+      "img": "arm-near-cocked.png",
+      "of": "arm-near-upper",
+      "pivot": [
+        555,
+        1174
+      ],
+      "hide": [
+        "arm-near-lower",
+        "hand-near"
+      ],
+      "jointCenters": [
+        [
+          555,
+          1174
+        ],
+        [
+          410,
+          1078
+        ],
+        [
+          480,
+          960
+        ]
+      ],
+      "itemGrip": [
+        559.0,
+        918.0
+      ],
+      "slotDirection": [
+        [
+          594.0,
+          953.0
+        ],
+        [
+          524.0,
+          883.0
+        ]
+      ]
+    },
+    "arm-near-raised": {
+      "img": "arm-near-raised.png",
+      "of": "arm-near-upper",
+      "pivot": [
+        555,
+        1174
+      ],
+      "hide": [
+        "arm-near-lower",
+        "hand-near"
+      ],
+      "jointCenters": [
+        [
+          555,
+          1174
+        ],
+        [
+          555,
+          1000
+        ],
+        [
+          555,
+          862
+        ]
+      ],
+      "itemGrip": [
+        513.0,
+        783.0
+      ],
+      "slotDirection": [
+        [
+          548.0,
+          748.0
+        ],
+        [
+          478.0,
+          818.0
+        ]
+      ]
+    },
+    "arm-far-raised-back": {
+      "img": "arm-far-raised-back.png",
+      "of": "arm-far-upper",
+      "pivot": [
+        960,
+        1179
+      ],
+      "hide": [
+        "arm-far-lower",
+        "hand-far"
+      ],
+      "jointCenters": [
+        [
+          960,
+          1179
+        ],
+        [
+          800,
+          1115
+        ],
+        [
+          875,
+          997
+        ]
+      ],
+      "itemGrip": [
+        964.45,
+        988.06
+      ],
+      "slotDirection": [
+        [
+          985.37,
+          1032.92
+        ],
+        [
+          943.54,
+          943.2
+        ]
+      ]
+    },
+    "arm-far-guard": {
+      "img": "arm-far-guard.png",
+      "of": "arm-far-upper",
+      "pivot": [
+        960,
+        1179
+      ],
+      "hide": [
+        "arm-far-lower",
+        "hand-far"
+      ],
+      "jointCenters": [
+        [
+          960,
+          1179
+        ],
+        [
+          1040,
+          1328
+        ],
+        [
+          875,
+          1230
+        ]
+      ],
+      "itemGrip": [
+        910.41,
+        1132.67
+      ],
+      "slotDirection": [
+        [
+          953.71,
+          1157.67
+        ],
+        [
+          867.11,
+          1107.67
+        ]
+      ]
+    },
+    "leg-near-kneeling": {
+      "img": "leg-near-kneeling.png",
+      "of": "leg-near-upper",
+      "pivot": [
+        638,
+        1520
+      ],
+      "hide": [
+        "leg-near-lower",
+        "foot-near"
+      ],
+      "jointCenters": [
+        [
+          638,
+          1520
+        ],
+        [
+          584,
+          1745
+        ],
+        [
+          476,
+          1745
+        ]
+      ]
+    },
+    "leg-near-kneeup": {
+      "img": "leg-near-kneeup.png",
+      "of": "leg-near-upper",
+      "pivot": [
+        638,
+        1520
+      ],
+      "hide": [
+        "leg-near-lower",
+        "foot-near"
+      ],
+      "jointCenters": [
+        [
+          638,
+          1520
+        ],
+        [
+          865,
+          1520
+        ],
+        [
+          865,
+          1630
+        ]
+      ]
+    },
+    "leg-far-folded": {
+      "img": "leg-far-folded.png",
+      "of": "leg-far-upper",
+      "pivot": [
+        899,
+        1520
+      ],
+      "hide": [
+        "leg-far-lower",
+        "foot-far"
+      ],
+      "jointCenters": [
+        [
+          899,
+          1520
+        ],
+        [
+          1095,
+          1632
+        ],
+        [
+          985,
+          1690
+        ]
+      ]
+    },
+    "foot-near-toe": {
+      "img": "foot-near-toe.png",
+      "of": "foot-near",
+      "pivot": [
+        563,
+        1853
+      ],
+      "contactY": 2048,
+      "ankleLiftToFloor": 98
+    },
+    "foot-far-toe": {
+      "img": "foot-far-toe.png",
+      "of": "foot-far",
+      "pivot": [
+        917,
+        1873
+      ],
+      "contactY": 2077,
+      "ankleLiftToFloor": 127
+    }
+  },
+  "notes": [
+    "Fragment: merge these parts/swaps into A018; image paths for this fragment resolve in A019. All coordinates are native A018 canvas pixels.",
+    "The swap of replaces the upper part; hide suppresses its lower limb and hand/foot, following importer semantics.",
+    "Native cut parts are rigidly reposed without scaling; imagegen repair paint is confined to recorded bend masks. Source art remains on the original pivots. Motion seams and item alignment await Code import."
+  ],
+  "floorY": 1950
+}
