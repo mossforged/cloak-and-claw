@@ -61,8 +61,9 @@ Same canvas; each swap shares its part's pivot so it drops in place. The study (
 | Slot | Essential (hero) | Polish |
 |---|---|---|
 | `head` | `neutral`, `attack`, `hurt`, `effort`, `ko`, `back` | `front` (turn midpoint), `shout`; 3-5 face-detail overlays (7a) |
-| `torso` | `three-quarter` (default), `side` (thrusts, horizontal cuts), `back` (spin, back throw, roll) | `hunched` (block, crouch), `twisted` (cross cut, hip toss) |
-| `pelvis` | one | `side` |
+| `torso` | `three-quarter` (default), `side` (thrusts), `back` (spin, back throw, roll), **`front`** (turned toward the camera: every swing's strike, turn-around, throws), **`away`** (back three-quarter: every wind-up and telegraph) | `hunched` (block, crouch, chop strike), `lean-back` (overhead wind-up, hurt snap) |
+| `pelvis` | three-quarter, **`side`, `front`, `back`** (one per view the hips take) | - |
+| shoulder caps | **`shoulder-near`, `shoulder-far`** (the shoulder top that shows when that arm swings in front of the body) | - |
 | `hand-near`, `hand-far` | `open`, `fist`, `grip` (side hold) | `grip-overhand`, `pinch` (bow, potion), `palm` (block, push), `shield` (far, shield users) |
 | `arm-near` whole-limb | `raised` (cast, overhead; carries the item), `cocked` (wound past 90 degrees: heavy wind-ups, telegraphs) | `smear` per swing family |
 | `arm-far` whole-limb | `guard` (block; carries the shield), `raised` (two-hand cast, bow draw) | - |
@@ -71,7 +72,9 @@ Same canvas; each swap shares its part's pivot so it drops in place. The study (
 | `foot-near`, `foot-far` | `flat`, `toe-off` (heel raised: walk, run, stepping attacks) | `heel-strike`, `out` (turned out, planted stances) |
 | joint patches | - | elbow x2, knee x2 fill caps, only where the stretch strip shows a gap |
 
-Hero: **40 drawings essential, ~62 polished.** Grunt: 27 / 33. Brute: 24 / 29. Caster: ~30. Floating caster: 7-11. Serpent: 4-5. Boss: 40-45. Full tables, non-biped templates and the per-state pose budget: study 2026-10-17, sections 3-4.
+**Views (added 2026-10-17, the T026 lesson):** a body that swings anything turns its chest into the swing; a rigid rig whose torso never changes view can only sweep an arm across a still body. Every torso and pelvis view carries its own joint points (`anchors`) and its own draw order (section 6), and the turned views are **essential for every weapon user, grunts included**. The study rated the turned torso polish and dropped views from the grunt kit; both were wrong. The first full body (the rat) is built to the hero polish tier plus views: `rigs/rat-raider-rehearsal.md`.
+
+Hero: **40 drawings essential, ~62 polished** (before views). Grunt: 27 / 33. Brute: 24 / 29. Caster: ~30. Floating caster: 7-11. Serpent: 4-5. Boss: 40-45. Full tables, non-biped templates and the per-state pose budget: study 2026-10-17, sections 3-4.
 
 **Whole-limb drawings** replace their rigid parts for that pose (`hide` list in `rig-source.json`), carry the held item where the arm does (`itemGrip`, `slotDirection`), and are cut from the master and inpainted, never generated from scratch.
 
@@ -97,6 +100,8 @@ Held art = floor art (decision 2026-10-16). Each item declares a **handle axis**
 
 ## 6. Draw order (depth bands)
 `hand-far`, `arm-far-*`, far weapon (100s) < `leg-far-*`, `foot-far` (200s) < `tail`, cape back (300s) < `pelvis` (400) < `leg-near-*`, `foot-near` (500s) < `torso` (600) < gear on torso (650) < `head` (700) < gear on head (750) < `arm-near-*`, `hand-near`, held weapon (800s). Swaps and gear inherit their part's band. **Exception:** the far hand on a two-handed item draws in an overlay band above the shaft (850), so it is never hidden.
+
+**Per view (2026-10-17):** the bands above are the three-quarter view. Side and front bring the near arm wholly in front of the torso (800s) with its shoulder cap on top; away puts it wholly behind; back brings the far arm in front with its cap and swaps the legs' depth, the tail drawing in front of the pelvis. Inside a move the switch happens on a named key (the frame where the hand passes the edge of the body), never as a blend; a pose may also override a part's band (a shield guard in front of the chest). Table: `rigs/rat-raider-rehearsal.md`.
 
 ## 7. Gear and colour (G4)
 - Gear overlays are drawn **over the approved master** (head and torso as they will be in game), after G3.
@@ -132,8 +137,11 @@ Holds: standee reference; master status; part list (marking extras); the swap an
 ### 9a. Sockets
 Every rig declares named attachment points for effects and items: `hand_near`, `hand_far`, `weapon_tip`, `chest`, `head_top`, `feet`, `mouth`, `tail_tip` (`saddle` for mounts). The importer derives defaults from pivots.
 
+### 9c. Move rehearsal (before any body art; added 2026-10-17)
+Before art is ordered for a body, every move it may ever do is walked **key by key**: which way the chest and hips face (view), which limbs are in front of the body, which drawings each key uses. Written as `rigs/<id>-rehearsal.md` and laid out by Code's rehearsal sheet (`viewer.html?rehearse=<id>`: every move's keys at game size, missing drawings as labelled red boxes, reviewed on the phone). Anything a key needs that the kit lacks is ordered with the body, not discovered in review. The rat's gaps (no turn, missing views) came from skipping this.
+
 ### 9b. Gate order
-Body (master, cut parts, rounded joint ends, stretch strip passed) -> pose-budget drawings -> gear on the frozen canvases -> moves (each packet citing its pose-budget rows, shipping a motion strip and the stretch strip). Weapons gate separately on handle-axis data and a grip test across every body that can hold them.
+Rehearsal (9c) -> body (master, cut parts, rounded joint ends, stretch strip passed) -> pose-budget drawings -> gear on the frozen canvases -> moves (each packet citing its pose-budget rows, shipping a motion strip and the stretch strip). Weapons gate separately on handle-axis data and a grip test across every body that can hold them.
 
 ## 10. Rig art packet checklist (lead)
 - [ ] Cites this standard and the character's rig sheet; names only the differences.
