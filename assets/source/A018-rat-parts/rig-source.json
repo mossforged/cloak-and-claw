@@ -1,0 +1,452 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "master": "reference.png",
+  "floorY": 1950,
+  "fighter": "rat-raider",
+  "parts": {
+    "pelvis": {
+      "img": "pelvis.png",
+      "parent": null,
+      "pivot": [
+        774,
+        1460
+      ],
+      "band": 400
+    },
+    "torso": {
+      "img": "torso.png",
+      "parent": "pelvis",
+      "pivot": [
+        776,
+        1382
+      ],
+      "band": 600
+    },
+    "head": {
+      "img": "head.png",
+      "parent": "torso",
+      "pivot": [
+        880,
+        1200
+      ],
+      "band": 700
+    },
+    "arm-near-upper": {
+      "img": "arm-near-upper.png",
+      "parent": "torso",
+      "pivot": [
+        555,
+        1174
+      ],
+      "band": 810
+    },
+    "arm-near-lower": {
+      "img": "arm-near-lower.png",
+      "parent": "arm-near-upper",
+      "pivot": [
+        447,
+        1310
+      ],
+      "band": 820
+    },
+    "hand-near": {
+      "img": "hand-near.png",
+      "parent": "arm-near-lower",
+      "pivot": [
+        401,
+        1440
+      ],
+      "band": 840
+    },
+    "arm-far-upper": {
+      "img": "arm-far-upper.png",
+      "parent": "torso",
+      "pivot": [
+        960,
+        1179
+      ],
+      "band": 110
+    },
+    "arm-far-lower": {
+      "img": "arm-far-lower.png",
+      "parent": "arm-far-upper",
+      "pivot": [
+        1038,
+        1329
+      ],
+      "band": 120
+    },
+    "hand-far": {
+      "img": "hand-far.png",
+      "parent": "arm-far-lower",
+      "pivot": [
+        1107,
+        1451
+      ],
+      "band": 130
+    },
+    "leg-near-upper": {
+      "img": "leg-near-upper.png",
+      "parent": "pelvis",
+      "pivot": [
+        638,
+        1520
+      ],
+      "band": 510
+    },
+    "leg-near-lower": {
+      "img": "leg-near-lower.png",
+      "parent": "leg-near-upper",
+      "pivot": [
+        584,
+        1745
+      ],
+      "band": 520
+    },
+    "foot-near": {
+      "img": "foot-near.png",
+      "parent": "leg-near-lower",
+      "pivot": [
+        563,
+        1853
+      ],
+      "band": 530
+    },
+    "leg-far-upper": {
+      "img": "leg-far-upper.png",
+      "parent": "pelvis",
+      "pivot": [
+        899,
+        1520
+      ],
+      "band": 210
+    },
+    "leg-far-lower": {
+      "img": "leg-far-lower.png",
+      "parent": "leg-far-upper",
+      "pivot": [
+        917,
+        1745
+      ],
+      "band": 220
+    },
+    "foot-far": {
+      "img": "foot-far.png",
+      "parent": "leg-far-lower",
+      "pivot": [
+        917,
+        1873
+      ],
+      "band": 230
+    },
+    "tail-1": {
+      "img": "tail-1.png",
+      "parent": "pelvis",
+      "pivot": [
+        492,
+        1540
+      ],
+      "band": 300
+    },
+    "tail-2": {
+      "img": "tail-2.png",
+      "parent": "tail-1",
+      "pivot": [
+        442,
+        1708
+      ],
+      "band": 310
+    },
+    "tail-3": {
+      "img": "tail-3.png",
+      "parent": "tail-2",
+      "pivot": [
+        350,
+        1835
+      ],
+      "band": 320
+    },
+    "scarf-tail": {
+      "img": "scarf-tail.png",
+      "parent": "torso",
+      "pivot": [
+        510,
+        1030
+      ],
+      "band": 330
+    }
+  },
+  "swaps": {
+    "hand-near-fist": {
+      "img": "hand-near-fist.png",
+      "of": "hand-near"
+    },
+    "hand-near-open": {
+      "img": "hand-near-open.png",
+      "of": "hand-near"
+    },
+    "hand-near-grip": {
+      "img": "hand-near-grip.png",
+      "of": "hand-near"
+    },
+    "hand-near-grip-overhand": {
+      "img": "hand-near-grip-overhand.png",
+      "of": "hand-near"
+    },
+    "hand-near-pinch": {
+      "img": "hand-near-pinch.png",
+      "of": "hand-near"
+    },
+    "hand-far-fist": {
+      "img": "hand-far-fist.png",
+      "of": "hand-far"
+    },
+    "hand-far-open": {
+      "img": "hand-far-open.png",
+      "of": "hand-far"
+    },
+    "hand-far-grip": {
+      "img": "hand-far-grip.png",
+      "of": "hand-far"
+    },
+    "hand-far-grip-overhand": {
+      "img": "hand-far-grip-overhand.png",
+      "of": "hand-far"
+    },
+    "hand-far-shield": {
+      "img": "hand-far-shield.png",
+      "of": "hand-far"
+    },
+    "torso-side": {
+      "img": "torso-side.png",
+      "of": "torso"
+    },
+    "torso-back": {
+      "img": "torso-back.png",
+      "of": "torso"
+    },
+    "head-attack": {
+      "img": "head-attack.png",
+      "of": "head"
+    },
+    "head-hurt": {
+      "img": "head-hurt.png",
+      "of": "head"
+    },
+    "head-effort": {
+      "img": "head-effort.png",
+      "of": "head"
+    },
+    "head-ko": {
+      "img": "head-ko.png",
+      "of": "head"
+    },
+    "head-back": {
+      "img": "head-back.png",
+      "of": "head"
+    }
+  },
+  "grips": {
+    "hand-near-grip": {
+      "of": "hand-near",
+      "center": [
+        443,
+        1519
+      ],
+      "direction": [
+        [
+          408,
+          1554
+        ],
+        [
+          478,
+          1484
+        ]
+      ],
+      "axis_degrees": -45
+    },
+    "hand-near-grip-overhand": {
+      "of": "hand-near",
+      "center": [
+        420,
+        1527
+      ],
+      "direction": [
+        [
+          370,
+          1527
+        ],
+        [
+          470,
+          1527
+        ]
+      ],
+      "axis_degrees": 0
+    },
+    "hand-near-pinch": {
+      "of": "hand-near",
+      "center": [
+        420,
+        1538
+      ],
+      "direction": [
+        [
+          385,
+          1573
+        ],
+        [
+          455,
+          1503
+        ]
+      ],
+      "axis_degrees": -45
+    },
+    "hand-far-grip": {
+      "of": "hand-far",
+      "center": [
+        1146,
+        1532
+      ],
+      "direction": [
+        [
+          1111,
+          1567
+        ],
+        [
+          1181,
+          1497
+        ]
+      ],
+      "axis_degrees": -45
+    },
+    "hand-far-grip-overhand": {
+      "of": "hand-far",
+      "center": [
+        1125,
+        1541
+      ],
+      "direction": [
+        [
+          1075,
+          1541
+        ],
+        [
+          1175,
+          1541
+        ]
+      ],
+      "axis_degrees": 0
+    },
+    "hand-far-shield": {
+      "of": "hand-far",
+      "center": [
+        1125,
+        1553
+      ],
+      "direction": [
+        [
+          1075,
+          1553
+        ],
+        [
+          1175,
+          1553
+        ]
+      ],
+      "axis_degrees": 0
+    }
+  },
+  "sockets": {
+    "hand_near": {
+      "part": "hand-near",
+      "at": [
+        443,
+        1519
+      ]
+    },
+    "hand_far": {
+      "part": "hand-far",
+      "at": [
+        1146,
+        1532
+      ]
+    },
+    "chest": {
+      "part": "torso",
+      "at": [
+        790,
+        1260
+      ]
+    },
+    "head_top": {
+      "part": "head",
+      "at": [
+        700,
+        602
+      ]
+    },
+    "feet": {
+      "parts": [
+        "foot-near",
+        "foot-far"
+      ],
+      "at": [
+        790,
+        1950
+      ]
+    },
+    "mouth": {
+      "part": "head",
+      "at": [
+        1190,
+        1110
+      ]
+    },
+    "tail_tip": {
+      "part": "tail-3",
+      "at": [
+        241,
+        1742
+      ]
+    }
+  },
+  "notes": [
+    "All part pivots measured at shared cut-joint centres in master canvas pixels; not runtime local coordinates.",
+    "Head pixels translated exactly (-114,-50). Immutable head rule takes priority over neck repaint; collar overlap is on torso.",
+    "Circular imagegen-painted material patches are composited under original visible cut pixels at both ends of joints.",
+    "Feet translated only: {'foot-near': -1, 'foot-far': 26}. No master or limb stretching.",
+    "Torso back tool repainted visible vest despite preservation prompt; treated as best attempt.",
+    "Hand slot axes measured from the new grip drawings; final weapon hold remains T025/T026 validation."
+  ],
+  "foot_translations": {
+    "foot-near": [
+      0,
+      -1
+    ],
+    "foot-far": [
+      0,
+      26
+    ]
+  },
+  "joint_radii": {
+    "arm-near-upper": 55,
+    "arm-near-lower": 62,
+    "hand-near": 49,
+    "arm-far-upper": 48,
+    "arm-far-lower": 57,
+    "hand-far": 48,
+    "leg-near-upper": 80,
+    "leg-near-lower": 58,
+    "foot-near": 50,
+    "leg-far-upper": 75,
+    "leg-far-lower": 58,
+    "foot-far": 50,
+    "tail-1": 26,
+    "tail-2": 25,
+    "tail-3": 22,
+    "scarf-tail": 24
+  }
+}
