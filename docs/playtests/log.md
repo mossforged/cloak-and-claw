@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-17 T024 rig pipeline + A017 rat master
+T024: user accepted in play (walk, squat/land, knee, kneel/downed/revive, lying, cocked wind-ups) (Code's note). A017: "the rat looks great".
+
 ## 2026-10-17 Stage 2 gate
 User: "yes all of those mechanics are fun and I can't wait to build more once we lock down the rigging".
 

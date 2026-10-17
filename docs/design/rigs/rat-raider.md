@@ -4,7 +4,7 @@ The per-character sheet the rig standard requires (section 9). **Art packets for
 
 - **Identity reference:** the art-bible standee (`assets/art/enemies/rat-raider.png`) and the approved A010 rat with **head R** (`assets/source/A010-rat-raider-standard/reference.png`). Look approved by the user 2026-10-16 ("much better, much closer to the standee").
 - **Master:** A017 (to come): setup pose (rig standard section 2), canvas 1536 x 2304, #00FF00, ~1350 px tall, floor marked. In game ~136 px (uniform scale).
-- **Gates:** G1 master: open (A017). G2 parts + stretch strip: open (A018, then a Code import). G3 motion: open. G4 gear/masks refit: open (A019).
+- **Gates:** G1 master: **passed** 2026-10-17 (A017; user: "the rat looks great"). G2 parts + stretch strip: open (A018, then a Code import). G3 motion: open. G4 gear/masks refit: open (A019).
 - **Names:** near/far (rig standard section 3).
 
 ## Carried over from A010/A011 (keep, do not redraw)
@@ -78,8 +78,9 @@ Held items: rat cutlass, spear, bow (+arrow), and for the test a club (A003), a 
 Colourways per type (raider, spearman, archer, shield-bearer, captain), face details, gear picks (hood, helmet, hat; jerkin, quiver, sash), +-4% size, fur range 0.12: as T019. Masks: fur, cloth, trim, leather per part (max four), redrawn for the new body in A019.
 
 ## Order of work
-1. **A017** setup-pose master + back view (G1: "is this still our rat?").
-2. **A018** parts + the library above, `rig-source.json` with grips and sockets (G2 with the stretch strip).
-3. **Code import** (after T024): uniform scale, every current rat move re-posed, walk rebuilt, stretch strip clean.
-4. **A019** torso gear + all masks refit (G4).
-5. **Flexibility test** (Code + two small item drawings): the new kits and moves above with no body art. Pass = the user plays it and the rat reads in every one.
+1. **A017** setup-pose master + back view: done, G1 passed.
+2. **A018** base parts with rounded joint ends, hand swaps (incl. overhand, pinch, shield), torso side/back, carried heads; `rig-source.json` with grips and sockets.
+3. **Code import** (T026): uniform scale, stretch strip clean (no seam over 2 px), every current rat move re-posed, walk on the floor-line rule.
+4. **A019** whole-limb key drawings + toe-off feet (cocked near arm, raised near arm, raised-back far arm, guard far arm, kneeling and knee-up near legs, folded far leg, toe-off x2), cut on the A018 pivots.
+5. **A020** torso gear (jerkin, quiver, sash) + all body masks refit.
+6. **Flexibility test** (Code + two item drawings: rat shield, dagger): new kits and moves with no new body art.
