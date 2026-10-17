@@ -1,0 +1,63 @@
+# Branch previews on GitHub Pages (T027): one site with main at the root and every branch not yet merged into main
+# under preview/<branch>/, plus previews.json for the review hub (reviews.html). tools/pages/build-site.mjs builds it
+# from the git refs, so any run builds the whole current set of open branches.
+# Deploys run on main only (the github-pages environment lets only main deploy): a push to any other branch builds the
+# site as a check, then starts this workflow on main (workflow_dispatch), which deploys. A deleted branch also rebuilds.
+# Needs the repo's Pages source set to "GitHub Actions" once (docs/handoffs/setup-mac.md, "Phone reviews"); until then
+# the build still runs as a check and nothing is deployed.
+name: pages
+on:
+  push:
+  delete:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: write
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true   # each run builds everything: the newest one wins
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      source: ${{ steps.mode.outputs.source }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # every branch's refs; source art (LFS) is never downloaded
+          lfs: false
+      - name: Build the site (main + open branch previews)
+        run: node tools/pages/build-site.mjs _site
+      - name: Pages source
+        id: mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          src=$(gh api "repos/${{ github.repository }}/pages" --jq .build_type 2>/dev/null || echo none)
+          echo "source=$src" >> "$GITHUB_OUTPUT"
+          if [ "$src" != "workflow" ]; then
+            echo "::notice::Pages source is '$src', not GitHub Actions: built, not deployed (docs/handoffs/setup-mac.md, Phone reviews)."
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.mode.outputs.source == 'workflow' && github.ref == 'refs/heads/main'
+        with:
+          path: _site
+      - name: Ask main to deploy (a branch push)
+        if: steps.mode.outputs.source == 'workflow' && github.ref != 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run pages.yml --repo "${{ github.repository }}" --ref main \
+            || echo "::notice::pages.yml is not on main yet: previews deploy once it is merged."
+  deploy:
+    needs: build
+    if: needs.build.outputs.source == 'workflow' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: "${{ steps.deployment.outputs.page_url }}reviews.html"
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- Model viewer (T027): any character's moves and held items, drawn by the game's own renderer from the game's data,
+     without a level. Phone first: the character on top, big buttons in the bottom sheet (a side panel on wide screens).
+     The URL holds the view (?f=rat-spearman&anim=spearThrust&item=rat-spear&grip=overhand&speed=0.5); src/viewer/. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:,">
+<title>Model viewer</title>
+<style>
+  :root { --bg: #16141c; --panel: #211e2a; --btn: #2f2b3b; --btn-on: #e0a83a; --ink: #f2ecdf; --dim: #a59fb4; --line: #3a3548; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font: 15px/1.3 system-ui, -apple-system, sans-serif; overflow: hidden; }
+  body { display: flex; flex-direction: column; height: 100dvh; }
+  #stage { position: relative; flex: 1 1 auto; min-height: 0; min-width: 0; }
+  #view { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+  #hud { position: absolute; left: 6px; right: 6px; bottom: 6px; pointer-events: none; font-size: 12px; text-shadow: 0 1px 2px #000;
+    overflow-wrap: anywhere; background: rgba(15, 12, 20, 0.55); border-radius: 8px; padding: 4px 8px; }
+  #hud:empty { display: none; }
+  #hud .flags { color: #ff8a80; }
+  #sheet { flex: 0 0 auto; background: var(--panel); border-top: 1px solid var(--line); display: flex; flex-direction: column;
+    height: 46dvh; min-width: 0; padding-bottom: env(safe-area-inset-bottom); }
+  #transport { display: flex; align-items: center; gap: 4px; padding: 8px 6px 4px; }
+  #transport button { min-width: 42px; padding: 6px 8px; flex: 0 0 auto; }
+  #transport input[type=range] { flex: 1 1 auto; min-width: 40px; width: 40px; height: 36px; accent-color: var(--btn-on); }
+  #frame { font: 11px ui-monospace, monospace; color: var(--dim); flex: 0 0 auto; text-align: center; }
+  #tabs { display: flex; gap: 4px; overflow-x: auto; padding: 4px 8px; scrollbar-width: none; }
+  #tabs button { flex: 0 0 auto; }
+  #panel { flex: 1; overflow-y: auto; padding: 4px 8px 12px; -webkit-overflow-scrolling: touch; }
+  button { font: inherit; color: var(--ink); background: var(--btn); border: 1px solid var(--line); border-radius: 10px;
+    min-height: 44px; min-width: 44px; padding: 6px 12px; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  button.on { background: var(--btn-on); color: #1b1408; border-color: var(--btn-on); font-weight: 600; }
+  button.icon { font-size: 18px; padding: 6px 10px; }
+  button.swatch { min-width: 44px; border-width: 3px; }
+  button.swatch.on { border-color: #fff; }
+  #tabs button { min-height: 38px; border-radius: 19px; }
+  h3 { margin: 10px 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--dim); font-weight: 600; }
+  .row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .row label { display: flex; align-items: center; gap: 8px; flex: 1; }
+  .row input[type=range] { flex: 1; height: 40px; accent-color: var(--btn-on); }
+  .note { color: var(--dim); font-size: 13px; margin: 6px 0; }
+  @media (min-width: 900px) and (min-aspect-ratio: 1/1) {
+    body { flex-direction: row; }
+    #sheet { width: 400px; height: 100dvh; border-top: 0; border-left: 1px solid var(--line); }
+  }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="view"></canvas><div id="hud"></div></div>
+<div id="sheet">
+  <div id="transport">
+    <button class="icon" id="back" title="Frame back" aria-label="Frame back">&#x23EE;</button>
+    <button class="icon" id="play" title="Play / pause" aria-label="Play or pause">&#x23F8;</button>
+    <button class="icon" id="fwd" title="Frame forward" aria-label="Frame forward">&#x23ED;</button>
+    <input type="range" id="scrub" min="0" max="1" value="0" aria-label="Scrub">
+    <span id="frame">0/0</span>
+    <button id="loop" title="Loop">Loop</button>
+    <button id="speed" title="Speed">1x</button>
+  </div>
+  <nav id="tabs"></nav>
+  <section id="panel"></section>
+</div>
+<script type="module" src="src/viewer/main.js"></script>
+</body>
+</html>

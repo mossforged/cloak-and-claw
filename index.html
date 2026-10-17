@@ -10,10 +10,13 @@
 <style>
   html, body { margin: 0; height: 100%; background: #0d0b14; overflow: hidden; }
   canvas { display: block; width: 100vw; height: 100vh; object-fit: contain; }
+  #tools { position: fixed; right: 8px; bottom: 6px; font: 12px system-ui, sans-serif; color: #fff; opacity: 0.35; text-decoration: none; }
+  #tools:hover { opacity: 0.9; }
 </style>
 </head>
 <body>
 <canvas id="game"></canvas>
+<a id="tools" href="viewer.html" title="Model viewer (T027)">model viewer</a>
 <script type="module" src="src/main.js"></script>
 </body>
 </html>

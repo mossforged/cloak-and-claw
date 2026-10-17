@@ -36,3 +36,19 @@ Type these at the Terminal prompt (not inside an agent):
 Starting a task: give the builder one line, for example
 `Pull first. Do T001: read docs/STATUS.md and docs/tasks/T001-tuning-lab.md.`
 When it reports a branch name, tell the lead.
+
+## Phone reviews (once, in a browser; T027)
+Every push builds a website with the game at the root and each branch that isn't merged yet under `preview/<branch>/`
+(`.github/workflows/pages.yml`). The review hub lists them all, newest first, with their screenshots and the question
+for you: **https://mossforged.github.io/cloak-and-claw/reviews.html** (bookmark it on the phone).
+
+One-time switch, on github.com (phone or computer):
+1. Open the repo -> **Settings** -> **Pages**.
+2. Under "Build and deployment", **Source**: pick **GitHub Actions** (instead of "Deploy from a branch").
+
+That's all. The game stays at the same address. The previews start after T027 is merged into main (the workflow
+deploys from main); from then on each push to any branch refreshes the site within a few minutes (Actions tab shows
+the `pages` runs). A merged or deleted branch drops off the hub on the next run.
+
+The model viewer: `viewer.html` (on the site, in each preview, or locally via `tools/Play.command`). Links the lead
+sends open an exact view, e.g. `.../preview/t026-import-new-rat/viewer.html?f=rat-raider&anim=walk&ov=floor`.
