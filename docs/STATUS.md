@@ -27,6 +27,7 @@
 - Art: none queued (A015 on hold).
 
 ## Open questions (for the user)
+- **Rig art inventory study** (`docs/studies/2026-10-17-rig-art-inventory.md`): adopt its process fixes? Rename parts near/far (one migration task) or keep front/back? Order the six missing mouse drawings (A016)? Keep our runtime vs test Spine?
 - **Stage 2 gate** (above). Then the lead tags `stage-2` and `stage-3`.
 - **Pillar 3** ("you grow by fighting... a run fits 30-60 minutes") was written for an arcade run. With mission -> home -> mission, growth comes from rescues and gear too. Reword it? (Lead's suggestion: "You grow by fighting and by the folk you save.")
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -44,6 +45,7 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: study "The rig art inventory" (5 research tracks + our history): the mouse lacked six whole-limb key drawings (toe-off feet x2, folded far leg, knee-up leg, kneeling leg, cocked arm) that a dozen states each use; half the painful rounds were runtime (floor-line rule, hand-follows-weapon, far-hand draw order). Proposes the rig sheet + pose budget, a stretch test, near/far naming, gate order. Waiting for the user's read.
 2026-10-17 lead: user: hold off on meta progression (home loop, stronghold) until the rig system and core combat are locked down and tested against different enemies and abilities. Stage plan reordered; A015 on hold.
 2026-10-17 lead: user on A014: "I think so far I like the ancient oak" (B). Wrote A015 (B refined: three layouts, hero at 130 px, animal-scale found objects, roots holding the walls, no invented emblems, animal silhouettes).
 2026-10-16 lead: merged A014 (7 JPG sheets, 2.6 MB, scope clean). Art's pick: A for the first home, B the strongest landmark, C the most motion. Lead notes: architecture reads human-scale (needs animal-scale cues); home frames' style is flatter than the art bible; mouse undersized; payoff silhouettes look human; watch post and garden weak at game size. T023 branch pushed, review next.
