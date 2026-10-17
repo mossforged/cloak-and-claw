@@ -33,3 +33,9 @@ User, in the viewer: "the old one had torso to arm to hand connections that look
 4. **Stance:** less hunched: raise the idle/menace crouch toward the master height (keep the menace); report the height vs A010.
 5. **Walk tail gap:** add stretch cells for the tail root at pelvis +-10 degrees.
 6. Then **wait for A022**, re-import it, and put the viewer links for the same views in `views.json` again. Do not merge until the user approves in the viewer.
+
+## Round 3 (lead, 2026-10-17): the user's look at round 2
+User: "technically all of them better except for the idle ... his arm that's not holding the sword is weirdly curled up, it's not natural like it used to be in the standee or in the old rat." Also raised: the rat can't turn his body into a slash (the lead answers that with a separate turn-set task; not in T026).
+1. **Idle:** re-pose the free (far) arm like the standee and the A010 rat: hanging forward and low in a loose fist or relaxed claw, elbow slightly bent; no curled-up hand at the chest. Keep the menace from the crouch, the cutlass and the lean. Check `idle`, `stance` and anything that spreads `STANCE` (walk, hurt) still read naturally. Add a viewer view "Idle: free arm" new vs A010.
+2. **CI:** the `tests` workflow fails because `tests/paint.test.mjs` reads LFS source (A017 `master.png`, the A010/A018 `rig-source.json`), which CI does not fetch. Skip the paint-body checks with a NOTE when a source file is an LFS pointer, or pull just those files (`git lfs pull --include`) in `tests.yml`.
+3. Push; do not merge. The lead merges T026 after the user OKs the idle.

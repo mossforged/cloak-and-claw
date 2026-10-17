@@ -6,6 +6,7 @@ The per-character sheet the rig standard requires (section 9). **Art packets for
 - **Master:** A017 (to come): setup pose (rig standard section 2), canvas 1536 x 2304, #00FF00, ~1350 px tall, floor marked. In game ~136 px (uniform scale).
 - **Gates:** G2 parts: A018 merged, lead stretch strip 2/28 flagged (2026-10-17); human look at T026 failed on joints -> A022 repair merged 2026-10-17 (hands, shoulders, tail root, clean cuts); re-import and motion look in T026 round 2. G1 master: **passed** 2026-10-17 (A017; user: "the rat looks great"). G2 parts + stretch strip: open (A018, then a Code import). G3 motion: open. G4 gear/masks refit: open (A019).
 - **Names:** near/far (rig standard section 3).
+- **Complete kit (user, 2026-10-17):** this body is built to the hero polish tier plus views, so no move ever waits on a missing drawing. The key-by-key move rehearsal is `rat-raider-rehearsal.md`; it supersedes the grunt-tier library below where they differ. New drawings: A023; runtime: T028; import and every move: T029.
 
 ## Carried over from A010/A011 (keep, do not redraw)
 | Asset | Why it carries | Condition |
@@ -77,10 +78,11 @@ Held items: rat cutlass, spear, bow (+arrow), and for the test a club (A003), a 
 ## Variety and gear
 Colourways per type (raider, spearman, archer, shield-bearer, captain), face details, gear picks (hood, helmet, hat; jerkin, quiver, sash), +-4% size, fur range 0.12: as T019. Masks: fur, cloth, trim, leather per part (max four), redrawn for the new body in A019.
 
-## Order of work
+## Order of work (revised 2026-10-17: complete kit; steps 5-6 below now come after A023 / T028 / T029)
 1. **A017** setup-pose master + back view: done, G1 passed.
 2. **A018** base parts with rounded joint ends, hand swaps (incl. overhand, pinch, shield), torso side/back, carried heads; `rig-source.json` with grips and sockets.
 3. **Code import** (T026): uniform scale, stretch strip clean (no seam over 2 px), every current rat move re-posed, walk on the floor-line rule.
 4. **A019** whole-limb key drawings + toe-off feet (cocked near arm, raised near arm, raised-back far arm, guard far arm, kneeling and knee-up near legs, folded far leg, toe-off x2), cut on the A018 pivots.
 5. **A020** torso gear (jerkin, quiver, sash) + all body masks refit.
 6. **Flexibility test** (Code + A021 items: dagger, round shield, hand axe, staff): new kits and moves with no new body art.
+7. **Complete kit:** T026 round 3 (idle) merged -> **A023** (views, turn drawings, polish drawings, anchors, seam repairs) and **T028** (views, depth switching, shoulder caps, turn-around, springs, rehearsal sheet) in parallel -> **T029** import A023, pose every rehearsal move (absorbs the flexibility test) -> **A020** gear and masks for every view -> rat locked. The mouse rebuild starts from its own rehearsal.
