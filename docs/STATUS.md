@@ -61,7 +61,7 @@
 
 ## Last session
 2026-10-16 code: T023 v3 on `t023-new-mouse`: shield face-on in block (user: fixed); walk was a crab scuttle (A013's wide-stance legs: near ~28 px, far ~21), now narrowed hips (pelvis.sx 0.4), upright, 2.6 strides/s; strikes on the flat turned-out trailing boot. 23/23 tests, bot numbers unchanged.
-2026-10-16 code: T023 for the lead: walk variants A-D in tools/walk-lab.html for the user to pick (B in game; boots slide ~5 px a stride, the short far leg can't reach more upright). Scarf tail still needs an Art fix (two painted pieces).
+2026-10-16 code: T023 for the lead: user picked walk B of tools/walk-lab.html's A-D (in game; boots slide ~5 px a stride, the short far leg can't reach more upright). Scarf tail still needs an Art fix (two painted pieces).
 2026-10-16 lead: merged T022 (user approved v2; ally leaves floor potions to players; 22/22 tests; solo bot numbers identical). Next: T023, then the combatant standard.
 2026-10-16 lead: user: gear mostly agreed (significance a goal, not a rule); downed allies wounded for a mission or no cost, to be tested; combatant standard agreed (after T022/T023).
 2026-10-16 lead: user answered the study's questions -> `docs/design/home-loop.md` (living home-loop design) + decisions. User: standards before more heroes/enemies.
