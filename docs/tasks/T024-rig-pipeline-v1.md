@@ -28,3 +28,9 @@ Out of scope: weapon node / hand-follows-weapon (T025), tail springs, meshes, ge
 - **Whole arm `arm-front-cocked`:** inherits band 590; check it against the torso and head in the stretch strip, the sword follows its `itemGrip`, and the old hand must not draw. Art drew it more like a raised, flexed arm (fist above the shoulder, elbow low) than "elbow high and behind"; use it for slash3 and club wind-ups and report in the strip whether it reads as wound back.
 - **Watch at game size:** the knee-up leg's long boot shaft and the join below the knee; the folded far leg is very compressed (may read as a tucked boot); the kneeling boot looks large.
 - Report any drawing that fails the strip; the lead turns failures into an A016 addendum.
+
+## Addendum 3 (lead, 2026-10-17): skip the mouse art work, the mouse is getting a new master
+The rat audit found that rig masters must be drawn in a neutral setup pose (rig standard section 2, revised). The mouse's A013 master is his standee pose, so he will be rebuilt after the rat (user agreed the principle). Therefore:
+- **Do not** import A016 or rebuild the mouse walk (item 5, Addendum 1 and Addendum 2 are cancelled). Leave walk B and the hip narrowing as they are; they go away with the new mouse.
+- **Do** items 1-4 (near/far rename, floor-line rule, stretch test, sockets). Run the stretch strip on the current mouse and rat and save it as the "before" baseline in `docs/screens/T024/`; flags are expected and are not failures for this task (report them).
+- If you already did item 5 on your branch, keep it in a separate commit and say so; the lead decides.

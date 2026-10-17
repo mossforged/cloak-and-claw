@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-17 Stage 2 gate
+User: "yes all of those mechanics are fun and I can't wait to build more once we lock down the rigging".
+
 ## 2026-10-17 T023 new Mouse Fighter (A013) in game
 Block: shield should face forward (v2: "fixed"). Walk v1 read as a crab scuttle; v3 narrowed hips; user picked walk B of four variants (stopgap until A016 + T024 rebuild the walk). (Code's notes; user's exact words on the walk not recorded.)
 
