@@ -3,8 +3,8 @@
 **Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T027 model viewer + phone review previews. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
-1. **Code:** T026 round 3 (idle free arm, CI paint test); merge after the user OKs the idle. Then **T028** views, depth switching, rehearsal sheet.
-2. **Art:** **A023** rat complete kit (views, turn drawings, polish drawings, anchors, seam repairs). Starts now; source only.
+1. **Code:** T026 round 4 (cutlass hold like A010, close pose gaps, pose seam test); merge after the user OKs it. Then **T028** views, depth switching, rehearsal sheet (A023 now on main).
+2. **Art:** A023 merged (source). Idle until the lead sends A023 round 2 (repairs collected from Code's pose seam test and T028).
 3. **User:** the idle after round 3; then the rehearsal sheet and the turning slash (T028); then A023 in motion (T029).
 4. **Lead:** reviews; T029 packet when A023 and T028 are in; then A020 (gear for every view); then the mouse's rehearsal and rebuild.
 
@@ -45,6 +45,7 @@
 
 ## Last session
 
+2026-10-17 lead: user on T026 r3: free hand better; cutlass hold still awkward; gap between leg and hips -> T026 round 4 (+ a pose seam test over every move frame). Merged A023 (24 drawings, view anchors and bands; Q/S/F convincing, BQ/B weaker, new views repainted not cut); repairs collected as A023 round 2.
 2026-10-17 lead: user on T026 r2: all better except the idle (curled free arm -> round 3); the rat can't turn into a swing. Decision: complete kit for the rat (polish tier + views). Wrote the key-by-key move rehearsal (`rigs/rat-raider-rehearsal.md`), rig standard views + 9c rehearsal gate, A023, T028; A020 moves after T029.
 2026-10-17 lead: merged A022 (rat joint repair: 25 cuts, one piece each; hands slotted, no holes or discs; near shoulder band 590, hands 815/115 under the bracers; tail root under the seat; rest paint diff 3.08% interior, 0.63% above the feet). Watch in motion: shoulder ends past ~90 degrees, the tail-1/tail-2 step. Code: T026 round 2 item 6.
 2026-10-17 lead: merged A021 (user: "yes the weapon designs are good"): dagger, buckler, hand axe, staff, measured grip points; wired in the rat flexibility test.

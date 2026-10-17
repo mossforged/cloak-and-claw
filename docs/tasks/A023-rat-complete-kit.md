@@ -23,7 +23,6 @@ The user wants one enemy with everything a brawler body needs, at the polish lev
 **Only if Code's stretch strip shows gaps after import:** elbow and knee patches (x4). Don't draw them now.
 
 **Repairs from T026's stretch strip:** the six far hands (`hand-far*`): lengthen the hidden wrist end so it stays under the far bracer when the hand turns over a shaft (Code measured gaps up to 10.5 px). `arm-near-upper` and its whole-arm keys: lengthen the hidden plain-fur end under the vest (a 2.5-5 px crack opens with the arm swung forward). Same files, same pivots.
-**Added after the user's T026 round 3 look (gap between leg and hips, a sliver at the waist; `docs/screens/T026/r3-user-review-gaps.jpg`):** `leg-near-upper`, `leg-far-upper` (and the whole-leg keys): lengthen the hidden top of each thigh so it stays under the pelvis's trousers across hip angles from about -30 to +60 degrees; `torso` and `pelvis` (and every torso / pelvis view you draw): the torso's lower edge and the pelvis's top must overlap under the belt by at least 40 source px, so the waist never opens when the chest turns or leans. Same files, same pivots; Code may report more joints from its new pose seam test, which the lead will add here.
 
 ## Joint points (the new part of `rig-source.json`)
 For **every torso view** (three-quarter, side, back, front, away, hunched, lean-back) record `anchors`: `neck`, `shoulder_near`, `shoulder_far`, `waist` in that drawing's canvas pixels; for **every pelvis view** (three-quarter, side, front, back): `waist`, `hip_near`, `hip_far`, `tail_root`. Include A018's existing side and back torsos. Code re-attaches the head, arms, legs and tail to these points when a view swaps in, so they must sit where the joint truly is in that drawing.
@@ -43,3 +42,10 @@ The PNGs above, a `rig-source.json` fragment (parts, swaps, `anchors`, bands as 
 - Human (viewer, phone, after T029): does he turn into his attacks? Does anything look pieced together?
 
 Out of scope: gear and masks for the new views (A020 after this), weapons, code.
+
+## Round 2 (lead, 2026-10-17): repairs, collected; start when the lead says (after Code's pose seam test and T028's rehearsal sheet)
+A023 merged as source 2026-10-17 (24 drawings, anchors, view bands; Q/S/F read as the same rat; F is strong). Collected for one repair pass:
+1. **Hips and waist** (user, T026 round 3: "a gap between his leg and hips"; `docs/screens/T026/r3-user-review-gaps.jpg`): `leg-near-upper`, `leg-far-upper` (and the whole-leg keys): lengthen the hidden top of each thigh so it stays under the pelvis's trousers across hip angles from about -30 to +60 degrees; `torso` and `pelvis` (and every torso / pelvis view you draw): the torso's lower edge and the pelvis's top must overlap under the belt by at least 40 source px, so the waist never opens when the chest turns or leans. Same files, same pivots; Code may report more joints from its new pose seam test, which the lead will add here.
+2. **Seat-to-thigh** transitions on `pelvis-front` and `pelvis-back` (your HANDOFF: abrupt where the new pelvis meets the Q thighs).
+3. **Shoulder caps:** remove the doubled trim / button edge against the baked shoulder on each torso view.
+4. Anything Code's pose seam test (T026 r4) and rehearsal sheet (T028) report; the lead lists them here before you start.
