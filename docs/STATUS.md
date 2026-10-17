@@ -4,8 +4,8 @@
 
 ## Next
 1. **Code:** T023 (import the new Mouse Fighter + attack footwork), in progress.
-2. **Art:** idle. A014 stronghold concepts merged; waiting for the user's pick (direction A/B/C, building states, props).
-3. **User:** pick from A014 (`docs/concepts/A014-stronghold/`); answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
+2. **Art:** A015 oak stronghold, second concept pass (layouts, true scale, animal-scale cues, bays in three states).
+3. **User:** pick an oak layout from A015 when it lands; answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
 4. **Lead:** review T023; draft the combatant standard (heroes + enemies), then the mission/stage standard.
 
 ## Stage plan (hook-based, 2026-10-16)
@@ -23,7 +23,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T023-import-new-mouse.md`.
-- Art: none queued (next: the picked stronghold direction as layers, after the user's pick).
+- Art: `docs/tasks/A015-oak-stronghold-concepts.md`.
 
 ## Open questions (for the user)
 - **Stage 2 gate** (above). Then the lead tags `stage-2` and `stage-3`.
@@ -43,6 +43,7 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: user on A014: "I think so far I like the ancient oak" (B). Wrote A015 (B refined: three layouts, hero at 130 px, animal-scale found objects, roots holding the walls, no invented emblems, animal silhouettes).
 2026-10-16 lead: merged A014 (7 JPG sheets, 2.6 MB, scope clean). Art's pick: A for the first home, B the strongest landmark, C the most motion. Lead notes: architecture reads human-scale (needs animal-scale cues); home frames' style is flatter than the art bible; mouse undersized; payoff silhouettes look human; watch post and garden weak at game size. T023 branch pushed, review next.
 2026-10-16 lead: wrote A014 (broad concept sheets for the stronghold home base; user's ask to keep Art busy). Concept packets deliver small JPGs to `docs/concepts/<ID>/` (Art guide updated).
 2026-10-16 lead: user chose large-file storage for source art (option A): `.gitattributes` tracks new source images from A014 on (old folders and review sheets stay normal); Mac setup, Art guide and asset contract updated.
