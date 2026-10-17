@@ -101,7 +101,7 @@ for (const [id, r] of Object.entries(RIGS)) {
     for (let q = name; q && !seen.has(q); q = r.parts[q]?.parent) seen.add(q);
     check(seen.size <= Object.keys(r.parts).length && !r.parts[[...seen].pop()]?.parent, `rig ${id}.${name}: parent chain reaches the root`);
   }
-  const known = new Set([...jointsOfRig(r), 'speed', 'swap']);   // swap contents: tests/rig.test.mjs
+  const known = new Set([...jointsOfRig(r), 'speed', 'swap', 'swapPhase']);   // swap contents: tests/rig.test.mjs
   const P = r.poses, M = P.moves ?? {};
   const named = { stance: P.stance, idle: P.idle, walk: P.walk, jump: P.jump, hurt: P.hurt, knockdown: P.knockdown, down: P.down, getup: P.getup };
   for (const [k, pose] of Object.entries(P)) if (!(k in named) && !['timing', 'moves', 'kits'].includes(k)) named[k] = pose;   // extra named poses (cast)

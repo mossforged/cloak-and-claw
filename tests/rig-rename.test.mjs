@@ -17,7 +17,10 @@ const old = rename(JSON.parse(readFileSync(url, 'utf8')));
 // rig id -> paths (dot-separated) T024 added or changed on purpose; ADDED goes for every rig
 const ADDED = ['sockets'];
 const CHANGED = { 'mouse-fighter': ['parts.sword.art', 'parts.shield.art',   // + A016 key drawings (new swaps)
-  'parts.foot-near.swaps.foot-near-toe', 'parts.foot-far.swaps', 'parts.leg-far-upper.swaps', 'parts.leg-near-upper.swaps', 'parts.arm-near-upper.swaps.arm-near-cocked'] };
+  'parts.foot-near.swaps.foot-near-toe', 'parts.foot-far.swaps', 'parts.leg-far-upper.swaps', 'parts.leg-near-upper.swaps', 'parts.arm-near-upper.swaps.arm-near-cocked',
+  // poses rebuilt on A016 drawings (pose budget) and the new walk
+  'poses.walk', 'poses.jump', 'poses.jumpSquat', 'poses.down', 'poses.getup', 'poses.knee', 'poses.reach', 'poses.downed', 'poses.revive',
+  'poses.moves.slash3.windup', 'poses.kits.plank-club.moves.club1.windup', 'poses.kits.plank-club.moves.club2.windup'] };
 const drop = (o, path) => { const ks = path.split('.'), last = ks.pop(), at = ks.reduce((a, k) => a?.[k], o); if (at) delete at[last]; };
 
 for (const [id, r] of Object.entries(RIGS)) {

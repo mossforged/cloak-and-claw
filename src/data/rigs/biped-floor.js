@@ -49,3 +49,32 @@ export function liftOf(rig, j, foot, swap) {
   const pts = hullAt(rig, fk(rig, j), foot, swap);
   return pts.length ? Math.max(0, floorLine(rig, foot) - lowest(pts)) : 0;
 }
+
+// A whole-leg drawing (kneeling, folded: a swap on the upper leg that hides the lower leg and foot) can't bend: it turns
+// at the hip until its lowest point is on `target` (screen y). view = how the drawing is placed: height = dy + a x + b y.
+// Returns the upper leg's joint angle nearest the posed one that does it (the posed angle if none within 90 degrees).
+export function turnToFloor(rig, j, up, swap, target, view = { a: 0, b: 1, dy: 0 }) {
+  const f = (d) => lowest(hullAt(rig, fk(rig, { ...j, [up]: d }), up, swap).map(([x, y]) => [0, view.dy + view.a * x + view.b * y])) - target;
+  const d0 = j[up] ?? 0, f0 = f(d0);
+  if (!Number.isFinite(f0) || Math.abs(f0) < 0.02) return d0;
+  let best = null;
+  for (const dir of [1, -1]) {
+    let a = d0, fa = f0;
+    for (let s = 2; s <= 90; s += 2) {
+      const b = d0 + dir * s, fb = f(b);
+      if (Math.sign(fb) !== Math.sign(fa)) {
+        let lo = a, hi = b, flo = fa;
+        for (let i = 0; i < 30; i++) { const m = (lo + hi) / 2, fm = f(m); if (Math.sign(fm) === Math.sign(flo)) { lo = m; flo = fm; } else hi = m; }
+        if (best === null || Math.abs((lo + hi) / 2 - d0) < Math.abs(best - d0)) best = (lo + hi) / 2;
+        break;
+      }
+      a = b; fa = fb;
+    }
+  }
+  return best ?? d0;
+}
+// The swap on a leg's upper part that replaces the whole leg (hides its foot), if the pose has one on.
+export const wholeLeg = (rig, swap, side) => {
+  const up = `leg-${side}-upper`, s = swap?.[up], sw = s && rig.parts[up]?.swaps?.[s];
+  return sw?.hide?.includes(`foot-${side}`) ? s : null;
+};

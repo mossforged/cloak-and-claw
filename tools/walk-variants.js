@@ -7,7 +7,7 @@ const narrow = (psx, legs, up) => ({ legs: { ...legs, body: { 'pelvis.sx': psx }
 export const VARIANTS = {
   A: { label: 'round 2 (wide hips, crouched)', legs: { speed: 2.1, lift: 6, dy: 6, gather: 0.6 },
     pose: { ...ARMS, dy: [6, 1, 0.75, 2], torso: [4, 1.5, 0, 2], head: [-4, 1.5, 0.1, 2] } },
-  B: { label: 'IN GAME: hips together, upright, 2.6 strides/s', game: true },
+  B: { label: 'IN GAME (T024 rebuild): wide hips, 9-key, toe-off push-off', game: true },
   C: { label: 'hips together, bouncier, slower 2.2', ...narrow(0.3, { speed: 2.2, lift: 8, dy: 4, stride: 28 },
     { dy: [4, 1.8, 0.75, 2], torso: [-2, 2, 0, 2], head: [2, 2, 0.1, 2] }) },
   D: { label: 'hips together, low as round 2', ...narrow(0.4, { speed: 2.1, lift: 6, dy: 6 },

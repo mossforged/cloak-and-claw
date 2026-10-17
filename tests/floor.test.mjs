@@ -15,7 +15,10 @@ const heightOn = (p, k) => { const a = Math.sin(p.rot) * p.sx * k, b = Math.cos(
 // lowest drawn point of each foot on screen (px from the feet line, - = above), as the frame places it
 export function soleHeights(fr) {
   const h = heightOn(fr.p, fr.k), out = {};
-  for (const e of fr.L) if (/^foot-/.test(e.name) && e.m) out[e.name] = Math.max(...(HULLS[e.img] ?? []).map((q) => h(apply(e.m, q))));
+  for (const e of fr.L) {
+    const whole = e.p?.swaps?.[e.swap]?.hide?.find((n) => n.startsWith('foot-'));   // a whole-leg drawing stands in for its foot
+    if ((/^foot-/.test(e.name) || whole) && e.m) out[whole ?? e.name] = Math.max(...(HULLS[e.img] ?? []).map((q) => h(apply(e.m, q))));
+  }
   return out;
 }
 const lowestBody = (fr) => { const h = heightOn(fr.p, fr.k); let lo = -Infinity; for (const e of fr.L) if (e.m && /^(pelvis|torso|head|leg-|foot-)/.test(e.name)) for (const q of HULLS[e.img] ?? []) lo = Math.max(lo, h(apply(e.m, q))); return lo; };
@@ -25,6 +28,8 @@ for (const id of ['mouse-fighter', 'rat-raider', 'rat-spearman', 'rat-archer']) 
   const base = { def, t: 0, mf: 0, move: null, z: 0, facing: 1, id: 1, stun: 10, x: 0, y: 0 };
   const frames = [];   // [label, fighter, time]
   for (let i = 0; i < 24; i++) frames.push([`idle ${i}`, { state: 'idle' }, i * 0.11], [`walk ${i}`, { state: 'walk', t: i * 2.5 }, 0]);
+  for (const t of [0, 2, 4]) frames.push([`jumpStart ${t}`, { state: 'jumpStart', t }, 0]);
+  if (rig.poses.downed) for (const t of [0, 30]) frames.push([`downed ${t}`, { state: 'downed', t }, 0]);
   for (const st of ['block', 'hurt', 'grabbing', 'toss', 'pickup', 'revive'].filter((s) => s === 'hurt' || def.toss)) for (const t of [0, 3, 8, 20]) frames.push([`${st} ${t}`, { state: st, t, grab: { knee: -1 } }, 0]);
   for (const [key, m] of Object.entries(def.moves)) {
     if (m.air) continue;

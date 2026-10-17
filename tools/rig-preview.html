@@ -3,7 +3,9 @@
      Serve the repo root, then open /tools/rig-preview.html?cells=standee,idle,slash3:windup,slash3:strike,hurt,cast
      Cell: a state (idle walk jump hurt knockdown down getup), a named pose (cast), '<move>:windup|strike|<frame>',
      or 'walk:<0..1 of a stride>'. Options: zoom=2, dots (joint pivots), fx (move swooshes), rig=mouse-fighter,
-     held=<item id> (a floor weapon in the hand; its kit moves then work as cells too, e.g. club1:strike). -->
+     held=<item id> (a floor weapon in the hand; its kit moves then work as cells too, e.g. club1:strike).
+     T024: cells are drawn as the game draws them (render/rig.js rigFrame: floor-line rule, standee lean and squash,
+     lying rest), with each boot's floor line (near solid, far dashed); more states: block, downed, revive, pickup:<frame>. -->
 <meta charset="utf-8">
 <title>Rig preview</title>
 <style>body { margin: 0; background: #6e6e76; } canvas { display: block; }</style>
@@ -12,7 +14,8 @@
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { targetPose } from '../src/render/rig-pose.js';
-import { layoutRig, heldOf } from '../src/render/rig.js';
+import { layoutRig, heldOf, rigFrame } from '../src/render/rig.js';
+import { floorLine } from '../src/data/rigs/biped-floor.js';
 import { ITEMS } from '../src/data/items/index.js';
 import { drawSlash } from '../src/render/effects.js';
 import { JUICE } from '../src/data/juice.js';
@@ -30,22 +33,25 @@ for (const p of Object.values(rig.parts)) { paths.add(p.img); for (const s of Ob
 const imgs = {};
 await Promise.all([...paths].map(async (p) => { imgs[p] = await load(p); }));
 
-function poseFor(cell) {
+function fighterFor(cell) {
   const [a, b] = cell.split(':');
-  const f = { def, state: 'idle', t: 0, mf: 0, move: null, weapon };
-  if (rig.poses[a] && !['idle', 'walk', 'jump', 'hurt', 'knockdown', 'down', 'getup', 'stance'].includes(a)) return targetPose(f, rig, 0, a);
+  const f = { def, state: 'idle', t: 0, mf: 0, move: null, weapon, z: 0, vz: 0, facing: 1, id: 1, x: 0, y: 0, stun: 10, grab: { knee: -1 } };
+  if (rig.poses[a] && !['idle', 'walk', 'jump', 'hurt', 'knockdown', 'down', 'getup', 'stance', 'block', 'downed', 'revive'].includes(a)) return [f, a];
   const m = moves[a];
   if (m) {
-    Object.assign(f, { state: m.air ? 'jump' : 'attack', move: m, moveKey: a });
+    Object.assign(f, { state: m.air ? 'jump' : 'attack', move: m, moveKey: a, z: m.air ? 30 : 0 });
     f.mf = b === 'windup' ? m.windup - 1 : b === 'strike' ? m.windup + m.active - 1 : +b;
   } else {
     f.state = a === 'stance' ? 'idle' : a;
     if (a === 'walk') f.t = (+b || 0) * 60 / rig.poses.walk.speed;
+    if (a === 'jump') f.z = 30;
+    if (a === 'knockdown') f.z = +b || 0;
     if (a === 'getup') f.t = +b || 20;
+    if (a === 'pickup') f.t = +b || def.pickup?.stow + def.pickup?.reach - 1;
+    if (a === 'down') f.t = 30;
   }
-  return targetPose(f, rig, 0);
+  return [f, undefined];
 }
-
 const c = document.getElementById('c'), g = c.getContext('2d');
 c.width = COLS * CW * Z; c.height = Math.ceil(cells.length / COLS) * CH * Z;
 g.font = `${11 * Z}px sans-serif`;
@@ -60,16 +66,24 @@ cells.forEach((cell, i) => {
     g.drawImage(im, at[0] - w * def.art.anchorX * Z, at[1] - h * Z, w * Z, h * Z);
     return;
   }
-  const { joints, swap } = poseFor(cell);
+  const [f, named] = fighterFor(cell), mem = {};
+  rigFrame(f, rig, -1, mem, named); const { L, p, k } = rigFrame(f, rig, 0, mem, named);
+  for (const [foot, dash] of [['foot-near', []], ['foot-far', [4 * Z, 3 * Z]]]) {   // each boot's floor line
+    if (!rig.parts[foot]) continue;
+    g.setTransform(1, 0, 0, 1, 0, 0); g.strokeStyle = dash.length ? '#9fd8ff' : '#ffe08a'; g.lineWidth = Z; g.setLineDash(dash);
+    const y = at[1] + floorLine(rig, foot) * Z; g.beginPath(); g.moveTo(ox + 14 * Z, y); g.lineTo(ox + (CW - 14) * Z, y); g.stroke(); g.setLineDash([]);
+  }
   // fx: the move's swoosh as it looks this many frames after the swing starts (back half behind the rig)
   const m = moves[cell.split(':')[0]], mf = cell.includes(':strike') ? m?.windup + m?.active - 1 : +cell.split(':')[1];
   const sl = q.has('fx') && m?.fx?.slash && mf >= m.windup && { f: { x: 0, y: 0, z: 0, facing: 1 }, ...m.fx.slash, t: mf - m.windup + 1, life: JUICE.slash.life };
   const swoosh = (layer) => { if (sl && sl.t < sl.life && (layer === 'front' || sl.wrap)) { g.setTransform(Z, 0, 0, Z, ...at); drawSlash(g, sl, sl.t / sl.life, layer); } };
   swoosh('back');
-  for (const { img, m, p } of layoutRig(rig, joints, swap, weapon ? heldOf({ weapon }, rig) : null)) {
-    g.setTransform(Z, 0, 0, Z, ...at); g.transform(...m);
+  const c0 = Math.cos(p.rot), s0 = Math.sin(p.rot), A = [p.sx * k * c0, p.sx * k * s0, -p.sy * k * s0, p.sy * k * c0, p.dx, p.dy - f.z];
+  for (const { img, m, p: part, line } of L) {
+    if (line || !m) continue;
+    g.setTransform(Z, 0, 0, Z, ...at); g.transform(...A); g.transform(...m);
     if (imgs[img]) g.drawImage(imgs[img], 0, 0);
-    if (q.has('dots')) { g.fillStyle = '#0ff'; g.beginPath(); g.arc(p.pivot[0], p.pivot[1], 4, 0, 7); g.fill(); }
+    if (q.has('dots')) { g.fillStyle = '#0ff'; g.beginPath(); g.arc(part.pivot[0], part.pivot[1], 4, 0, 7); g.fill(); }
   }
   swoosh('front');
 });

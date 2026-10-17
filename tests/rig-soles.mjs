@@ -12,6 +12,6 @@ const ankle = (rig, L, n) => { const m = L.find((x) => x.name === n).base, [x, y
 // height off the floor line (- = above).
 export function solePoints(rig, joints, swap = {}) {
   const L = layoutRig(rig, joints, swap), M = layoutRig(rig, {}, swap);
-  return Object.fromEntries(FEET.map((n) => [n, [ankle(rig, L, n), point(L, n)[1] - point(M, n)[1]]]));
+  return Object.fromEntries(FEET.filter((n) => L.some((e) => e.name === n)).map((n) => [n, [ankle(rig, L, n), point(L, n)[1] - point(M, n)[1]]]));   // T024: a foot a whole-leg drawing hides is skipped
 }
 export const soles = (rig, joints, swap) => Object.fromEntries(Object.entries(solePoints(rig, joints, swap)).map(([n, p]) => [n, p[1]]));

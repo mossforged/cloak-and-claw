@@ -28,7 +28,7 @@ export const jointsOfRig = (rig) => Object.keys(channelsOf(rig));
 function evalPose(pose, stance, t) {
   const out = { ...stance };
   for (const [k, v] of Object.entries(pose ?? {})) {
-    if (k === 'speed' || k === 'swap') continue;
+    if (k === 'speed' || k === 'swap' || k === 'swapPhase') continue;
     const wave = (w) => w[0] + w[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (w[3] ?? 1) + (w[2] ?? 0)));
     // T023: a list of waves adds up (harmonics fitted to an IK leg path)
     out[k] = !Array.isArray(v) ? v : Array.isArray(v[0]) ? v.reduce((a, w) => a + wave(w), 0) : wave(v);
@@ -52,6 +52,12 @@ function strikePose(M, W, X, K, p, T) {
 }
 
 const swapOf = (pose) => pose?.swap ?? {};
+// T024: a cycle's drawings by phase (the walk's toe-off feet): swapPhase [{ part, swap, from, to }] in 0..1 of the cycle.
+function phaseSwaps(pose, t) {
+  const out = { ...swapOf(pose) }, u = ((((pose.speed ?? 1) * t) % 1) + 1) % 1;
+  for (const { part, swap, from, to } of pose.swapPhase ?? []) if (from < to ? u >= from && u < to : u >= from || u < to) out[part] = swap;
+  return out;
+}
 
 // Grab and throw (T009): `grabbing` hold, `knee` strike (from def.grab.knee frames), `throw` wind (`throwWindBack`
 // for a back throw: the body narrows and mirrors, he turns as the rat goes over) then `throwRelease`, easing to idle.
@@ -145,7 +151,7 @@ export function targetPose(f, rig, time, override) {
       return { key, joints: mix(K, rest, easeInOut(p)), swap: p < T.swapBack ? swapOf(M.strike) : {} };
     }
   }
-  const named = (key, t = 0) => ({ key, joints: evalPose(poses[key], S, t), swap: swapOf(poses[key]) });
+  const named = (key, t = 0) => ({ key, joints: evalPose(poses[key], S, t), swap: phaseSwaps(poses[key], t) });
   switch (f.state) {
     case 'walk': return named('walk', f.t / 60);
     case 'jump': return named('jump');
@@ -160,8 +166,9 @@ export function targetPose(f, rig, time, override) {
     case 'grabbed': case 'thrown': if (poses.held) return named('held'); break;   // T011: a rig with a `held` pose (rats)
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
-    case 'down': case 'dead': case 'downed': return named('down');
-    case 'revive': if (poses.reach) return named('reach'); break;   // T022: crouched, hand down to his friend
+    case 'downed': if (poses.downed) return named('downed'); return named('down');   // T024: a rig with a `downed` pose kneels
+    case 'down': case 'dead': return named('down');
+    case 'revive': if (poses.revive || poses.reach) return named(poses.revive ? 'revive' : 'reach'); break;   // T022: hand down to his friend (T024: kneeling)
     case 'potionToss': if (poses.toss) return tossPose(f, poses, S, time, RULES.potions); break;
     case 'drink': if (poses.cast) return named('cast'); break;
     case 'getup': {

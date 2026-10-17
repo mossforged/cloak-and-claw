@@ -67,11 +67,11 @@ for (const [props, weaponBot] of [[true, true], [false, false]]) {
   if (weaponBot) check(/plank-club|big-fish|rat-cutlass/.test(a), 'the weapon bot really held floor weapons');
 }
 
-// 3. Kit pose variants: the club's own windup (raised arm overhead, leaning back) and low slam; the cutlass's own chops;
+// 3. Kit pose variants: the club's own windup (cocked arm, T024; leaning back) and low slam; the cutlass's own chops;
 // kits without a variant (the fish's slap) and rigs without kits (rats) keep the borrowed sword pose (old case).
 {
   const w = targetPose(inMove('plank-club', 'club1', 9), rig, 0);
-  check(w.swap['arm-near-upper'] === 'arm-near-raised', 'club1 windup: the whole raised arm, club overhead');
+  check(w.swap['arm-near-upper'] === 'arm-near-cocked', 'club1 windup: the whole cocked arm (T024, A016), club over the shoulder');
   check(w.joints.torso < 0, 'club1 windup: leaning back');
   const sw = targetPose(bare({ state: 'attack', move: ITEMS['plank-club'].moves.club1, moveKey: 'club1', mf: 9 }), rig, 0);
   check(!sw.swap['arm-near-upper'], 'no kit held: the move borrows the sword pose (slash1)');

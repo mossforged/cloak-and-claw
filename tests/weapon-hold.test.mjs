@@ -55,7 +55,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 // the fist holding it, in every pose (the whole raised arm's fist has its own slot axis, A013 slotDirection), and the
 // test poses (cast, toss, grab, stow) too.
 {
-  const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig], RA = rig.parts['arm-near-upper'].swaps['arm-near-raised'];
+  const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig];
   const named = ['cast', 'grabbing', 'knee', 'throwWind', 'throwRelease', 'toss', 'stow', 'block'];
   for (const K of [ITEMS['mouse-sword'], ...Object.values(ITEMS).filter((k) => k.grip === 'one-hand' && k.kind === 'weapon')]) {
     const weapon = K.kind === 'weapon' ? { def: K, uses: 5, hit: false, broken: false } : null;
@@ -64,7 +64,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     for (const [label, fi] of list) {
       const tp = targetPose(fi, rig, 0, fi.override), L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
       if (tp.joints['sword.sx'] !== 1 || tp.joints['sword.sy'] !== 1) continue;   // the spin's foreshortened blade (slash2 / fish slap) skews on purpose
-      const raised = tp.swap['arm-near-upper'] === 'arm-near-raised';
+      const raised = !!tp.swap['arm-near-upper'], RA = raised && rig.parts['arm-near-upper'].swaps[tp.swap['arm-near-upper']];   // a whole-arm drawing (raised; T024 cocked)
       const fist = L.find((e) => e.name === (raised ? 'arm-near-upper' : 'hand-near')), sw = L.find((e) => e.name === 'sword');
       const ax = (raised ? RA.axis : rig.axes['one-hand']) * D, m = raised ? fist.m : fist.base;
       const e = Math.abs(wrap(deg(lin(sw.m, [K.art.gripEnd[0] - K.art.grip[0], K.art.gripEnd[1] - K.art.grip[1]])) - deg(lin(m, [Math.cos(ax), Math.sin(ax)]))));

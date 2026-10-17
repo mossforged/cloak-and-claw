@@ -31,7 +31,8 @@ const gaps = Array.from({ length: 60 }, (_, i) => {
   const tp = targetPose(fighter({ t: i / 60 * 60 / P.walk.speed }), rig, 0), s = solePoints(rig, tp.joints, tp.swap);
   return s['foot-near'][0] - s['foot-far'][0];
 });
-check(Math.max(...gaps) > 8 && Math.min(...gaps) < -8, `walk: near foot steps past the far one (gap ${Math.min(...gaps).toFixed(1)}..${Math.max(...gaps).toFixed(1)} px)`);
+// T024: with the wide 3/4 hips kept (no pelvis narrowing) the short far leg limits how far the strides gather: 4 px past
+check(Math.max(...gaps) > 4 && Math.min(...gaps) < -8, `walk: near foot steps past the far one (gap ${Math.min(...gaps).toFixed(1)}..${Math.max(...gaps).toFixed(1)} px)`);
 
 // gather 0 = the old (T023 round 1) walk.
 const opts = { speed: 2.1, walk: 162, lift: 6, dy: 6 }, a = walkWaves(rig, opts), b = walkWaves(rig, { ...opts, gather: 0 });

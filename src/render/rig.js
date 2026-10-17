@@ -79,22 +79,25 @@ export function rigFrame(f, rig, time, mem, pose) {
   mem.hadWeapon = !!f.weapon;
   let joints = rigJoints(f, rig, time, mem, pose);
   if (!pose) joints = mem.last = braceLayer(rig, f, joints, time, mem, mem.swap);   // T015 bracing loop (kept in mem.last: no pop on leaving block)
-  joints = drawLayer(rig, time, mem, squatLayer(rig, joints, pose ? 0 : squatOf(f, time)));   // T014 jump squat crouch
+  const sq = pose ? 0 : squatOf(f, time);
+  joints = drawLayer(rig, time, mem, squatLayer(rig, joints, sq));   // T014 jump squat crouch
+  if (sq > 0.5 && rig.poses.jumpSquat?.swap) mem.swap = { ...mem.swap, ...rig.poses.jumpSquat.swap };   // T024: its folded leg
   if (!pose) joints = feelLayer(rig, f, joints, time, mem);   // T017 held weapon wobble / impact squash
-  const p = { ...poseOf(f, time) };
+  const p = { ...poseOf(f, time) }, kneel = f.state === 'downed' && rig.poses.downed;
+  if (kneel) Object.assign(p, { rot: 0, sx: 1, sy: 1 });   // T024: the rig kneels instead of lying flat
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
   if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
   if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss' || f.state === 'pickup') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
   if (f.state === 'block') { p.rot -= BLOCK_LEAN + braceOf(f, time).rot; p.sx = p.sy = 1; }   // the block pose leans and crouches (and the brace loop breathes); keep only the jolt
   const k = 1 + (f.look?.size ?? 0) * LOOKS.size;   // T019: render-only size (hit areas unchanged)
-  if (grounded(f)) {   // T024 floor-line rule: boots on their floor lines; the standee's lean turns the hips
+  if (grounded(f) || kneel) {   // T024 floor-line rule: boots on their floor lines; the standee's lean turns the hips
     joints = floorLayer(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy }, p.rot);
     p.rot = 0;
   }
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
   const held = heldOf(f, rig, mem.sheathed);
   const L = gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f), gearOf(f));   // T019 gear
-  if (lying(f)) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)
+  if (lying(f) && !kneel) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)
     const dy = restDy(L, view, f.z);
     p.dy = ['down', 'dead', 'downed'].includes(f.state) ? dy : Math.min(p.dy, dy);
   }

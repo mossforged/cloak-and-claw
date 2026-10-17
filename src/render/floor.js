@@ -5,7 +5,7 @@
 // (which lifted the trailing boot and sank the leading one).
 // Lying: the body's lowest drawn point rests on the floor (never below it). Render only; pure, so tests run it.
 import HULLS from '../data/rigs/hulls.js';
-import { floorLine } from '../data/rigs/biped-floor.js';
+import { floorLine, turnToFloor, wholeLeg } from '../data/rigs/biped-floor.js';
 import { limb } from '../data/rigs/biped-ik.js';
 import { layoutRig } from './rig-layout.js';
 
@@ -41,7 +41,8 @@ export function floorLayer(rig, joints, swap = {}, view = { rot: 0, sx: 1, sy: 1
     const R1 = (joints.pelvis ?? 0) + (joints[up] ?? 0), Rf = R1 + (joints[lo] ?? 0) + (joints[ft] ?? 0);
     goals.push({ up, lo, ft, T: [ankle[0], (target - view.dy - a * ankle[0] - reach) / b], Rf, R1, moved: Math.abs(lean) > 1e-9 || Math.abs((target - view.dy - a * ankle[0] - reach) / b - ankle[1]) > 1e-4 });
   }
-  if (!goals.some((g) => g.moved)) return joints;
+  const whole = ['near', 'far'].map((s) => [s, wholeLeg(rig, swap, s)]).filter(([, w]) => w);
+  if (!goals.some((g) => g.moved) && !whole.length) return joints;
   const out = { ...joints, pelvis: (joints.pelvis ?? 0) + lean / D };
   for (let pass = 0; pass < 2; pass++) {
     const L = byName(rig, out, swap);
@@ -58,6 +59,10 @@ export function floorLayer(rig, joints, swap = {}, view = { rot: 0, sx: 1, sy: 1
       out[g.up] = r1 - Rp; out[g.lo] = r2 - r1; out[g.ft] = g.Rf - r2;
     }
     break;
+  }
+  for (const [side, w] of whole) {   // a whole-leg drawing turns at the hip onto its line (after any hip drop)
+    const ft = `foot-${side}`, up = `leg-${side}-upper`;
+    out[up] = turnToFloor(rig, out, up, w, floorLine(rig, ft) - Math.max(0, joints[`${ft}.lift`] ?? 0), { a, b, dy: view.dy });
   }
   return out;
 }

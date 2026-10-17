@@ -157,7 +157,7 @@ for (const [k, pose] of Object.entries(allPoses))
 
 // T023: every pose (states, moves, kit poses) names only this rig's channels and known swaps.
 {
-  const ch = new Set(jointsOfRig(rig)), META = new Set(['swap', 'speed', 'hold', 'tremble']), every = [];
+  const ch = new Set(jointsOfRig(rig)), META = new Set(['swap', 'speed', 'hold', 'tremble', 'swapPhase']), every = [];
   for (const [k, v] of Object.entries(P)) if (!['timing', 'moves', 'kits'].includes(k)) every.push([k, v]);
   for (const [k, m] of Object.entries(P.moves)) for (const ph of ['windup', 'through', 'strike']) if (m[ph]) every.push([`${k}.${ph}`, m[ph]]);
   for (const [kit, K] of Object.entries(P.kits)) {

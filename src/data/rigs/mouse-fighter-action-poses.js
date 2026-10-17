@@ -17,10 +17,10 @@ export const ACTION_POSES = {
   }),
   knee: P({
     'arm-near-upper.order': 805, 'arm-near-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
-    swap: { ...ATTACK, 'hand-far': 'hand-far-fist', ...OUT },
     torso: 14, head: 8, dy: 2, hand: { off: [12.6, 24.5], dir: -92 }, shield: { off: [12.9, 15.3], turn: 2 },
-    feet: { near: [NEAR - 2, 0, 0], far: [FAR + 2, 22, 40] },
-    'leg-far-upper.order': 605, 'leg-far-lower.order': 604, 'foot-far.order': 603,   // the knee comes up in front of the tunic
+    // T024: the near (trailing) knee driven up (A016 knee-up leg), far boot planted
+    swap: { ...ATTACK, 'hand-far': 'hand-far-fist', 'leg-near-upper': 'leg-near-kneeup' }, lift: { 'foot-near': 16 },
+    feet: { far: [FAR - 2, 0, 0] }, 'leg-near-upper.order': 605,   // the knee comes up in front of the tunic
     tail: -15, 'scarf-tail': -7,
   }),
   throwWind: P({
@@ -63,8 +63,8 @@ export const ACTION_POSES = {
   }),
   reach: P({   // both boots flat on the floor at this crouch (tests/rig.test.mjs)
     'arm-near-upper.order': 805, 'arm-near-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
-    swap: OUT,
+    swap: { ...OUT, 'leg-far-upper': 'leg-far-folded' },   // T024: crouched on the folded far leg (A016)
     torso: 24, head: -18, dy: 12, hand: { off: [11.6, 24.4], dir: 8 }, shield: { off: [16.7, 1.8], turn: 2 },
-    feet: { near: [NEAR - 2, 0, 0], far: [FAR + 6, 0, 0] }, tail: -10, 'scarf-tail': -7,
+    feet: { near: [NEAR - 2, 0, 0] }, tail: -10, 'scarf-tail': -7,
   }),
 };

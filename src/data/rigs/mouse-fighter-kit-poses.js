@@ -16,8 +16,8 @@ export const KIT_POSES = {
     moves: {
       club1: {
         hold: 0.35, tremble: 2,
-        windup: P({ swap: { head: 'head-effort', 'arm-near-upper': 'arm-near-raised', ...OUT }, torso: -18, head: -8, dx: -4, dy: 3,
-          'arm-near-upper': -2, 'arm-near-upper.order': 820, 'sword.order': 815, shield: { off: [11.9, 12] },
+        windup: P({ swap: { head: 'head-effort', ...OUT }, torso: -18, head: -8, dx: -4, dy: 3,   // T024: A016 cocked arm, club over the shoulder
+          wholeArm: { swap: 'arm-near-cocked', dir: -140 }, 'arm-near-upper.order': 820, 'sword.order': 815, shield: { off: [11.9, 12] },
           feet: { near: [NEAR, 0, 0], far: [FAR - 4, 4, 15] }, tail: 25, 'scarf-tail': 5 }),
         strike: P({ swap: { ...ATTACK, ...OUT }, torso: 18, head: 12, dx: 4, dy: 15, pelvis: 6, hand: { off: [22, 20], dir: 50 }, shield: { off: [-23, 25] },
           'arm-near-upper.order': 805, 'arm-near-lower.order': 806,
@@ -26,8 +26,8 @@ export const KIT_POSES = {
       club2: {
         hold: 0.25, tremble: 1.5,
         windup: P({ swap: { torso: 'torso-side', head: 'head-effort', ...OUT }, torso: -14, head: -4, dx: -4, dy: 7,
-          hand: { off: [-26.9, -4.4], dir: 170 }, shield: { off: [13.7, -18.1] },
-          'arm-near-upper.order': 650, 'arm-near-lower.order': 651,   // out of the side torso's sleeve
+          wholeArm: { swap: 'arm-near-cocked', dir: 170 }, shield: { off: [13.7, -18.1] },   // T024: A016 cocked arm
+          'arm-near-upper.order': 650, 'sword.order': 645,   // out of the side torso's sleeve
           feet: { near: [NEAR - 2, 0, 0], far: [FAR - 6, 5, 18] }, tail: 20, 'scarf-tail': 5 }),
         strike: P({ swap: { ...ATTACK, ...OUT }, torso: 24, head: 14, dx: 6, dy: 17, pelvis: 8, hand: { off: [18, 24], dir: 40 }, shield: { off: [-28, 22] },
           'arm-near-upper.order': 805, 'arm-near-lower.order': 806,

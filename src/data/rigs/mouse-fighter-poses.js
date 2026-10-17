@@ -13,13 +13,15 @@
 // back by the lunge; recovery settles to the stance.
 // swap: { part: swap name } switches a part's drawing for that pose or move phase (rigs/mouse-fighter.js `swaps`).
 import rig from './mouse-fighter.js';
-import { pose, walkWaves } from './biped-ik.js';
+import { walkCycle } from './biped-ik.js';
 import { KIT_POSES } from './mouse-fighter-kit-poses.js';
 import { ACTION_POSES } from './mouse-fighter-action-poses.js';
 import { NEAR, FAR, OUT, PLANT, P } from './mouse-fighter-feet.js';
 
 const ATTACK = { head: 'head-attack' };
-export const WALK = { speed: 2.6, walk: 162, lift: 6, dy: 3, stride: 26, body: { 'pelvis.sx': 0.4 } };   // walkWaves options (walk = his sim walk px/s)
+// walkCycle options (T024; walk = his sim walk px/s): 2.6 strides/s, a 31 px planted sweep (= body travel; measured slide 1.8 / 1.0 px, T023: 3.7)
+export const WALK = { speed: 2.6, walk: 162, lift: 5, dy: 4, bob: 2, gather: 0.25, stride: 31, heel: 12, strike: 8,
+  toe: { near: 'foot-near-toe', far: 'foot-far-toe' } };
 
 export default {
   timing: {
@@ -39,25 +41,27 @@ export default {
     'arm-near-upper': [0, 3, 0.1], 'hand-near': [0, 2, 0.2], 'arm-far-upper': [0, 3, 0.1], 'hand-far': [0, 1.5, 0.3],
     tail: [0, 9, 0.3], 'scarf-tail': [0, 4, 0.55], 'scarf-tail-2': [-22, 6, 0.75],
   },
-  // Walk (T023 round 3, variant B of tools/walk-lab.html): A013's legs are drawn for the wide 3/4 stance (near leg ~28 px
-  // hip to ankle, far ~21), so walking on those hips splays the long near leg round the short far one: a crab scuttle
-  // (user). The pelvis is narrowed (pelvis.sx: the hip joints move in, the leg drawings are unchanged) so both feet step
-  // through under the body, upright, hips 3 px down, 2.6 strides/s. The far leg reaches a 26 px planted sweep (the body
-  // moves ~31 px meanwhile: the boots slide a little). Legs by IK on an ankle path (planted sweep back, lifted arc
-  // forward), 3 harmonics per joint. Forward near boot. Sword carried up and ready, swinging a little in step.
+  // Walk (T024 rebuild, study 2026-10-17's 9-key pattern; replaces T023's narrowed hips): the wide 3/4 hips stay as drawn,
+  // each boot pinned to its floor line through the planted half at walk speed (render/floor.js holds it there), hips low at
+  // each contact and high at each passing, heel rising then A016's toe-off drawing pushing off, toes up reaching for the
+  // next contact. Stride centres gathered a quarter of the way in so the near boot steps past the far one. Forward near
+  // boot. Sword carried up and ready, swinging a little in step.
   walk: {
-    speed: 2.6,
-    ...walkWaves(rig, WALK),
-    'pelvis.sx': WALK.body['pelvis.sx'], dy: [3, 1, 0.75, 2], torso: [0, 1.5, 0, 2], head: [0, 1.5, 0.1, 2],
+    speed: WALK.speed,
+    ...walkCycle(rig, WALK),
+    torso: [0, 1.5, 0, 2], head: [0, 1.5, 0.1, 2],
     'arm-near-upper': [4, 9, 0.5], 'arm-near-lower': [0, 6, 0.6], 'arm-far-upper': [0, 7, 0], 'hand-far': [0, 3, 0.1],
     tail: [5, 12, 0.25], 'scarf-tail': [-4, 4, 0.4, 2], 'scarf-tail-2': [-18, 8, 0.6, 2],
   },
+  // T024 jump tuck (A016): near knee up, far leg folded under (whole-leg drawings, hip angles as given: in the air)
   jump: P({ torso: -8, head: -4, hand: { off: [22, -8], dir: -104 }, shield: { off: [16.7, -4.2] },
-    feet: { near: [-24, 14, 15], far: [16, 18, 20] }, tail: 25, 'scarf-tail': 5 }),
+    swap: { 'leg-near-upper': 'leg-near-kneeup', 'leg-far-upper': 'leg-far-folded' }, 'leg-near-upper': -10, 'leg-far-upper': 10,
+    'leg-near-upper.order': 535, tail: 25, 'scarf-tail': 5 }),
   jumpSquat: P({   // T014: crouch before take-off and on landing (render/jump-squat.js); boots flat, arms swung down and back
     'arm-near-upper.order': 805, 'arm-near-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
     torso: 18, head: -6, dy: 12, hand: { off: [-13.1, 23.2], dir: 32 }, shield: { off: [-1.8, 24] },
-    feet: PLANT, tail: -15, 'scarf-tail': -7 }),
+    swap: { 'leg-far-upper': 'leg-far-folded' },   // T024 (A016): the far leg folded under him, turned onto its floor line
+    feet: { near: PLANT.near }, tail: -15, 'scarf-tail': -7 }),
   block: P({   // shield thrust out at chest height, face to the camera, his head peering over the rim (the old A002 block's
     // look, user T023 round 2: the whole guard arm turned it edge-on behind his body); effort head; sword cocked high,
     // ready to answer; crouched on planted boots (turned-out near boot). Both arms over the tunic.
@@ -84,14 +88,26 @@ export default {
     feet: { near: [-16, 14, -20], far: [30, 20, -30] }, tail: -30, 'scarf-tail': -14 }),
   // Flat on his back (the standee turns the figure round the feet): straightened into one line, KO face, arms flopped
   down: P({
-    swap: { head: 'head-ko', 'hand-far': 'hand-far-open', 'hand-near': 'hand-near-open' },
     torso: -4, head: 12, hand: { off: [1.6, 27], dir: 75 }, shield: { off: [-10, 22], turn: 20 },
-    feet: { near: [-12, 0, 0], far: [10, 0, 0] }, tail: 30, 'scarf-tail': 5 }),
-  getup: P({   // pushing up off the floor, coiling back into the stance
+    swap: { head: 'head-ko', 'hand-far': 'hand-far-open', 'hand-near': 'hand-near-open', 'leg-far-upper': 'leg-far-folded' },   // T024: far knee up (A016)
+    'leg-far-upper': -20, feet: { near: [-12, 0, 0] }, tail: 30, 'scarf-tail': 5 }),
+  getup: P({   // up on the near knee (A016 kneeling leg), far boot planted, pushing up into the stance
     'arm-near-upper.order': 805, 'arm-near-lower.order': 806,   // the arm over the tunic (A013 rests it under the torso)
-    swap: { head: 'head-effort' },
-    torso: 21, head: -6, dy: 10, hand: { off: [-1.1, 24], dir: -5 }, shield: { off: [9.8, 11.3] },
-    feet: { near: [NEAR + 4, 0, 0], far: [FAR - 4, 0, 0] } }),
+    swap: { head: 'head-effort', 'leg-near-upper': 'leg-near-kneeling' },
+    torso: 16, head: -6, dy: 17, hand: { off: [-1.1, 24], dir: -5 }, shield: { off: [9.8, 11.3] },
+    feet: { far: [FAR + 2, 0, 0] } }),
+  // T024 downed (needs a friend): slumped on the near knee, KO face, sword arm hanging, shield sagging
+  downed: P({
+    'arm-near-upper.order': 805, 'arm-near-lower.order': 806,
+    swap: { head: 'head-ko', 'leg-near-upper': 'leg-near-kneeling', 'hand-far': 'hand-far-open' },
+    torso: 26, head: 18, dy: 20, hand: { off: [8, 26], dir: 12 }, shield: { off: [4, 24], turn: 25 },   // blade resting on the floor
+    feet: { far: [FAR + 2, 0, 0] }, tail: -10, 'scarf-tail': -8 }),
+  // T024 revive hold: kneeling beside his friend, hand down to him
+  revive: P({
+    'arm-near-upper.order': 805, 'arm-near-lower.order': 806,
+    swap: { head: 'head-effort', 'leg-near-upper': 'leg-near-kneeling' },
+    torso: 24, head: -14, dy: 18, hand: { off: [14, 24], dir: 10 }, shield: { off: [12, 6], turn: 2 },
+    feet: { far: [FAR + 2, 0, 0] }, tail: -10, 'scarf-tail': -7 }),
   // Not a move: the flexibility test (sword thrust straight up for a spell). C plays it once from idle, in play or the lab.
   cast: P({   // A013 whole raised arm, fist above his head carrying the sword, blade straight up (raised arm's slot axis);
     // attack head, planted on the turned-out boot
@@ -124,8 +140,8 @@ export default {
     slash3: {   // big wind-back (turned side-on, effort face, deep on the back leg), full swing over the top with a long
       // stride in: knocks down
       windup: P({ swap: { torso: 'torso-side', head: 'head-effort', ...OUT }, torso: -16, head: -4, dx: -3, dy: 6,
-        hand: { off: [-11.8, -24], dir: -150 }, shield: { off: [13.1, -19.1] },
-        'arm-near-upper.order': 650, 'arm-near-lower.order': 651,   // the arm comes out of the side torso's sleeve
+        wholeArm: { swap: 'arm-near-cocked', dir: -150 }, shield: { off: [13.1, -19.1] },   // T024: A016 cocked arm, fist by the ear
+        'arm-near-upper.order': 650, 'sword.order': 645,   // the arm comes out of the side torso's sleeve, blade behind it
         feet: { near: [NEAR - 2, 0, 0], far: [FAR - 6, 5, 18] }, 'scarf-tail': 5, tail: 20 }),
       strike: P({ swap: { ...ATTACK, ...OUT }, torso: 14, head: 10, dx: 4, dy: 11, pelvis: 6, hand: { off: [19.3, 19.6], dir: 60 }, shield: { off: [-24, 26] },
         'arm-near-upper.order': 805, 'arm-near-lower.order': 806,
