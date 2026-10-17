@@ -11,72 +11,15 @@ import { ITEMS } from '../data/items/index.js';
 import { LOOKS } from '../data/looks.js';
 import { gearLayout, gearOf, lookImage } from './looks.js';
 import { socketPoints, keepSockets } from './sockets.js';
+import { layoutRig } from './rig-layout.js';
+import { floorLayer, restDy, grounded, lying } from './floor.js';
+
+export { layoutRig };
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
 const BOX = { w: 300, h: 260, ox: 150, oy: 200 };  // buffer area in screen px; (ox, oy) = feet
 const D = Math.PI / 180;
 const memory = new WeakMap();                    // fighter -> pose blend memory (render-only)
-
-// 2D affine matrices [a, b, c, d, e, f] (same layout as canvas setTransform).
-const mul = (m, n) => [m[0] * n[0] + m[2] * n[1], m[1] * n[0] + m[3] * n[1], m[0] * n[2] + m[2] * n[3],
-  m[1] * n[2] + m[3] * n[3], m[0] * n[4] + m[2] * n[5] + m[4], m[1] * n[4] + m[3] * n[5] + m[5]];
-const rot = (deg) => { const c = Math.cos(deg * D), s = Math.sin(deg * D); return [c, s, -s, c, 0, 0]; };
-const tr = (x, y) => [1, 0, 0, 1, x, y];
-const sc = (x, y = x) => [x, 0, 0, y, 0, 0];
-const apply = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
-const scaleOf = (p) => (Array.isArray(p.scale) ? p.scale : [p.scale ?? 1, p.scale ?? 1]);
-// image -> bone frame (no translation); pose stretch '<part>.sx/.sy' multiplies the data scale.
-const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[`${name}.sx`] ?? 1), y * (j[`${name}.sy`] ?? 1)), rot(p.rest ?? 0)); };
-
-// A swap image is drawn so its pixel (x, y) lands on the part's own (offset + scale * (x, y)):
-// pivot and children's attach points stay in the part's own pixels whichever image shows.
-// A swap may also hide other parts (`hide: [names]`, e.g. the forearm when a whole-arm drawing is in) and
-// re-attach children to points on its own image (`carry: { child: [x, y] }` in swap image px, e.g. the
-// shield onto the drawn fist): the child then hangs off this part, keeping its own joint angle (T012). T023: `turn: { child:
-// deg }` turns the carried child's drawing on top (the whole raised arm's fist holds the sword's handle at its own slot axis).
-const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
-
-// Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order (`base` = the matrix of the
-// part's own image whichever swap shows: gear overlays ride it, render/looks.js).
-// swap: { part: swap name } from the pose. held: { slot, part } from heldOf (a held weapon replaces the slot part's
-// drawing; part null = empty hand, slot hidden, and the rig's `emptyHand` swaps unless the pose names that part). Pure; tests use it.
-export function layoutRig(rig, joints, swap = {}, held = null) {
-  const frames = {};
-  const parts = held?.part ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : { ...rig.parts };
-  const hidden = new Set();
-  if (held && !held.part && rig.emptyHand) swap = { ...rig.emptyHand, ...swap };   // T023: the empty hand's own drawing
-  for (const [name, key] of Object.entries(swap)) {
-    const s = parts[name]?.swaps?.[key];
-    if (!s) continue;
-    for (const h of s.hide ?? []) hidden.add(h);
-    for (const [c, xy] of Object.entries(s.carry ?? {})) {
-      if (parts[c]) parts[c] = { ...parts[c], parent: name, attach: apply(swapMatrix(s), ...xy), rest: (parts[c].rest ?? 0) + (s.turn?.[c] ?? 0) };
-    }
-  }
-  const frameOf = (name) => {
-    if (frames[name]) return frames[name];
-    const p = parts[name];
-    let m;
-    if (!p.parent) m = mul(mul(tr(joints.dx ?? 0, (joints.dy ?? 0) - rig.rootY), sc(rig.scale * (joints.sx ?? 1), rig.scale)), rot(joints[name] ?? 0));
-    else {
-      const q = parts[p.parent];
-      const [ax, ay] = apply(shape(p.parent, q, joints), p.attach[0] - q.pivot[0], p.attach[1] - q.pivot[1]);
-      const pf = frameOf(p.parent);
-      // upright parts (the shield) cancel their parents' turn: the pose angle is relative to the rig, not the arm
-      const undo = p.upright ? -Math.atan2(pf[1], pf[0]) / D : 0;
-      m = mul(mul(pf, tr(ax, ay)), rot(undo + (joints[name] ?? 0)));
-    }
-    return (frames[name] = m);
-  };
-  return Object.entries(parts)
-    .map(([name, p]) => {
-      const m = mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1]));
-      const s = p.swaps?.[swap[name]];
-      return { name, p, order: joints[`${name}.order`] ?? p.order, img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m, base: m };
-    })
-    .filter((e) => !hidden.has(e.name) && !(held && e.name === held.slot && !held.part))
-    .sort((a, b) => a.order - b.order);
-}
 
 // The held weapon in a rig's hand slot (T010): the kit's image, grip point and size on the slot part's bone.
 // A broken weapon is an empty hand until its swing ends. null = nothing held (the slot part draws as usual).
@@ -127,10 +70,10 @@ function tinted(color) {
   return tintBuf;
 }
 
+// One frame of a rig, everything but the pixels (pure; tests use it): final joints, the held item, the drawn layout (L),
+// and how the standee places it (p: lean, squash, offsets; k: look size). mem = the fighter's render memory.
 // pose: optional named pose to hold (view-only test poses such as `cast`).
-export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
-  if (!memory.has(f)) memory.set(f, {});
-  const mem = memory.get(f);
+export function rigFrame(f, rig, time, mem, pose) {
   // sword draw after a held weapon is thrown or breaks (not when swapped at a pickup or knocked loose)
   if (mem.hadWeapon && !f.weapon && ['idle', 'walk', 'toss', 'attack', 'jumpStart', 'jump', 'block'].includes(f.state)) mem.drawT0 = time;
   mem.hadWeapon = !!f.weapon;
@@ -138,12 +81,34 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   if (!pose) joints = mem.last = braceLayer(rig, f, joints, time, mem, mem.swap);   // T015 bracing loop (kept in mem.last: no pop on leaving block)
   joints = drawLayer(rig, time, mem, squatLayer(rig, joints, pose ? 0 : squatOf(f, time)));   // T014 jump squat crouch
   if (!pose) joints = feelLayer(rig, f, joints, time, mem);   // T017 held weapon wobble / impact squash
+  const p = { ...poseOf(f, time) };
+  if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
+  if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
+  if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss' || f.state === 'pickup') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
+  if (f.state === 'block') { p.rot -= BLOCK_LEAN + braceOf(f, time).rot; p.sx = p.sy = 1; }   // the block pose leans and crouches (and the brace loop breathes); keep only the jolt
+  const k = 1 + (f.look?.size ?? 0) * LOOKS.size;   // T019: render-only size (hit areas unchanged)
+  if (grounded(f)) {   // T024 floor-line rule: boots on their floor lines; the standee's lean turns the hips
+    joints = floorLayer(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy }, p.rot);
+    p.rot = 0;
+  }
+  const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
+  const held = heldOf(f, rig, mem.sheathed);
+  const L = gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f), gearOf(f));   // T019 gear
+  if (lying(f)) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)
+    const dy = restDy(L, view, f.z);
+    p.dy = ['down', 'dead', 'downed'].includes(f.state) ? dy : Math.min(p.dy, dy);
+  }
+  return { joints, held, L, p, k };
+}
+
+export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
+  if (!memory.has(f)) memory.set(f, {});
+  const mem = memory.get(f);
+  const { held, L, p, k } = rigFrame(f, rig, time, mem, pose), B = !pose && held?.part && held.kit.feel?.bend;   // T017: a floppy held weapon
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
-  const held = heldOf(f, rig, mem.sheathed), B = !pose && held?.part && held.kit.feel?.bend;   // T017: a floppy held weapon
-  const L = gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f), gearOf(f));   // T019 gear
   for (const { name, img, m, line, p: part } of L) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     if (line) { g.strokeStyle = '#3a2a1e'; g.lineWidth = 0.8; g.beginPath(); line.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke(); continue; }
@@ -154,13 +119,6 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
       g.save(); g.transform(...t); g.drawImage(im, sx, 0, sw, im.height, sx, 0, sw, im.height); g.restore();
     }
   }
-
-  const p = { ...poseOf(f, time) };
-  if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
-  if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
-  if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss' || f.state === 'pickup') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
-  if (f.state === 'block') { p.rot -= BLOCK_LEAN + braceOf(f, time).rot; p.sx = p.sy = 1; }   // the block pose leans and crouches (and the brace loop breathes); keep only the jolt
-  const k = 1 + (f.look?.size ?? 0) * LOOKS.size;   // T019: render-only size (hit areas unchanged)
   const c = Math.cos(p.rot * f.facing), sn = Math.sin(p.rot * f.facing), ax = p.sx * f.facing * k, ay = p.sy * k;   // T024: sockets in world px
   keepSockets(f, socketPoints(rig, L, held, (img) => { const im = assets.get(img); return im?.width ? [im.width, im.height] : null; }),
     ([x, y]) => [f.x + p.dx * f.facing + c * ax * x - sn * ay * y, f.y - f.z + p.dy + sn * ax * x + c * ay * y]);

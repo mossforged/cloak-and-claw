@@ -1,7 +1,8 @@
 // Rig poses: picks the pose for a fighter's state/move, evaluates waves and move phases,
 // and eases from the last drawn pose into a new one. Pure (no DOM), so tests can run it.
 // Channels: '<part>' angle, 'dx'/'dy' root offset, 'sx' whole-body width (-1 = mirrored, e.g. mid-spin), and per part '<part>.sx' / '<part>.sy'
-// (stretch across/along the bone, 1 = as drawn, negative flips) and '<part>.order' (draw order).
+// (stretch across/along the bone, 1 = as drawn, negative flips) and '<part>.order' (draw order). T024: '<foot>.lift' = px the
+// foot's drawing stands off its floor line (0 = planted; render/floor.js re-solves the leg to it in grounded states).
 // A value: a number, a wave [base, amp, phase 0..1, harmonic], or (T023) a list of waves that add up.
 // Part swaps: a pose's `swap: { <part>: '<swap name>' }` picks one of the part's `swaps` images.
 // Swaps don't blend: they switch the moment the pose (or move phase) that names them starts.
@@ -18,6 +19,7 @@ export function channelsOf(rig) {
   const out = { dx: 0, dy: 0, sx: 1 };   // sx: whole-body width (1 = as drawn, -1 = mirrored; through 0 reads as a turn)
   for (const [name, p] of Object.entries(rig.parts)) {
     out[name] = 0; out[`${name}.sx`] = 1; out[`${name}.sy`] = 1; out[`${name}.order`] = p.order;
+    if (name.startsWith('foot-')) out[`${name}.lift`] = 0;
   }
   return out;
 }

@@ -12,8 +12,13 @@
 //     feet:   { near: [x, lift, turn], far: [...] }  ankle x (screen px) and height off its planted height; turn =
 //             the foot's tilt from flat (+ = toes down, facing right). Legs are bent by IK to put the ankles there.
 //     anything else (pelvis, torso, head, dx, dy, tail, swap, '<part>.order', raw joints) passes through as given.
+//   T024 floor-line rule: each foot placed off the floor gets a '<foot>.lift' channel = how far its drawing ends up above
+//   its floor line (rigs/biped-floor.js); in play the legs are re-solved so the foot sits exactly that high (0 = planted,
+//   render/floor.js). The foot's tilt is its own key: the IK target never changes it.
 //   walkWaves(rig, opts): the walk's leg joints as waves (one per joint, rigs/*-poses.js format) fitted to IK on an
 //     ankle path: planted sweep back at walk speed, lifted arc forward (3 harmonics each).
+import { liftOf } from './biped-floor.js';
+
 const D = Math.PI / 180;
 const ang = (v) => Math.atan2(v[1], v[0]) / D;
 const len = (v) => Math.hypot(v[0], v[1]);
@@ -41,7 +46,7 @@ function placer(rig, j, R) {
 
 // Two-bone IK: upper -> lower -> end, with the end part's world turn endR and its point `pt` (own px) on target T.
 // Returns world turns for upper and lower. bend 1 = the master's elbow side.
-function limb(rig, up, lo, end, S, T, endR, pt, bend = 1, ref) {
+export function limb(rig, up, lo, end, S, T, endR, pt, bend = 1, ref) {
   const b1 = bone(rig, lo), b2 = bone(rig, end), k = rig.scale;
   const W = sub(T, turn(endR, [k * (pt[0] - rig.parts[end].pivot[0]), k * (pt[1] - rig.parts[end].pivot[1])]));
   const l1 = k * len(b1), l2 = k * len(b2), v = sub(W, S);
@@ -82,6 +87,10 @@ export function pose(rig, spec) {
     const [r1, r2] = limb(rig, up, lo, ft, place(up), [x, y], tilt, rig.parts[ft].pivot, 1);
     j[up] = wrap(r1 - R.pelvis); j[lo] = wrap(r2 - r1); j[ft] = wrap(tilt - r2);
   }
+  for (const side of Object.keys(feet ?? {})) {
+    const ft = `foot-${side}`, h = liftOf(rig, j, ft, j.swap?.[ft]);
+    if (h > 0.05) j[`${ft}.lift`] = h;
+  }
   for (const k of Object.keys(j)) if (typeof j[k] === 'number') j[k] = Math.round(j[k] * 100) / 100;
   return j;
 }
@@ -120,12 +129,25 @@ export function walkWaves(rig, { speed, walk, lift, dy = 0, reach = 0, gather = 
     const k = (u - 0.5) * 2, e = k * k * (3 - 2 * k);
     return [hip(s) - half + 2 * half * e, lift * Math.sin(Math.PI * k), 8 * Math.sin(Math.PI * k)];
   };
-  const out = {}, keys = ['leg-near-upper', 'leg-near-lower', 'foot-near', 'leg-far-upper', 'leg-far-lower', 'foot-far'];
+  const out = {}, keys = ['leg-near-upper', 'leg-near-lower', 'foot-near', 'leg-far-upper', 'leg-far-lower', 'foot-far', 'foot-near.lift', 'foot-far.lift'];
   const series = Object.fromEntries(keys.map((k) => [k, []]));
   for (let i = 0; i < N; i++) {
     const u = i / N, j = pose(rig, { ...body, dy, feet: { near: ankle('near', u), far: ankle('far', (u + 0.5) % 1) } });
-    for (const k of keys) series[k].push(near(j[k], series[k].at(-1) ?? j[k]));
+    for (const k of keys) series[k].push(k.endsWith('.lift') ? j[k] ?? 0 : near(j[k], series[k].at(-1) ?? j[k]));
   }
-  for (const k of keys) out[k] = fitWave(series[k]);
+  for (const k of keys) out[k] = fitWave(series[k], k.endsWith('.lift') ? 6 : 3);   // lifts: sharper (planted half flat)
   return out;
+}
+
+// T024: the '<foot>.lift' waves a walk written as raw joint waves already has (how high each foot's drawing rises off its
+// floor line over one cycle), so the floor-line rule keeps it as it was. pose = a wave pose (speed = cycles/s).
+export function liftWaves(rig, pose, N = 48) {
+  const val = (v, t) => (!Array.isArray(v) ? v : (Array.isArray(v[0]) ? v : [v]).reduce((a, w) => a + w[0] + w[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (w[3] ?? 1) + (w[2] ?? 0))), 0));
+  const feet = Object.keys(rig.parts).filter((n) => n.startsWith('foot-')), series = Object.fromEntries(feet.map((n) => [n, []]));
+  for (let i = 0; i < N; i++) {
+    const t = i / N / (pose.speed ?? 1), j = {};
+    for (const [k, v] of Object.entries(pose)) if (k !== 'speed' && k !== 'swap') j[k] = val(v, t);
+    for (const n of feet) series[n].push(liftOf(rig, j, n, pose.swap?.[n]));
+  }
+  return Object.fromEntries(feet.map((n) => [`${n}.lift`, fitWave(series[n], 6)]));
 }

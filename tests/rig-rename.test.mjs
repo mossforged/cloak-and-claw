@@ -25,6 +25,8 @@ for (const [id, r] of Object.entries(RIGS)) {
   check(was, `${id} in the snapshot`);
   if (!was) continue;
   for (const p of [...ADDED, ...CHANGED[id] ?? []]) { drop(was, p); drop(cur, p); }
+  const noLifts = (o) => { if (o && typeof o === 'object') for (const k of Object.keys(o)) { if (k.endsWith('.lift')) delete o[k]; else noLifts(o[k]); } };
+  noLifts(cur);   // T024 '<foot>.lift' channels: declared lifts, the joints themselves unchanged
   const a = JSON.stringify(was), b = JSON.stringify(cur);
   if (a !== b) {
     const keys = new Set([...Object.keys(was.poses ?? {}), ...Object.keys(cur.poses ?? {})]);

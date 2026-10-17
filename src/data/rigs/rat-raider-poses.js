@@ -5,8 +5,16 @@
 // -75 + pelvis + torso + arm-near-upper + arm-near-lower + hand-near (the slot's rest, rigs/rat-raider.js).
 // Hands: the near hand grips the weapon (its default drawing); the far hand is open (default) idle/hurt, a fist walking
 // and striking. Spearman and archer (rigs/rat-spearman.js, rat-archer.js) override the arms and add their kit moves.
+import rig from './rat-raider.js';
+import { liftWaves } from './biped-ik.js';
+
 const HURT = { head: 'head-hurt', 'hand-far': 'hand-far-open' };
 const FALL = { head: 'head-hurt', 'hand-far': 'hand-far-open', 'hand-near': 'hand-near-open' };
+
+const WALK = { speed: 2.0, swap: { 'hand-far': 'hand-far-fist' }, dy: -2, torso: [-18, 1.5, 0, 2], head: [13, 1.5, 0.1, 2],
+    'leg-near-upper': [-7.9, 26.8, 0.744], 'leg-near-lower': [-108.7, 36.4, 0.795], 'foot-near': [116.6, 62.4, 0.273],
+    'leg-far-upper': [12.7, 34.6, 0.266], 'leg-far-lower': [69.8, 18.1, 0.982], 'foot-far': [-82.6, 35.4, 0.683],
+    'arm-far-upper': [0, 10, 0], 'arm-near-upper': [0, 6, 0.5], tail: [4, 12, 0.25], 'scarf-tail': [8, 8, 0.4, 2] };
 
 export default {
   timing: { blend: 0.09, strikeIn: 0.55, overshoot: 1.4, bodyLean: 0.3, swapBack: 0.5, throughSwap: [0, 0.75] },
@@ -21,10 +29,7 @@ export default {
   // torso leaned back to stand tall (head tipped to keep the face level). Legs: 2-bone IK on an ankle path (planted sweep
   // back, lifted arc forward) fitted to one wave per joint, feet kept level; the far leg is short, so higher hips would
   // need shorter (scuttlier) steps. tests/rat-rig.test.mjs checks the feet don't skate or sink.
-  walk: { speed: 2.0, swap: { 'hand-far': 'hand-far-fist' }, dy: -2, torso: [-18, 1.5, 0, 2], head: [13, 1.5, 0.1, 2],
-    'leg-near-upper': [-7.9, 26.8, 0.744], 'leg-near-lower': [-108.7, 36.4, 0.795], 'foot-near': [116.6, 62.4, 0.273],
-    'leg-far-upper': [12.7, 34.6, 0.266], 'leg-far-lower': [69.8, 18.1, 0.982], 'foot-far': [-82.6, 35.4, 0.683],
-    'arm-far-upper': [0, 10, 0], 'arm-near-upper': [0, 6, 0.5], tail: [4, 12, 0.25], 'scarf-tail': [8, 8, 0.4, 2] },
+  walk: { ...WALK, ...liftWaves(rig, WALK) },   // T024: its lifts declared (the floor-line rule keeps the step as it was)
   jump: {
     torso: -4, head: -6,
     'leg-near-upper': -40, 'leg-near-lower': 30, 'leg-far-upper': 20, 'leg-far-lower': 10,
