@@ -71,10 +71,10 @@ for (const [props, weaponBot] of [[true, true], [false, false]]) {
 // kits without a variant (the fish's slap) and rigs without kits (rats) keep the borrowed sword pose (old case).
 {
   const w = targetPose(inMove('plank-club', 'club1', 9), rig, 0);
-  check(w.swap['arm-front-upper'] === 'arm-front-raised', 'club1 windup: the whole raised arm, club overhead');
+  check(w.swap['arm-near-upper'] === 'arm-near-raised', 'club1 windup: the whole raised arm, club overhead');
   check(w.joints.torso < 0, 'club1 windup: leaning back');
   const sw = targetPose(bare({ state: 'attack', move: ITEMS['plank-club'].moves.club1, moveKey: 'club1', mf: 9 }), rig, 0);
-  check(!sw.swap['arm-front-upper'], 'no kit held: the move borrows the sword pose (slash1)');
+  check(!sw.swap['arm-near-upper'], 'no kit held: the move borrows the sword pose (slash1)');
   const hold = KP['plank-club'].moves.club1.hold, top = Math.ceil(10 * (1 - hold));   // club1 windup = 10 frames
   const a = targetPose(inMove('plank-club', 'club1', top), rig, 0).joints, b = targetPose(inMove('plank-club', 'club1', 9), rig, 0).joints;
   check(Math.abs(a.sword - b.sword) < 1e-9 && Math.abs(a.torso - b.torso) < 1e-9, 'club1: a held beat at the top of the windup');
@@ -88,11 +88,11 @@ for (const [props, weaponBot] of [[true, true], [false, false]]) {
   const fishSlap = targetPose(inMove('big-fish', 'fishSlap', 15), rig, 0), slash2 = targetPose(sword('slash2', 8), rig, 0);   // both at the strike
   check(fishSlap.joints.sx === slash2.joints.sx && fishSlap.joints.sword === slash2.joints.sword, 'fish slap: slash2 spin pieces');
   const cut = targetPose(inMove('rat-cutlass', 'cut1', 2), rig, 0).joints, slash = targetPose(sword('slash1', 2), rig, 0).joints;
-  const tip = (j) => (j.pelvis ?? 0) + j.torso + j['arm-front-upper'] + j['arm-front-lower'] + j['hand-front'] + j.sword;   // T023: the blade turns with the fist
+  const tip = (j) => (j.pelvis ?? 0) + j.torso + j['arm-near-upper'] + j['arm-near-lower'] + j['hand-near'] + j.sword;   // T023: the blade turns with the fist
   check(tip(cut) > tip(slash), 'cutlass: a smaller wind-back than the sword');
   check(ITEMS['rat-cutlass'].moves.cut1.fx.slash.r < def.moves.slash1.fx.slash.r, 'cutlass: a tighter swoosh than the sword');
   const ratRig = RIGS[FIGHTERS['rat-raider'].art.rig], rat = { def: FIGHTERS['rat-raider'], state: 'attack', t: 0, mf: 3, move: ITEMS['plank-club'].moves.club1, moveKey: 'club1', weapon: { def: ITEMS['plank-club'] } };
-  if (ratRig.poses.moves?.slash1) check(!targetPose(rat, ratRig, 0).swap['arm-front-upper'], 'a rig without kits keeps the borrowed pose');
+  if (ratRig.poses.moves?.slash1) check(!targetPose(rat, ratRig, 0).swap['arm-near-upper'], 'a rig without kits keeps the borrowed pose');
   const plain = targetPose(bare({ state: 'walk', t: 10 }), rig, 0.4).joints;
   check(plain.sword === targetPose(holding('rat-cutlass', { state: 'walk', t: 10 }), rig, 0.4).joints.sword, 'a kit without a walk variant walks as before');
 }

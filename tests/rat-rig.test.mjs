@@ -18,7 +18,7 @@ const apply = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + 
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 // Lowest points of the foot drawings (foot image px, measured on A010's feet). The far foot sits ~7 px higher in the
 // master (three-quarter view): each foot's floor is where it is at rest.
-const SOLE = { 'foot-front': [[52, 70], [85, 68]], 'foot-back': [[77, 49], [105, 52]] };
+const SOLE = { 'foot-near': [[52, 70], [85, 68]], 'foot-far': [[77, 49], [105, 52]] };
 const CHANNELS = new Set(['speed', 'swap', 'dx', 'dy', 'sx']);
 
 for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
@@ -80,16 +80,16 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 {
   const def = FIGHTERS['rat-raider'], rig = RIGS['rat-raider'], K = ITEMS[def.art.held], slot = rig.slots['one-hand'];
   check(def.art.held === 'rat-cutlass' && def.drop.item === def.art.held, 'raider: holds the cutlass he drops (same item id)');
-  check(K.grip === 'one-hand' && slot.parent === 'hand-front', 'raider: cutlass goes in the near hand slot');
+  check(K.grip === 'one-hand' && slot.parent === 'hand-near', 'raider: cutlass goes in the near hand slot');
   const f = (o) => ({ def, state: 'idle', t: 0, mf: 0, move: null, weapon: null, hp: 10, ...o });
   for (const [label, fi] of [['stance', f({})], ['strike', f({ state: 'attack', move: def.moves.ratSlash, moveKey: 'ratSlash', mf: def.moves.ratSlash.windup + 3 })]]) {
     const tp = targetPose(fi, rig, 0), L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
-    const blade = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-front');
+    const blade = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-near');
     check(blade?.img === K.art.img, `raider ${label}: the cutlass item drawn in his hand`);
     const d = dist(apply(blade.m, K.art.grip), apply(hand.m, slot.attach));
     check(d < 0.01, `raider ${label}: cutlass grip on the hand's shaft slot (${d.toFixed(3)} px off)`);
     check(blade.order < hand.order, `raider ${label}: handle drawn behind the grip hand`);
-    if (label === 'strike') check(L.findIndex((e) => e.name === 'arm-front-upper') > L.findIndex((e) => e.name === 'torso'), 'raider strike: near arm in front of the torso');
+    if (label === 'strike') check(L.findIndex((e) => e.name === 'arm-near-upper') > L.findIndex((e) => e.name === 'torso'), 'raider strike: near arm in front of the torso');
   }
   const ko = f({ state: 'dead', hp: 0, dropped: true }), tp = targetPose(ko, rig, 0);
   check(!gripLayout(rig, tp.joints, tp.swap, heldOf(ko, rig), ko).some((e) => e.name === 'held'), 'raider KO: dropped cutlass gone from his hand');
@@ -103,9 +103,9 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     ['thrust strike', { state: 'attack', move: def.moves.spearThrust, moveKey: 'spearThrust', mf: 45 }]]) {
     const fi = { def, t: 0, mf: 0, move: null, weapon: null, hp: 10, ...f }, tp = targetPose(fi, rig, 0);
     const L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
-    const spear = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-back');
-    check(spear?.img === K.art.img && hand.swap === 'hand-back-grip', `spearman ${label}: spear in hand, far hand gripping`);
-    const s = rig.parts['hand-back'].swaps['hand-back-grip'], at = apply(hand.m, [G.ik.hand[0] - s.offset[0], G.ik.hand[1] - s.offset[1]]);
+    const spear = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-far');
+    check(spear?.img === K.art.img && hand.swap === 'hand-far-grip', `spearman ${label}: spear in hand, far hand gripping`);
+    const s = rig.parts['hand-far'].swaps['hand-far-grip'], at = apply(hand.m, [G.ik.hand[0] - s.offset[0], G.ik.hand[1] - s.offset[1]]);
     const g1 = apply(spear.m, K.art.grip), g2 = apply(spear.m, K.art.grip2), L2 = dist(g1, g2);   // on the shaft line (T020: may slide back)
     const d = Math.abs((at[0] - g1[0]) * (g2[1] - g1[1]) - (at[1] - g1[1]) * (g2[0] - g1[0])) / L2;
     check(d < 2, `spearman ${label}: far hand on the shaft (${d.toFixed(2)} px off)`);
@@ -123,14 +123,14 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     ['loosed', { state: 'attack', move: m, moveKey: 'bowShot', mf: m.windup + 1 }, 0]]) {
     const fi = { def, t: 0, mf: 0, move: null, weapon: null, hp: 10, ...f }, tp = targetPose(fi, rig, 0);
     const L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
-    const bow = L.find((e) => e.name === 'held'), near = L.find((e) => e.name === 'hand-front'), far = L.find((e) => e.name === 'hand-back');
-    check(bow?.img === K.art.img && far.swap === 'hand-back-grip' && near.swap === 'hand-front-pinch', `archer ${label}: bow in the far grip hand, near hand pinching`);
+    const bow = L.find((e) => e.name === 'held'), near = L.find((e) => e.name === 'hand-near'), far = L.find((e) => e.name === 'hand-far');
+    check(bow?.img === K.art.img && far.swap === 'hand-far-grip' && near.swap === 'hand-near-pinch', `archer ${label}: bow in the far grip hand, near hand pinching`);
     check(Math.abs(Math.atan2(bow.m[1], bow.m[0])) < 0.01, `archer ${label}: bow upright`);
-    const s = rig.parts['hand-front'].swaps['hand-front-pinch'], sk = s.scale ?? 1;
+    const s = rig.parts['hand-near'].swaps['hand-near-pinch'], sk = s.scale ?? 1;
     const pinch = apply(near.m, [(G.ik.hand[0] - s.offset[0]) / sk, (G.ik.hand[1] - s.offset[1]) / sk]);
     const d = k ? dist(pinch, L.find((e) => e.line).line[1]) : 0;   // T020: on the drawn string's nock point
     if (k) check(d < 2, `archer ${label}: near hand on the string (${d.toFixed(2)} px off)`);
-    else check(L.find((e) => e.name === 'arm-front-upper').m.every((v, i) => Math.abs(v - layoutRig(rig, tp.joints, tp.swap).find((e) => e.name === 'arm-front-upper').m[i]) < 1e-9), `archer ${label}: near arm as posed (not drawing)`);
+    else check(L.find((e) => e.name === 'arm-near-upper').m.every((v, i) => Math.abs(v - layoutRig(rig, tp.joints, tp.swap).find((e) => e.name === 'arm-near-upper').m[i]) < 1e-9), `archer ${label}: near arm as posed (not drawing)`);
     const drawn = label === 'full draw';
     check(L.some((e) => e.line) === drawn && L.some((e) => e.name === 'arrow') === drawn, `archer ${label}: string + nocked arrow ${drawn ? 'shown' : 'hidden'}`);
     if (drawn) check(L.find((e) => e.line).order > L.find((e) => e.name === 'torso').order, 'archer full draw: string drawn in front of the body');

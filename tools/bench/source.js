@@ -15,16 +15,21 @@ export function sourceUrl(q) {
   return `assets/source/${q.get('src') ?? 'A010-rat-raider-standard'}/rig-source.json`;
 }
 
+// T024: part names use near/far (rig standard section 3). Deliveries up to A016 say front/back for the limbs, hands and
+// feet; they are read as near/far (head/torso `back` = the back view keeps its name). Image file names are not changed.
+export const nearFar = (n) => n?.replace(/\b(arm|leg|hand|foot)-front/g, '$1-near').replace(/\b(arm|leg|hand|foot)-back/g, '$1-far');
+const renamed = (o = {}) => Object.fromEntries(Object.entries(o).map(([k, v]) => [nearFar(k), v]));
+
 // Normalises a parsed rig-source.json: image paths repo-relative, every part/swap/overlay with its canvas pivot.
 export function readSource(json, url) {
   const dir = json.dir ?? url.slice(0, url.lastIndexOf('/'));
   const path = (img) => `${dir}/${img}`;
   const parts = {};
-  for (const [name, p] of Object.entries(json.parts ?? {})) {
-    parts[name] = { name, img: path(p.img), parent: p.parent ?? null, pivot: p.pivot, band: p.band ?? 500 };
+  for (const [name, p] of Object.entries(renamed(json.parts))) {
+    parts[name] = { name, img: path(p.img), parent: nearFar(p.parent) ?? null, pivot: p.pivot, band: p.band ?? 500 };
   }
   const swaps = {};
-  for (const [name, s] of Object.entries(json.swaps ?? {})) if (parts[s.of]) swaps[name] = { name, img: path(s.img), of: s.of };
+  for (const [name, s] of Object.entries(renamed(json.swaps))) if (parts[nearFar(s.of)]) swaps[name] = { name, img: path(s.img), of: nearFar(s.of) };
   const overlays = {};
   for (const [name, o] of Object.entries(json.overlays ?? {})) overlays[name] = { name, img: path(o.img), on: o.on };
   const errors = [];
@@ -32,7 +37,7 @@ export function readSource(json, url) {
     if (p.parent && !parts[p.parent]) errors.push(`${p.name}: parent ${p.parent} missing`);
     if (!Array.isArray(p.pivot) || p.pivot.length !== 2) errors.push(`${p.name}: no pivot`);
   }
-  for (const [name, s] of Object.entries(json.swaps ?? {})) if (!parts[s.of]) errors.push(`swap ${name}: part ${s.of} missing`);
+  for (const [name, s] of Object.entries(renamed(json.swaps))) if (!parts[nearFar(s.of)]) errors.push(`swap ${name}: part ${nearFar(s.of)} missing`);
   const roots = Object.values(parts).filter((p) => !p.parent).map((p) => p.name);
   if (roots.length !== 1) errors.push(`expected one root part, found ${roots.join(', ') || 'none'}`);
   return { canvas: json.canvas, master: path(json.master), floorY: json.floorY, fighter: json.fighter ?? null, note: json.note ?? '',

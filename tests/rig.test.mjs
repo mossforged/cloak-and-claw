@@ -65,7 +65,7 @@ flat('idle', targetPose(fighter({}), rig, 0));
 {
   const bp = targetPose(fighter({ state: 'block' }), rig, 0), L = layoutRig(rig, bp.joints, bp.swap);
   const ord = (n) => L.find((e) => e.name === n).order;
-  check(!bp.swap['arm-back-upper'] && bp.swap.head === 'head-effort', 'block: shield on the jointed arm (not the edge-on guard arm), effort head');
+  check(!bp.swap['arm-far-upper'] && bp.swap.head === 'head-effort', 'block: shield on the jointed arm (not the edge-on guard arm), effort head');
   check(ord('shield') > ord('torso') && ord('shield') > ord('head'), 'block: shield drawn in front of the body');
   const hit = targetPose(fighter({ state: 'block', t: 1, stun: 12 }), rig, 0);
   check(hit.key === 'block' && hit.joints['shield.sx'] > bp.joints['shield.sx'] + 0.08, 'blocked hit: shield shoved out (bigger), same pose key');
@@ -74,9 +74,9 @@ flat('idle', targetPose(fighter({}), rig, 0));
 }
 // Swap `carry`: a carried part hangs off the swapping part at the given point on the swap image (no jump).
 {
-  const s = rig.parts['arm-back-upper'].swaps['arm-back-guard'], j = targetPose(fighter({ state: 'block' }), rig, 0).joints;
-  const L = layoutRig(rig, j, { 'arm-back-upper': 'arm-back-guard' });
-  const arm = L.find((e) => e.name === 'arm-back-upper'), sh = L.find((e) => e.name === 'shield');
+  const s = rig.parts['arm-far-upper'].swaps['arm-far-guard'], j = targetPose(fighter({ state: 'block' }), rig, 0).joints;
+  const L = layoutRig(rig, j, { 'arm-far-upper': 'arm-far-guard' });
+  const arm = L.find((e) => e.name === 'arm-far-upper'), sh = L.find((e) => e.name === 'shield');
   const pt = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
   const fist = pt(arm.m, ...s.carry.shield), piv = pt(sh.m, ...sh.p.pivot);
   check(Math.hypot(fist[0] - piv[0], fist[1] - piv[1]) < 0.01, 'carry: the shield pivot sits on the guard arm fist');
@@ -89,27 +89,27 @@ flat('reach', { joints: { ...P.stance, ...P.reach }, swap: P.reach.swap });
 for (const k of ['stow', 'cast', 'grabbing', 'getup']) flat(k, { joints: { ...P.stance, ...P[k] }, swap: P[k].swap });
 
 // T023 footwork: planted poses stand on the turned-out near boot, walking (and jumping) on the forward one.
-const footOf = (pose) => pose.swap?.['foot-front'] ?? 'foot-front';
-for (const k of ['idle', 'block', 'blockHit', 'cast', 'grabbing', 'stow', 'reach']) check(footOf(P[k]) === 'foot-front-out', `${k}: planted on the turned-out near boot`);
-for (const [k, m] of Object.entries(P.moves)) if (!def.moves[k].air) check(footOf(m.windup) === 'foot-front-out' || k === 'slash2', `${k} windup: planted (turned-out near boot)`);
-for (const k of ['walk', 'jump']) check(footOf(P[k]) === 'foot-front', `${k}: forward near boot`);
+const footOf = (pose) => pose.swap?.['foot-near'] ?? 'foot-near';
+for (const k of ['idle', 'block', 'blockHit', 'cast', 'grabbing', 'stow', 'reach']) check(footOf(P[k]) === 'foot-near-out', `${k}: planted on the turned-out near boot`);
+for (const [k, m] of Object.entries(P.moves)) if (!def.moves[k].air) check(footOf(m.windup) === 'foot-near-out' || k === 'slash2', `${k} windup: planted (turned-out near boot)`);
+for (const k of ['walk', 'jump']) check(footOf(P[k]) === 'foot-near', `${k}: forward near boot`);
 // (T023 round 2: strikes stand on the turned-out trailing boot: tests/mouse-footwork.test.mjs)
 // Attacks move the legs (render only): the leading (far) boot steps in on the strike, the trailing one pushes back.
 for (const [k, m] of Object.entries(P.moves)) {
   if (def.moves[k].air) continue;
   const w = solePoints(rig, { ...P.stance, ...m.windup }, m.windup.swap), s = solePoints(rig, { ...P.stance, ...m.strike }, m.strike.swap);
-  check(s['foot-back'][0] - s['foot-front'][0] > w['foot-back'][0] - w['foot-front'][0] + 8, `${k}: the stride opens on the strike (step in)`);
-  check(s['foot-back'][1] > -1 && Math.abs(w['foot-front'][1]) < 1, `${k}: leading boot down on the strike, trailing boot planted in the windup`);
+  check(s['foot-far'][0] - s['foot-near'][0] > w['foot-far'][0] - w['foot-near'][0] + 8, `${k}: the stride opens on the strike (step in)`);
+  check(s['foot-far'][1] > -1 && Math.abs(w['foot-near'][1]) < 1, `${k}: leading boot down on the strike, trailing boot planted in the windup`);
 }
-check(P.moves.slash3.strike['leg-front-upper'] !== P.moves.slash1.strike['leg-front-upper'], 'slash3: its own (bigger) stride');
+check(P.moves.slash3.strike['leg-near-upper'] !== P.moves.slash1.strike['leg-near-upper'], 'slash3: its own (bigger) stride');
 { const jw = solePoints(rig, { ...P.stance, ...P.moves.jumpSlash.windup }), js = solePoints(rig, { ...P.stance, ...P.moves.jumpSlash.strike });
-  check(js['foot-back'][0] - js['foot-front'][0] > jw['foot-back'][0] - jw['foot-front'][0] + 15, 'jumpSlash: legs tuck in the windup, kick out on the cut'); }
+  check(js['foot-far'][0] - js['foot-near'][0] > jw['foot-far'][0] - jw['foot-near'][0] + 15, 'jumpSlash: legs tuck in the windup, kick out on the cut'); }
 
 // Walk: feet don't skate. While a foot is planted (half a stride cycle) the body moves walk * 60 / speed / 2 px;
 // the foot's sweep from front to back relative to the hips must match that.
 const walkSpeed = def.move.walk * 60, need = walkSpeed / P.walk.speed / 2;
 const walkSoles = Array.from({ length: 60 }, (_, i) => { const tp = targetPose(fighter({ state: 'walk', t: i / P.walk.speed }), rig, 0); return solePoints(rig, tp.joints, tp.swap); });
-for (const leg of ['foot-front', 'foot-back']) {
+for (const leg of ['foot-near', 'foot-far']) {
   const xs = walkSoles.map((s) => s[leg][0]), lo = Math.min(...xs), hi = Math.max(...xs), deepest = Math.max(...walkSoles.map((s) => s[leg][1]));
   check(deepest < 2, `${leg}: walk never sinks the boot into the floor (deepest y=${deepest.toFixed(1)})`);
   check(Math.abs((hi - lo) / need - 1) < 0.25, `${leg}: stride sweep ${(hi - lo).toFixed(1)} px ~ needed ${need.toFixed(1)} px (feet don't skate)`);
@@ -119,11 +119,11 @@ for (const leg of ['foot-front', 'foot-back']) {
 // to flat in front (strike), and the sim frames of the move are untouched by the rig.
 const s2 = def.moves.slash2, wind = layoutRig(rig, targetPose(fighter({ state: 'attack', move: s2, mf: s2.windup }), rig, 0).joints);
 const idx = (Lx, n) => Lx.findIndex((e) => e.name === n);
-check(idx(wind, 'arm-front-upper') > idx(wind, 'torso'), 'slash2 windup: front arm drawn in front of the torso');
+check(idx(wind, 'arm-near-upper') > idx(wind, 'torso'), 'slash2 windup: front arm drawn in front of the torso');
 const hit = layoutRig(rig, targetPose(fighter({ state: 'attack', move: s2, mf: s2.windup + s2.active - 1 }), rig, 0).joints);
-check(idx(hit, 'arm-front-upper') > idx(hit, 'torso'), 'slash2 strike: front arm drawn in front of the torso');
+check(idx(hit, 'arm-near-upper') > idx(hit, 'torso'), 'slash2 strike: front arm drawn in front of the torso');
 // blade direction on screen (0 forward, 90 down): the sword lies along the fist's slot axis
-const tipOf = (j) => (((['pelvis', 'torso', 'arm-front-upper', 'arm-front-lower', 'hand-front', 'sword'].reduce((a, k) => a + (j[k] ?? 0), rig.axes['one-hand'])) % 360) + 360) % 360;
+const tipOf = (j) => (((['pelvis', 'torso', 'arm-near-upper', 'arm-near-lower', 'hand-near', 'sword'].reduce((a, k) => a + (j[k] ?? 0), rig.axes['one-hand'])) % 360) + 360) % 360;
 check(near(tipOf(evalLike(P.moves.slash2.through)), 180, 5), 'slash2 through: blade flat out behind');
 check(near(tipOf(evalLike(P.moves.slash2.strike)), 0, 5) || near(tipOf(evalLike(P.moves.slash2.strike)), 360, 5), 'slash2 strike: blade flat out in front');
 check(s2.windup === 5 && s2.active === 4 && s2.recovery === 12 && s2.damage === 6, 'slash2: sim timing and damage unchanged (5/4/12, 6)');
@@ -141,7 +141,7 @@ for (const [name, p] of Object.entries(rig.parts)) {
     for (const hName of s.hide ?? []) check(rig.parts[hName], `${name}.${sw}: hides known part '${hName}'`);
     for (const [c, xy] of Object.entries(s.carry ?? {})) check(rig.parts[c] && xy.length === 2 && xy.every(Number.isFinite), `${name}.${sw}: carries known part '${c}' at a finite point`);
     if (s.hide?.some((hName) => rig.parts[hName]?.parent === name)) continue;
-    if (sw === 'foot-front-out') continue;   // A013 addendum 2: a painted perspective view (toes toward the camera), same ankle
+    if (sw === 'foot-near-out') continue;   // A013 addendum 2: a painted perspective view (toes toward the camera), same ankle
     // no jump: the swap image's centre lands within 15% of the part image's size of the part's own centre
     const [w, h] = pngSize(p.img), [sw2, sh] = pngSize(s.img), k = s.scale ?? 1;
     const dx = s.offset[0] + k * sw2 / 2 - w / 2, dy = s.offset[1] + k * sh / 2 - h / 2;
@@ -196,22 +196,22 @@ check(imgOf(late, 'head') === rig.parts.head.img, 'end of recovery: neutral head
 check(imgOf(poseLayout({ state: 'hurt' }), 'head') === rig.parts.head.swaps['head-hurt'].img, 'hurt: hurt head');
 check(imgOf(poseLayout({ state: 'knockdown' }), 'head') === rig.parts.head.swaps['head-hurt'].img, 'knockdown: hurt head');
 const idleL = poseLayout({});
-check(idleL.every((e) => (e.img === e.p.img && !e.swap) || (e.name === 'foot-front' && e.swap === 'foot-front-out')), 'idle: every part shows its normal image but the turned-out near boot');
+check(idleL.every((e) => (e.img === e.p.img && !e.swap) || (e.name === 'foot-near' && e.swap === 'foot-near-out')), 'idle: every part shows its normal image but the turned-out near boot');
 const idleJ = targetPose(fighter({}), rig, 0).joints;
 check(layoutRig(rig, idleJ).every((e, i) => e.m.every((v, j) => v === layoutRig(rig, idleJ, {})[i].m[j])), 'no swap argument = same layout as no swaps');
 // a swapped part keeps its joint: the head's pivot lands on the same screen point with or without the swap
 const hurtJ = targetPose(fighter({ state: 'hurt' }), rig, 0).joints;
-const pivotAt = (Lx) => { const e = Lx.find((x) => x.name === 'arm-front-upper'); return [e.m[4], e.m[5]]; };
+const pivotAt = (Lx) => { const e = Lx.find((x) => x.name === 'arm-near-upper'); return [e.m[4], e.m[5]]; };
 check(pivotAt(layoutRig(rig, hurtJ, {})).every((v, i) => near(v, pivotAt(layoutRig(rig, hurtJ, { torso: 'torso-back' }))[i])), 'swapping the torso does not move the arms');
 
 // cast (view-only test pose): sword straight up, shouting, reachable as an override whatever the state.
 const cast = targetPose(fighter({ state: 'walk', t: 9 }), rig, 0, 'cast');
 check(cast.key === 'cast' && cast.swap.head === 'head-attack', 'cast override: key cast, attack head');
 // T012: the whole raised arm hides the forearm and carries the sword, so the forearm drops out of the chain
-const raised = cast.swap['arm-front-upper'] === 'arm-front-raised';
+const raised = cast.swap['arm-near-upper'] === 'arm-near-raised';
 check(raised, 'cast: whole raised arm (A013)');
 // the raised arm's fist holds the handle along its own slot axis (A013 slotDirection)
-const tip = ['pelvis', 'torso', 'arm-front-upper', 'sword'].reduce((a, j) => a + cast.joints[j], rig.parts['arm-front-upper'].swaps['arm-front-raised'].axis);
+const tip = ['pelvis', 'torso', 'arm-near-upper', 'sword'].reduce((a, j) => a + cast.joints[j], rig.parts['arm-near-upper'].swaps['arm-near-raised'].axis);
 check(near(((tip % 360) + 360) % 360, 270, 1), `cast: sword points straight up (sum ${tip})`);
 
 // Grab and throw (T009): holding -> grabbing; a knee reaches the knee pose at its strike frame; a forward throw
@@ -220,7 +220,7 @@ const G = def.grab, TH = def.throw;
 const gp = (o) => targetPose(fighter({ state: 'grabbing', grab: { knee: -1 }, ...o }), rig, 0);
 check(gp({}).key === 'grabbing' && finite(gp({}).joints), 'grabbing -> pose grabbing');
 const kneeAt = gp({ grab: { knee: G.knee.windup } });
-check(kneeAt.key === 'knee' && near(kneeAt.joints['leg-back-upper'], P.knee['leg-back-upper']), 'knee strike frame reaches the knee pose');
+check(kneeAt.key === 'knee' && near(kneeAt.joints['leg-far-upper'], P.knee['leg-far-upper']), 'knee strike frame reaches the knee pose');
 check(kneeAt.swap.head === 'head-attack', 'knee: attack head');
 const tw = (back, t) => targetPose(fighter({ state: 'throw', t, grab: { back } }), rig, 0);
 check(tw(false, 2).key === 'throwWind' && tw(true, 2).key === 'throwWindBack', 'throw wind pose by direction');
@@ -251,7 +251,7 @@ check(tw(false, TH.wind + 1).key === 'throwRelease' && tw(false, TH.wind + TH.re
   const T = def.toss;
   check(targetPose(fighter({ state: 'toss', t: 2 }), rig, 0).key === 'toss' && targetPose(fighter({ state: 'toss', t: T.wind + 2 }), rig, 0).key === 'tossRelease', 'toss -> tossRelease poses');
   const m = club.moves.club2;
-  check(targetPose(fighter({ state: 'attack', move: m, moveKey: 'club2', mf: m.windup }), rig, 0).joints['arm-front-upper'] === P.moves.slash3.windup['arm-front-upper'], 'weapon move borrows its rig move pose (club2 -> slash3)');
+  check(targetPose(fighter({ state: 'attack', move: m, moveKey: 'club2', mf: m.windup }), rig, 0).joints['arm-near-upper'] === P.moves.slash3.windup['arm-near-upper'], 'weapon move borrows its rig move pose (club2 -> slash3)');
 }
 
 console.log(fails ? `${fails} failures` : 'ALL OK');

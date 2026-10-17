@@ -13,23 +13,23 @@ import { layoutRig } from '../src/render/rig.js';
 let failed = 0;
 const check = (c, msg) => { if (!c) { failed++; console.log('FAIL:', msg); } };
 const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig], P = rig.poses;
-const footOf = (pose) => layoutRig(rig, pose, pose.swap ?? {}).find((e) => e.name === 'foot-front').img.split('/').pop().replace('.png', '');
+const footOf = (pose) => layoutRig(rig, pose, pose.swap ?? {}).find((e) => e.name === 'foot-near').img.split('/').pop().replace('.png', '');
 
 const strikes = [...Object.entries(P.moves), ...Object.values(P.kits).flatMap((k) => Object.entries(k.moves ?? {}))]
   .filter(([k]) => k !== 'jumpSlash').map(([k, m]) => [`${k} strike`, m.strike]);
 for (const k of ['throwRelease', 'tossRelease']) strikes.push([k, ACTION_POSES[k]]);
 for (const [name, pose] of strikes) {
-  check(footOf(pose) === 'foot-front-out', `${name}: turned-out trailing boot`);
-  const y = soles(rig, pose, pose.swap)['foot-front'];
+  check(footOf(pose) === 'foot-near-out', `${name}: turned-out trailing boot`);
+  const y = soles(rig, pose, pose.swap)['foot-near'];
   check(Math.abs(y) < 0.5, `${name}: trailing sole flat on the floor (y=${y.toFixed(2)})`);
 }
-check(footOf(P.moves.jumpSlash.strike) === 'foot-front', 'jumpSlash strike: forward near boot (in the air)');
+check(footOf(P.moves.jumpSlash.strike) === 'foot-near', 'jumpSlash strike: forward near boot (in the air)');
 
 // Walk: over a stride the near ankle comes out in front of the far ankle and goes back behind it.
 const fighter = (o) => ({ def, state: 'walk', t: 0, mf: 0, move: null, ...o });
 const gaps = Array.from({ length: 60 }, (_, i) => {
   const tp = targetPose(fighter({ t: i / 60 * 60 / P.walk.speed }), rig, 0), s = solePoints(rig, tp.joints, tp.swap);
-  return s['foot-front'][0] - s['foot-back'][0];
+  return s['foot-near'][0] - s['foot-far'][0];
 });
 check(Math.max(...gaps) > 8 && Math.min(...gaps) < -8, `walk: near foot steps past the far one (gap ${Math.min(...gaps).toFixed(1)}..${Math.max(...gaps).toFixed(1)} px)`);
 

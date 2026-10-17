@@ -1,7 +1,7 @@
 // Walk variants for tools/walk-lab.html (T023 round 3). legs = walkWaves options (walk speed comes from the fighter);
 // pose = the upper body's waves (rigs/*-poses.js format; it also holds the legs' `body` channels). game: true = the
 // game's own walk (rigs/mouse-fighter-poses.js), drawn as is.
-const ARMS = { 'arm-front-upper': [4, 9, 0.5], 'arm-front-lower': [0, 6, 0.6], 'arm-back-upper': [0, 7, 0], 'hand-back': [0, 3, 0.1],
+const ARMS = { 'arm-near-upper': [4, 9, 0.5], 'arm-near-lower': [0, 6, 0.6], 'arm-far-upper': [0, 7, 0], 'hand-far': [0, 3, 0.1],
   tail: [5, 12, 0.25], 'scarf-tail': [-4, 4, 0.4, 2], 'scarf-tail-2': [-18, 8, 0.6, 2] };
 const narrow = (psx, legs, up) => ({ legs: { ...legs, body: { 'pelvis.sx': psx } }, pose: { ...ARMS, 'pelvis.sx': psx, ...up } });
 export const VARIANTS = {

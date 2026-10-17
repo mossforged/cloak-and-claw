@@ -7,8 +7,10 @@ Usage: python3 tools/rig_from_source.py <rig-source.json> --id rat-raider [--art
 A draft: the game's poses for the character still have to be written against it.
 T023: whole-arm swaps keep their extra fields: `hide` (parts the drawing replaces), `itemGrip` -> `grip` (where the held
 item sits, swap image px) and `slotDirection` -> `axis` (degrees the fist holds a handle toward the item's head). The
-source's `grips` (each grip hand's slot centre and direction) become `hands`: { swap: { part, at (part px), axis } }."""
-import argparse, json, math, os, sys
+source's `grips` (each grip hand's slot centre and direction) become `hands`: { swap: { part, at (part px), axis } }.
+T024: part names are near/far (rig standard section 3). A source that says front/back for limbs, hands and feet (A013,
+A016) is read as near/far, so the output (data and image names) uses the new names; head/torso `back` views keep theirs."""
+import argparse, json, math, os, re, sys
 import numpy as np
 from PIL import Image
 
@@ -26,6 +28,24 @@ def silhouette_top(path):
     return int(np.nonzero((alpha > 20).any(axis=1))[0][0])
 
 
+def near_far(n):
+    if n is None:
+        return None
+    return re.sub(r"\b(arm|leg|hand|foot)-back", r"\1-far", re.sub(r"\b(arm|leg|hand|foot)-front", r"\1-near", n))
+
+
+def renamed(src):
+    """The source with near/far part names (keys, parents, swap targets, hide lists, grip hands)."""
+    fix = lambda d: {near_far(k): v for k, v in (d or {}).items()}
+    out = dict(src)
+    out["parts"] = {k: {**p, "parent": near_far(p.get("parent"))} for k, p in fix(src.get("parts")).items()}
+    out["swaps"] = {k: {**s, "of": near_far(s["of"]), **({"hide": [near_far(h) for h in s["hide"]]} if s.get("hide") else {})}
+                    for k, s in fix(src.get("swaps")).items()}
+    if src.get("grips"):
+        out["grips"] = {k: {**g, "of": near_far(g["of"])} for k, g in fix(src["grips"]).items()}
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("source")
@@ -35,7 +55,7 @@ def main():
     ap.add_argument("--height", type=float, default=136, help="screen px tall in game")
     ap.add_argument("--scale", type=float, default=0.4, help="canvas px -> stored image px")
     a = ap.parse_args()
-    src = json.load(open(a.source))
+    src = renamed(json.load(open(a.source)))
     folder = src.get("dir") or os.path.dirname(a.source)
     art = a.art or f"assets/art/rigs/{a.id}"
     out = a.out or f"src/data/rigs/{a.id}.js"

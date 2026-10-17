@@ -89,7 +89,7 @@ function pickupPose(f, poses, S, time) {
 // Sword draw (T010 round 2): an arm-only layer over whatever pose he is in, after a floor weapon leaves his hand
 // (thrown or broken). The arm sweeps to the `stow` arm (sword still sheathed: mem.sheathed) and back up with the sword.
 // Starts when drawRig sets mem.drawT0. Returns the layered joints (mem.last is left unlayered for blending).
-const ARM = ['arm-front-upper', 'arm-front-lower', 'hand-front', 'sword'];   // T023: + the hand (A013 rigs turn the sword with it)
+const ARM = ['arm-near-upper', 'arm-near-lower', 'hand-near', 'sword'];   // T023: + the hand (A013 rigs turn the sword with it)
 export function drawLayer(rig, time, mem, joints) {
   const dur = rig.poses.timing.drawSword, k = mem.drawT0 === undefined ? 1 : (time - mem.drawT0) / dur;
   mem.sheathed = k < 0.5;
@@ -121,7 +121,7 @@ const withKit = (poses, KP) => (KP ? Object.fromEntries(Object.entries(poses).ma
 
 function windupPose(M, rest, W, p, time) {
   const h = M.hold ?? 0, j = mix(rest, W, easeOut(Math.min(1, p / (1 - h))));
-  if (h && p > 1 - h && M.tremble) j['arm-front-upper'] += M.tremble * Math.sin(time * 70);
+  if (h && p > 1 - h && M.tremble) j['arm-near-upper'] += M.tremble * Math.sin(time * 70);
   return j;
 }
 

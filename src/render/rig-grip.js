@@ -1,5 +1,5 @@
 // Weapon grips on a rig (T011): a held kit whose grip type has an entry in `rig.grips` (two-hand spear, bow) swaps in
-// its hand drawings (T018: the far `hand-back` grip or pinch) and bends one arm with 2-bone IK so its hand lands on a point of the weapon art: `grip2`
+// its hand drawings (T018: the far `hand-far` grip or pinch) and bends one arm with 2-bone IK so its hand lands on a point of the weapon art: `grip2`
 // on a spear shaft, or the bow's `nock` pulled back by how far the bow is drawn (the hand reaches it as the draw starts). A bow also gets its drawn string (two
 // lines from the tips to the hand) and, while drawing, the shot's arrow nocked on it. Drawing only; pure (tests use it).
 // T020: the IK hand can also turn to close round the shaft (`align`), parts can change draw order while gripping

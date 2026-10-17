@@ -2,14 +2,14 @@
 // joint angles (degrees added to the master pose, rigs/*-poses.js). Pure math on the rig's own data, run once when the
 // pose files load; the game then sees plain joint numbers. Only for rigs on the standard (rest 0 = master, uniform scale).
 //   pose(rig, spec): spec keys
-//     hand:   { at: [x, y] | off: [x, y], dir, bend?, up? }  near grip fist: its slot (rig.hands['hand-front-grip']) at screen point
+//     hand:   { at: [x, y] | off: [x, y], dir, bend?, up? }  near grip fist: its slot (rig.hands['hand-near-grip']) at screen point
 //             (x forward, y down, feet at 0,0, before the pose's sx mirror; `off` = from the shoulder instead), blade pointing `dir` (screen degrees: 0 =
 //             forward, -90 = up, 90 = down; unwrapped: a swing turns from one pose's dir to the next's the way the
 //             numbers run). bend -1 = elbow the other way from the master's. up = the upper arm's direction to
 //             unwrap next to (default dir: the arm follows the blade round).
 //     shield: { at | off, turn = 0, bend? }  far fist's strap point; turn = the shield's tilt (degrees, + = top forward... as
 //             drawn, clockwise) from the master.
-//     feet:   { front: [x, lift, turn], back: [...] }  ankle x (screen px) and height off its planted height; turn =
+//     feet:   { near: [x, lift, turn], far: [...] }  ankle x (screen px) and height off its planted height; turn =
 //             the foot's tilt from flat (+ = toes down, facing right). Legs are bent by IK to put the ankles there.
 //     anything else (pelvis, torso, head, dx, dy, tail, swap, '<part>.order', raw joints) passes through as given.
 //   walkWaves(rig, opts): the walk's leg joints as waves (one per joint, rigs/*-poses.js format) fitted to IK on an
@@ -61,20 +61,20 @@ export function pose(rig, spec) {
   const world = (n) => R[n] ?? 0, place = placer(rig, j, world), H = rig.hands;
   const target = (h, up) => h.at ?? [place(up)[0] + h.off[0], place(up)[1] + h.off[1]];
   if (hand) {
-    const g = H['hand-front-grip'], endR = hand.dir - g.axis;
-    [R['arm-front-upper'], R['arm-front-lower']] = limb(rig, 'arm-front-upper', 'arm-front-lower', 'hand-front',
-      place('arm-front-upper'), target(hand, 'arm-front-upper'), endR, g.at, hand.bend, hand.up ?? hand.dir);
-    j['arm-front-upper'] = R['arm-front-upper'] - R.torso;   // unwrapped too: the arm swings round the way the blade does
-    j['arm-front-lower'] = R['arm-front-lower'] - R['arm-front-upper'];
-    j['hand-front'] = endR - R['arm-front-lower'];   // unwrapped: the blade's world turn is exactly hand.dir
+    const g = H['hand-near-grip'], endR = hand.dir - g.axis;
+    [R['arm-near-upper'], R['arm-near-lower']] = limb(rig, 'arm-near-upper', 'arm-near-lower', 'hand-near',
+      place('arm-near-upper'), target(hand, 'arm-near-upper'), endR, g.at, hand.bend, hand.up ?? hand.dir);
+    j['arm-near-upper'] = R['arm-near-upper'] - R.torso;   // unwrapped too: the arm swings round the way the blade does
+    j['arm-near-lower'] = R['arm-near-lower'] - R['arm-near-upper'];
+    j['hand-near'] = endR - R['arm-near-lower'];   // unwrapped: the blade's world turn is exactly hand.dir
   }
   if (shield) {
-    const g = H['hand-back-shield'], endR = shield.turn ?? 0;
-    [R['arm-back-upper'], R['arm-back-lower']] = limb(rig, 'arm-back-upper', 'arm-back-lower', 'hand-back',
-      place('arm-back-upper'), target(shield, 'arm-back-upper'), endR, g.at, shield.bend);
-    j['arm-back-upper'] = wrap(R['arm-back-upper'] - R.torso);
-    j['arm-back-lower'] = wrap(R['arm-back-lower'] - R['arm-back-upper']);
-    j['hand-back'] = wrap(endR - R['arm-back-lower']);
+    const g = H['hand-far-shield'], endR = shield.turn ?? 0;
+    [R['arm-far-upper'], R['arm-far-lower']] = limb(rig, 'arm-far-upper', 'arm-far-lower', 'hand-far',
+      place('arm-far-upper'), target(shield, 'arm-far-upper'), endR, g.at, shield.bend);
+    j['arm-far-upper'] = wrap(R['arm-far-upper'] - R.torso);
+    j['arm-far-lower'] = wrap(R['arm-far-lower'] - R['arm-far-upper']);
+    j['hand-far'] = wrap(endR - R['arm-far-lower']);
   }
   for (const [side, v] of Object.entries(feet ?? {})) {
     const up = `leg-${side}-upper`, lo = `leg-${side}-lower`, ft = `foot-${side}`, [x, lift = 0, tilt = 0] = v;
@@ -107,23 +107,23 @@ export function fitWave(vals, H = 3) {
 }
 
 // Walk legs: speed cycles/s, walk px/s; each ankle sweeps back under its hip (planted half) and arcs forward lifted
-// `lift` px (swing half); front and back half a cycle apart. dy = hips lowered (px). gather 0..1 = how far each stride's
+// `lift` px (swing half); near and far half a cycle apart. dy = hips lowered (px). gather 0..1 = how far each stride's
 // centre moves from under its own hip toward the middle of the two (wide 3/4 hips: 0 keeps each leg sweeping round its
 // own spot, so the near foot never passes the far one; 1 = both feet step through under the body). Returns waves (lists of harmonics) for the leg joints.
 // stride = px the planted foot sweeps (default walk / speed / 2: no skating); shorter = the boot slides a little.
 // body = other pose channels held through the walk (e.g. 'pelvis.sx' narrowing the hips): the legs are fitted under it.
 export function walkWaves(rig, { speed, walk, lift, dy = 0, reach = 0, gather = 0, stride, body = {}, N = 48 }) {
-  const half = (stride ?? walk / speed / 2) / 2, x0 = (s) => placer(rig, body, () => 0)(`leg-${s}-upper`)[0], mid = (x0('front') + x0('back')) / 2;
+  const half = (stride ?? walk / speed / 2) / 2, x0 = (s) => placer(rig, body, () => 0)(`leg-${s}-upper`)[0], mid = (x0('near') + x0('far')) / 2;
   const hip = (s) => x0(s) + gather * (mid - x0(s)) + reach;
   const ankle = (s, u) => {
     if (u < 0.5) return [hip(s) + half - 4 * half * u, 0, 0];
     const k = (u - 0.5) * 2, e = k * k * (3 - 2 * k);
     return [hip(s) - half + 2 * half * e, lift * Math.sin(Math.PI * k), 8 * Math.sin(Math.PI * k)];
   };
-  const out = {}, keys = ['leg-front-upper', 'leg-front-lower', 'foot-front', 'leg-back-upper', 'leg-back-lower', 'foot-back'];
+  const out = {}, keys = ['leg-near-upper', 'leg-near-lower', 'foot-near', 'leg-far-upper', 'leg-far-lower', 'foot-far'];
   const series = Object.fromEntries(keys.map((k) => [k, []]));
   for (let i = 0; i < N; i++) {
-    const u = i / N, j = pose(rig, { ...body, dy, feet: { front: ankle('front', u), back: ankle('back', (u + 0.5) % 1) } });
+    const u = i / N, j = pose(rig, { ...body, dy, feet: { near: ankle('near', u), far: ankle('far', (u + 0.5) % 1) } });
     for (const k of keys) series[k].push(near(j[k], series[k].at(-1) ?? j[k]));
   }
   for (const k of keys) out[k] = fitWave(series[k]);

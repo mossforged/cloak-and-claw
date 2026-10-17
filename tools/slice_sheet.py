@@ -6,7 +6,7 @@ Usage: python3 tools/slice_sheet.py sheet.png out_dir name1,name2,... [scale] [r
 Finds parts as connected regions of non-green pixels (thin bits like whiskers are merged
 into the nearest part by a dilation), keys each with tools/key_green.py's keyer and trims it.
 Example (A001): python3 tools/slice_sheet.py assets/source/A001-mouse-fighter-rig/parts-sheet.png \\
-  assets/art/heroes/mouse-fighter/rig head,torso,scarf-tail,tail,sword,arm-front-upper,...
+  assets/art/heroes/mouse-fighter/rig head,torso,scarf-tail,tail,sword,arm-near-upper,...
 """
 import sys
 from collections import deque
