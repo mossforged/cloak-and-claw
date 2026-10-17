@@ -1,0 +1,111 @@
+{
+  "coordinateSpace": "Full delivered source PNG pixels; origin top-left, x right, y down. Points measured on the delivered images before trim.",
+  "importNote": "Subtract trim origin, then multiply every point by the uniform import scale. Angles are clockwise in image coordinates. gripEnd follows the handle toward the head; shield gripEnd follows its mostly hidden strap downward. rest=0 means the delivered horizontal/face-up drawing is already the floor orientation. stow is an item point placed at the belt/back socket.",
+  "measurementNote": "Markers picked at the leather grip centre lines, blade tip, axe cutting-edge centre, shield strap/face centre and staff stone centre. reviewScale derived from keyed silhouette bounds: dagger/axe/staff width, shield height. Staff grip spacing = 39.84 game pixels.",
+  "weapons": {
+    "dagger": {
+      "grip": [
+        445,
+        460
+      ],
+      "gripEnd": [
+        570,
+        460
+      ],
+      "tip": [
+        1715,
+        435
+      ],
+      "stow": [
+        620,
+        460
+      ],
+      "img": "dagger.png",
+      "canvas": [
+        1774,
+        887
+      ],
+      "rest": 0,
+      "reviewScale": 0.024125452352231604
+    },
+    "shield": {
+      "grip": [
+        195,
+        625
+      ],
+      "gripEnd": [
+        210,
+        700
+      ],
+      "center": [
+        704,
+        625
+      ],
+      "stow": [
+        704,
+        625
+      ],
+      "img": "shield.png",
+      "canvas": [
+        1254,
+        1254
+      ],
+      "rest": 0,
+      "reviewScale": 0.04660194174757282
+    },
+    "axe": {
+      "grip": [
+        445,
+        335
+      ],
+      "gripEnd": [
+        570,
+        335
+      ],
+      "tip": [
+        1500,
+        746
+      ],
+      "stow": [
+        660,
+        335
+      ],
+      "img": "axe.png",
+      "canvas": [
+        1774,
+        887
+      ],
+      "rest": 0,
+      "reviewScale": 0.03569303985722784
+    },
+    "staff": {
+      "grip": [
+        515,
+        421
+      ],
+      "gripEnd": [
+        620,
+        421
+      ],
+      "grip2": [
+        970,
+        421
+      ],
+      "tip": [
+        1652,
+        396
+      ],
+      "stow": [
+        880,
+        421
+      ],
+      "img": "staff.png",
+      "canvas": [
+        1774,
+        887
+      ],
+      "rest": 0,
+      "reviewScale": 0.08756567425569177
+    }
+  }
+}
