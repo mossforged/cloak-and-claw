@@ -10,6 +10,7 @@ import { feelLayer, bendSteps, bendStrips } from './weapon-feel.js';
 import { ITEMS } from '../data/items/index.js';
 import { LOOKS } from '../data/looks.js';
 import { gearLayout, gearOf, lookImage } from './looks.js';
+import { socketPoints, keepSockets } from './sockets.js';
 
 const RES = 2;                                   // buffer px per screen px (keeps parts sharp)
 const BOX = { w: 300, h: 260, ox: 150, oy: 200 };  // buffer area in screen px; (ox, oy) = feet
@@ -142,7 +143,8 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);
   g.imageSmoothingQuality = 'high';
   const held = heldOf(f, rig, mem.sheathed), B = !pose && held?.part && held.kit.feel?.bend;   // T017: a floppy held weapon
-  for (const { name, img, m, line, p: part } of gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f), gearOf(f))) {   // T019 gear
+  const L = gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f), gearOf(f));   // T019 gear
+  for (const { name, img, m, line, p: part } of L) {
     g.setTransform(RES, 0, 0, RES, BOX.ox * RES, BOX.oy * RES);
     if (line) { g.strokeStyle = '#3a2a1e'; g.lineWidth = 0.8; g.beginPath(); line.forEach(([x, y], i) => (i ? g.lineTo(x, y) : g.moveTo(x, y))); g.stroke(); continue; }
     g.transform(...m);
@@ -158,6 +160,10 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   if (f.state === 'walk' && !f.move) { p.dy = 0; p.rot = 0; }   // the rig's own walk cycle bobs in step
   if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss' || f.state === 'pickup') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
   if (f.state === 'block') { p.rot -= BLOCK_LEAN + braceOf(f, time).rot; p.sx = p.sy = 1; }   // the block pose leans and crouches (and the brace loop breathes); keep only the jolt
+  const k = 1 + (f.look?.size ?? 0) * LOOKS.size;   // T019: render-only size (hit areas unchanged)
+  const c = Math.cos(p.rot * f.facing), sn = Math.sin(p.rot * f.facing), ax = p.sx * f.facing * k, ay = p.sy * k;   // T024: sockets in world px
+  keepSockets(f, socketPoints(rig, L, held, (img) => { const im = assets.get(img); return im?.width ? [im.width, im.height] : null; }),
+    ([x, y]) => [f.x + p.dx * f.facing + c * ax * x - sn * ay * y, f.y - f.z + p.dy + sn * ax * x + c * ay * y]);
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;
   if (f.invuln > 0 && f.state === 'idle') alpha = f.invuln % 6 < 3 ? 1 : 0.55;
@@ -165,7 +171,6 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   ctx.globalAlpha = alpha;
   ctx.translate(f.x + p.dx * f.facing, f.y - f.z + p.dy);
   ctx.rotate(p.rot * f.facing);
-  const k = 1 + (f.look?.size ?? 0) * LOOKS.size;   // T019: render-only size (hit areas unchanged)
   ctx.scale(p.sx * f.facing * k, p.sy * k);
   const put = (img) => ctx.drawImage(img, -BOX.ox, -BOX.oy, BOX.w, BOX.h);
   put(buf);

@@ -14,8 +14,9 @@ const rename = (v) => (Array.isArray(v) ? v.map(rename) : v && typeof v === 'obj
   ? Object.fromEntries(Object.entries(v).map(([k, x]) => [nearFar(k), rename(x)])) : typeof v === 'string' ? nearFar(v) : v);
 const old = rename(JSON.parse(readFileSync(url, 'utf8')));
 
-// rig id -> pose paths (dot-separated under `poses`) and part paths (under `parts`) T024 changed on purpose
-const CHANGED = {};
+// rig id -> paths (dot-separated) T024 added or changed on purpose; ADDED goes for every rig
+const ADDED = ['sockets'];
+const CHANGED = { 'mouse-fighter': ['parts.sword.art', 'parts.shield.art'] };
 const drop = (o, path) => { const ks = path.split('.'), last = ks.pop(), at = ks.reduce((a, k) => a?.[k], o); if (at) delete at[last]; };
 
 for (const [id, r] of Object.entries(RIGS)) {
@@ -23,7 +24,7 @@ for (const [id, r] of Object.entries(RIGS)) {
   const was = old[id], cur = JSON.parse(JSON.stringify(now));
   check(was, `${id} in the snapshot`);
   if (!was) continue;
-  for (const p of CHANGED[id] ?? []) { drop(was, p); drop(cur, p); }
+  for (const p of [...ADDED, ...CHANGED[id] ?? []]) { drop(was, p); drop(cur, p); }
   const a = JSON.stringify(was), b = JSON.stringify(cur);
   if (a !== b) {
     const keys = new Set([...Object.keys(was.poses ?? {}), ...Object.keys(cur.poses ?? {})]);

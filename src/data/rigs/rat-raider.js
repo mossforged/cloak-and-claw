@@ -50,6 +50,8 @@ export default {
     bow: { swap: { 'hand-far': 'hand-far-grip', 'hand-near': 'hand-near-pinch' }, arrow: 810, string: 805, anchor: { part: 'head', at: EAR },
       ik: { arm: ['arm-near-upper', 'arm-near-lower'], end: 'hand-near', hand: PINCH, to: 'nock' } },
   },
+  // T024 sockets (rig standard 9a), from tools/rig_from_source.py --sockets (part px; feet, weapon_tip: render/sockets.js)
+  sockets: { hand_near: { part: 'hand-near', at: [44.7, 42.6] }, hand_far: { part: 'hand-far', at: [48.7, 47.6] }, chest: { part: 'torso', at: [169.6, 133.6] }, head_top: { part: 'head', at: [79.7, 0.0] }, mouth: { part: 'head', at: [318.4, 187.1] }, tail_tip: { part: 'tail', at: [0.8, 47.6] }, feet: { parts: ['foot-near', 'foot-far'] }, weapon_tip: { item: 'tip' } },
   parts: {
     'pelvis': { img: P + 'pelvis.png', pivot: [108.8, 44.0], order: 400 },
     'torso': { img: P + 'torso.png', parent: 'pelvis', attach: [108.8, 12.0], pivot: [157.6, 188.0], order: 600, swaps: { 'torso-side': { img: P + 'torso-side.png', offset: [76.8, 8.0] }, 'torso-back': { img: P + 'torso-back.png', offset: [28.4, 8.0] } } },

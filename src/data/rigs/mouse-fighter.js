@@ -28,7 +28,7 @@ const HANDS = {
 const AX = HANDS['hand-near-grip'].axis, SHIELD_AX = HANDS['hand-far-shield'].axis;
 // a fist's slot is a line: turn by the smaller way (the shield's strap reads the same either way up)
 const turnTo = (to, from) => ((((to - from) % 180) + 270) % 180) - 90;
-const item = (A, parent, at, axis, order) => ({ img: A.img, parent, attach: at, pivot: A.grip, rest: axis - handle(A), scale: A.px / SCALE, order });
+const item = (A, parent, at, axis, order) => ({ img: A.img, parent, attach: at, pivot: A.grip, rest: axis - handle(A), scale: A.px / SCALE, order, art: A });
 
 export default {
   id: 'mouse-fighter',
@@ -38,6 +38,9 @@ export default {
   slots: { 'one-hand': 'sword' },
   emptyHand: { 'hand-near': 'hand-near-open' },   // nothing in the sword hand (sheathed, thrown, broken): open, not a hollow grip
   axes: { 'one-hand': AX },
+  // T024 sockets (rig standard 9a): attachment points for effects and items, from tools/rig_from_source.py --sockets
+  // (part px; feet and weapon_tip are found each frame: render/sockets.js).
+  sockets: { hand_near: { part: 'hand-near', at: [43.2, 42.0] }, hand_far: { part: 'hand-far', at: [54.4, 37.2] }, chest: { part: 'torso', at: [140.4, 83.6] }, head_top: { part: 'head', at: [85.1, 0.0] }, mouth: { part: 'head', at: [289.6, 149.7] }, tail_tip: { part: 'tail', at: [0.0, 57.2] }, feet: { parts: ['foot-near', 'foot-far'] }, weapon_tip: { item: 'tip' } },
   parts: {
     'head': { img: P + 'head.png', parent: 'torso', attach: [159.2, 27.2], pivot: [176.0, 205.2], order: 700, swaps: { 'head-neutral': { img: P + 'head-neutral.png', offset: [0.0, 0.0] }, 'head-attack': { img: P + 'head-attack.png', offset: [4.0, 1.6] }, 'head-hurt': { img: P + 'head-hurt.png', offset: [3.2, 1.6] }, 'head-effort': { img: P + 'head-effort.png', offset: [4.0, 1.2] }, 'head-ko': { img: P + 'head-ko.png', offset: [3.2, 1.6] }, 'head-back': { img: P + 'head-back.png', offset: [-7.2, -2.4] } } },
     'torso': { img: P + 'torso.png', parent: 'pelvis', attach: [118.8, 0.8], pivot: [121.6, 140.0], order: 600, swaps: { 'torso-back': { img: P + 'torso-back.png', offset: [-0.4, -6.8], hide: ['scarf-tail'] }, 'torso-side': { img: P + 'torso-side.png', offset: [-22.8, 1.6], hide: ['scarf-tail'] } } },

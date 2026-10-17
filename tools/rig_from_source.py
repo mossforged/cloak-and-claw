@@ -18,14 +18,55 @@ sys.path.insert(0, os.path.dirname(__file__))
 from key_green import key  # noqa: E402
 
 
-def silhouette_top(path):
+def alpha_of(path):
     a = np.asarray(Image.open(path).convert("RGBA")).astype(np.float32)
     if a[..., 3].min() < 255:
-        alpha = a[..., 3]
-    else:
-        spill = a[..., 1] - np.maximum(a[..., 0], a[..., 2])
-        alpha = np.clip(1 - (spill - 25) / 70, 0, 1) * 255
-    return int(np.nonzero((alpha > 20).any(axis=1))[0][0])
+        return a[..., 3]
+    spill = a[..., 1] - np.maximum(a[..., 0], a[..., 2])
+    return np.clip(1 - (spill - 25) / 70, 0, 1) * 255
+
+
+def silhouette_top(path):
+    return int(np.nonzero((alpha_of(path) > 20).any(axis=1))[0][0])
+
+
+def derive_sockets(src, folder):
+    """T024 sockets (rig standard 9a), canvas px, from part pivots and drawings (facing right):
+    hand_near / hand_far = the grip fist's slot centre (source `grips`), else the hand drawing's middle; chest = halfway
+    from the torso's pivot (waist) to the neck; head_top = the top of the head drawing; mouth = its front-most point (the
+    snout); tail_tip = the tail drawing's point farthest from its pivot. feet (halfway between the soles, on the floor) and
+    weapon_tip (the held item's art `tip`, else its far end along the handle) are found at runtime."""
+    P = src["parts"]
+    def opaque(name):
+        ys, xs = np.nonzero(alpha_of(os.path.join(folder, P[name]["img"])) > 127)
+        return xs, ys
+    out = {}
+    grips = src.get("grips") or {}
+    for side in ("near", "far"):
+        hand = f"hand-{side}"
+        if hand not in P:
+            continue
+        g = next((g for n, g in grips.items() if g["of"] == hand), None)
+        if g:
+            out[f"hand_{side}"] = (hand, g["center"])
+        else:
+            xs, ys = opaque(hand)
+            out[f"hand_{side}"] = (hand, [float(xs.mean()), float(ys.mean())])
+    if "torso" in P and "head" in P:
+        a, b = P["torso"]["pivot"], P["head"]["pivot"]
+        out["chest"] = ("torso", [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2])
+    if "head" in P:
+        xs, ys = opaque("head")
+        top = ys.min()
+        out["head_top"] = ("head", [float(xs[ys <= top + 6].mean()), float(top)])
+        front = xs.max()
+        out["mouth"] = ("head", [float(front), float(ys[xs >= front - 6].mean())])
+    if "tail" in P:
+        xs, ys = opaque("tail")
+        px, py = P["tail"]["pivot"]
+        i = int(np.argmax((xs - px) ** 2 + (ys - py) ** 2))
+        out["tail_tip"] = ("tail", [float(xs[i]), float(ys[i])])
+    return out
 
 
 def near_far(n):
@@ -46,6 +87,11 @@ def renamed(src):
     return out
 
 
+def sockets_block(sk, local, pad=""):
+    body = ", ".join(f"{n}: {{ part: '{part}', at: {local(part, pt)} }}" for n, (part, pt) in sk.items())
+    return f"{pad}sockets: {{ {body}, feet: {{ parts: ['foot-near', 'foot-far'] }}, weapon_tip: {{ item: 'tip' }} }},"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("source")
@@ -54,13 +100,21 @@ def main():
     ap.add_argument("--out")
     ap.add_argument("--height", type=float, default=136, help="screen px tall in game")
     ap.add_argument("--scale", type=float, default=0.4, help="canvas px -> stored image px")
+    ap.add_argument("--sockets", action="store_true", help="only print the sockets block (T024; images not written)")
     a = ap.parse_args()
     src = renamed(json.load(open(a.source)))
     folder = src.get("dir") or os.path.dirname(a.source)
+    s = a.scale
+    if a.sockets:
+        def tl(name):   # trim box top-left of a part's drawing on the canvas (as key_green trims it)
+            al = alpha_of(os.path.join(folder, src["parts"][name]["img"])) > 20
+            ys, xs = np.nonzero(al)
+            return [int(xs.min()), int(ys.min())]
+        print(sockets_block({n: (part, pt) for n, (part, pt) in derive_sockets(src, folder).items()}, lambda n, pt: [round((pt[0] - tl(n)[0]) * s, 1), round((pt[1] - tl(n)[1]) * s, 1)]))
+        return
     art = a.art or f"assets/art/rigs/{a.id}"
     out = a.out or f"src/data/rigs/{a.id}.js"
     os.makedirs(art, exist_ok=True)
-    s = a.scale
 
     def cut(name, img):
         dst = os.path.join(art, f"{name}.png")
@@ -110,6 +164,7 @@ def main():
         for n, g in src["grips"].items():
             lines.append(f"    '{n}': {{ part: '{g['of']}', at: {local(g['of'], g['center'])}, axis: {axis(g['direction'])} }},")
         lines.append("  },")
+    lines.append(sockets_block(derive_sockets(src, folder), local, "  "))
     lines += ["};", ""]
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
     open(out, "w").write("\n".join(lines))
