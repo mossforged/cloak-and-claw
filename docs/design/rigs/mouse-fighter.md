@@ -1,5 +1,7 @@
 # Rig sheet: Mouse Fighter (hero)
 
+> **2026-10-17: to be rebuilt from a setup-pose master after the rat** (rig standard section 2 revised). A013's master is his standee pose; A016's drawings are fitted to it and are superseded. Head, sword and shield carry over. This sheet will be redone for the new master; its pose budget still applies.
+
 The per-character sheet the rig standard (section 9) requires. **Art packets for this character reference this sheet, not the generic list.** A move packet may only name drawings marked game-ready here. Background: `docs/studies/2026-10-17-rig-art-inventory.md`.
 
 - **Standee:** `assets/art/heroes/mouse-fighter.png` (art bible). **Master:** A013 `reference.png` + `master-back.png`, canvas 1536 x 2304, floor y 2050, uniform scale x0.4 in game (130 px).
