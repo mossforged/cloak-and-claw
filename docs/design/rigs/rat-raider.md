@@ -4,7 +4,7 @@ The per-character sheet the rig standard requires (section 9). **Art packets for
 
 - **Identity reference:** the art-bible standee (`assets/art/enemies/rat-raider.png`) and the approved A010 rat with **head R** (`assets/source/A010-rat-raider-standard/reference.png`). Look approved by the user 2026-10-16 ("much better, much closer to the standee").
 - **Master:** A017 (to come): setup pose (rig standard section 2), canvas 1536 x 2304, #00FF00, ~1350 px tall, floor marked. In game ~136 px (uniform scale).
-- **Gates:** G2 parts: A018 merged, lead stretch strip 2/28 flagged (2026-10-17); human look at T026. G1 master: **passed** 2026-10-17 (A017; user: "the rat looks great"). G2 parts + stretch strip: open (A018, then a Code import). G3 motion: open. G4 gear/masks refit: open (A019).
+- **Gates:** G2 parts: A018 merged, lead stretch strip 2/28 flagged (2026-10-17); human look at T026 failed on joints -> A022 repair merged 2026-10-17 (hands, shoulders, tail root, clean cuts); re-import and motion look in T026 round 2. G1 master: **passed** 2026-10-17 (A017; user: "the rat looks great"). G2 parts + stretch strip: open (A018, then a Code import). G3 motion: open. G4 gear/masks refit: open (A019).
 - **Names:** near/far (rig standard section 3).
 
 ## Carried over from A010/A011 (keep, do not redraw)
