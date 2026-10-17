@@ -39,4 +39,5 @@ Distilled from the studies in `docs/studies/` (genre study 2026-10-14, developer
 - Part names use near/far for camera depth (renamed from front/back in T024); "lead/trail" only in pose descriptions; `back` is the back view. In packets name the exact part. (A013: the wrong foot was turned because a packet said "back foot".)
 - A rigid cutout rig runs out of **whole-limb key drawings** (folded leg, kneeling leg, knee-up leg, cocked arm, toe-off feet, side/back torso), not hands or heads; write the character's pose budget before ordering art. (Rig art inventory study, 2026-10-17)
 - Feet off the floor, hands that should follow the weapon, a far hand drawn under the shaft: runtime problems, not art; check the stretch strip before asking Art for anything. (Same study)
+- Cut rigs from a neutral setup pose, never an action pose: a limb drawn folded or foreshortened stays short forever (rat A010, mouse A013). (2026-10-17)
 - Bodies freeze before gear, gear before moves. (A008 refit; Soulbound)

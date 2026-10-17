@@ -29,10 +29,17 @@ G1 is cheap and catches the expensive mistake (a different character). Don't dra
 
 ## 2. The master (G1)
 - Start from the character's **approved standee** (art bible) as an input image. **Redraw that character; don't design a new one.** Same proportions, limb thickness, outfit, colours.
-- **Master pose:** three-quarter view facing right (style contract), in the character's **game stance** (the rat crouches, the mouse stands), with arms and legs slightly apart so no limb hides another, the weapon in the near hand, and hands visible.
-- Also deliver `master-back.png`: the same character from behind (for the back torso and back-of-head swaps).
-- Canvas **1536 x 2304, #00FF00**, character silhouette about **1350 px tall** (as A004/A005), feet on a marked floor line.
+- **Master pose = a neutral setup pose, not the game stance** (revised 2026-10-17; the old rule baked one action pose into every part). Three-quarter view facing right (style contract), upright in the character's natural posture (a rat may keep a slight hunch in the torso and neck), and:
+  - **legs** both under the hips, roughly the same visible length, near leg slightly forward, knees bent about 10-20 degrees, feet flat on the floor line, no foreshortening;
+  - **arms** hanging down and slightly away from the body (about 20-30 degrees), elbows slightly bent, nothing crossing the torso, hands as relaxed fists, fully visible;
+  - **no held weapon** (weapons are items; the grip hands are drawn separately);
+  - **cloth that crosses a joint** (baggy trousers, skirts, long sleeves) is drawn so it can be cut into a pelvis piece plus one piece per limb, with overlap, not as one shape spanning hip and thigh;
+  - tail and cloth tails hanging naturally, in 2-3 segments' worth of length.
+- The game stance (crouch, lunge, guard) is **posed by the rig** afterwards. The standee remains the identity reference beside the master in every review.
+- Also deliver `master-back.png`: the same character from behind, in the same setup pose (for the back torso and back-of-head swaps).
+- Canvas **1536 x 2304, #00FF00**, character silhouette about **1350 px tall**, feet on a marked floor line.
 - The master is the single source of truth. Every later image is cut from it or drawn over it.
+- Why: the rat's A010 master was a lunge with the sword arm wound back, so his near arm was cut short and folded (no low overhand grip, T020) and his legs came out at different lengths (the walk, T018); the mouse's wide stance forced a hip-narrowing hack (T023). Professional rigs are cut from a neutral setup pose (Spine's setup pose, Live2D's front-facing neutral).
 
 ## 3. Standard biped part list (fixed names)
 Names are identical for every biped, so poses, weapon kits and gear transfer between bodies. **Depth words only:** `near` = the camera side, `far` = away from the camera. `lead` / `trail` are gait words used only in pose descriptions, never in part names. `back` is reserved for the back **view** (`head-back`, `torso-back`). (Decision 2026-10-17; A013 and earlier deliveries use `front/back` for near/far and the importer accepts both.)
