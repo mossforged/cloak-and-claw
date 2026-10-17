@@ -1,0 +1,106 @@
+{
+  "source_folder": "A010-rat-raider-standard",
+  "offset_xy": [
+    -114,
+    -50
+  ],
+  "dx": -114,
+  "dy": -50,
+  "scale": 1,
+  "rotation_degrees": 0,
+  "canvas": [
+    1536,
+    2304
+  ],
+  "floorY": 1950,
+  "floor_note": "Near front sole approx y1947; far sole approx y1920 (27 px / 2.7 game px higher). Rear soles approx y1914. Floor guide y1950 is marked in review; no line baked into source.",
+  "head_pixel_validation": {
+    "master.png": {
+      "head_foreground_pixels": 306987,
+      "changed_head_pixels": 0,
+      "silhouette_bbox": [
+        229,
+        600,
+        1300,
+        1952
+      ]
+    },
+    "master-back.png": {
+      "head_foreground_pixels": 234258,
+      "changed_head_pixels": 0,
+      "silhouette_bbox": [
+        198,
+        640,
+        1296,
+        1920
+      ]
+    }
+  },
+  "joint_points": {
+    "neck": [
+      880,
+      1200
+    ],
+    "shoulder-near": [
+      560,
+      1176
+    ],
+    "elbow-near": [
+      452,
+      1314
+    ],
+    "wrist-near": [
+      398,
+      1452
+    ],
+    "shoulder-far": [
+      961,
+      1171
+    ],
+    "elbow-far": [
+      1028,
+      1320
+    ],
+    "wrist-far": [
+      1100,
+      1469
+    ],
+    "hip-near": [
+      654,
+      1518
+    ],
+    "knee-near": [
+      602,
+      1734
+    ],
+    "ankle-near": [
+      572,
+      1848
+    ],
+    "hip-far": [
+      884,
+      1506
+    ],
+    "knee-far": [
+      914,
+      1728
+    ],
+    "ankle-far": [
+      914,
+      1842
+    ],
+    "tail-root": [
+      548,
+      1524
+    ]
+  },
+  "joint_note": "Expected anatomical centers interpreted under cloth for G1 only; not production pivots.",
+  "limb_lengths_source_px": {
+    "arm-near": 323.4,
+    "arm-far": 328.9,
+    "leg-near": 340.1,
+    "leg-far": 338.0,
+    "arm-difference-percent": 1.67,
+    "leg-difference-percent": 0.62
+  }
+}
