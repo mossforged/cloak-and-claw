@@ -36,4 +36,7 @@ Distilled from the studies in `docs/studies/` (genre study 2026-10-14, developer
 - Set gameplay numbers (belt depth, sizes) first, then brief the art to them. (our decision)
 - Study classics critically: keep what works, drop the frustrations. (SoR4)
 - Show builds to strangers early; watch, don't coach. (SoR4)
-- Part names front/back mean near/far, not leading/trailing; in packets name the exact part (e.g. `foot-front` = near foot) and use "leading/trailing" only for stance. (A013: the wrong foot was turned because a packet said "back foot".)
+- Part names use near/far for camera depth (renamed from front/back in T024); "lead/trail" only in pose descriptions; `back` is the back view. In packets name the exact part. (A013: the wrong foot was turned because a packet said "back foot".)
+- A rigid cutout rig runs out of **whole-limb key drawings** (folded leg, kneeling leg, knee-up leg, cocked arm, toe-off feet, side/back torso), not hands or heads; write the character's pose budget before ordering art. (Rig art inventory study, 2026-10-17)
+- Feet off the floor, hands that should follow the weapon, a far hand drawn under the shaft: runtime problems, not art; check the stretch strip before asking Art for anything. (Same study)
+- Bodies freeze before gear, gear before moves. (A008 refit; Soulbound)

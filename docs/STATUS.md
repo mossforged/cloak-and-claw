@@ -3,10 +3,10 @@
 **Stage 2 (feel pass + crowd tools): gate question with the user. Stage 3 (rig) passed. Stage 4 (standards) started with T023.** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T022 helping in the fight. Last art task merged: A013 Mouse Fighter to the rig standard. Plan rewritten around the hook on 2026-10-16 (old plan and older notes in `docs/history.md`).
 
 ## Next
-1. **Code:** T023 (import the new Mouse Fighter + attack footwork), in progress.
-2. **Art:** idle. A015 (oak stronghold) on hold with the home loop. Next art: the next body for the rig pipeline.
+1. **Code:** T023 pushed (review next); then T024 rig pipeline v1 (near/far names, floor-line rule, stretch test, sockets, A016 import), then T025 weapon node + grip modes.
+2. **Art:** A016, the Mouse Fighter's six missing key drawings (from his rig sheet). Needs the one-time large-file setup on the Mac first.
 3. **User:** answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
-4. **Lead:** review T023; draft the combatant standard and the rig pipeline plan; pick the stress-test enemies with the user.
+4. **Lead:** review T023; make the rig standard + study a reusable skill (user request); then the combatant standard; pick the stress-test enemies with the user.
 
 ## Stage plan (combat core first, 2026-10-17)
 | Stage | What | Gate question for the user |
@@ -23,11 +23,10 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T023-import-new-mouse.md`.
-- Art: none queued (A015 on hold).
+- Code: `docs/tasks/T024-rig-pipeline-v1.md` after T023 is merged; then `docs/tasks/T025-weapon-node-grips.md`.
+- Art: `docs/tasks/A016-mouse-key-drawings.md` (LFS setup first).
 
 ## Open questions (for the user)
-- **Rig art inventory study** (`docs/studies/2026-10-17-rig-art-inventory.md`): adopt its process fixes? Rename parts near/far (one migration task) or keep front/back? Order the six missing mouse drawings (A016)? Keep our runtime vs test Spine?
 - **Stage 2 gate** (above). Then the lead tags `stage-2` and `stage-3`.
 - **Pillar 3** ("you grow by fighting... a run fits 30-60 minutes") was written for an arcade run. With mission -> home -> mission, growth comes from rescues and gear too. Reword it? (Lead's suggestion: "You grow by fighting and by the folk you save.")
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -45,6 +44,7 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: user adopted the study (process fixes, near/far rename, A016, keep our runtime). Wrote the Mouse Fighter rig sheet (`docs/design/rigs/mouse-fighter.md`), A016, T024, T025; revised the rig standard and lessons. Next: the reusable skill.
 2026-10-17 lead: study "The rig art inventory" (5 research tracks + our history): the mouse lacked six whole-limb key drawings (toe-off feet x2, folded far leg, knee-up leg, kneeling leg, cocked arm) that a dozen states each use; half the painful rounds were runtime (floor-line rule, hand-follows-weapon, far-hand draw order). Proposes the rig sheet + pose budget, a stretch test, near/far naming, gate order. Waiting for the user's read.
 2026-10-17 lead: user: hold off on meta progression (home loop, stronghold) until the rig system and core combat are locked down and tested against different enemies and abilities. Stage plan reordered; A015 on hold.
 2026-10-17 lead: user on A014: "I think so far I like the ancient oak" (B). Wrote A015 (B refined: three layouts, hero at 130 px, animal-scale found objects, roots holding the walls, no invented emblems, animal silhouettes).

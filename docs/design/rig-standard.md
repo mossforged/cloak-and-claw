@@ -2,7 +2,7 @@
 
 Every rigged character follows this. Art packets cite it and only list what differs. Background and sources: `docs/studies/2026-10-16-how-pros-build-2d-rigs.md`.
 
-**Status: APPROVED by the user (2026-10-16).** Mouse Fighter predates it and is not retrofitted until a move needs it.
+**Status: APPROVED by the user (2026-10-16); revised 2026-10-17** from `docs/studies/2026-10-17-rig-art-inventory.md` (near/far names, key-drawing library, pose budget required, stretch test, gate order). The Mouse Fighter follows it from A013/A016 on.
 
 ## 0. Purpose (agreed with the user, 2026-10-16)
 Every rule below must serve one of these. A rule that serves none gets cut.
@@ -35,33 +35,38 @@ G1 is cheap and catches the expensive mistake (a different character). Don't dra
 - The master is the single source of truth. Every later image is cut from it or drawn over it.
 
 ## 3. Standard biped part list (fixed names)
-Names are identical for every biped, so poses, weapon kits and gear transfer between bodies. "front" = near (camera side), "back" = far. **These never mean leading/trailing.** In a stance the trailing foot is often the near (`front`) one. Packets and reviews say "near/far" for parts and "leading/trailing" for stance, and name the part explicitly (lesson from A013, where "back foot" was misread).
+Names are identical for every biped, so poses, weapon kits and gear transfer between bodies. **Depth words only:** `near` = the camera side, `far` = away from the camera. `lead` / `trail` are gait words used only in pose descriptions, never in part names. `back` is reserved for the back **view** (`head-back`, `torso-back`). (Decision 2026-10-17; A013 and earlier deliveries use `front/back` for near/far and the importer accepts both.)
 
 | Group | Parts |
 |---|---|
 | Core | `pelvis`, `torso`, `head` |
-| Near arm | `arm-front-upper`, `arm-front-lower`, `hand-front` |
-| Far arm | `arm-back-upper`, `arm-back-lower`, `hand-back` |
-| Near leg | `leg-front-upper`, `leg-front-lower`, `foot-front` |
-| Far leg | `leg-back-upper`, `leg-back-lower`, `foot-back` |
-| Cloth / tail (as the character has them) | `tail` (or `tail-1`, `tail-2`), `scarf-tail`, `cape`, `ear-back` etc. |
+| Near arm | `arm-near-upper`, `arm-near-lower`, `hand-near` |
+| Far arm | `arm-far-upper`, `arm-far-lower`, `hand-far` |
+| Near leg | `leg-near-upper`, `leg-near-lower`, `foot-near` |
+| Far leg | `leg-far-upper`, `leg-far-lower`, `foot-far` |
+| Cloth / tail (as the character has them) | `tail` (2-3 segments with rounded overlaps), `scarf-tail`, `cape`, `ear-far` etc. |
 
-About **15 core parts plus 1 to 3 extras**. Hands, feet and pelvis are always separate (the lesson from every professional example).
+About **15 core parts plus 1 to 3 extras**. Hands, feet and pelvis are always separate. Placeholder paths never carry a colour or a character name (`torso/side`, not `red-torso`).
 
-## 4. Minimum swap library (planned up front)
-Same canvas; each swap shares its part's pivot so it drops in place.
+## 4. Swap and key-drawing library (planned up front, per the character's pose budget)
+Same canvas; each swap shares its part's pivot so it drops in place. The study (2026-10-17) found that a rigid-part rig's missing category is not more hands or heads but **whole-limb key drawings for poses past the rigid-part limit** and **per-view torsos**. Every biped's sheet starts from this table and removes what its state list never uses (a grunt drops the back torso, knee-up leg and shout head).
 
-| Part | Required drawings |
-|---|---|
-| `hand-front`, `hand-back` | `open`, `fist`, `grip` (closed round a handle, hole for the shaft), plus `pinch` for bow users. Name: `hand-front-grip.png` |
-| `head` | `neutral`, `attack` (shout or snarl), `hurt`, `effort` (gritted, bracing), `ko` (eyes shut or dazed), `back` (back of the head); plus 3 to 5 face-detail overlays that fit all of them (section 7a) |
-| `torso` | `three-quarter` (default), `side` (turned side-on, for horizontal cuts), `back` |
-| feet | `flat` (default); `toe` (push-off) optional |
-| arms (casters and big moves) | `arm-front-raised` (whole raised arm, carries the held item), `arm-back-guard` or `arm-back-reach` (whole arm thrust forward, open palm, for casting at a target): only for characters that cast or block |
+| Slot | Essential (hero) | Polish |
+|---|---|---|
+| `head` | `neutral`, `attack`, `hurt`, `effort`, `ko`, `back` | `front` (turn midpoint), `shout`; 3-5 face-detail overlays (7a) |
+| `torso` | `three-quarter` (default), `side` (thrusts, horizontal cuts), `back` (spin, back throw, roll) | `hunched` (block, crouch), `twisted` (cross cut, hip toss) |
+| `pelvis` | one | `side` |
+| `hand-near`, `hand-far` | `open`, `fist`, `grip` (side hold) | `grip-overhand`, `pinch` (bow, potion), `palm` (block, push), `shield` (far, shield users) |
+| `arm-near` whole-limb | `raised` (cast, overhead; carries the item), `cocked` (wound past 90 degrees: heavy wind-ups, telegraphs) | `smear` per swing family |
+| `arm-far` whole-limb | `guard` (block; carries the shield), `raised` (two-hand cast, bow draw) | - |
+| `leg-near` whole-limb | `knee-up` (grab knee, jump tuck), `kneeling` (get-up, revive, downed, stun) | - |
+| `leg-far` whole-limb | `folded` (squat, land, crouch, lying) | - |
+| `foot-near`, `foot-far` | `flat`, `toe-off` (heel raised: walk, run, stepping attacks) | `heel-strike`, `out` (turned out, planted stances) |
+| joint patches | - | elbow x2, knee x2 fill caps, only where the stretch strip shows a gap |
 
-That's about 18 base parts and 14 to 18 swaps, roughly **35 images per character**: still small next to Don't Starve's ~155 or Streets of Rage 4's ~1,000 frames.
+Hero: **40 drawings essential, ~62 polished.** Grunt: 27 / 33. Brute: 24 / 29. Caster: ~30. Floating caster: 7-11. Serpent: 4-5. Boss: 40-45. Full tables, non-biped templates and the per-state pose budget: study 2026-10-17, sections 3-4.
 
-**Key drawings** (whole limbs or poses drawn for one move, like A006's raised arm) are **not** in the base kit. They are ordered only after G3 shows the rig can't sell a move. Each one is listed in the character's pose budget (section 9).
+**Whole-limb drawings** replace their rigid parts for that pose (`hide` list in `rig-source.json`), carry the held item where the arm does (`itemGrip`, `slotDirection`), and are cut from the master and inpainted, never generated from scratch.
 
 ## 5. Drawing rules (G2)
 1. **Cut, don't regenerate.** Each part is cut from the master along its joint lines. Use the image tool only to **paint in what was hidden** (shoulder under the sleeve, thigh under the tunic, the hip behind the near leg). A limb must never be generated from scratch, because separate generations drift into a different character.
@@ -80,8 +85,11 @@ That's about 18 base parts and 14 to 18 swaps, roughly **35 images per character
 6. **Swaps share the pivot** of the part they replace (same joint point on the canvas).
 7. Light from upper left, bold dark outline, no ground shadow (style contract).
 
+### 5a. Weapons (items)
+Held art = floor art (decision 2026-10-16). Each item declares a **handle axis** (`grip` at the pivot, business end along +X via `gripEnd`), `grip2` for two-handers, `tip`, and a `stow` anchor. In game the weapon is a node of its own; the hands reach its grip markers and copy its rotation (T025), so overhand, underhand and reverse holds are data. Hands are never painted onto weapons. Per weapon: one drawing, optionally one angle-specific drawing where a flip reads wrong, smears as polish; a bow's arrow is its own attachment; a shield needs the far-hand `shield` drawing.
+
 ## 6. Draw order (depth bands)
-`hand-back`, `arm-back-*`, far weapon (100s) < `leg-back-*`, `foot-back` (200s) < `tail`, cape back (300s) < `pelvis` (400) < `leg-front-*`, `foot-front` (500s) < `torso` (600) < gear on torso (650) < `head` (700) < gear on head (750) < `arm-front-*`, `hand-front`, held weapon (800s). Swaps and gear inherit their part's band.
+`hand-far`, `arm-far-*`, far weapon (100s) < `leg-far-*`, `foot-far` (200s) < `tail`, cape back (300s) < `pelvis` (400) < `leg-near-*`, `foot-near` (500s) < `torso` (600) < gear on torso (650) < `head` (700) < gear on head (750) < `arm-near-*`, `hand-near`, held weapon (800s). Swaps and gear inherit their part's band. **Exception:** the far hand on a two-handed item draws in an overlay band above the shaft (850), so it is never hidden.
 
 ## 7. Gear and colour (G4)
 - Gear overlays are drawn **over the approved master** (head and torso as they will be in game), after G3.
@@ -106,13 +114,22 @@ Effects attach to a named point on the rig (`hand-front` tip, weapon tip, chest)
 ## 8. Rig bench and motion test (G2, G3; Code's tool)
 - **Fit overlay:** load the source parts and `rig-source.json`, assemble at rest, and draw them over the faded master; flag drift in proportion or position.
 - **Standard motion strip:** stance, idle breath, walk cycle, attack (windup, strike, follow-through), hurt, knockdown, get-up; played live at game size beside the standee, with an exported strip image for the review.
+- **Stretch strip (G2 artefact, T024):** every joint at 90 and 150 degrees, arm straight up, each torso view, each hand and foot alternate, each hand holding each item at every grip mode, a crouch and a lying pose with the **floor line drawn**, the rig at 0.96x / 1.04x / 1.4x; exported as one JPG and run headless in `npm test`, failing on a seam gap over 2 px, a foot below the floor, or a hidden far hand.
+- **Floor-line rule:** in grounded states leg IK targets clamp to the floor; a pose lifts a foot only by naming it.
 - The user judges G3 here, in motion, before anything is imported into the game.
 
-## 9. Per-character rig sheet (one file per character: `docs/design/rigs/<id>.md`)
-Holds: standee reference; master status; part list (marking any extras); swap library status; **pose budget** (each move: which swaps and key drawings it uses); gear and tint regions; and which gate it has passed.
+## 9. Per-character rig sheet (one file per character: `docs/design/rigs/<id>.md`): **written before any art is requested**
+Holds: standee reference; master status; part list (marking extras); the swap and key-drawing library with each drawing's state (ordered / source / game-ready); the **pose budget** (each state the character has or is planned to have -> the drawings it consumes, from the study's section 4 tables); items and sockets; gear and tint regions; gates passed. **Rule:** a move packet whose pose budget names a drawing that is not yet game-ready is rejected at planning, not discovered in review. Art packets reference the sheet, not the generic list. First sheet: `rigs/mouse-fighter.md`.
+
+### 9a. Sockets
+Every rig declares named attachment points for effects and items: `hand_near`, `hand_far`, `weapon_tip`, `chest`, `head_top`, `feet`, `mouth`, `tail_tip` (`saddle` for mounts). The importer derives defaults from pivots.
+
+### 9b. Gate order
+Body (master, cut parts, rounded joint ends, stretch strip passed) -> pose-budget drawings -> gear on the frozen canvases -> moves (each packet citing its pose-budget rows, shipping a motion strip and the stretch strip). Weapons gate separately on handle-axis data and a grip test across every body that can hold them.
 
 ## 10. Rig art packet checklist (lead)
-- [ ] Cites this standard; names only the differences (extra parts, character-specific swaps).
+- [ ] Cites this standard and the character's rig sheet; names only the differences.
+- [ ] Every drawing ordered is a row in the rig sheet's library with a state that consumes it.
 - [ ] One gate per packet: G1 master, G2 parts, or G4 libraries. G3 is a code task.
 - [ ] Standee named as the input image; master is a redraw, not a new design.
 - [ ] Review shows the result beside the standee at full size **and** at game size.
