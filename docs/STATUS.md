@@ -44,6 +44,7 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: user set Pages source to GitHub Actions; first publish of main + previews triggered.
 2026-10-17 lead: merged T027 (viewer, Pages previews workflow, reviews.html; 30/30 tests; user: "yes the model viewer is great"). Previews start once the user sets Pages source to GitHub Actions.
 2026-10-17 code: user accepted T027 in use ("yes the model viewer is great"). Branch previews still need the Pages source switch + merge.
 2026-10-17 code: T027 on `t027-model-viewer`: `viewer.html` (src/viewer/): every rigged fighter, clips built from data and played by the real sim in a private world (attacks with real timing + hit-stop + swoosh, jump, block/block hit, hurt, knockdown -> get up, grab/knee/throws, grabbed/thrown, pickup, toss + sword draw, potions, downed/revive, cast, every rig pose), held item + grip mode, rat looks/gear, overlays (floor lines, pivots, sockets, live stretch flags, hit boxes, rest ghost), compare slot (also spearman hold versions), frame step/scrub/loop/speed, URL state, screenshot; phone first. 30/30 tests; game untouched.
