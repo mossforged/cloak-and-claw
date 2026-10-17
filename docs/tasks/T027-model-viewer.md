@@ -22,3 +22,13 @@ The user (2026-10-17): "rather than [loading] the model I need to review into a 
 - Human: can you review a character's moves and holds faster here than in a level? What's missing?
 
 Out of scope: editing poses or numbers in the viewer (that's the lab), new art, new moves.
+
+## Addendum (lead, 2026-10-17): every review on the phone, no terminal
+User: "going forward, I want to do all our asset reviews, whether animations, still images, models, whatever ... in a way that I can do on my phone rather than having to go through a terminal or a port." So this task also builds the review path:
+
+11. **Branch previews on GitHub Pages.** New workflow `.github/workflows/pages.yml`: on every push to any branch (and on main), assemble one site: `main` at the root, and every remote branch **not yet merged into main** under `preview/<branch>/`. Each copy includes the game, `viewer.html`, `src/`, `assets/art/` and that branch's `docs/screens/` and `docs/tasks/`; it excludes `assets/source/` (LFS; Pages can't serve it) and `node_modules`. Deploy with `actions/upload-pages-artifact` + `actions/deploy-pages`. Keep the build small (skip unchanged copies if easy). Document the one-time switch the user makes in a browser: repo Settings -> Pages -> Source: **GitHub Actions** (`docs/handoffs/setup-mac.md`, new "Phone reviews" section).
+12. **Review hub, `reviews.html`** (root of the site; the user's one bookmark): lists every open preview branch, newest first, read from a small `previews.json` the workflow writes (branch, task ID, packet title, last commit time). Each entry: **Open in viewer** (the branch's viewer), its screenshots and review sheets (`docs/screens/<TASK>/` images, tap to enlarge, swipe), and the packet's **Human** acceptance question shown as text. Phone-first layout; works offline of any terminal.
+13. **Viewer is phone-first:** large touch buttons in a bottom sheet, the character always in view, pinch or a slider to zoom, no hover-only controls. Check on a 390 x 844 viewport in the screenshots.
+14. The viewer's share URL (item 9) works on the preview copies, so the lead can send a link to an exact view on a branch.
+
+Acceptance additions: the workflow runs green on this branch and the preview of `t027-*` itself opens; `docs/screens/T027/` includes phone-size shots of `reviews.html` and the viewer.

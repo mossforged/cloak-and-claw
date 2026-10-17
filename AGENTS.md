@@ -11,12 +11,13 @@ Run `pwd`. It must end in `cloak-and-claw-art`. If not, **stop** and tell the us
 3. Create a branch: `git checkout -b a0nn-<short-slug>`. Never commit to main.
 
 ## You own
-`assets/source/` only, or the `docs/concepts/<ID>-<slug>/` folder a concept packet names (small JPG sheets, normal git). Plus the asset's row in `docs/assets.md` (set state to `source` when delivered).
+`assets/source/` only, or the `docs/concepts/<ID>-<slug>/` folder a concept packet names (small JPG sheets, normal git), and `docs/screens/<ID>/` for phone review copies. Plus the asset's row in `docs/assets.md` (set state to `source` when delivered).
 You never touch `src/`, `tests/`, `tools/`, `assets/art/`, `index.html` or other docs.
 
 ## Asset rules
 - Deliver to `assets/source/<ID>-<slug>/` exactly as the packet names the files.
 - Follow the style contract: three-quarter view toward the camera (about 30 degrees, like the art bible), facing right, flat #00FF00 background, light from upper left, bold dark outlines, no ground shadow, consistent scale.
+- **Phone review copy:** also save every review image as a small JPG (quality ~80, long side <= 2000 px) in `docs/screens/<ID>/` (e.g. `docs/screens/A019/review.jpg`). The user reviews on his phone from the published preview, which cannot show LFS files.
 - Include `prompt.md` (tool + exact prompts), `review.png` (all images on grey + one at game size, about 130 px tall, over `assets/art/stages/harbor-market.png`) and `HANDOFF.md`.
 - **Large files:** source images (png, jpg, webp, psd) in new folders go into Git LFS automatically (`.gitattributes`); `review*.png` and text files stay in normal git. Before committing, `git lfs status` should list your new part images. Never commit raw tool outputs (`generated/` folders, discarded variants): only the files the packet names.
 - If the tool cannot meet a rule (for example parts keep overlapping), deliver your best attempt and say so in `HANDOFF.md`. Do not invent a workaround in code.

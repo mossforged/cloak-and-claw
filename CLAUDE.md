@@ -28,7 +28,7 @@ When a packet says to import an asset: run `python3 tools/key_green.py assets/so
 
 ## End of task
 1. `npm test` passes. Add tests for new logic.
-2. Windowed acceptance: save screenshots to `docs/screens/T0NN/` as **JPG (quality ~80), not PNG**, to keep the repo small; otherwise list exactly what the user should look at.
+2. Windowed acceptance: the user reviews **on his phone** from the branch preview (`reviews.html`, once T027 lands): make sure everything he must judge is reachable there (viewer links with the exact state, screenshots). Save screenshots to `docs/screens/T0NN/` as **JPG (quality ~80), not PNG**, to keep the repo small; otherwise list exactly what the user should look at.
 3. Update `docs/MODULES.md` / contracts if files, exports or events changed.
 4. Two lines under "Last session" in `docs/STATUS.md`. Set `BUILD` in `src/config.js` to the task and round (e.g. `t009 grab v1`).
 5. Commit (author is the repo's configured anonymous handle), `git push -u origin <branch>`, and report the branch name and anything you could not do.
