@@ -12,11 +12,13 @@ The user wants one enemy with everything a brawler body needs, at the polish lev
 4. `torso-lean-back`: three-quarter, chest arched back. Overhead wind-up, hurt snap, skid, kick.
 5. `pelvis-side`, `pelvis-front`, `pelvis-back`: the trousers' waistband and seat from those angles; the **tail root tucks under the seat** in side and front; in back the seat and tail root face the camera with the root drawn clean and outlined (it draws in front there).
 
-**Heads:** 6. `head-front` (turn midpoint; same head, facing the camera); 7. `head-shout` (mouth wide, rallying). Same head canvas and neck point as the six carried heads.
+**Heads:** 6. `head-front` (turn midpoint; same head, facing the camera); 7. `head-shout` (mouth wide, rallying); 7b. `head-drink` (eyes shut, head tipped back, lips ready at a bottle's neck). Same head canvas and neck point as the six carried heads.
 
 **Shoulder caps:** 8. `shoulder-near`: the near shoulder with its pauldron and vest edge as the master shows it, as its own small piece that sits **on top of the upper arm** when the arm swings in front of the body (front and side views). 9. `shoulder-far`: the same for the far shoulder (back view, shield guard). The cap's lower edge tucks under nothing: it is outlined and finished; its top continues under the torso's vest edge.
 
 **Arms, hands, feet:** 10. `arm-far-raised` (whole far arm straight up, fist closed; two-hand overhead, cower); 11-12. `arm-near-smear-h`, `arm-near-smear-o` (whole near arm stretched into a motion blur along a horizontal and an overhead arc, fist and cutlass hand at the end; one frame each); 13-14. `hand-near-palm`, `hand-far-palm` (flat open palm facing out: block, push, grab reach, cower); 15-16. `foot-near-heel`, `foot-far-heel` (heel strike: toes up, heel on the floor); 17. `foot-near-out` (turned out, planted). Feet and hands cut from A017's own feet and fists like A022's.
+
+**Added (lifting, throwing, drinking, magic; see the rehearsal):** 18. `arm-near-mouth`: whole near arm bent with the elbow forward and the fist at the mouth in a side grip (drinking; also wiping the mouth with the back of the fist), carrying the item like the A019 arm keys (`itemGrip`, `slotDirection`); 19-20. `hand-near-cup`, `hand-far-cup`: open hand cupped palm up (holding an orb or flame, charging a spell, lifting from beneath); 21. `hand-near-point`: index finger pointing, other fingers curled (commands, curses).
 
 **Only if Code's stretch strip shows gaps after import:** elbow and knee patches (x4). Don't draw them now.
 

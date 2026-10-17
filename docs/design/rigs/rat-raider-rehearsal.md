@@ -67,10 +67,35 @@ Turning = a chain of views, the depth switching on the frame where the hand pass
 | Weapon drop / pickup | 2 / 3 | Q | open near hand; squat (folded far) then grip |
 | Cower | loop | Q hunched | raised near + far raised arms over the head, **palm hands**, hurt head |
 | Victory / taunt | 2 | Q | shout head, raised arm |
+| Weapon thrust in the air (victory, rally) | 2 | Q -> F | raised near arm carrying the weapon point-up, shout head, chest turned toward the camera, far fist clenched low |
+
+### Lifting, throwing, drinking (added at the user's request, 2026-10-17)
+| Move | Keys | V | Drawings and depth |
+|---|---|---|---|
+| Throw the hero over the shoulder (back throw) | grab, lift, arch, release | Q -> lean-back -> B | fists on the hero (carry point between the hands), **leaning-back torso** arching, back view at the release; the hero is posed and placed at the rat's carry point each key (T028 carry socket) |
+| Throw the hero forward (hip toss) | grab, turn, heave | Q -> F | front torso and pelvis, near arm in front; the hero swung round at the carry point |
+| Lift the hero overhead and hurl | squat, lift, hold, hurl | Q -> lean-back -> F | folded far leg in the squat; **raised near + far raised arms**, **palm hands** up under the hero; hurl in front |
+| Pick up and carry an object (crate, barrel) | squat, lift, carry loop | Q | folded far leg; both arms forward, palm hands on its sides; the object draws **between the torso and the near arm** (carry band), far hand behind it |
+| Throw an object two-handed (overhead) | wind, release | lean-back -> F hunched | raised near + far raised arms holding it overhead, then released in front |
+| Throw a small object one-handed (bottle, fish) | wind, release | BQ -> F | cocked arm behind with a side grip, released in front with the open hand |
+| Drink (potion, flask) | raise, drink, lower, wipe | Q | **near arm to the mouth** (whole-arm drawing, elbow forward, side grip at the lips), **drinking head** (eyes shut, head tipped back), leaning-back torso; wipe: the same arm with the back of the fist at the mouth |
+
+### Magic: generic spell poses (any caster or shaman rat; the spell itself is the effect kit, tinted per school)
+| Pose | Keys | V | Drawings and depth | Spells it serves |
+|---|---|---|---|---|
+| Charge (gather) | loop | Q | both hands at the chest, **cupped hands** facing each other, effort head, hunched torso | charge-up for any bolt, heal, buff |
+| Push (palm blast) | release | F | near arm straight forward, **palm hand**, chest turned toward the target; far hand behind | bolt, shockwave, push-back |
+| Two-hand beam | loop + release | F | **both arms in front** (per-pose draw order: the far arm in front of the chest too), palm hands | beam, breath, shield wall |
+| Hold an orb / flame in hand | loop | Q | **cupped hand** palm up (near or far) | fireball held, light, thrown orb (then the one-hand throw above) |
+| Call down (overhead) | wind, release | lean-back -> hunched | raised near + far raised arms, palm hands up then thrust down | meteor, lightning, rain |
+| Ground strike | strike | Q hunched | kneeling near leg, near fist to the floor | earth spike, quake, ring |
+| Point / command | 1 held | Q -> S | near arm straight forward, **pointing hand** (index finger), shout head | curse, mark target, captain's order |
+| Self-buff / roar | 2 | Q | lean-back torso, fists clenched low, shout head; aura behind (socket `chest`) | rage, haste, armour up |
+| Staff cast | wind, release | lean-back -> F | overhand grips, raised near arm, staff head toward the target or planted | any spell with a staff |
 
 ## What this adds (A023 art, T028 code)
-**Drawings (A023), 19 + 4 only if the stretch strip shows gaps:** torso front, torso turned-away, torso hunched, torso leaning-back; pelvis side, front, back; head front, head shout; near and far shoulder caps; far raised arm; smear arm horizontal and overhead; palm hand near and far; heel-strike foot near and far; out-turned near foot; (elbow x2, knee x2 patches). **Plus** the joint points for every torso and pelvis view, including A018's side and back, and the two seam repairs T026 flagged (longer far-wrist ends on the six far hands; a longer hidden end on the near upper arm and its whole-arm keys).
+**Drawings (A023), 24 + 4 only if the stretch strip shows gaps:** torso front, torso turned-away, torso hunched, torso leaning-back; pelvis side, front, back; head front, head shout, **head drinking**; near and far shoulder caps; far raised arm; **near arm to the mouth**; smear arm horizontal and overhead; palm hand near and far; **cupped hand near and far**; **pointing hand (near)**; heel-strike foot near and far; out-turned near foot; (elbow x2, knee x2 patches). Items already exist: crate, barrel (A003), health potion, big fish. **Plus** the joint points for every torso and pelvis view, including A018's side and back, and the two seam repairs T026 flagged (longer far-wrist ends on the six far hands; a longer hidden end on the near upper arm and its whole-arm keys).
 
-**Runtime (T028):** views (per-view joint points, per-view draw order, chest and hips separately), depth switching mid-move, per-pose draw-order overrides (shield in front), shoulder caps that show only when their arm is in front, the turn-around through F, tail and scarf springs (study recommendation 10), and a **rehearsal sheet** in the viewer: every move's keys as one contact sheet on the phone, each key labelled with its view and drawings, any missing drawing shown as a labelled red box. That sheet becomes the check before art for every new body.
+**Runtime (T028):** views (per-view joint points, per-view draw order, chest and hips separately), depth switching mid-move, per-pose draw-order overrides (shield in front), shoulder caps that show only when their arm is in front, the turn-around through F, **carry sockets** (a held hero or a two-hand object placed between the hands each key, with its own band), tail and scarf springs (study recommendation 10), and a **rehearsal sheet** in the viewer: every move's keys as one contact sheet on the phone, each key labelled with its view and drawings, any missing drawing shown as a labelled red box. That sheet becomes the check before art for every new body.
 
 **Gear cost (A020, after):** gear is one drawing per view it covers. The jerkin now covers seven torso drawings (three-quarter, side, back, front, turned-away, hunched, leaning-back); the hood, helmet and hat add a front and a shout head each. A020 waits until A023's views are approved.
