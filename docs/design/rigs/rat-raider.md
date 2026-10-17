@@ -4,7 +4,7 @@ The per-character sheet the rig standard requires (section 9). **Art packets for
 
 - **Identity reference:** the art-bible standee (`assets/art/enemies/rat-raider.png`) and the approved A010 rat with **head R** (`assets/source/A010-rat-raider-standard/reference.png`). Look approved by the user 2026-10-16 ("much better, much closer to the standee").
 - **Master:** A017 (to come): setup pose (rig standard section 2), canvas 1536 x 2304, #00FF00, ~1350 px tall, floor marked. In game ~136 px (uniform scale).
-- **Gates:** G1 master: **passed** 2026-10-17 (A017; user: "the rat looks great"). G2 parts + stretch strip: open (A018, then a Code import). G3 motion: open. G4 gear/masks refit: open (A019).
+- **Gates:** G2 parts: A018 merged, lead stretch strip 2/28 flagged (2026-10-17); human look at T026. G1 master: **passed** 2026-10-17 (A017; user: "the rat looks great"). G2 parts + stretch strip: open (A018, then a Code import). G3 motion: open. G4 gear/masks refit: open (A019).
 - **Names:** near/far (rig standard section 3).
 
 ## Carried over from A010/A011 (keep, do not redraw)
@@ -27,23 +27,23 @@ pelvis, torso, head; arm-near-upper/lower, hand-near; arm-far-upper/lower, hand-
 | Slot | Drawing | Tier | State | Used by |
 |---|---|---|---|---|
 | head | neutral, attack, hurt, effort, ko, back | E | carried (A010) | everything; back = spin, back-throw victim |
-| torso | three-quarter | E | A018 | default |
-| torso | side | E | A018 | spear thrust, dagger stab, shield bash |
+| torso | three-quarter | E | source (A018) | default |
+| torso | side | E | source (A018) | spear thrust, dagger stab, shield bash |
 | torso | back | P (needed for the dodge roll option) | A018 | dodge roll, thrown |
-| hand-near | fist, open, grip (side) | E | A018 | default / weapon drop, grab / cutlass, club |
-| hand-near | grip-overhand | E (T020's missing hold) | A018 | spear (overhand), dagger reverse grip, club two-hand |
-| hand-near | pinch | E (archer) | A018 | arrow nock and draw |
-| hand-far | fist, open, grip (side) | E | A018 | default / bow release / spear back hand |
-| hand-far | grip-overhand | E | A018 | spear, two-hand club |
-| hand-far | shield (strap) | E (shield-bearer) | A018 | shield |
-| arm-near whole-limb | cocked (wound back past 90 degrees: elbow up and **behind** the shoulder, fist level with the ear) | E | A018 | every telegraph, cutlass and club wind-ups, jump attack |
+| hand-near | fist, open, grip (side) | E | source (A018) | default / weapon drop, grab / cutlass, club |
+| hand-near | grip-overhand | E (T020's missing hold) | source (A018) | spear (overhand), dagger reverse grip, club two-hand |
+| hand-near | pinch | E (archer) | source (A018) | arrow nock and draw |
+| hand-far | fist, open, grip (side) | E | source (A018) | default / bow release / spear back hand |
+| hand-far | grip-overhand | E | source (A018) | spear, two-hand club |
+| hand-far | shield (strap) | E (shield-bearer) | source (A018) | shield |
+| arm-near whole-limb | cocked (wound back past 90 degrees: elbow up and **behind** the shoulder, fist level with the ear) | E | source (A018) | every telegraph, cutlass and club wind-ups, jump attack |
 | arm-near whole-limb | raised (straight up, carries the item) | P | A018 | overhead club slam |
-| arm-far whole-limb | raised-back (raised and drawn back: bow draw) | E (archer) | A018 | full bow draw (T020: "could be drawing the string back further") |
-| arm-far whole-limb | guard (forearm across the chest, carries the shield) | E (shield-bearer) | A018 | block, shield bash |
-| leg-near whole-limb | kneeling | E | A018 | get-up, stun |
-| leg-near whole-limb | knee-up | E (flexibility test) | A018 | jump attack tuck, dodge hop |
-| leg-far whole-limb | folded | E (flexibility test) | A018 | jump squat, land, dodge, lying |
-| foot-near, foot-far | flat, toe-off | E | A018 | walk push-off, lunge, thrust |
+| arm-far whole-limb | raised-back (raised and drawn back: bow draw) | E (archer) | source (A018) | full bow draw (T020: "could be drawing the string back further") |
+| arm-far whole-limb | guard (forearm across the chest, carries the shield) | E (shield-bearer) | source (A018) | block, shield bash |
+| leg-near whole-limb | kneeling | E | source (A018) | get-up, stun |
+| leg-near whole-limb | knee-up | E (flexibility test) | source (A018) | jump attack tuck, dodge hop |
+| leg-far whole-limb | folded | E (flexibility test) | source (A018) | jump squat, land, dodge, lying |
+| foot-near, foot-far | flat, toe-off | E | source (A018) | walk push-off, lunge, thrust |
 | joint patches | elbow x2, knee x2 | only if the strip shows gaps | - | |
 
 About **33 body drawings** plus the six carried heads.

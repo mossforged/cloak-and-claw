@@ -3,8 +3,8 @@
 **Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 (standards) started with T023.** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T024 rig pipeline v1. Last art task merged: A013 Mouse Fighter to the rig standard. Plan rewritten around the hook on 2026-10-16 (old plan and older notes in `docs/history.md`).
 
 ## Next
-1. **Code:** T025 weapon node + grip modes (next). The rat import (T026) follows A018.
-2. **Art:** A018, the rat's base parts, hands and torso views cut from the A017 master (rounded joints everywhere).
+1. **Code:** T025 weapon node pushed (user's look pending), then T026 import the rebuilt rat.
+2. **Art:** A019, the rat's whole-limb key drawings + toe-off feet (+ two small cut fixes).
 3. **User:** play T025 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
 4. **Lead:** review T023; make the rig standard + study a reusable skill (user request); then the combatant standard; pick the stress-test enemies with the user.
 
@@ -23,8 +23,8 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T025-weapon-node-grips.md`.
-- Art: `docs/tasks/A018-rat-parts.md`.
+- Code: `docs/tasks/T026-import-new-rat.md` (after T025 merges).
+- Art: `docs/tasks/A019-rat-key-drawings.md`.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -42,6 +42,7 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: merged A018 (rat base parts; fit 0.85% / 1.25% vs A010's 2.8 / 3.5; heads pixel-identical). Lead ran the stretch strip on a provisional import: 2 of 28 cells flagged (old rat: 7): near shoulder arms-up (expected, raised arm in A019), lying shoulder 9.3 px + far hip 3.3 px (fix in A019). Strip in docs/screens/A018/. Wrote T026 (import) and A019 (key drawings).
 2026-10-17 lead: merged T024 (near/far names, floor-line rule, stretch test headless with 28 known art flags, sockets, A016 in the current mouse, walk rebuilt without hip narrowing; user accepted in play; 28/28 tests). Merged A017 (G1 passed: "the rat looks great"). Wrote A018 (rat base parts, rounded joints from the stretch findings). Parked: tools/Play.command serves whatever already listens on port 8100 (served the art clone once).
 <<<<<<< HEAD
 2026-10-17 code: user accepted T024 in play (walk, squat/land, knee, kneel/downed/revive, lying, cocked wind-ups). For the lead: tools/Play.command opens whatever already listens on 8100 without checking its folder (it served Art's cloak-and-claw-art copy, an old build); not fixed (outside T024).
