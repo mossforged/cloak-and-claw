@@ -27,4 +27,6 @@ Rules: cut from the master where the master has the part; inpaint only what's hi
 - Bench: each swap drops in on its pivot with no scale fudge (Code checks when importing).
 - Human: in the stretch strip and in motion (T024/T025): does the walk push off, does the squat and landing read, does the kneel and the knee read, does the wind-up look wound?
 
+**Small extra (from T023):** the A013 `scarf-tail` was painted as two pieces; Code split it into a knot and a tail with a script. Deliver `scarf-knot.png` and `scarf-tail.png` cut cleanly from the master (the knot on the torso band, the tail with a rounded joint at the knot), with pivots.
+
 Out of scope: polish drawings (overhand grip, palms, pinch, hunched torso, smears), gear, masks, code.

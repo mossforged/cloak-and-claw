@@ -17,3 +17,7 @@ The study found half our art rounds were runtime problems: feet off the floor li
 - Human: walk, land, knockdown: are the feet planted? (And with A016: does the walk push off, does the squat read?)
 
 Out of scope: weapon node / hand-follows-weapon (T025), tail springs, meshes, gear.
+
+## Addendum (lead, 2026-10-17, from the T023 review)
+- T023 narrowed the hips in the walk (`'pelvis.sx': 0.4`) because A013's wide-stance legs can't step under the body; boots slide ~5 px a stride. That is a stopgap and breaks the uniform-scale rule. With the floor-line rule (item 2) and A016's toe-off feet and folded far leg, rebuild the walk on the study's 9-key pattern (hips low/high on alternate keys, IK targets pinned on the floor, foot-tip rotation keyed separately) and **remove the pelvis narrowing**. Report the boot slide before/after.
+- T023's `knee` pose shows the near leg broken (no knee-up drawing yet): rewire on A016's `leg-front-kneeup`.
