@@ -22,6 +22,10 @@ const D = Math.PI / 180;
 const memory = new WeakMap();                    // fighter -> pose blend memory (render-only)
 const forced = new WeakMap();                    // T025: fighter -> grip modes forced by a tool (hold sheet), view only
 export const forceGrip = (f, modes) => (modes ? forced.set(f, modes) : forced.delete(f));
+// T027 model viewer: a fighter's render memory (to replay frames without pixels: rigFrame(f, rig, t, rigMemory(f))) and
+// the last frame drawRig drew ({ joints, held, L, p, k, swap }: overlays). View only.
+export const rigMemory = (f) => { if (!memory.has(f)) memory.set(f, {}); return memory.get(f); };
+export const lastFrame = (f) => memory.get(f)?.frame ?? null;
 
 // The held weapon in a rig's hand slot (T010): the kit's image, grip point and size on the slot part's bone.
 // A broken weapon is an empty hand until its swing ends. null = nothing held (the slot part draws as usual).
@@ -107,9 +111,9 @@ export function rigFrame(f, rig, time, mem, pose) {
 }
 
 export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
-  if (!memory.has(f)) memory.set(f, {});
-  const mem = memory.get(f);
-  const { held, L, p, k } = rigFrame(f, rig, time, mem, pose), B = !pose && held?.part && held.kit.feel?.bend;   // T017: a floppy held weapon
+  const mem = rigMemory(f), F = rigFrame(f, rig, time, mem, pose);
+  mem.frame = { ...F, swap: mem.swap };
+  const { held, L, p, k } = F, B = !pose && held?.part && held.kit.feel?.bend;   // T017: a floppy held weapon
   buf ??= canvas();
   const g = buf.getContext('2d');
   g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, buf.width, buf.height);

@@ -1,0 +1,104 @@
+<!doctype html>
+<!-- Review hub (T027): the user's one bookmark for reviews on the phone. Lists every open (not yet merged) branch's preview,
+     newest first, from previews.json (written by tools/pages/build-site.mjs in the Pages workflow): open it in the
+     model viewer or the game, its screenshots and review sheets (tap to enlarge, swipe), and the packet's Human question. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:,">
+<title>Reviews</title>
+<style>
+  :root { --bg: #16141c; --card: #221f2c; --ink: #f2ecdf; --dim: #a59fb4; --acc: #e0a83a; --line: #3a3548; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.4 system-ui, -apple-system, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 14px 12px calc(24px + env(safe-area-inset-bottom)); }
+  h1 { font-size: 22px; margin: 4px 0 2px; }
+  .sub { color: var(--dim); font-size: 13px; margin-bottom: 14px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+  .task { color: var(--acc); font-weight: 700; font-size: 13px; letter-spacing: 0.04em; }
+  .title { font-size: 17px; font-weight: 600; margin: 2px 0 4px; }
+  .meta { color: var(--dim); font-size: 13px; overflow-wrap: anywhere; }
+  .q { background: #2c2838; border-left: 4px solid var(--acc); border-radius: 8px; padding: 10px 12px; margin: 10px 0; }
+  .q b { display: block; font-size: 12px; color: var(--acc); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 4px; }
+  .links a { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: 12px; background: #322d40;
+    color: var(--ink); text-decoration: none; border: 1px solid var(--line); }
+  .links a.main { background: var(--acc); color: #1b1408; font-weight: 700; border-color: var(--acc); }
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(96px, 1fr)); gap: 6px; margin-top: 10px; }
+  .shots img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; background: #000; cursor: zoom-in; }
+  .empty { color: var(--dim); }
+  #box { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.94); display: none; flex-direction: column; z-index: 9; touch-action: pan-y pinch-zoom; }
+  #box.open { display: flex; }
+  #box .bar { display: flex; align-items: center; gap: 8px; padding: calc(8px + env(safe-area-inset-top)) 10px 8px; color: var(--dim); font-size: 13px; }
+  #box .bar span { flex: 1; overflow-wrap: anywhere; }
+  #box button { min-width: 48px; min-height: 44px; font: inherit; font-size: 20px; color: var(--ink); background: #2b2737; border: 0; border-radius: 10px; }
+  #box .pic { flex: 1; display: flex; align-items: center; justify-content: center; overflow: auto; }
+  #box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reviews</h1>
+  <div class="sub" id="sub">Loading...</div>
+  <div id="list"></div>
+</main>
+<div id="box" role="dialog" aria-label="Screenshot">
+  <div class="bar"><button id="prev" aria-label="Previous">&#x2039;</button><span id="cap"></span><button id="next" aria-label="Next">&#x203A;</button><button id="close" aria-label="Close">&#x2715;</button></div>
+  <div class="pic"><img id="big" alt=""></div>
+</div>
+<script type="module">
+// The site root: this page lives there, or in a preview copy (preview/<branch>/reviews.html) before it reaches main.
+const root = location.pathname.includes('/preview/') ? location.pathname.slice(0, location.pathname.indexOf('/preview/') + 1) : location.pathname.replace(/[^/]*$/, '');
+const el = (tag, props = {}, kids = []) => { const e = Object.assign(document.createElement(tag), props); e.append(...kids); return e; };
+const ago = (iso) => {
+  const s = (Date.now() - new Date(iso)) / 1000;
+  return s < 3600 ? `${Math.max(1, Math.round(s / 60))} min ago` : s < 86400 ? `${Math.round(s / 3600)} h ago` : `${Math.round(s / 86400)} d ago`;
+};
+const link = (text, href, main = false) => el('a', { textContent: text, href, className: main ? 'main' : '' });
+
+// lightbox: tap to enlarge, swipe (or the arrows / keys) for the next one
+let set = [], at = 0, x0 = null;
+const box = document.getElementById('box'), big = document.getElementById('big'), cap = document.getElementById('cap');
+const show = (i) => { at = (i + set.length) % set.length; big.src = set[at].src; cap.textContent = `${at + 1}/${set.length} ${set[at].name}`; };
+const open = (list, i) => { set = list; show(i); box.classList.add('open'); };
+document.getElementById('prev').onclick = () => show(at - 1);
+document.getElementById('next').onclick = () => show(at + 1);
+document.getElementById('close').onclick = () => box.classList.remove('open');
+box.addEventListener('touchstart', (e) => { x0 = e.touches.length === 1 ? e.touches[0].clientX : null; }, { passive: true });
+box.addEventListener('touchend', (e) => { if (x0 == null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 50) show(at + (dx < 0 ? 1 : -1)); x0 = null; });
+addEventListener('keydown', (e) => { if (!box.classList.contains('open')) return; if (e.key === 'ArrowRight') show(at + 1); if (e.key === 'ArrowLeft') show(at - 1); if (e.key === 'Escape') box.classList.remove('open'); });
+
+function card(p) {
+  const base = root + p.path, kids = [];
+  kids.push(el('div', { className: 'task', textContent: `${p.task ?? ''} ${p.task ? '· ' : ''}${p.branch}` }));
+  kids.push(el('div', { className: 'title', textContent: p.title || p.subject }));
+  kids.push(el('div', { className: 'meta', textContent: `${ago(p.time)} · ${p.commit} · ${p.subject}` }));
+  for (const q of p.human ?? []) kids.push(el('div', { className: 'q' }, [el('b', { textContent: 'Your question' }), q]));
+  const links = [];
+  if (p.viewer) links.push(link('Open in viewer', base + 'viewer.html', true));
+  links.push(link('Play', base + 'index.html'));
+  if (p.packet) links.push(link('Packet', base + p.packet));
+  kids.push(el('div', { className: 'links' }, links));
+  const list = (p.screens ?? []).map((s) => ({ src: base + s, name: s.split('/').pop() }));
+  if (list.length) kids.push(el('div', { className: 'shots' }, list.map((s, i) => el('img', { src: s.src, alt: s.name, loading: 'lazy', onclick: () => open(list, i) }))));
+  else kids.push(el('div', { className: 'meta', textContent: 'No screenshots yet.' }));
+  return el('section', { className: 'card' }, kids);
+}
+
+try {
+  const data = await fetch(root + 'previews.json', { cache: 'no-store' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json(); });
+  const L = document.getElementById('list');
+  document.getElementById('sub').textContent = `${data.previews.length} open branch${data.previews.length === 1 ? '' : 'es'} · site built ${ago(data.built)}`;
+  if (!data.previews.length) L.append(el('p', { className: 'empty', textContent: 'Nothing waiting for review.' }));
+  for (const p of data.previews) L.append(card(p));
+  const m = data.main;
+  L.append(el('section', { className: 'card' }, [el('div', { className: 'task', textContent: 'main (merged)' }),
+    el('div', { className: 'meta', textContent: `${ago(m.time)} · ${m.commit} · ${m.subject}` }),
+    el('div', { className: 'links' }, [...(m.viewer ? [link('Viewer', root + 'viewer.html', true)] : []), link('Play', root + 'index.html'), link('Lab', root + 'lab.html')])]));
+} catch (e) {
+  document.getElementById('sub').textContent = `No preview list here yet (${e.message}). It is written by the Pages workflow.`;
+}
+</script>
+</body>
+</html>
