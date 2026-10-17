@@ -83,4 +83,4 @@ Colourways per type (raider, spearman, archer, shield-bearer, captain), face det
 3. **Code import** (T026): uniform scale, stretch strip clean (no seam over 2 px), every current rat move re-posed, walk on the floor-line rule.
 4. **A019** whole-limb key drawings + toe-off feet (cocked near arm, raised near arm, raised-back far arm, guard far arm, kneeling and knee-up near legs, folded far leg, toe-off x2), cut on the A018 pivots.
 5. **A020** torso gear (jerkin, quiver, sash) + all body masks refit.
-6. **Flexibility test** (Code + two item drawings: rat shield, dagger): new kits and moves with no new body art.
+6. **Flexibility test** (Code + A021 items: dagger, round shield, hand axe, staff): new kits and moves with no new body art.
