@@ -1,9 +1,9 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T025 weapon node + grip modes. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T027 model viewer + phone review previews. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
-1. **Code:** T027 model viewer (review any character's moves and held items without a level), then T026 import the rebuilt rat (reviewed in the viewer).
+1. **Code:** T026 import the rebuilt rat (review it in the viewer, old rat beside the new one).
 2. **Art:** A019, the rat's whole-limb key drawings + toe-off feet (+ two small cut fixes). Then A020 rat torso gear + masks.
 3. **User:** review in the viewer when T027 lands; then the rebuilt rat (T026), then A019 in motion.
 4. **Lead:** reviews; after the rat passes the flexibility test, plan the mouse rebuild (setup-pose master, parts, key drawings; head, sword and shield carry over).
@@ -25,7 +25,7 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T027-model-viewer.md`, then `docs/tasks/T026-import-new-rat.md`.
+- Code: `docs/tasks/T026-import-new-rat.md`.
 - Art: `docs/tasks/A019-rat-key-drawings.md`.
 
 ## Open questions (for the user)
@@ -44,6 +44,7 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: merged T027 (viewer, Pages previews workflow, reviews.html; 30/30 tests; user: "yes the model viewer is great"). Previews start once the user sets Pages source to GitHub Actions.
 2026-10-17 code: user accepted T027 in use ("yes the model viewer is great"). Branch previews still need the Pages source switch + merge.
 2026-10-17 code: T027 on `t027-model-viewer`: `viewer.html` (src/viewer/): every rigged fighter, clips built from data and played by the real sim in a private world (attacks with real timing + hit-stop + swoosh, jump, block/block hit, hurt, knockdown -> get up, grab/knee/throws, grabbed/thrown, pickup, toss + sword draw, potions, downed/revive, cast, every rig pose), held item + grip mode, rat looks/gear, overlays (floor lines, pivots, sockets, live stretch flags, hit boxes, rest ghost), compare slot (also spearman hold versions), frame step/scrub/loop/speed, URL state, screenshot; phone first. 30/30 tests; game untouched.
 2026-10-17 code: T027 previews: `.github/workflows/pages.yml` + `tools/pages/build-site.mjs` (main at root, unmerged branches under preview/<branch>/, previews.json) and `reviews.html` hub. User's one-time step: Settings -> Pages -> Source: GitHub Actions; previews deploy from main, so they start once T027 is merged. Build `t027 model viewer v1`.

@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-17 T027 model viewer
+User: "yes the model viewer is great" (Code's note).
+
 ## 2026-10-17 T024 rig pipeline + A017 rat master
 T024: user accepted in play (walk, squat/land, knee, kneel/downed/revive, lying, cocked wind-ups) (Code's note). A017: "the rat looks great".
 
