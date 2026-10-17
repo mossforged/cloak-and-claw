@@ -21,3 +21,10 @@ Out of scope: weapon node / hand-follows-weapon (T025), tail springs, meshes, ge
 ## Addendum (lead, 2026-10-17, from the T023 review)
 - T023 narrowed the hips in the walk (`'pelvis.sx': 0.4`) because A013's wide-stance legs can't step under the body; boots slide ~5 px a stride. That is a stopgap and breaks the uniform-scale rule. With the floor-line rule (item 2) and A016's toe-off feet and folded far leg, rebuild the walk on the study's 9-key pattern (hips low/high on alternate keys, IK targets pinned on the floor, foot-tip rotation keyed separately) and **remove the pelvis narrowing**. Report the boot slide before/after.
 - T023's `knee` pose shows the near leg broken (no knee-up drawing yet): rewire on A016's `leg-front-kneeup`.
+
+## Addendum 2 (lead, 2026-10-17, from the A016 review): A016 is merged, so do item 5
+- Merge A016's `rig-source.json` swaps into the mouse rig; its images resolve relative to `assets/source/A016-mouse-key-drawings/` (LFS: `git lfs pull` first). File names use front/back; alias to near/far on import.
+- **Toe-off feet:** the toes reach ~65 px (source) below the floor if the ankle stays at rest. In push-off poses the ankle lifts so the ball of the foot sits on the floor line (the floor-line rule handles it).
+- **Whole arm `arm-front-cocked`:** inherits band 590; check it against the torso and head in the stretch strip, the sword follows its `itemGrip`, and the old hand must not draw. Art drew it more like a raised, flexed arm (fist above the shoulder, elbow low) than "elbow high and behind"; use it for slash3 and club wind-ups and report in the strip whether it reads as wound back.
+- **Watch at game size:** the knee-up leg's long boot shaft and the join below the knee; the folded far leg is very compressed (may read as a tucked boot); the kneeling boot looks large.
+- Report any drawing that fails the strip; the lead turns failures into an A016 addendum.

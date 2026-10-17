@@ -4,7 +4,7 @@
 
 ## Next
 1. **Code:** T024 rig pipeline v1 (near/far names, floor-line rule, stretch test, sockets, A016 import, walk rebuild), then T025 weapon node + grip modes.
-2. **Art:** A016, the Mouse Fighter's six missing key drawings (from his rig sheet). Needs the one-time large-file setup on the Mac first.
+2. **Art:** idle (A016 merged as source; its motion gate runs in T024). Possible A016 addendum after the stretch strip; scarf pieces still owed.
 3. **User:** answer the Stage 2 gate; play T023 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
 4. **Lead:** review T023; make the rig standard + study a reusable skill (user request); then the combatant standard; pick the stress-test enemies with the user.
 
@@ -24,7 +24,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T024-rig-pipeline-v1.md`; then `docs/tasks/T025-weapon-node-grips.md`.
-- Art: `docs/tasks/A016-mouse-key-drawings.md` (LFS setup first).
+- Art: none queued.
 
 ## Open questions (for the user)
 - **Stage 2 gate** (above). Then the lead tags `stage-2` and `stage-3`.
@@ -44,6 +44,7 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: merged A016 (six key drawings, LFS working; pivots exact; static game-size panel reads). Art notes: inpaint-only rule not fully met (visible fur/leather repainted), knee-up boot re-registered at x0.7, folded leg compressed, toe-off needs ankle lift; cocked arm reads more raised-and-flexed than wound back. Scarf pieces (packet extra) not delivered. All go to T024's stretch strip and the user's motion check.
 2026-10-17 lead: merged T023 (A013 mouse in game; 3 rounds; user picked walk B as a stopgap; 23/23 tests; bot numbers unchanged). Walk rebuild and pelvis narrowing removal moved to T024. A016 delivered, review next.
 <<<<<<< HEAD
 2026-10-17 lead: user adopted the study (process fixes, near/far rename, A016, keep our runtime). Wrote the Mouse Fighter rig sheet (`docs/design/rigs/mouse-fighter.md`), A016, T024, T025; revised the rig standard and lessons. Next: the reusable skill.

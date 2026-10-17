@@ -21,12 +21,12 @@ pelvis, torso, head; arm-near-upper/lower (`arm-front-*`), hand-near (`hand-fron
 | arm-far | whole guard arm (carries the shield) | game-ready (A013) | block, brace |
 | foot-near | flat, out-turned | game-ready (A013) | out-turned in planted poses |
 | foot-far | flat | game-ready (A013) | |
-| **foot-near toe-off** | heel raised, weight on the ball | **ordered: A016** | walk, run, every stepping attack, block shuffle, lunge |
-| **foot-far toe-off** | same, far foot | **ordered: A016** | walk push-off, slash3, jump take-off |
-| **leg-far folded** | whole far leg, knee fully bent, foot under the hip | **ordered: A016** | jump squat, land, crouch pickup, knockdown lying, jump tuck |
-| **leg-near knee-up** | whole near leg raised, knee at hip height | **ordered: A016** | grab knee, jump tuck, jump slash |
-| **leg-near kneeling** | whole near leg kneeling, shin on the floor | **ordered: A016** | get-up, revive hold, downed, stun |
-| **arm-near cocked** | whole near arm wound back past 90 degrees, elbow high, fist by the ear | **ordered: A016** | slash3 wind-up, club overhead wind-up, charge attack, telegraphs |
+| **foot-near toe-off** | heel raised, weight on the ball | **source (A016 merged); import T024** | walk, run, every stepping attack, block shuffle, lunge |
+| **foot-far toe-off** | same, far foot | **source (A016 merged); import T024** | walk push-off, slash3, jump take-off |
+| **leg-far folded** | whole far leg, knee fully bent, foot under the hip | **source (A016 merged); import T024** | jump squat, land, crouch pickup, knockdown lying, jump tuck |
+| **leg-near knee-up** | whole near leg raised, knee at hip height | **source (A016 merged); import T024** | grab knee, jump tuck, jump slash |
+| **leg-near kneeling** | whole near leg kneeling, shin on the floor | **source (A016 merged); import T024** | get-up, revive hold, downed, stun |
+| **arm-near cocked** | whole near arm wound back past 90 degrees, elbow high, fist by the ear | **source (A016 merged); import T024** | slash3 wind-up, club overhead wind-up, charge attack, telegraphs |
 | hand-near grip-overhand | handle across the fist, seen from the front | polish, not ordered | overhand spear / club holds |
 | hand-near / hand-far flat palm | | polish, not ordered | block (far), push |
 | hand-near pinch | | polish, not ordered | potion, bow |
