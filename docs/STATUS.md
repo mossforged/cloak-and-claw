@@ -3,8 +3,8 @@
 **Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T027 model viewer + phone review previews. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
-1. **Code:** T026 import the rebuilt rat (review it in the viewer, old rat beside the new one).
-2. **Art:** A021 four weapon items for the flexibility test (dagger, round shield, hand axe, staff). A020 (rat torso gear + masks) after T026.
+1. **Code:** T026 round 2 on its branch (draw order, island filter, paint check, taller stance), then re-import A022. Not merged until the user approves in the viewer.
+2. **Art:** A022 rat joint repair (after A021 weapons, which await the user's look).
 3. **User:** review in the viewer when T027 lands; then the rebuilt rat (T026), then A019 in motion.
 4. **Lead:** reviews; after the rat passes the flexibility test, plan the mouse rebuild (setup-pose master, parts, key drawings; head, sword and shield carry over).
 
@@ -26,7 +26,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T026-import-new-rat.md`.
-- Art: `docs/tasks/A021-weapon-items.md`.
+- Art: `docs/tasks/A022-rat-joint-repair.md`.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -44,6 +44,7 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: T026 reviewed by the user in the viewer: body/poses better, but hands twisted, weapon holds wrong, shoulder/arm connections pieced together, butt-tail gap, a bit hunched. Causes: A018/A019 hands (punched holes, wrist discs), fur-ball shoulder cap, jagged tail root, stray scraps; lead's "near-circle" wording. A022 (art repair) + T026 round 2 written; rule 5.3 rewritten; paint check added to G2. A021 weapons waiting on the user's look.
 2026-10-17 lead: user widened the flexibility-test items to dagger, shield, axe and staff -> A021 (items only; safe in parallel with T026).
 2026-10-17 lead: Pages deploy works (main + previews live). Merged A019 (nine key drawings + two cut fixes; cocked arm now elbow up and behind; phone copies in docs/screens/A019/); T026 addendum imports it. Toe-off feet drawn steep (ankle lift 98/127 px source): check in the viewer.
 2026-10-17 lead: user set Pages source to GitHub Actions; first publish of main + previews triggered.

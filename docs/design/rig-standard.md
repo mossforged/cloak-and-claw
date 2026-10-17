@@ -78,7 +78,7 @@ Hero: **40 drawings essential, ~62 polished.** Grunt: 27 / 33. Brute: 24 / 29. C
 ## 5. Drawing rules (G2)
 1. **Cut, don't regenerate.** Each part is cut from the master along its joint lines. Use the image tool only to **paint in what was hidden** (shoulder under the sleeve, thigh under the tunic, the hip behind the near leg). A limb must never be generated from scratch, because separate generations drift into a different character.
 2. **Hidden areas painted** at least one joint-width past the visible edge.
-3. **Round joints:** the overlapping end is close to a circle around the pivot, with the outline continuing past the overlap so it never breaks when bent.
+3. **Hidden overlaps (revised 2026-10-17):** at every joint the child's end continues **underneath** the neighbouring piece (the shoulder under the vest edge, the wrist under the bracer, the tail root under the trousers, the hip under the pelvis), so the overlap is never seen. Where the joint is visible the outline continues unbroken. **Nothing visible is a geometric circle, disc, hole or unoutlined ball** (the old wording, "a near-circle around the pivot", was painted literally on the rat in A018/A019: fur-ball shoulders, discs at the wrists). If no neighbour covers the joint across its range, extend the neighbour's edge (e.g. the torso's vest edge) to cover it. Grip hands are seen from the side, wrapped round the handle with a narrow slot, never a round hole.
 4. **Pivots marked in `rig-source.json`** (one per delivery), as **measured canvas points**, not estimates. Because every part sits on the shared canvas exactly where it is in the master, a joint is one canvas point shared by parent and child:
    ```
    { "canvas": [1536, 2304], "master": "reference.png", "floorY": 2190,
@@ -122,6 +122,7 @@ Effects attach to a named point on the rig (`hand-front` tip, weapon tip, chest)
 - **Fit overlay:** load the source parts and `rig-source.json`, assemble at rest, and draw them over the faded master; flag drift in proportion or position.
 - **Standard motion strip:** stance, idle breath, walk cycle, attack (windup, strike, follow-through), hurt, knockdown, get-up; played live at game size beside the standee, with an exported strip image for the review.
 - **Stretch strip (G2 artefact, T024):** every joint at 90 and 150 degrees, arm straight up, each torso view, each hand and foot alternate, each hand holding each item at every grip mode, a crouch and a lying pose with the **floor line drawn**, the rig at 0.96x / 1.04x / 1.4x; exported as one JPG and run headless in `npm test`, failing on a seam gap over 2 px, a foot below the floor, or a hidden far hand.
+- **Paint check (G2, added 2026-10-17):** the rest assembly is compared with the master **colour for colour**, not only by outline; strong differences inside the silhouette (painted discs, holes, mismatched repaint) are flagged with a map. Every cut is also checked for detached islands. The T026 rat passed the outline fit and the stretch test but looked pieced together; this check catches that before the user sees it.
 - **Floor-line rule:** in grounded states leg IK targets clamp to the floor; a pose lifts a foot only by naming it.
 - The user judges G3 here, in motion, before anything is imported into the game.
 
