@@ -20,6 +20,8 @@ const RES = 2;                                   // buffer px per screen px (kee
 const BOX = { w: 300, h: 260, ox: 150, oy: 200 };  // buffer area in screen px; (ox, oy) = feet
 const D = Math.PI / 180;
 const memory = new WeakMap();                    // fighter -> pose blend memory (render-only)
+const forced = new WeakMap();                    // T025: fighter -> grip modes forced by a tool (hold sheet), view only
+export const forceGrip = (f, modes) => (modes ? forced.set(f, modes) : forced.delete(f));
 
 // The held weapon in a rig's hand slot (T010): the kit's image, grip point and size on the slot part's bone.
 // A broken weapon is an empty hand until its swing ends. null = nothing held (the slot part draws as usual).
@@ -96,7 +98,7 @@ export function rigFrame(f, rig, time, mem, pose) {
   }
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
   const held = heldOf(f, rig, mem.sheathed);
-  const L = gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f), gearOf(f));   // T019 gear
+  const L = gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), gearOf(f));   // T019 gear; T025 forced grip modes
   if (lying(f) && !kneel) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)
     const dy = restDy(L, view, f.z);
     p.dy = ['down', 'dead', 'downed'].includes(f.state) ? dy : Math.min(p.dy, dy);

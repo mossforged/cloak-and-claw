@@ -9,7 +9,7 @@ import { RAT_BOW } from '../moves/rat-bow.js';
 // `slack` px of his spot (or cornered), one arrow in flight at a time.
 export default {
   id: 'rat-bow', name: 'Bow', kind: 'weapon',
-  art: { img: 'assets/art/items/rat-bow.png', px: 0.25, grip: [63, 182.25], gripEnd: [63, 150], nock: [10.5, 182.25], pull: 100, reachIn: 0.25, tips: [[10.5, 18.75], [10.5, 346.25]], rest: 0, floor: 90 },
+  art: { img: 'assets/art/items/rat-bow.png', px: 0.25, grip: [63, 182.25], gripEnd: [63, 150], nock: [10.5, 182.25], pull: 100, reachIn: 0.25, tips: [[10.5, 18.75], [10.5, 346.25]], rest: 0, floor: 90, stow: 'back' },
   grip: 'bow', durability: 10,
   moves: RAT_BOW, attack: 'bowShot',
   toss: { damage: 6, spin: 0.4, hitstop: 5, shake: 4 },

@@ -5,6 +5,6 @@
 // replace it there with the same grip.
 export default {
   id: 'mouse-sword', name: 'Sword', kind: 'gear',
-  art: { img: 'assets/art/items/mouse-sword.png', px: 0.33012, grip: [164.4, 32.4], gripEnd: [141.6, 52.0] },
+  art: { img: 'assets/art/items/mouse-sword.png', px: 0.33012, grip: [164.4, 32.4], gripEnd: [141.6, 52.0], tip: [0, 158.5], stow: 'hip' },
   grip: 'one-hand',
 };

@@ -4,6 +4,8 @@
 const ELBOW_CAP = 'patch cap / rounded end on the forearm across the elbow (rig standard 4: joint patches)';
 const KNEE_CAP = 'patch cap / rounded end on the lower leg across the knee';
 const SHOULDER = 'round the top of arm-near-upper (A013 cut it straight: the torso hides it at rest, but every pose that draws the arm over the tunic shows the cut)';
+const TURNED = 'hand-<side>-grip-overhand drawing (T025: the grip fist turned over on the weapon node opens the wrist; the overhand hand has its own cuff)';
+const FAR_WRIST = 'as the current grip: rounded wrist end on hand-far-grip (the far fist turned hard round the shaft)';
 const HIP_FAR = 'rounded top on leg-far-upper under the pelvis (opens when the far thigh folds forward: kneel, lying)';
 export const KNOWN = {
   'mouse | near knee 90 | leg-near-upper / leg-near-lower': [6.0, KNEE_CAP],
@@ -34,4 +36,14 @@ export const KNOWN = {
   'rat | Rat Spearman: rat-spear (current grip) | arm-far-lower / hand-far': [12.5, 'wrist: the far grip fist turned hard round the shaft opens the wrist; rounded wrist end on hand-far-grip (or T025 grip modes)'],
   'rat | lying (floor) | torso / arm-far-upper': [4.5, 'rounded shoulder end on arm-far-upper'],
   'rat | lying (floor) | pelvis / leg-far-upper': [4.3, 'rounded top on leg-far-upper'],
+  // T025 grip modes (the fist turned on the weapon node): a fist turned over against its forearm opens the wrist
+  'mouse | Mouse Fighter: own weapon (overhand) | arm-near-lower / hand-near': [5.3, TURNED],
+  'mouse | rat-cutlass (overhand) | arm-near-lower / hand-near': [6.5, TURNED],
+  'mouse | plank-club (overhand) | arm-near-lower / hand-near': [6.5, TURNED],
+  'mouse | big-fish (overhand) | arm-near-lower / hand-near': [5.3, TURNED],
+  'rat | Rat Spearman: rat-spear (overhand) | arm-far-lower / hand-far': [2.8, FAR_WRIST],
+  'rat | Rat Spearman: rat-spear (underhand) | arm-far-lower / hand-far': [12.5, FAR_WRIST],
+  'rat | Rat Spearman: rat-spear (reverse) | arm-far-lower / hand-far': [12.5, FAR_WRIST],
+  'rat | Rat Archer: rat-bow (overhand) | arm-far-lower / hand-far': [2.3, TURNED],
+  'rat | Rat Archer: rat-bow (reverse) | arm-far-lower / hand-far': [2.5, TURNED],
 };

@@ -3,16 +3,19 @@
 // it (tools/rig-bench.html?...&stretch). alphaOf(img) -> { w, h, alpha } is the caller's (Node: bench/png.mjs; browser:
 // canvas pixels).
 // Cells: each knee and elbow bent 90 and 150 degrees from straight; arms straight up; each torso view; each hand, foot and
-// whole-limb drawing; each item each body holds (current grip; overhand / underhand / reverse come with T025); a crouch,
+// whole-limb drawing; each item each body holds (current grip, and T025: every grip mode on the weapon node); a crouch,
 // the pose-budget crouches and lying with the floor lines; the rig at 0.96x, 1.04x, 1.4x.
 // Flags: a seam gap over 2 px at a joint (a crack inside the joint's filled core at rest: empty with drawing on both sides), a foot below its floor line or floating
-// over it without a named lift (floor cells), a lying body off the floor, a far hand hidden on a two-handed item.
+// over it without a named lift (floor cells), a lying body off the floor, a far hand hidden on a two-handed item; T025:
+// the hold flags (tools/bench/hold.js: handle off the fist by over 2 px, second fist off the shaft, a grip hand under it).
 import { layoutRig } from '../../src/render/rig-layout.js';
 import { rigFrame } from '../../src/render/rig.js';
 import { gripLayout } from '../../src/render/rig-grip.js';
 import { channelsOf } from '../../src/render/rig-pose.js';
 import { floorLine } from '../../src/data/rigs/biped-floor.js';
 import { LOOKS } from '../../src/data/looks.js';
+import { GRIP_MODE_NAMES } from '../../src/data/grip-modes.js';
+import { holdFlags } from './hold.js';
 
 const D = Math.PI / 180;
 const ang = (v) => Math.atan2(v[1], v[0]) / D;
@@ -37,7 +40,7 @@ export function stretchCells(family, items = []) {
   const S = still();
   const custom = (label, joints, swap = {}, o = {}) => {
     const r = o.rig ?? rig, f = fighterOf(o.def ?? def, o.f), held = o.held ?? null;
-    cells.push({ label, rig: r, joints, swap, held, L: gripLayout(r, joints, swap, held, f), view: viewOf({ rot: 0, sx: 1, sy: 1, dx: 0, dy: 0 }, 1), k: 1, ...o.flags });
+    cells.push({ label, rig: r, joints, swap, held, L: gripLayout(r, joints, swap, held, f, o.grip && { grip: o.grip }), hold: !!o.grip, view: viewOf({ rot: 0, sx: 1, sy: 1, dx: 0, dy: 0 }, 1), k: 1, ...o.flags });
   };
   const frame = (label, o, pose, flags = {}) => {
     const f = fighterOf(def, o), mem = {};
@@ -75,6 +78,14 @@ export function stretchCells(family, items = []) {
     if (own || r === rig) custom(`${d.name ?? d.id}: ${own ?? 'own weapon'} (current grip)`, SR, {}, { rig: r, def: d, held: own ? heldFor(r, d) : null, flags: { twoHand: r.slots?.['two-hand'] && heldFor(r, d)?.grip === 'two-hand' } });
   }
   for (const it of items) custom(`${it.id} (current grip)`, S, {}, { held: heldFor(rig, def, it), f: { weapon: { def: it } } });
+  // T025: the same items in every other grip mode (the weapon stays where the fist holds it; the hand turns round it)
+  for (const grip of GRIP_MODE_NAMES.filter((m) => m !== 'side')) {
+    for (const [r, d] of family) {
+      const own = d.kit ?? d.art?.held;
+      if (own || r === rig) custom(`${d.name ?? d.id}: ${own ?? 'own weapon'} (${grip})`, still(r), {}, { rig: r, def: d, held: own ? heldFor(r, d) : null, grip });
+    }
+    for (const it of items) custom(`${it.id} (${grip})`, S, {}, { held: heldFor(rig, def, it), f: { weapon: { def: it } }, grip });
+  }
   // floor cells: the drawn frame (floor-line rule, standee lean) with the floor lines
   frame('stance (floor)', {}, undefined, { floor: true });
   if (rig.poses.jumpSquat) frame('crouch: jump squat (floor)', {}, 'jumpSquat', { floor: true });
@@ -173,6 +184,7 @@ export function flagsOf(cell, alphaOf) {
     for (let y = 0; y < A.h; y += 3) for (let x = 0; x < A.w; x += 3) if (A.alpha[y * A.w + x] > 127) { n++; const P = apply(e.m, [x + 0.5, y + 0.5]); if (!later.some((o) => covers(alphaOf, o, P))) seen++; }
     if (n && seen / n < 0.3) flags.push(`far hand hidden on the two-hander (${Math.round(100 * seen / n)}% shows)`);
   }
+  if (cell.hold) for (const h of holdFlags(rig, L, cell.held)) { flags.push(`hold: ${h.text}`); marks.push(apply(cell.view, h.at)); }
   return flags;
 }
 

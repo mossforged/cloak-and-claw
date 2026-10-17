@@ -1,12 +1,14 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 (standards) started with T023.** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T024 rig pipeline v1. Last art task merged: A013 Mouse Fighter to the rig standard. Plan rewritten around the hook on 2026-10-16 (old plan and older notes in `docs/history.md`).
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T025 weapon node + grip modes. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
 
-## Next
-1. **Code:** T025 weapon node pushed (user's look pending), then T026 import the rebuilt rat.
-2. **Art:** A019, the rat's whole-limb key drawings + toe-off feet (+ two small cut fixes).
-3. **User:** play T025 when it lands. One-time Mac step: install large-file storage (`docs/handoffs/setup-mac.md`) before Art's next task.
-4. **Lead:** review T023; make the rig standard + study a reusable skill (user request); then the combatant standard; pick the stress-test enemies with the user.
+## Next (rig lock-down only; everything else paused)
+1. **Code:** T027 model viewer (review any character's moves and held items without a level), then T026 import the rebuilt rat (reviewed in the viewer).
+2. **Art:** A019, the rat's whole-limb key drawings + toe-off feet (+ two small cut fixes). Then A020 rat torso gear + masks.
+3. **User:** review in the viewer when T027 lands; then the rebuilt rat (T026), then A019 in motion.
+4. **Lead:** reviews; after the rat passes the flexibility test, plan the mouse rebuild (setup-pose master, parts, key drawings; head, sword and shield carry over).
+
+**Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> A020 gear/masks + import -> rat flexibility test (new kits and moves, no new body art) -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
 
 ## Stage plan (combat core first, 2026-10-17)
 | Stage | What | Gate question for the user |
@@ -23,7 +25,7 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T026-import-new-rat.md` (after T025 merges).
+- Code: `docs/tasks/T027-model-viewer.md`, then `docs/tasks/T026-import-new-rat.md`.
 - Art: `docs/tasks/A019-rat-key-drawings.md`.
 
 ## Open questions (for the user)
@@ -42,17 +44,17 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-17 lead: merged T025 (weapon node, grip modes, far fist over the shaft; hold test 0 flags; 29/29 tests). User: pause everything but the rig lock-down for the rat and the mouse; asked for a model viewer instead of reviewing rigs in a level -> T027 (before T026).
 2026-10-17 lead: merged A018 (rat base parts; fit 0.85% / 1.25% vs A010's 2.8 / 3.5; heads pixel-identical). Lead ran the stretch strip on a provisional import: 2 of 28 cells flagged (old rat: 7): near shoulder arms-up (expected, raised arm in A019), lying shoulder 9.3 px + far hip 3.3 px (fix in A019). Strip in docs/screens/A018/. Wrote T026 (import) and A019 (key drawings).
+2026-10-17 code: T025 on `t025-weapon-node-grips`: weapon node (pose `weapon: {x, y, rot}`; absent = the old frame), grip hand copies the weapon's rotation, grip modes as data (side / overhand / underhand / reverse), far fist over the shaft (overlay band), items tip / stow; hold test (every body x item x mode x frame) 0 flags; 29/29 tests; sim untouched (bot numbers identical). Build `t025 weapon node v1`.
+2026-10-17 code: T025 for the user: overhand spear: A010's grip fist turned over has its wrist under the shaft, so the short near arm holds an overhand spear no lower than the chest; variants B/C/D (`?spear=`) vs E (default) in docs/screens/T025; a low overhand needs `hand-near-grip-overhand` (picked up automatically). Per-pose flip still used: raider cutlass (`flip: 'hold'`).
 2026-10-17 lead: merged T024 (near/far names, floor-line rule, stretch test headless with 28 known art flags, sockets, A016 in the current mouse, walk rebuilt without hip narrowing; user accepted in play; 28/28 tests). Merged A017 (G1 passed: "the rat looks great"). Wrote A018 (rat base parts, rounded joints from the stretch findings). Parked: tools/Play.command serves whatever already listens on port 8100 (served the art clone once).
-<<<<<<< HEAD
 2026-10-17 code: user accepted T024 in play (walk, squat/land, knee, kneel/downed/revive, lying, cocked wind-ups). For the lead: tools/Play.command opens whatever already listens on 8100 without checking its folder (it served Art's cloak-and-claw-art copy, an old build); not fixed (outside T024).
 2026-10-17 code: T024 on `t024-rig-pipeline`: near/far rename (old sources read as before; rename test vs a T023 snapshot), sockets (importer-derived; fish drops, heal ring, potion in hand use them), floor-line rule (boots on their own floor lines, lifts named, lean turns the hips, lying rests on the floor: slash3 boot float ~5 px and 28 px lying sink both 0), A016 imported and wired (squat/land, jump tuck, knee, kneeling get-up/downed/revive, lying, pickup, cocked wind-ups), walk rebuilt without pelvis narrowing (slide 3.7 -> 1.8/1.0 px). 28/28 tests; bot numbers identical.
 2026-10-17 code: T024 stretch test headless in npm test + `tools/stretch-strip.mjs` JPGs (docs/screens/T024): 28 known flags (elbow/knee caps at deep bends, mouse shoulder cut showing when the arm is over the tunic, rat far knee, spearman wrist), each with its art fix in tools/bench/stretch-known.js. User to judge walk / squat / knee / kneel in motion.
-=======
 2026-10-17 lead: user: the mouse needs a setup-pose master too. Agreed; order: rat first (proves the method), then the mouse (head, sword, shield carry over). A016 is superseded (fitted to the old master). T024 addendum 3: skip the A016 import and mouse walk rebuild; do the pipeline items and a 'before' stretch strip.
 2026-10-17 lead: rat audit: A010's master is an action pose (sword arm wound back, deep lunge) -> folded short near arm, uneven legs, trousers spanning hip and thigh. User: rebuild the rat from a setup-pose master, keeping head R, face details, head gear, weapons and variety ("yes lets do it"). Rig standard section 2 revised (setup pose); rat rig sheet + A017 written. Flexibility test defined (new kits and moves, no new body art).
 2026-10-17 lead: Stage 2 gate passed (user: "yes all of those mechanics are fun and I can't wait to build more once we lock down the rigging"); tags stage-2 + stage-3 queued; pillar 3 reworded (user: yes).
->>>>>>> main
 2026-10-17 lead: merged A016 (six key drawings, LFS working; pivots exact; static game-size panel reads). Art notes: inpaint-only rule not fully met (visible fur/leather repainted), knee-up boot re-registered at x0.7, folded leg compressed, toe-off needs ankle lift; cocked arm reads more raised-and-flexed than wound back. Scarf pieces (packet extra) not delivered. All go to T024's stretch strip and the user's motion check.
 2026-10-17 lead: merged T023 (A013 mouse in game; 3 rounds; user picked walk B as a stopgap; 23/23 tests; bot numbers unchanged). Walk rebuild and pelvis narrowing removal moved to T024. A016 delivered, review next.
 2026-10-17 lead: user adopted the study (process fixes, near/far rename, A016, keep our runtime). Wrote the Mouse Fighter rig sheet (`docs/design/rigs/mouse-fighter.md`), A016, T024, T025; revised the rig standard and lessons. Next: the reusable skill.
