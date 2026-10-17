@@ -7,7 +7,7 @@ import { RAT_SPEAR } from '../moves/rat-spear.js';
 // front arm reaches out along the shaft instead of folding at the chest.
 export default {
   id: 'rat-spear', name: 'Spear', kind: 'weapon',
-  art: { img: 'assets/art/items/rat-spear.png', px: 0.292, grip: [31.6, 438.8], gripEnd: [31.6, 266.8], grip2: [31.6, 226.5], tip: [32.4, 0.8], rest: 90, floor: 90 },
+  art: { img: 'assets/art/items/rat-spear.png', px: 0.292, grip: [31.6, 438.8], gripEnd: [31.6, 266.8], grip2: [31.6, 226.5], tip: [32.4, 0.8], rest: 90, floor: 90, stow: 'back' },
   grip: 'two-hand', durability: 10,
   moves: RAT_SPEAR, attack: 'spearThrust',
   toss: { damage: 10, spin: 0.3, hitstop: 7, shake: 6 },

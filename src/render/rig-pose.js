@@ -6,6 +6,11 @@
 // A value: a number, a wave [base, amp, phase 0..1, harmonic], or (T023) a list of waves that add up.
 // Part swaps: a pose's `swap: { <part>: '<swap name>' }` picks one of the part's `swaps` images.
 // Swaps don't blend: they switch the moment the pose (or move phase) that names them starts.
+// T025 weapon node (render/weapon-node.js): `weapon: { x, y, rot }` places the held weapon (rig px from the feet; rot = the
+// handle's angle, 0 = forward, - = up); any field left out keeps where the posed fist holds it. Stored as channels
+// 'weapon.x/.y/.rot' with weights 'weapon.at' (position) and 'weapon.turn' (angle), so it blends. `grip` / `grip2`: grip
+// mode names (data/grip-modes.js) for the grip hand and a two-hander's second hand; like swaps they switch at once
+// (carried in the swap list as '@grip' / '@grip2').
 import { phaseOf } from '../sim/fighter.js';
 import { RULES } from '../data/rules.js';
 
@@ -16,19 +21,25 @@ const easeOutBack = (t, s) => 1 + (s + 1) * (t - 1) ** 3 + s * (t - 1) ** 2;
 
 // Every channel a pose may use, with its value when a pose leaves it out.
 export function channelsOf(rig) {
-  const out = { dx: 0, dy: 0, sx: 1 };   // sx: whole-body width (1 = as drawn, -1 = mirrored; through 0 reads as a turn)
+  const out = { dx: 0, dy: 0, sx: 1, ...WEAPON };   // sx: whole-body width (1 = as drawn, -1 = mirrored; through 0 reads as a turn)
   for (const [name, p] of Object.entries(rig.parts)) {
     out[name] = 0; out[`${name}.sx`] = 1; out[`${name}.sy`] = 1; out[`${name}.order`] = p.order;
     if (name.startsWith('foot-')) out[`${name}.lift`] = 0;
   }
   return out;
 }
+const WEAPON = { 'weapon.x': 0, 'weapon.y': 0, 'weapon.rot': 0, 'weapon.at': 0, 'weapon.turn': 0 };   // T025: the pose's weapon node
 export const jointsOfRig = (rig) => Object.keys(channelsOf(rig));
 
 function evalPose(pose, stance, t) {
   const out = { ...stance };
   for (const [k, v] of Object.entries(pose ?? {})) {
-    if (k === 'speed' || k === 'swap' || k === 'swapPhase') continue;
+    if (k === 'speed' || k === 'swap' || k === 'swapPhase' || k === 'grip' || k === 'grip2') continue;
+    if (k === 'weapon') {   // T025: placement fields -> channels + weights
+      if (v.x != null && v.y != null) Object.assign(out, { 'weapon.x': v.x, 'weapon.y': v.y, 'weapon.at': 1 });
+      if (v.rot != null) Object.assign(out, { 'weapon.rot': v.rot, 'weapon.turn': 1 });
+      continue;
+    }
     const wave = (w) => w[0] + w[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (w[3] ?? 1) + (w[2] ?? 0)));
     // T023: a list of waves adds up (harmonics fitted to an IK leg path)
     out[k] = !Array.isArray(v) ? v : Array.isArray(v[0]) ? v.reduce((a, w) => a + wave(w), 0) : wave(v);
@@ -51,7 +62,8 @@ function strikePose(M, W, X, K, p, T) {
   return s < 0.5 ? mix(W, X, s * 2) : mix(X, K, easeOutBack(s * 2 - 1, T.overshoot));
 }
 
-const swapOf = (pose) => pose?.swap ?? {};
+// T025: a pose's grip modes ride with its swaps ('@grip', '@grip2'; layoutRig skips names that aren't parts)
+const swapOf = (pose) => (pose?.grip || pose?.grip2 ? { ...pose.swap, ...(pose.grip && { '@grip': pose.grip }), ...(pose.grip2 && { '@grip2': pose.grip2 }) } : pose?.swap ?? {});
 // T024: a cycle's drawings by phase (the walk's toe-off feet): swapPhase [{ part, swap, from, to }] in 0..1 of the cycle.
 function phaseSwaps(pose, t) {
   const out = { ...swapOf(pose) }, u = ((((pose.speed ?? 1) * t) % 1) + 1) % 1;

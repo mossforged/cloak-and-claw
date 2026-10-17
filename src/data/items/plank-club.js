@@ -2,7 +2,7 @@ import { PLANK_CLUB } from '../moves/plank-club.js';
 // Weapon kit (T010); fields: see rat-cutlass.js.
 export default {
   id: 'plank-club', name: 'Plank Club', kind: 'weapon',
-  art: { img: 'assets/art/items/plank-club.png', px: 0.38, grip: [40, 48], gripEnd: [80, 53.3], rest: 0 },
+  art: { img: 'assets/art/items/plank-club.png', px: 0.38, grip: [40, 48], gripEnd: [80, 53.3], tip: [239, 55.5], rest: 0, stow: 'back' },
   grip: 'one-hand', durability: 10,
   moves: PLANK_CLUB, attack: 'club1',
   toss: { damage: 14, spin: 0.45, hitstop: 9, shake: 8 },

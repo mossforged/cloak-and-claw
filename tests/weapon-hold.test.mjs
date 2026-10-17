@@ -3,6 +3,7 @@
 // and his far fist on the shaft (at `grip2`, sliding back only where out of reach), closed round the shaft (its ring axis along it) and drawn above the spear; the archer's
 // pinch hand reaches the drawn string, which full draw brings to the jaw anchor, with the arrow sticking out past the
 // bow; the A012 near pinch drawing is used (no borrowed far hand); weapons with `floor` lie flat on the floor.
+// T025: the hold matrix (bodies x items x grip modes x every frame, tools/bench/hold.js) has no hold flags.
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { ITEMS } from '../src/data/items/index.js';
@@ -10,6 +11,9 @@ import { targetPose } from '../src/render/rig-pose.js';
 import { heldOf, layoutRig } from '../src/render/rig.js';
 import { gripLayout, at } from '../src/render/rig-grip.js';
 import { movesOf } from '../src/sim/weapons.js';
+import { HOLDERS, holdFrames, holdFrame } from '../tools/bench/hold.js';
+import { GRIP_MODE_NAMES } from '../src/data/grip-modes.js';
+import { SPEAR_HOLDS, withSpearHold } from '../src/data/rigs/rat-spearman-holds.js';
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
@@ -128,6 +132,27 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 for (const K of Object.values(ITEMS).filter((k) => k.kind === 'weapon')) {
   const upright = ['rat-spear', 'rat-bow'].includes(K.id);
   check(upright ? K.art.floor === 90 : !K.art.floor, `${K.id}: lies flat on the floor`);
+}
+
+// T025 grip test: every item on every body that can hold it, in every grip mode, in every state and move frame, drawn
+// through rigFrame: no hold flags (handle off the fist over 2 px, second fist off the shaft, a grip hand under the weapon);
+// the spearman's overhand variants (?spear=B|C|D) too.
+for (const [body, list] of Object.entries(HOLDERS)) {
+  for (const [id, item] of list) for (const mode of GRIP_MODE_NAMES) {
+    const bad = [];
+    for (const [label, f] of holdFrames(id, item, true)) for (const x of holdFrame(f, { grip: mode }).flags) bad.push(`${label}: ${x.text}`);
+    check(!bad.length, `${body} ${id} ${item ?? 'own'} ${mode}: no hold flags (${bad.slice(0, 3).join('; ')}${bad.length > 3 ? ` +${bad.length - 3}` : ''})`);
+  }
+}
+{
+  const base = RIGS['rat-spearman'];
+  for (const k of Object.keys(SPEAR_HOLDS)) {
+    RIGS['rat-spearman'] = withSpearHold(base, k);
+    const bad = [];
+    for (const [label, f] of holdFrames('rat-spearman', null, true)) for (const x of holdFrame(f).flags) bad.push(`${label}: ${x.text}`);
+    check(!bad.length, `spearman hold ${k}: no hold flags (${bad.slice(0, 3).join('; ')})`);
+  }
+  RIGS['rat-spearman'] = base;
 }
 
 console.log(fails ? `${fails} failures` : 'ALL OK');
