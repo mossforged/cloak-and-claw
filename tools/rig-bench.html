@@ -5,7 +5,10 @@
      size beside the standee and over the Harbor Market floor; Export saves the strip as one image.
      Serve the repo root, then /tools/rig-bench.html?src=A010-rat-raider-standard (Art's assets/source/<ID>-<slug>/)
      or ?fixture=mouse-fighter (tools/fixtures/). Options: view=overlay|master|parts|diff, part=<name>, fighter=<id>,
-     export (only the strip image, for screenshots), t=<s> (freeze the motion at that time). -->
+     export (only the strip image, for screenshots), t=<s> (freeze the motion at that time).
+     T024 stretch (G2 artefact): ?src=<ID>&stretch or ?rig=<rig id>&stretch shows the stretch strip of the body that
+     delivery is (the game rig: mouse, rat family) with its flags; Export saves it as JPG (headless:
+     node tools/stretch-strip.mjs mouse|rat). -->
 <meta charset="utf-8">
 <title>Rig bench</title>
 <style>
@@ -55,6 +58,22 @@ import { drawFigure, drawStandee, renderStrip } from './bench/draw.js';
 
 const q = new URLSearchParams(location.search);
 const $ = (id) => document.getElementById(id);
+if (q.has('stretch')) {   // T024: the stretch strip instead of the fit / motion views
+  const { FAMILIES, bodyOf } = await import('./bench/families.js');
+  const { stretchCanvas } = await import('./bench/stretch-draw.js');
+  let rigId = q.get('rig');
+  if (!rigId) { const j = await fetch('../' + sourceUrl(q)).then((r) => (r.ok ? r.json() : {})).catch(() => ({})); rigId = FIGHTERS[j.fighter]?.art?.rig; }
+  const body = bodyOf(rigId);
+  document.body.innerHTML = body ? '<div style="padding:8px"><button id="sx">export JPG</button> <span id="sn"></span></div>' : `<p style="padding:12px">No game rig for ${rigId ?? 'this delivery'} yet: the stretch strip runs on an imported body (${Object.keys(FAMILIES).join(', ')}).</p>`;
+  if (body) {
+    const { canvas, cells, flagged } = await stretchCanvas(FAMILIES[body], `${FAMILIES[body].title}: stretch strip (G2, T024)`);
+    canvas.style.width = `${q.has('export') ? canvas.width : Math.min(canvas.width, 1600)}px`;
+    document.body.append(canvas); $('sn').textContent = `${cells} cells, ${flagged} flagged (known art debts: tools/bench/stretch-known.js)`;
+    $('sx').onclick = () => canvas.toBlob((b) => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = `stretch-${body}.jpg`; a.click(); }, 'image/jpeg', 0.8);
+  }
+  document.title = 'ready';
+  throw new Error('stretch view');   // stop here (the fit / motion views are not built)
+}
 if (q.has('export')) document.body.classList.add('export');
 const load = (src) => new Promise((res) => { const i = new Image(); i.onload = () => res(i); i.onerror = () => res(null); i.src = '../' + src; });
 const fail = (msg) => { $('err').textContent += msg + '\n'; };

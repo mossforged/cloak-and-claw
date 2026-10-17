@@ -1,18 +1,21 @@
 // Minimal PNG reader for headless tests (T024 stretch test): 8-bit, non-interlaced; RGBA, RGB, grey(+alpha) and palette.
-// Returns { w, h, alpha: Uint8Array(w * h) }. Node only (zlib).
+// readAlpha -> { w, h, alpha: Uint8Array(w * h) }; readRGBA -> { w, h, rgba: Uint8Array(w * h * 4) }. Node only (zlib).
 import { readFileSync } from 'node:fs';
 import { inflateSync } from 'node:zlib';
 
 const cache = new Map();
-export function readAlpha(path) {
+export function readAlpha(path) { return readPng(path); }
+export function readRGBA(path) { return readPng(path); }
+function readPng(path) {
   if (cache.has(path)) return cache.get(path);
   const b = readFileSync(path);
-  let o = 8, w, h, depth, type, inter, trns = null;
+  let o = 8, w, h, depth, type, inter, trns = null, palette = null;
   const idat = [];
   while (o < b.length) {
     const n = b.readUInt32BE(o), t = b.toString('latin1', o + 4, o + 8), d = b.subarray(o + 8, o + 8 + n);
     if (t === 'IHDR') { w = d.readUInt32BE(0); h = d.readUInt32BE(4); depth = d[8]; type = d[9]; inter = d[12]; }
     else if (t === 'tRNS') trns = d;
+    else if (t === 'PLTE') palette = d;
     else if (t === 'IDAT') idat.push(d);
     else if (t === 'IEND') break;
     o += 12 + n;
@@ -30,11 +33,13 @@ export function readAlpha(path) {
       px[row + x] = v;
     }
   }
-  const alpha = new Uint8Array(w * h);
+  const alpha = new Uint8Array(w * h), rgba = new Uint8Array(w * h * 4);
   for (let i = 0; i < w * h; i++) {
     alpha[i] = type === 6 ? px[i * 4 + 3] : type === 4 ? px[i * 2 + 1] : type === 3 ? (trns && px[i] < trns.length ? trns[px[i]] : 255) : 255;
+    const c = type === 6 || type === 2 ? [px[i * bpp], px[i * bpp + 1], px[i * bpp + 2]] : type === 3 ? [palette[px[i] * 3], palette[px[i] * 3 + 1], palette[px[i] * 3 + 2]] : [px[i * bpp], px[i * bpp], px[i * bpp]];
+    rgba.set([...c, alpha[i]], i * 4);
   }
-  const out = { w, h, alpha };
+  const out = { w, h, alpha, rgba };
   cache.set(path, out);
   return out;
 }
