@@ -12,9 +12,10 @@ import { pose, masterAt, walkCycle } from './biped-ik.js';
 
 export const P = (spec) => pose(rig, spec);
 export const NEAR = masterAt(rig, 'foot-near')[0], FAR = masterAt(rig, 'foot-far')[0];
-// the menace crouch: hips 6 px down, trailing (near) boot back, leading (far) boot forward, hunched over
-export const FEET = { near: [NEAR - 15, 0, 0], far: [FAR + 14, 0, 0] };
-export const CROUCH = { dy: 6, pelvis: 4, torso: 10, head: -12, feet: FEET, tail: -10, 'tail-2': 15, 'tail-3': 20, 'scarf-tail': 0 };
+// the menace crouch: hips 3 px down, trailing (near) boot back, leading (far) boot forward, leaning in (T026 r2: raised
+// from 6 px down and 10 / -12 degrees: idle 134.4 px tall, A010 137.8, the master 138; was 129.9)
+export const FEET = { near: [NEAR - 10, 0, 0], far: [FAR + 12, 0, 0] };
+export const CROUCH = { dy: 3, pelvis: 4, torso: 5, head: -6, feet: FEET, tail: -10, 'tail-2': 15, 'tail-3': 20, 'scarf-tail': 0 };
 const CLAW = { 'hand-far': 'hand-far-open' };
 const HURT = { head: 'head-hurt', 'hand-far': 'hand-far-open' };
 const FALL = { head: 'head-hurt', 'hand-far': 'hand-far-open', 'hand-near': 'hand-near-open' };
@@ -22,7 +23,7 @@ const TAIL = (a, b, c) => ({ tail: a, 'tail-2': b, 'tail-3': c });
 
 // Walk (T024's 9-key pattern, floor-line rule): 2 strides/s at his sim walk (2 px/frame = 120 px/s), hips in the crouch
 // (low at contact, high at passing), toe-off drawings (A019) at the push-off only.
-export const WALK = { speed: 2.0, walk: 120, lift: 5, dy: 5, bob: 1.5, gather: 0.2, heel: 10, strike: 8,
+export const WALK = { speed: 2.0, walk: 120, lift: 5, dy: 2, bob: 1.5, gather: 0.2, heel: 10, strike: 8,
   toe: { near: 'foot-near-toe', far: 'foot-far-toe' } };
 const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: CLAW, hand: { off: [-10, 12], dir: -105 }, shield: { off: [23, 6], turn: -40 } });
 const arm = (k, amp, ph) => [STANCE[k] ?? 0, amp, ph];
@@ -39,7 +40,7 @@ export default {
   },
   walk: {
     speed: WALK.speed, ...walkCycle(rig, WALK),
-    swap: { 'hand-far': 'hand-far-fist' }, pelvis: 3, torso: [8, 1.5, 0, 2], head: [-10, 1.5, 0.1, 2],
+    swap: { 'hand-far': 'hand-far-fist' }, pelvis: 3, torso: [5, 1.5, 0, 2], head: [-6, 1.5, 0.1, 2],
     'arm-near-upper': arm('arm-near-upper', 6, 0.5), 'arm-near-lower': STANCE['arm-near-lower'], 'hand-near': STANCE['hand-near'],
     'arm-far-upper': [10, 14, 0], 'arm-far-lower': [-20, 6, 0.1], 'hand-far': -10,
     tail: [-12, 12, 0.25], 'tail-2': [15, 10, 0.4], 'tail-3': [20, 12, 0.55], 'scarf-tail': [8, 8, 0.4, 2],

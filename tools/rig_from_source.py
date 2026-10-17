@@ -10,13 +10,16 @@ T023: whole-arm swaps keep their extra fields: `hide` (parts the drawing replace
 item sits, swap image px) and `slotDirection` -> `axis` (degrees the fist holds a handle toward the item's head). The
 source's `grips` (each grip hand's slot centre and direction) become `hands`: { swap: { part, at (part px), axis } }.
 T024: part names are near/far (rig standard section 3). A source that says front/back for limbs, hands and feet (A013,
-A016) is read as near/far, so the output (data and image names) uses the new names; head/torso `back` views keep theirs."""
+A016) is read as near/far, so the output (data and image names) uses the new names; head/torso `back` views keep theirs.
+T026 round 2: every cut loses its detached islands (tools/islands.py: stray scraps apart from the main shape), each one
+dropped listed in the report; --keep-islands <name,...> keeps them on parts drawn in pieces on purpose (e.g. whiskers)."""
 import argparse, json, math, os, re, sys
 import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
 from key_green import key  # noqa: E402
+from islands import describe  # noqa: E402
 
 
 def alpha_of(path):
@@ -124,6 +127,7 @@ def main():
     ap.add_argument("--height", type=float, default=136, help="screen px tall in game")
     ap.add_argument("--scale", type=float, default=0.4, help="canvas px -> stored image px")
     ap.add_argument("--merge", action="append", default=[], help="T026: a rig-source fragment (A019) laid over the source: its parts replace, its swaps add; images resolve in the fragment's folder")
+    ap.add_argument("--keep-islands", default="", help="T026 r2: comma-separated part/swap names whose detached pieces are kept")
     ap.add_argument("--sockets", action="store_true", help="only print the sockets block (T024; images not written)")
     a = ap.parse_args()
     raw = json.load(open(a.source))
@@ -147,9 +151,15 @@ def main():
     out = a.out or f"src/data/rigs/{a.id}.js"
     os.makedirs(art, exist_ok=True)
 
+    keep_islands = set(filter(None, a.keep_islands.split(",")))
+    dropped = {}
+
     def cut(name, img):
         dst = os.path.join(art, f"{name}.png")
-        _, bbox = key(os.path.join(folder, img), dst, None, s)
+        isl = None if name in keep_islands else []
+        _, bbox = key(os.path.join(folder, img), dst, None, s, isl)
+        if isl:
+            dropped[name] = isl
         return dst, bbox[:2]
 
     origin, path = {}, {}
@@ -197,6 +207,9 @@ def main():
         lines.append("  },")
     lines.append(sockets_block(source_sockets(src, derive_sockets(src, folder)), local, "  "))
     lines += ["};", ""]
+    print(f"islands dropped ({len(dropped)} cuts; canvas px):" if dropped else "islands dropped: none")
+    for n, isl in dropped.items():
+        print(f"  {n}: {describe(isl)}")
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
     open(out, "w").write("\n".join(lines))
     print("wrote", out, f"(scale {scale:.5f}: one uniform factor, no per-part scale)")

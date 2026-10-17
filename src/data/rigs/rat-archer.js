@@ -7,7 +7,7 @@ import rat from './rat-raider.js';
 import base, { P, CROUCH } from './rat-raider-poses.js';
 
 const BOW = (off, extra = {}) => ({ shield: { off, turn: -45 }, ...extra });
-const DRAW = { 'arm-near-upper.order': 815, 'hand-near.order': 845 };   // the string arm in front of the body
+const DRAW = { 'hand-near.order': 845 };   // the string hand in front of the body (the upper arm keeps its band under the vest, T026 r2)
 const { swap: _s, ...STANCE } = P({ ...CROUCH, torso: 4, head: -6, hand: { off: [10, 16], dir: -60 }, ...BOW([24, 2]) });
 const keep = (S, ...ks) => Object.fromEntries(ks.map((k) => [k, S[k]]));
 const ARMS = ['arm-near-upper', 'arm-near-lower', 'hand-near', 'arm-far-upper', 'arm-far-lower', 'hand-far'];

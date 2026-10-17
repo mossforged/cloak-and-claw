@@ -3,7 +3,7 @@
 // it (tools/rig-bench.html?...&stretch). alphaOf(img) -> { w, h, alpha } is the caller's (Node: bench/png.mjs; browser:
 // canvas pixels).
 // Cells: each knee and elbow bent 90 and 150 degrees from straight; arms straight up; each torso view; each hand, foot and
-// whole-limb drawing; each item each body holds (current grip, and T025: every grip mode on the weapon node); a crouch,
+// whole-limb drawing; the tail root +-10 (T026 r2); each item each body holds (current grip, and T025: every grip mode on the weapon node); a crouch,
 // the pose-budget crouches and lying with the floor lines; the rig at 0.96x, 1.04x, 1.4x.
 // Flags: a seam gap over 2 px at a joint (a crack inside the joint's filled core at rest: empty with drawing on both sides), a foot below its floor line or floating
 // over it without a named lift (floor cells), a lying body off the floor, a far hand hidden on a two-handed item; T025:
@@ -65,6 +65,14 @@ export function stretchCells(family, items = []) {
     up[l] = ang(bone(rig, l)) - ang(bone(rig, h));
   }
   custom('arms straight up', up);
+  // T026 r2: the tail root (the walk's butt / tail gap): the tail turned 10 degrees either way against the pelvis, the
+  // pelvis turned 10 either way under still legs, and the walk's four quarter keys (the thighs swing off the root)
+  if (rig.parts.tail?.parent) {
+    const T = { tailRoot: true };
+    for (const d of [10, -10]) custom(`tail root ${d > 0 ? '+' : ''}${d}`, { ...S, tail: (S.tail ?? 0) + d }, {}, { flags: T });
+    for (const d of [10, -10]) custom(`tail root, pelvis ${d > 0 ? '+' : ''}${d}`, { ...S, pelvis: (S.pelvis ?? 0) + d, 'leg-near-upper': (S['leg-near-upper'] ?? 0) - d, 'leg-far-upper': (S['leg-far-upper'] ?? 0) - d }, {}, { flags: T });
+    if (rig.poses.walk) for (const q of [0, 0.25, 0.5, 0.75]) frame(`tail root, walk ${q}`, { state: 'walk', t: q * 60 / rig.poses.walk.speed }, undefined, T);
+  }
   const views = rig.parts.torso?.swaps ?? {};
   custom('torso three-quarter', S);
   for (const sw of Object.keys(views)) custom(sw, S, { torso: sw, ...(sw === 'torso-back' && rig.parts.head?.swaps?.['head-back'] ? { head: 'head-back' } : {}) });
@@ -106,6 +114,13 @@ const covers = (alphaOf, e, P) => {
   const [u, v] = apply(e.inv ??= inv(e.m), P), x = Math.floor(u), y = Math.floor(v);
   return x >= 0 && y >= 0 && x < A.w && y < A.h && A.alpha[y * A.w + x] > 127;
 };
+// T026 r2: how far point P is from the nearest pixel of the entries (rings of 0.25 px out to 16; 16 if none)
+const BODY = /^(pelvis|torso|leg-|foot-)/;
+function offBody(alphaOf, list, P) {
+  if (list.some((e) => covers(alphaOf, e, P))) return 0;
+  for (let R = 0.25; R <= 16; R += 0.25) for (let a = 0; a < 48; a++) if (list.some((e) => covers(alphaOf, e, [P[0] + R * Math.cos(a * Math.PI / 24), P[1] + R * Math.sin(a * Math.PI / 24)]))) return R;
+  return 16;
+}
 // Largest radius (step 0.25, up to 8 px) round J that the entries fill completely.
 function core(alphaOf, list, J) {
   let r = 0;
@@ -155,7 +170,7 @@ export function flagsOf(cell, alphaOf) {
   const carried = new Set(drawn.flatMap((e) => Object.keys(e.p?.swaps?.[e.swap]?.carry ?? {})));
   const rest = Object.fromEntries(layoutRig(rig, { ...channelsOf(rig) }, cell.swap, cell.held).filter((e) => e.m).map((e) => [e.name, e]));
   // seams: the filled core round each joint, at rest (parent + child) and as posed (anything drawn over it)
-  for (const e of drawn) {
+  for (const e of cell.tailRoot ? [] : drawn) {   // the tail-root cells measure the tail root only (below)
     const p = rig.parts[e.name]?.parent;
     if (!p || ITEM.has(e.name) || carried.has(e.name) || !by[p] || !rest[e.name] || !rest[p]) continue;
     const J0 = apply(rest[e.name].base, rig.parts[e.name].pivot), r0 = core(alphaOf, [rest[e.name], rest[p]], J0);
@@ -177,6 +192,13 @@ export function flagsOf(cell, alphaOf) {
     let lo = -Infinity;
     for (const e of drawn) if (/^(pelvis|torso|head|leg-|foot-)/.test(e.name)) lo = Math.max(lo, lowest(e));
     if (Math.abs(lo) > 0.75) flags.push(`lying body ${lo > 0 ? 'under' : 'over'} the floor by ${Math.abs(lo).toFixed(1)} px`);
+  }
+  if (cell.tailRoot && by.tail) {   // T026 r2: the tail's root end shows (nothing in front covers it) and stands off the body
+    const e = by.tail, P = apply(e.base, rig.parts.tail.pivot), front = drawn.filter((o) => o.order > e.order && BODY.test(o.name));
+    if (!front.some((o) => covers(alphaOf, o, P))) {
+      const gap = offBody(alphaOf, drawn.filter((o) => BODY.test(o.name)), P) * cell.k;
+      if (gap > SEAM_PX) { flags.push(`seam ${rig.parts.tail.parent} / tail: ${gap.toFixed(1)} px`); marks.push(apply(cell.view, P)); }
+    }
   }
   if (cell.twoHand && by['hand-far']) {   // share of the far hand's pixels nothing drawn later covers
     const e = by['hand-far'], A = alphaOf(e.img), later = drawn.slice(drawn.indexOf(e) + 1);

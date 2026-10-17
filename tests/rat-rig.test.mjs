@@ -96,7 +96,9 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const d = dist(apply(blade.m, K.art.grip), apply(hand.base, slot.attach));   // slot in the hand part's px
     check(d < 0.01, `raider ${label}: cutlass grip on the hand's shaft slot (${d.toFixed(3)} px off)`);
     check(blade.order < hand.order, `raider ${label}: handle drawn behind the grip hand`);
-    if (label === 'strike') check(L.findIndex((e) => e.name === 'arm-near-upper') > L.findIndex((e) => e.name === 'torso'), 'raider strike: near arm in front of the torso');
+    // T026 r2: the near upper arm stays under the vest edge (band 590 < torso 600); the forearm chops in front of it
+    const at = (n) => L.findIndex((e) => e.name === n);
+    if (label === 'strike') check(at('arm-near-upper') < at('torso') && at('arm-near-lower') > at('torso'), 'raider strike: near upper arm under the vest, forearm in front of the torso');
   }
   const ko = f({ state: 'dead', hp: 0, dropped: true }), tp = targetPose(ko, rig, 0);
   check(!gripLayout(rig, tp.joints, tp.swap, heldOf(ko, rig), ko).some((e) => e.name === 'held'), 'raider KO: dropped cutlass gone from his hand');

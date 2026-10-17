@@ -5,7 +5,9 @@
 //     --merge assets/source/A019-rat-key-drawings/rig-source.json --id rat-raider --art assets/art/enemies/rat-raider/rig
 // rest 0 = the A017 master: standing straight, arms hanging, fists closed (all his poses start from there). Points are in
 // each image's own px; a joint's attach (on the parent) and pivot (on the child) are the same master canvas point.
-// order = the standard's depth bands (A018 needs no exceptions: the near arm draws over the torso at 810-840).
+// order = the standard's depth bands; T026 r2: the near upper arm (and its whole-arm keys) at 590, under the torso's vest
+// edge as A010 had it (A018 said 810: its shoulder cap showed over the vest); forearm and hand stay in front (820, 840).
+// Cuts are keyed without detached islands (importer, T026 r2), on the same trim boxes, so every point here holds.
 // Tail: three segments (A018 tail-1 is the standard's `tail`, tail-2 and tail-3 hang off it).
 // The old A010 rig is kept for the viewer's compare slot only (rigs/a010/). Same field meanings as rigs/mouse-fighter.js.
 // hands: the importer's grips (A018 `grips`): each grip drawing's slot centre (hand part px) and the direction it holds a
@@ -63,7 +65,7 @@ export default {
     'pelvis': { img: P + 'pelvis.png', pivot: [123.2, 62.0], order: 400 },
     'torso': { img: P + 'torso.png', parent: 'pelvis', attach: [124.0, 30.8], pivot: [116.4, 156.8], order: 600, swaps: { 'torso-side': { img: P + 'torso-side.png', offset: [31.6, -1.6] }, 'torso-back': { img: P + 'torso-back.png', offset: [2.0, 11.6] } } },
     'head': { img: P + 'head.png', parent: 'torso', attach: [158.0, 84.0], pivot: [152.0, 240.0], order: 700, swaps: { 'head-attack': { img: P + 'head-attack.png', offset: [-2.0, 0.0] }, 'head-hurt': { img: P + 'head-hurt.png', offset: [-3.2, 0.0] }, 'head-effort': { img: P + 'head-effort.png', offset: [2.0, 0.4] }, 'head-ko': { img: P + 'head-ko.png', offset: [1.6, 0.0] }, 'head-back': { img: P + 'head-back.png', offset: [0.4, 16.0] } } },
-    'arm-near-upper': { img: P + 'arm-near-upper.png', parent: 'torso', attach: [28.0, 73.6], pivot: [68.4, 52.0], order: 810, swaps: { 'arm-near-cocked': { img: P + 'arm-near-cocked.png', offset: [-27.2, -70.8], hide: ['arm-near-lower', 'hand-near'], grip: [97.2, 20.4], axis: -135.0,
+    'arm-near-upper': { img: P + 'arm-near-upper.png', parent: 'torso', attach: [28.0, 73.6], pivot: [68.4, 52.0], order: 590, swaps: { 'arm-near-cocked': { img: P + 'arm-near-cocked.png', offset: [-27.2, -70.8], hide: ['arm-near-lower', 'hand-near'], grip: [97.2, 20.4], axis: -135.0,
         carry: { held: [97.2, 20.4] }, turn: { held: -135.0 - AX } }, 'arm-near-raised': { img: P + 'arm-near-raised.png', offset: [31.2, -136.4], hide: ['arm-near-lower', 'hand-near'], grip: [20.4, 32.0], axis: 135.0,
         carry: { held: [20.4, 32.0] }, turn: { held: 135.0 - AX } } } },
     'arm-near-lower': { img: P + 'arm-near-lower.png', parent: 'arm-near-upper', attach: [25.2, 106.4], pivot: [74.4, 24.8], order: 820 },

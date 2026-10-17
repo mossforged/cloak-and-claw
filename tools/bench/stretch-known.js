@@ -7,17 +7,19 @@ const SHOULDER = 'round the top of arm-near-upper (A013 cut it straight: the tor
 const TURNED = 'hand-<side>-grip-overhand drawing (T025: the grip fist turned over on the weapon node opens the wrist; the overhand hand has its own cuff)';
 const FAR_WRIST = 'as the current grip: rounded wrist end on hand-far-grip (the far fist turned hard round the shaft)';
 const RAT_WRIST = 'A018 grip / pinch hands (repainted from the fist) start ~24 source px past the fist\'s wrist line: extend their wrist end under the forearm cuff to the wrist pivot, as hand-near-fist does';
+const TAIL_ROOT = 'A022: tail-1 root tucked under the trouser seat on pelvis (its root sits ~27 px of stored art outside the pelvis drawing; only the near thigh hides it at rest, so it opens in the walk)';
 const HIP_FAR = 'rounded top on leg-far-upper under the pelvis (opens when the far thigh folds forward: kneel, lying)';
 export const KNOWN = {
-  // T026: the rat rebuilt on A018 + A019 (every A010 rat flag cleared, incl. lying shoulder / far hip and arms up)
+  // T026: the rat rebuilt on A018 + A019 (every A010 rat flag cleared, incl. lying shoulder / far hip and arms up; r2: the
+  // stance wrist flags went with the taller stance)
   'rat | hand-near-grip | arm-near-lower / hand-near': [6.0, RAT_WRIST],
   'rat | hand-near-pinch | arm-near-lower / hand-near': [6.0, RAT_WRIST],
   'rat | Rat Raider: rat-cutlass (current grip) | arm-near-lower / hand-near': [6.0, RAT_WRIST],
   'rat | Rat Raider: rat-cutlass (underhand) | arm-near-lower / hand-near': [6.0, RAT_WRIST],
-  'rat | stance (floor) | arm-near-lower / hand-near': [3.0, RAT_WRIST],
-  'rat | 0.96x (floor) | arm-near-lower / hand-near': [2.9, RAT_WRIST],
-  'rat | 1.04x (floor) | arm-near-lower / hand-near': [3.1, RAT_WRIST],
-  'rat | 1.4x (floor) | arm-near-lower / hand-near': [4.2, RAT_WRIST],
+  // T026 r2: the tail-root cells (the user's butt / tail gap in the walk)
+  'rat | tail root, walk 0 | pelvis / tail': [6.3, TAIL_ROOT],
+  'rat | tail root, walk 0.25 | pelvis / tail': [2.5, TAIL_ROOT],
+  'rat | tail root, walk 0.75 | pelvis / tail': [4.3, TAIL_ROOT],
   'rat | 1.4x (floor) | leg-near-lower / foot-near': [2.1, 'only at the 1.4x size step (variety is +-4%): a touch more overlap at the near ankle, low priority'],
   'mouse | near knee 90 | leg-near-upper / leg-near-lower': [6.0, KNEE_CAP],
   'mouse | near knee 150 | leg-near-upper / leg-near-lower': [3.3, KNEE_CAP],

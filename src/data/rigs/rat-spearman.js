@@ -16,8 +16,8 @@ export default {
   holds: { 'rat-spear': { grip: 'overhand', grip2: 'overhand' } },
   poses: {
     ...base,
-    stance: { ...STANCE, ...SPEAR(-4, -44, -10) },
-    idle: { ...base.idle, ...SPEAR(-4, -44, -10), 'arm-near-upper': STANCE['arm-near-upper'], 'arm-near-lower': STANCE['arm-near-lower'], 'hand-near': STANCE['hand-near'],
+    stance: { ...STANCE, ...SPEAR(-6, -44, -10) },   // T026 r2: 2 px nearer him (the taller stance's far fist reaches it)
+    idle: { ...base.idle, ...SPEAR(-6, -44, -10), 'arm-near-upper': STANCE['arm-near-upper'], 'arm-near-lower': STANCE['arm-near-lower'], 'hand-near': STANCE['hand-near'],
       'arm-far-upper': [STANCE['arm-far-upper'], 3, 0.1], 'arm-far-lower': STANCE['arm-far-lower'], 'hand-far': STANCE['hand-far'] },
     walk: { ...base.walk, ...SPEAR(-4, -44, -8), swap: {}, 'arm-near-upper': STANCE['arm-near-upper'], 'arm-near-lower': STANCE['arm-near-lower'], 'hand-near': STANCE['hand-near'],
       'arm-far-upper': STANCE['arm-far-upper'], 'arm-far-lower': STANCE['arm-far-lower'], 'hand-far': STANCE['hand-far'] },
