@@ -17,3 +17,10 @@ The rat is rebuilt from a neutral setup-pose master (decision 2026-10-17). A018 
 - Human: do the rats still look like our rats and fight like them? Are the overhand spear and the full bow draw better than before?
 
 Out of scope: A019 key drawings (next art task), torso gear refit (A020), new kits and moves (the flexibility test, after A019 + A020).
+
+## Addendum (lead, 2026-10-17): A019 is merged, import it in this task
+- Merge A019's fragment (nine whole-limb/foot swaps with `hide`, `itemGrip`, `slotDirection`) and its two replacement parts (`arm-near-upper`, `leg-far-upper`, same pivots) into the rat. Images resolve from `assets/source/A019-rat-key-drawings/` (LFS).
+- Wire the pose-budget states that waited on them (rig sheet): telegraph + cutlass wind-up on `arm-near-cocked`; full bow draw on `arm-far-raised-back` (far forearm and fist drawn **in front of** the torso and head while drawing: add the overlay band); `arm-far-guard` for the shield-bearer's block (rat shield item comes with the flexibility test; wire the pose); `arm-near-raised` for arms-up; get-up on `leg-near-kneeling`; squat / land / lying on `leg-far-folded`; jump tuck on `leg-near-kneeup`; walk push-off and thrust lunge on the toe-off feet.
+- **Toe-off feet:** Art drew them steep (toes nearly straight down); the ankle must lift 98 px (near) / 127 px (far) source for the ball to meet the floor. Use them only at the push-off key, let the floor-line rule lift the ankle, and report in the viewer whether they read as a push-off or a tiptoe.
+- Stretch strip: confirm the lying shoulder (was 9.3 px) and far hip (3.3 px) are cleared by the replacements; the arms-up shoulder flag should go with `arm-near-raised`.
+- Human check in the viewer (phone): wind-up, full draw, guard, kneel, squat, jump tuck, walk.
