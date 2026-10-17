@@ -88,7 +88,7 @@ for (const [props, weaponBot] of [[true, true], [false, false]]) {
   const fishSlap = targetPose(inMove('big-fish', 'fishSlap', 15), rig, 0), slash2 = targetPose(sword('slash2', 8), rig, 0);   // both at the strike
   check(fishSlap.joints.sx === slash2.joints.sx && fishSlap.joints.sword === slash2.joints.sword, 'fish slap: slash2 spin pieces');
   const cut = targetPose(inMove('rat-cutlass', 'cut1', 2), rig, 0).joints, slash = targetPose(sword('slash1', 2), rig, 0).joints;
-  const tip = (j) => j.torso + j['arm-front-upper'] + j['arm-front-lower'] + j.sword;
+  const tip = (j) => (j.pelvis ?? 0) + j.torso + j['arm-front-upper'] + j['arm-front-lower'] + j['hand-front'] + j.sword;   // T023: the blade turns with the fist
   check(tip(cut) > tip(slash), 'cutlass: a smaller wind-back than the sword');
   check(ITEMS['rat-cutlass'].moves.cut1.fx.slash.r < def.moves.slash1.fx.slash.r, 'cutlass: a tighter swoosh than the sword');
   const ratRig = RIGS[FIGHTERS['rat-raider'].art.rig], rat = { def: FIGHTERS['rat-raider'], state: 'attack', t: 0, mf: 3, move: ITEMS['plank-club'].moves.club1, moveKey: 'club1', weapon: { def: ITEMS['plank-club'] } };

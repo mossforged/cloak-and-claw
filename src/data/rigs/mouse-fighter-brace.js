@@ -6,12 +6,13 @@
 //   sway:    s per weight shift; hips = px side to side (boots stay planted: the legs bend to keep them)
 //   swayFade: frames for the sway to stop/restart while he shuffle-walks behind the shield
 //   sword:   deg; ready-grip twitch on two quick, uneven cycles (twitch s) so it never looks like a metronome
-//   plant:   upper leg -> [lower leg, sole point in the lower leg's own px] (kept on the spot it has in the plain pose)
+//   swordJoint: the joint the twitch turns (T023: the sword hand; the sword itself stays rigid in the fist)
+//   plant:   upper leg -> [lower leg, ankle point in the lower leg's own px (T023: where the foot attaches)] (kept on the spot it has in the plain pose)
 export default {
   fade: 14,
   breath: 1.4, chest: 0.035, head: 1.2,
   shield: 1.4, arm: 1, lag: 0.18,
   sway: 3.2, hips: 1, swayFade: 10,
-  sword: 1.6, twitch: [0.53, 0.29],
-  plant: { 'leg-back-upper': ['leg-back-lower', [38, 82]], 'leg-front-upper': ['leg-front-lower', [45, 94]] },
+  sword: 1.6, twitch: [0.53, 0.29], swordJoint: 'hand-front',
+  plant: { 'leg-back-upper': ['leg-back-lower', [42.0, 53.2]], 'leg-front-upper': ['leg-front-lower', [29.6, 58.0]] },
 };

@@ -4,8 +4,11 @@
     swaps with their offsets, rest 0 (joint angle 0 = the master pose, as in the rig bench and data/rigs/biped-poses.js).
 Usage: python3 tools/rig_from_source.py <rig-source.json> --id rat-raider [--art assets/art/enemies/rat-raider/rig]
        [--out src/data/rigs/rat-raider.js] [--height 136] [--scale 0.4]
-A draft: the game's poses for the character still have to be written against it."""
-import argparse, json, os, sys
+A draft: the game's poses for the character still have to be written against it.
+T023: whole-arm swaps keep their extra fields: `hide` (parts the drawing replaces), `itemGrip` -> `grip` (where the held
+item sits, swap image px) and `slotDirection` -> `axis` (degrees the fist holds a handle toward the item's head). The
+source's `grips` (each grip hand's slot centre and direction) become `hands`: { swap: { part, at (part px), axis } }."""
+import argparse, json, math, os, sys
 import numpy as np
 from PIL import Image
 
@@ -47,10 +50,12 @@ def main():
     origin, path = {}, {}
     for name, p in src["parts"].items():
         path[name], origin[name] = cut(name, p["img"])
-    swaps = {}
+    swaps, sorigin = {}, {}
     for name, sw in src.get("swaps", {}).items():
         if sw["of"] in src["parts"]:
             swaps[name] = (sw["of"],) + cut(name, sw["img"])
+            sorigin[name] = swaps[name][2]
+    axis = lambda d: round(math.degrees(math.atan2(d[1][1] - d[0][1], d[1][0] - d[0][0])), 2)
 
     top = silhouette_top(os.path.join(folder, src["master"]))
     scale = a.height / ((src["floorY"] - top) * s)   # stored image px -> screen px
@@ -66,12 +71,26 @@ def main():
         if p.get("parent"):
             fields += [f"parent: '{p['parent']}'", f"attach: {local(p['parent'], p['pivot'])}"]
         fields += [f"pivot: {local(name, p['pivot'])}", f"order: {p.get('band', 500)}"]
-        sw = [f"'{n}': {{ img: P + '{n}.png', offset: [{round((o[0] - origin[name][0]) * s, 2)}, {round((o[1] - origin[name][1]) * s, 2)}] }}"
+        def extra(n):
+            S, o = src["swaps"][n], sorigin[n]
+            out = f", hide: {json.dumps(S['hide'])}" if S.get("hide") else ""
+            if S.get("itemGrip"):
+                out += f", grip: [{round((S['itemGrip'][0] - o[0]) * s, 2)}, {round((S['itemGrip'][1] - o[1]) * s, 2)}]"
+            if S.get("slotDirection"):
+                out += f", axis: {axis(S['slotDirection'])}"
+            return out
+        sw = [f"'{n}': {{ img: P + '{n}.png', offset: [{round((o[0] - origin[name][0]) * s, 2)}, {round((o[1] - origin[name][1]) * s, 2)}]{extra(n)} }}"
               for n, (of, _, o) in swaps.items() if of == name]
         if sw:
             fields.append("swaps: { " + ", ".join(sw) + " }")
         lines.append(f"    '{name}': {{ " + ", ".join(fields) + " },")
-    lines += ["  },", "};", ""]
+    lines.append("  },")
+    if src.get("grips"):
+        lines.append("  hands: {")
+        for n, g in src["grips"].items():
+            lines.append(f"    '{n}': {{ part: '{g['of']}', at: {local(g['of'], g['center'])}, axis: {axis(g['direction'])} }},")
+        lines.append("  },")
+    lines += ["};", ""]
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
     open(out, "w").write("\n".join(lines))
     print("wrote", out)

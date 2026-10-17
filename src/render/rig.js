@@ -31,22 +31,26 @@ const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[
 // pivot and children's attach points stay in the part's own pixels whichever image shows.
 // A swap may also hide other parts (`hide: [names]`, e.g. the forearm when a whole-arm drawing is in) and
 // re-attach children to points on its own image (`carry: { child: [x, y] }` in swap image px, e.g. the
-// shield onto the drawn fist): the child then hangs off this part, keeping its own joint angle (T012).
+// shield onto the drawn fist): the child then hangs off this part, keeping its own joint angle (T012). T023: `turn: { child:
+// deg }` turns the carried child's drawing on top (the whole raised arm's fist holds the sword's handle at its own slot axis).
 const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 
 // Each part's image matrix (part px -> screen px, feet at 0,0) and image path, in draw order (`base` = the matrix of the
 // part's own image whichever swap shows: gear overlays ride it, render/looks.js).
 // swap: { part: swap name } from the pose. held: { slot, part } from heldOf (a held weapon replaces the slot part's
-// drawing; part null = empty hand, slot hidden). Pure; tests use it.
+// drawing; part null = empty hand, slot hidden, and the rig's `emptyHand` swaps unless the pose names that part). Pure; tests use it.
 export function layoutRig(rig, joints, swap = {}, held = null) {
   const frames = {};
   const parts = held?.part ? { ...rig.parts, [held.slot]: { ...rig.parts[held.slot], ...held.part, swaps: undefined } } : { ...rig.parts };
   const hidden = new Set();
+  if (held && !held.part && rig.emptyHand) swap = { ...rig.emptyHand, ...swap };   // T023: the empty hand's own drawing
   for (const [name, key] of Object.entries(swap)) {
     const s = parts[name]?.swaps?.[key];
     if (!s) continue;
     for (const h of s.hide ?? []) hidden.add(h);
-    for (const [c, xy] of Object.entries(s.carry ?? {})) if (parts[c]) parts[c] = { ...parts[c], parent: name, attach: apply(swapMatrix(s), ...xy) };
+    for (const [c, xy] of Object.entries(s.carry ?? {})) {
+      if (parts[c]) parts[c] = { ...parts[c], parent: name, attach: apply(swapMatrix(s), ...xy), rest: (parts[c].rest ?? 0) + (s.turn?.[c] ?? 0) };
+    }
   }
   const frameOf = (name) => {
     if (frames[name]) return frames[name];

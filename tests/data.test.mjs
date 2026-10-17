@@ -61,7 +61,7 @@ for (const [id, p] of Object.entries(RULES.potions.drops)) if (id !== 'solo') ch
 // Items, weapon kits and props (T010)
 const dropIds = (d) => (!d ? [] : typeof d === 'string' ? [d] : Object.keys(d));
 for (const [id, it] of Object.entries(ITEMS)) {
-  check(it.id === id && ['weapon', 'food', 'potion'].includes(it.kind), `item ${id}: id and kind`);
+  check(it.id === id && ['weapon', 'food', 'potion', 'gear'].includes(it.kind), `item ${id}: id and kind`);
   check(existsSync(it.art.img) && it.art.px > 0, `item ${id}: art exists, px set`);
   if (it.kind === 'food') check(it.heal > 0, `item ${id}: heal`);
   if (it.kind === 'potion') check(it.heal > 0 && it.splash?.x > 0 && it.splash?.y > 0, `item ${id}: potion heal and splash`);

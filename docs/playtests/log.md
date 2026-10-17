@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-17 T023 new Mouse Fighter (A013) in game
+Block: shield should face forward (v2: "fixed"). Walk v1 read as a crab scuttle; v3 narrowed hips; user picked walk B of four variants (stopgap until A016 + T024 rebuild the walk). (Code's notes; user's exact words on the walk not recorded.)
+
 ## 2026-10-16 T021 multi-hero engine
 User: "I didn't see any issues with it."
 
