@@ -46,19 +46,25 @@ export default {
     'torso': { img: P + 'torso.png', parent: 'pelvis', attach: [118.8, 0.8], pivot: [121.6, 140.0], order: 600, swaps: { 'torso-back': { img: P + 'torso-back.png', offset: [-0.4, -6.8], hide: ['scarf-tail'] }, 'torso-side': { img: P + 'torso-side.png', offset: [-22.8, 1.6], hide: ['scarf-tail'] } } },
     'pelvis': { img: P + 'pelvis.png', pivot: [116.4, 28.8], order: 400 },
     'arm-near-upper': { img: P + 'arm-near-upper.png', parent: 'torso', attach: [65.6, 58.4], pivot: [63.2, 56.8], order: 590, swaps: { 'arm-near-raised': { img: P + 'arm-near-raised.png', offset: [41.2, -57.6], hide: ['arm-near-lower', 'hand-near'], grip: [28.4, 21.2], axis: -90.0,
-        carry: { sword: [28.4, 21.2] }, turn: { sword: turnTo(-90, AX) } } } },
+        carry: { sword: [28.4, 21.2] }, turn: { sword: turnTo(-90, AX) } },
+      // T024: A016 whole cocked arm (wound back, fist by the ear), carries the sword at its fist like the raised arm
+      'arm-near-cocked': { img: P + 'arm-near-cocked.png', offset: [-19.2, -58.4], hide: ['arm-near-lower', 'hand-near'], grip: [70.0, 32.0], axis: -126.87,
+        carry: { sword: [70.0, 32.0] }, turn: { sword: turnTo(-126.87, AX) } } } },
     'arm-near-lower': { img: P + 'arm-near-lower.png', parent: 'arm-near-upper', attach: [4.8, 37.2], pivot: [42.0, 40.0], order: 580 },
     'hand-near': { img: P + 'hand-near.png', parent: 'arm-near-lower', attach: [15.6, 28.4], pivot: [70.4, 45.2], order: 840, swaps: { 'hand-near-grip': { img: P + 'hand-near-grip.png', offset: [0.0, 0.0] }, 'hand-near-open': { img: P + 'hand-near-open.png', offset: [-23.6, -5.6] }, 'hand-near-fist': { img: P + 'hand-near-fist.png', offset: [-15.2, 2.0] } } },
     'arm-far-upper': { img: P + 'arm-far-upper.png', parent: 'torso', attach: [207.6, 66.0], pivot: [20.0, 14.8], order: 110, swaps: { 'arm-far-guard': { img: P + 'arm-far-guard.png', offset: [-62.4, -59.6], hide: ['arm-far-lower', 'hand-far'], grip: [22.8, 22.4], axis: -90.0,
         carry: { shield: [22.8, 22.4] }, turn: { shield: turnTo(-90, SHIELD_AX) } } } },
     'arm-far-lower': { img: P + 'arm-far-lower.png', parent: 'arm-far-upper', attach: [33.6, 49.6], pivot: [6.8, 3.6], order: 120 },
     'hand-far': { img: P + 'hand-far.png', parent: 'arm-far-lower', attach: [9.2, 17.2], pivot: [7.6, 44.4], order: 140, swaps: { 'hand-far-shield': { img: P + 'hand-far-shield.png', offset: [0.0, 0.0] }, 'hand-far-open': { img: P + 'hand-far-open.png', offset: [-2.0, -8.0] }, 'hand-far-fist': { img: P + 'hand-far-fist.png', offset: [-0.4, 0.0] }, 'hand-far-grip': { img: P + 'hand-far-grip.png', offset: [0.0, 0.0] } } },
-    'leg-near-upper': { img: P + 'leg-near-upper.png', parent: 'pelvis', attach: [59.6, 52.4], pivot: [76.8, 23.2], order: 530 },
+    'leg-near-upper': { img: P + 'leg-near-upper.png', parent: 'pelvis', attach: [59.6, 52.4], pivot: [76.8, 23.2], order: 530,
+      swaps: { 'leg-near-kneeup': { img: P + 'leg-near-kneeup.png', offset: [47.6, -12.0], hide: ['leg-near-lower', 'foot-near'] },   // T024: A016
+        'leg-near-kneeling': { img: P + 'leg-near-kneeling.png', offset: [-100.0, 10.0], hide: ['leg-near-lower', 'foot-near'] } } },
     'leg-near-lower': { img: P + 'leg-near-lower.png', parent: 'leg-near-upper', attach: [22.4, 75.6], pivot: [38.4, 23.2], order: 520 },
-    'foot-near': { img: P + 'foot-near.png', parent: 'leg-near-lower', attach: [29.6, 58.0], pivot: [42.4, 15.6], order: 510, swaps: { 'foot-near-out': { img: P + 'foot-near-out.png', offset: [-32.8, -11.2] } } },
-    'leg-far-upper': { img: P + 'leg-far-upper.png', parent: 'pelvis', attach: [186.8, 62.0], pivot: [26.0, 23.2], order: 230 },
+    'foot-near': { img: P + 'foot-near.png', parent: 'leg-near-lower', attach: [29.6, 58.0], pivot: [42.4, 15.6], order: 510, swaps: { 'foot-near-out': { img: P + 'foot-near-out.png', offset: [-32.8, -11.2] }, 'foot-near-toe': { img: P + 'foot-near-toe.png', offset: [4.8, -16.8] } } },
+    'leg-far-upper': { img: P + 'leg-far-upper.png', parent: 'pelvis', attach: [186.8, 62.0], pivot: [26.0, 23.2], order: 230,
+      swaps: { 'leg-far-folded': { img: P + 'leg-far-folded.png', offset: [9.6, -35.6], hide: ['leg-far-lower', 'foot-far'] } } },   // T024: A016
     'leg-far-lower': { img: P + 'leg-far-lower.png', parent: 'leg-far-upper', attach: [45.6, 71.2], pivot: [39.2, 22.4], order: 220 },
-    'foot-far': { img: P + 'foot-far.png', parent: 'leg-far-lower', attach: [42.0, 53.2], pivot: [30.8, 15.2], order: 210 },
+    'foot-far': { img: P + 'foot-far.png', parent: 'leg-far-lower', attach: [42.0, 53.2], pivot: [30.8, 15.2], order: 210, swaps: { 'foot-far-toe': { img: P + 'foot-far-toe.png', offset: [-6.8, -11.2] } } },
     'tail': { img: P + 'tail.png', parent: 'pelvis', attach: [5.2, 50.0], pivot: [162.8, 82.4], order: 300 },
     // scarf-tail: A013 painted the scarf as two pieces (knot behind the neck, the streaming tail) with the sword arm
     // covering the gap between them; split (tools/split_pieces.py) so the tail hangs off the knot's lower end and stays

@@ -142,6 +142,7 @@ for (const [name, p] of Object.entries(rig.parts)) {
     for (const [c, xy] of Object.entries(s.carry ?? {})) check(rig.parts[c] && xy.length === 2 && xy.every(Number.isFinite), `${name}.${sw}: carries known part '${c}' at a finite point`);
     if (s.hide?.some((hName) => rig.parts[hName]?.parent === name)) continue;
     if (sw === 'foot-near-out') continue;   // A013 addendum 2: a painted perspective view (toes toward the camera), same ankle
+    if (sw.endsWith('-toe')) continue;   // A016 toe-off feet: same ankle, toes pointing down (the drawing reaches lower by design)
     // no jump: the swap image's centre lands within 15% of the part image's size of the part's own centre
     const [w, h] = pngSize(p.img), [sw2, sh] = pngSize(s.img), k = s.scale ?? 1;
     const dx = s.offset[0] + k * sw2 / 2 - w / 2, dy = s.offset[1] + k * sh / 2 - h / 2;
