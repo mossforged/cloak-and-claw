@@ -1,4 +1,5 @@
 [
+  { "label": "Idle: free arm (r3), new vs A010", "q": "f=rat-raider&anim=idle&f2=rat-raider&v2=a010&zoom=1.25" },
   { "label": "Raider: new vs A010 (idle)", "q": "f=rat-raider&anim=idle&f2=rat-raider&v2=a010" },
   { "label": "Raider slash (wind-up = cocked arm), slow", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=a010&speed=0.5" },
   { "label": "Walk (toe-off push-off), slow", "q": "f=rat-raider&anim=walk&f2=rat-raider&v2=a010&speed=0.5" },

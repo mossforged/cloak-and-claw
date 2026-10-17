@@ -216,7 +216,7 @@ Run log fields (one object per run; slot 0's hero in these fields, and T021 `her
 | `tests/walk-slide.test.mjs` | T024: planted boots slide < 2 px a stance in the rebuilt mouse walk (T023: 3.7); no pelvis narrowing |
 | `tests/sockets.test.mjs` | T024: every rig declares the 8 sockets; they sit where they should; hand on the grip, follows whole-arm swaps; = importer's derived values |
 | `tests/stretch.test.mjs` | T024: stretch test headless for the mouse and the rat; only known flags |
-| `tests/paint.test.mjs` | T026 r2: every paint body within `PAINT.limit` (set from A010); a painted disc on the torso is caught; the rat's game cuts have no islands (python) |
+| `tests/paint.test.mjs` | T026 r2: every paint body within `PAINT.limit` (set from A010); a painted disc on the torso is caught; the rat's game cuts have no islands (python). r3: a body whose master is still an LFS pointer is skipped with a NOTE; CI pulls just that master (`.github/workflows/tests.yml`) |
 
 ## Events (sim -> render)
 | Event | Payload | Listeners |

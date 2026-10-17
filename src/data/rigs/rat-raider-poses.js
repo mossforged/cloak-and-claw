@@ -3,7 +3,7 @@
 // it with the IK helper (rigs/biped-ik.js `pose`): the cutlass fist placed from the shoulder (`hand.off`) with the
 // blade's screen direction (`dir`: 0 forward, -90 up, 90 down), the far fist from its shoulder (`shield`: A018's
 // hand-far-shield slot, used as the far fist's reference point), ankles planted by leg IK (x, lift, tilt).
-// The menace crouch (his A010 look: wide hunched stance, cutlass up behind, far claw out) is CROUCH; poses spread it and
+// The menace crouch (his A010 look: wide hunched stance, cutlass up behind) is CROUCH; poses spread it and
 // change what they need. Whole-limb drawings (A019): cocked near arm for the telegraph, kneeling near leg for the
 // get-up, folded far leg for squat / lying, knee-up near leg for the jump tuck, toe-off feet at the walk's push-off.
 // Spearman and archer (rigs/rat-spearman.js, rat-archer.js) override the arms and add their kit moves.
@@ -16,7 +16,7 @@ export const NEAR = masterAt(rig, 'foot-near')[0], FAR = masterAt(rig, 'foot-far
 // from 6 px down and 10 / -12 degrees: idle 134.4 px tall, A010 137.8, the master 138; was 129.9)
 export const FEET = { near: [NEAR - 10, 0, 0], far: [FAR + 12, 0, 0] };
 export const CROUCH = { dy: 3, pelvis: 4, torso: 5, head: -6, feet: FEET, tail: -10, 'tail-2': 15, 'tail-3': 20, 'scarf-tail': 0 };
-const CLAW = { 'hand-far': 'hand-far-open' };
+const FIST = { 'hand-far': 'hand-far-fist' };
 const HURT = { head: 'head-hurt', 'hand-far': 'hand-far-open' };
 const FALL = { head: 'head-hurt', 'hand-far': 'hand-far-open', 'hand-near': 'hand-near-open' };
 const TAIL = (a, b, c) => ({ tail: a, 'tail-2': b, 'tail-3': c });
@@ -25,14 +25,16 @@ const TAIL = (a, b, c) => ({ tail: a, 'tail-2': b, 'tail-3': c });
 // (low at contact, high at passing), toe-off drawings (A019) at the push-off only.
 export const WALK = { speed: 2.0, walk: 120, lift: 5, dy: 2, bob: 1.5, gather: 0.2, heel: 10, strike: 8,
   toe: { near: 'foot-near-toe', far: 'foot-far-toe' } };
-const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: CLAW, hand: { off: [-10, 12], dir: -105 }, shield: { off: [23, 6], turn: -40 } });
+// T026 r3 (user: the free hand "weirdly curled up"): far arm hangs forward and low like the standee / A010, elbow
+// slightly bent, a loose fist in front of the belt (was off [23, 6], turn -40: an open claw curled at the chest)
+const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: FIST, hand: { off: [-10, 12], dir: -105 }, shield: { off: [20, 24], turn: -30 } });
 const arm = (k, amp, ph) => [STANCE[k] ?? 0, amp, ph];
 
 export default {
   timing: { blend: 0.09, strikeIn: 0.55, overshoot: 1.4, bodyLean: 0.3, swapBack: 0.5, throughSwap: [0, 0.75] },
-  stance: STANCE,   // channels only (every pose starts from it); the open claw is idle's swap
-  idle: {   // coiled: breathing through the shoulders, claw flexing, tail swishing (feet stay planted)
-    ...STANCE, speed: 0.6, swap: CLAW,
+  stance: STANCE,   // channels only (every pose starts from it); the loose far fist is idle's swap
+  idle: {   // coiled: breathing through the shoulders, free fist swaying, tail swishing (feet stay planted)
+    ...STANCE, speed: 0.6, swap: FIST,
     torso: [STANCE.torso, 1.6, 0], head: [STANCE.head, 2.4, 0.15],
     'arm-near-upper': arm('arm-near-upper', 2.5, 0.1), 'hand-near': arm('hand-near', 3, 0.2),
     'arm-far-upper': arm('arm-far-upper', 3, 0.1), 'hand-far': arm('hand-far', 6, 0.3),
