@@ -16,6 +16,7 @@ import { floorLine } from '../../src/data/rigs/biped-floor.js';
 import { LOOKS } from '../../src/data/looks.js';
 import { GRIP_MODE_NAMES } from '../../src/data/grip-modes.js';
 import { holdFlags } from './hold.js';
+import { tailRootFlags } from './tail-root.js';
 
 const D = Math.PI / 180;
 const ang = (v) => Math.atan2(v[1], v[0]) / D;
@@ -114,13 +115,6 @@ const covers = (alphaOf, e, P) => {
   const [u, v] = apply(e.inv ??= inv(e.m), P), x = Math.floor(u), y = Math.floor(v);
   return x >= 0 && y >= 0 && x < A.w && y < A.h && A.alpha[y * A.w + x] > 127;
 };
-// T026 r2: how far point P is from the nearest pixel of the entries (rings of 0.25 px out to 16; 16 if none)
-const BODY = /^(pelvis|torso|leg-|foot-)/;
-function offBody(alphaOf, list, P) {
-  if (list.some((e) => covers(alphaOf, e, P))) return 0;
-  for (let R = 0.25; R <= 16; R += 0.25) for (let a = 0; a < 48; a++) if (list.some((e) => covers(alphaOf, e, [P[0] + R * Math.cos(a * Math.PI / 24), P[1] + R * Math.sin(a * Math.PI / 24)]))) return R;
-  return 16;
-}
 // Largest radius (step 0.25, up to 8 px) round J that the entries fill completely.
 function core(alphaOf, list, J) {
   let r = 0;
@@ -193,13 +187,7 @@ export function flagsOf(cell, alphaOf) {
     for (const e of drawn) if (/^(pelvis|torso|head|leg-|foot-)/.test(e.name)) lo = Math.max(lo, lowest(e));
     if (Math.abs(lo) > 0.75) flags.push(`lying body ${lo > 0 ? 'under' : 'over'} the floor by ${Math.abs(lo).toFixed(1)} px`);
   }
-  if (cell.tailRoot && by.tail) {   // T026 r2: the tail's root end shows (nothing in front covers it) and stands off the body
-    const e = by.tail, P = apply(e.base, rig.parts.tail.pivot), front = drawn.filter((o) => o.order > e.order && BODY.test(o.name));
-    if (!front.some((o) => covers(alphaOf, o, P))) {
-      const gap = offBody(alphaOf, drawn.filter((o) => BODY.test(o.name)), P) * cell.k;
-      if (gap > SEAM_PX) { flags.push(`seam ${rig.parts.tail.parent} / tail: ${gap.toFixed(1)} px`); marks.push(apply(cell.view, P)); }
-    }
-  }
+  if (cell.tailRoot && by.tail) for (const t of tailRootFlags(rig, drawn, by.tail, cell, (e, P) => covers(alphaOf, e, P), alphaOf)) { flags.push(t.text); marks.push(t.at); }
   if (cell.twoHand && by['hand-far']) {   // share of the far hand's pixels nothing drawn later covers
     const e = by['hand-far'], A = alphaOf(e.img), later = drawn.slice(drawn.indexOf(e) + 1);
     let n = 0, seen = 0;

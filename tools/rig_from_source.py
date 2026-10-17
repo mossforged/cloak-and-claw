@@ -126,7 +126,7 @@ def main():
     ap.add_argument("--out")
     ap.add_argument("--height", type=float, default=136, help="screen px tall in game")
     ap.add_argument("--scale", type=float, default=0.4, help="canvas px -> stored image px")
-    ap.add_argument("--merge", action="append", default=[], help="T026: a rig-source fragment (A019) laid over the source: its parts replace, its swaps add; images resolve in the fragment's folder")
+    ap.add_argument("--merge", action="append", default=[], help="T026: a rig-source fragment (A019, A022) laid over the source: its parts replace, its swaps and grips add; images resolve in the fragment's folder")
     ap.add_argument("--keep-islands", default="", help="T026 r2: comma-separated part/swap names whose detached pieces are kept")
     ap.add_argument("--sockets", action="store_true", help="only print the sockets block (T024; images not written)")
     a = ap.parse_args()
@@ -136,7 +136,11 @@ def main():
         own = lambda d: {k: {**v, "img": os.path.join(fdir, v["img"])} for k, v in (d or {}).items()}
         raw["parts"] = {**raw["parts"], **{k: {**raw["parts"].get(k, {}), **v} for k, v in own(F.get("parts")).items()}}
         raw["swaps"] = {**raw.get("swaps", {}), **own(F.get("swaps"))}
-        print(f"merged {frag}: parts {sorted((F.get('parts') or {}))}, swaps {sorted((F.get('swaps') or {}))}")
+        if F.get("grips"):   # T026 r2 (A022): a fragment's grips win; a hand socket the base pinned on its old grip goes too
+            raw["grips"] = {**raw.get("grips", {}), **F["grips"]}
+            for side in {near_far(g["of"])[5:] for g in F["grips"].values()}:
+                (raw.get("sockets") or {}).pop(f"hand_{side}", None)
+        print(f"merged {frag}: parts {sorted((F.get('parts') or {}))}, swaps {sorted((F.get('swaps') or {}))}", file=sys.stderr)
     src = renamed(raw)
     folder = src.get("dir") or os.path.dirname(a.source)
     s = a.scale

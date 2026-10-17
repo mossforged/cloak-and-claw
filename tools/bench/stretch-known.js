@@ -6,20 +6,38 @@ const KNEE_CAP = 'patch cap / rounded end on the lower leg across the knee';
 const SHOULDER = 'round the top of arm-near-upper (A013 cut it straight: the torso hides it at rest, but every pose that draws the arm over the tunic shows the cut)';
 const TURNED = 'hand-<side>-grip-overhand drawing (T025: the grip fist turned over on the weapon node opens the wrist; the overhand hand has its own cuff)';
 const FAR_WRIST = 'as the current grip: rounded wrist end on hand-far-grip (the far fist turned hard round the shaft)';
-const RAT_WRIST = 'A018 grip / pinch hands (repainted from the fist) start ~24 source px past the fist\'s wrist line: extend their wrist end under the forearm cuff to the wrist pivot, as hand-near-fist does';
-const TAIL_ROOT = 'A022: tail-1 root tucked under the trouser seat on pelvis (its root sits ~27 px of stored art outside the pelvis drawing; only the near thigh hides it at rest, so it opens in the walk)';
+const RAT_SHOULDER = 'A022 near upper arm (band 590): its hidden end under the vest is short; with the arm swung forward for a held item a crack opens at the shoulder core (check in motion; fix: longer plain-fur end under the torso)';
+const RAT_UP = 'expected: a straight-up near arm under the vest needs arm-near-raised (cast uses it)';
+const RAT_FAR_WRIST = 'A022 far hands (band 115, wrist under the bracer): the hidden wrist end is short; turned or lifted over the shaft (845) the wrist core opens (fix: longer wrist end under the far bracer)';
 const HIP_FAR = 'rounded top on leg-far-upper under the pelvis (opens when the far thigh folds forward: kneel, lying)';
 export const KNOWN = {
-  // T026: the rat rebuilt on A018 + A019 (every A010 rat flag cleared, incl. lying shoulder / far hip and arms up; r2: the
-  // stance wrist flags went with the taller stance)
-  'rat | hand-near-grip | arm-near-lower / hand-near': [6.0, RAT_WRIST],
-  'rat | hand-near-pinch | arm-near-lower / hand-near': [6.0, RAT_WRIST],
-  'rat | Rat Raider: rat-cutlass (current grip) | arm-near-lower / hand-near': [6.0, RAT_WRIST],
-  'rat | Rat Raider: rat-cutlass (underhand) | arm-near-lower / hand-near': [6.0, RAT_WRIST],
-  // T026 r2: the tail-root cells (the user's butt / tail gap in the walk)
-  'rat | tail root, walk 0 | pelvis / tail': [6.3, TAIL_ROOT],
-  'rat | tail root, walk 0.25 | pelvis / tail': [2.5, TAIL_ROOT],
-  'rat | tail root, walk 0.75 | pelvis / tail': [4.3, TAIL_ROOT],
+  // T026: the rat rebuilt on A018 + A019 + A022 (every A010 rat flag cleared; A022's hands cleared the near wrist flags)
+  // T026 r2 + A022 (round 2 re-import)
+  'rat | arms straight up | torso / arm-near-upper': [6.8, RAT_UP],
+  'rat | torso-back | arm-far-lower / hand-far': [5.3, RAT_FAR_WRIST],
+  'rat | hand-near-grip-overhand | arm-near-lower / hand-near': [2.3, RAT_FAR_WRIST],
+  'rat | hand-far-grip | arm-far-lower / hand-far': [3.0, RAT_FAR_WRIST],
+  'rat | hand-far-grip-overhand | arm-far-lower / hand-far': [3.0, RAT_FAR_WRIST],
+  'rat | hand-far-shield | arm-far-lower / hand-far': [2.8, RAT_FAR_WRIST],
+  'rat | Rat Spearman: rat-spear (current grip) | torso / arm-near-upper': [3.5, RAT_SHOULDER],
+  'rat | Rat Spearman: rat-spear (current grip) | arm-far-lower / hand-far': [10.5, RAT_FAR_WRIST],
+  'rat | Rat Archer: rat-bow (current grip) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
+  'rat | Rat Raider: rat-cutlass (overhand) | torso / arm-near-upper': [2.5, RAT_SHOULDER],
+  'rat | Rat Spearman: rat-spear (overhand) | torso / arm-near-upper': [3.5, RAT_SHOULDER],
+  'rat | Rat Spearman: rat-spear (overhand) | arm-far-lower / hand-far': [10.5, RAT_FAR_WRIST],
+  'rat | Rat Archer: rat-bow (overhand) | arm-far-lower / hand-far': [3.3, RAT_FAR_WRIST],
+  'rat | Rat Archer: rat-bow (overhand) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
+  'rat | Rat Spearman: rat-spear (underhand) | torso / arm-near-upper': [4.8, RAT_SHOULDER],
+  'rat | Rat Spearman: rat-spear (underhand) | arm-far-lower / hand-far': [8.8, RAT_FAR_WRIST],
+  'rat | Rat Archer: rat-bow (underhand) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
+  'rat | Rat Spearman: rat-spear (reverse) | torso / arm-near-upper': [5.0, RAT_SHOULDER],
+  'rat | Rat Spearman: rat-spear (reverse) | arm-far-lower / hand-far': [8.8, RAT_FAR_WRIST],
+  'rat | Rat Archer: rat-bow (reverse) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
+  'rat | crouch: jump squat (floor) | arm-far-lower / hand-far': [3.0, RAT_FAR_WRIST],
+  'rat | lying (floor) | torso / arm-near-upper': [7.0, RAT_SHOULDER],
+  'rat | lying (floor) | arm-near-lower / hand-near': [7.0, RAT_FAR_WRIST],
+  'rat | 1.04x (floor) | arm-far-lower / hand-far': [2.1, RAT_FAR_WRIST],
+  'rat | 1.4x (floor) | arm-far-lower / hand-far': [2.8, RAT_FAR_WRIST],
   'rat | 1.4x (floor) | leg-near-lower / foot-near': [2.1, 'only at the 1.4x size step (variety is +-4%): a touch more overlap at the near ankle, low priority'],
   'mouse | near knee 90 | leg-near-upper / leg-near-lower': [6.0, KNEE_CAP],
   'mouse | near knee 150 | leg-near-upper / leg-near-lower': [3.3, KNEE_CAP],

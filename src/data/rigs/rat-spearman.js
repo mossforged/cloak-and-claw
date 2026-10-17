@@ -21,7 +21,7 @@ export default {
       'arm-far-upper': [STANCE['arm-far-upper'], 3, 0.1], 'arm-far-lower': STANCE['arm-far-lower'], 'hand-far': STANCE['hand-far'] },
     walk: { ...base.walk, ...SPEAR(-4, -44, -8), swap: {}, 'arm-near-upper': STANCE['arm-near-upper'], 'arm-near-lower': STANCE['arm-near-lower'], 'hand-near': STANCE['hand-near'],
       'arm-far-upper': STANCE['arm-far-upper'], 'arm-far-lower': STANCE['arm-far-lower'], 'hand-far': STANCE['hand-far'] },
-    hurt: { ...base.hurt, ...SPEAR(-10, -46, 14) },   // spear jolted point-down, both fists keep the shaft
+    hurt: { ...base.hurt, ...SPEAR(-8, -46, 10) },   // spear jolted point-down, both fists keep the shaft (T026 r2: 10, was 14: A022's front fist reaches it)
     moves: {
       spearThrust: {   // draws the spear back along his side (long telegraph), then drives it straight out at the enemy
         windup: { ...P({ ...CROUCH, ...GRIP, swap: { head: 'head-effort' }, dx: -4, torso: 2, head: -6, shield: { off: [14, 12] },
