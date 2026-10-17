@@ -20,15 +20,15 @@ const url = 'tools/fixtures/mouse-fighter-a002.rig-source.json';   // T023: the 
 const src = readSource(JSON.parse(readFileSync(join(root, url), 'utf8')), url);
 ok(src.errors.length === 0, `fixture reads cleanly: ${src.errors}`);
 ok(src.root === 'torso', 'mouse root is the torso');
-ok(['pelvis', 'hand-front', 'hand-back', 'foot-front', 'foot-back'].every((n) => src.missing.includes(n)), 'missing standard parts listed');
+ok(['pelvis', 'hand-near', 'hand-far', 'foot-near', 'foot-far'].every((n) => src.missing.includes(n)), 'missing standard parts listed');
 ok(src.extras.includes('sword') && src.extras.includes('shield'), 'extras listed');
 for (const p of Object.values(src.parts)) ok(existsSync(join(root, p.img)), `image exists: ${p.img}`);
 ok(existsSync(join(root, src.master)), 'master exists');
 
 // trimmed boxes as the bench makes them (A002's real trims) so offsets are exercised
-const BOX = { torso: [478, 510], head: [365, 80], 'scarf-tail': [345, 408], tail: [110, 574], 'arm-front-upper': [412, 529],
-  'arm-front-lower': [325, 636], sword: [2, 718], 'arm-back-upper': [811, 575], 'arm-back-lower': [871, 631], shield: [925, 481],
-  'leg-back-upper': [803, 855], 'leg-back-lower': [864, 934], 'leg-front-upper': [405, 849], 'leg-front-lower': [249, 933] };
+const BOX = { torso: [478, 510], head: [365, 80], 'scarf-tail': [345, 408], tail: [110, 574], 'arm-near-upper': [412, 529],
+  'arm-near-lower': [325, 636], sword: [2, 718], 'arm-far-upper': [811, 575], 'arm-far-lower': [871, 631], shield: [925, 481],
+  'leg-far-upper': [803, 855], 'leg-far-lower': [864, 934], 'leg-near-upper': [405, 849], 'leg-near-lower': [249, 933] };
 const boxes = {};
 for (const [n, [x, y]] of Object.entries(BOX)) boxes[src.parts[n].img] = [x, y, x + 300, y + 300];
 boxes[src.swaps['head-attack'].img] = [365, 80, 1038, 601];
@@ -71,7 +71,7 @@ for (const st of BIPED.strip) ok(BIPED.poses[st.pose] && st.in >= 0 && st.hold >
 const labels = stripFrames().map((f) => f.label).join();
 for (const l of ['stance', 'idle breath', 'walk', 'windup', 'strike', 'follow-through', 'hurt', 'knockdown', 'down', 'get-up'])
   ok(labels.includes(l), `strip frame ${l}`);
-ok(BIPED_PARENTS.pelvis === null && BIPED_PARENTS['foot-front'] === 'leg-front-lower', 'standard skeleton');
+ok(BIPED_PARENTS.pelvis === null && BIPED_PARENTS['foot-near'] === 'leg-near-lower', 'standard skeleton');
 
 // A full standard rig gets the pose's angles as they are; the mouse (legs on the torso, no pelvis) gets each leg's
 // absolute angle unchanged, and no joint for parts he lacks.
@@ -81,9 +81,9 @@ const fj = rigJointsOf(full, strike);
 for (const n of BIPED_PARTS) ok(Math.abs(fj[n] - (strike[n] ?? 0)) < 1e-9, `standard rig keeps ${n}`);
 const mj = rigJointsOf(src, strike);
 ok(Math.abs(mj.torso - ((strike.pelvis ?? 0) + strike.torso)) < 1e-9, 'pelvis turn goes to the mouse root');
-ok(Math.abs(mj.torso + mj['leg-front-upper'] - ((strike.pelvis ?? 0) + strike['leg-front-upper'])) < 1e-9, 'mouse leg keeps its standard angle');
-ok(!('hand-front' in mj), 'missing part has no joint');
-ok(Object.keys(swapsOf(src, { head: ['head-ko', 'head-hurt'], 'hand-front': ['hand-front-grip'] })).join() === 'head', 'swap fallback; missing hand skipped');
+ok(Math.abs(mj.torso + mj['leg-near-upper'] - ((strike.pelvis ?? 0) + strike['leg-near-upper'])) < 1e-9, 'mouse leg keeps its standard angle');
+ok(!('hand-near' in mj), 'missing part has no joint');
+ok(Object.keys(swapsOf(src, { head: ['head-ko', 'head-hurt'], 'hand-near': ['hand-near-grip'] })).join() === 'head', 'swap fallback; missing hand skipped');
 ok(swapsOf(src, { head: ['head-ko', 'head-hurt'] }).head === 'head-hurt', 'first swap the character has');
 
 // Draft importer on the fixture (needs python3 + Pillow; CI has neither, so it says so instead).
@@ -122,7 +122,7 @@ else {
     if (r.status === 0) {
       const d = (await import(pathToFileURL(join(out, 'mouse-13.js')))).default;
       const game = (await import(pathToFileURL(join(root, 'src/data/rigs/mouse-fighter.js')))).default;
-      for (const [part, sw] of [['arm-front-upper', 'arm-front-raised'], ['arm-back-upper', 'arm-back-guard']]) {
+      for (const [part, sw] of [['arm-near-upper', 'arm-near-raised'], ['arm-far-upper', 'arm-far-guard']]) {
         const a = d.parts[part].swaps[sw], g = game.parts[part].swaps[sw];
         ok(a.hide?.length === 2 && near(a.grip, g.grip, 0.01) && a.axis === g.axis, `importer keeps ${sw}'s hide / grip / axis (as in the game rig)`);
       }

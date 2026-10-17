@@ -6,6 +6,7 @@
 // potionPickup = the pickup pop.
 import { bus } from '../core/events.js';
 import { JUICE } from '../data/juice.js';
+import { socketOf } from './sockets.js';
 
 export function createPropFx(assets) {
   let list = [];
@@ -39,7 +40,7 @@ export function createPropFx(assets) {
     for (let i = 0; i < I.sparkles; i++) add({ type: 'sparkle', x: x + (Math.random() - 0.5) * 50, y: y - Math.random() * 40, vy: -0.8 - Math.random(), size: 6 + Math.random() * 6, life: 28 + Math.random() * 14 });
   });
   bus.on('heal', ({ f, heal, x, y }) => {
-    const H = JUICE.help.heal, cy = f.y - 50;
+    const H = JUICE.help.heal, cy = socketOf(f, 'chest')?.[1] ?? f.y - 50;   // T024: round his chest
     add({ type: 'ring', x: f.x, y: cy, r: H.ringR, life: 16, color: '125,255,106' });
     add({ type: 'ring', x: f.x, y: cy, r: H.ringR * 1.6, life: 22, color: '125,255,106' });
     add({ type: 'heal', x: f.x, y: cy - 40, text: `+${heal}`, life: JUICE.numbers.life });
@@ -47,7 +48,7 @@ export function createPropFx(assets) {
     if (x !== f.x) dust(x, y, 3, 24);   // tossed: a splash where it landed
   });
   bus.on('revive', ({ target }) => {
-    const U = JUICE.help.up, cy = target.y - 50;
+    const U = JUICE.help.up, cy = target.y - 50;   // (the reviving hero stands up: his drawn chest is still on the floor)
     add({ type: 'flash', x: target.x, y: cy, r: U.flashR, life: 12 });
     add({ type: 'ring', x: target.x, y: cy, r: U.ringR, life: 14 });
     add({ type: 'ring', x: target.x, y: cy, r: U.ringR * 1.7, life: 22 });

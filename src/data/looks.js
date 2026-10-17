@@ -18,7 +18,7 @@ export const PALETTES = {
 // Mask -> tint channel by the image it masks (rig images and gear overlays). Not listed = untinted cloth.
 export const CHANNELS = {
   torso: 'bandana', 'torso-side': 'bandana', 'torso-back': 'bandana', 'scarf-tail': 'bandana',
-  pelvis: 'trousers', 'leg-front-upper': 'trousers', 'leg-back-upper': 'trousers',
+  pelvis: 'trousers', 'leg-near-upper': 'trousers', 'leg-far-upper': 'trousers',
   'gear-hood': 'hood', 'gear-hood-hurt': 'hood', 'gear-hood-back': 'hood',
   'gear-jerkin': 'jerkin', 'gear-jerkin-side': 'jerkin', 'gear-jerkin-back': 'jerkin',
   'gear-sash': 'sash', 'gear-sash-side': 'sash', 'gear-sash-back': 'sash',

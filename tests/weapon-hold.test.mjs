@@ -55,7 +55,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 // the fist holding it, in every pose (the whole raised arm's fist has its own slot axis, A013 slotDirection), and the
 // test poses (cast, toss, grab, stow) too.
 {
-  const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig], RA = rig.parts['arm-front-upper'].swaps['arm-front-raised'];
+  const def = FIGHTERS['mouse-fighter'], rig = RIGS[def.art.rig];
   const named = ['cast', 'grabbing', 'knee', 'throwWind', 'throwRelease', 'toss', 'stow', 'block'];
   for (const K of [ITEMS['mouse-sword'], ...Object.values(ITEMS).filter((k) => k.grip === 'one-hand' && k.kind === 'weapon')]) {
     const weapon = K.kind === 'weapon' ? { def: K, uses: 5, hit: false, broken: false } : null;
@@ -64,11 +64,11 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     for (const [label, fi] of list) {
       const tp = targetPose(fi, rig, 0, fi.override), L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
       if (tp.joints['sword.sx'] !== 1 || tp.joints['sword.sy'] !== 1) continue;   // the spin's foreshortened blade (slash2 / fish slap) skews on purpose
-      const raised = tp.swap['arm-front-upper'] === 'arm-front-raised';
-      const fist = L.find((e) => e.name === (raised ? 'arm-front-upper' : 'hand-front')), sw = L.find((e) => e.name === 'sword');
+      const raised = !!tp.swap['arm-near-upper'], RA = raised && rig.parts['arm-near-upper'].swaps[tp.swap['arm-near-upper']];   // a whole-arm drawing (raised; T024 cocked)
+      const fist = L.find((e) => e.name === (raised ? 'arm-near-upper' : 'hand-near')), sw = L.find((e) => e.name === 'sword');
       const ax = (raised ? RA.axis : rig.axes['one-hand']) * D, m = raised ? fist.m : fist.base;
       const e = Math.abs(wrap(deg(lin(sw.m, [K.art.gripEnd[0] - K.art.grip[0], K.art.gripEnd[1] - K.art.grip[1]])) - deg(lin(m, [Math.cos(ax), Math.sin(ax)]))));
-      const gap = dist(apply(sw.m, sw.p.pivot), raised ? apply(m, RA.grip) : at(rig, L, 'hand-front', rig.hands['hand-front-grip'].at));
+      const gap = dist(apply(sw.m, sw.p.pivot), raised ? apply(m, RA.grip) : at(rig, L, 'hand-near', rig.hands['hand-near-grip'].at));
       if (e > worst) { worst = e; where = label; }
       if (gap > 0.01) { worst = Math.max(worst, 99); where = `${label} (grip ${gap.toFixed(2)} px off the slot)`; }
     }
@@ -88,7 +88,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 {
   const def = FIGHTERS['rat-spearman'], rig = RIGS['rat-spearman'], K = ITEMS['rat-spear'], G = rig.grips['two-hand'];
   for (const [label, fi] of poses(def, null)) {
-    const L = layoutOf(rig, fi), spear = L.find((e) => e.name === 'held'), far = L.find((e) => e.name === 'hand-back'), near = L.find((e) => e.name === 'hand-front');
+    const L = layoutOf(rig, fi), spear = L.find((e) => e.name === 'held'), far = L.find((e) => e.name === 'hand-far'), near = L.find((e) => e.name === 'hand-near');
     const dn = dist(apply(spear.m, K.art.grip), apply(near.base, rig.slots['two-hand'].attach));
     // far fist: on the shaft line, at grip2 standing; elsewhere it may slide back toward the near fist (out of reach)
     const ring = apply(far.base, G.ik.hand), g1 = apply(spear.m, K.art.grip), g2 = apply(spear.m, K.art.grip2);
@@ -101,16 +101,16 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     check(e2 < 3, `spearman ${label}: far fist closed round the shaft (${e2.toFixed(1)} deg off)`);
     check(far.order > spear.order && near.order > spear.order, `spearman ${label}: both fists drawn over the spear`);
   }
-  check(!Object.values(rig.poses).some((p) => p?.['hand-back.order']), 'spearman: far fist order comes from the grip, not poses');
+  check(!Object.values(rig.poses).some((p) => p?.['hand-far.order']), 'spearman: far fist order comes from the grip, not poses');
 }
 
 // Archer: the pinch hand reaches the drawn string; full draw = the string at the jaw anchor; the arrow past the bow.
 {
   const def = FIGHTERS['rat-archer'], rig = RIGS['rat-archer'], K = ITEMS['rat-bow'], G = rig.grips.bow, m = def.moves.bowShot;
-  check(rig.parts['hand-front'].swaps['hand-front-pinch'].img.endsWith('hand-front-pinch.png'), 'archer: A012 near pinch drawing (not the borrowed far hand)');
+  check(rig.parts['hand-near'].swaps['hand-near-pinch'].img.endsWith('hand-near-pinch.png'), 'archer: A012 near pinch drawing (not the borrowed far hand)');
   for (const mf of [Math.round(m.windup * 0.5), m.windup - 1]) {
     const fi = { def, state: 'attack', t: 0, mf, move: m, moveKey: 'bowShot', weapon: null, hp: 10 }, L = layoutOf(rig, fi);
-    const near = L.find((e) => e.name === 'hand-front'), N = L.find((e) => e.line).line[1];
+    const near = L.find((e) => e.name === 'hand-near'), N = L.find((e) => e.line).line[1];
     const d = dist(apply(near.base, G.ik.hand), N);
     check(d < 1.5, `archer draw @${mf}: pinch on the string (${d.toFixed(2)} px off)`);
     if (mf !== m.windup - 1) continue;

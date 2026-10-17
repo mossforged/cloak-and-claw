@@ -3,7 +3,7 @@
 **Owns:** backdrop, stage art, standees (pose, lean, squash, flash, tint), cutout rigs (part layout, joint poses, blends, held weapons in hand slots), props and floor items, effects (incl. debris), screen shake + hit-stop counters, HUD, debug overlay.
 **Does not own:** gameplay state. Render reads `world` and listens to bus events; it never writes to fighters or world.
 
-**Public API:** `createRenderer(ctx, assets)`, `createJuice()`, `drawStandee`, `drawRig`, `braceLayer`, `layoutRig`, `heldOf`, `restIn`, `handleAngle`, `gripLayout`, `gearLayout`, `tintPixels`, `drawHud`, `drawDebug`, `stepViewPose`, `squatOf`, `feelLayer`.
+**Public API:** `createRenderer(ctx, assets)`, `createJuice()`, `drawStandee`, `drawRig`, `rigFrame`, `floorLayer`, `socketOf`, `socketPoints`, `braceLayer`, `layoutRig`, `heldOf`, `restIn`, `handleAngle`, `gripLayout`, `gearLayout`, `tintPixels`, `drawHud`, `drawDebug`, `stepViewPose`, `squatOf`, `feelLayer`.
 
 **Rules:**
 - Look numbers live in `src/data/juice.js`, move `pose`/`fx` blocks in `src/data/moves/` and rig parts/poses in `src/data/rigs/`.
@@ -19,3 +19,7 @@
 - Heroes (T021): HUD draws one panel per hero (slot x 320 px along the top); heroes on slots 1, 2 are drawn with `JUICE.heroes.filter[slot]` (a canvas filter: the test hero is a tinted Mouse Fighter) and tagged P1-P3 when there is more than one.
 - Gear and looks (T019, `looks.js`): gear overlays (a fighter's `art.gear` loadout + its `look.detail`) ride their part, picking the variant for the part's current swap from `rig.views`; cloth/fur masks (`rig.masks`) recolour images per look, cached per image + look (never per frame); `look.size` scales the drawn rig only. Render reads `f.look`, never writes it.
 - Helping (T022, `helping.js`): downed timer ring, revive ring and prompt, potion in hand are drawn from sim state (it may call the pure helpers in `sim/revive.js`); revive and heal bursts come from the `revive`/`heal` events (`prop-fx.js`). Numbers in `JUICE.help`.
+- T024 names: limbs, hands and feet are `near` / `far` (`arm-near-upper`, `hand-far`, `foot-near`...; `head-back`, `torso-back` = the back view). The importer and bench read old front/back sources.
+- T024 floor-line rule (`floor.js`): in grounded states each boot's drawing sits on its own floor line (master contact height; the far boot's is higher in 3/4), raised only by the pose's `'<foot>.lift'` channel (blends like any joint); the foot's tilt is the pose's, the IK only moves the ankle up/down. The standee's lean turns the hips instead of tipping the figure round its feet. Whole-leg drawings (kneeling, folded) turn at the hip onto the line. Lying states rest the body's lowest point on the floor. A rig with a `downed` pose kneels (no standee lying tilt). Render only.
+- T024 sockets (`sockets.js`): every rig declares `sockets` (`hand_near`, `hand_far`, `weapon_tip`, `chest`, `head_top`, `feet`, `mouth`, `tail_tip`; importer-derived); `drawRig` keeps the last drawn world points; effects use `socketOf(f, name)` and fall back to their own numbers for standees (fish drops at the weapon tip, heal ring at the chest, potion in the near fist / at the mouth).
+- T024 phase swaps: a cycle pose's `swapPhase: [{ part, swap, from, to }]` shows a drawing in that window of the cycle (the walk's toe-off feet).

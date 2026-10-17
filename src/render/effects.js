@@ -2,6 +2,7 @@
 // grab clinch flash, whoosh trail on a thrown body, big impact burst when it bowls someone over. Render-only.
 import { bus } from '../core/events.js';
 import { JUICE } from '../data/juice.js';
+import { socketOf } from './sockets.js';
 
 const D2R = Math.PI / 180;
 
@@ -12,10 +13,10 @@ export function createEffects() {
 
   bus.on('swing', ({ f, move }) => {
     if (move.fx?.slash) add({ type: 'slash', f, ...move.fx.slash, life: JUICE.slash.life });
-    const W = JUICE.drops;   // T017: water flicked off the fish
+    const W = JUICE.drops, tip = socketOf(f, 'weapon_tip');   // T017: water flicked off the fish (T024: off its tip)
     for (let i = 0; i < (move.fx?.drops ?? 0); i++) {
       const a = -Math.PI / 2 + (Math.random() - 0.5) * W.spread, s = W.speed * (0.5 + Math.random());
-      add({ type: 'drop', x: f.x - f.facing * W.dx, y: f.y - f.z - W.dy, vx: Math.cos(a) * s - f.facing * 1.5, vy: Math.sin(a) * s, g: W.gravity, life: W.life, r: 1.5 + Math.random() * 2 });
+      add({ type: 'drop', x: tip?.[0] ?? f.x - f.facing * W.dx, y: tip?.[1] ?? f.y - f.z - W.dy, vx: Math.cos(a) * s - f.facing * 1.5, vy: Math.sin(a) * s, g: W.gravity, life: W.life, r: 1.5 + Math.random() * 2 });
     }
   });
   bus.on('hit', ({ target, damage, x, y, z, ko, move }) => {

@@ -42,12 +42,17 @@
 - **Other:** pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+<<<<<<< HEAD
+2026-10-17 code: user accepted T024 in play (walk, squat/land, knee, kneel/downed/revive, lying, cocked wind-ups). For the lead: tools/Play.command opens whatever already listens on 8100 without checking its folder (it served Art's cloak-and-claw-art copy, an old build); not fixed (outside T024).
+2026-10-17 code: T024 on `t024-rig-pipeline`: near/far rename (old sources read as before; rename test vs a T023 snapshot), sockets (importer-derived; fish drops, heal ring, potion in hand use them), floor-line rule (boots on their own floor lines, lifts named, lean turns the hips, lying rests on the floor: slash3 boot float ~5 px and 28 px lying sink both 0), A016 imported and wired (squat/land, jump tuck, knee, kneeling get-up/downed/revive, lying, pickup, cocked wind-ups), walk rebuilt without pelvis narrowing (slide 3.7 -> 1.8/1.0 px). 28/28 tests; bot numbers identical.
+2026-10-17 code: T024 stretch test headless in npm test + `tools/stretch-strip.mjs` JPGs (docs/screens/T024): 28 known flags (elbow/knee caps at deep bends, mouse shoulder cut showing when the arm is over the tunic, rat far knee, spearman wrist), each with its art fix in tools/bench/stretch-known.js. User to judge walk / squat / knee / kneel in motion.
+=======
 2026-10-17 lead: user: the mouse needs a setup-pose master too. Agreed; order: rat first (proves the method), then the mouse (head, sword, shield carry over). A016 is superseded (fitted to the old master). T024 addendum 3: skip the A016 import and mouse walk rebuild; do the pipeline items and a 'before' stretch strip.
 2026-10-17 lead: rat audit: A010's master is an action pose (sword arm wound back, deep lunge) -> folded short near arm, uneven legs, trousers spanning hip and thigh. User: rebuild the rat from a setup-pose master, keeping head R, face details, head gear, weapons and variety ("yes lets do it"). Rig standard section 2 revised (setup pose); rat rig sheet + A017 written. Flexibility test defined (new kits and moves, no new body art).
 2026-10-17 lead: Stage 2 gate passed (user: "yes all of those mechanics are fun and I can't wait to build more once we lock down the rigging"); tags stage-2 + stage-3 queued; pillar 3 reworded (user: yes).
+>>>>>>> main
 2026-10-17 lead: merged A016 (six key drawings, LFS working; pivots exact; static game-size panel reads). Art notes: inpaint-only rule not fully met (visible fur/leather repainted), knee-up boot re-registered at x0.7, folded leg compressed, toe-off needs ankle lift; cocked arm reads more raised-and-flexed than wound back. Scarf pieces (packet extra) not delivered. All go to T024's stretch strip and the user's motion check.
 2026-10-17 lead: merged T023 (A013 mouse in game; 3 rounds; user picked walk B as a stopgap; 23/23 tests; bot numbers unchanged). Walk rebuild and pelvis narrowing removal moved to T024. A016 delivered, review next.
-<<<<<<< HEAD
 2026-10-17 lead: user adopted the study (process fixes, near/far rename, A016, keep our runtime). Wrote the Mouse Fighter rig sheet (`docs/design/rigs/mouse-fighter.md`), A016, T024, T025; revised the rig standard and lessons. Next: the reusable skill.
 2026-10-17 lead: study "The rig art inventory" (5 research tracks + our history): the mouse lacked six whole-limb key drawings (toe-off feet x2, folded far leg, knee-up leg, kneeling leg, cocked arm) that a dozen states each use; half the painful rounds were runtime (floor-line rule, hand-follows-weapon, far-hand draw order). Proposes the rig sheet + pose budget, a stretch test, near/far naming, gate order. Waiting for the user's read.
 2026-10-17 lead: user: hold off on meta progression (home loop, stronghold) until the rig system and core combat are locked down and tested against different enemies and abilities. Stage plan reordered; A015 on hold.
@@ -56,7 +61,6 @@
 2026-10-16 lead: wrote A014 (broad concept sheets for the stronghold home base; user's ask to keep Art busy). Concept packets deliver small JPGs to `docs/concepts/<ID>/` (Art guide updated).
 2026-10-16 lead: user chose large-file storage for source art (option A): `.gitattributes` tracks new source images from A014 on (old folders and review sheets stay normal); Mac setup, Art guide and asset contract updated.
 2026-10-16 lead: STATUS tidied (old notes, parked detail and old plan to history.md); stage plan rewritten around the hook (user approved the rewrite). Stage 2 gate question to the user.
-=======
 2026-10-16 code: T023 v3 on `t023-new-mouse`: shield face-on in block (user: fixed); walk was a crab scuttle (A013's wide-stance legs: near ~28 px, far ~21), now narrowed hips (pelvis.sx 0.4), upright, 2.6 strides/s; strikes on the flat turned-out trailing boot. 23/23 tests, bot numbers unchanged.
 2026-10-16 code: T023 for the lead: user picked walk B of tools/walk-lab.html's A-D (in game; boots slide ~5 px a stride, the short far leg can't reach more upright). Scarf tail still needs an Art fix (two painted pieces).
 2026-10-16 lead: merged T022 (user approved v2; ally leaves floor potions to players; 22/22 tests; solo bot numbers identical). Next: T023, then the combatant standard.
@@ -205,4 +209,3 @@
 2026-10-14 lead: user answered the six genre-study questions (decisions.md); block, throws and floor weapons added to Stage 2.
 2026-10-14 lead: genre study written (docs/studies). A private lore appendix went to the user only, not the repo.
 2026-10-15 lead: set up the workflow (guides, contracts, CI, test runner, data test, brief, decisions, packets T001, T002, A001). Details in `docs/history.md`.
->>>>>>> origin/t023-new-mouse

@@ -85,7 +85,7 @@ def.jumpSquatMode = saved;
 
 // Rig crouch: both boots flat on the floor at full crouch (same check as block / reach in rig.test.mjs).
 const rig = RIGS[def.art.rig];
-for (const [foot, sy] of Object.entries(soles(rig, squatLayer(rig, targetPose(fake({}), rig, 0).joints, 1)))) check(Math.abs(sy) < 2, `jumpSquat: ${foot} sole on the floor (y=${sy.toFixed(1)})`);
+for (const [foot, sy] of Object.entries(soles(rig, squatLayer(rig, targetPose(fake({}), rig, 0).joints, 1), rig.poses.jumpSquat.swap))) check(Math.abs(sy) < 2, `jumpSquat: ${foot} sole on the floor (y=${sy.toFixed(1)})`);
 
 console.log(fails ? `${fails} failures` : 'ALL OK');
 process.exit(fails ? 1 : 0);

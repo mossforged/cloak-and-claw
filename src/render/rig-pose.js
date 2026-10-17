@@ -1,7 +1,8 @@
 // Rig poses: picks the pose for a fighter's state/move, evaluates waves and move phases,
 // and eases from the last drawn pose into a new one. Pure (no DOM), so tests can run it.
 // Channels: '<part>' angle, 'dx'/'dy' root offset, 'sx' whole-body width (-1 = mirrored, e.g. mid-spin), and per part '<part>.sx' / '<part>.sy'
-// (stretch across/along the bone, 1 = as drawn, negative flips) and '<part>.order' (draw order).
+// (stretch across/along the bone, 1 = as drawn, negative flips) and '<part>.order' (draw order). T024: '<foot>.lift' = px the
+// foot's drawing stands off its floor line (0 = planted; render/floor.js re-solves the leg to it in grounded states).
 // A value: a number, a wave [base, amp, phase 0..1, harmonic], or (T023) a list of waves that add up.
 // Part swaps: a pose's `swap: { <part>: '<swap name>' }` picks one of the part's `swaps` images.
 // Swaps don't blend: they switch the moment the pose (or move phase) that names them starts.
@@ -18,6 +19,7 @@ export function channelsOf(rig) {
   const out = { dx: 0, dy: 0, sx: 1 };   // sx: whole-body width (1 = as drawn, -1 = mirrored; through 0 reads as a turn)
   for (const [name, p] of Object.entries(rig.parts)) {
     out[name] = 0; out[`${name}.sx`] = 1; out[`${name}.sy`] = 1; out[`${name}.order`] = p.order;
+    if (name.startsWith('foot-')) out[`${name}.lift`] = 0;
   }
   return out;
 }
@@ -26,7 +28,7 @@ export const jointsOfRig = (rig) => Object.keys(channelsOf(rig));
 function evalPose(pose, stance, t) {
   const out = { ...stance };
   for (const [k, v] of Object.entries(pose ?? {})) {
-    if (k === 'speed' || k === 'swap') continue;
+    if (k === 'speed' || k === 'swap' || k === 'swapPhase') continue;
     const wave = (w) => w[0] + w[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (w[3] ?? 1) + (w[2] ?? 0)));
     // T023: a list of waves adds up (harmonics fitted to an IK leg path)
     out[k] = !Array.isArray(v) ? v : Array.isArray(v[0]) ? v.reduce((a, w) => a + wave(w), 0) : wave(v);
@@ -50,6 +52,12 @@ function strikePose(M, W, X, K, p, T) {
 }
 
 const swapOf = (pose) => pose?.swap ?? {};
+// T024: a cycle's drawings by phase (the walk's toe-off feet): swapPhase [{ part, swap, from, to }] in 0..1 of the cycle.
+function phaseSwaps(pose, t) {
+  const out = { ...swapOf(pose) }, u = ((((pose.speed ?? 1) * t) % 1) + 1) % 1;
+  for (const { part, swap, from, to } of pose.swapPhase ?? []) if (from < to ? u >= from && u < to : u >= from || u < to) out[part] = swap;
+  return out;
+}
 
 // Grab and throw (T009): `grabbing` hold, `knee` strike (from def.grab.knee frames), `throw` wind (`throwWindBack`
 // for a back throw: the body narrows and mirrors, he turns as the rat goes over) then `throwRelease`, easing to idle.
@@ -89,7 +97,7 @@ function pickupPose(f, poses, S, time) {
 // Sword draw (T010 round 2): an arm-only layer over whatever pose he is in, after a floor weapon leaves his hand
 // (thrown or broken). The arm sweeps to the `stow` arm (sword still sheathed: mem.sheathed) and back up with the sword.
 // Starts when drawRig sets mem.drawT0. Returns the layered joints (mem.last is left unlayered for blending).
-const ARM = ['arm-front-upper', 'arm-front-lower', 'hand-front', 'sword'];   // T023: + the hand (A013 rigs turn the sword with it)
+const ARM = ['arm-near-upper', 'arm-near-lower', 'hand-near', 'sword'];   // T023: + the hand (A013 rigs turn the sword with it)
 export function drawLayer(rig, time, mem, joints) {
   const dur = rig.poses.timing.drawSword, k = mem.drawT0 === undefined ? 1 : (time - mem.drawT0) / dur;
   mem.sheathed = k < 0.5;
@@ -121,7 +129,7 @@ const withKit = (poses, KP) => (KP ? Object.fromEntries(Object.entries(poses).ma
 
 function windupPose(M, rest, W, p, time) {
   const h = M.hold ?? 0, j = mix(rest, W, easeOut(Math.min(1, p / (1 - h))));
-  if (h && p > 1 - h && M.tremble) j['arm-front-upper'] += M.tremble * Math.sin(time * 70);
+  if (h && p > 1 - h && M.tremble) j['arm-near-upper'] += M.tremble * Math.sin(time * 70);
   return j;
 }
 
@@ -143,7 +151,7 @@ export function targetPose(f, rig, time, override) {
       return { key, joints: mix(K, rest, easeInOut(p)), swap: p < T.swapBack ? swapOf(M.strike) : {} };
     }
   }
-  const named = (key, t = 0) => ({ key, joints: evalPose(poses[key], S, t), swap: swapOf(poses[key]) });
+  const named = (key, t = 0) => ({ key, joints: evalPose(poses[key], S, t), swap: phaseSwaps(poses[key], t) });
   switch (f.state) {
     case 'walk': return named('walk', f.t / 60);
     case 'jump': return named('jump');
@@ -158,8 +166,9 @@ export function targetPose(f, rig, time, override) {
     case 'grabbed': case 'thrown': if (poses.held) return named('held'); break;   // T011: a rig with a `held` pose (rats)
     case 'hurt': return named('hurt');
     case 'knockdown': return named('knockdown');
-    case 'down': case 'dead': case 'downed': return named('down');
-    case 'revive': if (poses.reach) return named('reach'); break;   // T022: crouched, hand down to his friend
+    case 'downed': if (poses.downed) return named('downed'); return named('down');   // T024: a rig with a `downed` pose kneels
+    case 'down': case 'dead': return named('down');
+    case 'revive': if (poses.revive || poses.reach) return named(poses.revive ? 'revive' : 'reach'); break;   // T022: hand down to his friend (T024: kneeling)
     case 'potionToss': if (poses.toss) return tossPose(f, poses, S, time, RULES.potions); break;
     case 'drink': if (poses.cast) return named('cast'); break;
     case 'getup': {

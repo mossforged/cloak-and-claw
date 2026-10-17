@@ -13,6 +13,6 @@ export default {
   breath: 1.4, chest: 0.035, head: 1.2,
   shield: 1.4, arm: 1, lag: 0.18,
   sway: 3.2, hips: 1, swayFade: 10,
-  sword: 1.6, twitch: [0.53, 0.29], swordJoint: 'hand-front',
-  plant: { 'leg-back-upper': ['leg-back-lower', [42.0, 53.2]], 'leg-front-upper': ['leg-front-lower', [29.6, 58.0]] },
+  sword: 1.6, twitch: [0.53, 0.29], swordJoint: 'hand-near',
+  plant: { 'leg-far-upper': ['leg-far-lower', [42.0, 53.2]], 'leg-near-upper': ['leg-near-lower', [29.6, 58.0]] },
 };

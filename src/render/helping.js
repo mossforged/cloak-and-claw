@@ -4,6 +4,7 @@
 // Reads state only. Numbers: JUICE.help.
 import { JUICE } from '../data/juice.js';
 import { RULES } from '../data/rules.js';
+import { socketOf } from './sockets.js';
 import { reviverOf, reviveProgress, downedNear } from '../sim/revive.js';
 
 const FONT = (px) => `${px}px "Lilita One", sans-serif`;
@@ -55,7 +56,10 @@ function drawHeld(ctx, f, assets, time) {
   let x = f.x + f.facing * H.x, z = H.z, rot = 0;
   if (f.state === 'potionToss') { const k = Math.min(1, f.t / P.wind); x -= f.facing * 22 * k; z += 14 * k; rot = -f.facing * 0.6 * k; }
   if (f.state === 'drink') { const k = Math.min(1, f.t / 8); x -= f.facing * 12 * k; z += 22 * k; rot = -f.facing * (1.9 * k + 0.1 * Math.sin(time * 18)); }
-  ctx.save(); ctx.translate(x, f.y - f.z - z); ctx.rotate(rot); ctx.drawImage(img, -w / 2, -h / 2, w, h); ctx.restore();
+  let at = [x, f.y - f.z - z];
+  const hand = socketOf(f, 'hand_near'), mouth = socketOf(f, 'mouth');   // T024: in his drawn fist, brought to his mouth to drink
+  if (hand) at = f.state === 'drink' && mouth ? hand.map((v, i) => v + (mouth[i] - v) * Math.min(1, f.t / 8)) : hand;
+  ctx.save(); ctx.translate(...at); ctx.rotate(rot); ctx.drawImage(img, -w / 2, -h / 2, w, h); ctx.restore();
 }
 
 export function drawHelping(ctx, w, assets, time) {
