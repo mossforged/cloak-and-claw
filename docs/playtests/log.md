@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-17 A021 weapons + T026 rat review
+A021: "yes the weapon designs are good". T026 (rebuilt rat, viewer): "the old one had torso to arm to hand connections that look right, it looks like a single piece of art. the arms and hands on the new rat are twisted and strange. it doesnt hold weapons correctly. when it walks a gap is visible between butt and tail. and yes overall its probably a bit hunched down, height wise, but thats a smaller issue" -> A022 + T026 round 2.
+
 ## 2026-10-17 T027 model viewer
 User: "yes the model viewer is great" (Code's note).
 
