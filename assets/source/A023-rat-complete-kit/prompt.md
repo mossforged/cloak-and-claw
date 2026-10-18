@@ -278,3 +278,415 @@ Precise-object-edit of this exact cropped rat back hip. REMOVE the pink tail com
 
 
 Round 3 inputs: call 1 = A017 `master-back.png` and preceding A023 `torso-away.png`; call 2 = call 1 result and A017 `master-back.png`; call 3 = a native-scale crop `(430,1330,950,1830)` of the round-2 back drawing, with green outside the character. Call 2 supplies the final torso; call 3 is accepted only inside the tail-removal mask. Feet and rear shins are recut from A017 master-back; the clipped thumb is recut with a wider boundary from the accepted round-2 back drawing. No grip art changes. All intermediate images/scripts stay outside git.
+
+# Round 4 exact prompts
+
+Tool: built-in `image_gen.imagegen`, edit mode, `transparent_background=false`; no seed exposed. Each input is a native crop of the pulled-main source cut, with green margins. Crop coordinates are (left, top, right, bottom) on the 1536 × 2304 canvas. Mechanical postprocessing only: green key, uniform scale / translation registration, original-paint restoration through overlap and cut-end masks, largest 8-connected component cleanup, static source composition. No stretched texture fills or procedural repaint. Raw outputs and temporary scripts are excluded. Shared ankle ends apply only above the ankle to matching swaps; every whole-arm and whole-leg pose uses its own edited target. Grip face/under pieces and grip markers stay unchanged.
+
+## foot-near
+
+Input: pulled-main `foot-near.png`, native crop `[434, 1630, 857, 2001]`.
+
+```text
+Use case: precise-object-edit. Production rig cutout repair; reference is the edit target. Replace ONLY tall rectangular/stretched extension above leather ankle with a NARROW tapered rounded leather-wrap ankle end, about HALF current extension width, ending just below its current top. Paint real curved overlapping brown leather bands with highlights, grain, fine stitches and bold dark outline around rounded top. Keep entire lower boot, pink toes/claws and visible ankle unchanged. No rectangular column, flat fill or repeated stretched pixels. Match EXACT warm painted cartoon style, palette, upper-left lighting and bold dark outlines. Same composition and part scale within crop; keep all original visible material registered. One connected isolated piece on exact flat #00FF00 green. No shadow, text or other pieces. Finish hidden material professionally; it may show during rotation.
+```
+
+## hand-far
+
+Input: pulled-main `hand-far.png`, native crop `[950, 1268, 1254, 1638]`.
+
+```text
+Use case: precise-object-edit. Production rig cutout repair; reference is the edit target. Replace ONLY long stretched striped wrist extension above fist with a SHORT narrow wrist end, half its current length, 60 percent current width, tapered to rounded end. Paint real brown leather fingerless glove cuff, natural creases grain and stitching, thick dark outline. Keep entire fist fingers thumb glove face and claws unchanged. No striped stretching, no hole, no object. Match EXACT warm painted cartoon style, palette, upper-left lighting and bold dark outlines. Same composition and part scale within crop; keep all original visible material registered. One connected isolated piece on exact flat #00FF00 green. No shadow, text or other pieces. Finish hidden material professionally; it may show during rotation.
+```
+
+## arm-near-upper
+
+Input: pulled-main `arm-near-upper.png`, native crop `[334, 1002, 706, 1423]`.
+
+```text
+Use case: precise-object-edit. Production rig cutout repair; reference is the edit target. Replace ONLY stretched diagonal upper shoulder stalk with a short tapered fully painted warm brown fur shoulder end, rounded with small natural fur tufts and dark outline. Keep cream middle fur and lower brown bracer unchanged. Shoulder end stays along existing up-right axis, narrower than body of arm, no flat column or circle/disc. Round and outline elbow cut at lower bracer. Match EXACT warm painted cartoon style, palette, upper-left lighting and bold dark outlines. Same composition and part scale within crop; keep all original visible material registered. One connected isolated piece on exact flat #00FF00 green. No shadow, text or other pieces. Finish hidden material professionally; it may show during rotation.
+```
+
+## torso
+
+Input: pulled-main `torso.png`, native crop `[410, 956, 1100, 1517]`.
+
+```text
+Use case: precise-object-edit. Production rig cutout repair; reference is the edit target. Finish this isolated torso's hidden cut surfaces only. At top complete a rounded neck/collar opening using red scarf and warm brown neck fur, repair straight upper shoulder cuts with short fur/leather rounded outlined contours. At bottom REMOVE the baked belt/buckle below cream belly and replace its whole region with CONTINUING cream waist fur in a short rounded tapered hem, fully painted fur strands and bold outline. Fill reconstruction gaps beneath shoulder and waist as actual fur or vest leather. Preserve all visible chest, straps, buttons, scarf, pauldron pixels and positions. No head arms hips belt buckle or extra objects. Match EXACT warm painted cartoon style, palette, upper-left lighting and bold dark outlines. Same composition and part scale within crop; keep all original visible material registered. One connected isolated piece on exact flat #00FF00 green. No shadow, text or other pieces. Finish hidden material professionally; it may show during rotation.
+```
+
+## torso-side
+
+Input: pulled-main `torso-side.png`, native crop `[514, 936, 1022, 1476]`.
+
+```text
+Use case: precise-object-edit. Edit target: this isolated rat torso cutout, torso-side. Replace ONLY flat/stretched rectangular lower waist extension with continuing real waist fur/leather, painted to same detail as main torso, tapered rounded fully outlined end at same lower height. Round and finish straight cut edges at upper neck/collar/shoulders with short real fur and scarf material. Keep all already visible chest/back costume paint unchanged. Do not add a belt or head. Preserve torso's pose and size. It is a joint overlap for a professional animated cutout rig; hidden material will show during twists. Match exact warm painted cartoon palette, texture, bold dark outlines, upper-left light. One connected part in original framing and scale on flat exact #00FF00 background. No additional anatomy, text, shadow or objects.
+```
+
+## torso-front
+
+Input: pulled-main `torso-front.png`, native crop `[430, 960, 1090, 1476]`.
+
+```text
+Use case: precise-object-edit. Edit target: this isolated rat torso cutout, torso-front. Replace ONLY flat/stretched rectangular lower waist extension with continuing real waist fur/leather, painted to same detail as main torso, tapered rounded fully outlined end at same lower height. Round and finish straight cut edges at upper neck/collar/shoulders with short real fur and scarf material. Keep all already visible chest/back costume paint unchanged. Do not add a belt or head. Preserve torso's pose and size. It is a joint overlap for a professional animated cutout rig; hidden material will show during twists. Match exact warm painted cartoon palette, texture, bold dark outlines, upper-left light. One connected part in original framing and scale on flat exact #00FF00 background. No additional anatomy, text, shadow or objects.
+```
+
+## torso-back
+
+Input: pulled-main `torso-back.png`, native crop `[216, 910, 1081, 1476]`.
+
+```text
+Use case: precise-object-edit. Edit target: this isolated rat torso cutout, torso-back. Replace ONLY flat/stretched rectangular lower waist extension with continuing real waist fur/leather, painted to same detail as main torso, tapered rounded fully outlined end at same lower height. Round and finish straight cut edges at upper neck/collar/shoulders with short real fur and scarf material. Keep all already visible chest/back costume paint unchanged. Do not add a belt or head. Preserve torso's pose and size. It is a joint overlap for a professional animated cutout rig; hidden material will show during twists. Match exact warm painted cartoon palette, texture, bold dark outlines, upper-left light. One connected part in original framing and scale on flat exact #00FF00 background. No additional anatomy, text, shadow or objects.
+```
+
+## torso-away
+
+Input: pulled-main `torso-away.png`, native crop `[450, 920, 1090, 1466]`.
+
+```text
+Use case: precise-object-edit. Edit target: this isolated rat torso cutout, torso-away. Finish the thin unfinished dark outline along the lower fur hem and collar. Keep ALL leather vest, straps, scarf, shoulders and their exact shapes unchanged. It is a joint overlap for a professional animated cutout rig; hidden material will show during twists. Match exact warm painted cartoon palette, texture, bold dark outlines, upper-left light. One connected part in original framing and scale on flat exact #00FF00 background. No additional anatomy, text, shadow or objects.
+```
+
+## torso-hunched
+
+Input: pulled-main `torso-hunched.png`, native crop `[460, 980, 1040, 1476]`.
+
+```text
+Use case: precise-object-edit. Edit target: this isolated rat torso cutout, torso-hunched. Replace ONLY flat/stretched rectangular lower waist extension with continuing real waist fur/leather, painted to same detail as main torso, tapered rounded fully outlined end at same lower height. Round and finish straight cut edges at upper neck/collar/shoulders with short real fur and scarf material. Keep all already visible chest/back costume paint unchanged. Do not add a belt or head. Preserve torso's pose and size. It is a joint overlap for a professional animated cutout rig; hidden material will show during twists. Match exact warm painted cartoon palette, texture, bold dark outlines, upper-left light. One connected part in original framing and scale on flat exact #00FF00 background. No additional anatomy, text, shadow or objects.
+```
+
+## torso-lean-back
+
+Input: pulled-main `torso-lean-back.png`, native crop `[425, 920, 965, 1476]`.
+
+```text
+Use case: precise-object-edit. Edit target: this isolated rat torso cutout, torso-lean-back. Replace ONLY flat/stretched rectangular lower waist extension with continuing real waist fur/leather, painted to same detail as main torso, tapered rounded fully outlined end at same lower height. Round and finish straight cut edges at upper neck/collar/shoulders with short real fur and scarf material. Keep all already visible chest/back costume paint unchanged. Do not add a belt or head. Preserve torso's pose and size. It is a joint overlap for a professional animated cutout rig; hidden material will show during twists. Match exact warm painted cartoon palette, texture, bold dark outlines, upper-left light. One connected part in original framing and scale on flat exact #00FF00 background. No additional anatomy, text, shadow or objects.
+```
+
+## pelvis
+
+Input: pulled-main `pelvis.png`, native crop `[459, 1255, 1066, 1650]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part pelvis; input is edit target. Repair hidden top and bottom cut edges ONLY. Continue upper waist as real cloth/fur behind belt, rounded outline. Finish both lower trouser-seat ends as olive-brown woven cloth with folds and seams, rounded outlined overlaps. Remove green rectangular notch in cream apron by continuing cream fur. Preserve belt buckle pouch and visible apron. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## pelvis-side
+
+Input: pulled-main `pelvis-side.png`, native crop `[515, 1280, 1055, 1705]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part pelvis-side; input is edit target. Replace flat brown top block with real woven olive-brown trouser waist material, textured folds and a rounded tapered outlined top. Finish bottom flat cut as short rounded trouser-seat cloth end with seams. Preserve visible belt pouch patch and all central cloth. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## pelvis-front
+
+Input: pulled-main `pelvis-front.png`, native crop `[411, 1280, 1094, 1671]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part pelvis-front; input is edit target. Replace flat brown top block with real woven olive-brown trouser waist material, textured folds and a rounded tapered outlined top. Finish bottom straight cuts as two short rounded trouser-seat cloth ends with seams. Preserve visible belt buckle pouch apron patches. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## pelvis-back
+
+Input: pulled-main `pelvis-back.png`, native crop `[475, 1265, 1083, 1646]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part pelvis-back; input is edit target. Finish top cut as rounded outlined waist continuation; finish both lower trouser seat ends as real olive brown cloth with creases and stitched seat seam, rounded outlined ends. Keep belt pouch and cream fur apron exactly as shown. No tail embedded, this is the seat only. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## arm-far-upper
+
+Input: pulled-main `arm-far-upper.png`, native crop `[870, 1088, 1145, 1437]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part arm-far-upper; input is edit target. Finish upper shoulder tip as tapered rounded brown fur end, with natural tiny fur tufts and dark outline, narrower than main upper arm. Round and outline lower elbow cut. Preserve center brown/cream fur and bracer edge. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## leg-near-upper
+
+Input: pulled-main `leg-near-upper.png`, native crop `[410, 1390, 848, 1853]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part leg-near-upper; input is edit target. Replace ONLY reconstructed blocky top of thigh and pink sliver at upper left with finished olive-brown trouser cloth, textured with natural folds, tapered rounded outlined top ending just below current top. No buckle buttons apron tail or leather on thigh top. Preserve ALL lower patches stitches fur hem pink knee and bracer. Round and outline bottom joint cut. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## leg-far-upper
+
+Input: pulled-main `leg-far-upper.png`, native crop `[731, 1320, 1108, 1853]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part leg-far-upper; input is edit target. Replace ONLY flat brown rectangular top extension and overlapping apron/button above patch with continuing olive-brown trouser cloth, natural woven texture creases and short rounded tapered outlined top. Preserve lower patch stitches fur hem pink knee and bracer. Round and outline lower joint cut. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## foot-far
+
+Input: pulled-main `foot-far.png`, native crop `[783, 1630, 1230, 2000]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part foot-far; input is edit target. Replace ONLY tall rectangular/stretched extension above leather ankle with NARROW tapered rounded leather-wrap ankle end, HALF current extension width, ending just below current top. Paint curved overlapping brown leather bands with highlights, grain, fine stitches and bold dark outline around rounded top. Keep entire lower boot pink toes claws and visible ankle unchanged. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## hand-near
+
+Input: pulled-main `hand-near.png`, native crop `[256, 1357, 553, 1605]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part hand-near; input is edit target. Finish ONLY straight upper wrist cut of this fingerless-gloved fist with a short narrow rounded tapered leather wrist cuff, fully painted creases fine stitches and dark outline, slightly extending above current cut. Keep entire fist/glove face fingers thumb and claws unchanged. No hole object or bracer. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## scarf-tail
+
+Input: pulled-main `scarf-tail.png`, native crop `[220, 921, 666, 1460]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part scarf-tail; input is edit target. Repair ONLY upper scarf root and right inner edge: remove ALL baked shoulder metal gold/leather fragments, replace by continuing RED woven scarf cloth with darker folds, texture and bold outline. Upper attachment ends in narrow rounded tapered cloth tip. Preserve long ragged red silhouette and holes; no armor body or shoulder. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## head-back
+
+Input: pulled-main `head-back.png`, native crop `[520, 590, 1341, 1213]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part head-back; input is edit target. Repair ONLY straight vertical and lower cut at lower LEFT neck edge, replace cut red scarf scrap with matching natural warm brown fur tufts and bold dark outline curved rounded neck end. Keep ALL head face ears muzzle hair silhouette and positions unchanged. Do not draw body scarf arms or neck column. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## tail-1
+
+Input: pulled-main `tail-1.png`, native crop `[356, 1413, 626, 1783]`.
+
+```text
+Use case: precise-object-edit. Production animated cutout rig part tail-1; input is edit target. Repair this single pink rat tail part. Make the bottom-left broad cut end into a rounded tapered attachment root with bold continuous dark outline, natural pink skin folds and transverse skin bands, no flat cut or extension. Complete missing green notches on right inner edge with pink tail material and outline. Keep same curve thickness color and small upper tip. No body seat fur objects. One connected shape. Keep original part position, pose, scale and all visible paint outside requested areas. Match exact warm painted cartoon palette texture bold dark outlines and upper-left light. Finished material in every overlap, never flat fill/stretch/rectangular ends or discs. One isolated connected part, same framing, exact flat #00FF00 green, no shadows/text/other pieces.
+```
+
+## arm-near-cocked
+
+Input: pulled-main `arm-near-cocked.png`, native crop `[276, 804, 696, 1269]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-near-cocked. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-near-raised
+
+Input: pulled-main `arm-near-raised.png`, native crop `[404, 717, 706, 1263]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-near-raised. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-far-raised-back
+
+Input: pulled-main `arm-far-raised-back.png`, native crop `[703, 822, 1042, 1269]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-far-raised-back. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-far-guard
+
+Input: pulled-main `arm-far-guard.png`, native crop `[694, 1087, 1142, 1427]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-far-guard. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-far-raised
+
+Input: pulled-main `arm-far-raised.png`, native crop `[840, 736, 1080, 1260]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-far-raised. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-near-smear-h
+
+Input: pulled-main `arm-near-smear-h.png`, native crop `[435, 1020, 1211, 1290]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-near-smear-h. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-near-smear-o
+
+Input: pulled-main `arm-near-smear-o.png`, native crop `[445, 1040, 978, 1671]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-near-smear-o. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-near-mouth
+
+Input: pulled-main `arm-near-mouth.png`, native crop `[450, 900, 1150, 1502]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-near-mouth. Repair ONLY shoulder attachment end opposite the fist: replace any rectangular flat brown stalk or straight cut with a SHORT tapered rounded warm brown FUR ending, painted natural strands, shading and continuous dark outline, blending along this particular arm's own angle. Do not attach another arm segment. Preserve EXACT pose, fist face, fingers, wrist, leather bracer, elbow and all central fur. Keep motion blur on smear pieces. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-near-upper-back
+
+Input: pulled-main `arm-near-upper-back.png`, native crop `[415, 1044, 767, 1455]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-near-upper-back. Finish ONLY clipped upper shoulder and lower elbow ends as fully painted rounded tapered fur ends, narrow shoulder with natural brown fur tufts continuous dark outline. Remove tiny red scarf or armor fragments cut into top end, replace by matching brown fur. Keep ALL central brown/cream fur and bracer unchanged. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-far-upper-back
+
+Input: pulled-main `arm-far-upper-back.png`, native crop `[792, 1099, 1076, 1450]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-far-upper-back. Finish ONLY clipped upper shoulder and lower elbow ends as fully painted rounded tapered fur ends, narrow shoulder with natural brown fur tufts continuous dark outline. Remove tiny red scarf or armor fragments cut into top end, replace by matching brown fur. Keep ALL central brown/cream fur and bracer unchanged. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-near-lower-back
+
+Input: pulled-main `arm-near-lower-back.png`, native crop `[327, 1203, 599, 1491]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-near-lower-back. Finish ONLY straight top and bottom cut edges of this forearm/bracer as rounded tapered natural fur/leather/wrist ends with continuous bold dark outline. Keep ALL central leather bands stitching and their pose unchanged. Do not add a fist or shoulder. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## arm-far-lower-back
+
+Input: pulled-main `arm-far-lower-back.png`, native crop `[898, 1244, 1159, 1500]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target arm-far-lower-back. Finish ONLY straight top and bottom cut edges of this forearm/bracer as rounded tapered natural fur/leather/wrist ends with continuous bold dark outline. Keep ALL central leather bands stitching and their pose unchanged. Do not add a fist or shoulder. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## hand-near-back
+
+Input: pulled-main `hand-near-back.png`, native crop `[273, 1343, 518, 1585]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target hand-near-back. Finish ONLY clipped top wrist edge as a short narrow rounded tapered glove/leather wrist end, outlined naturally with small creases. Keep complete thumb, fingers and glove face identical. Do not redraw hand face or add long bracer. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## hand-far-back
+
+Input: pulled-main `hand-far-back.png`, native crop `[992, 1352, 1233, 1575]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target hand-far-back. Finish ONLY clipped top wrist edge as a short narrow rounded tapered glove/leather wrist end, outlined naturally with small creases. Keep complete thumb, fingers and glove face identical. Do not redraw hand face or add long bracer. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## leg-near-upper-back
+
+Input: pulled-main `leg-near-upper-back.png`, native crop `[464, 1390, 837, 1801]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target leg-near-upper-back. Finish ONLY clipped upper thigh end as continuing olive-brown trouser fabric, rounded tapered top with natural folds woven texture and continuous dark outline. No belt apron or pouch at thigh top. Finish bottom knee cut with small rounded outlined skin/leather end. Keep all patch stitches trouser hem and middle fabric untouched. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## leg-far-upper-back
+
+Input: pulled-main `leg-far-upper-back.png`, native crop `[724, 1393, 1080, 1806]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target leg-far-upper-back. Finish ONLY clipped upper thigh end as continuing olive-brown trouser fabric, rounded tapered top with natural folds woven texture and continuous dark outline. No belt apron or pouch at thigh top. Finish bottom knee cut with small rounded outlined skin/leather end. Keep all patch stitches trouser hem and middle fabric untouched. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## hand-far-open
+
+Input: pulled-main `hand-far-open.png`, native crop `[982, 1298, 1279, 1643]`.
+
+```text
+Use case: precise-object-edit. Production animated rat cutout rig, target hand-far-open. Replace ALL long striped stretched leather above wrist with a short narrow rounded tapered glove cuff, fully painted brown leather grain creases fine stitches dark outline. Remove striped side scrap. Keep open palm fingers thumb and their exact pose untouched. Hidden ends may show in motion: no flat fill, stretching, blocks, circles or joint discs. Match original warm painted cartoon palette and bold dark line weight, upper-left light. Keep original part registered at SAME position scale angle and dimensions inside crop. One connected isolated piece on exact #00FF00 green, no text shadow body or accessories.
+```
+
+## hand-near-open
+
+Input: pulled-main `hand-near-open.png`, native crop `[295, 1389, 529, 1649]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part hand-near-open. Finish ONLY clipped wrist attachment end as a SHORT narrow tapered rounded leather cuff with natural grain creases stitching and continuous dark outline. Follow this exact hand's wrist direction; do not change palm, thumb, fingers, knuckles, claws or visible glove face. Do not add a second cuff, bracer, object or hole. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## hand-near-palm
+
+Input: pulled-main `hand-near-palm.png`, native crop `[285, 1380, 550, 1677]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part hand-near-palm. Finish ONLY clipped wrist attachment end as a SHORT narrow tapered rounded leather cuff with natural grain creases stitching and continuous dark outline. Follow this exact hand's wrist direction; do not change palm, thumb, fingers, knuckles, claws or visible glove face. Do not add a second cuff, bracer, object or hole. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## hand-far-palm
+
+Input: pulled-main `hand-far-palm.png`, native crop `[1000, 1380, 1250, 1606]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part hand-far-palm. Finish ONLY clipped wrist attachment end as a SHORT narrow tapered rounded leather cuff with natural grain creases stitching and continuous dark outline. Follow this exact hand's wrist direction; do not change palm, thumb, fingers, knuckles, claws or visible glove face. Do not add a second cuff, bracer, object or hole. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## hand-near-cup
+
+Input: pulled-main `hand-near-cup.png`, native crop `[280, 1380, 570, 1643]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part hand-near-cup. Finish ONLY clipped wrist attachment end as a SHORT narrow tapered rounded leather cuff with natural grain creases stitching and continuous dark outline. Follow this exact hand's wrist direction; do not change palm, thumb, fingers, knuckles, claws or visible glove face. Do not add a second cuff, bracer, object or hole. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## hand-far-cup
+
+Input: pulled-main `hand-far-cup.png`, native crop `[990, 1380, 1265, 1599]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part hand-far-cup. Finish ONLY clipped wrist attachment end as a SHORT narrow tapered rounded leather cuff with natural grain creases stitching and continuous dark outline. Follow this exact hand's wrist direction; do not change palm, thumb, fingers, knuckles, claws or visible glove face. Do not add a second cuff, bracer, object or hole. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## hand-near-point
+
+Input: pulled-main `hand-near-point.png`, native crop `[290, 1380, 605, 1586]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part hand-near-point. Finish ONLY clipped wrist attachment end as a SHORT narrow tapered rounded leather cuff with natural grain creases stitching and continuous dark outline. Follow this exact hand's wrist direction; do not change palm, thumb, fingers, knuckles, claws or visible glove face. Do not add a second cuff, bracer, object or hole. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## leg-near-kneeling
+
+Input: pulled-main `leg-near-kneeling.png`, native crop `[200, 1330, 838, 1916]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part leg-near-kneeling. Replace ONLY flat rectangular upper hip extension and scrap apron/button at attachment with continuing olive-brown trouser cloth, fully painted woven texture folds and a SHORT rounded tapered outlined end following the thigh's existing pose. Keep entire visible thigh patches stitches knee shin foot and pose exactly unchanged. No extra limb or fur/apron at upper attachment. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## leg-near-kneeup
+
+Input: pulled-main `leg-near-kneeup.png`, native crop `[482, 1304, 1017, 1914]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part leg-near-kneeup. Replace ONLY flat rectangular upper hip extension and scrap apron/button at attachment with continuing olive-brown trouser cloth, fully painted woven texture folds and a SHORT rounded tapered outlined end following the thigh's existing pose. Keep entire visible thigh patches stitches knee shin foot and pose exactly unchanged. No extra limb or fur/apron at upper attachment. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## leg-far-folded
+
+Input: pulled-main `leg-far-folded.png`, native crop `[734, 1330, 1288, 1807]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part leg-far-folded. Replace ONLY flat rectangular upper hip extension and scrap apron/button at attachment with continuing olive-brown trouser cloth, fully painted woven texture folds and a SHORT rounded tapered outlined end following the thigh's existing pose. Keep entire visible thigh patches stitches knee shin foot and pose exactly unchanged. No extra limb or fur/apron at upper attachment. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## shoulder-near
+
+Input: pulled-main `shoulder-near.png`, native crop `[435, 1040, 720, 1296]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part shoulder-near. Finish ONLY top attachment edge of this little shoulder cover as naturally curved short leather/fur continuation with bold dark outline. Preserve all visible fur, leather trim and lower outline exactly. No button, extra armor, limb or disc. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## shoulder-far
+
+Input: pulled-main `shoulder-far.png`, native crop `[850, 1070, 1085, 1308]`.
+
+```text
+Use case: precise-object-edit. Repair one isolated cartoon rat rig part shoulder-far. Finish ONLY top attachment edge of this little shoulder cover as naturally curved short leather/fur continuation with bold dark outline. Preserve all visible fur, leather trim and lower outline exactly. No button, extra armor, limb or disc. Keep exact original position, scale, proportions and pose in crop. Every hidden surface is finished paint, no flat/stretched blocks or straight unoutlined cuts. Match original warm painted cartoon palette and bold outlines, upper-left lighting. One connected part on flat exact #00FF00 green with no text/shadow/body/other pieces.
+```
+
+## tail-root-back
+
+Inputs: `tail-1.png` native crop `[356,1413,626,1783]`, and the pre-round-4 rear source assembly as anatomy context. A first attempt returned no usable output; the accepted retry is below. Uniform two-landmark registration puts the root on `(492,1540)` and the continuation on `(442,1708)`; no existing Q tail paint is used for the new B/BQ drawing.
+
+```text
+Use case: precise-object-edit. Repair a cartoon rat TAIL sprite for a fantasy brawler cutout game. Keep exactly the curved tail segment shown, on green background. At UPPER RIGHT, shorten the thin tapered extension so its new endpoint lies near the middle of the reference's right edge rather than the top. Make that endpoint a naturally outlined, softly curved tail-to-body attachment, with the same transverse tail scale bands and painted shading as the rest. This end will be placed over brown trouser fabric in a rear view. Preserve lower-left curved segment and its native position. Fill the small missing green notches along the inner curve as matching tail skin with a continuous black outline. No other anatomy, object, text or shadow. Same warm cartoon style, original framing and exact #00FF00 background.
+```

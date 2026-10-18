@@ -1,27 +1,34 @@
-# A023 Round 3 — rear fixes and turned-away torso
+# A023 Round 4 — finished hidden material and rear tail root
 
-Branch: `a023-r3-rat-back-fixes`. Based on pulled main `03a06cf`. Source delivery; pushed for review, **do not merge automatically**.
+Branch: `a023-r4-rat-hidden-paint`. Based on pulled main `0420f03`; exposure list read from `origin/t028-views-and-depth` (`9ad1a73`). Source delivery only; push for review, do not merge.
 
 ## Delivered
 
-- `foot-near-back.png`, `foot-far-back.png`: recut from the approved A017 back reference, with heel toward camera and toes angled right. Matching `leg-near-lower-back.png` and `leg-far-lower-back.png` recuts remove the old straight-away heel painted into the lower shin. Feet continue to y1680 in anatomical B setup, 65 source px above y1745, hidden under shin/thigh.
-- `hand-near-back.png`: viewer-right B hand. Wider recut from the accepted round-2 rear drawing retains the whole thumb. Arm drawings and approved split grip pairs are untouched.
-- `pelvis-back.png`, `leg-far-upper-back.png`: local inpainting removes baked-in pink tail paint and reconstructs hidden cloth. Separate tail images are unchanged. The B tail bands now sit **below pelvis** and the rear tail anchor is `(490,1525)`, so the outlined tail emerges beside the trousers with its end covered. This supersedes the older view table's instruction to put the back tail in front.
-- `torso-away.png`: reference-guided back-panel redraw, crossed straps and back scarf knot, near shoulder drawn back. Same inherited torso pivot; updated neck/shoulder anchors. Q hips and existing neutral head are retained for the twisted wind-up; head looks back toward the right-hand target. No new pelvis-away or head drawing.
+60 repaired existing cuts plus `tail-root-back.png`. All sources are 1536 × 2304 PNG on exact green. Same inherited pivots and original grip metadata; split grip faces and under-pieces are unchanged.
 
-Eight changed cut PNGs, updated `rig-source.json`, `views.png`, `turn.png`, `review.png`, `review-views.png`, `review-back.png`, `review-r3-back.png`, `review-r3-turn.png`, exact prompts in `prompt.md`. Phone copies: `docs/screens/A023/r3-back.jpg` and `r3-turn.jpg`; overview and B/BQ copies refreshed. All new review JPGs are quality 82, long side <=2000.
+- Seven torso views: completed collar/neck, shoulder cut surfaces and waist ends. Removed the hidden baked belt remnant from the Q torso; the separate belt remains the cover.
+- Four pelvis views: finished trouser cloth / waist overlap, rounded seat ends and seams.
+- Split upper arms, whole-arm keys, rear arms and shoulder caps: rounded, outlined fur/leather ends following each pose's own angle.
+- Default and gesture hands: finished short cuffs; long stretched far-wrist columns removed. Existing finger/palm/grip paint restored outside the cuff masks.
+- Q and rear thighs plus kneeling, knee-up and folded keys: finished olive-brown cloth at the hip, replacing flat blocks. Ankle ends on default, toe, heel, out and rear feet: tapered leather wraps, narrower than the former columns.
+- Scarf root: red cloth in place of baked shoulder/metal fragments. Rear head: finished clipped neck edge. Q tail overlap: continued banded skin; separate B/BQ tail root ends on the seat.
 
-## Import and reproduce the proofs
+`review.png` contains every repaired part, before/after on grey, with actual 130 px source assemblies on Harbor Market. Refreshed `views.png`, `turn.png`, `review-views.png`, `review-back.png`; new `review-r4-overview.png`. Phone: `docs/screens/A023/r4-overview.jpg`, `r4-parts-01.jpg` onward, and one equal-scale before/after hidden-area crop per repaired piece as `r4-<piece>.jpg`. All phone JPGs quality 82 and long side <=2000. Exact imagegen prompts and native crop coordinates: `prompt.md`.
 
-Merge the fragment after prior A018/A019/A022/A023 data; honor each source path. All cut images are 1536 × 2304 on exact green, and all repaired pivots are unchanged. No runtime files were edited.
+## Import notes — rear tail supersedes round 3
 
-- Use the existing B `viewSwaps` and `viewJointPositions` for rear limbs; source pivots differ from assembled rear positions. Keep shin above foot and cuff above hand.
-- B `tail-1/2/3` bands are 300/310/320, below pelvis 400. Apply the updated pelvis-back tail anchor. Do not retain the old 430/440/450 tail bands.
-- `torso-away` neck `(805,1180)`, near shoulder `(550,1160)`, far shoulder `(982,1170)`, waist `(776,1382)`. Pivot remains `(776,1382)`. Near arm is entirely behind torso. `reviewPoses.BQ` records the source proof's cocked-arm transform; this is a static pose recipe, not a runtime change.
-- `turn.png` / `review-r3-turn.png` show Q → BQ → B at native cut scale and 136 px character height. `review.png` also shows 130 px assemblies over harbor art. These images are composed from delivered parts, not painted-over full characters.
+- Merge this fragment after A018/A019/A022 and the earlier A023 fragments. Honor each entry's `source`; inherited drawings repaired here now resolve to A023.
+- In B and BQ, use `tail-root-back` for `tail-1`; source pivot `(492,1540)`, next tail joint `(442,1708)` unchanged. Q/S/F keep the repaired ordinary `tail-1`.
+- B root attaches at `(780,1505)` on `pelvis-back`; BQ at `(560,1505)` on the existing Q pelvis. The root ends on the painted seat, rather than disappearing behind the trouser leg.
+- B/BQ tail bands are **550/560/570**, above the seat and thigh bands, below torso 600. Do not retain round-3 300/310/320. `round4Tail` records the full recipe.
+- BQ still uses the Q pelvis drawing. The generic importer only emits non-arm swaps for an existing pelvis view: Code must explicitly carry BQ's tail swap/attachment/bands into its current view data. No runtime files or importer changes are delivered here.
 
-## Validation and limitations
+## Validation and remaining gate
 
-All eight changed cuts pass single 8-connected foreground, same-canvas, exact-green corner and unchanged-pivot checks. The new torso's central neutral overlap with the retained Q pelvis is at least **87 source px** (40 required). `round3Validation` records results. Scope is A023 sources, A023 phone copies and the A023 asset row only.
+61 cuts checked: one 8-connected foreground component, 1536 × 2304 canvas, exact-green corner and inherited pivots unchanged. Original `grips` metadata is identical; whole-arm grip neighborhoods were checked separately. Detailed per-cut results and mask diagnostics are in `rig-source.json` → `round4Validation`.
 
-The turned-away torso and tail-covered cloth are reference-guided repaint, not pixel-identical master paint. BQ retains Q hips and head for a torso-twist wind-up; the turn's anatomical readability still needs the user's viewer judgment. Hidden straight cut edges require the stated overlaps. Existing Q ankle notches and inherited rear head/scarf junction are outside this round. Runtime motion, extreme rotations, tail attachment and every rehearsal move still need Code's import and seam checks; no runtime or human-acceptance claim is made. No requested source drawing is intentionally omitted.
+The requested motion pass has **not been measured**: Code must import this source and run the T028 exposure/cut-edge and seam checks. Required: zero flags in idle, walk, turning slash and turn-around; every other move below 20 game px² per piece. These static source proofs do not establish that pass, and no pose or motion acceptance is claimed.
+
+T028's current exposure check counts any pixels hidden at rest that later show, regardless of RGB or whether the material is now finished. Repainting can improve the drawing while retaining an area flag; the shortened/narrowed ends also need Code's geometry measurement. Do not treat the repaint as permission to waive a remaining flag.
+
+Masked restoration preserves approved paint away from overlap/cut areas. Component cleanup removed residual cut scraps outside the masks on these cuts (source pixels): `{"torso": 1875, "leg-near-kneeup": 31, "pelvis-front": 167, "arm-near-smear-h": 11, "arm-near-smear-o": 1, "arm-near-mouth": 1, "hand-near-cup": 2, "leg-far-upper-back": 3}`. This is a local redraw of hidden surfaces and cut contours, not a promise of pixel-identical paint throughout every newly exposed region. Extreme-angle transitions and the new tail depth/attachment still require the viewer check. No requested source drawing is intentionally omitted; the runtime pass remains outstanding.
