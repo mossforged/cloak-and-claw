@@ -1,12 +1,12 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T026 new rat import (rounds 1-5, 2026-10-18). Last art task merged: A023 round 2 (rat repairs, 2026-10-18). Older notes in `docs/history.md`.
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T026 new rat import (rounds 1-5, 2026-10-18). Last art task merged: A023 round 3 (back-view fixes, 2026-10-18). Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
 **The user called this "the final test of this type of rigging" (2026-10-18).** Anatomy rules: rig standard 5b.
-1. **User:** look at A023 round 3 (`docs/screens/A023/r3-back.jpg`, `r3-turn.jpg`): back-view feet and thumb, the turned-away view.
+1. **User:** next look: the turning slash in motion (T028 round 3), where the turned-away chest is judged as the wind-up twist.
 2. **Code:** T028 round 3: exposed-hidden-paint check (A023's extensions show in the walk), exposure list for Art, then A023 round 3 imported. Then T029 (every rehearsal move).
-3. **Art:** idle until Code's exposure list (A023 round 3 delivered on `a023-r3-rat-back-fixes`).
+3. **Art:** idle until Code's exposure list; then A023 round 4 (exposure fixes + the back-view tail root).
 4. **Lead:** review A023 round 3 and T028 round 2 (round 3's drawings imported before the user's look); T029 packet; then A020 gear; then the mouse.
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
@@ -45,7 +45,8 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
-22026-10-18 lead: reviewed T028 round 2 (35/35, CI green, scope clean) and A023 round 3 (scope clean). Not sent to the user: A023 round 2's hidden extensions show as flat blocks in the walk (shins narrower than the extensions), and the walk's hip and knee seams didn't shrink; the back view has visible straight cut edges. Wrote T028 round 3 (exposed-hidden-paint check, exposure list for Art). A023 round 3 waits for the user's look.
+22026-10-18 lead: user approved A023 round 3's back-view feet and thumb; the turned-away chest didn't read as a still (it is the wind-up twist), to be judged in motion. Merged round 3 as source; T028 round 3 imports it.
+2026-10-18 lead: reviewed T028 round 2 (35/35, CI green, scope clean) and A023 round 3 (scope clean). Not sent to the user: A023 round 2's hidden extensions show as flat blocks in the walk (shins narrower than the extensions), and the walk's hip and knee seams didn't shrink; the back view has visible straight cut edges. Wrote T028 round 3 (exposed-hidden-paint check, exposure list for Art). A023 round 3 waits for the user's look.
 026-10-18 lead: user on A023 round 2: grips good; back view good except the feet point straight away (prefers the reference's angle), clipping on the thumb and the tail root; the turned-away view doesn't read. Merged round 2 as source; wrote A023 round 3.
 2026-10-18 lead: merged T026 (rounds 1-5; 33/33 with LFS art, CI green): the game now uses the new rat. Reviewed A023 round 2 (`a023-r2-rat-repairs`: all items 1-9 delivered by name, scope clean, LFS): split grips, belt, longer feet and thighs, back-view cuts, redrawn fists; waiting for the user's look at the grips and back views. Wrote T028 round 2 (import A023 with the views, knee/waist/shoulder rules, hand-table check).
 026-10-18 code: T026 round 5 on `t026-import-new-rat`: shin over foot (rat feet 515 / 215, were 530 / 230; spearman and archer inherit; toe swaps keep the band): seam flags unchanged, no ankle opens further; known ankle gaps re-labelled as foot top to extend under the shin (rat walk near 4 / far 10 game px, getup far 9.5, knockdown near 3.5). Anatomy rule test `tests/anatomy.test.mjs` (rules `src/data/rigs/anatomy.js`): rats pass every pair in 1276 frame keys; the mouse waives 4 pairs (rebuild).
