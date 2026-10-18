@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 T026 round 4 (rat hold + gaps)
+Idle: "almost perfect except the hand holding the sword is showing the palm side of his hand. the hand should be showing the back of his hand to hold the sword like that." Slow walk: "a small gray line between the forward foot and the leg, it almost looks like the foot is being rendered over the pants instead of under them". Slash: "a gap opens up betwen his waist and his chest." On the process: "this entire process just doesn't seem to be working. you're very good at seeing and diagnosing and fixing many things, but you don't seem to be able to see some of these anatomical issues that are apparent to me". On the hand: "why do we not have art for the back of hand grip? How is that not one of the core parts of rendering a camera viewing somebody walking around with a sword?"
+
 ## 2026-10-17 A021 weapons + T026 rat review
 A021: "yes the weapon designs are good". T026 (rebuilt rat, viewer): "the old one had torso to arm to hand connections that look right, it looks like a single piece of art. the arms and hands on the new rat are twisted and strange. it doesnt hold weapons correctly. when it walks a gap is visible between butt and tail. and yes overall its probably a bit hunched down, height wise, but thats a smaller issue" -> A022 + T026 round 2.
 
