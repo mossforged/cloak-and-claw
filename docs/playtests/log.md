@@ -2,6 +2,15 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 A023 round 2 (grips, back views)
+"those grips all look good." Back view: "the anatomical back reference all looks great. The rear cuts and heels, the feet are kind of pointed like straight away from the camera, which is maybe fine. Um, I like it better in the anatomical back reference where it's a little bit more to the, the angle. But um, the arms look good, the back looks good, the head looks good. There is like a little bit of clipping going on on his, from my perspective, right hand. You can see on the thumb and a little bit on the tail, but most of that is good. The near arm behind, I'm not really sure what's happening in that picture." -> merged as source; A023 round 3.
+
+## 2026-10-18 Anatomy pass on the rat's hands (hand sheet `docs/screens/anatomy/rat-hands.jpg`)
+"For one and for two, that's not the back of the hand. The back of the hand wouldn't have a gap in it because you wouldn't be seeing through it. And the object is going to be underneath the back of the hand, not on top of it." Pinch: "sort of the back of the hand". "Four is not the back of the hand. Five is not the back of the hand. Six is the back of the hand. You can see there's no gap running alongside the hand." Seven: "I don't really see the palm ... it's strange." Eight: "yeah, I guess that's palm side fingers. Although ... we're going to be separating the fingers out from the rest of the hand, right?" Nine and ten right; eleven: "I'm not sure, that hand looks a little strange." 12-16 right.
+
+## 2026-10-18 T026 round 4 (rat hold + gaps)
+Idle: "almost perfect except the hand holding the sword is showing the palm side of his hand. the hand should be showing the back of his hand to hold the sword like that." Slow walk: "a small gray line between the forward foot and the leg, it almost looks like the foot is being rendered over the pants instead of under them". Slash: "a gap opens up betwen his waist and his chest." On the process: "this entire process just doesn't seem to be working. you're very good at seeing and diagnosing and fixing many things, but you don't seem to be able to see some of these anatomical issues that are apparent to me". On the hand: "why do we not have art for the back of hand grip? How is that not one of the core parts of rendering a camera viewing somebody walking around with a sword?"
+
 ## 2026-10-17 A021 weapons + T026 rat review
 A021: "yes the weapon designs are good". T026 (rebuilt rat, viewer): "the old one had torso to arm to hand connections that look right, it looks like a single piece of art. the arms and hands on the new rat are twisted and strange. it doesnt hold weapons correctly. when it walks a gap is visible between butt and tail. and yes overall its probably a bit hunched down, height wise, but thats a smaller issue" -> A022 + T026 round 2.
 
@@ -100,3 +109,9 @@ User's words (lightly cleaned): "The actual feel of striking and the knockback a
 Issues he noted but set aside as not this stage's point: the walkable lane doesn't line up with the background art; the animations are janky.
 **Gate result: passed.**
 - 2026-10-15 A008 rat gear (review image): user likes the change of clothes and the hat. Legs still look "very strange, weirdly spread, weirdly muscly but still thin"; judge again in T011's crouch rig.
+
+## 2026-10-17/18 T026 rounds 2-3, A023 views (user, viewer and phone)
+- T026 r2: "technically all of them better except for the idle ... his arm that's not holding the sword is weirdly curled up." And: "the rat can't turn his body ... he just has to slash across his body, which seems like a fundamental problem." -> complete kit (rehearsal, views, A023, T028).
+- T026 r3: "his non sword hand is better, but the sword holding [arm] is still awkward and there's a gap between his leg and hips." -> T026 round 4 + pose seam test; A023 round 2 hips/waist.
+- A023 views: "the art is fine, but obviously the rightmost two [turned-away, back] are doing very strange things anatomically." -> A023 round 2 item 4.
+

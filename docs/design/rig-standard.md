@@ -64,7 +64,7 @@ Same canvas; each swap shares its part's pivot so it drops in place. The study (
 | `torso` | `three-quarter` (default), `side` (thrusts), `back` (spin, back throw, roll), **`front`** (turned toward the camera: every swing's strike, turn-around, throws), **`away`** (back three-quarter: every wind-up and telegraph) | `hunched` (block, crouch, chop strike), `lean-back` (overhead wind-up, hurt snap) |
 | `pelvis` | three-quarter, **`side`, `front`, `back`** (one per view the hips take) | - |
 | shoulder caps | **`shoulder-near`, `shoulder-far`** (the shoulder top that shows when that arm swings in front of the body) | - |
-| `hand-near`, `hand-far` | `open`, `fist`, `grip` (side hold) | `grip-overhand`, `pinch` (bow, potion), `palm` (block, push), `shield` (far, shield users) |
+| `hand-near`, `hand-far` | `open`, `fist`, **split grips** (5b rule 2: the face the camera sees, in front of the handle, plus the wrapping fingers or thumb behind it; one pair per hold in the character's hand table) | `grip-overhand`, `pinch` (bow, potion), `palm` (block, push), `shield` (far, shield users) |
 | `arm-near` whole-limb | `raised` (cast, overhead; carries the item), `cocked` (wound past 90 degrees: heavy wind-ups, telegraphs) | `smear` per swing family |
 | `arm-far` whole-limb | `guard` (block; carries the shield), `raised` (two-hand cast, bow draw) | - |
 | `leg-near` whole-limb | `knee-up` (grab knee, jump tuck), `kneeling` (get-up, revive, downed, stun) | - |
@@ -81,7 +81,7 @@ Hero: **40 drawings essential, ~62 polished** (before views). Grunt: 27 / 33. Br
 ## 5. Drawing rules (G2)
 1. **Cut, don't regenerate.** Each part is cut from the master along its joint lines. Use the image tool only to **paint in what was hidden** (shoulder under the sleeve, thigh under the tunic, the hip behind the near leg). A limb must never be generated from scratch, because separate generations drift into a different character.
 2. **Hidden areas painted** at least one joint-width past the visible edge.
-3. **Hidden overlaps (revised 2026-10-17):** at every joint the child's end continues **underneath** the neighbouring piece (the shoulder under the vest edge, the wrist under the bracer, the tail root under the trousers, the hip under the pelvis), so the overlap is never seen. Where the joint is visible the outline continues unbroken. **Nothing visible is a geometric circle, disc, hole or unoutlined ball** (the old wording, "a near-circle around the pivot", was painted literally on the rat in A018/A019: fur-ball shoulders, discs at the wrists). If no neighbour covers the joint across its range, extend the neighbour's edge (e.g. the torso's vest edge) to cover it. Grip hands are seen from the side, wrapped round the handle with a narrow slot, never a round hole.
+3. **Hidden overlaps (revised 2026-10-17):** at every joint the child's end continues **underneath** the neighbouring piece (the shoulder under the vest edge, the wrist under the bracer, the tail root under the trousers, the hip under the pelvis), so the overlap is never seen. Where the joint is visible the outline continues unbroken. **Nothing visible is a geometric circle, disc, hole or unoutlined ball** (the old wording, "a near-circle around the pivot", was painted literally on the rat in A018/A019: fur-ball shoulders, discs at the wrists). If no neighbour covers the joint across its range, extend the neighbour's edge (e.g. the torso's vest edge) to cover it. Grip hands follow 5b rule 2 (split around the handle, face per the hand table), never a round hole. (Supersedes "seen from the side with a narrow slot", 2026-10-18.)
 4. **Pivots marked in `rig-source.json`** (one per delivery), as **measured canvas points**, not estimates. Because every part sits on the shared canvas exactly where it is in the master, a joint is one canvas point shared by parent and child:
    ```
    { "canvas": [1536, 2304], "master": "reference.png", "floorY": 2190,
@@ -98,8 +98,31 @@ Hero: **40 drawings essential, ~62 polished** (before views). Grunt: 27 / 33. Br
 ### 5a. Weapons (items)
 Held art = floor art (decision 2026-10-16). Each item declares a **handle axis** (`grip` at the pivot, business end along +X via `gripEnd`), `grip2` for two-handers, `tip`, and a `stow` anchor. In game the weapon is a node of its own; the hands reach its grip markers and copy its rotation (T025), so overhand, underhand and reverse holds are data. Hands are never painted onto weapons. Per weapon: one drawing, optionally one angle-specific drawing where a flip reads wrong, smears as polish; a bow's arrow is its own attachment; a shield needs the far-hand `shield` drawing.
 
+### 5b. Anatomy rules (added 2026-10-18; checked by name, not by eye)
+Why: the lead's eye misses small anatomy (a palm where a hand's back should be, a foot painted over a trouser leg, a waist that opens). These rules come from the draw order of real rigs (study 2026-10-18, "Joint rules from real rigs") and can be checked from the rig data. Each character's rig sheet lists how it meets them; the user checks the sheet once, before Art draws (decision 2026-10-18).
+1. **Who covers whom at each joint** (every view; per-view bands in section 6 keep these pairs):
+   | Joint | On top | Underneath, extending up under it |
+   |---|---|---|
+   | ankle | shin (`leg-*-lower`, or the trouser hem) | foot |
+   | knee | shin | thigh |
+   | hip (three-quarter) | near thigh over the pelvis, its top hidden under the torso and belt cover; pelvis over the far thigh (as Spineboy; the real rigs differ here, so each view names it) | thigh tops |
+   | waist | a **belt cover** (its own piece on the pelvis, drawn just above the torso) | torso's lower edge and pelvis top, both |
+   | shoulder | torso edge or shoulder cap (whichever the view puts in front) | upper arm top |
+   | elbow | forearm | upper arm |
+   | wrist | bracer or cuff (forearm, or its own piece) | hand |
+   | tail root | pelvis | tail |
+2. **Hands: which face the camera sees** (three-quarter, facing right). Every hold names one face per hand in the rig sheet's hand table, and every pose uses the drawing for that face. Default, to be confirmed per hold in the user's anatomy pass:
+   - **Near hand holding something in front of or beside the body: the back of the hand** (knuckles toward the camera), the fingers wrapping out of sight behind the handle.
+   - **Far hand holding something in front of the body: the palm side**, the fingers curling round the handle toward the camera.
+   - Open-hand moves (palm push, block, cupped spell) show the palm by design; the table says so per move.
+   - **The back of a hand is solid** (user, 2026-10-18): no gap or slot shows through it, and the held object passes **underneath** it, never on top.
+   - A grip is **split around the handle**: the face in front of the handle is one piece, what wraps behind it is a second piece under the handle (Spine's sword hero and goblins). The handle never passes through a painted hole or slot.
+3. **Cover pieces where a joint has no natural cover:** belt (waist), shoulder caps, bracers, trouser hems. A cover is its own small drawing on the parent's pivot, so the two pieces it joins never have to line up exactly.
+4. **Hidden length through the full range:** every covered end continues underneath far enough to stay hidden at the joint's most extreme angle in the character's rehearsal (not just at rest). Measured by the pose seam test; the rig sheet lists each joint's range.
+5. **Gaps block reviews:** a move with a seam-test flag is not sent to the user for a look until the flag is fixed or explained in the review note.
+
 ## 6. Draw order (depth bands)
-`hand-far`, `arm-far-*`, far weapon (100s) < `leg-far-*`, `foot-far` (200s) < `tail`, cape back (300s) < `pelvis` (400) < `leg-near-*`, `foot-near` (500s) < `torso` (600) < gear on torso (650) < `head` (700) < gear on head (750) < `arm-near-*`, `hand-near`, held weapon (800s). Swaps and gear inherit their part's band. **Exception:** the far hand on a two-handed item draws in an overlay band above the shaft (850), so it is never hidden.
+`hand-far`, `arm-far-*`, far weapon (100s) < `leg-far-*`, `foot-far` (200s) < `tail`, cape back (300s) < `pelvis` (400) < `leg-near-*`, `foot-near` (500s) < `torso` (600) < gear on torso (650) < `head` (700) < gear on head (750) < `arm-near-*`, `hand-near`, held weapon (800s). Inside each limb the 5b covers hold: shin over foot, forearm over upper arm, cuff or bracer over hand. Swaps and gear inherit their part's band. **Exception:** the far hand on a two-handed item draws in an overlay band above the shaft (850), so it is never hidden.
 
 **Per view (2026-10-17):** the bands above are the three-quarter view. Side and front bring the near arm wholly in front of the torso (800s) with its shoulder cap on top; away puts it wholly behind; back brings the far arm in front with its cap and swaps the legs' depth, the tail drawing in front of the pelvis. Inside a move the switch happens on a named key (the frame where the hand passes the edge of the body), never as a blend; a pose may also override a part's band (a shield guard in front of the chest). Table: `rigs/rat-raider-rehearsal.md`.
 

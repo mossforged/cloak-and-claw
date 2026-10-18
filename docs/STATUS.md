@@ -1,12 +1,13 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T027 model viewer + phone review previews. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T026 new rat import (rounds 1-5, 2026-10-18). Last art task merged: A023 round 2 (rat repairs, 2026-10-18). Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
-1. **Code:** T026 round 3 (idle free arm, CI paint test); merge after the user OKs the idle. Then **T028** views, depth switching, rehearsal sheet.
-2. **Art:** **A023** rat complete kit (views, turn drawings, polish drawings, anchors, seam repairs). Starts now; source only.
-3. **User:** the idle after round 3; then the rehearsal sheet and the turning slash (T028); then A023 in motion (T029).
-4. **Lead:** reviews; T029 packet when A023 and T028 are in; then A020 (gear for every view); then the mouse's rehearsal and rebuild.
+**The user called this "the final test of this type of rigging" (2026-10-18).** Anatomy rules: rig standard 5b.
+1. **User:** next look: T028 round 2 (turning slash with real drawings) once Code and A023 round 3 are in.
+2. **Code:** T028 round 2 (merge main, import A023 rounds 1-2, split grips, extended anatomy test with the hand table, turning slash with real drawings). Then T029 (every rehearsal move).
+3. **Art:** A023 round 3 (back-view feet angled, back-view thumb and tail root, turned-away view redrawn).
+4. **Lead:** review A023 round 3 and T028 round 2 (round 3's drawings imported before the user's look); T029 packet; then A020 gear; then the mouse.
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
 
@@ -25,8 +26,8 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T026-import-new-rat.md` (round 3), then `docs/tasks/T028-views-and-depth.md`.
-- Art: `docs/tasks/A023-rat-complete-kit.md`.
+- Code: `docs/tasks/T028-views-and-depth.md` round 2 (A023 round 2 is merged).
+- Art: `docs/tasks/A023-rat-complete-kit.md` round 3.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -44,6 +45,16 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+22026-10-18 lead: user on A023 round 2: grips good; back view good except the feet point straight away (prefers the reference's angle), clipping on the thumb and the tail root; the turned-away view doesn't read. Merged round 2 as source; wrote A023 round 3.
+2026-10-18 lead: merged T026 (rounds 1-5; 33/33 with LFS art, CI green): the game now uses the new rat. Reviewed A023 round 2 (`a023-r2-rat-repairs`: all items 1-9 delivered by name, scope clean, LFS): split grips, belt, longer feet and thighs, back-view cuts, redrawn fists; waiting for the user's look at the grips and back views. Wrote T028 round 2 (import A023 with the views, knee/waist/shoulder rules, hand-table check).
+026-10-18 code: T026 round 5 on `t026-import-new-rat`: shin over foot (rat feet 515 / 215, were 530 / 230; spearman and archer inherit; toe swaps keep the band): seam flags unchanged, no ankle opens further; known ankle gaps re-labelled as foot top to extend under the shin (rat walk near 4 / far 10 game px, getup far 9.5, knockdown near 3.5). Anatomy rule test `tests/anatomy.test.mjs` (rules `src/data/rigs/anatomy.js`): rats pass every pair in 1276 frame keys; the mouse waives 4 pairs (rebuild).
+2026-10-18 code: T026 r5 review links (docs/screens/T026/views.json) cut to the slow walk, walk paused close-up and idle; every seam flag in them is a listed art fix (shoulders, wrist, elbow, knees, hip, ankles, tail roots), named in the report. docs/screens/T026/r5-ankle-before-after.jpg. 33/33. Build `t026 rat anatomy r5`. Not merged.
+2026-10-18 lead: user's anatomy pass on the rat's hands -> hand table "Now" column, rule "the back of a hand is solid, the object passes under it" (5b.2), A023 round 2 released with the redraw list.
+2026-10-18 lead: reviewed T026 r4 (32/32 with LFS art; CI green; scope clean) and T028 v1 (CI green, scope clean). User on r4: palm-side sword hand, foot drawn over the trousers in the walk, waist gap in the slash; "this entire process just doesn't seem to be working". Study "Joint rules from real rigs" (Spine's six reference rigs: shin always over foot, weapon between two hand pieces, cover pieces at joints); rig standard 5b anatomy rules; rat hand table + hand sheet; T026 round 5; A023 round 2 items 6-9.
+2026-10-18 lead: user on A023 views: art fine, turned-away and back views anatomically wrong -> A023 round 2 item 4 (redraw torso-away; back-view legs, feet, arms). Lead chat handed over to a new conversation; resume from this file.
+2026-10-17 code: T026 round 4 on `t026-import-new-rat`: cutlass held as a guard (fist in front of the chest, forearm about level, blade up and a little back, wrist cocked ~25 deg; a fist behind the body like A010 can't hold the blade up with A018's side-on grip without a >45 deg wrist bend); crouch boots 4 / 10 px off the master (were 10 / 12), 1 px down, pelvis 3 + torso 6: idle crotch, waist, far trouser-leg and bent-wrist gaps closed (idle 136.5 px tall; stance narrower than A010's, user to judge the menace); left: near shoulder 4.5 px as the idle breathes, far chest fur nick 2.5 (art). Walk unchanged (its gaps don't move with hip tilt, gather or stride: art).
+2026-10-17 code: T026 r4 pose seam test `tests/pose-seams.test.mjs`: every frame key of every viewer clip for the 3 rats + mouse, stretch core measure + new joint-band measure (tools/bench/junction.js; the core one missed all four review gaps); 113 known flags with fixes in tools/bench/pose-seams-known.js (writer tools/pose-seams-known.mjs), worst frame per move in docs/screens/T026/pose-seams-*.jpg; npm test runs files in parallel (40 s total). 32/32. Build `t026 rat hold r4`. Not merged.
+2026-10-17 lead: user on T026 r3: free hand better; cutlass hold still awkward; gap between leg and hips -> T026 round 4 (+ a pose seam test over every move frame). Merged A023 (24 drawings, view anchors and bands; Q/S/F convincing, BQ/B weaker, new views repainted not cut); repairs collected as A023 round 2.
 2026-10-17 code: T028 on `t028-views-and-depth` (built on the unmerged T026 branch): body views (per-view drawing, joint points, draw bands; chest and hips separately; slide between views), depth switch on a named key, pose band overrides, shoulder caps (no art yet), turn-around through F, tail/scarf springs, carry socket, importer reads A023 `anchors`; raider slash re-posed BQ -> F (side torso stands in); rehearsal sheet `viewer.html?rehearse=rat-raider`; stretch cells per view. 33/33 tests; no-view rigs lay out exactly as before.
 2026-10-17 code: measured stand-in points (torso px) side: neck 152,62 / near shoulder 76,64 / far 110,62 / waist 124,146; back: 130,78 / 193,70 / 40,68 / 126,149. Not done: spearman thrust still swaps the side torso without the S view (T029). Build `t028 views v1`.
 2026-10-17 code: T026 round 3 on `t026-import-new-rat`: idle free (far) arm re-posed hanging forward and low, loose fist in front of the belt (stance `shield` off [20, 24], turn -30; was [23, 6] / -40, open claw at the chest); spreads to every pose that keeps the stance's far arm (spearman / archer keep their own arms). Hand tilt picked so the far wrist seam stays shut: 6 rat far-wrist known flags cleared from stretch-known.js. CI: paint test skips a body with a NOTE when its master is an LFS pointer; tests.yml pulls only `A018-rat-parts/reference.png` (1.4 MB per run) so CI still runs the real check. Viewer view "Idle: free arm (r3), new vs A010" (docs/screens/T026/views.json, r3-idle-free-arm.jpg). 31/31 tests. Build `t026 rat idle r3`. Awaiting the user's look; not merged.

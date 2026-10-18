@@ -22,15 +22,14 @@ export const KNOWN = {
   // T026: the rat rebuilt on A018 + A019 + A022 (every A010 rat flag cleared; A022's hands cleared the near wrist flags)
   // T026 r2 + A022 (round 2 re-import)
   'rat | arms straight up | torso / arm-near-upper': [6.8, RAT_UP],
-  'rat | hand-near-grip-overhand | arm-near-lower / hand-near': [2.3, RAT_FAR_WRIST],
   'rat | Rat Spearman: rat-spear (current grip) | torso / arm-near-upper': [3.5, RAT_SHOULDER],
   'rat | Rat Spearman: rat-spear (current grip) | arm-far-lower / hand-far': [10.5, RAT_FAR_WRIST],
   'rat | Rat Archer: rat-bow (current grip) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
-  'rat | Rat Raider: rat-cutlass (overhand) | torso / arm-near-upper': [2.5, RAT_SHOULDER],
   'rat | Rat Spearman: rat-spear (overhand) | torso / arm-near-upper': [3.5, RAT_SHOULDER],
   'rat | Rat Spearman: rat-spear (overhand) | arm-far-lower / hand-far': [10.5, RAT_FAR_WRIST],
   'rat | Rat Archer: rat-bow (overhand) | arm-far-lower / hand-far': [3.3, RAT_FAR_WRIST],
   'rat | Rat Archer: rat-bow (overhand) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
+  'rat | Rat Raider: rat-cutlass (underhand) | torso / arm-near-upper': [2.8, RAT_SHOULDER],   // T026 r4 stance (the cutlass guard)
   'rat | Rat Spearman: rat-spear (underhand) | torso / arm-near-upper': [4.8, RAT_SHOULDER],
   'rat | Rat Spearman: rat-spear (underhand) | arm-far-lower / hand-far': [8.8, RAT_FAR_WRIST],
   'rat | Rat Archer: rat-bow (underhand) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
@@ -38,9 +37,8 @@ export const KNOWN = {
   'rat | Rat Spearman: rat-spear (reverse) | arm-far-lower / hand-far': [8.8, RAT_FAR_WRIST],
   'rat | Rat Archer: rat-bow (reverse) | torso / arm-near-upper': [2.8, RAT_SHOULDER],
   'rat | crouch: jump squat (floor) | arm-far-lower / hand-far': [3.0, RAT_FAR_WRIST],
-  'rat | lying (floor) | torso / arm-near-upper': [7.0, RAT_SHOULDER],
+  'rat | lying (floor) | torso / arm-near-upper': [8.3, RAT_SHOULDER],   // T026 r4: 7.0 before the new stance
   'rat | lying (floor) | arm-near-lower / hand-near': [7.0, RAT_FAR_WRIST],
-  'rat | 1.4x (floor) | leg-near-lower / foot-near': [2.1, 'only at the 1.4x size step (variety is +-4%): a touch more overlap at the near ankle, low priority'],
   'mouse | near knee 90 | leg-near-upper / leg-near-lower': [6.0, KNEE_CAP],
   'mouse | near knee 150 | leg-near-upper / leg-near-lower': [3.3, KNEE_CAP],
   'mouse | near elbow 90 | arm-near-upper / arm-near-lower': [3.3, ELBOW_CAP],
