@@ -6,15 +6,24 @@
 // T028 r2: knee, waist (the belt cover over both; B hides the belt and skips) and shoulder (`top` may list several pieces:
 // the rule holds when any one drawn is over the under piece: the torso's edge, or the shoulder cap where the view brings
 // the arm in front). The hand-table check (5b.2): HAND_TABLES below.
+// T028 r3 (user, 2026-10-18): a rule with `side` holds only in those views: 'front' = three-quarter, side and front
+// (and H / LB), 'back' = the chest turned away or back (BQ, B) or the back hips (B): from behind the tail lies over the seat.
+// by: 'pelvis' = judged by the hip view alone (the hip rules: BQ keeps the three-quarter hips and their legs' depth).
+export const BACK_VIEWS = ['BQ', 'B'];
+export const sideOf = (swap, by) => ((by !== 'pelvis' && BACK_VIEWS.includes(swap?.['@view.torso'])) || BACK_VIEWS.includes(swap?.['@view.pelvis']) ? 'back' : 'front');
 export const COVERS = [
   { joint: 'ankle', top: 'leg-{s}-lower', under: 'foot-{s}', rule: 'shin over foot' },
   { joint: 'knee', top: 'leg-{s}-lower', under: 'leg-{s}-upper', rule: 'shin over thigh' },
   { joint: 'elbow', top: 'arm-{s}-lower', under: 'arm-{s}-upper', rule: 'forearm over upper arm' },
   { joint: 'wrist', top: 'arm-{s}-lower', under: 'hand-{s}', rule: 'hand under its forearm or bracer', overlay: true },
   { joint: 'shoulder', top: ['torso', 'shoulder-{s}'], under: 'arm-{s}-upper', rule: 'torso edge or shoulder cap over the upper arm' },
-  { joint: 'tail root', top: 'pelvis', under: 'tail', rule: 'pelvis over the tail root' },
-  { joint: 'near hip', top: 'torso', under: 'leg-near-upper', rule: 'near thigh under the torso' },
-  { joint: 'far hip', top: 'pelvis', under: 'leg-far-upper', rule: 'pelvis over the far thigh' },
+  { joint: 'tail root', top: 'pelvis', under: 'tail', rule: 'pelvis over the tail root', side: 'front' },
+  { joint: 'tail root', top: 'tail', under: 'pelvis', rule: 'tail over pelvis (seen from behind)', side: 'back' },
+  { joint: 'near hip', top: 'torso', under: 'leg-near-upper', rule: 'near thigh under the torso', side: 'front', by: 'pelvis' },
+  { joint: 'far hip', top: 'pelvis', under: 'leg-far-upper', rule: 'pelvis over the far thigh', side: 'front', by: 'pelvis' },
+  // from behind the legs trade depth (B: the far leg is nearest): the mirrored pair
+  { joint: 'near hip', top: 'pelvis', under: 'leg-near-upper', rule: 'pelvis over the near thigh (seen from behind)', side: 'back', by: 'pelvis' },
+  { joint: 'far hip', top: 'torso', under: 'leg-far-upper', rule: 'far thigh under the torso (seen from behind)', side: 'back', by: 'pelvis' },
   { joint: 'waist (chest)', top: 'belt', under: 'torso', rule: 'belt cover over the torso\'s lower edge' },
   { joint: 'waist (hips)', top: 'belt', under: 'pelvis', rule: 'belt cover over the pelvis top' },
 ];

@@ -7,6 +7,8 @@
 // T028 r2: A023 rounds 1-2 imported: every torso / pelvis view (rat-raider-views.js), front / shout / drink heads, shoulder
 // caps (`cap`), the belt (pelvis child at 640 over the torso; hidden in B), longer feet and thighs (hidden tops), the back
 // view's limb cuts, palms / cups / point, smear and mouth arms, and the split grips (`under`: render/grip-split.js).
+// T028 r3: A023 round 3 imported the same way (angled back feet and their shins, whole back thumb, back pelvis and far
+// thigh without baked tail paint, torso-away redrawn): only those swaps' offsets moved; BQ points in rat-raider-views.js.
 // rest 0 = the A017 master: standing straight, arms hanging, fists closed (all his poses start from there). Points are in
 // each image's own px; a joint's attach (on the parent) and pivot (on the child) are the same master canvas point.
 // order = the standard's depth bands; T026 r2: the near upper arm (and its whole-arm keys) at 590, under the torso's vest
@@ -95,11 +97,11 @@ export default {
   parts: {
     'pelvis': { img: P + 'pelvis.png', pivot: [106.0, 62.0], order: 400, swaps: { 'pelvis-side': { img: P + 'pelvis-side.png', offset: [22.4, 10.0] },
         'pelvis-front': { img: P + 'pelvis-front.png', offset: [-19.2, 10.0] },
-        'pelvis-back': { img: P + 'pelvis-back.png', offset: [6.8, 4.0] } } },
+        'pelvis-back': { img: P + 'pelvis-back.png', offset: [6.4, 4.0] } } },
     'torso': { img: P + 'torso.png', parent: 'pelvis', attach: [106.8, 30.8], pivot: [126.4, 150.4], order: 600, swaps: { 'torso-side': { img: P + 'torso-side.png', offset: [41.6, -8.0] },
         'torso-back': { img: P + 'torso-back.png', offset: [-77.6, -18.4] },
         'torso-front': { img: P + 'torso-front.png', offset: [8.0, 1.6] },
-        'torso-away': { img: P + 'torso-away.png', offset: [16.0, -16.4] },
+        'torso-away': { img: P + 'torso-away.png', offset: [16.0, -14.4] },
         'torso-hunched': { img: P + 'torso-hunched.png', offset: [20.0, 9.6] },
         'torso-lean-back': { img: P + 'torso-lean-back.png', offset: [6.0, -14.4] } } },
     'head': { img: P + 'head.png', parent: 'torso', attach: [168.0, 77.6], pivot: [152.0, 240.0], order: 700, swaps: { 'head-attack': { img: P + 'head-attack.png', offset: [-2.0, 0.0] },
@@ -127,7 +129,7 @@ export default {
         'hand-near-palm': { img: P + 'hand-near-palm.png', offset: [7.6, 5.2] },
         'hand-near-cup': { img: P + 'hand-near-cup.png', offset: [5.6, 5.2] },
         'hand-near-point': { img: P + 'hand-near-point.png', offset: [9.6, 5.2] },
-        'hand-near-back': { img: P + 'hand-near-back.png', offset: [10.8, -9.6] },
+        'hand-near-back': { img: P + 'hand-near-back.png', offset: [2.8, -9.6] },
         'hand-near-grip-under': { img: P + 'hand-near-grip-under.png', offset: [12.8, 51.2] },
         'hand-near-grip-overhand-under': { img: P + 'hand-near-grip-overhand-under.png', offset: [52.8, 39.2] },
         'hand-near-pinch-under': { img: P + 'hand-near-pinch-under.png', offset: [23.6, 51.2] } } },
@@ -149,17 +151,17 @@ export default {
     'leg-near-upper': { img: P + 'leg-near-upper.png', parent: 'pelvis', attach: [51.6, 86.0], pivot: [71.2, 32.0], order: 510, swaps: { 'leg-near-kneeling': { img: P + 'leg-near-kneeling.png', offset: [-88.0, -28.0], hide: ["leg-near-lower", "foot-near"] },
         'leg-near-kneeup': { img: P + 'leg-near-kneeup.png', offset: [24.8, -38.4], hide: ["leg-near-lower", "foot-near"] },
         'leg-near-upper-back': { img: P + 'leg-near-upper-back.png', offset: [17.6, -4.0] } } },
-    'leg-near-lower': { img: P + 'leg-near-lower.png', parent: 'leg-near-upper', attach: [49.6, 122.0], pivot: [35.6, 23.6], order: 520, swaps: { 'leg-near-lower-back': { img: P + 'leg-near-lower-back.png', offset: [7.6, 9.6] } } },
+    'leg-near-lower': { img: P + 'leg-near-lower.png', parent: 'leg-near-upper', attach: [49.6, 122.0], pivot: [35.6, 23.6], order: 520, swaps: { 'leg-near-lower-back': { img: P + 'leg-near-lower-back.png', offset: [9.6, 9.6] } } },
     'foot-near': { img: P + 'foot-near.png', parent: 'leg-near-lower', attach: [27.2, 66.8], pivot: [31.6, 69.2], order: 515, swaps: { 'foot-near-toe': { img: P + 'foot-near-toe.png', offset: [-5.2, 0.0] },
         'foot-near-heel': { img: P + 'foot-near-heel.png', offset: [-2.4, -5.6] },
         'foot-near-out': { img: P + 'foot-near-out.png', offset: [-1.6, -22.4] },
-        'foot-near-back': { img: P + 'foot-near-back.png', offset: [-8.8, 0.0] } } },
+        'foot-near-back': { img: P + 'foot-near-back.png', offset: [-0.4, 0.0] } } },
     'leg-far-upper': { img: P + 'leg-far-upper.png', parent: 'pelvis', attach: [156.0, 86.0], pivot: [47.2, 60.0], order: 210, swaps: { 'leg-far-folded': { img: P + 'leg-far-folded.png', offset: [-2.8, 0.0], hide: ["leg-far-lower", "foot-far"] },
-        'leg-far-upper-back': { img: P + 'leg-far-upper-back.png', offset: [-8.4, 25.2] } } },
-    'leg-far-lower': { img: P + 'leg-far-lower.png', parent: 'leg-far-upper', attach: [54.4, 150.0], pivot: [31.2, 23.6], order: 220, swaps: { 'leg-far-lower-back': { img: P + 'leg-far-lower-back.png', offset: [-0.8, 9.6] } } },
+        'leg-far-upper-back': { img: P + 'leg-far-upper-back.png', offset: [-6.8, 25.2] } } },
+    'leg-far-lower': { img: P + 'leg-far-lower.png', parent: 'leg-far-upper', attach: [54.4, 150.0], pivot: [31.2, 23.6], order: 220, swaps: { 'leg-far-lower-back': { img: P + 'leg-far-lower-back.png', offset: [-6.8, 9.6] } } },
     'foot-far': { img: P + 'foot-far.png', parent: 'leg-far-lower', attach: [31.2, 74.8], pivot: [33.6, 77.2], order: 215, swaps: { 'foot-far-toe': { img: P + 'foot-far-toe.png', offset: [-2.0, 0.0] },
         'foot-far-heel': { img: P + 'foot-far-heel.png', offset: [-1.2, 0.0] },
-        'foot-far-back': { img: P + 'foot-far-back.png', offset: [-8.4, 0.0] } } },
+        'foot-far-back': { img: P + 'foot-far-back.png', offset: [-13.2, 0.0] } } },
     'tail': { img: P + 'tail.png', parent: 'pelvis', attach: [-6.8, 94.0], pivot: [34.4, 30.8], order: 300 },
     'tail-2': { img: P + 'tail-2.png', parent: 'tail', attach: [14.4, 98.0], pivot: [58.8, 16.0], order: 310 },
     'tail-3': { img: P + 'tail-3.png', parent: 'tail-2', attach: [22.0, 66.8], pivot: [48.0, 41.2], order: 320 },

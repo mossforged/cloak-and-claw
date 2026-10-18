@@ -1,8 +1,8 @@
 // T026 r5 anatomy rule test (rig standard 5b.1): for every rigged fighter and every frame key of every viewer clip (the
 // pose seam test's frames: tools/bench/pose-seams.js poseFrames), each cover pair in src/data/rigs/anatomy.js holds on
 // the draw list as drawn. A break fails with the fighter, the frame and the pair named, unless the rig's pair is waived.
-import { poseFrames } from '../tools/bench/pose-seams.js';
-import { coverPairs, WAIVED, HAND_TABLES, GRIP_DRAWING } from '../src/data/rigs/anatomy.js';
+import { poseFrames, rehearsalFrames } from '../tools/bench/pose-seams.js';
+import { coverPairs, WAIVED, HAND_TABLES, GRIP_DRAWING, sideOf } from '../src/data/rigs/anatomy.js';
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { MODELS, rigOf } from '../src/viewer/models.js';
 
@@ -13,12 +13,13 @@ const overlayOrders = (rig, part) => Object.values(rig.grips ?? {}).map((g) => g
 for (const id of MODELS) {
   const rig = rigOf(id), pairs = coverPairs(rig);
   check(pairs.some((p) => p.joint === 'near ankle'), `${id}: the cover rules find its parts`);
-  for (const fk of poseFrames(id)) {
+  for (const fk of [...poseFrames(id), ...rehearsalFrames(id)]) {   // T028 r3: + the rehearsal keys (the only B frames)
     frames++;
     const by = Object.fromEntries(fk.cell.L.filter((e) => e.m && !e.line).map((e) => [e.name, e]));
     for (const p of pairs) {
       const ts = p.tops.map((n) => by[n]).filter(Boolean), u = by[p.under], t = ts[0];
       if (!t || !u) continue;   // a whole-limb swap or a view hides one of the pair
+      if (p.side && p.side !== sideOf(fk.cell.swap, p.by)) continue;   // T028 r3: a rule for the front or back views only
       if (p.overlay && overlayOrders(rig, p.under).includes(u.order)) continue;
       checked++;
       if (ts.some((x) => x.order > u.order)) continue;
@@ -64,6 +65,9 @@ for (const id of MODELS) {
     }
   }
 }
+// T028 r3: the tail rule splits by view, and the rat's B and BQ frames are checked (the rehearsal sheet)
+check(coverPairs(rigOf('rat-raider')).filter((p) => p.joint === 'tail root').map((p) => p.side).join() === 'front,back', 'tail root rule split: pelvis over (front), tail over (back)');
+check(poseFrames('rat-raider', ['ratSlash']).some((f) => sideOf(f.cell.swap) === 'back') && rehearsalFrames('rat-raider').some((f) => f.cell.swap['@view.pelvis'] === 'B'), 'the rat\'s BQ and B frames are in the check');
 // the rat itself waives nothing
 check(Object.keys(WAIVED).every((k) => k.startsWith('mouse-fighter |')), 'only the mouse (rebuild pending) has waivers');
 for (const k of Object.keys(WAIVED)) if (!used.has(k)) console.log(`NOTE waiver no longer needed: ${k}`);
