@@ -76,3 +76,5 @@ Code's exposed-hidden-paint check (T028 round 3) found hidden paint showing in n
 4. **Tail root in the back view** (collected above): a finished end on the seat.
 5. **Pass bar** (Code measures it after import): zero exposure and cut-edge flags in the idle, the walk, the turning slash and the turn-around; every other move under 20 game px² per piece. Same canvas, same pivots, same visible paint: change only what's hidden and the cut edges.
 Deliver on `a023-r4-rat-hidden-paint`, with before/after crops of each piece's hidden area in `docs/screens/A023/r4-*.jpg`.
+
+**Round 4 delivered and merged (2026-10-18).** Pass bar corrected by the lead after Art's handoff: the exposure check flags unfinished paint (flat or straight-cut regions), not finished material that shows (T028 round 4 item 6).

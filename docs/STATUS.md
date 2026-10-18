@@ -1,12 +1,12 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T026 new rat import (rounds 1-5, 2026-10-18). Last art task merged: A023 round 3 (back-view fixes, 2026-10-18). Older notes in `docs/history.md`.
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T026 new rat import (rounds 1-5, 2026-10-18). Last art task merged: A023 round 4 (finished hidden paint, 2026-10-18). Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
 **The user called this "the final test of this type of rigging" (2026-10-18).** Anatomy rules: rig standard 5b.
 1. **User:** next look: the turning slash in motion (T028 round 3), where the turned-away chest is judged as the wind-up twist.
-2. **Code:** T028 round 4: holds from the user's grip lines + grip alignment test. Then A023 round 4's import, then T029 (every rehearsal move).
-3. **Art:** A023 round 4 (every hidden area finished, pass bar; back-view tail root).
+2. **Code:** T028 round 4: holds from the user's grip lines + alignment test; A023 round 4 imported; exposure check flags only unfinished paint; pass bar reported. Then T029 (every rehearsal move).
+3. **Art:** idle until Code's pass-bar report.
 4. **Lead:** review A023 round 3 and T028 round 2 (round 3's drawings imported before the user's look); T029 packet; then A020 gear; then the mouse.
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
@@ -27,7 +27,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T028-views-and-depth.md` round 4.
-- Art: `docs/tasks/A023-rat-complete-kit.md` round 4.
+- Art: idle (round 4 merged).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -45,6 +45,7 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+22026-10-18 lead: merged A023 round 4 (61 cuts: finished hidden paint, outlined ends, rear tail root; scope clean). Art's handoff showed the r3 exposure check can't tell finished paint from blocks: pass bar corrected (flag unfinished paint only, calibrated on r3 vs r4). Added to T028 round 4 as items 5-7.
 22026-10-18 lead: reviewed T028 round 3 (36/36, CI green; exposure check found hidden paint in nearly every move) -> A023 round 4 sent. User: holds misaligned, proposed drawing the grip lines himself; built the Rat Grip Lines page, he drew all 25; lines in `docs/design/rigs/grip-lines-rat.json`, fit check `docs/screens/anatomy/grip-lines-fitcheck.jpg`; T028 round 4 uses them.
 2026-10-18 code: T028 round 3 on `t028-views-and-depth` (main merged): exposed-hidden-paint check (`tools/bench/exposure.js`, `tests/exposure.test.mjs`: hidden zone = paint a joint's cover hides in the view's rest assembly; flag > 4 game px² on top; straight cut runs >= 4 px off the reference outline, Q = A017 master, B = A017 master-back, CI pulls it); 212 known flags with fixes, rat repair list `docs/screens/T028/r3-exposure-list.md` + worst-frame strips; A023 round 3 imported; tail over the pelvis in B/BQ (anatomy rules split by view, hips mirrored in B; B tail root on the seat under the flap). 36/36. Build `t028 views r3`. Not merged.
 2026-10-18 code: T028 r3 left: no pose or draw-order fixes (none of the flags is a draw-order cause; the far open hand and the cast arm wait on T029 poses); poses depend on the sim's global fighter-id counter (idle phase), so the seam and exposure tests must run in the writers' order; review links docs/screens/T028/views.json (turning slash, rehearsal sheet) + r3-back-tail.jpg.
