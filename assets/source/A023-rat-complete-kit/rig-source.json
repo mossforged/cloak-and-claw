@@ -164,6 +164,46 @@
       ],
       "band": 640,
       "coverJoint": "waist"
+    },
+    "hand-near": {
+      "img": "hand-near.png",
+      "parent": "arm-near-lower",
+      "pivot": [
+        401,
+        1440
+      ],
+      "band": 815,
+      "source": "A023-rat-complete-kit"
+    },
+    "arm-far-upper": {
+      "img": "arm-far-upper.png",
+      "parent": "torso",
+      "pivot": [
+        960,
+        1179
+      ],
+      "band": 110,
+      "source": "A023-rat-complete-kit"
+    },
+    "tail-1": {
+      "img": "tail-1.png",
+      "parent": "pelvis",
+      "pivot": [
+        492,
+        1540
+      ],
+      "band": 300,
+      "source": "A023-rat-complete-kit"
+    },
+    "scarf-tail": {
+      "img": "scarf-tail.png",
+      "parent": "torso",
+      "pivot": [
+        510,
+        1030
+      ],
+      "band": 330,
+      "source": "A023-rat-complete-kit"
     }
   },
   "swaps": {
@@ -526,8 +566,8 @@
           1520
         ],
         "tail_root": [
-          490,
-          1525
+          780,
+          1505
         ]
       }
     },
@@ -1182,6 +1222,80 @@
       ],
       "source": "A023-rat-complete-kit",
       "handFace": "palm"
+    },
+    "hand-near-fist": {
+      "img": "hand-near-fist.png",
+      "of": "hand-near",
+      "source": "A023-rat-complete-kit"
+    },
+    "hand-near-open": {
+      "img": "hand-near-open.png",
+      "of": "hand-near",
+      "source": "A023-rat-complete-kit"
+    },
+    "head-back": {
+      "img": "head-back.png",
+      "of": "head",
+      "source": "A023-rat-complete-kit"
+    },
+    "arm-far-guard": {
+      "img": "arm-far-guard.png",
+      "of": "arm-far-upper",
+      "pivot": [
+        960,
+        1179
+      ],
+      "hide": [
+        "arm-far-lower",
+        "hand-far"
+      ],
+      "jointCenters": [
+        [
+          960,
+          1179
+        ],
+        [
+          1040,
+          1328
+        ],
+        [
+          875,
+          1230
+        ]
+      ],
+      "itemGrip": [
+        780.87,
+        1186.5
+      ],
+      "slotDirection": [
+        [
+          809.12,
+          1166.86
+        ],
+        [
+          752.63,
+          1206.13
+        ]
+      ],
+      "source": "A023-rat-complete-kit"
+    },
+    "tail-root-back": {
+      "img": "tail-root-back.png",
+      "of": "tail-1",
+      "pivot": [
+        492,
+        1540
+      ],
+      "source": "A023-rat-complete-kit",
+      "rootEndpoint": [
+        492,
+        1540
+      ],
+      "nextJoint": [
+        442,
+        1708
+      ],
+      "use": "B/BQ only: finished attachment on top of seat and thighs; Q tail-1 remains separate."
     }
   },
   "grips": {
@@ -1832,8 +1946,8 @@
             1520
           ],
           "tail_root": [
-            490,
-            1525
+            780,
+            1505
           ]
         }
       }
@@ -1846,7 +1960,8 @@
     "All hand swaps share original hand pivots. Open-palm/cup/point grip records are contact sockets rather than weapon slots. Smear grips use fist centers; verify blade occlusion in viewer.",
     "New view/key paint is reference-guided, not pixel-identical master paint. Seam repair foreground pixels are unchanged.",
     "Round 2: belt draws above torso; grip under-pieces below weapon and solid face above. B viewSwaps supplies rear legs/heels and arms. Same inherited pivots. Runtime rehearsal remains T029.",
-    "Round 3: rear feet recut from A017 with toes angled right; rear near hand recut to retain whole thumb. B tail bands 300/310/320 UNDER pelvis 400 in every view (5b.1 supersedes old back-tail-in-front note). torso-away redrawn and anchors remeasured; pivots unchanged. Static proofs r3-back/r3-turn. Runtime import required. Matching rear shin recuts use A017 paint; local cloth inpaint removes baked tail from seat/thigh. Back tail_root now (490,1525)."
+    "Round 3: rear feet recut from A017 with toes angled right; rear near hand recut to retain whole thumb. B tail bands 300/310/320 UNDER pelvis 400 in every view (5b.1 supersedes old back-tail-in-front note). torso-away redrawn and anchors remeasured; pivots unchanged. Static proofs r3-back/r3-turn. Runtime import required. Matching rear shin recuts use A017 paint; local cloth inpaint removes baked tail from seat/thigh. Back tail_root now (490,1525).",
+    "Round 4 supersedes round 3 tail rules: B/BQ tail root draws on the seat, above thigh bands, finished tail-root-back on the inherited tail-1 pivot. All new part/pose hidden material is generated, uniformly registered, accepted through native overlap/cut-end masks; original paint outside masks retained. See round4Validation and HANDOFF for measured limitations. No runtime pass is claimed."
   ],
   "viewBands": {
     "Q": {
@@ -1900,7 +2015,10 @@
       "leg-near-lower": 520,
       "foot-far": 205,
       "leg-far-lower": 220,
-      "belt": 640
+      "belt": 640,
+      "tail-1": 550,
+      "tail-2": 560,
+      "tail-3": 570
     },
     "B": {
       "arm-near-upper": 110,
@@ -1917,9 +2035,9 @@
       "leg-far-upper": 510,
       "leg-far-lower": 520,
       "foot-far": 505,
-      "tail-1": 300,
-      "tail-2": 310,
-      "tail-3": 320,
+      "tail-1": 550,
+      "tail-2": 560,
+      "tail-3": 570,
       "belt": 640
     }
   },
@@ -2438,7 +2556,11 @@
       "hand-near": "hand-near-back",
       "arm-far-upper": "arm-far-upper-back",
       "arm-far-lower": "arm-far-lower-back",
-      "hand-far": "hand-far-back"
+      "hand-far": "hand-far-back",
+      "tail-1": "tail-root-back"
+    },
+    "BQ": {
+      "tail-1": "tail-root-back"
     }
   },
   "viewJointPositions": {
@@ -2490,6 +2612,20 @@
       "foot-far": [
         617,
         1873
+      ],
+      "tail-1": [
+        780,
+        1505
+      ]
+    },
+    "BQ": {
+      "pelvis": [
+        774,
+        1460
+      ],
+      "tail-1": [
+        560,
+        1505
       ]
     }
   },
@@ -2676,5 +2812,1674 @@
       ],
       "note": "Static proof uses Q hips; all remaining limbs retain Q setup plus view anchors."
     }
+  },
+  "round4Tail": {
+    "drawing": "tail-root-back",
+    "sourcePivot": [
+      492,
+      1540
+    ],
+    "continuationJoint": [
+      442,
+      1708
+    ],
+    "B": {
+      "seatAnchor": [
+        780,
+        1505
+      ],
+      "bands": [
+        550,
+        560,
+        570
+      ]
+    },
+    "BQ": {
+      "seatAnchor": [
+        560,
+        1505
+      ],
+      "bands": [
+        550,
+        560,
+        570
+      ],
+      "pelvisDrawing": "pelvis"
+    },
+    "importNote": "BQ uses the existing Q pelvis drawing; explicitly apply the BQ tail drawing / attachment with the BQ torso view. The generic importer only emits non-arm viewSwaps for a pelvis view that exists, so Code must carry these source settings into the current bodyViews. Do not retain round-3 300/310/320 tail bands for B/BQ."
+  },
+  "round4Validation": {
+    "drawings": 61,
+    "checked": {
+      "pelvis": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 111340,
+        "passed": true
+      },
+      "torso": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 75837,
+        "passed": true
+      },
+      "arm-near-upper": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 44324,
+        "passed": true
+      },
+      "hand-near": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 6209,
+        "passed": true
+      },
+      "arm-far-upper": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 23911,
+        "passed": true
+      },
+      "hand-far": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 18028,
+        "passed": true
+      },
+      "leg-near-upper": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 28519,
+        "passed": true
+      },
+      "foot-near": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 21609,
+        "passed": true
+      },
+      "leg-far-upper": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 41563,
+        "passed": true
+      },
+      "foot-far": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 21310,
+        "passed": true
+      },
+      "tail-1": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 9297,
+        "passed": true
+      },
+      "scarf-tail": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 9902,
+        "passed": true
+      },
+      "hand-near-fist": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 6129,
+        "passed": true
+      },
+      "hand-near-open": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 4269,
+        "passed": true
+      },
+      "hand-far-fist": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 18028,
+        "passed": true
+      },
+      "hand-far-open": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 14705,
+        "passed": true
+      },
+      "hand-far-shield": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 16869,
+        "passed": true
+      },
+      "torso-side": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 45075,
+        "passed": true
+      },
+      "torso-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 68763,
+        "passed": true
+      },
+      "head-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 2518,
+        "passed": true
+      },
+      "arm-near-cocked": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 26651,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "arm-near-raised": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 25361,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "arm-far-raised-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 17192,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "arm-far-guard": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 14591,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "leg-near-kneeling": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 50195,
+        "passed": true
+      },
+      "leg-near-kneeup": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 78978,
+        "passed": true
+      },
+      "leg-far-folded": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 58560,
+        "passed": true
+      },
+      "foot-near-toe": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 11164,
+        "passed": true
+      },
+      "foot-far-toe": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 10762,
+        "passed": true
+      },
+      "torso-front": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 54673,
+        "passed": true
+      },
+      "torso-away": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 40336,
+        "passed": true
+      },
+      "torso-hunched": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 72378,
+        "passed": true
+      },
+      "torso-lean-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 47711,
+        "passed": true
+      },
+      "pelvis-side": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 120021,
+        "passed": true
+      },
+      "pelvis-front": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 122927,
+        "passed": true
+      },
+      "pelvis-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 116488,
+        "passed": true
+      },
+      "arm-far-raised": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 10159,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "arm-near-smear-h": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 38029,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "arm-near-smear-o": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 60247,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "hand-near-palm": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 1850,
+        "passed": true
+      },
+      "hand-far-palm": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 3001,
+        "passed": true
+      },
+      "foot-near-heel": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 14462,
+        "passed": true
+      },
+      "foot-far-heel": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 11308,
+        "passed": true
+      },
+      "foot-near-out": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 20114,
+        "passed": true
+      },
+      "arm-near-mouth": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 89324,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "hand-near-cup": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 6680,
+        "passed": true
+      },
+      "hand-far-cup": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 5408,
+        "passed": true
+      },
+      "hand-near-point": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 5516,
+        "passed": true
+      },
+      "leg-near-upper-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 36112,
+        "passed": true
+      },
+      "leg-far-upper-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 32508,
+        "passed": true
+      },
+      "foot-near-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 21873,
+        "passed": true
+      },
+      "foot-far-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 21386,
+        "passed": true
+      },
+      "arm-near-upper-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 57624,
+        "passed": true
+      },
+      "arm-near-lower-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 8714,
+        "passed": true
+      },
+      "hand-near-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 4058,
+        "passed": true
+      },
+      "arm-far-upper-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 42183,
+        "passed": true
+      },
+      "arm-far-lower-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 6636,
+        "passed": true
+      },
+      "hand-far-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 3497,
+        "passed": true
+      },
+      "shoulder-near": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 3196,
+        "passed": true
+      },
+      "shoulder-far": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "changedSourcePixels": 1692,
+        "passed": true
+      },
+      "tail-root-back": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "greenCorner": [
+          0,
+          255,
+          0
+        ],
+        "pivotUnchanged": true,
+        "passed": true
+      }
+    },
+    "failed": [],
+    "gripMetadataUnchanged": true,
+    "maskedEditDiagnostics": {
+      "pelvis": {
+        "donor": "pelvis",
+        "changedPixels": 111340,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          460,
+          1006,
+          1058,
+          1803
+        ]
+      },
+      "torso": {
+        "donor": "torso",
+        "changedPixels": 75837,
+        "outsideMaskChangedPixels": 1875,
+        "maskBounds": [
+          456,
+          600,
+          1297,
+          1600
+        ]
+      },
+      "arm-near-upper": {
+        "donor": "arm-near-upper",
+        "changedPixels": 44324,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          367,
+          1029,
+          701,
+          1391
+        ]
+      },
+      "hand-near": {
+        "donor": "hand-near",
+        "changedPixels": 6209,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          344,
+          1248,
+          546,
+          1432
+        ]
+      },
+      "arm-far-upper": {
+        "donor": "arm-far-upper",
+        "changedPixels": 23911,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          815,
+          1034,
+          1119,
+          1410
+        ]
+      },
+      "hand-far": {
+        "donor": "hand-far",
+        "changedPixels": 18028,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1483
+        ]
+      },
+      "leg-near-upper": {
+        "donor": "leg-near-upper",
+        "changedPixels": 28519,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1809
+        ]
+      },
+      "foot-near": {
+        "donor": "foot-near",
+        "changedPixels": 21609,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1905
+        ]
+      },
+      "leg-far-upper": {
+        "donor": "leg-far-upper",
+        "changedPixels": 41563,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1809
+        ]
+      },
+      "foot-far": {
+        "donor": "foot-far",
+        "changedPixels": 21310,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1956
+        ]
+      },
+      "tail-1": {
+        "donor": "tail-1",
+        "changedPixels": 9297,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          295,
+          1305,
+          1016,
+          1857
+        ]
+      },
+      "scarf-tail": {
+        "donor": "scarf-tail",
+        "changedPixels": 9902,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          460,
+          1006,
+          1050,
+          1467
+        ]
+      },
+      "hand-near-fist": {
+        "donor": "hand-near",
+        "changedPixels": 6129,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          344,
+          1248,
+          546,
+          1431
+        ]
+      },
+      "hand-near-open": {
+        "donor": "hand-near-open",
+        "changedPixels": 4269,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          310,
+          1399,
+          514,
+          1475
+        ]
+      },
+      "hand-far-fist": {
+        "donor": "hand-far",
+        "changedPixels": 18028,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1483
+        ]
+      },
+      "hand-far-open": {
+        "donor": "hand-far-open",
+        "changedPixels": 14705,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1483
+        ]
+      },
+      "hand-far-shield": {
+        "donor": "hand-far",
+        "changedPixels": 16869,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1483
+        ]
+      },
+      "torso-side": {
+        "donor": "torso-side",
+        "changedPixels": 45075,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          490,
+          520,
+          1287,
+          1600
+        ]
+      },
+      "torso-back": {
+        "donor": "torso-back",
+        "changedPixels": 68763,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          509,
+          640,
+          1241,
+          1600
+        ]
+      },
+      "head-back": {
+        "donor": "head-back",
+        "changedPixels": 2518,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          686,
+          1000,
+          746,
+          1046
+        ]
+      },
+      "arm-near-cocked": {
+        "donor": "arm-near-cocked",
+        "changedPixels": 26651,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          410,
+          1029,
+          701,
+          1320
+        ]
+      },
+      "arm-near-raised": {
+        "donor": "arm-near-raised",
+        "changedPixels": 25361,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          410,
+          1029,
+          701,
+          1320
+        ]
+      },
+      "arm-far-raised-back": {
+        "donor": "arm-far-raised-back",
+        "changedPixels": 17192,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          815,
+          1034,
+          1106,
+          1325
+        ]
+      },
+      "arm-far-guard": {
+        "donor": "arm-far-guard",
+        "changedPixels": 14591,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          815,
+          1034,
+          1106,
+          1325
+        ]
+      },
+      "leg-near-kneeling": {
+        "donor": "leg-near-kneeling",
+        "changedPixels": 50195,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1882
+        ]
+      },
+      "leg-near-kneeup": {
+        "donor": "leg-near-kneeup",
+        "changedPixels": 78978,
+        "outsideMaskChangedPixels": 31,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1880
+        ]
+      },
+      "leg-far-folded": {
+        "donor": "leg-far-folded",
+        "changedPixels": 58560,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1773
+        ]
+      },
+      "foot-near-toe": {
+        "donor": "foot-near",
+        "changedPixels": 11164,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1801
+        ]
+      },
+      "foot-far-toe": {
+        "donor": "foot-far",
+        "changedPixels": 10762,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1801
+        ]
+      },
+      "torso-front": {
+        "donor": "torso-front",
+        "changedPixels": 54673,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          390,
+          469,
+          1189,
+          1600
+        ]
+      },
+      "torso-away": {
+        "donor": "torso-away",
+        "changedPixels": 40336,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          425,
+          580,
+          1222,
+          1600
+        ]
+      },
+      "torso-hunched": {
+        "donor": "torso-hunched",
+        "changedPixels": 72378,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          475,
+          620,
+          1272,
+          1600
+        ]
+      },
+      "torso-lean-back": {
+        "donor": "torso-lean-back",
+        "changedPixels": 47711,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          340,
+          480,
+          1137,
+          1600
+        ]
+      },
+      "pelvis-side": {
+        "donor": "pelvis-side",
+        "changedPixels": 120021,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          460,
+          986,
+          1058,
+          1803
+        ]
+      },
+      "pelvis-front": {
+        "donor": "pelvis-front",
+        "changedPixels": 122927,
+        "outsideMaskChangedPixels": 167,
+        "maskBounds": [
+          455,
+          1010,
+          1058,
+          1803
+        ]
+      },
+      "pelvis-back": {
+        "donor": "pelvis-back",
+        "changedPixels": 116488,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          266,
+          960,
+          1058,
+          1803
+        ]
+      },
+      "arm-far-raised": {
+        "donor": "arm-far-raised",
+        "changedPixels": 10159,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          460,
+          770,
+          1050,
+          1467
+        ],
+        "gripRestorationBox": [
+          868,
+          715,
+          1058,
+          905
+        ]
+      },
+      "arm-near-smear-h": {
+        "donor": "arm-near-smear-h",
+        "changedPixels": 38029,
+        "outsideMaskChangedPixels": 11,
+        "maskBounds": [
+          460,
+          1006,
+          1145,
+          1467
+        ]
+      },
+      "arm-near-smear-o": {
+        "donor": "arm-near-smear-o",
+        "changedPixels": 60247,
+        "outsideMaskChangedPixels": 1,
+        "maskBounds": [
+          460,
+          1006,
+          1050,
+          1637
+        ]
+      },
+      "hand-near-palm": {
+        "donor": "hand-near-palm",
+        "changedPixels": 1850,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          300,
+          1390,
+          535,
+          1466
+        ]
+      },
+      "hand-far-palm": {
+        "donor": "hand-far-palm",
+        "changedPixels": 3001,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          1015,
+          1390,
+          1235,
+          1466
+        ]
+      },
+      "foot-near-heel": {
+        "donor": "foot-near",
+        "changedPixels": 14462,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1801
+        ]
+      },
+      "foot-far-heel": {
+        "donor": "foot-far",
+        "changedPixels": 11308,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1801
+        ]
+      },
+      "foot-near-out": {
+        "donor": "foot-near",
+        "changedPixels": 20114,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1801
+        ]
+      },
+      "arm-near-mouth": {
+        "donor": "arm-near-mouth",
+        "changedPixels": 89324,
+        "outsideMaskChangedPixels": 1,
+        "maskBounds": [
+          460,
+          934,
+          1076,
+          1468
+        ]
+      },
+      "hand-near-cup": {
+        "donor": "hand-near-cup",
+        "changedPixels": 6680,
+        "outsideMaskChangedPixels": 2,
+        "maskBounds": [
+          295,
+          1395,
+          411,
+          1506
+        ]
+      },
+      "hand-far-cup": {
+        "donor": "hand-far-cup",
+        "changedPixels": 5408,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          1152,
+          1395,
+          1250,
+          1511
+        ]
+      },
+      "hand-near-point": {
+        "donor": "hand-near-point",
+        "changedPixels": 5516,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          310,
+          1400,
+          396,
+          1566
+        ]
+      },
+      "leg-near-upper-back": {
+        "donor": "leg-near-upper-back",
+        "changedPixels": 36112,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1767
+        ]
+      },
+      "leg-far-upper-back": {
+        "donor": "leg-far-upper-back",
+        "changedPixels": 32508,
+        "outsideMaskChangedPixels": 3,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1772
+        ]
+      },
+      "foot-near-back": {
+        "donor": "foot-near",
+        "changedPixels": 21873,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1819
+        ]
+      },
+      "foot-far-back": {
+        "donor": "foot-far",
+        "changedPixels": 21386,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          0,
+          0,
+          1536,
+          1819
+        ]
+      },
+      "arm-near-upper-back": {
+        "donor": "arm-near-upper-back",
+        "changedPixels": 57624,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          266,
+          0,
+          1536,
+          1426
+        ]
+      },
+      "arm-near-lower-back": {
+        "donor": "arm-near-lower-back",
+        "changedPixels": 8714,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          352,
+          1084,
+          727,
+          1516
+        ]
+      },
+      "hand-near-back": {
+        "donor": "hand-near-back",
+        "changedPixels": 4058,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          309,
+          1243,
+          559,
+          1551
+        ]
+      },
+      "arm-far-upper-back": {
+        "donor": "arm-far-upper-back",
+        "changedPixels": 42183,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          266,
+          960,
+          1045,
+          1426
+        ]
+      },
+      "arm-far-lower-back": {
+        "donor": "arm-far-lower-back",
+        "changedPixels": 6636,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          832,
+          1139,
+          1134,
+          1546
+        ]
+      },
+      "hand-far-back": {
+        "donor": "hand-far-back",
+        "changedPixels": 3497,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          938,
+          1284,
+          1188,
+          1541
+        ]
+      },
+      "shoulder-near": {
+        "donor": "shoulder-near",
+        "changedPixels": 3196,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          455,
+          1050,
+          701,
+          1116
+        ]
+      },
+      "shoulder-far": {
+        "donor": "shoulder-far",
+        "changedPixels": 1692,
+        "outsideMaskChangedPixels": 0,
+        "maskBounds": [
+          870,
+          1080,
+          1066,
+          1146
+        ]
+      }
+    },
+    "tailRoot": {
+      "drawing": "tail-root-back",
+      "sourcePivot": [
+        492,
+        1540
+      ],
+      "continuationJoint": [
+        442,
+        1708
+      ],
+      "B": {
+        "seatAnchor": [
+          780,
+          1505
+        ],
+        "bands": [
+          550,
+          560,
+          570
+        ]
+      },
+      "BQ": {
+        "seatAnchor": [
+          560,
+          1505
+        ],
+        "bands": [
+          550,
+          560,
+          570
+        ],
+        "pelvisDrawing": "pelvis"
+      },
+      "importNote": "BQ uses the existing Q pelvis drawing; explicitly apply the BQ tail drawing / attachment with the BQ torso view. The generic importer only emits non-arm viewSwaps for a pelvis view that exists, so Code must carry these source settings into the current bodyViews. Do not retain round-3 300/310/320 tail bands for B/BQ."
+    },
+    "runtime": "Not measured on this source-only branch. Code must import and run T028 exposure/cut-edge and seam checks. Pass required: zero idle/walk/turning slash/turn-around flags; every other move <20 game px\u00b2 per piece. Source QA does not establish this pass.",
+    "measurementNote": "T028 exposure.js identifies any rest-hidden pixels becoming visible, independent of RGB/material finish. Repainting can fix appearance while still producing an area flag. Narrower rounded ends are supplied; Code must report residual geometry flags after import, not waive them as a source-art pass."
   }
 }
