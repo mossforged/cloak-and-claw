@@ -110,7 +110,8 @@ Why: the lead's eye misses small anatomy (a palm where a hand's back should be, 
    | shoulder | torso edge or shoulder cap (whichever the view puts in front) | upper arm top |
    | elbow | forearm | upper arm |
    | wrist | bracer or cuff (forearm, or its own piece) | hand |
-   | tail root | pelvis | tail |
+   | tail root (three-quarter, side, front) | pelvis | tail |
+   | tail root (back, turned-away) | **tail**, its root painted as a finished end on the seat (user, 2026-10-18: "the tail should be rendered over the back view ... so it looks like it's ending on his body") | seat |
 2. **Hands: which face the camera sees** (three-quarter, facing right). Every hold names one face per hand in the rig sheet's hand table, and every pose uses the drawing for that face. Default, to be confirmed per hold in the user's anatomy pass:
    - **Near hand holding something in front of or beside the body: the back of the hand** (knuckles toward the camera), the fingers wrapping out of sight behind the handle.
    - **Far hand holding something in front of the body: the palm side**, the fingers curling round the handle toward the camera.
