@@ -109,7 +109,7 @@ function heldFor(rig, def, item) {
 }
 
 // Is screen point P covered by entry e's drawing?
-const covers = (alphaOf, e, P) => {
+export const covers = (alphaOf, e, P) => {
   const A = alphaOf(e.img);
   if (!A) return false;
   const [u, v] = apply(e.inv ??= inv(e.m), P), x = Math.floor(u), y = Math.floor(v);
@@ -146,7 +146,7 @@ function crack(alphaOf, list, J, r, out = null) {
 
 // The outer side of a bend at joint J (parent p, child entry e): away from the bisector of the directions to the parent's
 // far end and to the child's; null when the limb is nearly straight (over 150 degrees open).
-function outward(rig, by, e, p, J, alphaOf) {
+export function outward(rig, by, e, p, J, alphaOf) {
   const unit = (v) => { const n = Math.hypot(v[0], v[1]); return n > 1e-6 ? [v[0] / n, v[1] / n] : null; };
   const toParent = unit(apply(by[p].base, rig.parts[p].pivot).map((v, i) => v - J[i]));
   const gc = Object.keys(rig.parts).find((c) => rig.parts[c].parent === e.name && !ITEM.has(c) && by[c]);

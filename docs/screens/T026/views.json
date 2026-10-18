@@ -1,12 +1,15 @@
 [
-  { "label": "Idle: free arm (r3), new vs A010", "q": "f=rat-raider&anim=idle&f2=rat-raider&v2=a010&zoom=1.25" },
-  { "label": "Raider: new vs A010 (idle)", "q": "f=rat-raider&anim=idle&f2=rat-raider&v2=a010" },
-  { "label": "Raider slash (wind-up = cocked arm), slow", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=a010&speed=0.5" },
-  { "label": "Walk (toe-off push-off), slow", "q": "f=rat-raider&anim=walk&f2=rat-raider&v2=a010&speed=0.5" },
-  { "label": "Knockdown + kneeling get-up", "q": "f=rat-raider&anim=knockdown&f2=rat-raider&v2=a010&speed=0.5" },
-  { "label": "Spearman: overhand, thrust", "q": "f=rat-spearman&anim=spearThrust&f2=rat-spearman&v2=a010&speed=0.5" },
-  { "label": "Archer: full draw", "q": "f=rat-archer&anim=bowShot&f2=rat-archer&v2=a010&speed=0.5" },
-  { "label": "Squat (folded far leg)", "q": "f=rat-raider&anim=pose:jumpSquat" },
-  { "label": "Jump tuck (knee-up)", "q": "f=rat-raider&anim=pose:jump" },
-  { "label": "Arms up (raised arm)", "q": "f=rat-raider&anim=pose:cast" }
+  {"label": "r4: cutlass guard + closed gaps (idle), new vs A010, zoomed", "q": "f=rat-raider&anim=idle&f2=rat-raider&v2=a010&zoom=2"},
+  {"label": "r4: idle paused, close up (look for gaps)", "q": "f=rat-raider&anim=idle&paused=1&zoom=3"},
+  {"label": "r4: walk with the new hold, slow", "q": "f=rat-raider&anim=walk&f2=rat-raider&v2=a010&speed=0.5&zoom=1.5"},
+  {"label": "r4: slash from the new guard, slow", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=a010&speed=0.5"},
+  {"label": "Raider: new vs A010 (idle)", "q": "f=rat-raider&anim=idle&f2=rat-raider&v2=a010"},
+  {"label": "Raider slash (wind-up = cocked arm), slow", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=a010&speed=0.5"},
+  {"label": "Walk (toe-off push-off), slow", "q": "f=rat-raider&anim=walk&f2=rat-raider&v2=a010&speed=0.5"},
+  {"label": "Knockdown + kneeling get-up", "q": "f=rat-raider&anim=knockdown&f2=rat-raider&v2=a010&speed=0.5"},
+  {"label": "Spearman: overhand, thrust", "q": "f=rat-spearman&anim=spearThrust&f2=rat-spearman&v2=a010&speed=0.5"},
+  {"label": "Archer: full draw", "q": "f=rat-archer&anim=bowShot&f2=rat-archer&v2=a010&speed=0.5"},
+  {"label": "Squat (folded far leg)", "q": "f=rat-raider&anim=pose:jumpSquat"},
+  {"label": "Jump tuck (knee-up)", "q": "f=rat-raider&anim=pose:jump"},
+  {"label": "Arms up (raised arm)", "q": "f=rat-raider&anim=pose:cast"}
 ]

@@ -12,10 +12,13 @@ import { pose, masterAt, walkCycle } from './biped-ik.js';
 
 export const P = (spec) => pose(rig, spec);
 export const NEAR = masterAt(rig, 'foot-near')[0], FAR = masterAt(rig, 'foot-far')[0];
-// the menace crouch: hips 3 px down, trailing (near) boot back, leading (far) boot forward, leaning in (T026 r2: raised
-// from 6 px down and 10 / -12 degrees: idle 134.4 px tall, A010 137.8, the master 138; was 129.9)
-export const FEET = { near: [NEAR - 10, 0, 0], far: [FAR + 12, 0, 0] };
-export const CROUCH = { dy: 3, pelvis: 4, torso: 5, head: -6, feet: FEET, tail: -10, 'tail-2': 15, 'tail-3': 20, 'scarf-tail': 0 };
+// the menace crouch: hips 1 px down, trailing (near) boot back, leading (far) boot forward, leaning in (T026 r2: raised
+// from 6 px down: idle 134.4 px tall, A010 137.8, the master 138; was 129.9). T026 r4 (the user's gaps): boots 4 px back
+// / 10 px forward of the master (were 10 / 12) and 1 px down (was 3), pelvis 3 + torso 6 (was 4 + 5): the near thigh no
+// longer swings back off the trouser apron (crotch gap) nor the far knee open the trouser leg's hem (pose seam test);
+// idle 136.5 px tall
+export const FEET = { near: [NEAR - 4, 0, 0], far: [FAR + 10, 0, 0] };
+export const CROUCH = { dy: 1, pelvis: 3, torso: 6, head: -6, feet: FEET, tail: -10, 'tail-2': 15, 'tail-3': 20, 'scarf-tail': 0 };
 const FIST = { 'hand-far': 'hand-far-fist' };
 const HURT = { head: 'head-hurt', 'hand-far': 'hand-far-open' };
 const FALL = { head: 'head-hurt', 'hand-far': 'hand-far-open', 'hand-near': 'hand-near-open' };
@@ -26,8 +29,14 @@ const TAIL = (a, b, c) => ({ tail: a, 'tail-2': b, 'tail-3': c });
 export const WALK = { speed: 2.0, walk: 120, lift: 5, dy: 2, bob: 1.5, gather: 0.2, heel: 10, strike: 8,
   toe: { near: 'foot-near-toe', far: 'foot-far-toe' } };
 // T026 r3 (user: the free hand "weirdly curled up"): far arm hangs forward and low like the standee / A010, elbow
-// slightly bent, a loose fist in front of the belt (was off [23, 6], turn -40: an open claw curled at the chest)
-const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: FIST, hand: { off: [-10, 12], dir: -105 }, shield: { off: [20, 24], turn: -30 } });
+// slightly bent, a loose fist in front of the belt (was off [23, 6], turn -40: an open claw curled at the chest). r4: 4 px
+// nearer and 2 px higher, turned -40 (was [20, 24], -30): the far wrist's seam stays shut on the new crouch
+// T026 r4 (user: the cutlass arm "still awkward"): a guard like the standee / A010: fist in front of the chest, forearm
+// about level from the elbow, blade upright and a little back, the hand in the forearm's line but for a fist's cock (was
+// off [-10, 12]: fist behind the shoulder, forearm up and the hand bent ~50 degrees under the bracer). A fist behind the
+// body (A010's spot) can't hold the blade up with A018's side-on grip without bending the wrist past 45 degrees.
+export const HOLD = { off: [8, 13], dir: -105 };
+const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: FIST, hand: HOLD, shield: { off: [16, 22], turn: -40 } });
 const arm = (k, amp, ph) => [STANCE[k] ?? 0, amp, ph];
 
 export default {
