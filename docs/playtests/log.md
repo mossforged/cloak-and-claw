@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 A023 round 2 (grips, back views)
+"those grips all look good." Back view: "the anatomical back reference all looks great. The rear cuts and heels, the feet are kind of pointed like straight away from the camera, which is maybe fine. Um, I like it better in the anatomical back reference where it's a little bit more to the, the angle. But um, the arms look good, the back looks good, the head looks good. There is like a little bit of clipping going on on his, from my perspective, right hand. You can see on the thumb and a little bit on the tail, but most of that is good. The near arm behind, I'm not really sure what's happening in that picture." -> merged as source; A023 round 3.
+
 ## 2026-10-18 Anatomy pass on the rat's hands (hand sheet `docs/screens/anatomy/rat-hands.jpg`)
 "For one and for two, that's not the back of the hand. The back of the hand wouldn't have a gap in it because you wouldn't be seeing through it. And the object is going to be underneath the back of the hand, not on top of it." Pinch: "sort of the back of the hand". "Four is not the back of the hand. Five is not the back of the hand. Six is the back of the hand. You can see there's no gap running alongside the hand." Seven: "I don't really see the palm ... it's strange." Eight: "yeah, I guess that's palm side fingers. Although ... we're going to be separating the fingers out from the rest of the hand, right?" Nine and ten right; eleven: "I'm not sure, that hand looks a little strange." 12-16 right.
 
