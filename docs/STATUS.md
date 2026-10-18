@@ -1,13 +1,14 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T028 views and depth (rounds 1-5, 2026-10-18). Last art task merged: A023 round 5 (seat covers, 2026-10-18). Older notes in `docs/history.md`.
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T030 A023 r5 import (2026-10-18). Last art task merged: A023 round 5 (seat covers, 2026-10-18). Older notes in `docs/history.md`.
 
-## Next (rig lock-down only; everything else paused)
-**The rat passed the final rig test** (user, 2026-10-18: "the rat is good to go ... much improved ... my faith is mostly restored"). T028 merged into the game.
-1. **User:** rat approved in play. Next look: T030's report, then the next step in the lock-down order.
-2. **Code:** T030 (import A023 round 5's seat covers and repairs; pass bar). Then T029 (every rehearsal move).
-3. **Art:** idle until T030's report.
-4. **Lead:** review T030; T029 packet; then A020 gear; then the mouse (rebuild with everything learned, grip lines drawn by the user).
+## Next
+**Priorities agreed with the user (voice, 2026-10-18), in order:**
+1. **Automatic handoffs (next):** a script on the user's Mac Mini watches the repo; when the lead commits a task packet it starts Code (`claude -p`) or Codex (`codex exec`) in that agent's clone, unattended; the agent pushes its branch, the phone preview updates, the user reviews on his phone, the lead merges and writes the next packet. One-time setup at his Mac: safe commands pre-approved so nothing stalls on a prompt; confirm Codex's image tool works in unattended mode. (User: "the next priority would be ... to set that up. So don't let me forget that.")
+2. **Evaluation plan:** finish the mouse with the full process from day one, then **one new enemy start to finish** (his description -> concept look -> art -> his grip lines -> his look in motion). Track per character: rounds, and how many reviews it cost the user. Baseline: the rat, well over ten rounds; goal two or three. User's ideal: description -> art and code pass -> grip lines -> done.
+3. **First sound pass** right after the rigs lock (before new enemies): a small kit (light/heavy hits, swooshes, block clang, footsteps, grunts, pickups, breakables) with random takes and slight pitch/volume variation; **animal voices a must** (cartoony squeaks, grunts, hisses, chitters). Lead shortlists free game-usable libraries and AI sound generators (licences checked) for the user to pick by ear.
+4. **Rig work:** T029 (every rehearsal move on the finished rat), A020 gear, then the mouse.
+Later (talked through, not planned): stage kits per place (segments, joins, props assembled from data), wave design mixing enemy roles, set pieces, breathers, a boss per stage.
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
 
@@ -26,7 +27,7 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T030-import-a023-r5.md`.
+- Code: idle until the handoff automation or T029.
 - Art: idle.
 
 ## Open questions (for the user)
@@ -45,7 +46,8 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
-2026-10-18 code: T030 on `t030-import-a023-r5` (not merged): A023 round 5 imported (pelvis-locked `seat` at 540, seat-side / seat-front for S / F, seat in BQ, hidden in B; repaired far foot, near upper arm, raised arm, scarf root; only the near upper arm's and far foot's points moved); anatomy rule `seat over thigh tops` (surface cover: exposure zones built without it, nothing visible waived); seat test; baselines rewritten. 38/38. Build `t030 import a023 r5 v1`.
+22026-10-18 lead: merged T030 (38/38 on main; crotch seam closed in idle and walk). The rat is approved in play, so its remaining seam-bar flags (mostly shoulder and armpit band readings, a cast shoulder, knockdown far foot) are parked as polish, not blockers; before the mouse, the pass bar gets tuned so the seam measure stops counting open space under raised arms. Recorded the voice-call priorities above.
+026-10-18 code: T030 on `t030-import-a023-r5` (not merged): A023 round 5 imported (pelvis-locked `seat` at 540, seat-side / seat-front for S / F, seat in BQ, hidden in B; repaired far foot, near upper arm, raised arm, scarf root; only the near upper arm's and far foot's points moved); anatomy rule `seat over thigh tops` (surface cover: exposure zones built without it, nothing visible waived); seat test; baselines rewritten. 38/38. Build `t030 import a023 r5 v1`.
 2026-10-18 code: T030 pass bar (`docs/screens/T030/pass-bar.md`, 32 / 54): crotch seam closed in idle and walk, walk foot top and thrust scarf fixed; bar clips still miss on seams already known (shoulders, wrists, knees, neck, tail 2.5-14.5 px; the r5 report showed only the worst per clip), turn-around far thigh 6.8 px², cast shoulder ~125 px², knockdown far foot 54-66 px²; paint at rest 2.17% (seat). List for the lead in the report.
 22026-10-18 lead: user played the new rat: "good to go ... not 100% perfect but much improved ... my faith is mostly restored". Rig test passed (decision).
 2026-10-18 lead: merged A023 round 5 (seat covers, foot, shoulder, scarf; scope clean) and T028 (rounds 1-5; 37/37 on merged main, CI green): bow drawn upright on the user's line, wind-up over the shoulder. Pass bar on T028 r5 missed only on what A023 r5 covers -> T030 imports it.
