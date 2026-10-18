@@ -188,3 +188,68 @@ Refine this CUT FROM MASTER near pauldron into a usable small shoulder-cap piece
 ## Final cut decisions
 
 The generated repair-wrist and repair-shoulder attempts were discarded. The nine delivered repairs instead extend cuts of native A022 paint beneath restored unchanged original foreground. The near cap started as an A017 pauldron cut and received a targeted imagegen lower-outline refinement. Both smear fists were replaced by A022 hand-near-grip cutouts (horizontal key rotates that hand 62 degrees about its measured grip; overhead keeps the original slot direction). Generated camera-facing/leaning torso lower ends were clipped at the hidden belt overlap, y1385. Far palm was rotated 180 degrees before registration to put its wrist at the common attachment end. Final connected-component cleanup uses the importer spill threshold corresponding to alpha >20.
+# Round 2 — exact prompts
+
+Built-in `image_gen.imagegen`, edit mode, green backgrounds; no seed exposed. References: A017 master-back and existing A023/cropped native-fist parts. Crop/registration and layer splitting use Pillow; final canvases remain 1536 × 2304. Raw outputs are excluded from git.
+
+## back
+
+```text
+Use case: precise-object-edit. Edit target: attached rat master back view. Keep this exact rat, palette, bold outlines, upper left light, scale, costume and neutral stance. Fix back anatomy only: both feet must be viewed from behind with rounded leather HEELS toward the camera, toes pointing away and mostly hidden; rear calf/shin leather wraps continue into heel footwear; arms hang naturally at either side seen from behind. Head looking slightly right as now. Keep back trousers and crossed vest straps. Flat exact #00FF00 background, no shadow. This is the anatomical reference for cutout game rig back-view parts. Preserve source paint outside ankle/foot corrections.
+```
+
+## away
+
+```text
+Use case: precise-object-edit. Edit the isolated torso target (image 1), using rat back master (image 2) for actual anatomy. Deliver ONLY the isolated torso on flat #00FF00 green. Correct back-three-quarter torso, chest facing AWAY to screen right, broad back surface visible; near shoulder pulled BACK on screen LEFT, not a giant pauldron across the front-right. Neck opening top center-right, vest waist below. No head, arms, hands, legs or loose scarf tail. The near arm will attach behind the torso at its left edge; far shoulder at right edge. Red scarf at neckline, brown leather stitched vest with crossing back straps. Preserve rat style, thick dark outline, warm paint, upper-left lighting. Clean waist continuing 70px below belt attachment, no belt or buckle baked in, no duplicate shoulder trim/button. Full isolated torso occupies center 60% of canvas, ample green around.
+```
+
+## neargrip
+
+Input: `/private/tmp/r2-hand-near-fist.png` (temporary crop from the existing source).
+
+```text
+Use case: precise-object-edit. Edit this exact cut from the rat master's near fist into a weapon grip seen from the BACK OF THE HAND. Keep leather fingerless glove on the whole back, knuckles below, thumb curling at right edge. Solid unbroken glove back, no green gap or slot anywhere through hand. Object will pass BEHIND the hand, do not draw object. Do not show palm. Keep exact paint style and silhouette size. Isolated hand only, no forearm, green #00FF00 background. Tiny hidden fingertip wrap may protrude at lower edge for splitting later.
+```
+
+## fargrip
+
+Input: `/private/tmp/r2-hand-far-grip.png` (temporary crop from the existing source).
+
+```text
+Use case: precise-object-edit. Edit this rat hand to show the PALM SIDE unmistakably: fleshy central palm pad, thumb crossing diagonally from left, four curled fingers stacked down right wrapping around an invisible upright handle. No leather covering central palm; leather fingerless glove remains at wrist and outer edge. Remove striped long wrist extension, end just above cuff. No object drawn, no green hole through palm. Preserve exact cartoon style and hand proportion. Isolated on #00FF00 green.
+```
+
+## cocked
+
+Input: `/private/tmp/r2-arm-near-cocked.png` (temporary crop from the existing source).
+
+```text
+Use case: precise-object-edit. Edit ONLY the fist at the upper left of this whole arm. Replace the current palm-side grip with BACK OF HAND, solid brown leather fingerless glove back above a row of curled knuckles, thumb at right edge. No green gap through fist, weapon passes behind. Preserve every other pixel of forearm, bracer, upper fur arm and exact pose, size and position. Green #00FF00 background.
+```
+
+## raised
+
+Input: `/private/tmp/r2-arm-near-raised.png` (temporary crop from the existing source).
+
+```text
+Use case: precise-object-edit. Edit ONLY the top fist of this raised rat arm: camera sees BACK OF HAND with solid brown leather fingerless glove back, knuckles up-left, thumb at right. No palm facing camera, no green gap or slot through fist; weapon will pass behind. Preserve every other pixel of forearm, bracer, fur arm and exact pose, position, scale. #00FF00 background.
+```
+
+## farbow
+
+Input: `/private/tmp/r2-arm-far-raised-back.png` (temporary crop from the existing source).
+
+```text
+Use case: precise-object-edit. Edit ONLY the top fist on this far rat arm so the camera clearly sees the PALM SIDE gripping a bow: visible fleshy palm pad, thumb from left crossing to center, curled fingers along right side. Brown fingerless glove only at wrist and hand outer edge. No green hole through hand. Invisible bow handle would run diagonally lower-left to upper-right between thumb and fingers. Preserve exact forearm, bracer, fur upper arm, pose, size, position. #00FF00 green background.
+```
+
+## Shoulder caps
+
+One call per side; suffix `Side: near.` or `Side: far.`
+
+```text
+undefined
+```
+
+Processing: the native fist edit supplies both near grips; the overhand rotates the same solid knuckle face. Pinch and far overhand keep existing paint, split into two layers. Whole-arm edits are accepted above a wrist mask only; original forearm/upper-arm pixels are restored below. Back reference is cut into rear arms, legs, heels, torso and seat, each translated onto inherited pivots. `viewJointPositions.B` records the rear setup positions used in the proof. Hidden extensions use native material under original paint; default thighs are clipped to rest torso/belt coverage to avoid exposed patches. New view paint and cap paint are reference-guided redraws and are not pixel-identical master cuts.
