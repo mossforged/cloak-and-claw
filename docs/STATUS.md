@@ -1,13 +1,13 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T027 model viewer + phone review previews. Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T026 new rat import (rounds 1-5, 2026-10-18). Last art task merged: A018 rat base parts. Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
-**The user called this "the final test of this type of rigging" (2026-10-18).** New anatomy rules (rig standard 5b) from real rigs' draw order (study 2026-10-18).
-1. **User:** anatomy pass done (2026-10-18): near grips, overhand, cocked and raised fists wrong; far grip and bow hand strange. Next look: T026 round 5, then A023 round 2.
-2. **Code:** T026 round 5 (shin over foot, anatomy rule test, seam gaps block reviews). Lead merges it, then Code brings T028 up to date on main (T028 v1 reviewed by the lead: CI green, scope clean; the user's look comes after the update).
-3. **Art:** A023 round 2 now (items 1-9: hips and waist, seat, caps, BQ/B views, split grips with a solid back of the hand, belt cover, foot tops, fists in arm keys).
-4. **Lead:** T029 packet (import A023 round 2 + pose every rehearsal move + hand-table check); then A020 gear; then the mouse.
+**The user called this "the final test of this type of rigging" (2026-10-18).** Anatomy rules: rig standard 5b.
+1. **User:** look at A023 round 2's grips and back views (`docs/screens/A023/review-grips.jpg`, `review-back.jpg`); then the lead merges it.
+2. **Code:** T028 round 2 (merge main, import A023 rounds 1-2, split grips, extended anatomy test with the hand table, turning slash with real drawings). Then T029 (every rehearsal move).
+3. **Art:** idle until the user's look at round 2 and Code's import report.
+4. **Lead:** merge A023 round 2 on the user's OK; review T028 round 2; T029 packet; then A020 gear; then the mouse.
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
 
@@ -26,8 +26,8 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T026-import-new-rat.md` (round 5), then update `docs/tasks/T028-views-and-depth.md` on main.
-- Art: `docs/tasks/A023-rat-complete-kit.md` round 2 (items 1-9).
+- Code: `docs/tasks/T028-views-and-depth.md` round 2 (after A023 round 2 is merged).
+- Art: idle (A023 round 2 delivered on `a023-r2-rat-repairs`).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -45,7 +45,8 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
-2026-10-18 code: T026 round 5 on `t026-import-new-rat`: shin over foot (rat feet 515 / 215, were 530 / 230; spearman and archer inherit; toe swaps keep the band): seam flags unchanged, no ankle opens further; known ankle gaps re-labelled as foot top to extend under the shin (rat walk near 4 / far 10 game px, getup far 9.5, knockdown near 3.5). Anatomy rule test `tests/anatomy.test.mjs` (rules `src/data/rigs/anatomy.js`): rats pass every pair in 1276 frame keys; the mouse waives 4 pairs (rebuild).
+22026-10-18 lead: merged T026 (rounds 1-5; 33/33 with LFS art, CI green): the game now uses the new rat. Reviewed A023 round 2 (`a023-r2-rat-repairs`: all items 1-9 delivered by name, scope clean, LFS): split grips, belt, longer feet and thighs, back-view cuts, redrawn fists; waiting for the user's look at the grips and back views. Wrote T028 round 2 (import A023 with the views, knee/waist/shoulder rules, hand-table check).
+026-10-18 code: T026 round 5 on `t026-import-new-rat`: shin over foot (rat feet 515 / 215, were 530 / 230; spearman and archer inherit; toe swaps keep the band): seam flags unchanged, no ankle opens further; known ankle gaps re-labelled as foot top to extend under the shin (rat walk near 4 / far 10 game px, getup far 9.5, knockdown near 3.5). Anatomy rule test `tests/anatomy.test.mjs` (rules `src/data/rigs/anatomy.js`): rats pass every pair in 1276 frame keys; the mouse waives 4 pairs (rebuild).
 2026-10-18 code: T026 r5 review links (docs/screens/T026/views.json) cut to the slow walk, walk paused close-up and idle; every seam flag in them is a listed art fix (shoulders, wrist, elbow, knees, hip, ankles, tail roots), named in the report. docs/screens/T026/r5-ankle-before-after.jpg. 33/33. Build `t026 rat anatomy r5`. Not merged.
 2026-10-18 lead: user's anatomy pass on the rat's hands -> hand table "Now" column, rule "the back of a hand is solid, the object passes under it" (5b.2), A023 round 2 released with the redraw list.
 2026-10-18 lead: reviewed T026 r4 (32/32 with LFS art; CI green; scope clean) and T028 v1 (CI green, scope clean). User on r4: palm-side sword hand, foot drawn over the trousers in the walk, waist gap in the slash; "this entire process just doesn't seem to be working". Study "Joint rules from real rigs" (Spine's six reference rigs: shin always over foot, weapon between two hand pieces, cover pieces at joints); rig standard 5b anatomy rules; rat hand table + hand sheet; T026 round 5; A023 round 2 items 6-9.

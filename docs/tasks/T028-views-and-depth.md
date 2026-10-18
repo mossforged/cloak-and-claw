@@ -21,3 +21,13 @@ The T026 review found the rat can't turn into a swing: the torso never changes v
 - Human: does the rat turn into the slash? Is the rehearsal sheet readable on the phone?
 
 Out of scope: importing A023 and posing every rehearsal move (T029), gear (A020).
+
+## Round 2 (lead, 2026-10-18): up to date on main + Art's new drawings
+T028 v1 reviewed by the lead (CI green, scope clean); the user hasn't looked yet, because the views ran on stand-ins. T026 is merged (rounds 1-5). **Needs:** A023 round 2 merged (the lead merges it after the user's look at its grips and back views). Read: rig standard 5b (anatomy rules), `docs/design/rigs/rat-raider.md` "Anatomy check" (hand table, covers), A023's `HANDOFF.md` (round 2 import notes).
+1. **Merge main into `t028-views-and-depth`** and resolve conflicts (T026 r4/r5 changed the rat's poses, bands and tests; keep both sides' work).
+2. **Import A023 (round 1 + round 2)** after A018, A019, A022, honouring each entry's `source` path: every torso and pelvis view with its `anchors` (replacing your measured stand-ins), the front head, shoulder caps, the **belt** (a pelvis child at band 640 above the torso; hidden in B, which has its own rear belt), the lengthened feet and thighs, the back-view limb cuts (`viewSwaps.B`, placed at `viewJointPositions.B`, not the Q offsets), and the redrawn fists in the arm keys.
+3. **Split grips** (5b.2-3): each grip pair draws `[under, held item, face]` per `grips[name].order`; the under piece shares the hand's pivot and moves with the same hand transform. Never draw a weapon over a solid near-hand back. Re-measure the handle line so every current hold (cutlass, club, spear, bow, the A021 items) passes between the pieces.
+4. **Anatomy rule test, extended:** add knee (shin over thigh), waist (belt over torso and pelvis, outside B) and shoulder (the view's torso edge or cap over the upper arm) to `src/data/rigs/anatomy.js`; add the **hand-table check** (each hold in the rat's table uses its named drawing; a hold with no row fails).
+5. **Re-run the pose seam test and the turning slash** with the real drawings; the turn-around through F with the front head, torso and pelvis.
+6. **Review links only for clean clips** (5b.6): idle, slow walk, the turning slash, the turn-around, and the rehearsal sheet. Any flag left in a linked clip is named in your report with its cause.
+Out of scope: posing every rehearsal move (T029), gear (A020).
