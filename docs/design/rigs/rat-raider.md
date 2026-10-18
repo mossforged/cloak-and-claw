@@ -23,6 +23,34 @@ torso (three-quarter, side, back), pelvis, all arm and leg pieces, hands, feet, 
 ## Part list (A018)
 pelvis, torso, head; arm-near-upper/lower, hand-near; arm-far-upper/lower, hand-far; leg-near-upper/lower, foot-near; leg-far-upper/lower, foot-far; tail-1, tail-2, tail-3; scarf-tail. **Trousers:** the waistband and seat belong to the pelvis; each trouser leg belongs to its thigh, overlapping the pelvis piece (no single shape spanning hip and thigh).
 
+## Anatomy check (rig standard 5b; added 2026-10-18)
+**Hand table** (three-quarter, facing right: the near hand is his left). The face column is the lead's proposal from rule 5b.2; the user's anatomy pass confirms or corrects each row before Art draws (decision 2026-10-18). "Now" is what the current drawing shows, filled in during that pass from the hand sheet (`docs/screens/anatomy/rat-hands.jpg`).
+
+| Hold | Hand | Face the camera sees | Drawing | Now | Moves |
+|---|---|---|---|---|---|
+| weapon held upright in front (guard), at the side, swung in front (forehand strike) | near | **back of the hand**, knuckles; fingers wrap behind the handle | `hand-near-grip` (split) | **palm (user, T026 r4): wrong** | idle, walk, run, slash strike / recover, pickup, jump attack |
+| overhand on a shaft (spear, two-hand club, staff), reverse dagger | near | back of the hand, knuckles on top | `hand-near-grip-overhand` (split) | | spear thrust, dagger stab, overhead chop, staff |
+| bow string pinched at the jaw | near | back of the hand | `hand-near-pinch` | | bow draw / aim |
+| cocked behind the head with the weapon (wind-up) | near | back of the hand (proposal; arm mostly behind the body in BQ) | inside `arm-near-cocked` | | telegraph, slash wind, dagger and bottle throw wind |
+| raised overhead with the weapon | near | back of the hand | inside `arm-near-raised` | | overhead chop wind, rally, weapon thrust in the air |
+| flask at the lips | near | back of the hand (the palm faces the face) | inside `arm-near-mouth` | | drink |
+| weapon held in front | far | **palm side**: fingers curling round the handle toward the camera | `hand-far-grip` (split) | | two-hand holds, bow grip at arm's length |
+| overhand on a shaft | far | palm side: fingers over the shaft toward the camera | `hand-far-grip-overhand` (split, overlay band 850) | | spear thrust, staff, two-hand club |
+| shield strap | far | hidden behind the shield; knuckles if seen | `hand-far-shield` | | block, shield bash |
+| empty fist hanging low | far | as now (user OK'd T026 r3) | `hand-far-fist` | OK | idle, walk |
+| palm push, block, grab reach, cower, beam | either | palm (by design) | `hand-*-palm` | | grabs, magic |
+| cupped spell, lift from beneath | either | palm, up | `hand-*-cup` | | charge, orb, lifts |
+| pointing | near | back of the hand, index finger out | `hand-near-point` | | point / command |
+
+**Covers** (5b.1, current state on the T026 r4 branch):
+| Joint | Rule | Rat now | Fix |
+|---|---|---|---|
+| ankle | shin over foot | **foot over shin** (530 over 520; 230 over 220) | Code: swap the order (T026 round 5); Art: foot tops extended under the shin if a gap shows |
+| waist | belt cover over torso and pelvis | torso over pelvis, no cover; opens when the chest tips forward (user, T026 r4 slash) | Art: `belt` cover piece (A023 round 2); Code: wire it |
+| hip | near thigh over the pelvis, top hidden under torso and belt; pelvis over far thigh | as rule (510 / 400 / 210) | hidden length per the seam test |
+| shoulder | torso edge or shoulder cap | near upper arm under the vest (590); caps from A023 | caps wired in T028 |
+| wrist | bracer over hand | forearm 820 over hand 815, bracer painted on the forearm | separate bracer pieces only if the seam test still flags the wrists |
+
 ## Swap and key-drawing library (grunt kit, extended for this body's roles and the flexibility test)
 
 | Slot | Drawing | Tier | State | Used by |
