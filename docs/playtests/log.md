@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 A023 round 3 back view
+"one note: the tail should be rendered over the back view, right, so it looks like its ending on his body where it should?" -> rule 5b.1 split by view; T028 round 3 item 5; A023 round 4 item 1.
+
 ## 2026-10-18 A023 round 2 (grips, back views)
 "those grips all look good." Back view: "the anatomical back reference all looks great. The rear cuts and heels, the feet are kind of pointed like straight away from the camera, which is maybe fine. Um, I like it better in the anatomical back reference where it's a little bit more to the, the angle. But um, the arms look good, the back looks good, the head looks good. There is like a little bit of clipping going on on his, from my perspective, right hand. You can see on the thumb and a little bit on the tail, but most of that is good. The near arm behind, I'm not really sure what's happening in that picture." -> merged as source; A023 round 3.
 

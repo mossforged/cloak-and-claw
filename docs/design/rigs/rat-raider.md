@@ -51,6 +51,7 @@ pelvis, torso, head; arm-near-upper/lower, hand-near; arm-far-upper/lower, hand-
 | waist | belt cover over torso and pelvis | torso over pelvis, no cover; opens when the chest tips forward (user, T026 r4 slash) | Art: `belt` cover piece (A023 round 2); Code: wire it |
 | hip | near thigh over the pelvis, top hidden under torso and belt; pelvis over far thigh | as rule (510 / 400 / 210) | hidden length per the seam test |
 | shoulder | torso edge or shoulder cap | near upper arm under the vest (590); caps from A023 | caps wired in T028 |
+| tail root, back and turned-away views | tail over the seat, root painted as a finished end on the body | A023 r3 tucks the tail behind the leg in B (lead's wrong instruction in round 3) | Art: finished tail root on the seat for B; Code: tail band over the pelvis in B and BQ |
 | wrist | bracer over hand | forearm 820 over hand 815, bracer painted on the forearm | separate bracer pieces only if the seam test still flags the wrists |
 
 ## Swap and key-drawing library (grunt kit, extended for this body's roles and the flexibility test)

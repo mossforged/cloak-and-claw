@@ -38,3 +38,4 @@ Round 2 reviewed by the lead (CI green, 35/35, scope clean, report clear) but **
 2. **Report the exposure list** per part and joint (worst frame, area, which piece pokes out from under which), plus a strip of the worst frames, as Art's next repair list. Do not try to fix art in code; you may fix pose and draw order where that is the cause.
 3. **A023 round 3** (back-view feet, thumb, tail root, turned-away torso; on `a023-r3-rat-back-fixes`): import it once the lead merges it (after the user's look), then run every check again.
 4. **Review links** stay limited to clips with no unexplained seam or exposure flag.
+5. **Tail in the back view** (user, 2026-10-18): in B and BQ the tail draws **over** the pelvis and seat, so it ends on his body; split the anatomy rule `pelvis over the tail root` by view (three-quarter, side, front only) and add `tail over pelvis` for B and BQ.
