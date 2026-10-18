@@ -100,3 +100,9 @@ User's words (lightly cleaned): "The actual feel of striking and the knockback a
 Issues he noted but set aside as not this stage's point: the walkable lane doesn't line up with the background art; the animations are janky.
 **Gate result: passed.**
 - 2026-10-15 A008 rat gear (review image): user likes the change of clothes and the hat. Legs still look "very strange, weirdly spread, weirdly muscly but still thin"; judge again in T011's crouch rig.
+
+## 2026-10-17/18 T026 rounds 2-3, A023 views (user, viewer and phone)
+- T026 r2: "technically all of them better except for the idle ... his arm that's not holding the sword is weirdly curled up." And: "the rat can't turn his body ... he just has to slash across his body, which seems like a fundamental problem." -> complete kit (rehearsal, views, A023, T028).
+- T026 r3: "his non sword hand is better, but the sword holding [arm] is still awkward and there's a gap between his leg and hips." -> T026 round 4 + pose seam test; A023 round 2 hips/waist.
+- A023 views: "the art is fine, but obviously the rightmost two [turned-away, back] are doing very strange things anatomically." -> A023 round 2 item 4.
+

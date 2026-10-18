@@ -45,6 +45,7 @@
 
 ## Last session
 
+2026-10-18 lead: user on A023 views: art fine, turned-away and back views anatomically wrong -> A023 round 2 item 4 (redraw torso-away; back-view legs, feet, arms). Lead chat handed over to a new conversation; resume from this file.
 2026-10-17 lead: user on T026 r3: free hand better; cutlass hold still awkward; gap between leg and hips -> T026 round 4 (+ a pose seam test over every move frame). Merged A023 (24 drawings, view anchors and bands; Q/S/F convincing, BQ/B weaker, new views repainted not cut); repairs collected as A023 round 2.
 2026-10-17 lead: user on T026 r2: all better except the idle (curled free arm -> round 3); the rat can't turn into a swing. Decision: complete kit for the rat (polish tier + views). Wrote the key-by-key move rehearsal (`rigs/rat-raider-rehearsal.md`), rig standard views + 9c rehearsal gate, A023, T028; A020 moves after T029.
 2026-10-17 lead: merged A022 (rat joint repair: 25 cuts, one piece each; hands slotted, no holes or discs; near shoulder band 590, hands 815/115 under the bracers; tail root under the seat; rest paint diff 3.08% interior, 0.63% above the feet). Watch in motion: shoulder ends past ~90 degrees, the tail-1/tail-2 step. Code: T026 round 2 item 6.
