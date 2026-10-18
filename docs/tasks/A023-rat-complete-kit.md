@@ -42,3 +42,10 @@ The PNGs above, a `rig-source.json` fragment (parts, swaps, `anchors`, bands as 
 - Human (viewer, phone, after T029): does he turn into his attacks? Does anything look pieced together?
 
 Out of scope: gear and masks for the new views (A020 after this), weapons, code.
+
+## Round 2 (lead, 2026-10-17): repairs, collected; start when the lead says (after Code's pose seam test and T028's rehearsal sheet)
+A023 merged as source 2026-10-17 (24 drawings, anchors, view bands; Q/S/F read as the same rat; F is strong). Collected for one repair pass:
+1. **Hips and waist** (user, T026 round 3: "a gap between his leg and hips"; `docs/screens/T026/r3-user-review-gaps.jpg`): `leg-near-upper`, `leg-far-upper` (and the whole-leg keys): lengthen the hidden top of each thigh so it stays under the pelvis's trousers across hip angles from about -30 to +60 degrees; `torso` and `pelvis` (and every torso / pelvis view you draw): the torso's lower edge and the pelvis's top must overlap under the belt by at least 40 source px, so the waist never opens when the chest turns or leans. Same files, same pivots; Code may report more joints from its new pose seam test, which the lead will add here.
+2. **Seat-to-thigh** transitions on `pelvis-front` and `pelvis-back` (your HANDOFF: abrupt where the new pelvis meets the Q thighs).
+3. **Shoulder caps:** remove the doubled trim / button edge against the baked shoulder on each torso view.
+4. Anything Code's pose seam test (T026 r4) and rehearsal sheet (T028) report; the lead lists them here before you start.
