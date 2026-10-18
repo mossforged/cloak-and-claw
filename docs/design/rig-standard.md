@@ -120,7 +120,8 @@ Why: the lead's eye misses small anatomy (a palm where a hand's back should be, 
    - A grip is **split around the handle**: the face in front of the handle is one piece, what wraps behind it is a second piece under the handle (Spine's sword hero and goblins). The handle never passes through a painted hole or slot.
 3. **Cover pieces where a joint has no natural cover:** belt (waist), shoulder caps, bracers, trouser hems. A cover is its own small drawing on the parent's pivot, so the two pieces it joins never have to line up exactly.
 4. **Hidden length through the full range:** every covered end continues underneath far enough to stay hidden at the joint's most extreme angle in the character's rehearsal (not just at rest). Measured by the pose seam test; the rig sheet lists each joint's range.
-5. **Gaps block reviews:** a move with a seam-test flag is not sent to the user for a look until the flag is fixed or explained in the review note.
+5. **Choices are shown on the body:** when the user picks between options (a grip line, a pose, a drawing), render each option on the assembled character in the moves it affects, never on loose parts (user, 2026-10-18).
+6. **Gaps block reviews:** a move with a seam-test flag is not sent to the user for a look until the flag is fixed or explained in the review note.
 
 ## 6. Draw order (depth bands)
 `hand-far`, `arm-far-*`, far weapon (100s) < `leg-far-*`, `foot-far` (200s) < `tail`, cape back (300s) < `pelvis` (400) < `leg-near-*`, `foot-near` (500s) < `torso` (600) < gear on torso (650) < `head` (700) < gear on head (750) < `arm-near-*`, `hand-near`, held weapon (800s). Inside each limb the 5b covers hold: shin over foot, forearm over upper arm, cuff or bracer over hand. Swaps and gear inherit their part's band. **Exception:** the far hand on a two-handed item draws in an overlay band above the shaft (850), so it is never hidden.

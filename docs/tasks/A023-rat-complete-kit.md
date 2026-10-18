@@ -78,3 +78,13 @@ Code's exposed-hidden-paint check (T028 round 3) found hidden paint showing in n
 Deliver on `a023-r4-rat-hidden-paint`, with before/after crops of each piece's hidden area in `docs/screens/A023/r4-*.jpg`.
 
 **Round 4 delivered and merged (2026-10-18).** Pass bar corrected by the lead after Art's handoff: the exposure check flags unfinished paint (flat or straight-cut regions), not finished material that shows (T028 round 4 item 6).
+
+## Round 5 (lead, 2026-10-18): a crotch cover and four small repairs
+Code's pass bar after round 4 (`origin/t028-views-and-depth:docs/screens/T028/r4-pass-bar.md`): nearly all unfinished paint is gone (zero in the idle and the turning slash). What's left:
+1. **Crotch cover** (new piece `seat`, a pelvis child drawn over both thigh tops, below the belt): the trouser seat and crotch from the master, covering where the two trouser legs meet below the apron, so the far thigh's top never shows as it swings (the far-hip notch in every move: `docs/screens/anatomy/r4-crotch-notch.jpg`, bottom ring). Finished paint only, outlined where it can show; same canvas and pelvis pivot. One drawing per pelvis view (three-quarter, side, front; the back view's seat already covers it).
+2. **foot-far:** its top shows a straight cut end in the walk (frame 25): round and outline the top of the leather wrap.
+3. **arm-near-upper and its raised key:** the shoulder top shows when the arm is raised (cast, 124 px²): finish the hidden shoulder top as fur under the torso edge.
+4. **scarf-tail:** its root shows in the spear thrust (68 px²): finish it as red cloth with a tapered end.
+5. **arm-near-upper (archer lying down, 34 px²):** covered by item 3.
+Deliver on `a023-r5-rat-crotch`, before/after crops in `docs/screens/A023/r5-*.jpg`.
+

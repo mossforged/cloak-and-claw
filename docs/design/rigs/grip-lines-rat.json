@@ -122,7 +122,8 @@
     0.5743,
     0.1665
    ],
-   "c": null
+   "c": null,
+   "note": "2026-10-18: user confirmed this line as drawn (wind-up blade forward), over the flipped option"
   },
   "arm-near-mouth": {
    "kind": "hand",
@@ -340,14 +341,15 @@
    "w": 89,
    "h": 364,
    "a": [
-    0.7105,
-    0.4742
+    0.7079,
+    0.5007
    ],
    "b": [
-    1.4812,
-    0.4728
+    0.7079,
+    0.4121
    ],
-   "c": null
+   "c": null,
+   "note": "2026-10-18: user picked the line along the bow (B) from the on-body comparison; replaces his first line, which ran across the bow"
   },
   "rat-cutlass": {
    "kind": "weapon",

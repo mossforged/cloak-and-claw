@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 T028 round 4 (holds on his grip lines)
+"Those minor lines and stuff that you're saying are so much smaller than the issues we used to have, so I'm happy about that ... this might be good um, to test out in game." Bow line: picked the line along the bow from the archer render ("yes the bottom one. b"); wind-up: "your line now is good, not ... line flipped". Asked to see choices on the rat's body, not on loose parts.
+
 ## 2026-10-18 Holds in the T028 r3 strips; grip lines
 "in almost all of them, his hand is not the right rotation for the cutlass, or ... the cutlass isn't rotated to match his hand ... I don't think that ... whoever's making the decision knows ... the sort of invisible line ... in a closed fist, of where objects like a straight tube would pass through it ... Maybe ... I draw a line across where ... the hilt of a sword would go, and then we use that to draw it." Then drew all 25 lines; "in the test fit the weapons are scaled very small" (lead's page bug, fixed).
 

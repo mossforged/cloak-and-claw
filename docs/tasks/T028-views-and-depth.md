@@ -49,3 +49,12 @@ The user, on the T028 r3 strips: in almost every frame the hand isn't at the rig
 5. **Import A023 round 4** (merged 2026-10-18): 60 repaired cuts with finished hidden paint and `tail-root-back` for B and BQ (tail bands 550/560/570 in those views; BQ keeps the Q pelvis, so carry its tail swap, attachment and bands into the view data by hand: see A023's HANDOFF "Import notes").
 6. **Exposure check: flag unfinished paint, not all paint** (Art's point, correct): the r3 check flags any rest-hidden pixel that shows, even once it's finished material meant to be seen. Change it to flag an exposed hidden-zone region only when it is **unfinished**: flat (luminance standard deviation in a 5x5 window under a threshold over the region) or bounded by a long straight run (the cut-edge measure). Calibrate on real data and make it a test: every A023 round 3 hidden-zone block the r3 strips showed (e.g. `foot-near`, `leg-near-upper`, the far wrist columns) must flag, and the round 4 repaint of the same piece must pass. Keep the seam test and the straight-cut-edge check unchanged.
 7. **Report the pass bar** with the new check: idle, walk, turning slash, turn-around at zero unfinished-paint, cut-edge and seam flags; every other move under 20 game px² per piece. Strips of the worst frames in `docs/screens/T028/r4-*`.
+
+## Round 5 (lead, 2026-10-18): last fixes before merge
+Round 4 reviewed: holds on the user's lines are right (user: these issues are "so much smaller than the issues we used to have"). The user picked, from renders on the rat's body:
+1. **Bow line along the bow** (`docs/design/rigs/grip-lines-rat.json`, `rat-bow` updated: a [0.7079, 0.5007], b [0.7079, 0.4121]). Re-pin it in `rat-raider-grip-lines.js`. In the bow draw, **reach the bow arm out** toward the target so the bow stands at arm's length in front of the body, not at his face (lead's render with the new line: `docs/screens/anatomy/bow-compare.jpg`, bottom row).
+2. **Cocked arm line stays as drawn** (user confirmed the forward blade).
+3. **Turning slash wind-up, frame ~4:** the near arm disappears behind the body and the blade pokes out by the tail. Pose the wind-up so the cocked arm and blade read above and behind the shoulder through the whole wind-up (no frame with the blade by the legs).
+4. **Import A023 round 5** (crotch cover and small repairs) when the lead merges it, then rerun the pass bar.
+5. Report the pass bar again; viewer links for the turning slash, walk, bow draw. Then the lead merges T028.
+

@@ -5,8 +5,8 @@
 ## Next (rig lock-down only; everything else paused)
 **The user called this "the final test of this type of rigging" (2026-10-18).** Anatomy rules: rig standard 5b.
 1. **User:** next look: the turning slash in motion (T028 round 3), where the turned-away chest is judged as the wind-up twist.
-2. **Code:** T028 round 4: holds from the user's grip lines + alignment test; A023 round 4 imported; exposure check flags only unfinished paint; pass bar reported. Then T029 (every rehearsal move).
-3. **Art:** idle until Code's pass-bar report.
+2. **Code:** T028 round 5 (bow line along the bow + bow arm reaching out, wind-up pose, then A023 round 5 import and pass bar). Lead merges T028 after. Then T029 (every rehearsal move).
+3. **Art:** A023 round 5 (crotch cover + four small repairs).
 4. **Lead:** review A023 round 3 and T028 round 2 (round 3's drawings imported before the user's look); T029 packet; then A020 gear; then the mouse.
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
@@ -26,8 +26,8 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T028-views-and-depth.md` round 4.
-- Art: idle (round 4 merged).
+- Code: `docs/tasks/T028-views-and-depth.md` round 5.
+- Art: `docs/tasks/A023-rat-complete-kit.md` round 5.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -45,7 +45,8 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
-22026-10-18 lead: reviewed T028 round 4 (37/37, CI green, scope clean; not merged). Holds now follow the user's grip lines (6345 holds aligned). Pass bar NOT met: unfinished paint is zero in the idle and slash, but a small crotch notch at the far hip (pelvis / far thigh) shows in every bar clip, the far foot top shows a cut end at one walk frame, the cast arm and a few falls still show hidden paint; the wind-up hides the arm and pokes the blade out by the tail. Two grip lines for the user to check: the bow (drawn across the bow, so it lies flat) and the cocked arm (sends the wind-up blade forward).
+22026-10-18 lead: user on T028 r4: remaining issues "so much smaller than the issues we used to have"; wants to test in game. From on-body renders he picked the bow line along the bow (B) and kept the cocked-arm line. Wrote T028 round 5 and A023 round 5 (crotch cover).
+2026-10-18 lead: reviewed T028 round 4 (37/37, CI green, scope clean; not merged). Holds now follow the user's grip lines (6345 holds aligned). Pass bar NOT met: unfinished paint is zero in the idle and slash, but a small crotch notch at the far hip (pelvis / far thigh) shows in every bar clip, the far foot top shows a cut end at one walk frame, the cast arm and a few falls still show hidden paint; the wind-up hides the arm and pokes the blade out by the tail. Two grip lines for the user to check: the bow (drawn across the bow, so it lies flat) and the cocked arm (sends the wind-up blade forward).
 2026-10-18 lead: merged A023 round 4 (61 cuts: finished hidden paint, outlined ends, rear tail root; scope clean). Art's handoff showed the r3 exposure check can't tell finished paint from blocks: pass bar corrected (flag unfinished paint only, calibrated on r3 vs r4). Added to T028 round 4 as items 5-7.
 2026-10-18 lead: reviewed T028 round 3 (36/36, CI green; exposure check found hidden paint in nearly every move) -> A023 round 4 sent. User: holds misaligned, proposed drawing the grip lines himself; built the Rat Grip Lines page, he drew all 25; lines in `docs/design/rigs/grip-lines-rat.json`, fit check `docs/screens/anatomy/grip-lines-fitcheck.jpg`; T028 round 4 uses them.
 2026-10-18 lead: user approved A023 round 3's back-view feet and thumb; the turned-away chest didn't read as a still (it is the wind-up twist), to be judged in motion. Merged round 3 as source; T028 round 3 imports it.
