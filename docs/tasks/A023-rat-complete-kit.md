@@ -67,3 +67,12 @@ Deliver on a new branch `a023-r3-rat-back-fixes`, with phone JPGs in `docs/scree
 
 ## Collected for round 4 (lead; sent with Code's exposure list from T028 round 3)
 1. **Tail root in the back view** (user, 2026-10-18: "the tail should be rendered over the back view, right, so it looks like it's ending on his body where it should"). Round 3 item 3 was the lead's error (it applied the three-quarter rule, tail root under the seat, to the back view). In B and BQ the tail draws over the seat: give its root a finished, outlined end where it meets the body (a `tail-root-back` drawing on tail-1's pivot if the three-quarter tail-1 can't serve), no hidden extension showing.
+
+## Round 4 (lead, 2026-10-18): every hidden area finished, to a measured pass bar
+Code's exposed-hidden-paint check (T028 round 3) found hidden paint showing in nearly every move, idle and walk included: `docs/screens/T028/r3-exposure-list.md` (22 piece/cover pairs, 12 cut edges) and the strips `r3-exposure-rat-*.jpg` (on the `t028-views-and-depth` branch until merged). It is one problem, not 34: the hidden areas were painted as stretched blocks or reconstruction, on the assumption they'd never show. In motion they do. Professional rigs paint the overlap areas as finished material.
+1. **Every hidden area is finished paint.** For every piece, everything that sits under another piece at rest (thigh tops, foot tops, wrist ends, shoulder tops, the torso's hem and collar, the scarf root, the tail root) is painted as the real material it would be (fur, cloth, leather wrap) in the piece's own colours and texture, with a rounded, tapered end and the outline continuing where an edge can show. No flat or stretched fill anywhere.
+2. **Hidden ends stay inside their cover:** a hidden end is narrower than the piece that covers it (foot tops narrower than the shin hem, wrist ends narrower than the bracer), so it stays covered as the joint turns.
+3. **No straight cut edges**: every cut edge that can show (list: feet, thighs, torso, upper arms, scarf, hands, head, pelvis) is outlined or rounded.
+4. **Tail root in the back view** (collected above): a finished end on the seat.
+5. **Pass bar** (Code measures it after import): zero exposure and cut-edge flags in the idle, the walk, the turning slash and the turn-around; every other move under 20 game px² per piece. Same canvas, same pivots, same visible paint: change only what's hidden and the cut edges.
+Deliver on `a023-r4-rat-hidden-paint`, with before/after crops of each piece's hidden area in `docs/screens/A023/r4-*.jpg`.
