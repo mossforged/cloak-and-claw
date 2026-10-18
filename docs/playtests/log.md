@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 Holds in the T028 r3 strips; grip lines
+"in almost all of them, his hand is not the right rotation for the cutlass, or ... the cutlass isn't rotated to match his hand ... I don't think that ... whoever's making the decision knows ... the sort of invisible line ... in a closed fist, of where objects like a straight tube would pass through it ... Maybe ... I draw a line across where ... the hilt of a sword would go, and then we use that to draw it." Then drew all 25 lines; "in the test fit the weapons are scaled very small" (lead's page bug, fixed).
+
 ## 2026-10-18 A023 round 3 (back feet, thumb, turned-away view)
 "The back view feet and thumb are correct, but the middle view ... It looks like his head is facing forward, his feet are facing forward, but his chest and shoulders are turned away. I'm not really sure what that's supposed to signify." -> lead: that is the wind-up twist (chest only; feet planted, head on the target); judged in motion in the turning slash.
 
