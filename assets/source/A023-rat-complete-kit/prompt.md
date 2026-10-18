@@ -253,3 +253,28 @@ undefined
 ```
 
 Processing: the native fist edit supplies both near grips; the overhand rotates the same solid knuckle face. Pinch and far overhand keep existing paint, split into two layers. Whole-arm edits are accepted above a wrist mask only; original forearm/upper-arm pixels are restored below. Back reference is cut into rear arms, legs, heels, torso and seat, each translated onto inherited pivots. `viewJointPositions.B` records the rear setup positions used in the proof. Hidden extensions use native material under original paint; default thighs are clipped to rest torso/belt coverage to avoid exposed patches. New view paint and cap paint are reference-guided redraws and are not pixel-identical master cuts.
+
+# Round 3 exact prompts
+
+Tool: built-in `image_gen.imagegen`, edit mode. No seed exposed. All calls use flat green backgrounds. Mechanical processing: green-key extraction, largest 8-connected component, source cut masks, uniform scale and pivot registration, layer composition. No procedural paint. Raw generations remain outside the repository.
+
+## 1
+
+```text
+Use case: identity-preserve. Edit reference 1 (approved rat back master), with reference 2 (current isolated torso) only as size/cut guidance. Redraw ONLY an isolated BACK THREE QUARTER torso, halfway between right-facing three-quarter and full back. Camera sees the broad BACK of brown leather vest with crossed straps, near shoulder blade and red scarf knot at upper LEFT; chest almost entirely hidden at RIGHT edge. The shoulder nearer camera is pulled BACK on screen LEFT; its arm will attach BEHIND the torso there. Opposite shoulder on screen RIGHT is foreshortened. Back leather plane must be unmistakeable: asymmetric diagonal back view, no frontal cream belly, no front chest breastplate, no symmetrical straight back. Include near small metal/leather pauldron at upper left shoulder, same costume as master. NO head, ears, arms, hands, belt, legs, tail, or loose scarf tails. Plain short hidden neck and waist continuation. Same warm painted cartoon, thick dark outlines, upper-left light and colors. Detached torso alone centered, about 540w by 470h native proportions, generous margin on flat exact #00FF00 green; no shadow/text.
+```
+
+## 2
+
+```text
+Edit this isolated torso to read unequivocally as the BACK of a leather vest turned diagonally away to screen right. Replace the front-looking V-shaped chest seams with a plain broad leather BACK PANEL and two leather straps crossing in a clear X across shoulder blades, like the approved rat back reference (second image). Keep scarf knot on screen LEFT at back of neck and small pauldron on screen LEFT. Rotate back plane farther away, right shoulder receding and narrower, left shoulder blade broad. NO cream chest/belly showing on front; lower short fur is back waist fur. No arms, head, belt, legs, tails, text or shadows. Preserve exact style, colors, detached torso and green background. A real three-quarter rear view between side and full rear.
+```
+
+## 3
+
+```text
+Precise-object-edit of this exact cropped rat back hip. REMOVE the pink tail completely, including black outline, from the LEFT hip. Reconstruct the hidden olive brown trouser fabric underneath where tail was covering the left thigh and seat. Give the left hip/seat a natural clean dark outlined silhouette curving from underneath the upper fur/vest near x160 y130 down to left thigh edge around x80 y330. Green background outside the trousers. Preserve all other visible pixels: belt, pouch, fur fringe, patch stitches, pants legs, skin and boots. Do not add any tail, pink streak, tail stub, extra object or text. Same size crop and exact #00FF00 background. This will be cut into pelvis and thigh rig parts; separate tail art goes behind these trousers.
+```
+
+
+Round 3 inputs: call 1 = A017 `master-back.png` and preceding A023 `torso-away.png`; call 2 = call 1 result and A017 `master-back.png`; call 3 = a native-scale crop `(430,1330,950,1830)` of the round-2 back drawing, with green outside the character. Call 2 supplies the final torso; call 3 is accepted only inside the tail-removal mask. Feet and rear shins are recut from A017 master-back; the clipped thumb is recut with a wider boundary from the accepted round-2 back drawing. No grip art changes. All intermediate images/scripts stay outside git.
