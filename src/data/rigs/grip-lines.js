@@ -15,14 +15,15 @@ const r = (v) => Math.round(v * 1000) / 1000;
 export const partPx = (rig, G, part, C) => [rig.parts[part].pivot[0] + G.CUT * (C[0] - G.PIVOT[part][0]), rig.parts[part].pivot[1] + G.CUT * (C[1] - G.PIVOT[part][1])];
 export const lineIn = (rig, G, name) => { const d = G.DRAWINGS[name]; return { a: partPx(rig, G, d.part, d.a), b: partPx(rig, G, d.part, d.b) }; };
 export const handOf = (rig, G, name) => { const l = lineIn(rig, G, name); return { part: G.DRAWINGS[name].part, at: mid(l).map(r), axis: r(axisOf(l)) }; };
-export const itemLine = (G, id) => {
+// size: the game image's px when it isn't the one the user drew on (A021's, cut at 4x the review size)
+export const itemLine = (G, id, size) => {
   const I = G.ITEMS[id];
   if (!I) return null;
-  const px = (f) => [r(f[0] * I.size[0]), r(f[1] * I.size[1])];
+  const S = size ?? I.size, px = (f) => [r(f[0] * S[0]), r(f[1] * S[1])];
   return { grip: px(I.a), gripEnd: px(I.b), ...(I.c ? { grip2: px(I.c) } : {}) };
 };
 
-export function withGripLines(rig, G, itemIds) {
+export function withGripLines(rig, G, itemIds, sizes = {}) {
   const parts = { ...rig.parts }, hands = { ...rig.hands };
   for (const name of Object.keys(G.DRAWINGS).filter((n) => n.startsWith('hand-'))) hands[name] = handOf(rig, G, name);
   const SIDE = hands['hand-near-grip'], FAR = hands['hand-far-grip'];
@@ -39,6 +40,6 @@ export function withGripLines(rig, G, itemIds) {
   const g2 = rig.grips['two-hand'], gb = rig.grips.bow;
   const grips = { ...rig.grips, 'two-hand': { ...g2, align: OVER.axis, ik: { ...g2.ik, hand: OVER.at } },
     bow: { ...gb, align: PINCH.axis, ik: { ...gb.ik, hand: PINCH.at } } };
-  const itemLines = Object.fromEntries(itemIds.map((id) => [id, itemLine(G, id)]).filter(([, l]) => l));
+  const itemLines = Object.fromEntries(itemIds.map((id) => [id, itemLine(G, id, sizes[id])]).filter(([, l]) => l));
   return { ...rig, parts, hands, slots, axes, grips, itemLines, gripLines: true };
 }

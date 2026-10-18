@@ -18,13 +18,15 @@
 // Cuts are keyed without detached islands (importer, T026 r2), on the same trim boxes, so every point here holds.
 // Tail: three segments (A018 tail-1 is the standard's `tail`, tail-2 and tail-3 hang off it).
 // The old A010 rig is kept for the viewer's compare slot only (rigs/a010/). Same field meanings as rigs/mouse-fighter.js.
-// hands: the importer's grips (A018 `grips`): each grip drawing's slot centre (hand part px) and the direction it holds a
-//   handle toward the item's head. heldHand (T026): A018's default hands are fists; the near one holds its item in the
+// T028 r4: A023 round 4 imported the same way (61 re-cut drawings with finished hidden ends, so most pivots and offsets
+// moved: points here are the importer's; the rear tail root `tail-root-back` for B / BQ in rat-raider-views.js). Every
+// hold now comes from the user's grip lines (withGripLines at the end): hands, whole-arm keys, slots, axes, the second
+// hand's grips and each item's own line on this body (itemLines); no per-item or per-hand angle offsets.
+// hands: contact points (palms, cups, the pointing finger: A023 grips, hand part px); the grip hands come from the lines. heldHand (T026): A018's default hands are fists; the near one holds its item in the
 //   side grip drawing (a pose may name another). A grip mode with its own drawing (overhand) uses that drawing's slot.
-// slots / axes / grips: as rigs/a010/rat-raider.js (T018-T020), on A018's grip drawings. The spear's far fist closes
-//   overhand on the shaft (hand-far-grip-overhand, A018's slot axis along it), the bow sits in the far grip fist.
-// Whole-arm swaps (A019 hide / itemGrip / slotDirection): the drawing replaces the forearm and hand and carries the held
-//   item at its fist (`carry`), turned so the handle runs along that fist's slot (`turn`).
+// slots / grips: as rigs/a010/rat-raider.js (T018-T020); attach points, axes, the spear's far overhand fist and the bow
+//   pinch's point and line from the user's lines. Whole-arm swaps (A019 hide): the drawing replaces the forearm and hand;
+//   withGripLines gives each its grip, axis and the held item carried there (`carry`, `turn`; far keys only the far hand's).
 // overlays / views / masks: A011's head gear and face details ride the heads unchanged (A018 heads are A010's pixel for
 //   pixel, moved by A017's offset with the rest of the body, so their offsets in head px hold). The torso gear (jerkin,
 //   sash, quiver) and every body mask were drawn for A010's torso and limbs: hidden until A020 refits them.
@@ -32,6 +34,7 @@ import { OVERLAYS, VIEWS, MASKS } from './rat-raider-gear.js';
 import { BODY_VIEWS } from './rat-raider-views.js';
 import * as LINES from './rat-raider-grip-lines.js';
 import { withGripLines } from './grip-lines.js';
+import { A021_HOLDS } from '../items/a021-holds.js';
 
 const P = 'assets/art/enemies/rat-raider/rig/';
 // T028 r4: every grip hand, every arm key that carries an item and every item's handle line come from the user's grip
@@ -166,4 +169,5 @@ const RIG = {
 
 // T028 r4: the user's grip lines (hands, arm keys, slots, second-hand grips, item lines); a re-import moves pivots and
 // offsets above, the lines stay on the canvas
-export default withGripLines(RIG, LINES, ['rat-cutlass', 'plank-club', 'big-fish', 'rat-spear', 'rat-bow', 'mouse-sword', 'rat-arrow', 'a021-dagger', 'a021-axe', 'a021-staff', 'a021-shield']);
+export default withGripLines(RIG, LINES, ['rat-cutlass', 'plank-club', 'big-fish', 'rat-spear', 'rat-bow', 'mouse-sword', 'rat-arrow', ...Object.keys(A021_HOLDS)],
+  Object.fromEntries(Object.entries(A021_HOLDS).map(([id, d]) => [id, d.size])));

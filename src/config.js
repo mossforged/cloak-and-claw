@@ -3,4 +3,4 @@ export const VIEW = { w: 960, h: 540 };   // internal resolution; CSS scales to 
 export const FPS = 60;                    // sim runs at a fixed 60 steps/sec; all timings are in frames
 export const START_STAGE = 'harbor-run';   // ?stage=harbor-market in the URL loads the single-screen arena
 export const START_HERO = 'mouse-fighter';
-export const BUILD = 't028 views r3';
+export const BUILD = 't028 views r4';
