@@ -48,7 +48,7 @@ export const KNOWN = {
   'rat | Rat Archer: rat-bow (current grip) | torso / arm-near-upper': [4.3, RAT_SHOULDER],
   'rat | Rat Spearman: rat-spear (overhand) | torso / arm-near-upper': [8.8, RAT_SHOULDER],
   'rat | Rat Spearman: rat-spear (overhand) | arm-far-lower / hand-far': [12.3, RAT_FAR_CUFF],
-  'rat | Rat Archer: rat-bow (overhand) | arm-far-lower / hand-far': [12.0, RAT_FAR_CUFF],
+  'rat | Rat Archer: rat-bow (overhand) | arm-far-lower / hand-far': [14.8, RAT_FAR_CUFF],   // T028 r5: the user's bow line (along the bow) holds the bow as the fist is drawn, so this mode turns the fist ~90 deg further
   'rat | Rat Archer: rat-bow (overhand) | torso / arm-near-upper': [4.3, RAT_SHOULDER],   // T026 r4 stance (the cutlass guard)
   'rat | Rat Spearman: rat-spear (underhand) | torso / arm-near-upper': [4.8, RAT_SHOULDER],
   'rat | Rat Spearman: rat-spear (underhand) | arm-far-lower / hand-far': [16.0, RAT_FAR_CUFF],

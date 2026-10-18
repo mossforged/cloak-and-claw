@@ -30,7 +30,7 @@ export const ITEMS = {
   'mouse-sword': { size: [206, 162], a: [0.8221, 0.18], b: [0.7285, 0.2813] },
   'plank-club': { size: [240, 90], a: [0.1606, 0.4366], b: [0.2678, 0.4758] },
   'rat-arrow': { size: [245, 32], a: [0.4494, 0.4732], b: [0.5995, 0.4645] },
-  'rat-bow': { size: [89, 364], a: [0.7105, 0.4742], b: [1.4812, 0.4728] },
+  'rat-bow': { size: [89, 364], a: [0.7079, 0.5007], b: [0.7079, 0.4121] },   // T028 r5: the user's pick (along the bow), copied by hand from the json (item lines are fractions: no re-pin)
   'rat-cutlass': { size: [240, 81], a: [0.1926, 0.6845], b: [0.3055, 0.6251] },
   'rat-spear': { size: [123, 592], a: [0.2554, 0.731], b: [0.267, 0.6129], c: [0.267, 0.4673] },
 };

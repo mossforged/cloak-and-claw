@@ -30,10 +30,11 @@ export function drawOf(f) {
 }
 
 // T020: the far fist closes round the shaft. Screen angles (degrees) of the held weapon's handle (grip -> gripEnd) and of
-// the IK hand's own axis `G.align` (its px).
+// the IK hand's own axis `G.align` (its px). T028 r5: a grip's `along` (a line in the item's px) replaces the handle: the
+// bow's string hand lies along the arrow, which runs along the bow's forward axis, not up the bow's handle.
 function axesOf(L, held, G, wm) {
-  const h = L.find((e) => e.name === G.ik.end).base, w = wm(L), A = held.kit.art;
-  return [ang([0, 0], lin(w, [A.gripEnd[0] - A.grip[0], A.gripEnd[1] - A.grip[1]])), ang([0, 0], lin(h, [Math.cos(G.align * D), Math.sin(G.align * D)])), h];
+  const h = L.find((e) => e.name === G.ik.end).base, w = wm(L), A = held.kit.art, v = G.along ?? [A.gripEnd[0] - A.grip[0], A.gripEnd[1] - A.grip[1]];
+  return [ang([0, 0], lin(w, v)), ang([0, 0], lin(h, [Math.cos(G.align * D), Math.sin(G.align * D)])), h];
 }
 // Solved in one go: the fist's axis goes along the shaft (the smaller turn, or the other way round if the arm can't
 // reach the wrist spot for that one: the ring holds either way; or as `G.wrist` says: forearm 'above' / 'below' the

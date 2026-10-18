@@ -22,7 +22,7 @@ const BOW = (off, extra = {}) => ({ shield: { off: [off[0] + SHIFT[0], off[1] + 
 // T026 r2: hand dirs are measured on the side-grip slot (A022: -16, was -45) and A022's pinch is drawn turned 55 deg: every
 // dir here +84 from round 1 keeps the pinch drawing at its old screen angle (the pinch then reaches the string mid-draw)
 const DRAW = { 'hand-near.order': 818 };   // the string hand over string (805) and arrow (810), still under its bracer (820; T026 r2)
-const { swap: _s, ...STANCE } = P({ ...CROUCH, torso: 4, head: -6, hand: { off: [10, 16], dir: 24 + NEAR }, ...BOW([24, 2]) });
+const { swap: _s, ...STANCE } = P({ ...CROUCH, torso: 4, head: -6, hand: { off: [10, 16], dir: 24 + NEAR }, ...BOW([16, 14]) });
 const keep = (S, ...ks) => Object.fromEntries(ks.map((k) => [k, S[k]]));
 const ARMS = ['arm-near-upper', 'arm-near-lower', 'hand-near', 'arm-far-upper', 'arm-far-lower', 'hand-far'];
 export default {
@@ -37,8 +37,13 @@ export default {
     hurt: { ...base.hurt, ...keep(P({ ...CROUCH, torso: -14, head: -14, hand: { off: [-6, 18], dir: -36 + NEAR }, ...BOW([18, 10]) }), ...ARMS) },
     moves: {
       bowShot: {   // windup = the draw (string to the jaw), bow arm locked out; strike = the loose, string hand flicks back
-        windup: { ...P({ ...CROUCH, swap: { head: 'head-effort' }, torso: 0, head: -2, dx: -2, hand: { off: [14, -4], dir: 144 + NEAR }, ...BOW([33, -6]) }), ...DRAW },
-        strike: { ...P({ ...CROUCH, swap: { head: 'head-attack', 'hand-near': 'hand-near-open' }, torso: 0, head: -4, dx: 1, hand: { off: [-4, -6], dir: -6 + NEAR }, ...BOW([33, -6]) }), ...DRAW },
+        // T028 r5 (user's bow line along the bow): the bow at arm's length in front, not at his face. The far arm is already
+        // straight at full reach (~31 px), which ends at the snout tip, so he stands up and leans back (torso -10, was 0)
+        // with the chin up (head -12, was -2) and the bow fist at shoulder height (BOW [35, 0], was [33, -6]); the string
+        // still comes to the jaw anchor (1.9 px). Full draw: bow grip 9 px in front of the nose, no bow pixel over the head
+        // (was ~150 px²)
+        windup: { ...P({ ...CROUCH, swap: { head: 'head-effort' }, torso: -10, head: -12, dx: -2, hand: { off: [14, -2], dir: 144 + NEAR }, ...BOW([35, 0]) }), ...DRAW },
+        strike: { ...P({ ...CROUCH, swap: { head: 'head-attack', 'hand-near': 'hand-near-open' }, torso: -10, head: -14, dx: 1, hand: { off: [-4, -4], dir: -6 + NEAR }, ...BOW([35, 0]) }), ...DRAW },
       },
     },
   },

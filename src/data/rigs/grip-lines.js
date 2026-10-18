@@ -37,9 +37,11 @@ export function withGripLines(rig, G, itemIds, sizes = {}) {
   const slots = { ...rig.slots, 'one-hand': { ...rig.slots['one-hand'], attach: SIDE.at }, 'two-hand': { ...rig.slots['two-hand'], attach: SIDE.at },
     bow: { ...rig.slots.bow, attach: FAR.at } };
   const axes = { ...rig.axes, 'one-hand': SIDE.axis, 'two-hand': SIDE.axis, bow: FAR.axis };
-  const g2 = rig.grips['two-hand'], gb = rig.grips.bow;
-  const grips = { ...rig.grips, 'two-hand': { ...g2, align: OVER.axis, ik: { ...g2.ik, hand: OVER.at } },
-    bow: { ...gb, align: PINCH.axis, ik: { ...gb.ik, hand: PINCH.at } } };
   const itemLines = Object.fromEntries(itemIds.map((id) => [id, itemLine(G, id, sizes[id])]).filter(([, l]) => l));
+  // T028 r5: the string hand lies along the arrow (its line, in the arrow's px: the arrow is the bow's frame scaled), not
+  // the bow's handle (the user's bow line now runs up the bow)
+  const g2 = rig.grips['two-hand'], gb = rig.grips.bow, ar = itemLines['rat-arrow'];
+  const grips = { ...rig.grips, 'two-hand': { ...g2, align: OVER.axis, ik: { ...g2.ik, hand: OVER.at } },
+    bow: { ...gb, align: PINCH.axis, ik: { ...gb.ik, hand: PINCH.at }, ...(ar ? { along: [r(ar.gripEnd[0] - ar.grip[0]), r(ar.gripEnd[1] - ar.grip[1])] } : {}) } };
   return { ...rig, parts, hands, slots, axes, grips, itemLines, gripLines: true };
 }

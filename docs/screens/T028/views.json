@@ -1,9 +1,9 @@
 [
-  { "label": "r4: Turning slash, slow: the cutlass on the user's grip lines in every key (the cocked wind-up's line sends the blade forward over his head)", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" },
-  { "label": "r4: Idle and walk: the fist turned onto the cutlass's line", "q": "f=rat-raider&anim=walk&speed=0.5&zoom=2" },
+  { "label": "r5: Archer's draw, slow: bow line along the bow, bow arm reached out at arm's length in front of him (not at his face), string to the jaw", "q": "f=rat-archer&anim=bowShot&speed=0.25&zoom=2" },
+  { "label": "r5: Turning slash, slow: the wind-up keeps the cocked arm and blade above and behind the shoulder (no frame with the blade by the legs)", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" },
+  { "label": "r5: Walk (archer: bow held down by his side, fist at the chest)", "q": "f=rat-archer&anim=walk&speed=0.5&zoom=2" },
+  { "label": "r5: Walk (raider)", "q": "f=rat-raider&anim=walk&speed=0.5&zoom=2" },
   { "label": "r4: Spearman's thrust, slow: both fists on the shaft line", "q": "f=rat-spearman&anim=spearThrust&speed=0.25&zoom=2" },
-  { "label": "r4: Archer's draw, slow: far fist turned to stand the bow up on the user's bow line", "q": "f=rat-archer&anim=bowShot&speed=0.25&zoom=2" },
-  { "label": "r4: Raider holding the plank club (any item: Hold tab)", "q": "f=rat-raider&anim=idle&item=plank-club&zoom=2" },
   { "label": "r4: Turn-around (A023 round 4 rear tail root in the back views)", "q": "f=rat-raider&anim=turn&speed=0.25&zoom=2" },
   { "label": "r3: Rehearsal sheet (stand-in poses until T029)", "q": "rehearse=rat-raider" }
 ]

@@ -100,8 +100,12 @@ export default {
       // the trailing toe; recover: F held through the follow-through (timing.swapBack), then back to three-quarter with
       // the arm under the vest. Until A023: the side torso stands in for F and BQ.
       switchAt: 0.1,
+      // T028 r5 (lead: frame ~4 the arm vanished and the blade poked out by the tail): the cocked drawing swaps in at the
+      // windup's start and turned 373 deg from idle's arm angle (-339) to its own (+34), sweeping the blade round past the
+      // legs. Now -50 (fist above and behind the shoulder, blade up over the head) taken one turn down (-410), so the arm
+      // turns 51 deg back from idle and then swings over the top into `through` (+174)
       windup: P({ ...CROUCH, view: { torso: 'BQ' }, swap: { head: 'head-effort', 'hand-far': 'hand-far-fist' }, dx: -4, torso: -12, head: 0,
-        wholeArm: { swap: 'arm-near-cocked', dir: 14.3 }, shield: { off: [22, 10], turn: -50 },
+        wholeArm: { swap: 'arm-near-cocked', dir: -410 }, shield: { off: [22, 10], turn: -50 },
         feet: { near: FEET.near, far: [FEET.far[0] - 2, 2, 10] }, ...TAIL(15, 20, 20), 'scarf-tail': 20 }),
       through: P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist' }, dx: 0, dy: 3,
         pelvis: 4, torso: 6, head: -10, hand: { off: [10, -30], dir: -45 }, shield: { off: [10, 16], turn: 0 },
