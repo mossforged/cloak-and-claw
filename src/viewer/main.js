@@ -12,7 +12,7 @@ import { phaseOf } from '../sim/fighter.js';
 import { BUILD } from '../config.js';
 import { createSlot } from './sandbox.js';
 import { clipsFor } from './clips.js';
-import { itemsFor, versionsOf } from './models.js';
+import { itemsFor, versionsOf, VERSION_RIGS } from './models.js';
 import { parseState, formatState } from './state.js';
 import { drawSlot, warm } from './scene.js';
 import { createUI } from './ui.js';
@@ -22,7 +22,7 @@ if (!new URLSearchParams(location.search).has('size') && innerWidth < 600) S.siz
 const canvas = document.getElementById('view'), ctx = canvas.getContext('2d'), hud = document.getElementById('hud');
 const $ = (id) => document.getElementById(id);
 hud.textContent = 'Loading art...';
-const assets = await loadAssets(collectArtPaths(FIGHTERS, RIGS, ITEMS, STAGES));
+const assets = await loadAssets(collectArtPaths(FIGHTERS, RIGS, ITEMS, STAGES, VERSION_RIGS));   // T026: + compare versions' art (old rats)
 const fxOf = () => { const a = createEffects(), b = createPropFx(assets); return { a, b, update() { a.update(); b.update(); }, clear() { a.clear(); b.clear(); } }; };
 const slots = [createSlot({ fx: fxOf, warm }), createSlot({ fx: fxOf, warm })];
 let playing = !S.paused, acc = 0, last = performance.now(), dirty = true, flags = [];

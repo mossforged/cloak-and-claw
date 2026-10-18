@@ -1,0 +1,14 @@
+[
+ {
+  "label": "r5: slow walk, feet now under the trouser legs (shin over foot). Seam flags left: art (A023 r2), named in the report",
+  "q": "f=rat-raider&anim=walk&speed=0.25&zoom=3"
+ },
+ {
+  "label": "r5: walk paused at a stride, close up on the ankles",
+  "q": "f=rat-raider&anim=walk&paused=1&t=9&zoom=4"
+ },
+ {
+  "label": "r5: idle (unchanged from r4 but the ankles; palm hand and waist wait for Art)",
+  "q": "f=rat-raider&anim=idle&zoom=2"
+ }
+]

@@ -1,6 +1,7 @@
 // Pose filmstrip (T024): fighter states drawn as the game draws them (render/rig.js rigFrame: floor-line rule, standee
 // lean, lying rest) with each boot's floor line, headless, as a JPG (tools/stretch_render.py).
-// Usage: node tools/pose-strip.mjs <fighter id> <out.jpg> <title> <cell> [<cell> ...]
+// Usage: node tools/pose-strip.mjs <fighter id> <out.jpg> <title> <cell> [<cell> ...] [--zoom N] [--a010]
+//   --zoom: scale (default 1.5; 1 = game size); --a010 (T026): draw a rat with its old A010 rig (rigs/a010/)
 //   cell: state[:t[:z]] (walk:<0..1 of a stride>), a named pose (=name, e.g. =cast), or move:<frame> (e.g. slash3:14)
 import { writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
@@ -8,8 +9,11 @@ import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { rigFrame } from '../src/render/rig.js';
 import { floorLine } from '../src/data/rigs/biped-floor.js';
+import { RAT_A010 } from '../src/data/rigs/a010/index.js';
 
-const [id, out, title, ...specs] = process.argv.slice(2), def = FIGHTERS[id], rig = RIGS[def.art.rig];
+const args = process.argv.slice(2), opt = (k) => { const i = args.indexOf(k); return i < 0 ? null : args.splice(i, 2)[1]; };
+const zoom = +(opt('--zoom') ?? 1.5), old = args.includes('--a010') && args.splice(args.indexOf('--a010'), 1);
+const [id, out, title, ...specs] = args, def = FIGHTERS[id], rig = old ? RAT_A010[def.art.rig] : RIGS[def.art.rig];
 const mul = (m, n) => [m[0] * n[0] + m[2] * n[1], m[1] * n[0] + m[3] * n[1], m[0] * n[2] + m[2] * n[3],
   m[1] * n[2] + m[3] * n[3], m[0] * n[4] + m[2] * n[5] + m[4], m[1] * n[4] + m[3] * n[5] + m[5]];
 const cells = specs.map((spec) => {
@@ -27,7 +31,7 @@ const cells = specs.map((spec) => {
     lines: ['foot-near', 'foot-far'].map((n) => ({ foot: n, y: floorLine(rig, n) })) };
 });
 const json = out.replace(/\.jpg$/, '.json');
-writeFileSync(json, JSON.stringify({ title, zoom: 1.5, cells }));
+writeFileSync(json, JSON.stringify({ title, zoom, cells }));
 const r = spawnSync('python3', ['tools/stretch_render.py', json, out], { encoding: 'utf8' });
 spawnSync('rm', [json]);
 if (r.status) { console.error(r.stderr); process.exit(1); }

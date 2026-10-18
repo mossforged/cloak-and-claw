@@ -6,7 +6,7 @@
 // (`order`), and a bow can be drawn back to a point on the body (`anchor`: the ear) instead of a fixed `pull`.
 // T025: the weapon is a node of its own (render/weapon-node.js): when a pose places it or names a grip mode, the grip
 // hand is put on it first and the second hand reaches the node's grip markers; otherwise the old hand-led frame.
-import { layoutRig } from './rig-layout.js';
+import { layoutRig, withHeldHand } from './rig-layout.js';
 import { phaseOf } from '../sim/fighter.js';
 import { at, reach } from './rig-ik.js';
 import { modesOf, nodeActive, placeNode } from './weapon-node.js';
@@ -89,14 +89,20 @@ function band(L, slot, hands) {
 // Layout entries (layoutRig's, plus { order, line: [points] } for a bow string), with the grip applied.
 // force (T025, hold sheet and tests): { grip, grip2 } grip modes overriding the pose's.
 export function gripLayout(rig, joints, swap, held, f, force) {
-  const G = held?.part && rig.grips?.[held.grip], modes = modesOf(rig, held, swap, force);
+  const G0 = held?.part && rig.grips?.[held.grip], modes = modesOf(rig, held, swap, force);
+  // T026: a whole-limb drawing (A019 raised / cocked arm) that hides the arm the grip bends: no second-hand IK this frame
+  const G = G0 && !Object.entries(swap).some(([p, k]) => rig.parts[p]?.swaps?.[k]?.hide?.some((h) => [...G0.ik.arm, G0.ik.end].includes(h))) ? G0 : null;
   const N = nodeActive(rig, joints, swap, held, modes);
   if (!G && !N) return band(layoutRig(rig, joints, swap, held), held?.part ? held.slot : typeof rig.slots?.['one-hand'] === 'string' && rig.slots['one-hand'], []);
-  let sw = { ...swap, ...G?.swap }, j = joints, finish = (L) => L, Wn = null;
+  let sw = { ...withHeldHand(rig, swap, held), ...G?.swap }, j = joints, finish = (L) => L, Wn = null, Nm = N;
   if (N) {   // T025: the weapon node and its grip hand first (a mode's own hand drawing if the rig has one)
-    const ms = GRIP_MODES[modes.grip]?.swap, cur = sw[N.hand] ?? N.hand;
-    if (ms && rig.parts[N.hand].swaps?.[`${cur}-${ms}`]) sw = { ...sw, [N.hand]: `${cur}-${ms}` };
-    const node = placeNode(rig, j, sw, held, N, modes.grip);
+    const ms = GRIP_MODES[modes.grip]?.swap, cur = sw[N.hand] ?? N.hand, own = `${cur}-${ms}`;
+    if (ms && rig.parts[N.hand].swaps?.[own]) {
+      sw = { ...sw, [N.hand]: own };
+      // T026: that drawing's own slot point and axis (rig.hands, the importer's grips), when the rig records them
+      if (rig.hands?.[own]) Nm = { ...N, at: rig.hands[own].at, axis: rig.hands[own].axis };
+    }
+    const node = placeNode(rig, j, sw, held, Nm, modes.grip);
     j = node.joints; finish = node.finish; Wn = node.W;
   }
   if (!G) return band(finish(layoutRig(rig, j, sw, held)), N.slot, [N.hand]);

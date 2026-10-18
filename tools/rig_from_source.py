@@ -3,19 +3,23 @@
   - a draft src/data/rigs/<id>.js: pivots/attach points converted to each image's own pixels, bands as draw order,
     swaps with their offsets, rest 0 (joint angle 0 = the master pose, as in the rig bench and data/rigs/biped-poses.js).
 Usage: python3 tools/rig_from_source.py <rig-source.json> --id rat-raider [--art assets/art/enemies/rat-raider/rig]
+       [--merge <fragment rig-source.json> ...]
        [--out src/data/rigs/rat-raider.js] [--height 136] [--scale 0.4]
 A draft: the game's poses for the character still have to be written against it.
 T023: whole-arm swaps keep their extra fields: `hide` (parts the drawing replaces), `itemGrip` -> `grip` (where the held
 item sits, swap image px) and `slotDirection` -> `axis` (degrees the fist holds a handle toward the item's head). The
 source's `grips` (each grip hand's slot centre and direction) become `hands`: { swap: { part, at (part px), axis } }.
 T024: part names are near/far (rig standard section 3). A source that says front/back for limbs, hands and feet (A013,
-A016) is read as near/far, so the output (data and image names) uses the new names; head/torso `back` views keep theirs."""
+A016) is read as near/far, so the output (data and image names) uses the new names; head/torso `back` views keep theirs.
+T026 round 2: every cut loses its detached islands (tools/islands.py: stray scraps apart from the main shape), each one
+dropped listed in the report; --keep-islands <name,...> keeps them on parts drawn in pieces on purpose (e.g. whiskers)."""
 import argparse, json, math, os, re, sys
 import numpy as np
 from PIL import Image
 
 sys.path.insert(0, os.path.dirname(__file__))
 from key_green import key  # noqa: E402
+from islands import describe  # noqa: E402
 
 
 def alpha_of(path):
@@ -61,22 +65,44 @@ def derive_sockets(src, folder):
         out["head_top"] = ("head", [float(xs[ys <= top + 6].mean()), float(top)])
         front = xs.max()
         out["mouth"] = ("head", [float(front), float(ys[xs >= front - 6].mean())])
-    if "tail" in P:
-        xs, ys = opaque("tail")
-        px, py = P["tail"]["pivot"]
+    tails = [n for n in P if n == "tail" or re.fullmatch(r"tail-\d", n)]
+    if tails:   # T026: a segmented tail's tip is on its last segment
+        last = sorted(tails, key=lambda n: 0 if n == "tail" else int(n[5:]))[-1]
+        xs, ys = opaque(last)
+        px, py = P[last]["pivot"]
         i = int(np.argmax((xs - px) ** 2 + (ys - py) ** 2))
-        out["tail_tip"] = ("tail", [float(xs[i]), float(ys[i])])
+        out["tail_tip"] = (last, [float(xs[i]), float(ys[i])])
+    return out
+
+
+def source_sockets(src, derived):
+    """T026: sockets the source names outright (A018 `sockets`: { name: { part, at } }, canvas px) win over the derived
+    ones; feet / weapon_tip stay runtime. Prints where each differs from the derived point (canvas px)."""
+    out = dict(derived)
+    for n, s in (src.get("sockets") or {}).items():
+        if "part" not in s:
+            continue
+        part = near_far(s["part"])
+        d = derived.get(n)
+        if d:
+            gap = math.hypot(s["at"][0] - d[1][0], s["at"][1] - d[1][1]) if d[0] == part else None
+            print(f"socket {n}: source {part} {s['at']} vs derived {d[0]} {[round(v) for v in d[1]]}"
+                  + (f" ({gap:.0f} canvas px apart)" if gap is not None else " (different part)"), file=sys.stderr)
+        out[n] = (part, s["at"])
     return out
 
 
 def near_far(n):
     if n is None:
         return None
+    if n == "tail-1":
+        return "tail"
     return re.sub(r"\b(arm|leg|hand|foot)-back", r"\1-far", re.sub(r"\b(arm|leg|hand|foot)-front", r"\1-near", n))
 
 
 def renamed(src):
-    """The source with near/far part names (keys, parents, swap targets, hide lists, grip hands)."""
+    """The source with near/far part names (keys, parents, swap targets, hide lists, grip hands). T026: a segmented tail's
+    first segment `tail-1` is the standard's `tail` (poses turn the root by that name); tail-2, tail-3 hang off it."""
     fix = lambda d: {near_far(k): v for k, v in (d or {}).items()}
     out = dict(src)
     out["parts"] = {k: {**p, "parent": near_far(p.get("parent"))} for k, p in fix(src.get("parts")).items()}
@@ -100,9 +126,22 @@ def main():
     ap.add_argument("--out")
     ap.add_argument("--height", type=float, default=136, help="screen px tall in game")
     ap.add_argument("--scale", type=float, default=0.4, help="canvas px -> stored image px")
+    ap.add_argument("--merge", action="append", default=[], help="T026: a rig-source fragment (A019, A022) laid over the source: its parts replace, its swaps and grips add; images resolve in the fragment's folder")
+    ap.add_argument("--keep-islands", default="", help="T026 r2: comma-separated part/swap names whose detached pieces are kept")
     ap.add_argument("--sockets", action="store_true", help="only print the sockets block (T024; images not written)")
     a = ap.parse_args()
-    src = renamed(json.load(open(a.source)))
+    raw = json.load(open(a.source))
+    for frag in a.merge:   # T026: fragments (same canvas and pivots); their image paths made absolute so they resolve
+        F, fdir = json.load(open(frag)), os.path.abspath(os.path.dirname(frag))
+        own = lambda d: {k: {**v, "img": os.path.join(fdir, v["img"])} for k, v in (d or {}).items()}
+        raw["parts"] = {**raw["parts"], **{k: {**raw["parts"].get(k, {}), **v} for k, v in own(F.get("parts")).items()}}
+        raw["swaps"] = {**raw.get("swaps", {}), **own(F.get("swaps"))}
+        if F.get("grips"):   # T026 r2 (A022): a fragment's grips win; a hand socket the base pinned on its old grip goes too
+            raw["grips"] = {**raw.get("grips", {}), **F["grips"]}
+            for side in {near_far(g["of"])[5:] for g in F["grips"].values()}:
+                (raw.get("sockets") or {}).pop(f"hand_{side}", None)
+        print(f"merged {frag}: parts {sorted((F.get('parts') or {}))}, swaps {sorted((F.get('swaps') or {}))}", file=sys.stderr)
+    src = renamed(raw)
     folder = src.get("dir") or os.path.dirname(a.source)
     s = a.scale
     if a.sockets:
@@ -110,15 +149,21 @@ def main():
             al = alpha_of(os.path.join(folder, src["parts"][name]["img"])) > 20
             ys, xs = np.nonzero(al)
             return [int(xs.min()), int(ys.min())]
-        print(sockets_block({n: (part, pt) for n, (part, pt) in derive_sockets(src, folder).items()}, lambda n, pt: [round((pt[0] - tl(n)[0]) * s, 1), round((pt[1] - tl(n)[1]) * s, 1)]))
+        print(sockets_block(source_sockets(src, derive_sockets(src, folder)), lambda n, pt: [round((pt[0] - tl(n)[0]) * s, 1), round((pt[1] - tl(n)[1]) * s, 1)]))
         return
     art = a.art or f"assets/art/rigs/{a.id}"
     out = a.out or f"src/data/rigs/{a.id}.js"
     os.makedirs(art, exist_ok=True)
 
+    keep_islands = set(filter(None, a.keep_islands.split(",")))
+    dropped = {}
+
     def cut(name, img):
         dst = os.path.join(art, f"{name}.png")
-        _, bbox = key(os.path.join(folder, img), dst, None, s)
+        isl = None if name in keep_islands else []
+        _, bbox = key(os.path.join(folder, img), dst, None, s, isl)
+        if isl:
+            dropped[name] = isl
         return dst, bbox[:2]
 
     origin, path = {}, {}
@@ -164,11 +209,14 @@ def main():
         for n, g in src["grips"].items():
             lines.append(f"    '{n}': {{ part: '{g['of']}', at: {local(g['of'], g['center'])}, axis: {axis(g['direction'])} }},")
         lines.append("  },")
-    lines.append(sockets_block(derive_sockets(src, folder), local, "  "))
+    lines.append(sockets_block(source_sockets(src, derive_sockets(src, folder)), local, "  "))
     lines += ["};", ""]
+    print(f"islands dropped ({len(dropped)} cuts; canvas px):" if dropped else "islands dropped: none")
+    for n, isl in dropped.items():
+        print(f"  {n}: {describe(isl)}")
     os.makedirs(os.path.dirname(out) or ".", exist_ok=True)
     open(out, "w").write("\n".join(lines))
-    print("wrote", out)
+    print("wrote", out, f"(scale {scale:.5f}: one uniform factor, no per-part scale)")
 
 
 if __name__ == "__main__":

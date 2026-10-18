@@ -9,7 +9,7 @@ const pair = (id) => [RIGS[id], defOf(id)];
 export const FAMILIES = {
   mouse: { title: 'Mouse Fighter (A013 + A016)', family: [pair('mouse-fighter')],
     items: Object.values(ITEMS).filter((k) => k.grip === 'one-hand' && k.kind === 'weapon') },
-  rat: { title: 'Rat Raider family (A010; spearman, archer)', family: ['rat-raider', 'rat-spearman', 'rat-archer'].map(pair), items: [] },
+  rat: { title: 'Rat Raider family (A018 + A019; spearman, archer)', family: ['rat-raider', 'rat-spearman', 'rat-archer'].map(pair), items: [] },
 };
 // rig id -> body name (for ?rig= / ?src= on the bench)
 export const bodyOf = (rigId) => Object.keys(FAMILIES).find((b) => FAMILIES[b].family.some(([r]) => r.id === rigId));

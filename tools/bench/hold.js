@@ -11,9 +11,9 @@ import { rigFrame, forceGrip } from '../../src/render/rig.js';
 import { nodeOf } from '../../src/render/weapon-node.js';
 import { movesOf } from '../../src/sim/weapons.js';
 import { GRIP_MODE_NAMES } from '../../src/data/grip-modes.js';
-import { SPEAR_HOLDS, withSpearHold } from '../../src/data/rigs/rat-spearman-holds.js';
 
 export const HOLD_PX = 2;   // how far the handle may leave the fist
+const MODE_DRAWING = /-(overhand|underhand)$/;   // T026: hand drawings named for a grip mode (data/grip-modes.js swap)
 const FIST = 5;             // half a fist's width along its slot (screen px): the handle line is checked out to here
 const apply = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const lin = (m, [x, y]) => [m[0] * x + m[2] * y, m[1] * x + m[3] * y];
@@ -38,7 +38,9 @@ export function holdFlags(rig, L, held) {
   if ((W.m[0] * W.m[3] - W.m[1] * W.m[2]) === 0 || W.p?.scale?.[0] === 0) return out;
   // the fist holding it: the grip hand, or the whole-arm drawing that hides it (its own grip point and slot axis)
   let S, v, fist = by[N.hand];
-  if (fist) { S = apply(fist.base, N.at); v = unit(lin(fist.base, [Math.cos(N.axis * D), Math.sin(N.axis * D)])); }
+  // T026: a grip mode's own hand drawing (A018 hand-near-grip-overhand) holds it at its own slot (rig.hands)
+  const own = fist && MODE_DRAWING.test(fist.swap ?? '') && rig.hands?.[fist.swap], at = own ? own.at : N.at, ax = own ? own.axis : N.axis;
+  if (fist) { S = apply(fist.base, at); v = unit(lin(fist.base, [Math.cos(ax * D), Math.sin(ax * D)])); }
   else {
     fist = L.find((e) => e.p?.swaps?.[e.swap]?.hide?.includes(N.hand) && e.p.swaps[e.swap].grip);
     if (!fist) return out;
@@ -82,20 +84,10 @@ export function holdFrame(f, modes) {
   return { rig, ...fr, flags: holdFlags(rig, fr.L, fr.held) };
 }
 
-// Strip cells for a body: holders x the sheet's frames x grip modes; body 'spear': the spearman's hold variants (E = the
-// default, then data/rigs/rat-spearman-holds.js) in the sheet's frames + hurt, each with its own grip modes.
+// Strip cells for a body: holders x the sheet's frames x grip modes (T026: the T025 spear hold variants retired, the
+// spearman holds overhand by default).
 export function holdCells(body, all = false) {
   const cells = [];
-  if (body === 'spear') {
-    const base = RIGS['rat-spearman'];
-    for (const k of ['E', ...Object.keys(SPEAR_HOLDS)]) {
-      RIGS['rat-spearman'] = withSpearHold(base, k);
-      const frames = [...holdFrames('rat-spearman', null, all), ['hurt', fighterOf(FIGHTERS['rat-spearman'], null, { state: 'hurt', t: 30, stun: 31 })]];
-      for (const [label, f] of frames) cells.push(cellOf(holdFrame(f), `${k} ${SPEAR_HOLDS[k]?.label ?? 'underhand (T020 pick, default)'}: ${label}`, { id: 'rat-spearman', mode: k, frame: label }));
-    }
-    RIGS['rat-spearman'] = base;
-    return cells;
-  }
   for (const [id, item] of HOLDERS[body]) {
     for (const mode of GRIP_MODE_NAMES) for (const [label, f] of holdFrames(id, item, all)) {
       const name = `${id.replace('-fighter', '').replace('rat-', '')} ${item ?? (FIGHTERS[id].kit ?? FIGHTERS[id].art.held ?? 'sword')}`.replace('rat-', '').replace('mouse-', '');

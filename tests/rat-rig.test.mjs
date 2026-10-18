@@ -1,4 +1,4 @@
-// Rat rigs (T018: A010 on the rig standard). raider / spearman / archer share the A010 body. Every pose names only
+// Rat rigs (T018: A010 on the rig standard; T026: rebuilt on A018 + A019). raider / spearman / archer share the body. Every pose names only
 // existing parts and swaps; uniform scale only (no per-part scale); grabbed/thrown use `held`; feet stay on their floor
 // in the crouch and move poses, walk doesn't skate or sink; layouts finite. Weapons: the raider holds the rat-cutlass
 // item (its grip on the near hand's shaft slot) and drops that same item, his hand empty once it has fallen; spear on
@@ -8,25 +8,30 @@ import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { ITEMS } from '../src/data/items/index.js';
 import { targetPose, jointsOfRig } from '../src/render/rig-pose.js';
-import { heldOf, layoutRig } from '../src/render/rig.js';
+import { heldOf, layoutRig, rigFrame } from '../src/render/rig.js';
 import { gripLayout } from '../src/render/rig-grip.js';
 import { BIPED_PARTS } from '../src/data/rigs/biped-poses.js';
+import { floorLine } from '../src/data/rigs/biped-floor.js';
+import HULLS from '../src/data/rigs/hulls.js';
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
 const apply = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
-// Lowest points of the foot drawings (foot image px, measured on A010's feet). The far foot sits ~7 px higher in the
-// master (three-quarter view): each foot's floor is where it is at rest.
-const SOLE = { 'foot-near': [[52, 70], [85, 68]], 'foot-far': [[77, 49], [105, 52]] };
-const CHANNELS = new Set(['speed', 'swap', 'dx', 'dy', 'sx']);
+// T026: a foot is on its floor when the lowest point of whichever drawing it shows (flat or A019 toe-off: its hull,
+// rigs/hulls.js) is on that foot's floor line (rigs/biped-floor.js, the master's); x = its ankle (the same point in
+// every drawing), for the walk's stride.
+const FEET = ['foot-near', 'foot-far'];
+const CHANNELS = new Set(['speed', 'swap', 'swapPhase', 'dx', 'dy', 'sx', 'weapon']);   // weapon.*: T025 node channels
 
 for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   const def = FIGHTERS[id], rig = RIGS[def.art.rig], P = rig.poses;
   const fighter = (o) => ({ def, state: 'idle', t: 0, mf: 0, move: null, weapon: null, hp: 10, ...o });
   const lay = (f) => { const tp = targetPose(f, rig, 0); return gripLayout(rig, tp.joints, tp.swap, heldOf(f, rig), f); };
-  const soles = (L) => Object.fromEntries(Object.entries(SOLE).map(([n, pts]) => [n, pts.map((p) => apply(L.find((e) => e.name === n).m, p))]));
-  const floor = soles(layoutRig(rig, {}));   // the master pose
+  const soles = (L) => Object.fromEntries(FEET.filter((n) => L.some((e) => e.name === n)).map((n) => {
+    const e = L.find((x) => x.name === n), ys = HULLS[e.img].map((p) => apply(e.m, p)[1]);
+    return [n, { y: Math.max(...ys), x: apply(e.base, rig.parts[n].pivot)[0] }];
+  }));
 
   check(BIPED_PARTS.every((n) => rig.parts[n]), `${id}: every standard part present`);
   check(Object.values(rig.parts).every((p) => p.scale === undefined), `${id}: uniform scale only (no per-part scale)`);
@@ -37,7 +42,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   for (const [k, pose] of Object.entries(poses)) {
     for (const ch of Object.keys(pose)) {
       const part = ch.split('.')[0];
-      check(CHANNELS.has(ch) || rig.parts[part], `${id} ${k}: '${ch}' names an existing part`);
+      check(CHANNELS.has(ch) || CHANNELS.has(part) || rig.parts[part], `${id} ${k}: '${ch}' names an existing part`);
     }
     for (const [part, sw] of Object.entries(pose.swap ?? {})) check(rig.parts[part]?.swaps?.[sw], `${id} ${k}: swap ${part} -> ${sw} exists`);
   }
@@ -51,24 +56,26 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   for (const state of ['grabbed', 'thrown']) check(targetPose(fighter({ state }), rig, 0).key === 'held', `${id} ${state}: held pose (hurt face)`);
   check(targetPose(fighter({ state: 'down' }), rig, 0).swap.head === 'head-ko', `${id} down: KO face`);
 
-  // crouch stance and ground moves: both feet on their floor
+  // crouch stance and ground moves: both feet on their floor (T026: the frame before the strike and its last active
+  // frame, each fully in its pose; a swap switching in on the first strike frame is the floor-line rule's, render/floor.js)
   const onFloor = (L, tol, label) => {
     const S = soles(L);
-    for (const n of Object.keys(SOLE)) {
-      const d = Math.max(...S[n].map((p, i) => Math.abs(p[1] - floor[n][i][1])));
+    for (const n of Object.keys(S)) {
+      const d = Math.abs(S[n].y - floorLine(rig, n));
       check(d < tol, `${id} ${label}: ${n} on its floor (${d.toFixed(1)} px off)`);
     }
   };
   onFloor(lay(fighter({})), 2, 'stance');
-  for (const [key, m] of Object.entries(def.moves)) for (const mf of [m.windup, m.windup + m.active - 1]) onFloor(lay(fighter({ state: 'attack', move: m, moveKey: key, mf })), 2, `${key}@${mf}`);
+  for (const [key, m] of Object.entries(def.moves)) for (const mf of [m.windup - 1, m.windup + m.active - 1]) onFloor(lay(fighter({ state: 'attack', move: m, moveKey: key, mf })), 2, `${key}@${mf}`);
 
   // walk: feet never sink under their floor and the planted foot sweeps back as far as the body moves (no skating)
   const need = def.move.walk * 60 / P.walk.speed / 2;
-  for (const n of Object.keys(SOLE)) {
+  for (const n of FEET) {
     let lo = Infinity, hi = -Infinity, sink = -Infinity;
     for (let i = 0; i < 60; i++) {
-      const s = soles(lay(fighter({ state: 'walk', t: i / P.walk.speed })))[n], x = (s[0][0] + s[1][0]) / 2;
-      lo = Math.min(lo, x); hi = Math.max(hi, x); sink = Math.max(sink, ...s.map((p, j) => p[1] - floor[n][j][1]));
+      const f = fighter({ state: 'walk', t: i / P.walk.speed, facing: 1, x: 0, y: 0, z: 0, vz: 0 }), mem = {};
+      rigFrame(f, rig, -1, mem); const s = soles(rigFrame(f, rig, 0, mem).L)[n];   // as drawn: the floor-line rule holds planted feet
+      lo = Math.min(lo, s.x); hi = Math.max(hi, s.x); sink = Math.max(sink, s.y - floorLine(rig, n));
     }
     check(sink < 3, `${id} walk ${n}: never sinks (deepest ${sink.toFixed(1)} px under)`);
     check(Math.abs((hi - lo) / need - 1) < 0.25, `${id} walk ${n}: stride ${(hi - lo).toFixed(1)} px ~ ${need.toFixed(1)} (no skating)`);
@@ -86,10 +93,12 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const tp = targetPose(fi, rig, 0), L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
     const blade = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-near');
     check(blade?.img === K.art.img, `raider ${label}: the cutlass item drawn in his hand`);
-    const d = dist(apply(blade.m, K.art.grip), apply(hand.m, slot.attach));
+    const d = dist(apply(blade.m, K.art.grip), apply(hand.base, slot.attach));   // slot in the hand part's px
     check(d < 0.01, `raider ${label}: cutlass grip on the hand's shaft slot (${d.toFixed(3)} px off)`);
     check(blade.order < hand.order, `raider ${label}: handle drawn behind the grip hand`);
-    if (label === 'strike') check(L.findIndex((e) => e.name === 'arm-near-upper') > L.findIndex((e) => e.name === 'torso'), 'raider strike: near arm in front of the torso');
+    // T026 r2: the near upper arm stays under the vest edge (band 590 < torso 600); the forearm chops in front of it
+    const at = (n) => L.findIndex((e) => e.name === n);
+    if (label === 'strike') check(at('arm-near-upper') < at('torso') && at('arm-near-lower') > at('torso'), 'raider strike: near upper arm under the vest, forearm in front of the torso');
   }
   const ko = f({ state: 'dead', hp: 0, dropped: true }), tp = targetPose(ko, rig, 0);
   check(!gripLayout(rig, tp.joints, tp.swap, heldOf(ko, rig), ko).some((e) => e.name === 'held'), 'raider KO: dropped cutlass gone from his hand');
@@ -104,8 +113,8 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const fi = { def, t: 0, mf: 0, move: null, weapon: null, hp: 10, ...f }, tp = targetPose(fi, rig, 0);
     const L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
     const spear = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-far');
-    check(spear?.img === K.art.img && hand.swap === 'hand-far-grip', `spearman ${label}: spear in hand, far hand gripping`);
-    const s = rig.parts['hand-far'].swaps['hand-far-grip'], at = apply(hand.m, [G.ik.hand[0] - s.offset[0], G.ik.hand[1] - s.offset[1]]);
+    check(spear?.img === K.art.img && hand.swap === G.swap['hand-far'], `spearman ${label}: spear in hand, far hand gripping (${hand.swap})`);
+    const s = rig.parts['hand-far'].swaps[G.swap['hand-far']], at = apply(hand.m, [G.ik.hand[0] - s.offset[0], G.ik.hand[1] - s.offset[1]]);
     const g1 = apply(spear.m, K.art.grip), g2 = apply(spear.m, K.art.grip2), L2 = dist(g1, g2);   // on the shaft line (T020: may slide back)
     const d = Math.abs((at[0] - g1[0]) * (g2[1] - g1[1]) - (at[1] - g1[1]) * (g2[0] - g1[0])) / L2;
     check(d < 2, `spearman ${label}: far hand on the shaft (${d.toFixed(2)} px off)`);
@@ -125,7 +134,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
     const bow = L.find((e) => e.name === 'held'), near = L.find((e) => e.name === 'hand-near'), far = L.find((e) => e.name === 'hand-far');
     check(bow?.img === K.art.img && far.swap === 'hand-far-grip' && near.swap === 'hand-near-pinch', `archer ${label}: bow in the far grip hand, near hand pinching`);
-    check(Math.abs(Math.atan2(bow.m[1], bow.m[0])) < 0.01, `archer ${label}: bow upright`);
+    check(Math.abs(Math.atan2(bow.m[1], bow.m[0])) < 0.01, `archer ${label}: bow upright (${(Math.atan2(bow.m[1], bow.m[0]) / Math.PI * 180).toFixed(2)} deg)`);
     const s = rig.parts['hand-near'].swaps['hand-near-pinch'], sk = s.scale ?? 1;
     const pinch = apply(near.m, [(G.ik.hand[0] - s.offset[0]) / sk, (G.ik.hand[1] - s.offset[1]) / sk]);
     const d = k ? dist(pinch, L.find((e) => e.line).line[1]) : 0;   // T020: on the drawn string's nock point

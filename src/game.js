@@ -6,7 +6,6 @@ import { createWorld, stepWorld } from './sim/world.js';
 import { createRenderer } from './render/renderer.js';
 import { stepViewPose } from './render/view-pose.js';
 import { RIGS } from './data/rigs/index.js';
-import { withSpearHold } from './data/rigs/rat-spearman-holds.js';
 import { STAGES } from './data/stages/index.js';
 import { createJuice } from './render/juice.js';
 import { bus } from './core/events.js';
@@ -22,8 +21,6 @@ const HEROES = Array(Math.max(1, Math.min(3, +Q.get('heroes') || 1))).fill(START
 // T022: ?ally=1 adds an AI ally (a tinted Mouse Fighter, sim/ally.js) on the next free slot. Off in normal play for now.
 if (Q.get('ally') === '1' && HEROES.length < 3) HEROES.push({ id: START_HERO, ally: true });
 if (Q.has('keys2')) KEYBOARD2.on = true;
-// T025 view test: ?spear=B (C, D) gives spearmen an overhand hold variant (data/rigs/rat-spearman-holds.js); default E
-if (Q.get('spear')) RIGS['rat-spearman'] = withSpearHold(RIGS['rat-spearman'], Q.get('spear'));
 const newWorld = () => createWorld(STAGE, HEROES);
 
 export function createGame(ctx, assets) {

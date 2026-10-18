@@ -3,7 +3,7 @@
 // it (tools/rig-bench.html?...&stretch). alphaOf(img) -> { w, h, alpha } is the caller's (Node: bench/png.mjs; browser:
 // canvas pixels).
 // Cells: each knee and elbow bent 90 and 150 degrees from straight; arms straight up; each torso view; each hand, foot and
-// whole-limb drawing; each item each body holds (current grip, and T025: every grip mode on the weapon node); a crouch,
+// whole-limb drawing; the tail root +-10 (T026 r2); each item each body holds (current grip, and T025: every grip mode on the weapon node); a crouch,
 // the pose-budget crouches and lying with the floor lines; the rig at 0.96x, 1.04x, 1.4x.
 // Flags: a seam gap over 2 px at a joint (a crack inside the joint's filled core at rest: empty with drawing on both sides), a foot below its floor line or floating
 // over it without a named lift (floor cells), a lying body off the floor, a far hand hidden on a two-handed item; T025:
@@ -16,6 +16,7 @@ import { floorLine } from '../../src/data/rigs/biped-floor.js';
 import { LOOKS } from '../../src/data/looks.js';
 import { GRIP_MODE_NAMES } from '../../src/data/grip-modes.js';
 import { holdFlags } from './hold.js';
+import { tailRootFlags } from './tail-root.js';
 
 const D = Math.PI / 180;
 const ang = (v) => Math.atan2(v[1], v[0]) / D;
@@ -65,6 +66,14 @@ export function stretchCells(family, items = []) {
     up[l] = ang(bone(rig, l)) - ang(bone(rig, h));
   }
   custom('arms straight up', up);
+  // T026 r2: the tail root (the walk's butt / tail gap): the tail turned 10 degrees either way against the pelvis, the
+  // pelvis turned 10 either way under still legs, and the walk's four quarter keys (the thighs swing off the root)
+  if (rig.parts.tail?.parent) {
+    const T = { tailRoot: true };
+    for (const d of [10, -10]) custom(`tail root ${d > 0 ? '+' : ''}${d}`, { ...S, tail: (S.tail ?? 0) + d }, {}, { flags: T });
+    for (const d of [10, -10]) custom(`tail root, pelvis ${d > 0 ? '+' : ''}${d}`, { ...S, pelvis: (S.pelvis ?? 0) + d, 'leg-near-upper': (S['leg-near-upper'] ?? 0) - d, 'leg-far-upper': (S['leg-far-upper'] ?? 0) - d }, {}, { flags: T });
+    if (rig.poses.walk) for (const q of [0, 0.25, 0.5, 0.75]) frame(`tail root, walk ${q}`, { state: 'walk', t: q * 60 / rig.poses.walk.speed }, undefined, T);
+  }
   const views = rig.parts.torso?.swaps ?? {};
   custom('torso three-quarter', S);
   for (const sw of Object.keys(views)) custom(sw, S, { torso: sw, ...(sw === 'torso-back' && rig.parts.head?.swaps?.['head-back'] ? { head: 'head-back' } : {}) });
@@ -100,7 +109,7 @@ function heldFor(rig, def, item) {
 }
 
 // Is screen point P covered by entry e's drawing?
-const covers = (alphaOf, e, P) => {
+export const covers = (alphaOf, e, P) => {
   const A = alphaOf(e.img);
   if (!A) return false;
   const [u, v] = apply(e.inv ??= inv(e.m), P), x = Math.floor(u), y = Math.floor(v);
@@ -137,7 +146,7 @@ function crack(alphaOf, list, J, r, out = null) {
 
 // The outer side of a bend at joint J (parent p, child entry e): away from the bisector of the directions to the parent's
 // far end and to the child's; null when the limb is nearly straight (over 150 degrees open).
-function outward(rig, by, e, p, J, alphaOf) {
+export function outward(rig, by, e, p, J, alphaOf) {
   const unit = (v) => { const n = Math.hypot(v[0], v[1]); return n > 1e-6 ? [v[0] / n, v[1] / n] : null; };
   const toParent = unit(apply(by[p].base, rig.parts[p].pivot).map((v, i) => v - J[i]));
   const gc = Object.keys(rig.parts).find((c) => rig.parts[c].parent === e.name && !ITEM.has(c) && by[c]);
@@ -155,7 +164,7 @@ export function flagsOf(cell, alphaOf) {
   const carried = new Set(drawn.flatMap((e) => Object.keys(e.p?.swaps?.[e.swap]?.carry ?? {})));
   const rest = Object.fromEntries(layoutRig(rig, { ...channelsOf(rig) }, cell.swap, cell.held).filter((e) => e.m).map((e) => [e.name, e]));
   // seams: the filled core round each joint, at rest (parent + child) and as posed (anything drawn over it)
-  for (const e of drawn) {
+  for (const e of cell.tailRoot ? [] : drawn) {   // the tail-root cells measure the tail root only (below)
     const p = rig.parts[e.name]?.parent;
     if (!p || ITEM.has(e.name) || carried.has(e.name) || !by[p] || !rest[e.name] || !rest[p]) continue;
     const J0 = apply(rest[e.name].base, rig.parts[e.name].pivot), r0 = core(alphaOf, [rest[e.name], rest[p]], J0);
@@ -178,6 +187,7 @@ export function flagsOf(cell, alphaOf) {
     for (const e of drawn) if (/^(pelvis|torso|head|leg-|foot-)/.test(e.name)) lo = Math.max(lo, lowest(e));
     if (Math.abs(lo) > 0.75) flags.push(`lying body ${lo > 0 ? 'under' : 'over'} the floor by ${Math.abs(lo).toFixed(1)} px`);
   }
+  if (cell.tailRoot && by.tail) for (const t of tailRootFlags(rig, drawn, by.tail, cell, (e, P) => covers(alphaOf, e, P), alphaOf)) { flags.push(t.text); marks.push(t.at); }
   if (cell.twoHand && by['hand-far']) {   // share of the far hand's pixels nothing drawn later covers
     const e = by['hand-far'], A = alphaOf(e.img), later = drawn.slice(drawn.indexOf(e) + 1);
     let n = 0, seen = 0;
