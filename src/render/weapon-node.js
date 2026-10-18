@@ -9,7 +9,7 @@
 // wobble, a sword turned in the fist) turns the weapon in the fist last.
 import { layoutRig, mul, rot, tr, apply } from './rig-layout.js';
 import { reach } from './rig-ik.js';
-import { GRIP_MODES } from '../data/grip-modes.js';
+import { GRIP_MODES, modesFor } from '../data/grip-modes.js';
 import HULLS from '../data/rigs/hulls.js';
 
 const D = Math.PI / 180;
@@ -34,7 +34,9 @@ export function nodeOf(rig, held) {
 // as '@grip' / '@grip2'), else the rig's per-kit default (rig.holds[item id]), else the item's (kit.hold).
 export function modesOf(rig, held, swap, force = {}) {
   const id = held?.kit?.id, d = { ...held?.kit?.hold, ...(id && rig.holds?.[id]) };
-  return { grip: force.grip ?? swap['@grip'] ?? d.grip ?? 'side', grip2: force.grip2 ?? swap['@grip2'] ?? d.grip2 ?? null };
+  const m = { grip: force.grip ?? swap['@grip'] ?? d.grip ?? 'side', grip2: force.grip2 ?? swap['@grip2'] ?? d.grip2 ?? null };
+  if (rig.gripLines && !modesFor(rig).includes(m.grip)) m.grip = 'side';   // T028 r4: no mode without its own drawing
+  return m;
 }
 
 // Is the node on this frame? (anything but the old placement with the side grip)
@@ -59,7 +61,8 @@ export function placeNode(rig, joints, swap, held, N, mode) {
   const G = [G0[0] + (Gt[0] - G0[0]) * wa, G0[1] + (Gt[1] - G0[1]) * wa], a = a0 + wrap(aT - a0) * wt;
   let W = mul(mul(tr(G[0] - G0[0], G[1] - G0[1]), about(G0, a - a0)), W0);
   // the grip hand copies the weapon: slot axis along the handle, slot point on the grip, then the mode about the grip
-  const M = GRIP_MODES[mode] ?? GRIP_MODES.side, S0 = apply(H0, ...N.at);
+  // T028 r4: on the user's lines the drawing is placed as drawn (its own line along the handle), never turned over
+  const M = rig.gripLines ? GRIP_MODES.side : GRIP_MODES[mode] ?? GRIP_MODES.side, S0 = apply(H0, ...N.at);
   const B1 = mul(mul(tr(G[0] - S0[0], G[1] - S0[1]), about(S0, a - ang(lin(H0, [Math.cos(N.axis * D), Math.sin(N.axis * D)])))), H0);
   const pivot = rig.parts[N.hand].pivot, cands = M.turns.map((t) => (M.mirror ? mul(mirror(G, a + 90), mul(about(G, t), B1)) : mul(about(G, t), B1)));
   // over / under: the fist drawing's middle (its hull's mean point) above or below the shaft line on screen

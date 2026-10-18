@@ -45,7 +45,8 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
     if (!s) continue;
     for (const h of s.hide ?? []) hidden.add(h);
     for (const [c, xy] of Object.entries(s.carry ?? {})) {
-      if (parts[c]) parts[c] = { ...parts[c], parent: name, attach: apply(swapMatrix(s), ...xy), rest: (parts[c].rest ?? 0) + (s.turn?.[c] ?? 0) };
+      // T028 r4: a key that carries only what its own hand holds (`carryHand`: the far raised arm and the bow, not the cutlass)
+      if (parts[c] && !(s.carryHand && parts[c].parent !== s.carryHand)) parts[c] = { ...parts[c], parent: name, attach: apply(swapMatrix(s), ...xy), rest: (parts[c].rest ?? 0) + (s.turn?.[c] ?? 0) };
     }
   }
   const frameOf = (name) => {

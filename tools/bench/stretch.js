@@ -175,7 +175,8 @@ export function flagsOf(cell, alphaOf) {
     if (gap > SEAM_PX) { flags.push(`seam ${p} / ${e.name}: ${gap.toFixed(1)} px`); marks.push(apply(cell.view, J)); }
   }
   const H = cell.view, height = ([x, y]) => H[1] * x + H[3] * y + H[5];
-  const lowest = (e) => { const A = alphaOf(e.img); let lo = -Infinity; if (!A) return lo; for (let y = 0; y < A.h; y += 2) for (let x = 0; x < A.w; x += 2) if (A.alpha[y * A.w + x] > 127) lo = Math.max(lo, height(apply(e.m, [x + 0.5, y + 0.5]))); return lo; };
+  // T028 r4: every pixel (was every 2nd: 0.7 screen px apart at 1.4x, so A023 r4's far foot read 0.9 px off the floor)
+  const lowest = (e) => { const A = alphaOf(e.img); let lo = -Infinity; if (!A) return lo; for (let y = 0; y < A.h; y++) for (let x = 0; x < A.w; x++) if (A.alpha[y * A.w + x] > 127) lo = Math.max(lo, height(apply(e.m, [x + 0.5, y + 0.5]))); return lo; };
   if (cell.floor) for (const e of drawn) {
     const foot = /^foot-/.test(e.name) ? e.name : e.p?.swaps?.[e.swap]?.hide?.find((n) => n.startsWith('foot-'));
     if (!foot) continue;

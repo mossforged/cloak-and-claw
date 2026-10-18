@@ -1,9 +1,10 @@
 // Model viewer (T027) controls: the tabbed bottom sheet (big touch buttons, nothing hover-only) built from the model
 // list, its clips, holdable items and look options. ui.set(patch) asks main.js to apply a state change. Browser only.
 import { FIGHTERS } from '../data/fighters/index.js';
-import { MODELS, SIZES, GRIPS, itemsFor, itemLabel, versionsOf, looksFor, randomLook, STEPS } from './models.js';
+import { MODELS, SIZES, itemsFor, rigOf, itemLabel, versionsOf, looksFor, randomLook, STEPS } from './models.js';
 import { clipsFor, GROUPS } from './clips.js';
 import { OVERLAYS, BGS } from './state.js';
+import { modesFor } from '../data/grip-modes.js';
 
 const TABS = ['Character', 'Moves', 'Hold', 'Look', 'View', 'Compare'];
 const OVERLAY_LABELS = { floor: 'Floor lines', pivots: 'Joint pivots', sockets: 'Sockets', seams: 'Stretch flags', hitbox: 'Hit boxes', ghost: 'Rest ghost' };
@@ -41,7 +42,7 @@ export function createUI(api) {
 
   function hold(S) {
     return [head('Held item'), row(itemsFor(S.f).map((id) => btn(itemLabel(id), S.item === id, () => api.set({ item: id })))),
-      head('Grip mode'), row(btn('Default', !S.grip, () => api.set({ grip: '' })), GRIPS.map((g) => btn(g, S.grip === g, () => api.set({ grip: g })))),
+      head('Grip mode'), row(btn('Default', !S.grip, () => api.set({ grip: '' })), modesFor(rigOf(S.f)).map((g) => btn(g, S.grip === g, () => api.set({ grip: g })))),
       el('p', { className: 'note', textContent: 'Attacks use the held item\'s own moves when it has them (Moves tab).' })];
   }
 

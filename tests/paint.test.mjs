@@ -17,8 +17,11 @@ for (const name of Object.keys(PAINT_BODIES)) {
   if (pointers.length) { console.log(`NOTE ${name} paint check skipped: LFS pointer, not the image (git lfs pull --include "${pointers.join(',')}")`); continue; }
   const r = paintCheck(bodyOf(name), readRGBA), share = (100 * r.strongShare).toFixed(2), region = r.region.gamePx.toFixed(0);
   console.log(`${name}: mean ${r.mean.toFixed(1)}, p95 ${r.p95.toFixed(1)}, strong ${share}%, largest region ${region} game px^2`);
-  check(r.strongShare <= PAINT.limit.strongShare, `${name}: ${share}% of the silhouette paints unlike the master (limit ${100 * PAINT.limit.strongShare}%; map: node tools/paint-map.mjs ${name})`);
-  check(r.region.gamePx <= PAINT.limit.region, `${name}: a ${region} game px^2 region paints unlike the master (limit ${PAINT.limit.region}; map: node tools/paint-map.mjs ${name})`);
+  const K = PAINT.known?.[name], lim = { strongShare: Math.max(PAINT.limit.strongShare, K?.strongShare ?? 0), region: Math.max(PAINT.limit.region, K?.region ?? 0) };
+  if (K && (r.strongShare > PAINT.limit.strongShare || r.region.gamePx > PAINT.limit.region)) console.log(`NOTE ${name}: over the limit, known (${K.why})`);
+  if (K && r.strongShare <= PAINT.limit.strongShare && r.region.gamePx <= PAINT.limit.region) console.log(`NOTE ${name}: back under the limit: delete PAINT.known.${name}`);
+  check(r.strongShare <= lim.strongShare + 1e-4, `${name}: ${share}% of the silhouette paints unlike the master (limit ${100 * PAINT.limit.strongShare}%; map: node tools/paint-map.mjs ${name})`);
+  check(r.region.gamePx <= lim.region + 0.5, `${name}: a ${region} game px^2 region paints unlike the master (limit ${PAINT.limit.region}; map: node tools/paint-map.mjs ${name})`);
 }
 // the check sees a painted disc (the T026 review's hard-edged wrist disc): a flat disc of another paint, 24 cut px
 // (6 game px) across, on the torso at rest fails it

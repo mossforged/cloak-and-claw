@@ -74,7 +74,7 @@ const idx = (L, n) => L.findIndex((e) => e.name === n);
   check(idx(O, 'arm-far-upper') > idx(O, 'head'), 'pose band override: the far arm in front of the chest');
   check(JSON.stringify(order({ '@view.torso': 'Q' }).map((e) => [e.name, e.order, ...e.m])) === JSON.stringify(LQ.map((e) => [e.name, e.order, ...e.m])), 'Q named = no view');
   const R = viewRig(rat, { torso: 'S' });
-  check(near(R.parts.head.attach, rat.bodyViews.torso.S.anchors.neck) && R.parts.head !== rat.parts.head && rat.parts.head.attach[0] === 168, 'viewRig: parts on the view\'s points, the rig untouched');
+  check(near(R.parts.head.attach, rat.bodyViews.torso.S.anchors.neck) && R.parts.head !== rat.parts.head && rat.parts.head.attach[0] === 169.6, 'viewRig: parts on the view\'s points, the rig untouched');
 }
 
 // 3. shoulder caps

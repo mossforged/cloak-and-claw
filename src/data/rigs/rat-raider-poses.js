@@ -1,7 +1,10 @@
 // Rat Raider rig poses (T026, A018 + A019 on the standard part names). Same format as rigs/mouse-fighter-poses.js.
 // All-zero joints = the A017 setup master: standing straight, arms hanging, fists closed. Every pose here is posed from
 // it with the IK helper (rigs/biped-ik.js `pose`): the cutlass fist placed from the shoulder (`hand.off`) with the
-// blade's screen direction (`dir`: 0 forward, -90 up, 90 down), the far fist from its shoulder (`shield`: A018's
+// blade's screen direction (`dir`: 0 forward, -90 up, 90 down; T028 r4: on the user's grip line the blade keeps its
+// direction and the fist turns to it, ~87 deg from A023's estimate; a whole-arm drawing instead keeps its round 3
+// screen angle, so the item leaves its fist where the user drew it: wholeArm dirs moved by the change of the arm's line,
+// cocked -185.7, raised -194.8; turning those drawings 186 / 195 deg would stand the arm on its head), the far fist from its shoulder (`shield`: A018's
 // hand-far-shield slot, used as the far fist's reference point), ankles planted by leg IK (x, lift, tilt).
 // The menace crouch (his A010 look: wide hunched stance, cutlass up behind) is CROUCH; poses spread it and
 // change what they need. Whole-limb drawings (A019): cocked near arm for the telegraph, kneeling near leg for the
@@ -87,7 +90,7 @@ export default {
     dy: 16, pelvis: 4, torso: 16, head: -12, hand: { off: [-14, 14], dir: -80 }, shield: { off: [12, 22], turn: 0 },
     feet: { far: [FAR + 6, 0, 0] }, ...TAIL(-20, 10, 15) }),
   // not a state: the arms-up check (stretch test, viewer): A019 raised near arm, cutlass hanging back over his head
-  cast: P({ ...CROUCH, swap: { head: 'head-attack' }, wholeArm: { swap: 'arm-near-raised', dir: 135 },
+  cast: P({ ...CROUCH, swap: { head: 'head-attack' }, wholeArm: { swap: 'arm-near-raised', dir: -59.8 },
     shield: { off: [19, 9], turn: -40 } }),
   moves: {
     ratSlash: {   // T028 the turning slash (rehearsal Slash 1): wind-up turned away (BQ) with the cocked arm (A019) wholly
@@ -98,7 +101,7 @@ export default {
       // the arm under the vest. Until A023: the side torso stands in for F and BQ.
       switchAt: 0.1,
       windup: P({ ...CROUCH, view: { torso: 'BQ' }, swap: { head: 'head-effort', 'hand-far': 'hand-far-fist' }, dx: -4, torso: -12, head: 0,
-        wholeArm: { swap: 'arm-near-cocked', dir: -160 }, shield: { off: [22, 10], turn: -50 },
+        wholeArm: { swap: 'arm-near-cocked', dir: 14.3 }, shield: { off: [22, 10], turn: -50 },
         feet: { near: FEET.near, far: [FEET.far[0] - 2, 2, 10] }, ...TAIL(15, 20, 20), 'scarf-tail': 20 }),
       through: P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist' }, dx: 0, dy: 3,
         pelvis: 4, torso: 6, head: -10, hand: { off: [10, -30], dir: -45 }, shield: { off: [10, 16], turn: 0 },

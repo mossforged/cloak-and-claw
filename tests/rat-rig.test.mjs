@@ -93,7 +93,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const tp = targetPose(fi, rig, 0), L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
     const blade = L.find((e) => e.name === 'held'), hand = L.find((e) => e.name === 'hand-near');
     check(blade?.img === K.art.img, `raider ${label}: the cutlass item drawn in his hand`);
-    const d = dist(apply(blade.m, K.art.grip), apply(hand.base, slot.attach));   // slot in the hand part's px
+    const d = dist(apply(blade.m, (rig.itemLines?.[K.id] ?? K.art).grip), apply(hand.base, slot.attach));   // slot in the hand part's px (T028 r4: the user's line)
     check(d < 0.01, `raider ${label}: cutlass grip on the hand's shaft slot (${d.toFixed(3)} px off)`);
     check(blade.order < hand.order, `raider ${label}: handle drawn behind the grip hand`);
     // T026 r2: at rest the near upper arm stays under the vest edge (band 590 < torso 600), the forearm in front of it;

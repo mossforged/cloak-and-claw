@@ -10,6 +10,11 @@
 //     shown paint are tolerance (the surface carries on a little under its cover).
 //   exposed: in a frame (as drawn: every piece's screen matrix, the draw order), hidden-zone pixels that end up on top.
 //     Flag over EXPOSED_PX2 game px^2 for a piece in a frame; `under` = the piece that hid most of them at rest.
+//     T028 r4 (Art's point: finished paint meant to show must not flag): only UNFINISHED exposed paint flags: a piece's
+//     exposed region is unfinished when it is flat over the region (FLAT_SHARE or more of its pixels sit in plain fill:
+//     the drawing's luminance standard deviation in a FLAT_WIN window, its own image px, under FLAT_SD) or when it touches
+//     a straight cut run of the same piece (the cut-edge measure below: a block bounded by a knife cut). px2 = the
+//     region's area when unfinished (as r3), else 0; `all` = its area either way, `flat` = its flat share.
 //   cut edge: a visible run of a piece's own outline that isn't on the reference's outline (the reference's ink or
 //     silhouette edge: exposure-refs.js; Q the master, B A017's back reference; a view without one: the outline its
 //     rest assembly shows), CUT_MIN game px or longer and straight (within CUT_DEV px of a line): a knife cut showing,
@@ -21,6 +26,7 @@ import { channelsOf } from '../../src/render/rig-pose.js';
 import { coverPairs } from '../../src/data/rigs/anatomy.js';
 
 export const EXPOSED_PX2 = 4, EDGE_PX = 1, CUT_MIN = 4, CUT_DEV = 1, SS = 2;
+export const FLAT_SD = 6, FLAT_WIN = 5, FLAT_SHARE = 0.3;   // T028 r4 unfinished paint (calibrated in tests/exposure.test.mjs on A023 r3 vs r4)
 const SKIP = new Set(['sword', 'shield', 'held']);
 const mul = (m, n) => [m[0] * n[0] + m[2] * n[1], m[1] * n[0] + m[3] * n[1], m[0] * n[2] + m[2] * n[3],
   m[1] * n[2] + m[3] * n[3], m[0] * n[4] + m[2] * n[5] + m[4], m[1] * n[4] + m[3] * n[5] + m[5]];
@@ -44,6 +50,25 @@ function placed(e, M, readRGBA) {
   const A = readRGBA(e.img), I = inv(M), c = [[0, 0], [A.w, 0], [0, A.h], [A.w, A.h]].map(([x, y]) => apply(M, x, y));
   return { e, A, M, box: [Math.min(...c.map((p) => p[0])), Math.min(...c.map((p) => p[1])), Math.max(...c.map((p) => p[0])), Math.max(...c.map((p) => p[1]))],
     at(x, y) { const [u, v] = apply(I, x, y), X = Math.floor(u), Y = Math.floor(v); return X >= 0 && Y >= 0 && X < A.w && Y < A.h && A.alpha[Y * A.w + X] > 127 ? Y * A.w + X : -1; } };
+}
+// plain fill: 1 where the luminance in the FLAT_WIN window round an opaque pixel (opaque neighbours only) varies by under FLAT_SD
+const flats = new WeakMap();
+export function flatOf(A) {
+  if (flats.has(A)) return flats.get(A);
+  const lum = new Float32Array(A.w * A.h), out = new Uint8Array(A.w * A.h), r = (FLAT_WIN - 1) / 2;
+  for (let j = 0; j < lum.length; j++) lum[j] = 0.299 * A.rgba[j * 4] + 0.587 * A.rgba[j * 4 + 1] + 0.114 * A.rgba[j * 4 + 2];
+  for (let y = 0; y < A.h; y++) for (let x = 0; x < A.w; x++) {
+    if (A.alpha[y * A.w + x] <= 127) continue;
+    let n = 0, s = 0, s2 = 0;
+    for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
+      const xx = x + dx, yy = y + dy, k = yy * A.w + xx;
+      if (xx < 0 || yy < 0 || xx >= A.w || yy >= A.h || A.alpha[k] <= 127) continue;
+      n++; s += lum[k]; s2 += lum[k] * lum[k];
+    }
+    out[y * A.w + x] = +(Math.sqrt(Math.max(0, s2 / n - (s / n) ** 2)) < FLAT_SD);
+  }
+  flats.set(A, out);
+  return out;
 }
 const outline = (A, j) => {
   const x = j % A.w, y = (j - x) / A.w, op = (xx, yy) => xx >= 0 && yy >= 0 && xx < A.w && yy < A.h && A.alpha[yy * A.w + xx] > 127;
@@ -111,20 +136,33 @@ export function frameExposure(cell, readRGBA, o = {}) {
       }
   });
   const views = viewKey(cell.swap), Z = P.map((p) => (subject(cell, p.e) ? hiddenZone(cell.rig, views, p.e.name, p.e.swap, p.e.img, cell.k, readRGBA, o.ref) : null));
-  const count = new Float64Array(P.length), sx = new Float64Array(P.length), sy = new Float64Array(P.length), under = P.map(() => ({})), edge = new Uint8Array(W * H);
+  const count = new Float64Array(P.length), flat = new Float64Array(P.length), sx = new Float64Array(P.length), sy = new Float64Array(P.length), under = P.map(() => ({})), edge = new Uint8Array(W * H);
+  const shown = new Uint8Array(W * H), F = P.map((p, i) => Z[i] && flatOf(p.A));
   for (let b = 0; b < W * H; b++) {
     const i = top[b], z = Z[i];
     if (i < 0 || !z) continue;
     const j = pix[b], x = b % W, y = (b - x) / W;
-    if (z.deep[j]) { count[i]++; sx[i] += x; sy[i] += y; const n = z.names[z.by[j]]; under[i][n] = (under[i][n] ?? 0) + 1; }
+    if (z.deep[j]) {
+      count[i]++; shown[b] = 1;
+      if (F[i][j]) flat[i]++;
+      sx[i] += x; sy[i] += y; const n = z.names[z.by[j]]; under[i][n] = (under[i][n] ?? 0) + 1;
+    }
     if (z.cut[j]) edge[b] = 1;
+  }
+  const cuts = cutRuns(edge, top, W, H, x0, y0, P);
+  // a straight cut run of the piece within one game px of its exposed paint: that paint is a block cut with a knife
+  const edged = new Set();
+  for (const c of cuts) {
+    const i = top[c.pts[0]];
+    if (edged.has(i) || !count[i]) continue;
+    if (c.pts.some((b) => { const x = b % W, y = (b - x) / W; for (let dy = -SS; dy <= SS; dy++) for (let dx = -SS; dx <= SS; dx++) { const n = (y + dy) * W + x + dx; if (x + dx >= 0 && x + dx < W && y + dy >= 0 && y + dy < H && shown[n] && top[n] === i) return true; } return false; })) edged.add(i);
   }
   const exposed = [];
   P.forEach((p, i) => {
-    const px2 = count[i] / (SS * SS);
-    if (px2 > EXPOSED_PX2) exposed.push({ part: p.e.name, img: p.e.img, px2: +px2.toFixed(1), under: Object.entries(under[i]).sort((a, b) => b[1] - a[1])[0][0], at: [x0 + sx[i] / count[i] / SS, y0 + sy[i] / count[i] / SS] });
+    const all = count[i] / (SS * SS), px2 = edged.has(i) || flat[i] >= FLAT_SHARE * count[i] ? all : 0;
+    if (px2 > EXPOSED_PX2) exposed.push({ part: p.e.name, img: p.e.img, px2: +px2.toFixed(1), all: +all.toFixed(1), flat: +(flat[i] / count[i]).toFixed(2), edged: edged.has(i),
+      under: Object.entries(under[i]).sort((a, b) => b[1] - a[1])[0][0], at: [x0 + sx[i] / count[i] / SS, y0 + sy[i] / count[i] / SS] });
   });
-  const cuts = cutRuns(edge, top, W, H, x0, y0, P);
   return { exposed, cuts: cuts.map(({ pts, ...c }) => c), ...(o.paint && { image: paint(P, Z, top, pix, W, H, cuts, exposed, x0, y0, o.paint === 'all' && edge) }) };
 }
 function paint(P, Z, top, pix, W, H, cuts, exposed, x0, y0, edge) {

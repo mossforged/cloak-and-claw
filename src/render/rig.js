@@ -47,7 +47,7 @@ export function heldOf(f, rig, sheathed = false) {
   if (!W) return one && (pk || sheathed) ? { slot: one, part: null } : null;
   const spec = rig.slots?.[W.def.grip];
   if (!spec) return null;
-  const slot = typeof spec === 'string' ? spec : 'held', kit = W.def, grip = kit.grip;
+  const slot = typeof spec === 'string' ? spec : 'held', kit = linedKit(rig, W.def), grip = kit.grip;
   if (W.broken || (!f.weapon && f.dropped && f.def.drop?.item === kit.id)) return { slot, part: null, grip, kit };
   const A = kit.art, mount = typeof spec === 'string' ? {} : spec;   // T018: a slot's own `rest` turns the item in the hand
   const k = A.px / rig.scale, ax = rig.axes?.[grip];
@@ -57,6 +57,10 @@ export function heldOf(f, rig, sheathed = false) {
   if (mount.flip === 'hold' && !f.move && ax != null) return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit) - 2 * ax, scale: [k, -k] } };
   return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit), scale: k } };
 }
+
+// T028 r4: a rig with the user's grip lines holds each item by its own line for that item (rig.itemLines: grip, gripEnd,
+// grip2 in the item's image px), whatever the item's data says for other bodies (the mouse keeps the item's own points).
+export const linedKit = (rig, kit) => (rig.itemLines?.[kit.id] ? { ...kit, art: { ...kit.art, ...rig.itemLines[kit.id] } } : kit);
 
 // T020: the handle runs through the fist. rig.axes[grip type] = the slot axis: the direction (degrees, in the slot
 // parent's own px) the closed hand holds a handle, pointing out toward the weapon's head; art.gripEnd = a point along

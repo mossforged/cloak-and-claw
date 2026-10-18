@@ -12,6 +12,7 @@ import { createSlot } from '../../src/viewer/sandbox.js';
 import { clipsFor } from '../../src/viewer/clips.js';
 import { rigOf } from '../../src/viewer/models.js';
 import { rigFrame, rigMemory } from '../../src/render/rig.js';
+import { drawOf } from '../../src/render/rig-grip.js';
 import { layoutRig } from '../../src/render/rig-layout.js';
 import { channelsOf } from '../../src/render/rig-pose.js';
 import { flagsOf, covers, outward, SEAM_PX } from './stretch.js';
@@ -32,10 +33,10 @@ const same = (a, b) => a.sig === b.sig && Math.abs(a.rot - b.rot) <= KEY_DEG * M
 
 // Every frame key of every clip for fighter id (only: those clip keys): [{ clip, label, n, cell }] (cell as stretch.js
 // builds them: rig, joints, swap, held, L, view, k).
-export function poseFrames(id, only = null) {
+export function poseFrames(id, only = null, item = 'own') {   // T028 r4: item = any the viewer offers (itemsFor)
   const out = [], keys = [], slot = createSlot(), rig = rigOf(id);
   for (const c of clipsFor(id).filter((c) => !only || only.includes(c.key))) {
-    slot.load({ f: id, v: 'current', anim: c.key, item: 'own', grip: '', look: {}, gear: null });
+    slot.load({ f: id, v: 'current', anim: c.key, item, grip: '', look: {}, gear: null });
     const sb = slot.seek(0), mem = rigMemory(sb.hero);
     for (let n = 0; n <= slot.len; n++) {
       if (n) slot.step();
@@ -44,7 +45,7 @@ export function poseFrames(id, only = null) {
       if (keys.some((k) => same(key, k))) continue;
       keys.push(key);
       out.push({ clip: c.key, label: `${c.label} @${n}`, n,
-        cell: { label: `${c.label} @${n}`, rig, joints: fr.joints, swap: { ...mem.swap }, held: fr.held, L: fr.L, view: viewOf(fr.p, fr.k), k: fr.k, p: fr.p } });
+        cell: { label: `${c.label} @${n}`, rig, joints: fr.joints, swap: { ...mem.swap }, held: fr.held, L: fr.L, view: viewOf(fr.p, fr.k), k: fr.k, p: fr.p, draw: drawOf(sb.hero) } });
     }
   }
   return out;

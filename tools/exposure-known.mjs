@@ -1,7 +1,7 @@
 // Writes tools/bench/exposure-known.js (T028 r3) from a full exposure run: every flag the test sees now, each with the
 // fix it needs (Art's repair list; notes by piece and cover). Run it after a pose or art change the lead accepts as the
 // new baseline, then review the diff: a line that went away is fixed; a new one is a problem to fix or to accept.
-// Also writes docs/screens/T028/r3-exposure-list.md: the rat family's flags merged (the three rats share A018-A023's
+// Also writes docs/screens/T028/r4-exposure-list.md (T028 r4: unfinished paint only; r3's list stays as it was): the rat family's flags merged (the three rats share A018-A023's
 // drawings), per piece and cover, worst first: the list Art repairs from.
 // Usage: node tools/exposure-known.mjs
 import { writeFileSync } from 'node:fs';
@@ -65,16 +65,18 @@ writeFileSync('tools/bench/exposure-known.js', head + lines.join('\n') + '\n};\n
 const NOTES = Object.fromEntries([...head.matchAll(/^const (\w+) = '(.*)';$/gm)].map((m) => [m[1], m[2]]));
 const row = (r) => `| ${r.cut ? r.what.replace('cut ', '') : r.what.replace(' < ', ' under ')} | ${r.px} | ${r.at} | ${NOTES[r.note]} |`;
 const sorted = [...rat.values()].sort((a, b) => b.px - a.px);
-writeFileSync('docs/screens/T028/r3-exposure-list.md', `# T028 r3: exposed hidden paint and cut edges, Rat Raider family (Art's repair list)
+writeFileSync('docs/screens/T028/r4-exposure-list.md', `# T028 r4: unfinished exposed paint and cut edges, Rat Raider family (A023 round 4 imported)
 
 Written by \`node tools/exposure-known.mjs\` (check: \`tools/bench/exposure.js\`, test \`tests/exposure.test.mjs\`). Every frame key of every
 viewer clip for the raider, spearman and archer (they share the A018-A023 drawings), each body view standing, and the
 rehearsal sheet's stand-in keys. Worst frame per piece; strips of the worst frame per move:
-\`r3-exposure-rat-raider.jpg\`, \`r3-exposure-rat-spearman.jpg\`, \`r3-exposure-rat-archer.jpg\` (exposed paint red, cut runs blue).
+\`r4-exposure-rat-raider.jpg\`, \`r4-exposure-rat-spearman.jpg\`, \`r4-exposure-rat-archer.jpg\` (unfinished exposed paint red, cut runs blue).
+T028 r4: exposed hidden paint counts only when unfinished: flat over the region (30% or more of it plain fill) or beside a straight cut run;
+finished paint meant to show (A023 round 4's repaint) passes. Pass bar: \`r4-pass-bar.md\`.
 Frames named \`view: X\` (the idle in that body view) and rehearsal keys (\`Move: key\`) are stand-in poses until T029
 poses every move: their flags are real for those drawings but the pose may change; the viewer clips' flags come first.
 
-## Exposed hidden paint (game px², shown over 4)
+## Unfinished exposed hidden paint (game px², shown over 4)
 "Piece under cover": the piece's paint that the cover hides at rest, showing in the frame.
 
 | Piece under cover | Worst px² | Worst frame | Fix |
@@ -87,4 +89,4 @@ ${sorted.filter((r) => !r.cut).map(row).join('\n')}
 |---|---|---|---|
 ${sorted.filter((r) => r.cut).map(row).join('\n')}
 `);
-console.log(`wrote tools/bench/exposure-known.js: ${lines.length} known flags; docs/screens/T028/r3-exposure-list.md`);
+console.log(`wrote tools/bench/exposure-known.js: ${lines.length} known flags; docs/screens/T028/r4-exposure-list.md`);

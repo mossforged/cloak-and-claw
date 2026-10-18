@@ -83,7 +83,7 @@ export function pose(rig, spec) {
     j['arm-near-upper'] = wholeArm.dir - sw.axis - R.torso;
   }
   if (shield) {
-    const g = H['hand-far-shield'], endR = shield.turn ?? 0;
+    const g = rig.shieldRef ?? H['hand-far-shield'], endR = shield.turn ?? 0;   // T028 r4: a rig may pin this reference apart from its shield hold
     [R['arm-far-upper'], R['arm-far-lower']] = limb(rig, 'arm-far-upper', 'arm-far-lower', 'hand-far',
       place('arm-far-upper'), target(shield, 'arm-far-upper'), endR, g.at, shield.bend);
     j['arm-far-upper'] = wrap(R['arm-far-upper'] - R.torso);
