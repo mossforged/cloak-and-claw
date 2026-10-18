@@ -16,6 +16,7 @@ import { floorLayer, restDy, grounded, lying } from './floor.js';
 import { viewLayer } from './rig-views.js';
 import { springLayer } from './springs.js';
 import { carryLayer, carryMotion } from './carry.js';
+import { splitGrips } from './grip-split.js';
 
 export { layoutRig };
 
@@ -108,7 +109,7 @@ export function rigFrame(f, rig, time, mem, pose) {
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
   const held = heldOf(f, rig, mem.sheathed);
   const G = carryLayer(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), mem.swap);   // T028 carried object
-  const L = gearLayout(rig, G, gearOf(f));   // T019 gear; T025 forced grip modes
+  const L = splitGrips(gearLayout(rig, G, gearOf(f)), held);   // T019 gear; T025 forced grip modes; T028 r2 split grips
   if (lying(f) && !kneel) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)
     const dy = restDy(L, view, f.z);
     p.dy = ['down', 'dead', 'downed'].includes(f.state) ? dy : Math.min(p.dy, dy);

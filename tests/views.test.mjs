@@ -23,25 +23,30 @@ const rat = RIGS['rat-raider'], def = FIGHTERS['rat-raider'], S = { ...channelsO
 const by = (L) => Object.fromEntries(L.map((e) => [e.name, e]));
 const idx = (L, n) => L.findIndex((e) => e.name === n);
 
-// 1. no views = exactly the pre-T028 layout (same cells as the fixture was made with, from the T026 base)
+// 1. no views = exactly the pre-T028 layout: the mouse (no views) against the fixture made on the T026 base; T028 r2: the
+// rats' drawings changed with A023 (fixture values no longer theirs), so each rat cell is laid out with and without its
+// bodyViews instead: a pose that names no view lays out exactly as the rig without views
 {
   const old = JSON.parse(readFileSync(new URL('./fixtures/t028-pre-views-layouts.json', import.meta.url)));
   const r3 = (v) => Math.round(v * 1000) / 1000;
-  let n = 0;
-  for (const [key, want] of Object.entries(old)) {
-    const [id, c] = key.split('|'), [st, t] = c.split(':'), d = FIGHTERS[id], M = d.moves[st];
-    const rig = id === 'mouse-fighter' ? RIGS[d.art.rig] : strip(RIGS[d.art.rig]);
-    check(id !== 'mouse-fighter' || !RIGS[d.art.rig].bodyViews, 'mouse: no views');
-    const f = fighter(d, { state: st, t: +t, z: st === 'jump' ? 20 : 0 });
+  const layout = (d, rig, st, t) => {
+    const M = d.moves[st], f = fighter(d, { state: st, t: +t, z: st === 'jump' ? 20 : 0 });
     if (M) Object.assign(f, { state: M.air ? 'jump' : 'attack', move: M, moveKey: st, mf: +t, t: +t });
     if (st === 'idle') f.t = 0;
     const mem = {}, time = st === 'idle' ? +t : 1;
-    rigFrame(f, rig, time - 1 / 60, mem); const fr = rigFrame(f, rig, time, mem);
-    const got = fr.L.map((e) => [e.name, e.order, e.img ?? null, ...(e.m ?? []).map(r3)]);
-    check(JSON.stringify(got) === JSON.stringify(want), `${key}: lays out exactly as before T028`);
+    rigFrame(f, rig, time - 1 / 60, mem);
+    return rigFrame(f, rig, time, mem).L.map((e) => [e.name, e.order, e.img ?? null, ...(e.m ?? []).map(r3)]);
+  };
+  let n = 0;
+  for (const [key, fixture] of Object.entries(old)) {
+    const [id, c] = key.split('|'), [st, t] = c.split(':'), d = FIGHTERS[id], R = RIGS[d.art.rig];
+    check(id !== 'mouse-fighter' || !R.bodyViews, 'mouse: no views');
+    const { bodyViews, ...noViews } = R;
+    const want = id === 'mouse-fighter' ? fixture : layout(d, noViews, st, t);
+    check(JSON.stringify(layout(d, R, st, t)) === JSON.stringify(want), `${key}: lays out exactly as without views`);
     n++;
   }
-  check(n >= 40, `pre-T028 fixture covers ${n} frames`);
+  check(n >= 40, `no-view cells: ${n} frames`);
 }
 
 // 2. views: children on the view's points, the view's drawing, bands

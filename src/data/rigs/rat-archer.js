@@ -1,12 +1,12 @@
 // Rat Archer rig (T026): the A018 rat holding the bow kit (items/rat-bow.js): bow upright in the far grip fist, held out
 // in front; the near (pinch) hand rests by the string, draws it to his jaw over the windup (IK + string,
-// render/rig-grip.js) and lets go on the shot. Far fist turned 5 so A022's slot axis (-95, bow end) stands the bow up.
+// render/rig-grip.js) and lets go on the shot. T028 r2: A023's far grip (slot axis 90, bow end -90) stands the bow up square.
 // A019's raised-back far arm (fist at the jaw) is not used: with the bow out in front the near arm can't reach past
 // that fist (near shoulder + arm ends ~5 px behind it), so the string arm stays the near one (report T026).
 import rat from './rat-raider.js';
 import base, { P, CROUCH } from './rat-raider-poses.js';
 
-const BOW = (off, extra = {}) => ({ shield: { off, turn: 5 }, ...extra });   // T026 r2: A022's far grip slot at -95: the bow upright with the fist turned 5
+const BOW = (off, extra = {}) => ({ shield: { off, turn: 0 }, ...extra });   // T028 r2: A023's far grip slot runs straight down the fist (90): the bow upright with the fist square
 // T026 r2: hand dirs are measured on the side-grip slot (A022: -16, was -45) and A022's pinch is drawn turned 55 deg: every
 // dir here +84 from round 1 keeps the pinch drawing at its old screen angle (the pinch then reaches the string mid-draw)
 const DRAW = { 'hand-near.order': 818 };   // the string hand over string (805) and arrow (810), still under its bracer (820; T026 r2)
@@ -20,6 +20,8 @@ export default {
     stance: STANCE,
     idle: { ...base.idle, torso: [4, 1.5, 0], head: [-6, 2, 0.15], ...keep(STANCE, ...ARMS) },   // bow arm held steady
     walk: { ...base.walk, swap: {}, ...keep(STANCE, ...ARMS), 'arm-far-upper': [STANCE['arm-far-upper'], 4, 0] },
+    // T028 r2 (hand table): the raised near arm turns the bow grip's IK off, so the cast names the far grip drawing itself
+    cast: { ...base.cast, swap: { ...base.cast.swap, 'hand-far': 'hand-far-grip' } },
     hurt: { ...base.hurt, ...keep(P({ ...CROUCH, torso: -14, head: -14, hand: { off: [-6, 18], dir: -36 }, ...BOW([18, 10]) }), ...ARMS) },
     moves: {
       bowShot: {   // windup = the draw (string to the jaw), bow arm locked out; strike = the loose, string hand flicks back

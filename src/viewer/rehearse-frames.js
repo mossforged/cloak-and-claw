@@ -33,7 +33,8 @@ function fighterFor(def, rig, ref) {
   const M = def.moves[a], T = rig.poses.timing;
   if (M) {
     const at = { windup: M.windup - 1, through: M.windup + Math.max(1, Math.round(0.5 * T.strikeIn * M.active)), strike: M.windup + M.active - 1,
-      recover: M.windup + M.active + Math.round(0.7 * M.recovery) }[b] ?? M.windup - 1;
+      // T028 r2: a rig move with its own `recover` key passes it at the middle of the recovery
+      recover: M.windup + M.active + Math.round((rig.poses.moves?.[M.rig ?? a]?.recover ? 0.5 : 0.7) * M.recovery) }[b] ?? M.windup - 1;
     return { f: Object.assign(f, { state: M.air ? 'jump' : 'attack', move: M, moveKey: a, mf: at, t: at }), time: 0 };
   }
   if (a === 'walk') return { f: Object.assign(f, { state: 'walk', t: +b * 60 / rig.poses.walk.speed }), time: 0 };

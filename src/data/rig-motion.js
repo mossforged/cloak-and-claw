@@ -11,6 +11,6 @@
 export const RIG_MOTION = {
   capTurn: 0.45,
   viewBlend: 0.07,
-  turn: { sx: [-0.7, -0.25, 0.25, 0.7], front: [1, 2] },
+  turn: { sx: [-0.7, -0.9, 0.9, 0.7], front: [1, 2] },   // T028 r2: the F frames near full width (A023's front drawings face the camera; at 0.25 they were a sliver)
   springs: { on: true, inertia: 0.08, strength: 140, damping: 0.75, max: 28 },
 };

@@ -13,6 +13,8 @@ const NOTE = (id, joint, px) => {
   const rat = id.startsWith('rat'), [p, c] = joint.split(' / ');
   if (!rat) return 'MOUSE';   // the mouse is rebuilt after the rat (rig lock-down order): its seams wait for that
   if (/^arm-.*-upper$/.test(c)) return px >= 9 ? 'ARMPIT' : 'SHOULDER';
+  if (/^shoulder-/.test(c)) return 'CAP';   // T028 r2
+  if (c === 'belt') return 'BELT';
   if (/^hand-/.test(c)) return 'WRIST';
   if (/^arm-.*-lower$/.test(c)) return 'ELBOW';
   if (p === 'pelvis' && /^leg-/.test(c)) return 'HIP';
@@ -34,7 +36,7 @@ for (const id of MODELS) {
   for (const [k, w] of [...by].sort(([a], [b]) => a.localeCompare(b)))
     lines.push(`  '${k}': [${w.px}, ${NOTE(id, w.joint, w.px)}${k.includes(' * ') ? `, '${w.clips.slice(0, 3).join(', ')}'` : ''}],`);
 }
-const head = `// Pose seam flags known at T026 r4 (tests/pose-seams.test.mjs), written by tools/pose-seams-known.mjs, each with the
+const head = `// Pose seam flags known at T026 r4, rewritten at T028 r2 after A023 (tests/pose-seams.test.mjs), written by tools/pose-seams-known.mjs, each with the
 // fix it needs (the lead turns these into art repairs; A023 round 2 for the rat). The test fails on a flag not listed
 // here or one more than 1 px worse; fix the pose or the art, rerun the writer and check the diff.
 // Key: 'fighter | clip | joint' (idle, walk) or 'fighter | * | joint' (worst over the other clips); [px, fix, clips at the worst].
@@ -49,6 +51,8 @@ const KNEE = 'longer trouser hem over the shin / rounder shin top (opens when th
 const ANKLE = 'foot top extended further up under the shin (T026 r5: shin over foot, 5b.1); px here = game px of extra hidden foot top, x4 in part px';
 const TAIL = 'tail root and scarf roots: longer hidden ends under the pelvis / torso';
 const NECK = 'longer neck end on the head under the torso fur (head tipped back or down)';
+const CAP = 'T028 r2: the A023 shoulder cap on its arm: mostly the turn-around frames, squeezed to 0.7-0.9 width (non-uniform scale shears the joint for one frame); a real crack = a larger cap';
+const BELT = 'T028 r2: the A023 belt on the pelvis in the squeezed frames of the turn-around (one frame each)';
 const OTHER = 'see the strip';
 const MOUSE = 'mouse: waits for the mouse rebuild (rig lock-down order, after the rat)';
 export const KNOWN = {

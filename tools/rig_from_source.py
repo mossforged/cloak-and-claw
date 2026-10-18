@@ -14,7 +14,12 @@ A016) is read as near/far, so the output (data and image names) uses the new nam
 T026 round 2: every cut loses its detached islands (tools/islands.py: stray scraps apart from the main shape), each one
 dropped listed in the report; --keep-islands <name,...> keeps them on parts drawn in pieces on purpose (e.g. whiskers).
 T028: the source's view joint points (`anchors`, canvas px, per torso / pelvis drawing; A023) become `bodyViews` (each
-view's drawing, points in that part's own px, the rehearsal's default bands); render/rig-views.js reads them."""
+view's drawing, points in that part's own px, the rehearsal's default bands); render/rig-views.js reads them.
+T028 r2 (A023 round 2): a grip drawing's `under` piece (the fingers behind the handle) is written on the swap
+(`under: '<swap>'`; paired-under grips are not hands of their own); a part marked `visibleWhenArmInFront` is a shoulder cap
+(`cap: true`); `viewSwaps.<code>` (the back view's limb cuts) and `viewJointPositions.<code>` (where each limb's joint sits
+in that view, canvas px) become the view's `swaps` and `attach` (each child's joint on its parent's own px, so the cut
+hangs where the view's setup put it); the B pelvis hides the separate `belt` (the back drawing has its own)."""
 import argparse, json, math, os, re, sys
 import numpy as np
 from PIL import Image
@@ -131,9 +136,13 @@ VIEW_BANDS = {
     ("torso", "S"): NEAR_FRONT, ("torso", "F"): NEAR_FRONT,
     ("torso", "BQ"): {"arm-near-upper": 140, "arm-near-lower": 150, "hand-near": 145},
     ("torso", "B"): {"arm-far-upper": 800, "arm-far-lower": 820, "hand-far": 815, "arm-near-upper": 110, "arm-near-lower": 120, "hand-near": 115},
-    ("pelvis", "B"): {"leg-near-upper": 210, "leg-near-lower": 220, "foot-near": 230, "leg-far-upper": 510, "leg-far-lower": 520,
-                      "foot-far": 530, "tail": 450, "tail-2": 460, "tail-3": 470},
+    # T028 r2: the feet stay under their shins (rig standard 5b.1) when the legs swap depth
+    ("pelvis", "B"): {"leg-near-upper": 210, "leg-near-lower": 220, "foot-near": 215, "leg-far-upper": 510, "leg-far-lower": 520,
+                      "foot-far": 515, "tail": 450, "tail-2": 460, "tail-3": 470},
 }
+# T028 r2: drawings a view brings for other parts (the front head on the F chest, the back head on the B chest)
+VIEW_HEADS = {("torso", "F"): "head-front", ("torso", "B"): "head-back"}
+ARM_PARTS = ("arm-", "hand-", "shoulder-")
 
 
 def anchors_of(src):
@@ -145,9 +154,27 @@ def anchors_of(src):
     return out
 
 
+def view_limbs(src, slot, code, local):
+    """T028 r2: a view's limb cuts (`viewSwaps`) and their joints (`viewJointPositions`, canvas px in that view's setup):
+    each child's attach on its parent = the parent's pivot + (child joint - parent joint), in the parent's own px. Arms go
+    with the torso view, legs with the pelvis view."""
+    mine = lambda n: n.startswith(ARM_PARTS) == (slot == "torso")
+    sw = {near_far(k): near_far(v) for k, v in ((src.get("viewSwaps") or {}).get(code) or {}).items() if mine(near_far(k))}
+    J = {near_far(k): v for k, v in ((src.get("viewJointPositions") or {}).get(code) or {}).items()}
+    at = {}
+    for c, xy in J.items():
+        par = src["parts"].get(c, {}).get("parent")
+        if not mine(c) or par not in J:
+            continue
+        pv = src["parts"][par]["pivot"]
+        at[c] = local(par, [pv[0] + xy[0] - J[par][0], pv[1] + xy[1] - J[par][1]])
+    return sw, at
+
+
 def views_block(src, local, pad="  "):
     """T028: bodyViews from the source's anchors (canvas px -> the torso's / pelvis' own px, as attach points)."""
     views = {}
+    swaps = src.get("swaps") or {}
     for drawing, A in anchors_of(src).items():
         slot = drawing.split("-")[0]
         code = VIEW_OF.get(drawing)
@@ -160,6 +187,15 @@ def views_block(src, local, pad="  "):
         f.append("anchors: { " + ", ".join(f"{k}: {local(slot, pt)}" for k, pt in A.items()) + " }")
         if VIEW_BANDS.get((slot, code)):
             f.append("bands: " + json.dumps(VIEW_BANDS[(slot, code)]).replace('"', "'"))
+        sw, at = view_limbs(src, slot, code, local)
+        if VIEW_HEADS.get((slot, code)) in swaps:
+            sw = {"head": VIEW_HEADS[(slot, code)], **sw}
+        if sw:
+            f.append("swaps: " + json.dumps(sw).replace('"', "'"))
+        if at:
+            f.append("attach: { " + ", ".join(f"'{c}': {xy}" for c, xy in at.items()) + " }")
+        if slot == "pelvis" and code == "B" and "belt" in src["parts"]:
+            f.append("hide: ['belt']")
         views.setdefault(slot, []).append(f"{code}: {{ " + ", ".join(f) + " }")
     if not views:
         return []
@@ -186,6 +222,9 @@ def main():
         raw["swaps"] = {**raw.get("swaps", {}), **own(F.get("swaps"))}
         if F.get("anchors"):   # T028 (A023): view joint points
             raw["anchors"] = {**raw.get("anchors", {}), **F["anchors"]}
+        for k in ("viewSwaps", "viewJointPositions"):   # T028 r2 (A023 round 2): the back view's limb cuts
+            if F.get(k):
+                raw[k] = {**raw.get(k, {}), **F[k]}
         if F.get("grips"):   # T026 r2 (A022): a fragment's grips win; a hand socket the base pinned on its old grip goes too
             raw["grips"] = {**raw.get("grips", {}), **F["grips"]}
             for side in {near_far(g["of"])[5:] for g in F["grips"].values()}:
@@ -240,9 +279,13 @@ def main():
         if p.get("parent"):
             fields += [f"parent: '{p['parent']}'", f"attach: {local(p['parent'], p['pivot'])}"]
         fields += [f"pivot: {local(name, p['pivot'])}", f"order: {p.get('band', 500)}"]
+        if p.get("visibleWhenArmInFront"):   # T028 r2: a shoulder cap (render/rig-views.js)
+            fields.append("cap: true")
         def extra(n):
             S, o = src["swaps"][n], sorigin[n]
             out = f", hide: {json.dumps(S['hide'])}" if S.get("hide") else ""
+            if S.get("under"):   # T028 r2: the split grip's piece behind the handle
+                out += f", under: '{near_far(S['under'])}'"
             if S.get("itemGrip"):
                 out += f", grip: [{round((S['itemGrip'][0] - o[0]) * s, 2)}, {round((S['itemGrip'][1] - o[1]) * s, 2)}]"
             if S.get("slotDirection"):
@@ -257,6 +300,8 @@ def main():
     if src.get("grips"):
         lines.append("  hands: {")
         for n, g in src["grips"].items():
+            if g.get("kind") == "paired-under":   # T028 r2: drawn with its face piece, not a hand of its own
+                continue
             lines.append(f"    '{n}': {{ part: '{g['of']}', at: {local(g['of'], g['center'])}, axis: {axis(g['direction'])} }},")
         lines.append("  },")
     lines.append(sockets_block(source_sockets(src, derive_sockets(src, folder)), local, "  "))

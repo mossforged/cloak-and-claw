@@ -1,8 +1,7 @@
 [
-  { "label": "Rehearsal sheet: every move's keys (red = drawing still to come)", "q": "rehearse=rat-raider" },
-  { "label": "Turning slash, slow (wind-up turned away, strike turned toward you)", "q": "f=rat-raider&anim=ratSlash&speed=0.25" },
-  { "label": "Turning slash: new vs old A010 rig side by side", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=a010&speed=0.25" },
-  { "label": "Turn-around through the front view, slow", "q": "f=rat-raider&anim=turn&speed=0.25" },
-  { "label": "Walk across (tail and scarf springs)", "q": "f=rat-raider&anim=walkAcross" },
-  { "label": "Jump (tail springs on the rise and landing)", "q": "f=rat-raider&anim=jump&speed=0.5" }
+  { "label": "r2: Rehearsal sheet: every move's keys with A023's drawings (no red boxes left; poses are stand-ins until T029)", "q": "rehearse=rat-raider" },
+  { "label": "r2: Turning slash, slow: wind-up turned away (BQ, arm behind), strike turned toward you (F, arm in front), low recover", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" },
+  { "label": "r2: Turn-around, slow: two frames through the front head, chest and hips", "q": "f=rat-raider&anim=turn&speed=0.25&zoom=2" },
+  { "label": "r2: Idle close up: split grip (back of the hand over the handle), belt over the waist", "q": "f=rat-raider&anim=idle&zoom=3" },
+  { "label": "r2: Slow walk with A023's longer feet and thighs", "q": "f=rat-raider&anim=walk&speed=0.25&zoom=3" }
 ]

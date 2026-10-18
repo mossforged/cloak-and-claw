@@ -3,7 +3,8 @@
 // points on that drawing (that part's own px: torso `neck`, `shoulder_near`, `shoulder_far`, `waist`; pelvis `waist`,
 // `hip_near`, `hip_far`, `tail_root`; or any child part's name), bands: { part: draw order } (which limbs draw in front of
 // the body in this view), swaps: { part: swap } other drawings the view brings (a front head), standIn: the drawing it
-// waits for (rehearsal sheet) }. View Q (or a missing code) = the part's own drawing, points and bands: a rig without
+// waits for (rehearsal sheet); T028 r2: attach: { part: [x, y] } where a limb further down hangs on its parent in this
+// view (the back view's limb cuts, parent px), hide: [parts] the view leaves out (B: the separate belt) }. View Q (or a missing code) = the part's own drawing, points and bands: a rig without
 // bodyViews lays out exactly as before.
 // A pose picks views and per-part bands through its swap list (render/rig-pose.js swapOf): '@view.<slot>' = code,
 // '@order.<part>' = band (a shield guard in front of the chest). rigFrame adds '@viewFrom.<slot>' / '@viewMix.<slot>'
@@ -23,17 +24,20 @@ export const viewOf = (swap, slot) => swap?.[`@view.${slot}`] ?? 'Q';
 export function anchorsOf(rig, slot, code) {
   const out = { [slot]: rig.parts[slot].pivot };
   for (const [c, p] of Object.entries(rig.parts)) if (p.parent === slot) out[c] = p.attach;
-  for (const [k, xy] of Object.entries(rig.bodyViews?.[slot]?.[code]?.anchors ?? {})) out[ANCHOR_PARTS[k] ?? k] = xy;
-  return out;
+  const V = rig.bodyViews?.[slot]?.[code];
+  for (const [k, xy] of Object.entries(V?.anchors ?? {})) out[ANCHOR_PARTS[k] ?? k] = xy;
+  return Object.assign(out, V?.attach);
 }
+// the rig's own point for a part a view moves (its pivot under the slot's name, else its attach)
+const ownPoint = (rig, slot, c) => (c === slot ? rig.parts[c].pivot : rig.parts[c].attach);
 
 const lerp2 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
 
 // Applies the views named in `swap` to a copy of the rig's parts (`parts` is layoutRig's own copy: entries are replaced,
-// never changed). Returns the swap list with each view's drawings added (a pose's own swap of that part wins) and the
-// view bands + pose band overrides ({ part: order }).
+// never changed). Returns the swap list with each view's drawings added (a pose's own swap of that part wins), the
+// view bands + pose band overrides ({ part: order }) and the parts the views hide.
 export function applyViews(rig, parts, swap) {
-  const bands = {};
+  const bands = {}, hide = [];
   if (rig.bodyViews) {
     swap = { ...swap };
     for (const slot of Object.keys(rig.bodyViews)) {
@@ -42,17 +46,19 @@ export function applyViews(rig, parts, swap) {
       if (V.swap && !swap[slot]) swap[slot] = V.swap;
       for (const [p, s] of Object.entries(V.swaps ?? {})) if (!swap[p]) swap[p] = s;
       Object.assign(bands, V.bands);
+      hide.push(...(V.hide ?? []));
       const to = anchorsOf(rig, slot, code), from = swap[`@viewFrom.${slot}`], k = swap[`@viewMix.${slot}`];
       const A = from != null && from !== code && k < 1 ? anchorsOf(rig, slot, from) : null;
-      for (const [c, xy] of Object.entries(to)) {
-        const pt = A ? lerp2(A[c], xy, k) : xy;
-        if (pt === (c === slot ? rig.parts[c].pivot : rig.parts[c].attach)) continue;
+      for (const c of new Set([...Object.keys(to), ...Object.keys(A ?? {})])) {
+        if (!parts[c]) continue;
+        const xy = to[c] ?? ownPoint(rig, slot, c), pt = A ? lerp2(A[c] ?? ownPoint(rig, slot, c), xy, k) : xy;
+        if (pt === ownPoint(rig, slot, c)) continue;
         parts[c] = { ...parts[c], [c === slot ? 'pivot' : 'attach']: pt };
       }
     }
   }
   for (const [k, v] of Object.entries(swap)) if (k.startsWith('@order.')) bands[k.slice(7)] = v;
-  return { swap, bands };
+  return { swap, bands, hide };
 }
 
 // Shoulder caps (rig standard 4): a part with `cap: true` hangs off its upper arm, turns only RIG_MOTION.capTurn of the

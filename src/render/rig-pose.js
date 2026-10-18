@@ -174,8 +174,12 @@ export function targetPose(f, rig, time, override) {
       // M.hold: share of the windup held at the top (the club's heavy beat), with a strain tremble of M.tremble degrees on the arm
       if (ph === 'windup') return { key, joints: windupPose(M, rest, W, p, time), swap: swapOf(M.windup) };
       if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: activeSwap(M, p, T) };
-      // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest
-      return { key, joints: mix(K, rest, easeInOut(p)), swap: p < T.swapBack ? swapOf(M.strike) : {} };
+      // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest. T028 r2: a move's optional
+      // `recover` key is passed through at the middle of it (the blade dropped low in front before the guard comes back up)
+      const swap = p < T.swapBack ? swapOf(M.strike) : {};
+      if (!M.recover) return { key, joints: mix(K, rest, easeInOut(p)), swap };
+      const R = evalPose(M.recover, S, 0);
+      return { key, joints: p < 0.5 ? mix(K, R, easeInOut(p * 2)) : mix(R, rest, easeInOut(p * 2 - 1)), swap };
     }
   }
   const named = (key, t = 0) => ({ key, joints: evalPose(poses[key], S, t), swap: phaseSwaps(poses[key], t) });

@@ -1,5 +1,6 @@
 // Rig layout (split out of rig.js, T024): each part's image matrix for a set of joints, swaps and held item. Pure.
 import { applyViews, capTurn, capShows } from './rig-views.js';
+import { GRIP_BAND } from '../data/grip-modes.js';
 
 const D = Math.PI / 180;
 
@@ -20,7 +21,7 @@ const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[
 // re-attach children to points on its own image (`carry: { child: [x, y] }` in swap image px, e.g. the
 // shield onto the drawn fist): the child then hangs off this part, keeping its own joint angle (T012). T023: `turn: { child:
 // deg }` turns the carried child's drawing on top (the whole raised arm's fist holds the sword's handle at its own slot axis).
-const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
+export const swapMatrix = (s) => mul(tr(...(s.offset ?? [0, 0])), sc(s.scale ?? 1));
 
 // T026: a rig whose default hand drawing is a fist (A018) names the drawing a hand holding its item puts on
 // (`heldHand: { part: swap }`), unless the pose names that part. No heldHand: swaps as given.
@@ -37,6 +38,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
   if (held && !held.part && rig.emptyHand) swap = { ...rig.emptyHand, ...swap };   // T023: the empty hand's own drawing
   const V = applyViews(rig, parts, swap);   // T028: torso / pelvis views (drawing, joint points, bands); none = as before
   swap = V.swap;
+  for (const h of V.hide) hidden.add(h);   // T028 r2: parts a view leaves out (B: the belt)
   swap = withHeldHand(rig, swap, held);
   for (const [name, key] of Object.entries(swap)) {
     const s = parts[name]?.swaps?.[key];
@@ -62,19 +64,22 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
     return (frames[name] = m);
   };
   // T028: a view's band beats the pose's order channel; a cap draws just above its arm; the held item keeps its place
-  // relative to the hand it hangs from when a view moves that hand to another band
-  const orderOf = (name) => V.bands[name] ?? (parts[name].cap ? orderOf(parts[name].parent) + (parts[name].capOrder ?? 5)
+  // relative to the hand it hangs from when a view moves that hand to another band. T028 r2: a whole-arm drawing carrying
+  // the held item is lifted over it later (rig-grip.js band, GRIP_BAND): its cap goes by that lifted order
+  const orderOf = (name) => V.bands[name] ?? (parts[name].cap ? liftedOf(parts[name].parent) + (parts[name].capOrder ?? 5)
     : joints[`${name}.order`] ?? parts[name].order);
   const heldBy = held?.part && rig.parts[held.part.parent] ? held.part.parent : null;
   const orderAt = (name) => (heldBy && name === held.slot && V.bands[heldBy] != null && V.bands[name] == null
     ? parts[name].order + orderOf(heldBy) - (joints[`${heldBy}.order`] ?? rig.parts[heldBy].order) : orderOf(name));
+  const liftedOf = (name) => (held?.part && parts[name]?.swaps?.[swap[name]]?.carry?.[held.slot] && orderOf(name) <= orderAt(held.slot)
+    ? orderAt(held.slot) + GRIP_BAND : orderOf(name));
   return Object.entries(parts)
     .map(([name, p]) => {
       const m = mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1]));
       const s = p.swaps?.[swap[name]];
       return { name, p, order: orderAt(name), img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m, base: m };
     })
-    .filter((e) => !hidden.has(e.name) && !(held && e.name === held.slot && !held.part) && !(e.p.cap && !capShows(orderOf, e.p)))
+    .filter((e) => !hidden.has(e.name) && !(held && e.name === held.slot && !held.part) && !(e.p.cap && !capShows(liftedOf, e.p)))
     .sort((a, b) => a.order - b.order);
 }
 

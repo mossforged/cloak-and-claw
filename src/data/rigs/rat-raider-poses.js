@@ -37,7 +37,7 @@ export const WALK = { speed: 2.0, walk: 120, lift: 5, dy: 2, bob: 1.5, gather: 0
 // about level from the elbow, blade upright and a little back, the hand in the forearm's line but for a fist's cock (was
 // off [-10, 12]: fist behind the shoulder, forearm up and the hand bent ~50 degrees under the bracer). A fist behind the
 // body (A010's spot) can't hold the blade up with A018's side-on grip without bending the wrist past 45 degrees.
-export const HOLD = { off: [8, 13], dir: -105 };
+export const HOLD = { off: [2, 14], dir: -105 };
 const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: FIST, hand: HOLD, shield: { off: [16, 22], turn: -40 } });
 const arm = (k, amp, ph) => [STANCE[k] ?? 0, amp, ph];
 
@@ -106,6 +106,10 @@ export default {
       strike: P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist', 'foot-near': 'foot-near-toe' }, dx: 5, dy: 9,
         pelvis: 6, torso: 24, head: -22, hand: { off: [26, 18], dir: 55 }, shield: { off: [-4, 18], turn: 20 },
         feet: { near: [FEET.near[0] - 6, 9.8, 0], far: [FEET.far[0] + 6, 0, 0] }, ...TAIL(-25, -10, 0), 'scarf-tail': -25 }),
+      // T028 r2: recover through a low key (the blade dropped forward and down by the near hip, back in three-quarter
+      // with the arm under the vest) so the guard rises in front of the body, not across the face
+      recover: P({ ...CROUCH, swap: { 'hand-far': 'hand-far-fist' }, dx: 2, dy: 4, pelvis: 4, torso: 12, head: -10,
+        hand: { off: [8, 30], dir: 20 }, shield: { off: [10, 22], turn: 0 }, ...TAIL(-15, 0, 10), 'scarf-tail': -10 }),
     },
   },
 };

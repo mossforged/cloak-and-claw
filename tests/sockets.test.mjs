@@ -51,8 +51,8 @@ check(tipOf({ img: 'x', grip: [10, 50], gripEnd: [20, 50] }, () => [100, 100]).j
 // The game rigs carry the importer's sockets (derived, or the source's own: A018; needs python3 + Pillow + numpy).
 const py = spawnSync('python3', ['-c', 'import PIL, numpy'], { encoding: 'utf8' });
 if (py.status !== 0) console.log('NOTE importer socket check skipped: python3 with Pillow + numpy not available');
-else for (const [id, srcDir, ...frags] of [['mouse-fighter', 'A013-mouse-fighter-standard'], ['rat-raider', 'A018-rat-parts', 'A019-rat-key-drawings', 'A022-rat-joint-repair']]) {
-  const merge = frags.flatMap((f) => ['--merge', `assets/source/${f}/rig-source.json`]);   // T026 r2: the rat's fragments, as imported
+else for (const [id, srcDir, ...frags] of [['mouse-fighter', 'A013-mouse-fighter-standard'], ['rat-raider', 'A018-rat-parts', 'A019-rat-key-drawings', 'A022-rat-joint-repair', 'A023-rat-complete-kit']]) {
+  const merge = frags.flatMap((f) => ['--merge', `assets/source/${f}/rig-source.json`]);   // T026 r2: the rat's fragments, as imported (T028 r2: + A023)
   const r = spawnSync('python3', ['tools/rig_from_source.py', `assets/source/${srcDir}/rig-source.json`, '--id', id, '--sockets', ...merge], { encoding: 'utf8' });
   const sk = (0, eval)(`({${r.stdout.trim().replace(/,$/, '')}})`).sockets;
   for (const [n, s] of Object.entries(sk)) check(JSON.stringify(s) === JSON.stringify(RIGS[id].sockets[n]), `${id}: ${n} as derived by the importer`);
