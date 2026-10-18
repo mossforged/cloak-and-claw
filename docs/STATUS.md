@@ -1,13 +1,13 @@
 # Status
 
-**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T026 new rat import (rounds 1-5, 2026-10-18). Last art task merged: A023 round 4 (finished hidden paint, 2026-10-18). Older notes in `docs/history.md`.
+**Stages 2 and 3 passed (2026-10-17, tags `stage-2`, `stage-3`). Stage 4 now = lock down the rigs: everything else paused until the rat and the mouse are locked (user, 2026-10-17).** Stage 1 passed 2026-10-14 (tag `stage-1`). Last code task merged: T028 views and depth (rounds 1-5, 2026-10-18). Last art task merged: A023 round 5 (seat covers, 2026-10-18). Older notes in `docs/history.md`.
 
 ## Next (rig lock-down only; everything else paused)
-**The user called this "the final test of this type of rigging" (2026-10-18).** Anatomy rules: rig standard 5b.
-1. **User:** next look: the turning slash in motion (T028 round 3), where the turned-away chest is judged as the wind-up twist.
-2. **Code:** T028 round 5 (bow line along the bow + bow arm reaching out, wind-up pose, then A023 round 5 import and pass bar). Lead merges T028 after. Then T029 (every rehearsal move).
-3. **Art:** A023 round 5 (crotch cover + four small repairs).
-4. **Lead:** review A023 round 3 and T028 round 2 (round 3's drawings imported before the user's look); T029 packet; then A020 gear; then the mouse.
+**The rat's final rig test (user, 2026-10-18) nearly passed:** holds on the user's own grip lines, hidden paint finished, views and the turning slash in. T028 merged into the game.
+1. **User:** play the game with the new rats (main build on GitHub Pages).
+2. **Code:** T030 (import A023 round 5's seat covers and repairs; pass bar). Then T029 (every rehearsal move).
+3. **Art:** idle until T030's report.
+4. **Lead:** review T030; T029 packet; then A020 gear; then the mouse (rebuild with everything learned, grip lines drawn by the user).
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
 
@@ -26,8 +26,8 @@
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: `docs/tasks/T028-views-and-depth.md` round 5.
-- Art: `docs/tasks/A023-rat-complete-kit.md` round 5.
+- Code: `docs/tasks/T030-import-a023-r5.md`.
+- Art: idle.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -45,7 +45,8 @@
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
-2026-10-18 code: T028 round 5 on `t028-views-and-depth` (main merged): user's bow line along the bow re-pinned; the string hand now lies along the arrow's line (grip `along`; on the old line it lay on the bow line, so the new line turned it 90 deg off the string); archer draw re-posed: far arm already straight at full reach (it ends at the snout), so he leans back with the chin up and the bow fist at shoulder height: full draw bow grip 9 px past the nose, no bow over the head (was ~150 px²), string at the jaw (1.9 px); archer stance fist at the chest, bow down by his side. Turning slash wind-up: the cocked drawing spun 373 deg from idle's angle (the blade past the legs at frames 3-8); now unwrapped and raised (-50: fist above and behind the shoulder, blade up over the head) and swings over the top. Baselines: archer only (neck seam 2.5-3 px as the raider's / spearman's; bow rehearsal stand-ins, T029). 37/37. Build `t028 views r5`. Not merged.
+22026-10-18 lead: merged A023 round 5 (seat covers, foot, shoulder, scarf; scope clean) and T028 (rounds 1-5; 37/37 on merged main, CI green): bow drawn upright on the user's line, wind-up over the shoulder. Pass bar on T028 r5 missed only on what A023 r5 covers -> T030 imports it.
+026-10-18 code: T028 round 5 on `t028-views-and-depth` (main merged): user's bow line along the bow re-pinned; the string hand now lies along the arrow's line (grip `along`; on the old line it lay on the bow line, so the new line turned it 90 deg off the string); archer draw re-posed: far arm already straight at full reach (it ends at the snout), so he leans back with the chin up and the bow fist at shoulder height: full draw bow grip 9 px past the nose, no bow over the head (was ~150 px²), string at the jaw (1.9 px); archer stance fist at the chest, bow down by his side. Turning slash wind-up: the cocked drawing spun 373 deg from idle's angle (the blade past the legs at frames 3-8); now unwrapped and raised (-50: fist above and behind the shoulder, blade up over the head) and swings over the top. Baselines: archer only (neck seam 2.5-3 px as the raider's / spearman's; bow rehearsal stand-ins, T029). 37/37. Build `t028 views r5`. Not merged.
 2026-10-18 code: T028 r5 left: A023 round 5 not imported (not on main yet), so pass bar rerun on A023 r4 (`docs/screens/T028/r5-pass-bar.md`, 36 / 54): every bar clip now misses only on what A023 r5 covers (far-hip crotch notch 13-16 px, walk far-foot top 21.5 px², turn-around seat 9 px²); cast 124 px², spearman thrust scarf 68, archer lying 34. Review: `docs/screens/T028/r5-bow.jpg`, `r5-slash.jpg`, `r5-walk.jpg` (round 4 vs 5), views.json links (bow draw, turning slash, walks).
 22026-10-18 lead: user on T028 r4: remaining issues "so much smaller than the issues we used to have"; wants to test in game. From on-body renders he picked the bow line along the bow (B) and kept the cocked-arm line. Wrote T028 round 5 and A023 round 5 (crotch cover).
 2026-10-18 lead: reviewed T028 round 4 (37/37, CI green, scope clean; not merged). Holds now follow the user's grip lines (6345 holds aligned). Pass bar NOT met: unfinished paint is zero in the idle and slash, but a small crotch notch at the far hip (pelvis / far thigh) shows in every bar clip, the far foot top shows a cut end at one walk frame, the cast arm and a few falls still show hidden paint; the wind-up hides the arm and pokes the blade out by the tail. Two grip lines for the user to check: the bow (drawn across the bow, so it lies flat) and the cocked arm (sends the wind-up blade forward).
