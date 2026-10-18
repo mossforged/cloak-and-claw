@@ -10,9 +10,13 @@ import { feelLayer, bendSteps, bendStrips } from './weapon-feel.js';
 import { ITEMS } from '../data/items/index.js';
 import { LOOKS } from '../data/looks.js';
 import { gearLayout, gearOf, lookImage } from './looks.js';
-import { socketPoints, keepSockets } from './sockets.js';
+import { socketPoints, keepSockets, socketOf } from './sockets.js';
 import { layoutRig } from './rig-layout.js';
 import { floorLayer, restDy, grounded, lying } from './floor.js';
+import { viewLayer } from './rig-views.js';
+import { springLayer } from './springs.js';
+import { carryLayer, carryMotion } from './carry.js';
+import { splitGrips } from './grip-split.js';
 
 export { layoutRig };
 
@@ -43,7 +47,7 @@ export function heldOf(f, rig, sheathed = false) {
   if (!W) return one && (pk || sheathed) ? { slot: one, part: null } : null;
   const spec = rig.slots?.[W.def.grip];
   if (!spec) return null;
-  const slot = typeof spec === 'string' ? spec : 'held', kit = W.def, grip = kit.grip;
+  const slot = typeof spec === 'string' ? spec : 'held', kit = linedKit(rig, W.def), grip = kit.grip;
   if (W.broken || (!f.weapon && f.dropped && f.def.drop?.item === kit.id)) return { slot, part: null, grip, kit };
   const A = kit.art, mount = typeof spec === 'string' ? {} : spec;   // T018: a slot's own `rest` turns the item in the hand
   const k = A.px / rig.scale, ax = rig.axes?.[grip];
@@ -53,6 +57,10 @@ export function heldOf(f, rig, sheathed = false) {
   if (mount.flip === 'hold' && !f.move && ax != null) return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit) - 2 * ax, scale: [k, -k] } };
   return { slot, grip, kit, part: { ...mount, img: A.img, pivot: A.grip, rest: restIn(rig, kit), scale: k } };
 }
+
+// T028 r4: a rig with the user's grip lines holds each item by its own line for that item (rig.itemLines: grip, gripEnd,
+// grip2 in the item's image px), whatever the item's data says for other bodies (the mouse keeps the item's own points).
+export const linedKit = (rig, kit) => (rig.itemLines?.[kit.id] ? { ...kit, art: { ...kit.art, ...rig.itemLines[kit.id] } } : kit);
 
 // T020: the handle runs through the fist. rig.axes[grip type] = the slot axis: the direction (degrees, in the slot
 // parent's own px) the closed hand holds a handle, pointing out toward the weapon's head; art.gripEnd = a point along
@@ -88,6 +96,7 @@ export function rigFrame(f, rig, time, mem, pose) {
   const sq = pose ? 0 : squatOf(f, time);
   joints = drawLayer(rig, time, mem, squatLayer(rig, joints, sq));   // T014 jump squat crouch
   if (sq > 0.5 && rig.poses.jumpSquat?.swap) mem.swap = { ...mem.swap, ...rig.poses.jumpSquat.swap };   // T024: its folded leg
+  ({ joints, swap: mem.swap } = viewLayer(rig, f, joints, mem.swap, mem, time));   // T028: turn-around, view slide
   if (!pose) joints = feelLayer(rig, f, joints, time, mem);   // T017 held weapon wobble / impact squash
   const p = { ...poseOf(f, time) }, kneel = f.state === 'downed' && rig.poses.downed;
   if (kneel) Object.assign(p, { rot: 0, sx: 1, sy: 1 });   // T024: the rig kneels instead of lying flat
@@ -100,9 +109,11 @@ export function rigFrame(f, rig, time, mem, pose) {
     joints = floorLayer(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy }, p.rot);
     p.rot = 0;
   }
+  if (!pose) joints = springLayer(rig, f, joints, mem.swap, mem, time, k);   // T028 tail and scarf springs
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
   const held = heldOf(f, rig, mem.sheathed);
-  const L = gearLayout(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), gearOf(f));   // T019 gear; T025 forced grip modes
+  const G = carryLayer(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), mem.swap);   // T028 carried object
+  const L = splitGrips(gearLayout(rig, G, gearOf(f)), held);   // T019 gear; T025 forced grip modes; T028 r2 split grips
   if (lying(f) && !kneel) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)
     const dy = restDy(L, view, f.z);
     p.dy = ['down', 'dead', 'downed'].includes(f.state) ? dy : Math.min(p.dy, dy);
@@ -131,6 +142,7 @@ export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const c = Math.cos(p.rot * f.facing), sn = Math.sin(p.rot * f.facing), ax = p.sx * f.facing * k, ay = p.sy * k;   // T024: sockets in world px
   keepSockets(f, socketPoints(rig, L, held, (img) => { const im = assets.get(img); return im?.width ? [im.width, im.height] : null; }),
     ([x, y]) => [f.x + p.dx * f.facing + c * ax * x - sn * ay * y, f.y - f.z + p.dy + sn * ax * x + c * ay * y]);
+  mem.carryV = carryMotion(mem, socketOf(f, 'carry'));   // T028: a throw releases along it
   let alpha = 1;
   if (f.state === 'dead') alpha = f.t % 8 < 4 ? 1 : 0.25;
   if (f.invuln > 0 && f.state === 'idle') alpha = f.invuln % 6 < 3 ? 1 : 0.55;

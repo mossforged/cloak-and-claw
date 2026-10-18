@@ -14,6 +14,12 @@ export const GRIP_MODES = {
   reverse: { turns: [0], mirror: true },
 };
 export const GRIP_MODE_NAMES = Object.keys(GRIP_MODES);
+// T028 r4: a rig with the user's grip lines (rig.gripLines) holds every item by those lines, so it keeps only the modes
+// that pick a hand drawing of their own (side, and overhand where '<grip hand>-overhand' exists); turns and mirrors would
+// take the handle off the drawn line. Other rigs: every mode.
+export const modesFor = (rig) => (rig?.gripLines
+  ? GRIP_MODE_NAMES.filter((m) => m === 'side' || (GRIP_MODES[m].swap && rig.hands?.[`${rig.heldHand?.['hand-near'] ?? 'hand-near-grip'}-${GRIP_MODES[m].swap}`]))
+  : GRIP_MODE_NAMES);
 // Draw order (rig standard 6): a hand gripping a weapon (the grip hand on the node, a two-hander's second fist) never
 // draws under it: one that would is lifted to the weapon's order + GRIP_BAND (the 850 overlay band over a held item at
 // 830-835), so the spearman never "loses an arm". Rigs may still set their own (rat grips['two-hand'].order).

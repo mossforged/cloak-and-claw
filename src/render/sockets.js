@@ -31,10 +31,15 @@ export function socketPoints(rig, L, held = null, size = null) {
       const pts = s.parts.map((n) => by[n] && apply(by[n].base, rig.parts[n].pivot).map((v, i) => v + (i ? (H[n] ??= ankleHeight(rig, n)) : 0))).filter(Boolean);
       if (pts.length) out[name] = [pts.reduce((a, p) => a + p[0], 0) / pts.length, Math.max(...pts.map((p) => p[1]))];
     } else if (by[s.part]) out[name] = apply(by[s.part].base, s.at);
-    else {
+    else if (s.part) {
       const e = L.find((x) => x.p?.swaps?.[x.swap]?.hide?.includes(s.part) && x.p.swaps[x.swap].grip);
       if (e) out[name] = apply(e.m, e.p.swaps[e.swap].grip);
     }
+  }
+  // T028 carry socket (`between: [a, b]`): halfway between two other sockets (the two fists), resolved last
+  for (const [name, s] of Object.entries(rig.sockets ?? {})) {
+    const [a, b] = (s.between ?? []).map((n) => out[n]);
+    if (a && b) out[name] = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
   }
   return out;
 }

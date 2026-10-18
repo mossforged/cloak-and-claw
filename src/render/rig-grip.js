@@ -30,10 +30,11 @@ export function drawOf(f) {
 }
 
 // T020: the far fist closes round the shaft. Screen angles (degrees) of the held weapon's handle (grip -> gripEnd) and of
-// the IK hand's own axis `G.align` (its px).
+// the IK hand's own axis `G.align` (its px). T028 r5: a grip's `along` (a line in the item's px) replaces the handle: the
+// bow's string hand lies along the arrow, which runs along the bow's forward axis, not up the bow's handle.
 function axesOf(L, held, G, wm) {
-  const h = L.find((e) => e.name === G.ik.end).base, w = wm(L), A = held.kit.art;
-  return [ang([0, 0], lin(w, [A.gripEnd[0] - A.grip[0], A.gripEnd[1] - A.grip[1]])), ang([0, 0], lin(h, [Math.cos(G.align * D), Math.sin(G.align * D)])), h];
+  const h = L.find((e) => e.name === G.ik.end).base, w = wm(L), A = held.kit.art, v = G.along ?? [A.gripEnd[0] - A.grip[0], A.gripEnd[1] - A.grip[1]];
+  return [ang([0, 0], lin(w, v)), ang([0, 0], lin(h, [Math.cos(G.align * D), Math.sin(G.align * D)])), h];
 }
 // Solved in one go: the fist's axis goes along the shaft (the smaller turn, or the other way round if the arm can't
 // reach the wrist spot for that one: the ring holds either way; or as `G.wrist` says: forearm 'above' / 'below' the
@@ -65,8 +66,24 @@ function alignGrip(rig, joints, swap, held, G, target, wm, wrist2 = G.wrist) {
   const goal = axis + d;   // the fist axis' screen angle when done
   let j = joints;
   for (let i = 0; i < 2; i++) j = reach(rig, j, swap, held, wrist, () => wristAt(d));
-  const [, axis2, h] = axesOf(layoutRig(rig, j, swap, held), held, G, wm);
-  return { ...j, [end]: j[end] + Math.sign(h[0] * h[3] - h[1] * h[2]) * wrap(goal - axis2) };
+  let [, axis2, h] = axesOf(layoutRig(rig, j, swap, held), held, G, wm);
+  j = { ...j, [end]: j[end] + Math.sign(h[0] * h[3] - h[1] * h[2]) * wrap(goal - axis2) };
+  // T028 r4: a body squashed across (the turn-around) turns a joint by less or more on screen than its angle: more
+  // passes close the rest (an unsquashed rig is exact after the first, so these change nothing there)
+  for (let i = 0; i < 5 && rig.gripLines; i++) {
+    [, axis2, h] = axesOf(layoutRig(rig, j, swap, held), held, G, wm);
+    j = { ...j, [end]: j[end] + Math.sign(h[0] * h[3] - h[1] * h[2]) * wrap(goal - axis2) };
+  }
+  return j;
+}
+
+// T028 r4: how far (screen px) the second fist's grip centre sits off the shaft line; past LET_GO it lets go
+const LET_GO = 1;
+function offShaft(rig, L, held, G, wm) {
+  const h = L.find((e) => e.name === G.ik.end), A = held.kit.art, w = wm(L);
+  if (!h) return 0;
+  const P = apply(h.base, ...G.ik.hand), g = apply(w, ...A.grip), u = lin(w, [A.gripEnd[0] - A.grip[0], A.gripEnd[1] - A.grip[1]]);
+  return Math.abs((P[0] - g[0]) * u[1] - (P[1] - g[1]) * u[0]) / Math.hypot(...u);
 }
 
 // How far back (bow image px) full draw pulls the string: to the grip's `anchor` (T020: the ear; the anchor seen along
@@ -112,6 +129,14 @@ export function gripLayout(rig, joints, swap, held, f, force) {
   for (let i = 0; i < 2; i++) j = reach(rig, j, sw, held, G.ik, (L) => weaponPt(L, to(L)));   // 2nd pass mops up the error
   const wrist2 = modes.grip2 ? GRIP_MODES[modes.grip2]?.wrist : G.wrist;   // T025: the second fist's mode (over / under the shaft)
   if (G.align != null) j = alignGrip(rig, j, sw, held, G, (L) => weaponPt(L, to(L)), weapon, wrist2);
+  // T028 r4: on the user's lines a second fist that can't reach the shaft lets go (its own fist, posed) rather than
+  // gripping beside it
+  if (rig.gripLines && G.ik.to === 'grip2' && offShaft(rig, layoutRig(rig, j, sw, held), held, G, weapon) > LET_GO) {
+    sw = { ...withHeldHand(rig, swap, held), ...(N ? { [N.hand]: sw[N.hand] } : {}) };
+    delete sw[G.ik.end];
+    for (const n of [...G.ik.arm, G.ik.end]) j = { ...j, [n]: posed[n] };
+    return band(finish(layoutRig(rig, j, sw, held)), held.slot, [N?.hand]);
+  }
   // a bow hand only goes to the string as the draw starts (over the first `A.reachIn` of it); at rest it stays posed
   const w = A.nock ? Math.min(1, k / A.reachIn) : 1;
   if (w < 1) for (const n of G.ik.arm) j[n] = posed[n] + (j[n] - posed[n]) * w;

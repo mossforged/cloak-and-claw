@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      # T026 r3: only the master the paint check compares against (tests/paint.test.mjs; other LFS source stays unfetched)
-      - run: git lfs pull --include "assets/source/A018-rat-parts/reference.png"
+      # T026 r3: only the masters the checks compare against (paint check; T028 r3 exposure check: A017 back reference)
+      - run: git lfs pull --include "assets/source/A018-rat-parts/reference.png,assets/source/A017-rat-setup-master/master-back.png"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'

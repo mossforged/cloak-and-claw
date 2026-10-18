@@ -8,11 +8,11 @@ import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { ITEMS } from '../src/data/items/index.js';
 import { targetPose } from '../src/render/rig-pose.js';
-import { heldOf, layoutRig } from '../src/render/rig.js';
+import { heldOf, layoutRig, linedKit } from '../src/render/rig.js';
 import { gripLayout, at } from '../src/render/rig-grip.js';
 import { movesOf } from '../src/sim/weapons.js';
 import { HOLDERS, holdFrames, holdFrame } from '../tools/bench/hold.js';
-import { GRIP_MODE_NAMES } from '../src/data/grip-modes.js';
+import { GRIP_MODE_NAMES, modesFor } from '../src/data/grip-modes.js';
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
@@ -50,7 +50,7 @@ function axisError(rig, L, K) {
 }
 
 for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
-  const def = FIGHTERS[id], rig = RIGS[def.art.rig], K = ITEMS[def.kit ?? def.art.held];
+  const def = FIGHTERS[id], rig = RIGS[def.art.rig], K = linedKit(rig, ITEMS[def.kit ?? def.art.held]);   // T028 r4: the rig's line
   check(rig.axes?.[K.grip] != null && K.art.gripEnd, `${id}: slot axis for ${K.grip} and the item's handle axis exist`);
   let worst = 0, where = '';
   for (const [label, fi] of poses(def, null)) {
@@ -96,7 +96,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 
 // Spearman: both fists on the shaft line, far fist closed round it and over it.
 {
-  const def = FIGHTERS['rat-spearman'], rig = RIGS['rat-spearman'], K = ITEMS['rat-spear'], G = rig.grips['two-hand'];
+  const def = FIGHTERS['rat-spearman'], rig = RIGS['rat-spearman'], K = linedKit(rig, ITEMS['rat-spear']), G = rig.grips['two-hand'];
   for (const [label, fi] of poses(def, null)) {
     const L = layoutOf(rig, fi), spear = L.find((e) => e.name === 'held'), far = L.find((e) => e.name === 'hand-far'), near = L.find((e) => e.name === 'hand-near');
     const slot = rig.hands?.[near.swap] && near.swap.endsWith('-overhand') ? rig.hands[near.swap].at : rig.slots['two-hand'].attach;   // T026: overhand drawing's own slot
@@ -117,7 +117,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
 
 // Archer: the pinch hand reaches the drawn string; full draw = the string at the jaw anchor; the arrow past the bow.
 {
-  const def = FIGHTERS['rat-archer'], rig = RIGS['rat-archer'], K = ITEMS['rat-bow'], G = rig.grips.bow, m = def.moves.bowShot;
+  const def = FIGHTERS['rat-archer'], rig = RIGS['rat-archer'], K = linedKit(rig, ITEMS['rat-bow']), G = rig.grips.bow, m = def.moves.bowShot;
   check(rig.parts['hand-near'].swaps['hand-near-pinch'].img.endsWith('hand-near-pinch.png'), 'archer: A012 near pinch drawing (not the borrowed far hand)');
   for (const mf of [Math.round(m.windup * 0.5), m.windup - 1]) {
     const fi = { def, state: 'attack', t: 0, mf, move: m, moveKey: 'bowShot', weapon: null, hp: 10 }, L = layoutOf(rig, fi);
@@ -128,7 +128,9 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const ear = at(rig, L, G.anchor.part, G.anchor.at), bow = L.find((e) => e.name === 'held');
     check(dist(N, ear) < 4, `archer full draw: string at the jaw (${dist(N, ear).toFixed(1)} px off)`);
     const pull = dist(N, apply(bow.m, K.art.nock));
-    check(pull > 30, `archer full draw: a deep draw (${pull.toFixed(0)} px back)`);
+    // T028 r4: 20 (was 30): on the user's lines the far fist turns 88 deg to stand the bow up (his bow line runs across
+    // the bow, toward the shot); the bow arm at full reach then holds the bow 9 px nearer (23 px draw; round 3: 31)
+    check(pull > 20, `archer full draw: a deep draw (${pull.toFixed(0)} px back)`);
     const S = m.shot.art, arrow = L.find((e) => e.name === 'arrow'), tip = apply(arrow.m, S.tip), grip = apply(bow.m, K.art.grip);
     check(tip[0] > grip[0] + 10, `archer full draw: arrow head past the bow (${(tip[0] - grip[0]).toFixed(0)} px)`);
     check(Math.abs(wrap(deg(lin(arrow.m, [1, 0])))) < 5, 'archer full draw: arrow level, pointing forward');

@@ -51,7 +51,8 @@ export function holdFlags(rig, L, held) {
   if (Math.max(gap, lean) > HOLD_PX) out.push({ text: `handle off the fist ${Math.max(gap, lean).toFixed(1)} px`, at: S });
   if (fist.order < W.order) out.push({ text: `${fist.name} under the weapon`, at: S });
   const G = held?.part && rig.grips?.[held.grip];
-  if (G?.ik.to === 'grip2' && by[G.ik.end]) {   // the second fist: on the shaft line, over it
+  // the second fist: on the shaft line, over it (T028 r4: unless it let go, out of reach: then it shows its own fist)
+  if (G?.ik.to === 'grip2' && by[G.ik.end] && !(rig.gripLines && G.swap?.[G.ik.end] && by[G.ik.end].swap !== G.swap[G.ik.end])) {
     const R = apply(by[G.ik.end].base, G.ik.hand), d = off(R, g, u);
     if (d > HOLD_PX) out.push({ text: `${G.ik.end} off the shaft ${d.toFixed(1)} px`, at: R });
     if (by[G.ik.end].order < W.order) out.push({ text: `${G.ik.end} under the shaft`, at: R });

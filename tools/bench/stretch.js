@@ -3,7 +3,7 @@
 // it (tools/rig-bench.html?...&stretch). alphaOf(img) -> { w, h, alpha } is the caller's (Node: bench/png.mjs; browser:
 // canvas pixels).
 // Cells: each knee and elbow bent 90 and 150 degrees from straight; arms straight up; each torso view; each hand, foot and
-// whole-limb drawing; the tail root +-10 (T026 r2); each item each body holds (current grip, and T025: every grip mode on the weapon node); a crouch,
+// whole-limb drawing; the tail root +-10 (T026 r2); T028: each body view (its stance, elbows / knees, held items); each item each body holds (current grip, and T025: every grip mode on the weapon node); a crouch,
 // the pose-budget crouches and lying with the floor lines; the rig at 0.96x, 1.04x, 1.4x.
 // Flags: a seam gap over 2 px at a joint (a crack inside the joint's filled core at rest: empty with drawing on both sides), a foot below its floor line or floating
 // over it without a named lift (floor cells), a lying body off the floor, a far hand hidden on a two-handed item; T025:
@@ -17,6 +17,7 @@ import { LOOKS } from '../../src/data/looks.js';
 import { GRIP_MODE_NAMES } from '../../src/data/grip-modes.js';
 import { holdFlags } from './hold.js';
 import { tailRootFlags } from './tail-root.js';
+import { viewCells } from './stretch-views.js';
 
 const D = Math.PI / 180;
 const ang = (v) => Math.atan2(v[1], v[0]) / D;
@@ -77,6 +78,7 @@ export function stretchCells(family, items = []) {
   const views = rig.parts.torso?.swaps ?? {};
   custom('torso three-quarter', S);
   for (const sw of Object.keys(views)) custom(sw, S, { torso: sw, ...(sw === 'torso-back' && rig.parts.head?.swaps?.['head-back'] ? { head: 'head-back' } : {}) });
+  viewCells(rig, family, S, { still, custom, flexed, heldFor });   // T028 (bench/stretch-views.js)
   for (const [n, p] of Object.entries(rig.parts)) {
     if (!/^(hand|foot|arm|leg)-/.test(n)) continue;
     for (const sw of Object.keys(p.swaps ?? {})) custom(sw, S, { [n]: sw });
@@ -173,7 +175,8 @@ export function flagsOf(cell, alphaOf) {
     if (gap > SEAM_PX) { flags.push(`seam ${p} / ${e.name}: ${gap.toFixed(1)} px`); marks.push(apply(cell.view, J)); }
   }
   const H = cell.view, height = ([x, y]) => H[1] * x + H[3] * y + H[5];
-  const lowest = (e) => { const A = alphaOf(e.img); let lo = -Infinity; if (!A) return lo; for (let y = 0; y < A.h; y += 2) for (let x = 0; x < A.w; x += 2) if (A.alpha[y * A.w + x] > 127) lo = Math.max(lo, height(apply(e.m, [x + 0.5, y + 0.5]))); return lo; };
+  // T028 r4: every pixel (was every 2nd: 0.7 screen px apart at 1.4x, so A023 r4's far foot read 0.9 px off the floor)
+  const lowest = (e) => { const A = alphaOf(e.img); let lo = -Infinity; if (!A) return lo; for (let y = 0; y < A.h; y++) for (let x = 0; x < A.w; x++) if (A.alpha[y * A.w + x] > 127) lo = Math.max(lo, height(apply(e.m, [x + 0.5, y + 0.5]))); return lo; };
   if (cell.floor) for (const e of drawn) {
     const foot = /^foot-/.test(e.name) ? e.name : e.p?.swaps?.[e.swap]?.hide?.find((n) => n.startsWith('foot-'));
     if (!foot) continue;

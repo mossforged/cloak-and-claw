@@ -61,11 +61,16 @@ for (const [id, item] of CASES) {
   // 5. out of reach: the weapon comes back to the hand
   const d = frame(id, item, { 'weapon.at': 1, 'weapon.x': x + 90, 'weapon.y': y - 90 });
   check(dist(d.slot, d.grip) < 0.05 && dist(d.grip, [x + 90, y - 90]) > 20, `${name}: out of reach the weapon follows the fist (${dist(d.slot, d.grip).toFixed(2)} px)`);
-  // 6. reverse: the head comes out of the other end of the fist (slot axis against the handle)
+  // 6. reverse: the head comes out of the other end of the fist (slot axis against the handle). T028 r4: a rig on the
+  // user's grip lines has no reverse or underhand drawing, so those modes hold as the side grip does
   const r = frame(id, item, {}, { grip: 'reverse' });
-  check(Math.abs(wrap(r.axis - r.handle)) > 179.9 && Math.abs(wrap(b.axis - b.handle)) < 0.01, `${name}: reverse turns the head out of the fist's other end`);
+  if (a.rig.gripLines) {
+    for (const mode of ['reverse', 'underhand']) check(same(frame(id, item, {}, { grip: mode }).L, a.L), `${name}: ${mode} (no drawing of its own) = the side grip`);
+  } else check(Math.abs(wrap(r.axis - r.handle)) > 179.9 && Math.abs(wrap(b.axis - b.handle)) < 0.01, `${name}: reverse turns the head out of the fist's other end`);
   // 7. overhand: the fist drawing's middle over the shaft line; underhand under it
-  for (const mode of ['overhand', 'underhand']) {
+  // T028 r4: on the user's lines overhand puts on the overhand drawing as drawn on its line (tests/grip-align.test.mjs)
+  if (a.rig.gripLines) check(frame(id, item, {}, { grip: 'overhand' }).H.swap?.endsWith('-overhand'), `${name}: overhand puts on the overhand drawing`);
+  else for (const mode of ['overhand', 'underhand']) {
     const m = frame(id, item, {}, { grip: mode }), u = [Math.cos(m.handle * D), Math.sin(m.handle * D)], up = u[0] >= 0 ? [u[1], -u[0]] : [-u[1], u[0]];
     const hull = HULLS[m.H.img], mid = hull.reduce((p, q) => [p[0] + q[0] / hull.length, p[1] + q[1] / hull.length], [0, 0]), c2 = apply(m.H.m, mid);
     const h = (c2[0] - m.grip[0]) * up[0] + (c2[1] - m.grip[1]) * up[1];

@@ -28,6 +28,7 @@ import { RAT_SPEAR } from './moves/rat-spear.js';
 import { RAT_BOW } from './moves/rat-bow.js';
 import mouseFighterBrace from './rigs/mouse-fighter-brace.js';
 import { LOOKS } from './looks.js';
+import { RIG_MOTION } from './rig-motion.js';
 import healthPotion from './items/health-potion.js';
 import { ALLY } from './ally.js';
 
@@ -58,6 +59,7 @@ export const ROOTS = {
   'src/data/looks.js': LOOKS,
   'src/data/items/health-potion.js': healthPotion,
   'src/data/ally.js': ALLY,
+  'src/data/rig-motion.js': RIG_MOTION,
 };
 // One pick section per floor weapon's moves (T010).
 const weaponMoves = (title, file) => ({
@@ -258,6 +260,17 @@ export const LAB_SCHEMA = [
       ['potions.drops.crate', 0, 1, 0.05], ['potions.drops.barrel', 0, 1, 0.05], ['potions.drops.rat-raider', 0, 1, 0.05],
       { path: 'heal', min: 5, max: 100, step: 1, file: 'src/data/items/health-potion.js', label: 'potion heal' },
       { path: 'splash.x', min: 10, max: 140, step: 1, file: 'src/data/items/health-potion.js', label: 'potion splash x' },
+    ],
+  },
+  {
+    title: 'Rig views, turn and springs (T028, look only)', file: 'src/data/rig-motion.js',
+    fields: [
+      { path: 'capTurn', min: 0, max: 1, step: 0.05, label: 'shoulder cap turns with the arm' },
+      { path: 'viewBlend', min: 0, max: 0.3, step: 0.01, label: 'view swap: joints slide (s)' },
+      { path: 'springs.inertia', min: 0, max: 0.3, step: 0.005, label: 'tail/scarf lag per px/s (deg)' },
+      { path: 'springs.strength', min: 10, max: 600, step: 5, label: 'tail/scarf pull back (1/s^2)' },
+      { path: 'springs.damping', min: 0.1, max: 1.5, step: 0.05, label: 'tail/scarf damping (1 = no bounce)' },
+      { path: 'springs.max', min: 0, max: 60, step: 1, label: 'tail/scarf max (deg)' },
     ],
   },
   {

@@ -34,7 +34,7 @@ export const jointsOfRig = (rig) => Object.keys(channelsOf(rig));
 function evalPose(pose, stance, t) {
   const out = { ...stance };
   for (const [k, v] of Object.entries(pose ?? {})) {
-    if (k === 'speed' || k === 'swap' || k === 'swapPhase' || k === 'grip' || k === 'grip2') continue;
+    if (k === 'speed' || k === 'swap' || k === 'swapPhase' || k === 'grip' || k === 'grip2' || k === 'view' || k === 'order' || k === 'carry') continue;
     if (k === 'weapon') {   // T025: placement fields -> channels + weights
       if (v.x != null && v.y != null) Object.assign(out, { 'weapon.x': v.x, 'weapon.y': v.y, 'weapon.at': 1 });
       if (v.rot != null) Object.assign(out, { 'weapon.rot': v.rot, 'weapon.turn': 1 });
@@ -62,8 +62,18 @@ function strikePose(M, W, X, K, p, T) {
   return s < 0.5 ? mix(W, X, s * 2) : mix(X, K, easeOutBack(s * 2 - 1, T.overshoot));
 }
 
-// T025: a pose's grip modes ride with its swaps ('@grip', '@grip2'; layoutRig skips names that aren't parts)
-const swapOf = (pose) => (pose?.grip || pose?.grip2 ? { ...pose.swap, ...(pose.grip && { '@grip': pose.grip }), ...(pose.grip2 && { '@grip2': pose.grip2 }) } : pose?.swap ?? {});
+// T025: a pose's grip modes ride with its swaps ('@grip', '@grip2'; layoutRig skips names that aren't parts).
+// T028: so do its views (`view: { torso: 'F', pelvis: 'Q' }` -> '@view.torso'), per-part band overrides (`order:
+// { 'arm-far-guard': 850 }` -> '@order.<part>') and a carried object (`carry: '<prop id>'` -> '@carry'): like swaps they
+// switch at once (render/rig-views.js, render/carry.js), never blend.
+function swapOf(pose) {
+  if (!pose?.grip && !pose?.grip2 && !pose?.view && !pose?.order && !pose?.carry) return pose?.swap ?? {};
+  const out = { ...pose.swap, ...(pose.grip && { '@grip': pose.grip }), ...(pose.grip2 && { '@grip2': pose.grip2 }) };
+  for (const [k, v] of Object.entries(pose.view ?? {})) out[`@view.${k}`] = v;
+  for (const [k, v] of Object.entries(pose.order ?? {})) out[`@order.${k}`] = v;
+  if (pose.carry) out['@carry'] = pose.carry;
+  return out;
+}
 // T024: a cycle's drawings by phase (the walk's toe-off feet): swapPhase [{ part, swap, from, to }] in 0..1 of the cycle.
 function phaseSwaps(pose, t) {
   const out = { ...swapOf(pose) }, u = ((((pose.speed ?? 1) * t) % 1) + 1) % 1;
@@ -128,10 +138,15 @@ export function squatLayer(rig, joints, k) {
 
 // Active-phase swaps: a `through` pose that names swaps shows them only while the swing is near it
 // (timing.throughSwap, as a share of the way to the strike), e.g. one back-view drawing mid-spin.
+// T028: `switchAt` (share of the way to the strike) = the named key where the depth switches (the hand passing the edge
+// of the body): the windup's swaps, views and bands hold until then, then the through pose's (from switchAt to the
+// end of timing.throughSwap) or the strike's. Without it, as before.
 function activeSwap(M, p, T) {
-  if (!M.through?.swap) return swapOf(M.strike);
-  const s = Math.min(1, p / T.strikeIn), [a, b] = T.throughSwap;
-  return s >= a && s < b ? swapOf(M.through) : swapOf(M.strike);
+  const s = Math.min(1, p / T.strikeIn);
+  if (M.switchAt != null && s < M.switchAt) return swapOf(M.windup);
+  if (!M.through?.swap && !M.through?.view && !M.through?.order) return swapOf(M.strike);
+  const [a, b] = T.throughSwap;
+  return s >= (M.switchAt ?? a) && s < b ? swapOf(M.through) : swapOf(M.strike);
 }
 
 // Weapon feel (T017): a rig's `kits[<item id>]` gives a held floor weapon its own look: `moves` (its own move poses,
@@ -159,8 +174,12 @@ export function targetPose(f, rig, time, override) {
       // M.hold: share of the windup held at the top (the club's heavy beat), with a strain tremble of M.tremble degrees on the arm
       if (ph === 'windup') return { key, joints: windupPose(M, rest, W, p, time), swap: swapOf(M.windup) };
       if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: activeSwap(M, p, T) };
-      // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest
-      return { key, joints: mix(K, rest, easeInOut(p)), swap: p < T.swapBack ? swapOf(M.strike) : {} };
+      // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest. T028 r2: a move's optional
+      // `recover` key is passed through at the middle of it (the blade dropped low in front before the guard comes back up)
+      const swap = p < T.swapBack ? swapOf(M.strike) : {};
+      if (!M.recover) return { key, joints: mix(K, rest, easeInOut(p)), swap };
+      const R = evalPose(M.recover, S, 0);
+      return { key, joints: p < 0.5 ? mix(K, R, easeInOut(p * 2)) : mix(R, rest, easeInOut(p * 2 - 1)), swap };
     }
   }
   const named = (key, t = 0) => ({ key, joints: evalPose(poses[key], S, t), swap: phaseSwaps(poses[key], t) });

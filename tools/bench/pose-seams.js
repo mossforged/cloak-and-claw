@@ -12,11 +12,14 @@ import { createSlot } from '../../src/viewer/sandbox.js';
 import { clipsFor } from '../../src/viewer/clips.js';
 import { rigOf } from '../../src/viewer/models.js';
 import { rigFrame, rigMemory } from '../../src/render/rig.js';
+import { drawOf } from '../../src/render/rig-grip.js';
 import { layoutRig } from '../../src/render/rig-layout.js';
 import { channelsOf } from '../../src/render/rig-pose.js';
 import { flagsOf, covers, outward, SEAM_PX } from './stretch.js';
 import { jointGap } from './junction.js';
 import { FPS } from '../../src/config.js';
+import { REHEARSALS } from '../../src/data/rehearsal/index.js';
+import { keyFrame } from '../../src/viewer/rehearse-frames.js';
 
 export const KEY_DEG = 4;
 export const STRICT = ['idle', 'walk'];   // clips the known list keys one by one (the poses the user judges most)
@@ -30,10 +33,10 @@ const same = (a, b) => a.sig === b.sig && Math.abs(a.rot - b.rot) <= KEY_DEG * M
 
 // Every frame key of every clip for fighter id (only: those clip keys): [{ clip, label, n, cell }] (cell as stretch.js
 // builds them: rig, joints, swap, held, L, view, k).
-export function poseFrames(id, only = null) {
+export function poseFrames(id, only = null, item = 'own') {   // T028 r4: item = any the viewer offers (itemsFor)
   const out = [], keys = [], slot = createSlot(), rig = rigOf(id);
   for (const c of clipsFor(id).filter((c) => !only || only.includes(c.key))) {
-    slot.load({ f: id, v: 'current', anim: c.key, item: 'own', grip: '', look: {}, gear: null });
+    slot.load({ f: id, v: 'current', anim: c.key, item, grip: '', look: {}, gear: null });
     const sb = slot.seek(0), mem = rigMemory(sb.hero);
     for (let n = 0; n <= slot.len; n++) {
       if (n) slot.step();
@@ -42,8 +45,24 @@ export function poseFrames(id, only = null) {
       if (keys.some((k) => same(key, k))) continue;
       keys.push(key);
       out.push({ clip: c.key, label: `${c.label} @${n}`, n,
-        cell: { label: `${c.label} @${n}`, rig, joints: fr.joints, swap: { ...mem.swap }, held: fr.held, L: fr.L, view: viewOf(fr.p, fr.k), k: fr.k, p: fr.p } });
+        cell: { label: `${c.label} @${n}`, rig, joints: fr.joints, swap: { ...mem.swap }, held: fr.held, L: fr.L, view: viewOf(fr.p, fr.k), k: fr.k, p: fr.p, draw: drawOf(sb.hero) } });
     }
+  }
+  return out;
+}
+
+// T028 r3: every key of the rehearsal sheets that uses fighter id's rig, as cells like poseFrames' (clip 'rehearsal'):
+// the only frames with the back view (B) and the hunched / leaning chests until T029 poses every move; and the idle in
+// each body view the rig has (clip 'views': each view standing, as the viewer's view picker shows it).
+export function rehearsalFrames(id) {
+  const out = [], rig = rigOf(id), sheet0 = { fighter: id };
+  const views = Object.keys(rig.bodyViews?.torso ?? {}).map((v) => [sheet0, { name: 'view' }, { key: v, view: v, pose: 'idle:0', draw: [] }, 'views']);
+  const keys = Object.values(REHEARSALS).flatMap((sheet) => sheet.sections.flatMap((sec) => sec.moves.flatMap((mv) => mv.keys.map((key) => [sheet, mv, key, 'rehearsal']))));
+  for (const [sheet, mv, key, clip] of [...views, ...keys]) {
+    if ((key.f ?? sheet.fighter) !== id) continue;
+    const K = keyFrame(sheet, key), label = `${mv.name}: ${key.key}`;
+    const swap = { '@view.torso': K.views.torso, '@view.pelvis': K.views.pelvis };
+    out.push({ clip, label, n: 0, cell: { label, rig: K.rig, joints: {}, swap, held: K.held, L: K.L, view: viewOf(K.p, K.k), k: K.k, p: K.p } });
   }
   return out;
 }

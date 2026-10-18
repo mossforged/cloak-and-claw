@@ -6,6 +6,7 @@ Plain JavaScript + canvas. No engine, no build step.
 Play online: https://mossforged.github.io/cloak-and-claw/
 Reviews (phone): https://mossforged.github.io/cloak-and-claw/reviews.html (every open branch's preview, screenshots and question)
 Model viewer: https://mossforged.github.io/cloak-and-claw/viewer.html (any character's moves and held items, no level)
+Move rehearsal sheet: https://mossforged.github.io/cloak-and-claw/viewer.html?rehearse=rat-raider (every move's keys, views and the drawings still to come)
 
 ## Run it (Mac)
 **Easiest:** double-click `tools/Play.command` in Finder. It starts a no-cache server on port 8100 and opens the game; keep its Terminal window open while playing, close it to stop.
