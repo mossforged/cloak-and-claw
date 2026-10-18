@@ -204,6 +204,18 @@
       ],
       "band": 330,
       "source": "A023-rat-complete-kit"
+    },
+    "seat": {
+      "img": "seat.png",
+      "source": "A023-rat-complete-kit",
+      "parent": "pelvis",
+      "pivot": [
+        774,
+        1460
+      ],
+      "band": 540,
+      "coverJoint": "crotch",
+      "use": "Pelvis-locked trouser cover above both thigh tops (210 / 510), below rear-tail root (550), torso (600) and belt (640). Q and BQ use seat; hide in B, whose existing seat already covers the joint."
     }
   },
   "swaps": {
@@ -1296,6 +1308,26 @@
         1708
       ],
       "use": "B/BQ only: finished attachment on top of seat and thighs; Q tail-1 remains separate."
+    },
+    "seat-side": {
+      "img": "seat-side.png",
+      "source": "A023-rat-complete-kit",
+      "of": "seat",
+      "pivot": [
+        774,
+        1460
+      ],
+      "view": "S"
+    },
+    "seat-front": {
+      "img": "seat-front.png",
+      "source": "A023-rat-complete-kit",
+      "of": "seat",
+      "pivot": [
+        774,
+        1460
+      ],
+      "view": "F"
     }
   },
   "grips": {
@@ -1978,7 +2010,8 @@
       "leg-near-lower": 520,
       "foot-far": 205,
       "leg-far-lower": 220,
-      "belt": 640
+      "belt": 640,
+      "seat": 540
     },
     "S": {
       "arm-near-upper": 810,
@@ -1990,7 +2023,8 @@
       "leg-near-lower": 520,
       "foot-far": 205,
       "leg-far-lower": 220,
-      "belt": 640
+      "belt": 640,
+      "seat": 540
     },
     "F": {
       "arm-near-upper": 810,
@@ -2003,7 +2037,8 @@
       "leg-near-lower": 520,
       "foot-far": 205,
       "leg-far-lower": 220,
-      "belt": 640
+      "belt": 640,
+      "seat": 540
     },
     "BQ": {
       "arm-near-upper": 110,
@@ -2018,7 +2053,8 @@
       "belt": 640,
       "tail-1": 550,
       "tail-2": 560,
-      "tail-3": 570
+      "tail-3": 570,
+      "seat": 540
     },
     "B": {
       "arm-near-upper": 110,
@@ -2038,7 +2074,8 @@
       "tail-1": 550,
       "tail-2": 560,
       "tail-3": 570,
-      "belt": 640
+      "belt": 640,
+      "seat": null
     }
   },
   "poseBandOverrides": {
@@ -2561,6 +2598,12 @@
     },
     "BQ": {
       "tail-1": "tail-root-back"
+    },
+    "S": {
+      "seat": "seat-side"
+    },
+    "F": {
+      "seat": "seat-front"
     }
   },
   "viewJointPositions": {
@@ -4481,5 +4524,318 @@
     },
     "runtime": "Not measured on this source-only branch. Code must import and run T028 exposure/cut-edge and seam checks. Pass required: zero idle/walk/turning slash/turn-around flags; every other move <20 game px\u00b2 per piece. Source QA does not establish this pass.",
     "measurementNote": "T028 exposure.js identifies any rest-hidden pixels becoming visible, independent of RGB/material finish. Repainting can fix appearance while still producing an area flag. Narrower rounded ends are supplied; Code must report residual geometry flags after import, not waive them as a source-art pass."
+  },
+  "round5Seat": {
+    "parent": "pelvis",
+    "pivot": [
+      774,
+      1460
+    ],
+    "band": 540,
+    "drawings": {
+      "Q": "seat",
+      "S": "seat-side",
+      "F": "seat-front",
+      "BQ": "seat",
+      "B": null
+    },
+    "attachment": "No thigh anchor or independent rotation: exactly inherit pelvis transform in every view. These source cuts share the pelvis canvas and pivot.",
+    "hideIn": [
+      "B"
+    ],
+    "coverPairs": [
+      "seat / leg-near-upper",
+      "seat / leg-far-upper"
+    ],
+    "importNote": "Add seat to rig parts and the view swaps/bands, with B explicitly hidden. Preserve all inherited pelvis/hip anchors, thigh pivots, grips, rear-tail depth and attachments. Update the seam checker to recognize the new painted cover; do not waive a visible gap."
+  },
+  "round5Validation": {
+    "drawings": {
+      "seat": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "backgroundRGB": [
+          0,
+          255,
+          0
+        ],
+        "pivot": [
+          774,
+          1460
+        ],
+        "foregroundBounds": [
+          518,
+          1470,
+          1017,
+          1639
+        ],
+        "pelvisPivotMatches": true,
+        "passed": true
+      },
+      "seat-side": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "backgroundRGB": [
+          0,
+          255,
+          0
+        ],
+        "pivot": [
+          774,
+          1460
+        ],
+        "foregroundBounds": [
+          562,
+          1470,
+          1008,
+          1710
+        ],
+        "pelvisPivotMatches": true,
+        "passed": true
+      },
+      "seat-front": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "backgroundRGB": [
+          0,
+          255,
+          0
+        ],
+        "pivot": [
+          774,
+          1460
+        ],
+        "foregroundBounds": [
+          503,
+          1470,
+          1036,
+          1697
+        ],
+        "pelvisPivotMatches": true,
+        "passed": true
+      },
+      "foot-far": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "backgroundRGB": [
+          0,
+          255,
+          0
+        ],
+        "pivot": [
+          917,
+          1873
+        ],
+        "foregroundBounds": [
+          833,
+          1709,
+          1181,
+          1952
+        ],
+        "changedPixels": 3370,
+        "outsideMaskChangedPixels": 0,
+        "passed": true
+      },
+      "arm-near-upper": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "backgroundRGB": [
+          0,
+          255,
+          0
+        ],
+        "pivot": [
+          555,
+          1174
+        ],
+        "foregroundBounds": [
+          378,
+          1052,
+          672,
+          1378
+        ],
+        "changedPixels": 19760,
+        "outsideMaskChangedPixels": 0,
+        "passed": true
+      },
+      "arm-near-raised": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "backgroundRGB": [
+          0,
+          255,
+          0
+        ],
+        "pivot": [
+          555,
+          1174
+        ],
+        "foregroundBounds": [
+          444,
+          757,
+          657,
+          1227
+        ],
+        "changedPixels": 14540,
+        "outsideMaskChangedPixels": 0,
+        "gripNeighborhoodChangedPixels": 0,
+        "passed": true
+      },
+      "scarf-tail": {
+        "canvas": [
+          1536,
+          2304
+        ],
+        "components8": 1,
+        "backgroundRGB": [
+          0,
+          255,
+          0
+        ],
+        "pivot": [
+          510,
+          1030
+        ],
+        "foregroundBounds": [
+          270,
+          971,
+          627,
+          1410
+        ],
+        "changedPixels": 5373,
+        "outsideMaskChangedPixels": 0,
+        "passed": true
+      }
+    },
+    "allPassed": true,
+    "existingPivotsUnchanged": true,
+    "gripsUnchanged": true,
+    "phoneCopies": [
+      "docs/screens/A023/r5-review.jpg",
+      "docs/screens/A023/r5-seat.jpg",
+      "docs/screens/A023/r5-seat-side.jpg",
+      "docs/screens/A023/r5-seat-front.jpg",
+      "docs/screens/A023/r5-foot-far.jpg",
+      "docs/screens/A023/r5-arm-near-upper.jpg",
+      "docs/screens/A023/r5-arm-near-raised.jpg",
+      "docs/screens/A023/r5-scarf-tail.jpg"
+    ],
+    "maskDiagnostics": {
+      "foot-far": {
+        "maskPolygon": [
+          [
+            832,
+            1680
+          ],
+          [
+            998,
+            1680
+          ],
+          [
+            997,
+            1760
+          ],
+          [
+            830,
+            1760
+          ]
+        ],
+        "changedPixels": 3370,
+        "outsideMaskChangedPixels": 0
+      },
+      "arm-near-upper": {
+        "maskPolygon": [
+          [
+            470,
+            980
+          ],
+          [
+            760,
+            980
+          ],
+          [
+            760,
+            1200
+          ],
+          [
+            570,
+            1235
+          ],
+          [
+            500,
+            1180
+          ]
+        ],
+        "changedPixels": 19760,
+        "outsideMaskChangedPixels": 0
+      },
+      "arm-near-raised": {
+        "maskPolygon": [
+          [
+            430,
+            1110
+          ],
+          [
+            710,
+            1105
+          ],
+          [
+            730,
+            1300
+          ],
+          [
+            430,
+            1300
+          ]
+        ],
+        "changedPixels": 14540,
+        "outsideMaskChangedPixels": 0
+      },
+      "scarf-tail": {
+        "maskPolygon": [
+          [
+            505,
+            935
+          ],
+          [
+            660,
+            935
+          ],
+          [
+            660,
+            1035
+          ],
+          [
+            555,
+            1080
+          ],
+          [
+            505,
+            1020
+          ]
+        ],
+        "changedPixels": 5373,
+        "outsideMaskChangedPixels": 0
+      }
+    },
+    "runtime": "Source-only validation. Code must import new seat/view cuts, register the cover in seam measurements, rerun T028 pass bar and review the actual clips. No runtime pass claimed."
   }
 }

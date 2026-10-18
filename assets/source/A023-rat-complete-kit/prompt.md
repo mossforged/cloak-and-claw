@@ -690,3 +690,66 @@ Inputs: `tail-1.png` native crop `[356,1413,626,1783]`, and the pre-round-4 rear
 ```text
 Use case: precise-object-edit. Repair a cartoon rat TAIL sprite for a fantasy brawler cutout game. Keep exactly the curved tail segment shown, on green background. At UPPER RIGHT, shorten the thin tapered extension so its new endpoint lies near the middle of the reference's right edge rather than the top. Make that endpoint a naturally outlined, softly curved tail-to-body attachment, with the same transverse tail scale bands and painted shading as the rest. This end will be placed over brown trouser fabric in a rear view. Preserve lower-left curved segment and its native position. Fill the small missing green notches along the inner curve as matching tail skin with a continuous black outline. No other anatomy, object, text or shadow. Same warm cartoon style, original framing and exact #00FF00 background.
 ```
+
+
+## Round 5 — seat covers and remaining cut ends (2026-10-18)
+
+Tool: built-in `image_gen.imagegen`, edit mode, one referenced local crop per call, `transparent_background=false`; no seed exposed. Final artwork normalized back to the exact native crop coordinates below; original 1536 × 2304 canvases retained. An initial concurrent attempt ended in a content-filter rejection; none of that attempt was used. The successful clothing/sprite edit prompts are recorded verbatim below.
+
+Local Pillow compositing selects the imagegen paint; no material or extension was procedurally drawn. For repairs, all pixels outside the recorded masks are restored from pulled main, with a 5 px material-only feather at mask joins. Exact-green keying and connected-component checks follow. For each seat, retain the corresponding original pelvis paint exactly, add generated cloth only below each column’s original hem, then cut the new cover below canvas y=1470. The unchanged pelvis beneath supplies the matching concealed top overlap; only the new lower contour can show. No tool outputs or temporary scripts are committed.
+
+### foot-far
+
+Reference/edit target: `foot-far.png` from pulled main, native crop [780, 1600, 1100, 1910]. Masked repair polygon: [[832, 1680], [998, 1680], [997, 1760], [830, 1760]].
+
+```text
+Isolated fantasy game costume/sprite asset repair. Non-realistic cartoon illustration. Use case: precise-object-edit. Game cutout repair. Edit only the top 90 pixels of the leather ankle wrap: replace the nearly straight horizontal cut top by a smoothly rounded domed leather cap with a continuous bold dark outline and curved wrap seam. No flat cut line. Keep position, width, lower foot and all other pixels unchanged. Flat exact #00FF00 green background, original warm painted cartoon style. Same framing and canvas aspect. No shadow, text or extra objects.
+```
+
+### arm-near-upper
+
+Reference/edit target: `arm-near-upper.png` from pulled main, native crop [380, 980, 760, 1390]. Masked repair polygon: [[470, 980], [760, 980], [760, 1200], [570, 1235], [500, 1180]].
+
+```text
+Isolated fantasy game costume/sprite asset repair. Non-realistic cartoon illustration. Use case: precise-object-edit. Game cutout repair. Edit only the brown fur shoulder tip in the upper right, above the cream fur: make it a complete rounded shoulder joint with flowing orange-brown fur strokes and natural tapered tufts, bold continuous dark silhouette. Eliminate the broad flat orange patch with textured directional fur. Keep contour approximately same, same pivot/pose. Preserve all cream fur, leather cuff, and lower arm unchanged. Flat exact #00FF00 green background, original warm painted cartoon style. Same framing and canvas aspect. No shadow, text or extra objects.
+```
+
+### arm-near-raised
+
+Reference/edit target: `arm-near-raised.png` from pulled main, native crop [380, 980, 760, 1390]. Masked repair polygon: [[430, 1110], [710, 1105], [730, 1300], [430, 1300]].
+
+```text
+Isolated fantasy game costume/sprite asset repair. Non-realistic cartoon illustration. Use case: precise-object-edit. Game cutout repair. Edit only the brown fur shoulder end at the bottom of this inverted arm crop: finish the hidden shoulder as round warm brown fur, layered directional tufts with highlights/shadows and a continuous bold dark outline. Eliminate broad featureless orange fill. Keep cream fur, top leather cuff, pose and alignment exactly unchanged. Flat exact #00FF00 green background, original warm painted cartoon style. Same framing and canvas aspect. No shadow, text or extra objects.
+```
+
+### scarf-tail
+
+Reference/edit target: `scarf-tail.png` from pulled main, native crop [240, 941, 646, 1440]. Masked repair polygon: [[505, 935], [660, 935], [660, 1035], [555, 1080], [505, 1020]].
+
+```text
+Isolated fantasy game costume/sprite asset repair. Non-realistic cartoon illustration. Use case: precise-object-edit. Game cutout repair. Edit only the root at the upper right end: make the cut end a rounded tapered point of folded red cloth, continuous bold dark outline, rich red fold highlights/shadows. Keep lower ragged tail, holes, silhouette, scale, alignment unchanged. Flat exact #00FF00 green background, original warm painted cartoon style. Same framing and canvas aspect. No shadow, text or extra objects.
+```
+
+### pelvis
+
+Reference/edit target: `pelvis.png` from pulled main, native crop [440, 1320, 1070, 1750]. Extracted as `seat.png`, on the pelvis pivot (774,1460).
+
+```text
+Use case: precise-object-edit. Isolated fantasy cartoon clothing asset on green background. Edit target: this olive canvas shorts costume with leather utility belt and hanging cream fabric tab. Preserve all existing artwork and alignment. Add a continuous broad rounded olive fabric panel BELOW the existing lower edge, extending down about 80 reference pixels to close the gap between the two shorts hems behind the cream fabric tab. Shade with matching directional olive canvas folds, thick dark silhouette outline. The new extension is narrower than total garment width. Preserve original canvas aspect and position. Flat exact #00FF00 background. No character, skin, anatomy or text; clothing only.
+```
+
+### pelvis-side
+
+Reference/edit target: `pelvis-side.png` from pulled main, native crop [440, 1320, 1070, 1750]. Extracted as `seat-side.png`, on the pelvis pivot (774,1460).
+
+```text
+Use case: precise-object-edit. Isolated fantasy cartoon clothing asset on green background. Edit target: this olive canvas shorts costume with leather utility belt and hanging cream fabric tab. Preserve all existing artwork and alignment. Add a continuous broad rounded olive fabric panel BELOW the existing lower edge, extending down about 80 reference pixels to close the gap between the two shorts hems behind the cream fabric tab. Shade with matching directional olive canvas folds, thick dark silhouette outline. The new extension is narrower than total garment width. Preserve original canvas aspect and position. Flat exact #00FF00 background. No character, skin, anatomy or text; clothing only.
+```
+
+### pelvis-front
+
+Reference/edit target: `pelvis-front.png` from pulled main, native crop [440, 1320, 1070, 1750]. Extracted as `seat-front.png`, on the pelvis pivot (774,1460).
+
+```text
+Use case: precise-object-edit. Isolated fantasy cartoon clothing asset on green background. Edit target: this olive canvas shorts costume with leather utility belt and hanging cream fabric tab. Preserve all existing artwork and alignment. Add a continuous broad rounded olive fabric panel BELOW the existing lower edge, extending down about 80 reference pixels to close the gap between the two shorts hems behind the cream fabric tab. Shade with matching directional olive canvas folds, thick dark silhouette outline. The new extension is narrower than total garment width. Preserve original canvas aspect and position. Flat exact #00FF00 background. No character, skin, anatomy or text; clothing only.
+```
