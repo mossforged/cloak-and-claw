@@ -22,6 +22,8 @@
 // moved: points here are the importer's; the rear tail root `tail-root-back` for B / BQ in rat-raider-views.js). Every
 // hold now comes from the user's grip lines (withGripLines at the end): hands, whole-arm keys, slots, axes, the second
 // hand's grips and each item's own line on this body (itemLines); no per-item or per-hand angle offsets.
+// T030: A023 round 5 imported the same way: the pelvis-locked `seat` (540) and the repaired near upper arm, raised arm,
+// far foot and scarf root (their tops reach higher, so the near upper arm's and far foot's pivots and offsets moved).
 // hands: contact points (palms, cups, the pointing finger: A023 grips, hand part px); the grip hands come from the lines. heldHand (T026): A018's default hands are fists; the near one holds its item in the
 //   side grip drawing (a pose may name another). A grip mode with its own drawing (overhand) uses that drawing's slot.
 // slots / grips: as rigs/a010/rat-raider.js (T018-T020); attach points, axes, the spear's far overhand fist and the bow
@@ -109,13 +111,13 @@ const RIG = {
         'head-front': { img: P + 'head-front.png', offset: [-8.0, -26.4] },
         'head-shout': { img: P + 'head-shout.png', offset: [0.0, -14.4] },
         'head-drink': { img: P + 'head-drink.png', offset: [0.0, -25.2] } } },
-    'arm-near-upper': { img: P + 'arm-near-upper.png', parent: 'torso', attach: [39.6, 67.6], pivot: [70.8, 46.0], order: 590, swaps: { 'arm-near-cocked': { img: P + 'arm-near-cocked.png', offset: [-24.8, -86.0], hide: ["arm-near-lower", "hand-near"] },
-        'arm-near-raised': { img: P + 'arm-near-raised.png', offset: [26.4, -120.8], hide: ["arm-near-lower", "hand-near"] },
-        'arm-near-smear-h': { img: P + 'arm-near-smear-h.png', offset: [39.2, -0.8], hide: ["arm-near-lower", "hand-near"] },
-        'arm-near-smear-o': { img: P + 'arm-near-smear-o.png', offset: [44.4, 3.2], hide: ["arm-near-lower", "hand-near"] },
-        'arm-near-mouth': { img: P + 'arm-near-mouth.png', offset: [44.8, -48.8], hide: ["arm-near-lower", "hand-near"] },
-        'arm-near-upper-back': { img: P + 'arm-near-upper-back.png', offset: [27.2, 0.8] } } },
-    'arm-near-lower': { img: P + 'arm-near-lower.png', parent: 'arm-near-upper', attach: [27.6, 100.4], pivot: [41.2, 24.8], order: 820, swaps: { 'arm-near-lower-back': { img: P + 'arm-near-lower-back.png', offset: [8.0, -6.4] } } },
+    'arm-near-upper': { img: P + 'arm-near-upper.png', parent: 'torso', attach: [39.6, 67.6], pivot: [70.8, 48.8], order: 590, swaps: { 'arm-near-cocked': { img: P + 'arm-near-cocked.png', offset: [-24.8, -83.2], hide: ["arm-near-lower", "hand-near"] },
+        'arm-near-raised': { img: P + 'arm-near-raised.png', offset: [26.4, -118.0], hide: ["arm-near-lower", "hand-near"] },
+        'arm-near-smear-h': { img: P + 'arm-near-smear-h.png', offset: [39.2, 2.0], hide: ["arm-near-lower", "hand-near"] },
+        'arm-near-smear-o': { img: P + 'arm-near-smear-o.png', offset: [44.4, 6.0], hide: ["arm-near-lower", "hand-near"] },
+        'arm-near-mouth': { img: P + 'arm-near-mouth.png', offset: [44.8, -46.0], hide: ["arm-near-lower", "hand-near"] },
+        'arm-near-upper-back': { img: P + 'arm-near-upper-back.png', offset: [27.2, 3.6] } } },
+    'arm-near-lower': { img: P + 'arm-near-lower.png', parent: 'arm-near-upper', attach: [27.6, 103.2], pivot: [41.2, 24.8], order: 820, swaps: { 'arm-near-lower-back': { img: P + 'arm-near-lower-back.png', offset: [8.0, -6.4] } } },
     'hand-near': { img: P + 'hand-near.png', parent: 'arm-near-lower', attach: [22.8, 76.8], pivot: [38.0, 28.0], order: 815, swaps: { 'hand-near-fist': { img: P + 'hand-near-fist.png', offset: [0.0, 0.0] },
         'hand-near-open': { img: P + 'hand-near-open.png', offset: [11.6, 22.4] },
         'hand-near-grip': { img: P + 'hand-near-grip.png', offset: [4.0, 14.4], under: 'hand-near-grip-under' },
@@ -154,16 +156,20 @@ const RIG = {
     'leg-far-upper': { img: P + 'leg-far-upper.png', parent: 'pelvis', attach: [156.0, 92.0], pivot: [48.4, 50.0], order: 210, swaps: { 'leg-far-folded': { img: P + 'leg-far-folded.png', offset: [16.8, 14.0], hide: ["leg-far-lower", "foot-far"] },
         'leg-far-upper-back': { img: P + 'leg-far-upper-back.png', offset: [-5.6, 5.6] } } },
     'leg-far-lower': { img: P + 'leg-far-lower.png', parent: 'leg-far-upper', attach: [55.6, 140.0], pivot: [31.2, 23.6], order: 220, swaps: { 'leg-far-lower-back': { img: P + 'leg-far-lower-back.png', offset: [-6.8, 9.6] } } },
-    'foot-far': { img: P + 'foot-far.png', parent: 'leg-far-lower', attach: [31.2, 74.8], pivot: [33.6, 63.2], order: 215, swaps: { 'foot-far-toe': { img: P + 'foot-far-toe.png', offset: [-2.0, 0.0] },
-        'foot-far-heel': { img: P + 'foot-far-heel.png', offset: [-1.2, 0.0] },
-        'foot-far-back': { img: P + 'foot-far-back.png', offset: [-13.2, 0.0] } } },
+    'foot-far': { img: P + 'foot-far.png', parent: 'leg-far-lower', attach: [31.2, 74.8], pivot: [33.6, 65.6], order: 215, swaps: { 'foot-far-toe': { img: P + 'foot-far-toe.png', offset: [-2.0, 2.4] },
+        'foot-far-heel': { img: P + 'foot-far-heel.png', offset: [-1.2, 2.4] },
+        'foot-far-back': { img: P + 'foot-far-back.png', offset: [-13.2, 2.4] } } },
     'tail': { img: P + 'tail.png', parent: 'pelvis', attach: [-6.8, 100.0], pivot: [34.8, 31.6], order: 300, swaps: { 'tail-root-back': { img: P + 'tail-root-back.png', offset: [2.8, 23.6] } } },
     'tail-2': { img: P + 'tail-2.png', parent: 'tail', attach: [14.8, 98.8], pivot: [58.8, 16.0], order: 310 },
     'tail-3': { img: P + 'tail-3.png', parent: 'tail-2', attach: [22.0, 66.8], pivot: [48.0, 41.2], order: 320 },
     'scarf-tail': { img: P + 'scarf-tail.png', parent: 'torso', attach: [21.6, 10.0], pivot: [96.0, 23.6], order: 330 },
-    'shoulder-near': { img: P + 'shoulder-near.png', parent: 'arm-near-upper', attach: [70.8, 46.0], pivot: [32.0, 38.8], order: 830, cap: true },
+    'shoulder-near': { img: P + 'shoulder-near.png', parent: 'arm-near-upper', attach: [70.8, 48.8], pivot: [32.0, 38.8], order: 830, cap: true },
     'shoulder-far': { img: P + 'shoulder-far.png', parent: 'arm-far-upper', attach: [14.4, 16.8], pivot: [28.0, 28.4], order: 130, cap: true },
     'belt': { img: P + 'belt.png', parent: 'pelvis', attach: [106.0, 68.0], pivot: [85.6, 56.0], order: 640 },
+    // T030 (A023 r5): the trouser seat over both thigh tops (210 / 510), locked to the pelvis (no joint of its own); its S / F
+    // drawings come with those pelvis views, hidden in B (rat-raider-views.js)
+    'seat': { img: P + 'seat.png', parent: 'pelvis', attach: [106.0, 68.0], pivot: [102.4, -4.0], order: 540, swaps: { 'seat-side': { img: P + 'seat-side.png', offset: [17.6, 0.0] },
+        'seat-front': { img: P + 'seat-front.png', offset: [-6.0, 0.0] } } },
   },
 };
 

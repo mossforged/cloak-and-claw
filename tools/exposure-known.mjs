@@ -3,7 +3,7 @@
 // new baseline, then review the diff: a line that went away is fixed; a new one is a problem to fix or to accept.
 // Also writes docs/screens/T028/r4-exposure-list.md (T028 r4: unfinished paint only; r3's list stays as it was): the rat family's flags merged (the three rats share A018-A023's
 // drawings), per piece and cover, worst first: the list Art repairs from.
-// Usage: node tools/exposure-known.mjs
+// Usage: node tools/exposure-known.mjs [list.md] (T030: the repair list's path; default docs/screens/T028/r4-exposure-list.md)
 import { writeFileSync } from 'node:fs';
 import { exposureFlags } from './bench/exposure-flags.js';
 import { MODELS } from '../src/viewer/models.js';
@@ -65,7 +65,8 @@ writeFileSync('tools/bench/exposure-known.js', head + lines.join('\n') + '\n};\n
 const NOTES = Object.fromEntries([...head.matchAll(/^const (\w+) = '(.*)';$/gm)].map((m) => [m[1], m[2]]));
 const row = (r) => `| ${r.cut ? r.what.replace('cut ', '') : r.what.replace(' < ', ' under ')} | ${r.px} | ${r.at} | ${NOTES[r.note]} |`;
 const sorted = [...rat.values()].sort((a, b) => b.px - a.px);
-writeFileSync('docs/screens/T028/r4-exposure-list.md', `# T028 r4: unfinished exposed paint and cut edges, Rat Raider family (A023 round 4 imported)
+const LIST = process.argv[2] ?? 'docs/screens/T028/r4-exposure-list.md', ROUND = process.argv[2] ? 'T030 (A023 round 5 imported)' : 'T028 r4 (A023 round 4 imported)';
+writeFileSync(LIST, `# ${ROUND.split(' (')[0]}: unfinished exposed paint and cut edges, Rat Raider family (${ROUND.split(' (')[1]}
 
 Written by \`node tools/exposure-known.mjs\` (check: \`tools/bench/exposure.js\`, test \`tests/exposure.test.mjs\`). Every frame key of every
 viewer clip for the raider, spearman and archer (they share the A018-A023 drawings), each body view standing, and the
@@ -89,4 +90,4 @@ ${sorted.filter((r) => !r.cut).map(row).join('\n')}
 |---|---|---|---|
 ${sorted.filter((r) => r.cut).map(row).join('\n')}
 `);
-console.log(`wrote tools/bench/exposure-known.js: ${lines.length} known flags; docs/screens/T028/r4-exposure-list.md`);
+console.log(`wrote tools/bench/exposure-known.js: ${lines.length} known flags; ${LIST}`);

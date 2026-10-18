@@ -24,6 +24,11 @@ export const COVERS = [
   // from behind the legs trade depth (B: the far leg is nearest): the mirrored pair
   { joint: 'near hip', top: 'pelvis', under: 'leg-near-upper', rule: 'pelvis over the near thigh (seen from behind)', side: 'back', by: 'pelvis' },
   { joint: 'far hip', top: 'torso', under: 'leg-far-upper', rule: 'far thigh under the torso (seen from behind)', side: 'back', by: 'pelvis' },
+  // T030 (A023 r5): the trouser seat, locked to the pelvis, lies over both thigh tops at the crotch (Q, S, F, BQ: the
+  // three-quarter hips; B hides it, the back pelvis has its own seat). surface: it lies over the thighs' finished cloth
+  // (shown before it came), so the hidden-paint zones are measured without it (tools/bench/exposure.js); in a frame it
+  // still covers whatever it is drawn over.
+  { joint: 'crotch', top: 'seat', under: 'leg-{s}-upper', rule: 'seat over thigh tops', side: 'front', by: 'pelvis', surface: true },
   { joint: 'waist (chest)', top: 'belt', under: 'torso', rule: 'belt cover over the torso\'s lower edge' },
   { joint: 'waist (hips)', top: 'belt', under: 'pelvis', rule: 'belt cover over the pelvis top' },
 ];
@@ -72,3 +77,5 @@ const RAT_HANDS = [
 export const HAND_TABLES = { 'rat-raider': RAT_HANDS, 'rat-spearman': RAT_HANDS, 'rat-archer': RAT_HANDS };
 // drawings that hold a handle (a hand drawing named as a grip, or a whole-arm drawing carrying the held item)
 export const GRIP_DRAWING = /-(grip|grip-overhand|pinch|shield)$/;
+// covers that lie over finished surface (rule `surface`): parts the hidden-paint zones leave out
+export const SURFACE_COVERS = new Set(COVERS.filter((c) => c.surface).flatMap((c) => [c.top].flat()));
