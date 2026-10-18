@@ -24,23 +24,25 @@ torso (three-quarter, side, back), pelvis, all arm and leg pieces, hands, feet, 
 pelvis, torso, head; arm-near-upper/lower, hand-near; arm-far-upper/lower, hand-far; leg-near-upper/lower, foot-near; leg-far-upper/lower, foot-far; tail-1, tail-2, tail-3; scarf-tail. **Trousers:** the waistband and seat belong to the pelvis; each trouser leg belongs to its thigh, overlapping the pelvis piece (no single shape spanning hip and thigh).
 
 ## Anatomy check (rig standard 5b; added 2026-10-18)
-**Hand table** (three-quarter, facing right: the near hand is his left). The face column is the lead's proposal from rule 5b.2; the user's anatomy pass confirms or corrects each row before Art draws (decision 2026-10-18). "Now" is what the current drawing shows, filled in during that pass from the hand sheet (`docs/screens/anatomy/rat-hands.jpg`).
+**Hand table** (three-quarter, facing right: the near hand is his left). Faces confirmed in the user's anatomy pass (2026-10-18); "Now" is his read of each current drawing. "Now" is what the current drawing shows, filled in during that pass from the hand sheet (`docs/screens/anatomy/rat-hands.jpg`).
 
 | Hold | Hand | Face the camera sees | Drawing | Now | Moves |
 |---|---|---|---|---|---|
-| weapon held upright in front (guard), at the side, swung in front (forehand strike) | near | **back of the hand**, knuckles; fingers wrap behind the handle | `hand-near-grip` (split) | **palm (user, T026 r4): wrong** | idle, walk, run, slash strike / recover, pickup, jump attack |
-| overhand on a shaft (spear, two-hand club, staff), reverse dagger | near | back of the hand, knuckles on top | `hand-near-grip-overhand` (split) | | spear thrust, dagger stab, overhead chop, staff |
-| bow string pinched at the jaw | near | back of the hand | `hand-near-pinch` | | bow draw / aim |
-| cocked behind the head with the weapon (wind-up) | near | back of the hand (proposal; arm mostly behind the body in BQ) | inside `arm-near-cocked` | | telegraph, slash wind, dagger and bottle throw wind |
-| raised overhead with the weapon | near | back of the hand | inside `arm-near-raised` | | overhead chop wind, rally, weapon thrust in the air |
-| flask at the lips | near | back of the hand (the palm faces the face) | inside `arm-near-mouth` | | drink |
-| weapon held in front | far | **palm side**: fingers curling round the handle toward the camera | `hand-far-grip` (split) | | two-hand holds, bow grip at arm's length |
-| overhand on a shaft | far | palm side: fingers over the shaft toward the camera | `hand-far-grip-overhand` (split, overlay band 850) | | spear thrust, staff, two-hand club |
-| shield strap | far | hidden behind the shield; knuckles if seen | `hand-far-shield` | | block, shield bash |
+| weapon held upright in front (guard), at the side, swung in front (forehand strike) | near | **back of the hand**, knuckles; fingers wrap behind the handle | `hand-near-grip` (split) | **wrong** (user: a gap shows through it and the object sits on top; the back of a hand is solid with the object underneath) | idle, walk, run, slash strike / recover, pickup, jump attack |
+| overhand on a shaft (spear, two-hand club, staff), reverse dagger | near | back of the hand, knuckles on top | `hand-near-grip-overhand` (split) | **wrong** (same as the grip) | spear thrust, dagger stab, overhead chop, staff |
+| bow string pinched at the jaw | near | back of the hand | `hand-near-pinch` | OK (user: "sort of the back of the hand") | bow draw / aim |
+| cocked behind the head with the weapon (wind-up) | near | back of the hand (proposal; arm mostly behind the body in BQ) | inside `arm-near-cocked` | **wrong** (not the back of the hand) | telegraph, slash wind, dagger and bottle throw wind |
+| raised overhead with the weapon | near | back of the hand | inside `arm-near-raised` | **wrong** (not the back of the hand) | overhead chop wind, rally, weapon thrust in the air |
+| flask at the lips | near | back of the hand (the palm faces the face) | inside `arm-near-mouth` | OK (user: the whole back of the hand, no gap) | drink |
+| weapon held in front | far | **palm side**: fingers curling round the handle toward the camera | `hand-far-grip` (split) | **wrong** (user: doesn't read as the palm; "strange") | two-hand holds, bow grip at arm's length |
+| overhand on a shaft | far | palm side: fingers over the shaft toward the camera | `hand-far-grip-overhand` (split, overlay band 850) | OK; fingers to be split out (user) | spear thrust, staff, two-hand club |
+| shield strap, shield guard arm | far | hidden behind the shield; knuckles if seen (guard arm: knuckles, OK) | `hand-far-shield` | OK | block, shield bash |
+| far arm raised-back holding the bow | far | palm side on the bow | inside `arm-far-raised-back` | **unsure** (user: "that hand looks a little strange"); redraw to read clearly | bow draw |
+| far arm raised | far | palm side | inside `arm-far-raised` | OK | two-hand overhead, cower |
 | empty fist hanging low | far | as now (user OK'd T026 r3) | `hand-far-fist` | OK | idle, walk |
-| palm push, block, grab reach, cower, beam | either | palm (by design) | `hand-*-palm` | | grabs, magic |
-| cupped spell, lift from beneath | either | palm, up | `hand-*-cup` | | charge, orb, lifts |
-| pointing | near | back of the hand, index finger out | `hand-near-point` | | point / command |
+| palm push, block, grab reach, cower, beam | either | palm (by design) | `hand-*-palm` | OK | grabs, magic |
+| cupped spell, lift from beneath | either | palm, up | `hand-*-cup` | OK | charge, orb, lifts |
+| pointing | near | back of the hand, index finger out | `hand-near-point` | OK | point / command |
 
 **Covers** (5b.1, current state on the T026 r4 branch):
 | Joint | Rule | Rat now | Fix |

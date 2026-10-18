@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 Anatomy pass on the rat's hands (hand sheet `docs/screens/anatomy/rat-hands.jpg`)
+"For one and for two, that's not the back of the hand. The back of the hand wouldn't have a gap in it because you wouldn't be seeing through it. And the object is going to be underneath the back of the hand, not on top of it." Pinch: "sort of the back of the hand". "Four is not the back of the hand. Five is not the back of the hand. Six is the back of the hand. You can see there's no gap running alongside the hand." Seven: "I don't really see the palm ... it's strange." Eight: "yeah, I guess that's palm side fingers. Although ... we're going to be separating the fingers out from the rest of the hand, right?" Nine and ten right; eleven: "I'm not sure, that hand looks a little strange." 12-16 right.
+
 ## 2026-10-18 T026 round 4 (rat hold + gaps)
 Idle: "almost perfect except the hand holding the sword is showing the palm side of his hand. the hand should be showing the back of his hand to hold the sword like that." Slow walk: "a small gray line between the forward foot and the leg, it almost looks like the foot is being rendered over the pants instead of under them". Slash: "a gap opens up betwen his waist and his chest." On the process: "this entire process just doesn't seem to be working. you're very good at seeing and diagnosing and fixing many things, but you don't seem to be able to see some of these anatomical issues that are apparent to me". On the hand: "why do we not have art for the back of hand grip? How is that not one of the core parts of rendering a camera viewing somebody walking around with a sword?"
 

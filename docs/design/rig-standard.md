@@ -115,6 +115,7 @@ Why: the lead's eye misses small anatomy (a palm where a hand's back should be, 
    - **Near hand holding something in front of or beside the body: the back of the hand** (knuckles toward the camera), the fingers wrapping out of sight behind the handle.
    - **Far hand holding something in front of the body: the palm side**, the fingers curling round the handle toward the camera.
    - Open-hand moves (palm push, block, cupped spell) show the palm by design; the table says so per move.
+   - **The back of a hand is solid** (user, 2026-10-18): no gap or slot shows through it, and the held object passes **underneath** it, never on top.
    - A grip is **split around the handle**: the face in front of the handle is one piece, what wraps behind it is a second piece under the handle (Spine's sword hero and goblins). The handle never passes through a painted hole or slot.
 3. **Cover pieces where a joint has no natural cover:** belt (waist), shoulder caps, bracers, trouser hems. A cover is its own small drawing on the parent's pivot, so the two pieces it joins never have to line up exactly.
 4. **Hidden length through the full range:** every covered end continues underneath far enough to stay hidden at the joint's most extreme angle in the character's rehearsal (not just at rest). Measured by the pose seam test; the rig sheet lists each joint's range.

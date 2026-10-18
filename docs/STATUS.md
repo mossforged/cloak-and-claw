@@ -4,9 +4,9 @@
 
 ## Next (rig lock-down only; everything else paused)
 **The user called this "the final test of this type of rigging" (2026-10-18).** New anatomy rules (rig standard 5b) from real rigs' draw order (study 2026-10-18).
-1. **User:** anatomy pass on the rat's hand table (`docs/design/rigs/rat-raider.md`, "Anatomy check") with the hand sheet `docs/screens/anatomy/rat-hands.jpg`: confirm or correct which face each hand shows.
+1. **User:** anatomy pass done (2026-10-18): near grips, overhand, cocked and raised fists wrong; far grip and bow hand strange. Next look: T026 round 5, then A023 round 2.
 2. **Code:** T026 round 5 (shin over foot, anatomy rule test, seam gaps block reviews). Lead merges it, then Code brings T028 up to date on main (T028 v1 reviewed by the lead: CI green, scope clean; the user's look comes after the update).
-3. **Art:** A023 round 2 (items 1-9: hips and waist, seat, caps, BQ/B views, split grips, belt cover, foot tops, fists in arm keys) once the user's pass confirms the hand table.
+3. **Art:** A023 round 2 now (items 1-9: hips and waist, seat, caps, BQ/B views, split grips with a solid back of the hand, belt cover, foot tops, fists in arm keys).
 4. **Lead:** T029 packet (import A023 round 2 + pose every rehearsal move + hand-table check); then A020 gear; then the mouse.
 
 **Rig lock-down order:** T027 viewer -> T026 rat import -> A019 key drawings + import -> **complete kit (2026-10-17): A023 + T028 -> T029 import + every rehearsal move (absorbs the flexibility test)** -> A020 gear/masks for every view -> mouse rebuild (master, parts, key drawings, import) -> mouse checked in the viewer -> both rigs locked -> resume Stage 4 content (combatant standard, new enemies).
@@ -27,7 +27,7 @@
 
 ## What builders need now
 - Code: `docs/tasks/T026-import-new-rat.md` (round 5), then update `docs/tasks/T028-views-and-depth.md` on main.
-- Art: `docs/tasks/A023-rat-complete-kit.md` round 2, after the user's anatomy pass.
+- Art: `docs/tasks/A023-rat-complete-kit.md` round 2 (items 1-9).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -46,6 +46,7 @@
 
 ## Last session
 
+2026-10-18 lead: user's anatomy pass on the rat's hands -> hand table "Now" column, rule "the back of a hand is solid, the object passes under it" (5b.2), A023 round 2 released with the redraw list.
 2026-10-18 lead: reviewed T026 r4 (32/32 with LFS art; CI green; scope clean) and T028 v1 (CI green, scope clean). User on r4: palm-side sword hand, foot drawn over the trousers in the walk, waist gap in the slash; "this entire process just doesn't seem to be working". Study "Joint rules from real rigs" (Spine's six reference rigs: shin always over foot, weapon between two hand pieces, cover pieces at joints); rig standard 5b anatomy rules; rat hand table + hand sheet; T026 round 5; A023 round 2 items 6-9.
 2026-10-18 lead: user on A023 views: art fine, turned-away and back views anatomically wrong -> A023 round 2 item 4 (redraw torso-away; back-view legs, feet, arms). Lead chat handed over to a new conversation; resume from this file.
 2026-10-17 lead: user on T026 r3: free hand better; cutlass hold still awkward; gap between leg and hips -> T026 round 4 (+ a pose seam test over every move frame). Merged A023 (24 drawings, view anchors and bands; Q/S/F convincing, BQ/B weaker, new views repainted not cut); repairs collected as A023 round 2.
