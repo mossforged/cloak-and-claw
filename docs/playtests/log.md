@@ -2,6 +2,9 @@
 
 The user's feedback in their own words, dated, newest first. The lead adds entries; builders read them.
 
+## 2026-10-18 Rat in game (T028 merged)
+"the rat is good to go.. its not 100% perfect but its much improved from before and my faith is mostly restored"
+
 ## 2026-10-18 T028 round 4 (holds on his grip lines)
 "Those minor lines and stuff that you're saying are so much smaller than the issues we used to have, so I'm happy about that ... this might be good um, to test out in game." Bow line: picked the line along the bow from the archer render ("yes the bottom one. b"); wind-up: "your line now is good, not ... line flipped". Asked to see choices on the rat's body, not on loose parts.
 
