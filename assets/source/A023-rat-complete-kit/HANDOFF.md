@@ -1,3 +1,40 @@
+# A023 Round 5 — pelvis seat covers and four repaired cuts
+
+Branch: `a023-r5-rat-crotch`. Based on pulled main `cb56b6a`. Source only; pushed for review, do not merge.
+
+## Delivered
+
+- New `seat.png`, `seat-side.png`, `seat-front.png`: olive trouser seat/crotch covers cut from each existing pelvis view, with finished matching cloth extending beneath the apron and across the thigh tops. Existing pelvis sources are unchanged.
+- `foot-far.png`: domed, outlined leather-wrap top replaces the straight cut end.
+- `arm-near-upper.png`, `arm-near-raised.png`: rounded shoulder ends with layered brown fur and dark tuft outlines. Covers the cast and lying-down repair requests; the raised fist and approved grip are unchanged.
+- `scarf-tail.png`: tapered, outlined red-cloth root with painted folds.
+- `rig-source.json`: new seat part, S/F swaps, view bands, import instructions, and `round5Validation`. `prompt.md`: exact successful built-in imagegen prompts, crop coordinates and compositing method.
+- `review.png`: Q/S/F source assemblies, enlarged hip crops, all seven delivered cuts on grey, and five 130 px assemblies on Harbor Market. Phone copies: `docs/screens/A023/r5-review.jpg` plus seven `r5-<piece>.jpg` before/after crops (quality 82, long side <=2000).
+
+## Import instructions
+
+`seat` is a child of `pelvis`, source pivot **(774,1460)**, with exactly the pelvis transform; it must not follow either thigh independently. Band **540** is above both thigh tops (210/510), below the BQ tail root (550), torso (600) and belt (640). The existing belt and garment paint remain the top covers.
+
+| Pelvis view | Seat drawing |
+|---|---|
+| Q | seat |
+| S | seat-side |
+| F | seat-front |
+| BQ (existing Q pelvis) | seat |
+| B | hidden; existing rear seat covers it |
+
+Add the new seat to the imported rig and view data; explicitly hide it in B (`viewBands.B.seat=null`, also recorded in `round5Seat.hideIn`). Recognize the new cover in the seam measurement without waiving visible gaps. Preserve all existing anchors, pivots, grips, rear-tail attachments and depth. The round-4 tail instructions below still apply.
+
+## Validation and remaining review
+
+All seven cuts: 1536 × 2304, exact #00FF00 background, one 8-connected foreground component. All inherited pivots and grip metadata match pulled main. The four repairs change **zero pixels outside their edit masks**; the raised-arm grip neighborhood is pixel-identical. All eight phone JPGs checked at <=2000 px. Results are in `rig-source.json` → `round5Validation`.
+
+No requested source cut is omitted. The S/F cover extensions have visible outlined lower borders; the motion review must judge their transition into the rotating thighs. Source assemblies do not prove the T028 pass bar: Code must import these drawings, run the unfinished-paint/cut-edge/seam checks and show the actual idle, walk, turning slash, turn-around, cast, fall and spear thrust. No runtime pass is claimed. No question for the user before that import.
+
+---
+
+## Previous round-4 handoff (retained for import context)
+
 # A023 Round 4 — finished hidden material and rear tail root
 
 Branch: `a023-r4-rat-hidden-paint`. Based on pulled main `0420f03`; exposure list read from `origin/t028-views-and-depth` (`9ad1a73`). Source delivery only; push for review, do not merge.
