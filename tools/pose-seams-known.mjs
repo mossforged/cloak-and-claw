@@ -46,7 +46,7 @@ const ELBOW = 'rounded / longer forearm top under the upper arm at the elbow';
 const HIP = 'thigh tops longer under the pelvis (trouser seat and apron): the thigh swung off the master angle shows the cut (A023 r2: already listed)';
 const WAIST = 'torso and pelvis overlap more at the waist (A023 r2: already listed)';
 const KNEE = 'longer trouser hem over the shin / rounder shin top (opens when the knee bends past the master)';
-const ANKLE = 'longer shin end into the boot (back of the ankle opens at the heel lift / toe-off)';
+const ANKLE = 'foot top extended further up under the shin (T026 r5: shin over foot, 5b.1); px here = game px of extra hidden foot top, x4 in part px';
 const TAIL = 'tail root and scarf roots: longer hidden ends under the pelvis / torso';
 const NECK = 'longer neck end on the head under the torso fur (head tipped back or down)';
 const OTHER = 'see the strip';

@@ -7,6 +7,8 @@
 // each image's own px; a joint's attach (on the parent) and pivot (on the child) are the same master canvas point.
 // order = the standard's depth bands; T026 r2: the near upper arm (and its whole-arm keys) at 590, under the torso's vest
 // edge as A010 had it (A018 said 810: its shoulder cap showed over the vest); forearm and hand stay in front (820, 840).
+// T026 r5 (rig standard 5b.1, shin over foot): feet at 515 / 215, just under their shins (A018 said 530 / 230: the boot
+// top showed over the trouser hem); toe swaps inherit the band. Cover pairs: src/data/rigs/anatomy.js.
 // Cuts are keyed without detached islands (importer, T026 r2), on the same trim boxes, so every point here holds.
 // Tail: three segments (A018 tail-1 is the standard's `tail`, tail-2 and tail-3 hang off it).
 // The old A010 rig is kept for the viewer's compare slot only (rigs/a010/). Same field meanings as rigs/mouse-fighter.js.
@@ -81,10 +83,10 @@ export default {
     'hand-far': { img: P + 'hand-far.png', parent: 'arm-far-lower', attach: [50.8, 71.6], pivot: [30.0, 13.2], order: 115, swaps: { 'hand-far-fist': { img: P + 'hand-far-fist.png', offset: [0.0, 0.0] }, 'hand-far-open': { img: P + 'hand-far-open.png', offset: [10.8, 8.0] }, 'hand-far-grip': { img: P + 'hand-far-grip.png', offset: [12.4, 4.4] }, 'hand-far-grip-overhand': { img: P + 'hand-far-grip-overhand.png', offset: [14.4, 5.2] }, 'hand-far-shield': { img: P + 'hand-far-shield.png', offset: [12.8, 4.0] } } },
     'leg-near-upper': { img: P + 'leg-near-upper.png', parent: 'pelvis', attach: [51.6, 86.0], pivot: [71.2, 32.0], order: 510, swaps: { 'leg-near-kneeling': { img: P + 'leg-near-kneeling.png', offset: [-88.0, 0.0], hide: ['leg-near-lower', 'foot-near'] }, 'leg-near-kneeup': { img: P + 'leg-near-kneeup.png', offset: [38.0, -38.4], hide: ['leg-near-lower', 'foot-near'] } } },
     'leg-near-lower': { img: P + 'leg-near-lower.png', parent: 'leg-near-upper', attach: [49.6, 122.0], pivot: [35.6, 23.6], order: 520 },
-    'foot-near': { img: P + 'foot-near.png', parent: 'leg-near-lower', attach: [27.2, 66.8], pivot: [31.6, 20.0], order: 530, swaps: { 'foot-near-toe': { img: P + 'foot-near-toe.png', offset: [-5.2, -1.2] } } },
+    'foot-near': { img: P + 'foot-near.png', parent: 'leg-near-lower', attach: [27.2, 66.8], pivot: [31.6, 20.0], order: 515, swaps: { 'foot-near-toe': { img: P + 'foot-near-toe.png', offset: [-5.2, -1.2] } } },
     'leg-far-upper': { img: P + 'leg-far-upper.png', parent: 'pelvis', attach: [156.0, 86.0], pivot: [47.2, 47.2], order: 210, swaps: { 'leg-far-folded': { img: P + 'leg-far-folded.png', offset: [16.4, 16.0], hide: ['leg-far-lower', 'foot-far'] } } },
     'leg-far-lower': { img: P + 'leg-far-lower.png', parent: 'leg-far-upper', attach: [54.4, 137.2], pivot: [31.2, 23.6], order: 220 },
-    'foot-far': { img: P + 'foot-far.png', parent: 'leg-far-lower', attach: [31.2, 74.8], pivot: [33.6, 20.4], order: 230, swaps: { 'foot-far-toe': { img: P + 'foot-far-toe.png', offset: [-2.0, -1.2] } } },
+    'foot-far': { img: P + 'foot-far.png', parent: 'leg-far-lower', attach: [31.2, 74.8], pivot: [33.6, 20.4], order: 215, swaps: { 'foot-far-toe': { img: P + 'foot-far-toe.png', offset: [-2.0, -1.2] } } },
     'tail': { img: P + 'tail.png', parent: 'pelvis', attach: [-6.8, 94.0], pivot: [34.4, 30.8], order: 300 },
     'tail-2': { img: P + 'tail-2.png', parent: 'tail', attach: [14.4, 98.0], pivot: [58.8, 16.0], order: 310 },
     'tail-3': { img: P + 'tail-3.png', parent: 'tail-2', attach: [22.0, 66.8], pivot: [48.0, 41.2], order: 320 },
