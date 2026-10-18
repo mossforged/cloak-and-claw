@@ -5,7 +5,8 @@
 //   hidden zone: a drawing's pixels that the rest assembly of the frame's view (the rig at rest 0 as the game lays it
 //     out; Q is the master, which the paint check holds it to; B and the other views are A023's setups) does not show
 //     because a piece at the same joint covers them: its parent or a child, or a sibling an anatomy rule names as its
-//     cover (src/data/rigs/anatomy.js: the torso over the near thigh, the belt over the torso). A piece that only passes
+//     cover (src/data/rigs/anatomy.js: the torso over the near thigh, the belt over the torso; T030: not a `surface` cover,
+//     the seat over the thighs' finished cloth, left out of the rest assembly). A piece that only passes
 //     in front (an arm hanging over the thigh) leaves painted surface, not hidden paint. Pixels within EDGE_PX of the
 //     shown paint are tolerance (the surface carries on a little under its cover).
 //   exposed: in a frame (as drawn: every piece's screen matrix, the draw order), hidden-zone pixels that end up on top.
@@ -23,7 +24,7 @@
 // the caller's (Node: bench/png.mjs, bench/exposure-refs.js).
 import { layoutRig } from '../../src/render/rig-layout.js';
 import { channelsOf } from '../../src/render/rig-pose.js';
-import { coverPairs } from '../../src/data/rigs/anatomy.js';
+import { coverPairs, SURFACE_COVERS } from '../../src/data/rigs/anatomy.js';
 
 export const EXPOSED_PX2 = 4, EDGE_PX = 1, CUT_MIN = 4, CUT_DEV = 1, SS = 2;
 export const FLAT_SD = 6, FLAT_WIN = 5, FLAT_SHARE = 0.3;   // T028 r4 unfinished paint (calibrated in tests/exposure.test.mjs on A023 r3 vs r4)
@@ -91,7 +92,8 @@ export function hiddenZone(rig, views, name, swapName, img, k, readRGBA, ref) {
   return z;
 }
 function zoneOf(rig, L, i, k, readRGBA, ref) {
-  const { A } = placed(L[i], L[i].m, readRGBA), above = L.slice(i + 1).map((e) => placed(e, e.m, readRGBA)), m = L[i].m;
+  // T030: a surface cover (the seat over the thighs' finished cloth) hides no paint Art drew to stay hidden: left out here
+  const { A } = placed(L[i], L[i].m, readRGBA), above = L.slice(i + 1).filter((e) => !SURFACE_COVERS.has(base(e.name))).map((e) => placed(e, e.m, readRGBA)), m = L[i].m;
   const names = above.map((x) => x.e.name), state = new Uint8Array(A.w * A.h), by = new Int16Array(A.w * A.h).fill(-1), cut = new Uint8Array(A.w * A.h);
   const [fx, fy] = ref?.shift[L[i].name] ?? [0, 0];   // A018 moved the feet off the master: laid back for the comparison
   for (let y = 0; y < A.h; y++) for (let x = 0; x < A.w; x++) {

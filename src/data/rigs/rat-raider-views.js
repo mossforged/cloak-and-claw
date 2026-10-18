@@ -21,6 +21,8 @@ const LEGS_SWAPPED = { 'leg-near-upper': 210, 'leg-near-lower': 220, 'foot-near'
 // the tail's drawing and point itself (the importer only writes them for a pelvis view).
 const TAIL_OVER = { tail: 550, 'tail-2': 560, 'tail-3': 570 }, REAR_TAIL = { tail: 'tail-root-back' };
 const WAIST = [128.0, 150.8], HIPS = [106.8, 36.8];
+// T030 (A023 r5): the seat cover's own drawing per pelvis view (Q and BQ: `seat`); B hides it (the back pelvis has its seat).
+const SEAT_S = { seat: 'seat-side' }, SEAT_F = { seat: 'seat-front' };
 
 export const BODY_VIEWS = {
   torso: {
@@ -34,16 +36,16 @@ export const BODY_VIEWS = {
       bands: FAR_FRONT,
       swaps: { head: 'head-back', 'arm-near-upper': 'arm-near-upper-back', 'arm-near-lower': 'arm-near-lower-back', 'hand-near': 'hand-near-back',
         'arm-far-upper': 'arm-far-upper-back', 'arm-far-lower': 'arm-far-lower-back', 'hand-far': 'hand-far-back' },
-      attach: { 'arm-near-lower': [110.8, 102.0], 'hand-near': [57.2, 68.8], 'arm-far-lower': [-9.6, 72.8], 'hand-far': [7.2, 71.2] } },
+      attach: { 'arm-near-lower': [110.8, 104.8], 'hand-near': [57.2, 68.8], 'arm-far-lower': [-9.6, 72.8], 'hand-far': [7.2, 71.2] } },
     H: { swap: 'torso-hunched', anchors: { neck: [159.6, 86.0], shoulder_near: [53.6, 78.0], shoulder_far: [189.6, 86.0], waist: WAIST } },
     LB: { swap: 'torso-lean-back', anchors: { neck: [105.6, 30.0], shoulder_near: [45.6, 50.0], shoulder_far: [163.6, 70.0], waist: WAIST } },
   },
   pelvis: {
     Q: {},
-    S: { swap: 'pelvis-side', anchors: { waist: HIPS, hip_near: [96.4, 96.0], hip_far: [130.4, 88.0], tail_root: [36.4, 96.0] } },
-    F: { swap: 'pelvis-front', anchors: { waist: HIPS, hip_near: [48.4, 96.0], hip_far: [160.4, 96.0], tail_root: [94.4, 88.0] } },
+    S: { swap: 'pelvis-side', anchors: { waist: HIPS, hip_near: [96.4, 96.0], hip_far: [130.4, 88.0], tail_root: [36.4, 96.0] }, swaps: SEAT_S },
+    F: { swap: 'pelvis-front', anchors: { waist: HIPS, hip_near: [48.4, 96.0], hip_far: [160.4, 96.0], tail_root: [94.4, 88.0] }, swaps: SEAT_F },
     B: { swap: 'pelvis-back', anchors: { waist: HIPS, hip_near: [162.4, 92.0], hip_far: [48.4, 92.0], tail_root: [108.4, 86.0] },
-      bands: { ...LEGS_SWAPPED, ...TAIL_OVER }, hide: ['belt'],
+      bands: { ...LEGS_SWAPPED, ...TAIL_OVER }, hide: ['belt', 'seat'],
       swaps: { 'leg-near-upper': 'leg-near-upper-back', 'leg-far-upper': 'leg-far-upper-back', 'leg-near-lower': 'leg-near-lower-back',
         'leg-far-lower': 'leg-far-lower-back', 'foot-near': 'foot-near-back', 'foot-far': 'foot-far-back', ...REAR_TAIL },
       attach: { 'leg-near-lower': [73.2, 123.6], 'foot-near': [37.6, 66.8], 'leg-far-lower': [46.4, 140.0], 'foot-far': [28.0, 74.8] } },

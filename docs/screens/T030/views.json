@@ -1,0 +1,7 @@
+[
+  { "label": "Idle, zoomed: the new trouser seat over both thigh tops (no notch at the far hip)", "q": "f=rat-raider&anim=idle&zoom=3" },
+  { "label": "Walk, slow: crotch closed as the thighs swing; far foot top domed, no cut end", "q": "f=rat-raider&anim=walk&speed=0.5&zoom=2" },
+  { "label": "Turning slash, slow (the seat turns with the hips through every view)", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" },
+  { "label": "Archer's bow draw, slow (repaired near shoulder and scarf root)", "q": "f=rat-archer&anim=bowShot&speed=0.25&zoom=2" },
+  { "label": "Turn-around, slow: front view uses the front seat drawing, back view hides it", "q": "f=rat-raider&anim=turn&speed=0.25&zoom=2" }
+]

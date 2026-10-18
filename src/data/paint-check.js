@@ -9,5 +9,7 @@ export const PAINT = {
   // T028 r4: known over the limit, Art to fix (the test fails if a body gets worse than this): A023 round 4's repaint of
   // the pelvis (trouser seat, flap) and the far thigh changed paint that shows at rest (without the pelvis 0.92%, without
   // the far thigh 1.13%; round 3 passed). Map: docs/screens/T028/r4-paint-rat.jpg.
-  known: { rat: { strongShare: 0.0168, region: 14, why: 'A023 r4 pelvis + far thigh repaint shows at rest (Art)' } },
+  // T030: A023 round 5's seat lies over the crotch and both thigh tops at rest, painted unlike the master there (1.68% ->
+  // 2.17%, largest region unchanged at 14). Map: docs/screens/T030/paint-rat.jpg.
+  known: { rat: { strongShare: 0.0217, region: 14, why: 'A023 r4 pelvis + far thigh repaint and the A023 r5 seat show at rest (Art)' } },
 };
