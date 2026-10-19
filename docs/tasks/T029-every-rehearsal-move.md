@@ -17,3 +17,11 @@ Out of scope (round 2 and 3): grabs, hurt and down, lifting and throwing, drinki
 - Headless: `npm test` 0 failed; hand-table check; pass-bar report.
 - Windowed: `docs/screens/T029/views.json` with viewer links for: the rehearsal sheet, turning slash, backhand, spin finisher, overhead chop, spear thrust, dash attack, jump attack, block, bow draw, dodge roll, run, skid stop. Phone JPGs of the sheet in `docs/screens/T029/`.
 - Human (user, phone): does he turn into his attacks? Does anything look pieced together? Do the moves read as the move named?
+
+## Round 2 (lead, 2026-10-19): fix what the machine can see, then the user looks
+Round 1 reviewed: every Moving and Attacking move posed (84 keys, no missing drawings), hand-table check in, pass-bar tune cleared 25 armpit flags. Smear-arm hand rows confirmed (near arm, back of the hand). Before the user spends a look, fix what doesn't need his eyes:
+1. **View changes snap, they don't blend.** The spin's in-between frame (pelvis < far thigh 222 px², torso < head 143) and the frame-1 slides (jumpUp, dashAttack, run, daggerStab, spearThrust: 31-48 px²) come from interpolating joint positions between two different view drawings. A view (and its anchors) changes on a key; between keys only angles tween. Where a swing needs the switch mid-swing, it happens on the depth-switch frame the rehearsal names.
+2. **Archer jump and getup regression** (passed in T030, miss now): find it; the old case must give the old result.
+3. **A021 items as real game items:** dagger, round shield (a second carried item on the far hand's strap), hand axe, staff, each held on the user's grip lines as the hold sheet already does. Use them in the moves that stood in: dagger stab and throw (a flying dagger can be the same drawing rotating), block and shield bash with the shield, overhead chop with the axe, staff swing and overhead with the staff (two-hand grips, far raised arm). Rehearsal-only like round 1: no rat type carries them in a fight yet.
+4. Rerun the pass bar; list what's left that only art can fix (piece, move, frame, size) for the lead's Art repair round.
+5. Refresh `views.json` (same links, plus axe chop, staff overhead, shield bash) and the sheet JPGs.
