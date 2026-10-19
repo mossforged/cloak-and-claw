@@ -435,3 +435,184 @@ Inputs: `/tmp/a020/target-torso-front.png`, `/tmp/a020/gear-jerkin.png`.
 ```text
 Use case: precise-object-edit. Asset: gear-jerkin-front. Image 1 is exact current body fit target (torso-front); Image 2 is approved gear design reference, not size reference. Redraw just ONE jerkin OVERLAY to dress image 1 in its exact pose. brown diamond-quilted sleeveless leather jerkin, gold piping, two gold buckles on camera-facing right, side lacing and small pocket. Back shows diamond quilted back, no front buckles. Match target body perspective torso-front; wide short hunched rat torso, not human body. Keep image 1 framing and proportions, shoulder and waist positions locked. Output gear ONLY on flat #00FF00; remove body, fur, scarf, pauldron, all existing clothing, no character. Leave neck and arm openings green. Fit hem over target belly edge, no fur peeking below. Preserve design details and palette from image 2. Bold dark outlines, upper-left lighting, warm painted cartoon. No text or shadow. Source crop rectangle [200,800,1200,1600] in 1536x2304 canvas. Maintain exact target framing.
 ```
+
+
+# Round 2 — dressed drawing, literal difference, colour masks
+
+Built-in `image_gen.imagegen`; `transparent_background: false`; one edit per drawing, with independent edits submitted concurrently. 17 calls, 16 selected outputs. No CLI/API fallback, seed or model controls. The first front-hood output added an unwanted second head; it was discarded and the single-head retry below selected. No raw outputs or discarded variants are delivered.
+
+Image 1 is always the current body drawing; image 2 is A011 design reference. Selected dressed outputs were uniformly enlarged from 1024×1536 to 1536×2304, without recentering, shape fitting or warping. Background was keyed with `G>100 and G>1.4R and G>1.4B`; source alpha is respected. Dressed references are `dressed-<gear-name>.png`. Literal overlays retain foreground dressed pixels where max absolute RGB difference from the undressed source exceeds 12, plus all new dressed silhouette pixels. These are saved as the ordinary gear PNG names; they are diagnostic best attempts, NOT ready gear. No removal mask or body swap hides the failed comparison.
+
+Fit comparison keys the original and dressed images identically, composites the difference over the original, then counts alpha-support mismatch or max absolute RGB error >24. All 16 fail. Diff components are measured with 8-neighbour connectivity. The full native riding-part cells, not stretched thumbnails, are in `fit-jerkin.jpg` and `fit-hood.jpg`; 136 px source assemblies use A023 torso anchors and inherited pivots. These are source checks, not runtime rehearsals.
+
+Material selections use no generated masks. `palette-round2.json` records hand-chosen material samples on the approved A023 assembly and A011 gear references. Each image is quantized to its own 128-colour RGB palette; palette colours within Euclidean RGB distance 24 of a hand sample are classified by nearest material. Pixels must be within distance 18 of that own-image palette colour. Masks get 3×3 closing, are clipped to the source foreground, made mutually exclusive, and components below 20 pixels are dropped. The four materials remain maximum four masks per drawing; absent materials are explicit empty masks. Mouth/teeth exclusions were hand-traced on a 100-pixel grid on nine body heads and their nine hood overlays; the conservative polygons and removed-pixel counts are recorded in `palette-round2.json`. Those fixes can underselect neighbouring pale fur. Brown material collisions and texture holes remain; this is NOT a passed semantic tint selection.
+
+## Round 2 call 1: gear-jerkin
+
+Image 1: `assets/source/A023-rat-complete-kit/torso.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-jerkin.png`
+
+```text
+Use case: precise-object-edit. Image 1 is the EDIT TARGET: approved rat torso part on green, 1536x2304. Image 2 is DESIGN REFERENCE only: approved brown leather jerkin, gold edge piping, two brass buckle straps, stitched panels and small side pocket. Dress the torso in image 1 itself in this jerkin. Cover its cream belly fur completely down to the torso's bottom outline; fit the jerkin around this exact belly, neck opening and shoulders. Keep original pauldron and red scarf visible above the jerkin. Preserve exact canvas 1536x2304, placement, scale, perspective, neck opening, pose and silhouette except where leather slightly extends. Every pixel outside the clothing edit must remain unchanged. Flat #00FF00 background. Bold dark outlined warm painted cartoon, upper-left light. Output the DRESSED TORSO on green, not isolated clothing, no other parts, no text.
+```
+
+## Round 2 call 2: gear-hood
+
+Image 1: `assets/source/A018-rat-parts/head.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 is the EDIT TARGET rat head on green, 1536x2304. Image 2 DESIGN REFERENCE only: olive-brown stitched cloth hood, tan seam stitches, two reinforced ear openings, ragged lower collar. Dress the exact head drawing in image 1 itself with this hood. Hood must wrap this exact skull and fit around THESE ears; preserve both existing ears poking through fitted holes at their bases, preserve exact eyes, expression, face, muzzle, nose, ear positions, head placement, size and pose. Preserve image 1 canvas and green margins exactly. Do not draw empty clothing: output the entire DRESSED HEAD on flat #00FF00 background. Bold dark outline warm painted cartoon upper-left light. Change only the area actually covered by hood and its small outlined extension. No text, no shadow, no added body.
+```
+
+## Round 2 call 3: gear-jerkin-side
+
+Image 1: `assets/source/A023-rat-complete-kit/torso-side.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-jerkin.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat torso-side body-part drawing. Image 2 DESIGN REFERENCE only is the approved jerkin. Dress image 1 itself in the brown leather sleeveless jerkin, diamond quilted panels, gold piping, two brass buckle straps, side lacing and small pocket. Rear views show cross-laced central back seam, no front buckles or pocket. Cover this belly fully down to its original lower edge; retain shoulder pauldron and red scarf above the jerkin. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 4: gear-jerkin-back
+
+Image 1: `assets/source/A023-rat-complete-kit/torso-back.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-jerkin.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat torso-back body-part drawing. Image 2 DESIGN REFERENCE only is the approved jerkin. Dress image 1 itself in the brown leather sleeveless jerkin, diamond quilted panels, gold piping, two brass buckle straps, side lacing and small pocket. Rear views show cross-laced central back seam, no front buckles or pocket. Cover this belly fully down to its original lower edge; retain shoulder pauldron and red scarf above the jerkin. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 5: gear-jerkin-front
+
+Image 1: `assets/source/A023-rat-complete-kit/torso-front.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-jerkin.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat torso-front body-part drawing. Image 2 DESIGN REFERENCE only is the approved jerkin. Dress image 1 itself in the brown leather sleeveless jerkin, diamond quilted panels, gold piping, two brass buckle straps, side lacing and small pocket. Rear views show cross-laced central back seam, no front buckles or pocket. Cover this belly fully down to its original lower edge; retain shoulder pauldron and red scarf above the jerkin. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 6: gear-jerkin-away
+
+Image 1: `assets/source/A023-rat-complete-kit/torso-away.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-jerkin.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat torso-away body-part drawing. Image 2 DESIGN REFERENCE only is the approved jerkin. Dress image 1 itself in the brown leather sleeveless jerkin, diamond quilted panels, gold piping, two brass buckle straps, side lacing and small pocket. Rear views show cross-laced central back seam, no front buckles or pocket. Cover this belly fully down to its original lower edge; retain shoulder pauldron and red scarf above the jerkin. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 7: gear-jerkin-hunched
+
+Image 1: `assets/source/A023-rat-complete-kit/torso-hunched.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-jerkin.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat torso-hunched body-part drawing. Image 2 DESIGN REFERENCE only is the approved jerkin. Dress image 1 itself in the brown leather sleeveless jerkin, diamond quilted panels, gold piping, two brass buckle straps, side lacing and small pocket. Rear views show cross-laced central back seam, no front buckles or pocket. Cover this belly fully down to its original lower edge; retain shoulder pauldron and red scarf above the jerkin. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 8: gear-jerkin-lean-back
+
+Image 1: `assets/source/A023-rat-complete-kit/torso-lean-back.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-jerkin.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat torso-lean-back body-part drawing. Image 2 DESIGN REFERENCE only is the approved jerkin. Dress image 1 itself in the brown leather sleeveless jerkin, diamond quilted panels, gold piping, two brass buckle straps, side lacing and small pocket. Rear views show cross-laced central back seam, no front buckles or pocket. Cover this belly fully down to its original lower edge; retain shoulder pauldron and red scarf above the jerkin. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 9: gear-hood-back
+
+Image 1: `assets/source/A023-rat-complete-kit/head-back.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-back body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 10: gear-hood-hurt
+
+Image 1: `assets/source/A018-rat-parts/head-hurt.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-hurt body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 11: gear-hood-front (discarded duplicate-head output)
+
+Image 1: `assets/source/A023-rat-complete-kit/head-front.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-front body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 12: gear-hood-drink
+
+Image 1: `assets/source/A023-rat-complete-kit/head-drink.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-drink body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 13: gear-hood-shout
+
+Image 1: `assets/source/A023-rat-complete-kit/head-shout.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-shout body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 14: gear-hood-attack
+
+Image 1: `assets/source/A018-rat-parts/head-attack.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-attack body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 15: gear-hood-effort
+
+Image 1: `assets/source/A018-rat-parts/head-effort.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-effort body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 16: gear-hood-ko
+
+Image 1: `assets/source/A018-rat-parts/head-ko.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the approved rat head-ko body-part drawing. Image 2 DESIGN REFERENCE only is the approved hood. Dress image 1 itself in the olive-brown cloth hood, tan stitched seams, reinforced circular ear holes at the bases of THESE ears, ragged lower collar and small brown patch. Keep THIS face, exact expression, muzzle, eyes, teeth and ears. Hood fits this exact skull with these ears sticking through matching holes. For back view show the back of the hood, no face. CRITICAL: preserve exact canvas 1536x2304, all green margins, part size, position, pose, perspective and silhouette. Do not narrow, move, shrink or redraw exposed anatomy; preserve every pixel outside the clothing. Gear follows this drawing's own shape and perspective. Keep existing outlines covered by gear, no old fur exposed under a hem. DRESSED PART output including all uncovered original anatomy; do not output separate clothing. Flat #00FF00 outside the part, bold dark outlines, warm painted cartoon, upper-left lighting. No extra parts, no text or shadow.
+```
+
+## Round 2 call 17: gear-hood-front (selected retry)
+
+Image 1: `assets/source/A023-rat-complete-kit/head-front.png`
+
+Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
+
+```text
+Use case: precise-object-edit. Image 1 is EDIT TARGET: ONE front-facing rat head on green, 1536x2304. Image 2 is design reference only for olive stitched hood, reinforced ear openings and ragged collar. Dress ONLY the ONE existing front head from Image 1 in the hood; preserve its exact scale, placement, expression, eyes, nose, teeth, ears, skull shape and all green margins. Hood conforms around this head and these ears. Maintain entire canvas and anatomy unchanged outside cloth area. ONE SINGLE FRONT HEAD ONLY, NO SECOND HEAD, NO OTHER VIEW, NO SHEET. Flat #00FF00 background, warm painted cartoon, bold outlines, upper-left light. Output dressed head, not empty clothing.
+```

@@ -1442,5 +1442,15 @@
     "front eyepatch oversized and central",
     "mask material spill and incomplete selection",
     "front quiver occlusion unverified"
-  ]
+  ],
+  "supersededBy": "Round 2 checks below; original per-drawing Round 1 metrics retained for history only.",
+  "round2": {
+    "canvasPass": true,
+    "fitPass": false,
+    "materialSemanticsPass": false,
+    "importReady": false,
+    "fit": "fit-round2.json",
+    "tint": "tint-round2.json",
+    "isolation": "tint-isolation-round2.json"
+  }
 }

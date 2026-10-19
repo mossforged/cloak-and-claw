@@ -58,3 +58,57 @@ Runner session: kept branch `a020-rat-gear-every-view`; no checkout, pull, branc
 ## Anything only the user can answer
 
 No design clarification is needed. A011 supplies the approved look and the corrected packet supplies the body/head references. The remaining problems are technical art fit/selection problems. Human approval of a moving, hooded/jerkined captain remains a later gate after the art is corrected and Code imports it; no approval is requested for the current failed fits.
+
+
+# Round 2 — method proof failed; do not import
+
+## Jerkin and hood first
+
+Edited the actual current riding drawings with the built-in image tool: all seven torso views in the A011 jerkin, and all nine current head expressions/views in the A011 hood. Delivered 16 selected dressed references (`dressed-gear-*.png`) and their 16 literal pixel-difference overlays (the ordinary `gear-jerkin*.png` and `gear-hood*.png`). Effort and KO now have their own hood attempts because a difference carrying repainted facial anatomy cannot safely ride another expression. All canvases remain 1536×2304 on the original source coordinates and pivots. Front hood was retried to remove an unwanted second head; the rejected output is not delivered.
+
+The method does **not** pass. Dressing helps place the clothing around the belly and ears, but the image tool changes exposed anatomy and silhouette edges too. The difference therefore contains repainted shoulder, scarf, fur, face or ears instead of a single clean outlined gear piece. A transparent additive overlay cannot erase original-body pixels outside the dressed silhouette. No green eraser, body replacement, stencil or runtime compensation has been invented. Side/away/lean-back jerkin attempts still expose fur under their hems; the back and away designs add front-style buckle details contrary to the approved back design. Hood cloth varies browner than the olive reference and some stitches/ear rims drift.
+
+## The rest
+
+The packet explicitly requires proving jerkin and hood before proceeding to the rest. That prerequisite failed, so sash, quiver, helmet, captain hat and face-detail art/masks remain the failed Round 1 delivery; none is newly certified. The ear-notch head swaps have **not** been made. Quiver front occlusion remains unverified. There is no claim that all Round 2 drawing work is complete. The review gallery labels these unchanged assets `R1 HOLD`; revised gear is `R2 FAIL`.
+
+## Fit checks
+
+`fit-jerkin.jpg` and `fit-hood.jpg` contain native-scale riding-part cells: original, dressed tool edit, original + literal difference, magenta mismatch map, and a 136 px source assembly using A023 anchors. Each row also has its own phone JPG. `fit.png` / `review-fit.png` provide the combined overview. Exact keyed compositing statistics, tolerances and component counts are in `fit-round2.json`. RGB difference threshold is 12; comparison tolerance is 24, with alpha-support differences always counted. Every comparison fails because original silhouette pixels remain. The unmatched count is not a material coverage or motion score.
+
+| Drawing | Unmatched source pixels | Diff components ≥20 px | Fit |
+|---|---:|---:|---|
+| gear-jerkin | 3437 | 12 | FAIL |
+| gear-hood | 2439 | 47 | FAIL |
+| gear-jerkin-front | 1737 | 26 | FAIL |
+| gear-jerkin-side | 984 | 16 | FAIL |
+| gear-jerkin-back | 6529 | 85 | FAIL |
+| gear-jerkin-away | 2344 | 21 | FAIL |
+| gear-jerkin-hunched | 1238 | 40 | FAIL |
+| gear-jerkin-lean-back | 1780 | 27 | FAIL |
+| gear-hood-back | 1664 | 96 | FAIL |
+| gear-hood-drink | 1325 | 43 | FAIL |
+| gear-hood-hurt | 3927 | 65 | FAIL |
+| gear-hood-shout | 2108 | 54 | FAIL |
+| gear-hood-attack | 1687 | 52 | FAIL |
+| gear-hood-effort | 3623 | 39 | FAIL |
+| gear-hood-ko | 1073 | 61 | FAIL |
+| gear-hood-front | 1599 | 69 | FAIL |
+
+## Tint checks
+
+Rebuilt 428 grayscale masks for 107 drawings: all 91 latest current body drawings across A018/A022/A023, plus the 16 revised gear attempts. The fragment has 560 mask entries in total; the other 132 masks belong to unchanged Round 1 gear. Samples were picked by hand on the approved A023 assembly and A011 designs, then selections made from each drawing's own RGB palette with small colour-distance tolerances. Small holes were closed and components below 20 px removed. Eighteen fur masks received hand-traced conservative mouth/teeth exclusions; coordinates and counts are in `palette-round2.json`. No image-tool material selections were used.
+
+`review-tints-round2-01.png` through `review-tints-round2-18.png` show original plus each of the four independent test tints on **every revised drawing**; the same pages are small phone JPGs. `tint-isolation-round2.json` records the outside-mask change count for every tint (expected and checked zero). This proves application isolation only. **Material semantics fail:** similar brown cloth/leather/fur colours collide, leather selection reaches hand skin shadows, fur loses textured highlights/darks, and some metal/stitch or cream-fur colours mix. Mouth exclusions fix the most obvious tooth tint but can omit adjacent pale fur. The per-drawing unresolved/uncertified list is the full `drawings` array of `tint-round2.json`; no drawing is falsely certified from the zero-outside-mask check. Further region isolation and hand painting are still needed.
+
+## Registration, files and readiness
+
+`rig-source.json` includes the two extra hood expression attempts, links dressed references and literal-difference methods, updates mask metadata, and keeps **`importReady: false`**. Source offsets remain [0,0], source pivots unchanged. `review.png` contains the source gallery and 130 px assemblies over the harbor stage. Every new review image has a quality-80 JPG, long side ≤2000 px, in `docs/screens/A020/`. Full native fit JPGs and selected source PNGs use LFS; `review*.png`, JSON and text remain normal git. Exact prompts, processing thresholds, limitations and hand-fix provenance are in `prompt.md` and `palette-round2.json`. No raw tool outputs, discarded variants, code, upstream body art, or runtime assets were changed.
+
+## Anything only the user can answer
+
+None. A011 supplies the design and the packet supplies the method. Remaining failures are technical art fit and material-isolation problems, not missing design decisions. Human approval of the moving captain remains a later gate after a successful source repair and Code import.
+
+## Runner session and repository checks
+
+Stayed on `a020-rat-gear-every-view`; no checkout, pull, branch creation or push. Git LFS 3.8.0 is available, staging succeeded, and LFS status lists the selected dressed images, new hood expression overlays and native fit JPGs. File-reference, 1536×2304 canvas, phone long-side ≤2000, scope and `git diff --check` checks pass. All 428 independent tint applications change zero pixels outside their own masks; fit and material-semantic checks remain failed. Art is committing this diagnostic best-attempt round for the runner to push.
