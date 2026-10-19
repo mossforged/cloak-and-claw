@@ -1,0 +1,137 @@
+{
+  "overlap_measurements": {
+    "shoulder-near": [
+      {
+        "angle": -61.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": -31.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": -1.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": 29.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": 59.0,
+        "overlap_source_px": null
+      }
+    ],
+    "elbow-near": [
+      {
+        "angle": -73.0,
+        "overlap_source_px": 4911
+      },
+      {
+        "angle": -53.5,
+        "overlap_source_px": 4415
+      },
+      {
+        "angle": -34.0,
+        "overlap_source_px": 4080
+      },
+      {
+        "angle": -14.5,
+        "overlap_source_px": 3833
+      },
+      {
+        "angle": 5.0,
+        "overlap_source_px": 3681
+      }
+    ],
+    "wrist-near": [
+      {
+        "angle": -42.0,
+        "overlap_source_px": 2566
+      },
+      {
+        "angle": -27.25,
+        "overlap_source_px": 2359
+      },
+      {
+        "angle": -12.5,
+        "overlap_source_px": 2149
+      },
+      {
+        "angle": 2.25,
+        "overlap_source_px": 2003
+      },
+      {
+        "angle": 17.0,
+        "overlap_source_px": 1911
+      }
+    ],
+    "hip-near": [
+      {
+        "angle": -23.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": -11.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": 1.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": 13.0,
+        "overlap_source_px": null
+      },
+      {
+        "angle": 25.0,
+        "overlap_source_px": null
+      }
+    ],
+    "knee-near": [
+      {
+        "angle": -23.0,
+        "overlap_source_px": 7104
+      },
+      {
+        "angle": -4.5,
+        "overlap_source_px": 7238
+      },
+      {
+        "angle": 14.0,
+        "overlap_source_px": 7410
+      },
+      {
+        "angle": 32.5,
+        "overlap_source_px": 7841
+      },
+      {
+        "angle": 51.0,
+        "overlap_source_px": 8315
+      }
+    ],
+    "ankle-near": [
+      {
+        "angle": -19.0,
+        "overlap_source_px": 6140
+      },
+      {
+        "angle": -4.25,
+        "overlap_source_px": 5855
+      },
+      {
+        "angle": 10.5,
+        "overlap_source_px": 5775
+      },
+      {
+        "angle": 25.25,
+        "overlap_source_px": 5871
+      },
+      {
+        "angle": 40.0,
+        "overlap_source_px": 6007
+      }
+    ]
+  },
+  "caveat": "Nonzero overlap is only a connectivity check, not proof of no visible cap or seam. Shoulder/hip lack separate parent source in named inputs. Visual failures documented in HANDOFF."
+}

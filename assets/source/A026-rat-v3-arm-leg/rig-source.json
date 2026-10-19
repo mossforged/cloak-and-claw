@@ -1,0 +1,236 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "master": "../A017-rat-setup-master/master.png",
+  "units": "master pixels",
+  "parts": {
+    "arm-near-upper": {
+      "img": "arm-near-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "torso",
+      "pivot": [
+        589.2,
+        1081.5
+      ],
+      "attach": {
+        "elbow-near": [
+          484.1,
+          1253.1
+        ]
+      },
+      "band": 800,
+      "skeleton_from": "shoulder-near",
+      "skeleton_to": "elbow-near",
+      "registration": {
+        "source_landmarks": [
+          [
+            650,
+            530
+          ],
+          [
+            300,
+            1060
+          ]
+        ],
+        "uniform_scale": 0.31682520451060686,
+        "clockwise_deg": -1.9536138702367745,
+        "note": "Visual landmark registration; exact circularity is not certified."
+      }
+    },
+    "arm-near-lower": {
+      "img": "arm-near-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-near-upper",
+      "pivot": [
+        484.1,
+        1253.1
+      ],
+      "attach": {
+        "wrist-near": [
+          398.6,
+          1402.5
+        ]
+      },
+      "band": 820,
+      "skeleton_from": "elbow-near",
+      "skeleton_to": "wrist-near",
+      "registration": {
+        "source_landmarks": [
+          [
+            660,
+            545
+          ],
+          [
+            365,
+            1060
+          ]
+        ],
+        "uniform_scale": 0.2900312506105697,
+        "clockwise_deg": -0.02271338539423661,
+        "note": "Visual landmark registration; exact circularity is not certified."
+      }
+    },
+    "hand-near": {
+      "img": "hand-near.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-near-lower",
+      "pivot": [
+        398.6,
+        1402.5
+      ],
+      "attach": {
+        "hand-near-tip": [
+          393.8,
+          1546.1
+        ]
+      },
+      "band": 810,
+      "skeleton_from": "wrist-near",
+      "skeleton_to": "hand-near-tip",
+      "registration": {
+        "source_landmarks": [
+          [
+            570,
+            525
+          ],
+          [
+            455,
+            1085
+          ]
+        ],
+        "uniform_scale": 0.2513270827665335,
+        "clockwise_deg": -9.690295901925479,
+        "note": "Visual landmark registration; exact circularity is not certified."
+      }
+    },
+    "leg-near-upper": {
+      "img": "leg-near-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        647.2,
+        1471.8
+      ],
+      "attach": {
+        "knee-near": [
+          633.1,
+          1661
+        ]
+      },
+      "band": 540,
+      "skeleton_from": "hip-near",
+      "skeleton_to": "knee-near",
+      "registration": {
+        "source_landmarks": [
+          [
+            535,
+            450
+          ],
+          [
+            490,
+            1000
+          ]
+        ],
+        "uniform_scale": 0.3438051102915326,
+        "clockwise_deg": -0.41536790192215567,
+        "note": "Visual landmark registration; exact circularity is not certified."
+      }
+    },
+    "leg-near-lower": {
+      "img": "leg-near-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-near-upper",
+      "pivot": [
+        633.1,
+        1661
+      ],
+      "attach": {
+        "ankle-near": [
+          571.1,
+          1799.1
+        ]
+      },
+      "band": 530,
+      "skeleton_from": "knee-near",
+      "skeleton_to": "ankle-near",
+      "registration": {
+        "source_landmarks": [
+          [
+            635,
+            665
+          ],
+          [
+            490,
+            1000
+          ]
+        ],
+        "uniform_scale": 0.41469815420307454,
+        "clockwise_deg": 0.7730082614011013,
+        "note": "Visual landmark registration; exact circularity is not certified."
+      }
+    },
+    "foot-near": {
+      "img": "foot-near.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-near-lower",
+      "pivot": [
+        571.1,
+        1799.1
+      ],
+      "attach": {
+        "toe-near": [
+          761.1,
+          1926.6
+        ]
+      },
+      "band": 520,
+      "skeleton_from": "ankle-near",
+      "skeleton_to": "toe-near",
+      "registration": {
+        "source_landmarks": [
+          [
+            290,
+            840
+          ],
+          [
+            850,
+            1150
+          ]
+        ],
+        "uniform_scale": 0.35747961737238926,
+        "clockwise_deg": 4.896029922754246,
+        "note": "Visual landmark registration; exact circularity is not certified."
+      }
+    }
+  },
+  "covers": {
+    "shoulder-near": "arm-near-upper over torso",
+    "elbow-near": "arm-near-lower over arm-near-upper",
+    "wrist-near": "arm-near-lower over hand-near",
+    "hip-near": "seat / trousers over leg-near-upper",
+    "knee-near": "leg-near-upper over leg-near-lower",
+    "ankle-near": "leg-near-lower over foot-near"
+  },
+  "note": "External torso/pelvis parent anchors must equal the named skeleton points. No new parent drawings supplied.",
+  "importReady": false
+}

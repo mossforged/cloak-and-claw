@@ -1,0 +1,32 @@
+# A026 exact prompts
+
+Tool: built-in image_gen.imagegen; six separate calls, master.png reference each; transparent_background=false. No seed exposed. Uniform canvas resizing and background keying for review only; no code-painted artwork.
+
+## arm-near-upper
+
+Use case: stylized-concept. Asset: arm-near-upper.png for a cutout rat rig. Reference image is approved master; redraw ONLY its near upper arm (left side of image) as a standalone piece, no other body parts. Full canvas 1536x2304 solid #00FF00 green, same scale and placement as reference. Shoulder pivot (589.2,1081.5), elbow (484.1,1253.1). Include the orange brown stitched leather shoulder pad with silver metal top and gold rivets, the complete rounded shoulder underneath, and brown/cream fur upper arm descending down-left to elbow. Match reference visible arm silhouette approximately x390..710 y1000..1350. Each joint end is fully painted, dark outlined, smooth circular cap centred exactly on its point, radius shoulder 105 and elbow 72 pixels. Shoulder pad covers torso, elbow cap will tuck beneath forearm. No torso, scarf, head, forearm, fist, green holes, labels, markers, ground shadow. Exact same warm painted cartoon, bold dark outlines, upper-left lighting and costume colors as reference. Draw this part by itself, not a cutout of the existing painting.
+
+## arm-near-lower
+
+Use case: stylized-concept. Draw one standalone arm-near-lower, ONLY the near forearm with orange-brown leather wrapped bracer from the left side of the approved rat master reference. Not a sheet. Solid #00FF00 canvas 1536x2304, exact master scale and placement, elbow (484.1,1253.1) to wrist (398.6,1402.5), diagonally down-left. Approximate outline x335..540 y1180..1465. Round complete leather proximal cuff centred on elbow radius 70; distal leather cuff centred on wrist radius 62, with fully finished dark outline. Leather wrap layers and fine tan stitches matching reference, upper-left light, bold dark outlines, warm painted cartoon. Redraw on its own, no upper arm, shoulder, hand, torso or neighboring material. Smooth clean closed contour; finished hidden leather at both ends, wrist cuff covers separate fist. No text, markers or shadow.
+
+## hand-near
+
+Use case: stylized-concept. Draw ONLY hand-near, the closed near fist hanging at the left side of the approved rat master. One standalone redraw on its own solid #00FF00 1536x2304 canvas, exact master scale and position: wrist pivot (398.6,1402.5), fist bottom tip (393.8,1546.1). Visible silhouette approximately x310..500 y1390..1555. Same pink rat skin and orange brown fingerless leather glove with stitching over back of knuckles, curled fingers, solid closed fist as reference, no slot. Wrist top must be a fully painted circular pink/leather end centred exactly (398.6,1402.5), radius 56 pixels, continuing under separate forearm cuff. Outline all round, smooth clean ends. Warm painted cartoon, bold dark outlines, upper-left lighting, match colors and texture closely. No bracer, forearm, body, item, text, markers or shadow.
+
+## leg-near-upper
+
+Use case: stylized-concept. Draw ONLY leg-near-upper, the near trouser thigh on left side of approved rat master, individually from scratch. Solid #00FF00 1536x2304 canvas, identical scale and location to master. Hip pivot (647.2,1471.8), knee (633.1,1661), thigh descending almost vertically slightly left. Silhouette approx x480..770 y1390..1770. Olive warm brown ragged trousers with orange leather patch above large lavender-grey patch, tan crisscross stitches exactly like reference. Complete smooth rounded hip top centred (647.2,1471.8), radius 105, fully painted trouser cloth, hidden under existing belt/seat. Ragged but finished outlined trouser hem extends around knee and covers separate shin top. No pelvis, belt, pouch, belly fur, tail, boot, lower leg, foot or any neighbor. Both ends finished and dark outlined, warm painted cartoon same texture/colors, upper-left light. No text, markers or shadows.
+
+## leg-near-lower
+
+Use case: stylized-concept. One standalone rat cutout leg-near-lower, ONLY near shin with boot ankle wrap matching left leg of approved reference. Redraw individually, not cut from painting. Solid #00FF00 1536x2304 canvas, exact master scale placement. Knee (633.1,1661) to ankle (571.1,1799.1), angled down-left. Upper shin pink warm rat skin complete circular cap radius 64 centred exactly at knee, finished painted under trouser hem. Brown orange layered leather boot wrap descends to ankle, ankle wrap covers separate foot top; rounded cuff centred ankle radius 65 with finished outlined leather. Approx silhouette x490..700 y1595..1870. Do not include thigh, trousers, foot, toes, heel, body or neighbors. Same warm painted cartoon, bold dark contour, upper-left light, clean smooth outline all round, same colors and leather texture as reference. No labels, markers or ground shadow.
+
+## foot-near
+
+Use case: stylized-concept. Draw ONLY foot-near, left-side near foot of approved rat master. One individual standalone redraw on solid #00FF00 1536x2304 canvas. Master scale and location unchanged: ankle pivot (571.1,1799.1), toe point (761.1,1926.6), foot faces right in three-quarter view. Approx silhouette x485..805 y1745..1945. Warm pink broad rat toes with three dark claws, orange brown leather foot strap and heel matching reference. At ankle make a fully painted smooth circular cap centred exactly (571.1,1799.1), radius 60, leather/pink as appropriate, to tuck under separate shin boot wrap. Rest foot silhouette and colors exactly like reference. No shin, ankle wrap above the joint, trouser leg, body or other parts. Bold dark outline all round, warm painted cartoon, upper-left lighting, no ground shadow or text or markers.
+
+
+## Registration and review processing
+
+The tool ignored full-canvas scale/placement in all six calls. Each generated drawing was fitted by a uniform similarity transform (scale + rotation + translation), using two visually measured output landmarks mapped onto the two exact skeleton points. The measured landmarks, scale and angle are preserved in rig-source.json. No anisotropic stretching or code-painted anatomy. Background pixels were normalized to #00FF00. Reviews use green keying, rigid rotations, compositing and resizing in Pillow. The art itself remains image-tool output. The circularity and anatomical centres are approximate, despite exact numeric pivots.
