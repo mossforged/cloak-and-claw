@@ -97,7 +97,7 @@ check_agent() { # agent dir
   local lock="$STATE/locks/$agent"
   if ! mkdir "$lock" 2>/dev/null; then
     # stale lock (runner crashed) after 4 hours
-    if [ -n "$(find "$lock" -maxdepth 0 -mmin +240 2>/dev/null)" ]; then rmdir "$lock"; mkdir "$lock"; else return; fi
+    if [ -n "$(find "$lock" -maxdepth 0 -mmin +240 2>/dev/null)" ]; then rmdir "$lock"; mkdir "$lock"; else return 0; fi
   fi
   cd "$dir" || { rmdir "$lock"; return; }
   if [ -n "$(git status --porcelain)" ]; then log "$agent: clone has uncommitted changes, not touching it"; rmdir "$lock"; return; fi
