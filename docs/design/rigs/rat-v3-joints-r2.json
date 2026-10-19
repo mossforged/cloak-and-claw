@@ -1,0 +1,72 @@
+{
+ "source": "Fitting Room v3 (artifact GQEwo2i25oFiGSdJkn6UgS, db joint-points), user, 2026-10-19, on A026 round 2 pieces",
+ "note": "pivot = point on the child piece, attach = point on the parent piece, both in the Fitting Room's half-size crop px; world = master.png px. front = child drawn over parent. + = clockwise.",
+ "joints": {
+  "shoulder-near": {
+   "world": [
+    573.4,
+    1087.6
+   ],
+   "limits": [
+    -116,
+    76
+   ],
+   "front": true
+  },
+  "elbow-near": {
+   "world": [
+    489.4,
+    1303.6
+   ],
+   "limits": [
+    -101,
+    5
+   ],
+   "front": true
+  },
+  "wrist-near": {
+   "world": [
+    411.2,
+    1427.6
+   ],
+   "limits": [
+    -49,
+    9
+   ],
+   "front": false
+  },
+  "hip-near": {
+   "world": [
+    640.4,
+    1476.6
+   ],
+   "limits": [
+    -23,
+    34
+   ],
+   "front": true
+  },
+  "knee-near": {
+   "world": [
+    633.2,
+    1661
+   ],
+   "limits": [
+    -23,
+    70
+   ],
+   "front": false
+  },
+  "ankle-near": {
+   "world": [
+    571.2,
+    1799
+   ],
+   "limits": [
+    -19,
+    40
+   ],
+   "front": false
+  }
+ }
+}
