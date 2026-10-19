@@ -301,5 +301,6 @@
     "docs/screens/A025/sweep--61.jpg",
     "docs/screens/A025/torso-jerkin.jpg",
     "docs/screens/A025/torso.jpg"
-  ]
+  ],
+  "preservationAuditNote": "One outside-support pixel on the near upper arm was removed during introduced-fragment cleanup; all other pixels outside the named repair support are unchanged."
 }
