@@ -30,3 +30,10 @@ Rules for every piece:
 
 ## Deliver
 The six PNGs, `rig-source.json` (each piece: canvas, pivot = its skeleton point, parent, draw order per the covers), the self-check images, `prompt.md`, `HANDOFF.md`; phone JPGs in `docs/screens/A026/`.
+
+## Round 2 (lead, 2026-10-19): right size, no tube ends
+Round 1 (`a026-rat-v3-arm-leg`, 11d033e) proved the method half-way: each piece is clean and whole, the style broadly matches, and the elbow sweep holds together through the full range (forearm over upper arm, no gap). Two things failed, both fixable:
+1. **Size and shape drifted.** Drawn from scratch, the pieces came out smaller and narrower than the master (small shoulder pad and fist, thin thigh), so the rest assembly doesn't match. **Start each piece from the master's own region** (cut along the outline, not across the limb), then extend and repaint only what the master hides: the round end that tucks under the neighbour, and any edge that was touching another part. At rest the six pieces must cover the master's own limb silhouette (silhouette overlap 95% or better per piece; report the number).
+2. **Tube ends.** The hidden ends were drawn as cut cylinders with a visible end face and rim (elbow, cuff tops, hip top, the shin's pink cap). A tucked end is a **dome**: fur or cloth that rounds off, shaded darker as it goes under, with no flat face, rim or cuff edge. It is never seen at rest and only its curve shows in a bend.
+3. **Body context:** use the A025 torso (now on main, `assets/source/A025-near-shoulder/`) for the shoulder sweep, and the current pelvis + seat for the hip; no torso cut-out holes in the review sheets.
+Same skeleton, limits, covers and self-checks as round 1; add the silhouette numbers to `rest.jpg`.
