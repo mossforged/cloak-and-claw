@@ -19,6 +19,7 @@ export function drawShot(ctx, s, assets) {
   ctx.strokeStyle = g; ctx.lineWidth = J.width; ctx.lineCap = 'round';
   ctx.beginPath(); ctx.moveTo(back * tail * 0.4, 0); ctx.lineTo(back * (tail * 0.4 + J.streak), 0); ctx.stroke();
   ctx.shadowColor = 'rgba(255,255,230,0.95)'; ctx.shadowBlur = J.glow;
+  if (A.spin) ctx.rotate(s.t * A.spin * s.facing);   // T029 r2: a thrown blade turns over in flight (rad per frame)
   ctx.scale(k * s.facing, k);   // T020: A012's arrow points right; mirrored to fly left; centred on its middle
   ctx.drawImage(img, -(A.nock[0] + A.tip[0]) / 2, -(A.nock[1] + A.tip[1]) / 2);
   ctx.restore();

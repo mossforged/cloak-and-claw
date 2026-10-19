@@ -10,24 +10,21 @@
 // change what they need. Whole-limb drawings (A019): cocked near arm for the telegraph, kneeling near leg for the
 // get-up, folded far leg for squat / lying, knee-up near leg for the jump tuck, toe-off feet at the walk's push-off.
 // Spearman and archer (rigs/rat-spearman.js, rat-archer.js) override the arms and add their kit moves.
+// T029: the helpers and the crouch / guard / stance live in rat-raider-kit.js (shared with the rehearsal move files
+// rat-raider-moves.js and rat-raider-attacks.js); the numbers' history stays here.
 import rig from './rat-raider.js';
-import { pose, masterAt, walkCycle } from './biped-ik.js';
-import { viewRig } from '../../render/rig-views.js';
-
-// T028: a pose that names its views (`view: { torso: 'F' }`) is placed on that view's own joint points
-export const P = (spec) => pose(spec.view ? viewRig(rig, spec.view) : rig, spec);
-export const NEAR = masterAt(rig, 'foot-near')[0], FAR = masterAt(rig, 'foot-far')[0];
+import { walkCycle } from './biped-ik.js';
+import { P, NEAR, FAR, FEET, CROUCH, HOLD, TAIL, FIST, STANCE } from './rat-raider-kit.js';
+import { MOVING, RUN, WALK_HEEL } from './rat-raider-moves.js';
+import { ATTACKS } from './rat-raider-attacks.js';
+export { P, NEAR, FAR, FEET, CROUCH, HOLD };
 // the menace crouch: hips 1 px down, trailing (near) boot back, leading (far) boot forward, leaning in (T026 r2: raised
 // from 6 px down: idle 134.4 px tall, A010 137.8, the master 138; was 129.9). T026 r4 (the user's gaps): boots 4 px back
 // / 10 px forward of the master (were 10 / 12) and 1 px down (was 3), pelvis 3 + torso 6 (was 4 + 5): the near thigh no
 // longer swings back off the trouser apron (crotch gap) nor the far knee open the trouser leg's hem (pose seam test);
-// idle 136.5 px tall
-export const FEET = { near: [NEAR - 4, 0, 0], far: [FAR + 10, 0, 0] };
-export const CROUCH = { dy: 1, pelvis: 3, torso: 6, head: -6, feet: FEET, tail: -10, 'tail-2': 15, 'tail-3': 20, 'scarf-tail': 0 };
-const FIST = { 'hand-far': 'hand-far-fist' };
+// idle 136.5 px tall (FEET, CROUCH: rat-raider-kit.js)
 const HURT = { head: 'head-hurt', 'hand-far': 'hand-far-open' };
 const FALL = { head: 'head-hurt', 'hand-far': 'hand-far-open', 'hand-near': 'hand-near-open' };
-const TAIL = (a, b, c) => ({ tail: a, 'tail-2': b, 'tail-3': c });
 
 // Walk (T024's 9-key pattern, floor-line rule): 2 strides/s at his sim walk (2 px/frame = 120 px/s), hips in the crouch
 // (low at contact, high at passing), toe-off drawings (A019) at the push-off only.
@@ -40,8 +37,7 @@ export const WALK = { speed: 2.0, walk: 120, lift: 5, dy: 2, bob: 1.5, gather: 0
 // about level from the elbow, blade upright and a little back, the hand in the forearm's line but for a fist's cock (was
 // off [-10, 12]: fist behind the shoulder, forearm up and the hand bent ~50 degrees under the bracer). A fist behind the
 // body (A010's spot) can't hold the blade up with A018's side-on grip without bending the wrist past 45 degrees.
-export const HOLD = { off: [2, 14], dir: -105 };
-const { swap: _s, ...STANCE } = P({ ...CROUCH, swap: FIST, hand: HOLD, shield: { off: [16, 22], turn: -40 } });
+// (HOLD, STANCE: rat-raider-kit.js)
 const arm = (k, amp, ph) => [STANCE[k] ?? 0, amp, ph];
 
 export default {
@@ -54,8 +50,8 @@ export default {
     'arm-far-upper': arm('arm-far-upper', 3, 0.1), 'hand-far': arm('hand-far', 6, 0.3),
     tail: [-10, 10, 0.3], 'tail-2': [15, 8, 0.45], 'tail-3': [20, 10, 0.6], 'scarf-tail': [0, 7, 0.55],
   },
-  walk: {
-    speed: WALK.speed, ...walkCycle(rig, WALK),
+  walk: {   // T029: heel-strike drawings at contact (rehearsal: toe-off at push-off, heel-strike at contact)
+    speed: WALK.speed, ...walkCycle(rig, { ...WALK, ...WALK_HEEL }),
     swap: { 'hand-far': 'hand-far-fist' }, pelvis: 3, torso: [5, 1.5, 0, 2], head: [-6, 1.5, 0.1, 2],
     'arm-near-upper': arm('arm-near-upper', 6, 0.5), 'arm-near-lower': STANCE['arm-near-lower'], 'hand-near': STANCE['hand-near'],
     'arm-far-upper': [10, 14, 0], 'arm-far-lower': [-20, 6, 0.1], 'hand-far': -10,
@@ -92,7 +88,9 @@ export default {
   // not a state: the arms-up check (stretch test, viewer): A019 raised near arm, cutlass hanging back over his head
   cast: P({ ...CROUCH, swap: { head: 'head-attack' }, wholeArm: { swap: 'arm-near-raised', dir: -59.8 },
     shield: { off: [19, 9], turn: -40 } }),
+  run: RUN,   // T029 rehearsal: the chase run (rat-raider-moves.js)
   moves: {
+    ...MOVING, ...ATTACKS,   // T029: every rehearsal move (Moving, Attacking) the rat types don't use yet
     ratSlash: {   // T028 the turning slash (rehearsal Slash 1): wind-up turned away (BQ) with the cocked arm (A019) wholly
       // behind the body, rearing back on the effort head; the swing turns the chest toward the camera (F) and brings the
       // arm over in front of it: the `through` key (fist over the shoulder, blade up and forward) is the named key where
@@ -107,9 +105,14 @@ export default {
       windup: P({ ...CROUCH, view: { torso: 'BQ' }, swap: { head: 'head-effort', 'hand-far': 'hand-far-fist' }, dx: -4, torso: -12, head: 0,
         wholeArm: { swap: 'arm-near-cocked', dir: -410 }, shield: { off: [22, 10], turn: -50 },
         feet: { near: FEET.near, far: [FEET.far[0] - 2, 2, 10] }, ...TAIL(15, 20, 20), 'scarf-tail': 20 }),
-      through: P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist' }, dx: 0, dy: 3,
+      // T029 (rehearsal: the horizontal smear arm on the strike frame): a second through key, the cut itself, on the
+      // smear arm (A023, carrying the cutlass on the user's line) between the over-the-shoulder key and the follow
+      through: [P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist' }, dx: 0, dy: 3,
         pelvis: 4, torso: 6, head: -10, hand: { off: [10, -30], dir: -45 }, shield: { off: [10, 16], turn: 0 },
         feet: { near: FEET.near, far: FEET.far }, ...TAIL(0, 10, 10), 'scarf-tail': 0 }),
+      P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist', 'foot-near': 'foot-near-toe' }, dx: 3, dy: 6,
+        pelvis: 5, torso: 15, head: -16, wholeArm: { swap: 'arm-near-smear-h', dir: 100 }, shield: { off: [2, 18], turn: 10 },
+        feet: { near: [FEET.near[0] - 4, 9.8, 0], far: [FEET.far[0] + 4, 0, 0] }, ...TAIL(-12, 0, 5), 'scarf-tail': -12 })],
       strike: P({ ...CROUCH, view: { torso: 'F' }, swap: { head: 'head-attack', 'hand-far': 'hand-far-fist', 'foot-near': 'foot-near-toe' }, dx: 5, dy: 9,
         pelvis: 6, torso: 24, head: -22, hand: { off: [26, 18], dir: 55 }, shield: { off: [-4, 18], turn: 20 },
         feet: { near: [FEET.near[0] - 6, 9.8, 0], far: [FEET.far[0] + 6, 0, 0] }, ...TAIL(-25, -10, 0), 'scarf-tail': -25 }),

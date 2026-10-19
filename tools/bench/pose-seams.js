@@ -15,7 +15,7 @@ import { rigFrame, rigMemory } from '../../src/render/rig.js';
 import { drawOf } from '../../src/render/rig-grip.js';
 import { layoutRig } from '../../src/render/rig-layout.js';
 import { channelsOf } from '../../src/render/rig-pose.js';
-import { flagsOf, covers, outward, SEAM_PX } from './stretch.js';
+import { flagsOf, covers, outward, SEAM_PX, LIMB_BODY, limbReach } from './stretch.js';
 import { jointGap } from './junction.js';
 import { FPS } from '../../src/config.js';
 import { REHEARSALS } from '../../src/data/rehearsal/index.js';
@@ -61,15 +61,17 @@ export function rehearsalFrames(id) {
   for (const [sheet, mv, key, clip] of [...views, ...keys]) {
     if ((key.f ?? sheet.fighter) !== id) continue;
     const K = keyFrame(sheet, key), label = `${mv.name}: ${key.key}`;
-    const swap = { '@view.torso': K.views.torso, '@view.pelvis': K.views.pelvis };
-    out.push({ clip, label, n: 0, cell: { label, rig: K.rig, joints: {}, swap, held: K.held, L: K.L, view: viewOf(K.p, K.k), k: K.k, p: K.p } });
+    const swap = K.posed ? K.swap : { '@view.torso': K.views.torso, '@view.pelvis': K.views.pelvis };   // T029: a posed key's own swaps (grip mode too)
+    out.push({ clip, label, n: 0, posed: !!K.posed, cell: { label, rig: K.rig, joints: {}, swap, held: K.held, L: K.L, view: viewOf(K.p, K.k), k: K.k, p: K.p } });
   }
   return out;
 }
 
 // Seams over 2 px in one frame key: [{ joint: 'parent / child', px, at (screen px, feet at 0,0, as drawn), by: 'core'|'band' }].
-export function frameSeams(cell, alphaOf) {
+// T029 pass-bar tune (tune: false = as before): no armpit daylight at the shoulders (stretch.js LIMB_BODY).
+export function frameSeams(cell, alphaOf, { tune = true } = {}) {
   const out = [], marks = [];
+  cell.limbBody = tune;
   const core = flagsOf(cell, alphaOf);   // only seam flags: the cells carry no floor / lying / hold checks
   core.forEach((f, i) => { const m = f.match(/^seam (.+): ([\d.]+) px$/); if (m) out.push({ joint: m[1], px: +m[2], at: cell.marks[i], by: 'core' }); });
   const { rig, L } = cell, drawn = L.filter((e) => e.m && !e.line), by = Object.fromEntries(drawn.map((e) => [e.name, e]));
@@ -81,7 +83,8 @@ export function frameSeams(cell, alphaOf) {
     if (!p || ITEM.has(e.name) || carried.has(e.name) || !by[p] || !rest[p] || !rest[e.name]) continue;
     const J = apply(e.base, rig.parts[e.name].pivot), k = cell.k;
     // the inner crease of a bend is anatomy at an elbow or knee (limb on limb); a hip, shoulder, waist or neck has none
-    const g = jointGap(J, by[p], e, rest[p], rest[e.name], drawn, cov, /^(arm|leg)-/.test(p) ? outward(rig, by, e, p, J, alphaOf) : null);
+    const lb = tune && LIMB_BODY.test(e.name) && p === 'torso' ?limbReach(alphaOf, rig, rest[e.name], apply(rest[e.name].base, rig.parts[e.name].pivot)) : Infinity;
+    const g = jointGap(J, by[p], e, rest[p], rest[e.name], drawn, cov, /^(arm|leg)-/.test(p) ? outward(rig, by, e, p, J, alphaOf) : null, lb);
     if (g && g.px * k > SEAM_PX) out.push({ joint: `${p} / ${e.name}`, px: +(g.px * k).toFixed(1), at: apply(cell.view, g.at), by: 'band' });
   }
   for (const s of out) marks.push(s.at);

@@ -18,7 +18,8 @@ const toRest = (posed, rest) => { const i = inv(posed.m); return (P) => apply(re
 
 // J: the joint pivot (screen px); p, c: posed entries; rp, rc: the same parts at rest; drawn: every posed entry; out: unit
 // vector to the outer side of the bend (stretch.js outward; null = nearly straight). -> { px, at, pts } (the widest gap point and its width, screen px; every gap point) or null.
-export function jointGap(J, p, c, rp, rc, drawn, covers, out = null) {
+// T029 within: only gap points that close to J count (a limb on the body: stretch.js limbReach; default every point).
+export function jointGap(J, p, c, rp, rc, drawn, covers, out = null, within = Infinity) {
   const viaP = toRest(p, rp), viaC = toRest(c, rc), n = Math.round((2 * BOX) / STEP) + 1;
   const hit = (P) => drawn.some((e) => covers(e, P)), pair = (P) => covers(p, P) || covers(c, P);
   const reach = (P, dx, dy) => { for (let d = STEP; d <= MAX; d += STEP) if (pair([P[0] + dx * d, P[1] + dy * d])) return d; return Infinity; };
@@ -34,7 +35,7 @@ export function jointGap(J, p, c, rp, rc, drawn, covers, out = null) {
   };
   // joint territory first (a few lookups a point): most joints have none and stop here
   const seeds = [];
-  for (let i = 0; i < n * n; i++) { const P = pt(i); if (covers(rc, viaP(P)) && covers(rp, viaC(P))) { T[i] = 1; seeds.push(i); } }
+  for (let i = 0; i < n * n; i++) { const P = pt(i); if (Math.hypot(P[0] - J[0], P[1] - J[1]) <= within && covers(rc, viaP(P)) && covers(rp, viaC(P))) { T[i] = 1; seeds.push(i); } }
   // each slit (8-neighbour see-through points) that reaches into joint territory; one smaller than MIN_AREA px^2 is a
   // nick between fur tips, not a seam; its width = the widest of its territory points
   let best = null;

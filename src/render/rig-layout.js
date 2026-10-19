@@ -40,6 +40,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
   swap = V.swap;
   for (const h of V.hide) hidden.add(h);   // T028 r2: parts a view leaves out (B: the belt)
   swap = withHeldHand(rig, swap, held);
+  if (rig.strapHand) swap = { ...swap, ...rig.strapHand };   // T029 r2: a hand holding a strap (render/strap.js) keeps its strap drawing
   for (const [name, key] of Object.entries(swap)) {
     const s = parts[name]?.swaps?.[key];
     if (!s) continue;
@@ -67,8 +68,9 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
   // T028: a view's band beats the pose's order channel; a cap draws just above its arm; the held item keeps its place
   // relative to the hand it hangs from when a view moves that hand to another band. T028 r2: a whole-arm drawing carrying
   // the held item is lifted over it later (rig-grip.js band, GRIP_BAND): its cap goes by that lifted order
+  // T029 r2: a part that `rides` its parent (a strapped item) draws that many bands over it, whichever part carries it
   const orderOf = (name) => V.bands[name] ?? (parts[name].cap ? liftedOf(parts[name].parent) + (parts[name].capOrder ?? 5)
-    : joints[`${name}.order`] ?? parts[name].order);
+    : parts[name].rides != null ? orderOf(parts[name].parent) + parts[name].rides : joints[`${name}.order`] ?? parts[name].order);
   const heldBy = held?.part && rig.parts[held.part.parent] ? held.part.parent : null;
   const orderAt = (name) => (heldBy && name === held.slot && V.bands[heldBy] != null && V.bands[name] == null
     ? parts[name].order + orderOf(heldBy) - (joints[`${heldBy}.order`] ?? rig.parts[heldBy].order) : orderOf(name));

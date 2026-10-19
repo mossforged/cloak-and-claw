@@ -86,8 +86,8 @@ export function viewLayer(rig, f, joints, swap, mem, time) {
   for (const s of Object.keys(rig.bodyViews)) {
     const v = viewOf(sw, s), m = (mem.views[s] ??= { cur: v, from: v, t0: -Infinity });
     if (m.cur !== v) Object.assign(m, { from: m.cur, cur: v, t0: time });
-    const k = (time - m.t0) / RIG_MOTION.viewBlend;
-    if (k >= 0 && k < 1) Object.assign(sw, { [`@viewFrom.${s}`]: m.from, [`@viewMix.${s}`]: k });
+    const k = (time - m.t0) / RIG_MOTION.viewBlend;   // T029 r2: viewBlend 0 = the joint points snap with the drawing
+    if (RIG_MOTION.viewBlend > 0 && k >= 0 && k < 1) Object.assign(sw, { [`@viewFrom.${s}`]: m.from, [`@viewMix.${s}`]: k });
   }
   return { joints, swap: sw };
 }

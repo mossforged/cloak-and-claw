@@ -8,7 +8,7 @@ import { REHEARSALS } from '../src/data/rehearsal/index.js';
 import { FIGHTERS } from '../src/data/fighters/index.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { VIEW_CODES } from '../src/render/rig-views.js';
-import { keyFrame, ready, swapPart } from '../src/viewer/rehearse-frames.js';
+import { keyFrame, ready, swapPart, posed } from '../src/viewer/rehearse-frames.js';
 
 let failed = 0;
 const check = (c, msg) => { if (!c) { failed++; console.log('FAIL:', msg); } };
@@ -20,15 +20,18 @@ const names = S.sections.flatMap((s) => s.moves.map((m) => m.name));
 for (const r of rows) check(names.includes(r), `rehearsal row '${r}' is on the sheet`);
 check(names.length === rows.length, `sheet has ${names.length} moves, the rehearsal ${rows.length}`);
 
-let keys = 0, boxes = 0;
+let keys = 0, boxes = 0, posedKeys = 0;
 for (const sec of S.sections) for (const mv of sec.moves) for (const key of mv.keys) {
   const tag = `${mv.name} / ${key.key}`, def = FIGHTERS[key.f ?? S.fighter], rig = RIGS[def.art.rig];
   keys++;
   for (const v of key.view.split('/')) check(VIEW_CODES.includes(v), `${tag}: view ${v} is a view code`);
   const [a, b] = key.pose.split(':');
-  check(def.moves[a] ? ['windup', 'through', 'strike', 'recover'].includes(b) : ['idle', 'walk', 'hurt', 'knockdown', 'down', 'getup', 'held'].includes(a) || rig.poses[a], `${tag}: pose '${key.pose}' resolves`);
+  if (key.posed) check(posed(def, rig, key.pose), `${tag}: posed key '${key.pose}' resolves`);
+  else check(def.moves[a] ? ['windup', 'through', 'strike', 'recover'].includes(b) : ['idle', 'walk', 'hurt', 'knockdown', 'down', 'getup', 'held'].includes(a) || rig.poses[a], `${tag}: pose '${key.pose}' resolves`);
   const r = keyFrame(S, key);
+  // T029: a posed key shows every view and drawing the rehearsal names for it (the posed frame, not put on by the sheet)
   check(r.L.every((e) => !e.m || e.m.every(Number.isFinite)), `${tag}: lays out`);
+  if (key.posed) { posedKeys++; check(!r.off.length, `${tag}: the posed frame shows what the rehearsal names (missing: ${r.off.join(', ')})`); continue; }
   for (const m of r.missing) { check(m.box && m.box.every(Number.isFinite), `${tag}: box for ${m.name}`); boxes++; }
   // drawn, unless a whole-limb drawing the key also names hides its part (the shield hand under the guard arm)
   // or the held weapon's grip puts its own hand drawing there (the bow's pinch)
@@ -37,5 +40,7 @@ for (const sec of S.sections) for (const mv of sec.moves) for (const key of mv.k
   for (const n of key.draw) check(ready(rig, n) || r.missing.some((m) => m.name === n), `${tag}: ${n} ready or boxed`);
 }
 check(keys > 100, `${keys} keys on the sheet`);
-console.log(failed ? `${failed} failed` : `rehearsal: ${keys} keys, ${boxes} boxes; all passed`);
+check(S.sections.filter((s) => s.posed).map((s) => s.title).join() === 'Moving,Attacking' && posedKeys > 70, `T029 round 1: Moving and Attacking posed (${posedKeys} keys)`);
+for (const s of S.sections.filter((s) => s.posed)) for (const mv of s.moves) check((mv.clips ?? [mv.clip]).every(Boolean), `${mv.name}: links to its viewer clip`);
+console.log(failed ? `${failed} failed` : `rehearsal: ${keys} keys (${posedKeys} posed), ${boxes} boxes; all passed`);
 process.exit(failed ? 1 : 0);

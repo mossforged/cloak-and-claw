@@ -46,7 +46,9 @@ export function createSlot(hooks = {}) {
     const hero = w.heroes[0];
     Object.assign(hero, { def, x: x0, y: Y, facing: dir });
     hero.look = lookOf(cfg.f, cfg.look);
-    const it = ITEMS[cfg.item];
+    // T029 r2: with his own item, a rehearsal move's own (the dagger stab's dagger) and its strap (the shield)
+    const own = cfg.item === 'own' || !cfg.item, it = ITEMS[cfg.item] ?? (own ? ITEMS[clip.item] : undefined);
+    if (own && clip.strap) hero.strap = { def: ITEMS[clip.strap] };
     if (it?.kind === 'potion') hero.potion = it;
     else if (it) hero.weapon = { def: it, uses: 999, hit: false, broken: false };
     if (cfg.grip) forceGrip(hero, { grip: cfg.grip, grip2: cfg.grip });
@@ -59,6 +61,9 @@ export function createSlot(hooks = {}) {
       p.look = lookOf(p.def.id, {});
       sb.partner = p;
     }
+    // T029 r2: fighters numbered from 1 in each clip (ids come from a global counter, and the idle breathing's phase is
+    // the id: render/standee.js), so a clip plays the same whatever was loaded before it (the pass bar's archer frames)
+    [...new Set([...w.heroes, ...w.fighters])].forEach((f, i) => { f.id = i + 1; });
     sb.cx0 = sb.partner && Math.abs(sb.partner.x - x0) < 320 ? (x0 + sb.partner.x) / 2 : x0 + dir * 24;   // fixed camera: model (a little toward his reach) and partner
     sb.fakeStop = clip.kind === 'attack' && !sb.partner;
     clip.setup?.(sb);

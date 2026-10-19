@@ -60,21 +60,36 @@ export function coverPairs(rig) {
 // Hand tables (5b.2; docs/design/rigs/rat-raider.md "Anatomy check", the user's pass 2026-10-18): per rig family, every
 // drawing a hand may hold an item in, with the face the camera sees. tests/anatomy.test.mjs: every hold in every clip
 // frame uses a drawing in its rig's table (a hold with no row fails), and every row's drawing exists on the rig.
+// T029: each row's `holds` names the holds that must use its drawing: `grip` (the item's grip type: one-hand, two-hand,
+// bow), `role` ('item' = the hand the item hangs from, 'second' = a two-hander's other fist or the bow's string hand),
+// `mode` (grip mode, data/grip-modes.js; default any); `carry` rows are whole-arm drawings, any of which may carry the
+// item its hand holds. `holdDrawings(T, hold)` = the drawings a hold may use (tests/anatomy.test.mjs: any other fails).
+const ONE = ['one-hand', 'two-hand'];
 const RAT_HANDS = [
-  { hold: 'weapon upright in front (guard), at the side, swung in front', hand: 'near', face: 'back', drawing: 'hand-near-grip' },
-  { hold: 'overhand on a shaft, reverse dagger', hand: 'near', face: 'back', drawing: 'hand-near-grip-overhand' },
-  { hold: 'bow string pinched at the jaw', hand: 'near', face: 'back', drawing: 'hand-near-pinch' },
-  { hold: 'cocked behind the head (wind-up)', hand: 'near', face: 'back', drawing: 'arm-near-cocked' },
-  { hold: 'raised overhead with the weapon', hand: 'near', face: 'back', drawing: 'arm-near-raised' },
-  { hold: 'flask at the lips', hand: 'near', face: 'back', drawing: 'arm-near-mouth' },
-  { hold: 'weapon held in front (two-hand, bow at arm\'s length)', hand: 'far', face: 'palm', drawing: 'hand-far-grip' },
-  { hold: 'overhand on a shaft', hand: 'far', face: 'palm', drawing: 'hand-far-grip-overhand' },
-  { hold: 'shield strap', hand: 'far', face: 'hidden / knuckles', drawing: 'hand-far-shield' },
-  { hold: 'shield guard arm', hand: 'far', face: 'knuckles', drawing: 'arm-far-guard' },
-  { hold: 'raised back holding the bow', hand: 'far', face: 'palm', drawing: 'arm-far-raised-back' },
-  { hold: 'raised', hand: 'far', face: 'palm', drawing: 'arm-far-raised' },
+  { hold: 'weapon upright in front (guard), at the side, swung in front', hand: 'near', face: 'back', drawing: 'hand-near-grip', holds: [{ grip: ONE, role: 'item', mode: 'side' }] },
+  { hold: 'overhand on a shaft, reverse dagger', hand: 'near', face: 'back', drawing: 'hand-near-grip-overhand', holds: [{ grip: ONE, role: 'item', mode: 'overhand' }] },
+  { hold: 'bow string pinched at the jaw', hand: 'near', face: 'back', drawing: 'hand-near-pinch', holds: [{ grip: ['bow'], role: 'second' }] },
+  { hold: 'cocked behind the head (wind-up)', hand: 'near', face: 'back', drawing: 'arm-near-cocked', carry: true },
+  { hold: 'raised overhead with the weapon', hand: 'near', face: 'back', drawing: 'arm-near-raised', carry: true },
+  { hold: 'flask at the lips', hand: 'near', face: 'back', drawing: 'arm-near-mouth', carry: true },
+  // T029: A023's smear arms carry the weapon on the strike frame (the user's grip lines include them); face as the grip
+  { hold: 'swung in a horizontal smear (strike frame)', hand: 'near', face: 'back', drawing: 'arm-near-smear-h', carry: true },
+  { hold: 'swung in an overhead smear (strike frame)', hand: 'near', face: 'back', drawing: 'arm-near-smear-o', carry: true },
+  { hold: 'weapon held in front (two-hand, bow at arm\'s length)', hand: 'far', face: 'palm', drawing: 'hand-far-grip', holds: [{ grip: ['bow'], role: 'item' }] },
+  { hold: 'overhand on a shaft', hand: 'far', face: 'palm', drawing: 'hand-far-grip-overhand', holds: [{ grip: ['two-hand'], role: 'second' }] },
+  { hold: 'shield strap', hand: 'far', face: 'hidden / knuckles', drawing: 'hand-far-shield', holds: [{ grip: ['shield'], role: 'strap' }] },   // T029 r2: A021's round shield (render/strap.js)
+  { hold: 'shield guard arm', hand: 'far', face: 'knuckles', drawing: 'arm-far-guard', carry: true },
+  { hold: 'raised back holding the bow', hand: 'far', face: 'palm', drawing: 'arm-far-raised-back', carry: true },
+  { hold: 'raised', hand: 'far', face: 'palm', drawing: 'arm-far-raised', carry: true },
 ];
 export const HAND_TABLES = { 'rat-raider': RAT_HANDS, 'rat-spearman': RAT_HANDS, 'rat-archer': RAT_HANDS };
+// The table's rule of faces (5b.2): near holds show the back of the hand, far holds the palm side (a shield hand is hidden)
+export const FACE = { near: 'back', far: 'palm' };
+// hold: { hand: 'near' | 'far', role, grip, mode, carried (a whole-arm drawing carries the item) } -> the rows it may use
+export function holdRows(T, { hand, role, grip, mode, carried }) {
+  if (carried) return T.filter((r) => r.hand === hand && r.carry);
+  return T.filter((r) => r.hand === hand && r.holds?.some((h) => h.role === role && h.grip.includes(grip) && (!h.mode || h.mode === mode)));
+}
 // drawings that hold a handle (a hand drawing named as a grip, or a whole-arm drawing carrying the held item)
 export const GRIP_DRAWING = /-(grip|grip-overhand|pinch|shield)$/;
 // covers that lie over finished surface (rule `surface`): parts the hidden-paint zones leave out

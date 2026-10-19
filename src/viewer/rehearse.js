@@ -22,7 +22,7 @@ const root = document.getElementById('rh'), el = (tag, cls, html) => { const e =
 if (!sheet) { root.append(el('p', null, `No rehearsal named "${id}" (have: ${Object.keys(REHEARSALS).join(', ')}).`)); throw new Error('no rehearsal'); }
 document.title = `Rehearsal: ${sheet.title}`;
 root.append(el('h1', null, sheet.title));
-root.append(el('p', 'legend', `<span>Every move's keys at about game size, as the rig draws them today (stand-in poses until T029).</span> `
+root.append(el('p', 'legend', `<span>Every move's keys at about game size. Moving and Attacking: each key is the posed frame as the game draws it (T029); tap a move's ▶ to play it in the viewer. The other sections are stand-in poses until rounds 2 and 3.</span> `
   + `<span class="view">Blue: chest / hip view.</span> <span class="miss">Red: a drawing not game-ready yet (box = where it goes).</span> `
   + `<span>Views: ${Object.entries(NAMES).map(([k, v]) => `${k} ${v}`).join(', ')}.</span> <span>Build ${BUILD}.</span>`
   + (gear.length ? ` <span class="ok">Wearing: ${gear.map((g) => g.replace(/^(gear|detail)-/, '')).join(', ')}.</span>` : '')));
@@ -66,7 +66,9 @@ for (const sec of sheet.sections) {
   root.append(el('h2', null, sec.title));
   for (const mv of sec.moves) {
     const box = el('div', 'move'), keys = el('div', 'keys');
-    box.append(el('h3', null, `${mv.name} <span class="ok">(${mv.keys.length} key${mv.keys.length > 1 ? 's' : ''})</span>`), keys);
+    // T029: each posed move links to its clip in the viewer (slow, zoomed)
+    const fid = mv.f ?? sheet.fighter, links = (mv.clips ?? (mv.clip ? [mv.clip] : [])).map((c) => `<a class="play" href="viewer.html?f=${fid}&anim=${encodeURIComponent(c)}&speed=0.5&zoom=2">▶ ${c}</a>`).join(' ');
+    box.append(el('h3', null, `${mv.name} <span class="ok">(${mv.keys.length} key${mv.keys.length > 1 ? 's' : ''})</span> ${links}`), keys);
     root.append(box);
     for (const key of mv.keys) {
       const r = keyFrame(sheet, key, gear), card = el('div', 'key'), cv = el('canvas');
@@ -75,6 +77,7 @@ for (const sec of sheet.sections) {
       card.append(cv, el('b', null, key.key), el('div', 'view', `chest ${r.views.torso} / hips ${r.views.pelvis}`),
         el('div', null, [...r.ready.map((n) => `<span class="ok">${n}</span>`), ...key.draw.filter((n) => !r.ready.includes(n)).map((n) => `<span class="miss">${n}</span>`),
           ...stand.map((n) => `<span class="miss">${n} (view)</span>`)].join(', ') || '<span class="ok">base drawings</span>'));
+      if (r.off.length) card.append(el('div', 'miss', `not in the pose: ${r.off.join(', ')}`));   // T029: the rehearsal names it, the posed frame lacks it
       if (key.note) card.append(el('div', 'ok', key.note));
       if (key.f) card.append(el('div', 'ok', `rig: ${key.f}`));
       keys.append(card);
