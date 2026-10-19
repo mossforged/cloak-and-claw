@@ -28,3 +28,11 @@ The PNGs, a `rig-source.json` fragment (gear name, the drawing it rides, offset,
 - Human (after Code imports): a hooded, jerkined captain turning into a slash keeps his gear.
 
 Out of scope: code, weapons, new gear designs.
+
+## Round 2 (lead, 2026-10-19): dress the part, don't draw gear separately
+Round 1 (`a020-rat-gear-every-view`, 49eb7ce) was an honest best attempt and the report is right: gear drawn as separate pieces doesn't land on the body (belly fur under the jerkin hem, ear holes beside the ears, an oversized eyepatch), and masks picked by the image tool select the wrong materials. Change the method, keep the designs:
+1. **Dress the drawing itself.** For each body drawing a gear piece covers, edit **that drawing** with the image tool so the rat is wearing the A011 gear in it (same canvas, same pose, same pivot, the gear following that drawing's own shape and perspective: hood over these ears, jerkin over this belly). Then **the overlay is the difference**: every pixel of the dressed drawing that differs from the undressed one, plus the dressed silhouette where the gear sticks out past the body. Keep the overlay one connected, outlined piece. It fits by construction; check it by compositing overlay over body against the dressed drawing (must match within JPEG noise).
+2. **Ear holes and face details** come out of step 1 too (the hood drawn round these ears; the eyepatch drawn on the camera-side eye at the right size). Ear notch: draw it as a notched ear swap of each head (`head-*-notch`) rather than a painted rim, if the overlay can't remove the ear tip.
+3. **Masks by colour, not by the image tool.** For each drawing, pick the material regions from its own palette: sample each material (fur, cloth, trim, leather) on the master by hand, then select by colour distance with a small tolerance, cleaned (fill holes, drop specks under 20 px), and hand-fix what's left. The tint sheet must show each material changing alone on every view; list any drawing you couldn't separate.
+4. Do the jerkin and the hood across all their views first and prove the method on them (`fit-jerkin.jpg`, `fit-hood.jpg`, both full-size cells and 136 px); then the rest.
+Deliver on the same branch with a new HANDOFF section; `importReady: true` only when the fit and tint checks pass.
