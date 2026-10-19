@@ -1,0 +1,495 @@
+{
+  "hand-near-grip-overhand": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "arm-near-upper": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "arm-near-raised": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": "shoulder-only repaint; fist and bracer unchanged"
+  },
+  "arm-far-upper": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "arm-near-upper-back": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "arm-far-upper-back": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "scarf-tail": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "foot-far": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "leg-far-upper": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "arm-far-lower": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "generatedDetachedPixelsRemoved": 0,
+    "originalVisiblePaintChangedPixels": 0
+  },
+  "restAssembly": {
+    "changedPixelsBeforeVsAfter": 0,
+    "masterInteriorRGBDifferenceOver32_before": 72331,
+    "masterInteriorRGBDifferenceOver32_after": 72331,
+    "masterForegroundPixels": 843587,
+    "note": "Direct source canvas Q rest assembly, Q view bands, hidden shoulder covers, shin over foot, and seat. Existing A023/master differences are reported, not waived. Runtime import and posed exposure tests were not run."
+  },
+  "wrists": [
+    {
+      "hand": "hand-near-grip",
+      "angle": -45,
+      "overlapSourcePixels": 4372,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-grip",
+      "angle": 0,
+      "overlapSourcePixels": 2947,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-grip",
+      "angle": 45,
+      "overlapSourcePixels": 3140,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-grip-overhand",
+      "angle": -45,
+      "overlapSourcePixels": 11369,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-grip-overhand",
+      "angle": 0,
+      "overlapSourcePixels": 6642,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-grip-overhand",
+      "angle": 45,
+      "overlapSourcePixels": 3761,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-pinch",
+      "angle": -45,
+      "overlapSourcePixels": 3649,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-pinch",
+      "angle": 0,
+      "overlapSourcePixels": 965,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-near-pinch",
+      "angle": 45,
+      "overlapSourcePixels": 508,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-far-grip",
+      "angle": -45,
+      "overlapSourcePixels": 2379,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-far-grip",
+      "angle": 0,
+      "overlapSourcePixels": 1797,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-far-grip",
+      "angle": 45,
+      "overlapSourcePixels": 2188,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-far-grip-overhand",
+      "angle": -45,
+      "overlapSourcePixels": 5101,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-far-grip-overhand",
+      "angle": 0,
+      "overlapSourcePixels": 9741,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    },
+    {
+      "hand": "hand-far-grip-overhand",
+      "angle": 45,
+      "overlapSourcePixels": 7129,
+      "gapSourcePixelsChebyshev": 0,
+      "gapGamePixelsApprox": 0.0
+    }
+  ],
+  "repairMasks": {
+    "hand-near-grip-overhand": {
+      "changedPixels": 7280,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        330,
+        1300,
+        490,
+        1460
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/hand-near-grip-overhand.png"
+    },
+    "arm-near-upper": {
+      "changedPixels": 35272,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        475,
+        1020,
+        710,
+        1240
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/arm-near-upper.png",
+      "additionalRepairBounds": [
+        [
+          360,
+          1280,
+          590,
+          1400
+        ]
+      ]
+    },
+    "arm-near-raised": {
+      "changedPixels": 15232,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        420,
+        1110,
+        710,
+        1250
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/arm-near-raised.png"
+    },
+    "arm-far-upper": {
+      "changedPixels": 17345,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        900,
+        1090,
+        1050,
+        1250
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/arm-far-upper.png",
+      "additionalRepairBounds": [
+        [
+          990,
+          1300,
+          1130,
+          1420
+        ]
+      ]
+    },
+    "arm-near-upper-back": {
+      "changedPixels": 20089,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        425,
+        1030,
+        735,
+        1230
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/arm-near-upper-back.png"
+    },
+    "arm-far-upper-back": {
+      "changedPixels": 12855,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        820,
+        1070,
+        1070,
+        1260
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/arm-far-upper-back.png"
+    },
+    "scarf-tail": {
+      "changedPixels": 3051,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        505,
+        930,
+        650,
+        1080
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/scarf-tail.png"
+    },
+    "foot-far": {
+      "changedPixels": 4012,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        825,
+        1670,
+        1000,
+        1770
+      ],
+      "registrationTranslation": [
+        0,
+        0
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/foot-far.png"
+    },
+    "leg-far-upper": {
+      "changedPixels": 42505,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        760,
+        1370,
+        1070,
+        1545
+      ],
+      "registrationTranslation": [
+        0,
+        -2
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A023-rat-complete-kit/leg-far-upper.png",
+      "additionalRepairBounds": [
+        [
+          780,
+          1690,
+          1080,
+          1820
+        ]
+      ]
+    },
+    "arm-far-lower": {
+      "changedPixels": 0,
+      "outsideMaskChangedPixels": 0,
+      "repairBounds": [
+        905,
+        1250,
+        1050,
+        1390
+      ],
+      "registrationTranslation": [
+        0,
+        -2
+      ],
+      "canvas": [
+        1536,
+        2304
+      ],
+      "pivotUnchanged": true,
+      "visibleOriginalPaintChangedPixels": 0,
+      "finalComparedWith": "assets/source/A022-rat-joint-repair/arm-far-lower.png",
+      "additionalRepairBounds": [
+        [
+          1040,
+          1400,
+          1200,
+          1530
+        ]
+      ]
+    }
+  },
+  "unchangedSource": "arm-far-lower.png: repair attempt rejected to preserve original visible paint",
+  "pivots": {
+    "hand-near-grip-overhand": [
+      401,
+      1440
+    ],
+    "arm-near-upper": [
+      555,
+      1174
+    ],
+    "arm-near-raised": [
+      555,
+      1174
+    ],
+    "arm-far-upper": [
+      960,
+      1179
+    ],
+    "arm-near-upper-back": [
+      555,
+      1174
+    ],
+    "arm-far-upper-back": [
+      960,
+      1179
+    ],
+    "scarf-tail": [
+      510,
+      1030
+    ],
+    "foot-far": [
+      917,
+      1873
+    ],
+    "leg-far-upper": [
+      899,
+      1520
+    ],
+    "arm-far-lower": [
+      1038,
+      1329
+    ]
+  },
+  "allPivotsUnchanged": true,
+  "rawToolOutputsIncluded": false
+}
