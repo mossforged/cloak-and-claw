@@ -1,20 +1,78 @@
 [
-  { "label": "Rehearsal sheet: Moving and Attacking show the posed frames (round 2: views snap on their keys, A021 items in hand); tap a move's ▶ to play it", "q": "rehearse=rat-raider" },
-  { "label": "Turning slash, slow (round 2: each key's drawings from the frame it is reached)", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" },
-  { "label": "Backhand, slow: across in front (chest toward camera) -> side-on -> behind (turned away)", "q": "f=rat-raider&anim=backhand&speed=0.25&zoom=2" },
-  { "label": "Spin finisher, slow: three-quarter -> side -> back (smear arm) -> front -> three-quarter (no more slide between views)", "q": "f=rat-raider&anim=spin&speed=0.25&zoom=2" },
-  { "label": "Overhead chop with the hand axe, slow: lean back with the raised arm -> hunched, overhead smear down in front", "q": "f=rat-raider&anim=overheadChop&speed=0.25&zoom=2" },
-  { "label": "Staff overhead, slow: the staff raised behind his head in the far raised fist, both hands overhand -> chopped down hunched", "q": "f=rat-spearman&anim=staffOverhead&speed=0.25&zoom=2" },
-  { "label": "Staff swing, slow: wound turned away -> swept through toward the camera", "q": "f=rat-spearman&anim=staffSwing&speed=0.25&zoom=2" },
-  { "label": "Spear thrust, slow: side-on chest and hips, out-turned rear boot on the lunge", "q": "f=rat-spearman&anim=spearThrust&speed=0.25&zoom=2" },
-  { "label": "Dagger stab, slow: reverse grip on the dagger, side-on", "q": "f=rat-raider&anim=daggerStab&speed=0.25&zoom=2" },
-  { "label": "Dagger throw, slow: the dagger leaves the open hand and flies, turning over", "q": "f=rat-raider&anim=daggerThrow&speed=0.25&zoom=2" },
-  { "label": "Dash attack, slow: hunched, off the trailing toe", "q": "f=rat-raider&anim=dashAttack&speed=0.25&zoom=2" },
-  { "label": "Jump attack, slow: rise cocked -> top turned away -> chop down in front -> land", "q": "f=rat-raider&anim=jumpAttack&speed=0.25&zoom=2" },
-  { "label": "Block with the round shield on the guard arm's strap, slow", "q": "f=rat-raider&anim=guard&speed=0.5&zoom=2" },
-  { "label": "Shield bash, slow: side-on, the shield driven forward off the trailing toe", "q": "f=rat-raider&anim=shieldBash&speed=0.25&zoom=2" },
-  { "label": "Bow draw / aim / release, slow (open hand on the loose)", "q": "f=rat-archer&anim=bowShot&speed=0.25&zoom=2" },
-  { "label": "Dodge roll, slow: tuck -> back to the camera mid-roll -> up on the knee", "q": "f=rat-raider&anim=dodgeRoll&speed=0.25&zoom=2" },
-  { "label": "Run (in place): hunched chest, both feet up between steps", "q": "f=rat-raider&anim=pose:run&speed=0.5&zoom=2" },
-  { "label": "Skid stop, slow: leaning back on the out-turned trailing boot", "q": "f=rat-raider&anim=skidStop&speed=0.25&zoom=2" }
+ {
+  "label": "Rehearsal sheet (round 3: every wrist inside 45 deg; the arm turns, or the item, never the wrist); tap a move's ▶ to play it",
+  "q": "rehearse=rat-raider"
+ },
+ {
+  "label": "Spearman idle, slow (round 3: spear 8 px lower, both fists inside their wrist limits)",
+  "q": "f=rat-spearman&anim=idle&speed=0.5&zoom=2"
+ },
+ {
+  "label": "Turning slash, slow (round 2: each key's drawings from the frame it is reached)",
+  "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Backhand, slow: across in front (chest toward camera) -> side-on -> behind (turned away)",
+  "q": "f=rat-raider&anim=backhand&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Spin finisher, slow: three-quarter -> side -> back (smear arm) -> front -> three-quarter (no more slide between views)",
+  "q": "f=rat-raider&anim=spin&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Overhead chop with the hand axe, slow: lean back with the raised arm -> hunched, overhead smear down in front",
+  "q": "f=rat-raider&anim=overheadChop&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Staff overhead, slow (round 3): both fists on the staff with the jointed far arm (wrists inside their limits) -> chopped down hunched",
+  "q": "f=rat-spearman&anim=staffOverhead&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Staff swing, slow (round 3: re-posed so both wrists stay inside their limits): wound turned away -> swept through toward the camera",
+  "q": "f=rat-spearman&anim=staffSwing&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Spear thrust, slow (round 3: the base of each fist on its forearm; spear re-placed so both wrists stay inside): side-on, out-turned rear boot on the lunge",
+  "q": "f=rat-spearman&anim=spearThrust&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Dagger stab, slow: reverse grip on the dagger, side-on",
+  "q": "f=rat-raider&anim=daggerStab&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Dagger throw, slow: the dagger leaves the open hand and flies, turning over",
+  "q": "f=rat-raider&anim=daggerThrow&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Dash attack, slow: hunched, off the trailing toe",
+  "q": "f=rat-raider&anim=dashAttack&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Jump attack, slow: rise cocked -> top turned away -> chop down in front -> land",
+  "q": "f=rat-raider&anim=jumpAttack&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Block with the round shield on the guard arm's strap, slow",
+  "q": "f=rat-raider&anim=guard&speed=0.5&zoom=2"
+ },
+ {
+  "label": "Shield bash, slow: side-on, the shield driven forward off the trailing toe",
+  "q": "f=rat-raider&anim=shieldBash&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Bow draw / aim / release, slow (round 3: string elbow drawn back, wrist straight; open hand on the loose)",
+  "q": "f=rat-archer&anim=bowShot&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Dodge roll, slow: tuck -> back to the camera mid-roll -> up on the knee",
+  "q": "f=rat-raider&anim=dodgeRoll&speed=0.25&zoom=2"
+ },
+ {
+  "label": "Run (in place): hunched chest, both feet up between steps",
+  "q": "f=rat-raider&anim=pose:run&speed=0.5&zoom=2"
+ },
+ {
+  "label": "Skid stop, slow: leaning back on the out-turned trailing boot",
+  "q": "f=rat-raider&anim=skidStop&speed=0.25&zoom=2"
+ }
 ]

@@ -29,6 +29,7 @@ import { RAT_BOW } from './moves/rat-bow.js';
 import mouseFighterBrace from './rigs/mouse-fighter-brace.js';
 import { LOOKS } from './looks.js';
 import { RIG_MOTION } from './rig-motion.js';
+import { WRISTS } from './wrists.js';
 import healthPotion from './items/health-potion.js';
 import { ALLY } from './ally.js';
 
@@ -60,6 +61,7 @@ export const ROOTS = {
   'src/data/items/health-potion.js': healthPotion,
   'src/data/ally.js': ALLY,
   'src/data/rig-motion.js': RIG_MOTION,
+  'src/data/wrists.js': WRISTS,
 };
 // One pick section per floor weapon's moves (T010).
 const weaponMoves = (title, file) => ({
@@ -271,6 +273,18 @@ export const LAB_SCHEMA = [
       { path: 'springs.strength', min: 10, max: 600, step: 5, label: 'tail/scarf pull back (1/s^2)' },
       { path: 'springs.damping', min: 0.1, max: 1.5, step: 0.05, label: 'tail/scarf damping (1 = no bounce)' },
       { path: 'springs.max', min: 0, max: 60, step: 1, label: 'tail/scarf max (deg)' },
+    ],
+  },
+  {
+    title: 'Wrists (T029 r3, look only)', file: 'src/data/wrists.js',
+    fields: [
+      { path: 'default.near', min: 10, max: 90, step: 1, label: 'near wrist limit (deg)' },
+      { path: 'default.far', min: 10, max: 90, step: 1, label: 'far wrist limit (deg)' },
+      { path: 'turn', min: 0.2, max: 6, step: 0.1, label: 'two-handed item: cost per deg turned' },
+      { path: 'turn1', min: 0.2, max: 6, step: 0.1, label: 'one-handed item: cost per deg turned' },
+      { path: 'trade', min: 0.1, max: 3, step: 0.05, label: 'cost per px the hand moves' },
+      { path: 'armTurn', min: 0, max: 0.5, step: 0.01, label: 'cost per deg the arm turns' },
+      { path: 'elbowMax', min: 60, max: 170, step: 1, label: 'deepest elbow bend (deg)' },
     ],
   },
   {

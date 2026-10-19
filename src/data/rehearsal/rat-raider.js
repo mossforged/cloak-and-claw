@@ -57,7 +57,7 @@ const SHEET = {
       { name: 'Bow draw / aim / release', clip: 'bowShot', f: BOW, keys: [k('draw', 'Q', 'bowShot:20', 'hand-near-pinch', 'three-quarter (rehearsal: S or Q); bow at arm\'s length (the user\'s bow line, T028 r5), not the raised-back far arm', BOW), k('aim', 'Q', 'bowShot:windup', 'hand-near-pinch hand-far-grip', '', BOW),
         k('release', 'Q', 'bowShot:strike', 'hand-near-open', '', BOW)] },
       { name: 'Staff two-hand swing / overhead', clip: 'staffSwing', f: SPEAR, keys: [k('wind', 'BQ', 'staffSwing:windup', 'torso-away hand-near-grip-overhand hand-far-grip-overhand', 'the staff (A021), overhand both hands', SPEAR), k('swing', 'F/Q', 'staffSwing:strike', 'torso-front shoulder-near hand-near-grip-overhand hand-far-grip-overhand', '', SPEAR),
-        k('overhead wind', 'LB', 'staffOverhead:windup', 'torso-lean-back arm-far-raised', 'staff raised behind the head, its second grip in the far raised fist', SPEAR), k('overhead strike', 'H', 'staffOverhead:strike', 'torso-hunched', '', SPEAR)], clips: ['staffSwing', 'staffOverhead'] },
+        k('overhead wind', 'LB', 'staffOverhead:windup', 'torso-lean-back hand-near-grip-overhand hand-far-grip-overhand', 'staff raised behind the head, both fists on it (T029 r3: the jointed far arm, not the rigid raised one: wrists inside their limits)', SPEAR), k('overhead strike', 'H', 'staffOverhead:strike', 'torso-hunched', '', SPEAR)], clips: ['staffSwing', 'staffOverhead'] },
       { name: 'Captain rally (shout)', clip: 'rally', keys: [k('raise', 'Q', 'rally:windup', 'head-shout arm-near-raised'), k('shout', 'Q', 'rally:strike', 'head-shout arm-near-raised')] },
     ] },
     { title: 'Grabs, hurt, down', moves: [

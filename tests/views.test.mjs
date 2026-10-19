@@ -13,6 +13,7 @@ import { viewLayer, anchorsOf, viewRig } from '../src/render/rig-views.js';
 import { RIG_MOTION } from '../src/data/rig-motion.js';
 import { socketPoints } from '../src/render/sockets.js';
 import { carryLayer } from '../src/render/carry.js';
+import { WRISTS } from '../src/data/wrists.js';
 
 let failed = 0;
 const check = (c, msg) => { if (!c) { failed++; console.log('FAIL:', msg); } };
@@ -45,7 +46,10 @@ const idx = (L, n) => L.findIndex((e) => e.name === n);
     if (RM && [RM.windup, RM.through, RM.strike, RM.recover].flat().some((x) => x?.view)) continue;
     const { bodyViews, ...noViews } = R;
     const want = id === 'mouse-fighter' ? fixture : layout(d, noViews, st, t);
+    // T029 r3: the mouse's fixture predates the wrist limits (render/wrist.js turns its arms now): compared without them
+    if (id === 'mouse-fighter') WRISTS.on = false;
     check(JSON.stringify(layout(d, R, st, t)) === JSON.stringify(want), `${key}: lays out exactly as without views`);
+    WRISTS.on = true;
     n++;
   }
   check(n >= 39, `no-view cells: ${n} frames`);   // T029: the spearman's thrust (3 cells) now names its views

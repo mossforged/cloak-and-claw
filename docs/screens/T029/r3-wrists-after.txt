@@ -1,0 +1,267 @@
+  mouse-fighter | idle | 2 @3 near | off 0 @240 far
+  mouse-fighter | walk | -3 @16 far | off 0 @46 far
+  mouse-fighter | walkAcross | -3 @16 far | off 0 @123 near
+  mouse-fighter | jump | -45 @45 near | off 0 @74 near
+  mouse-fighter | block | 45 @47 near | off 0 @120 near
+  mouse-fighter | blockHit | -45 @53 far | off 0 @107 far
+  mouse-fighter | slash1 | -45 @16 near | off 0 @41 near
+  mouse-fighter | slash2 | -45 @14 near | off 0 @41 near
+  mouse-fighter | slash3 | -45 @26 near | off 0 @57 near
+  mouse-fighter | jumpSlash | -45 @45 far | off 0 @60 near
+  mouse-fighter | combo | -45 @58 far | off 0 @76 near
+  mouse-fighter | hurt | -45 @62 near | off 0 @99 near
+  mouse-fighter | knockdown | -45 @129 near | off 0 @152 near
+  mouse-fighter | grabKnee | 45 @90 near | off 0 @190 far
+  mouse-fighter | throw | -45 @47 near | off 0 @150 near
+  mouse-fighter | throwBack | -45 @47 near | off 0 @150 near
+  mouse-fighter | pickup | -45 @26 near | off 0 @51 near
+  mouse-fighter | toss | -45 @32 near | off 0 @102 far
+  mouse-fighter | drink | -17.1 @57 far | off 0 @81 near
+  mouse-fighter | potionToss | -45 @18 far | off 0 @74 near
+  mouse-fighter | downed | -45 @8 near | off 0 @150 near
+  mouse-fighter | revive | -45 @10 near | off 0 @116 near
+  mouse-fighter | cast | -17.1 @67 far | off 0 @100 far
+  mouse-fighter | pose:stance | 1.9 @1 near | off 0 @90 near
+  mouse-fighter | pose:jump | -45 @4 far | off 0 @90 near
+  mouse-fighter | pose:jumpSquat | -45 @90 near | off 0 @90 near
+  mouse-fighter | pose:block | -45 @2 far | off 0 @90 near
+  mouse-fighter | pose:blockHit | -45 @3 far | off 0 @90 near
+  mouse-fighter | pose:hurt | -45 @90 near | off 0 @90 near
+  mouse-fighter | pose:knockdown | -45 @2 near | off 0 @90 near
+  mouse-fighter | pose:down | -45 @5 near hand-near-open | off 0 @90 near
+  mouse-fighter | pose:getup | -45 @3 near | off 0 @90 near
+  mouse-fighter | pose:downed | -45 @2 near | off 0 @90 near
+  mouse-fighter | pose:revive | -45 @5 near | off 0 @90 near
+  mouse-fighter | pose:cast | -17.1 @90 far | off 0 @90 far
+  mouse-fighter | pose:grabbing | -45 @2 near | off 0 @90 near
+  mouse-fighter | pose:knee | -45 @2 near | off 0 @90 near
+  mouse-fighter | pose:throwWind | -45 @3 near | off 0 @90 near
+  mouse-fighter | pose:throwWindBack | -45 @5 near | off 0 @90 near
+  mouse-fighter | pose:throwRelease | -45 @3 near | off 0 @90 near
+  mouse-fighter | pose:toss | -44.1 @90 near | off 0 @90 far
+  mouse-fighter | pose:tossRelease | -45 @5 near | off 0 @90 near
+  mouse-fighter | pose:stow | -45 @3 far | off 0 @90 near
+  mouse-fighter | pose:reach | -45 @5 near | off 0 @90 near
+  rat-raider | idle | -27.6 @157 near hand-near-grip | off 0 @240 near
+  rat-raider | walk | -24.6 @60 near hand-near-grip | off 0 @58 near
+  rat-raider | walkAcross | -27.6 @151 near hand-near-grip | off 0 @151 near
+  rat-raider | turn | -27.6 @57 near hand-near-grip | off 0 @130 near
+  rat-raider | ratSlash | 45 @35 far hand-far-fist | off 0 @87 far
+  rat-raider | fidget | 45 @27 far hand-far-fist | off 0 @93 near
+  rat-raider | skidStop | 45 @3 far hand-far-fist | off 0 @57 near
+  rat-raider | jumpUp | -45 @11 near hand-near-grip | off 0 @78 near
+  rat-raider | dodgeHop | 45 @9 far hand-far-fist | off 0 @56 near
+  rat-raider | dodgeRoll | -45 @38 near hand-near-grip | off 0 @64 near
+  rat-raider | backhand | -45 @32 near hand-near-grip | off 0 @66 near
+  rat-raider | spin | 45 @12 far hand-far-fist | off 0 @83 far
+  rat-raider | overheadChop | -45 @65 near hand-near-grip | off 0 @92 far
+  rat-raider | daggerStab | -45 @42 near hand-near-grip | off 0 @57 near
+  rat-raider | daggerThrow | 45 @23 near hand-near-open | off 0 @95 near
+  rat-raider | jumpAttack | -45 @54 near hand-near-grip | off 0 @68 near
+  rat-raider | dashAttack | -45 @2 near hand-near-grip | off 0 @66 near
+  rat-raider | kick | 45 @10 far hand-far-fist | off 0 @57 near
+  rat-raider | guard | -45 @64 near hand-near-grip | off 0 @93 near
+  rat-raider | shieldBash | -27.6 @57 near hand-near-grip | off 0 @66 near
+  rat-raider | rally | -26.2 @70 near hand-near-grip | off 0 @96 near
+  rat-raider | hurt | -45 @32 near hand-near-grip | off 0 @76 near
+  rat-raider | knockdown | -45 @120 near hand-near-grip | off 0 @144 near
+  rat-raider | grabbed | -45 @171 near hand-near-grip | off 0 @191 near
+  rat-raider | thrown | -45 @131 near hand-near-grip | off 0 @151 near
+  rat-raider | cast | 45 @9 far | off 0 @100 far
+  rat-raider | pose:stance | -24.6 @90 near hand-near-grip | off 0 @90 far
+  rat-raider | pose:jump | 45 @5 far | off 0 @90 near
+  rat-raider | pose:jumpSquat | -42.3 @6 near hand-near-grip | off 0 @90 near
+  rat-raider | pose:hurt | -45 @3 near hand-near-grip | off 0 @90 near
+  rat-raider | pose:held | 45 @2 far hand-far-open | off 0 @90 near
+  rat-raider | pose:knockdown | 45 @2 far hand-far-open | off 0 @90 near
+  rat-raider | pose:down | -45 @2 near hand-near-open | off 0 @90 near
+  rat-raider | pose:getup | -45 @90 near hand-near-grip | off 0 @90 near
+  rat-raider | pose:cast | 45 @3 far | off 0 @90 far
+  rat-raider | pose:run | -21.8 @0 near hand-near-grip | off 0 @89 near
+  rat-raider | rehearsal Menace idle + fidget: idle a | -21.8 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Menace idle + fidget: idle b | -27.3 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Menace idle + fidget: fidget a | 36.5 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Menace idle + fidget: fidget b | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 1/9 | -24.6 @0 near hand-near-grip | off 0 
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 2/9 | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 3/9 | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 4/9 | -24.6 @0 near hand-near-grip | off 0 @0 far
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 5/9 | -24.6 @0 near hand-near-grip | off 0 
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 6/9 | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 7/9 | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 8/9 | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Walk, approach, circle, back-walk: walk 9/9 | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Run (chase, flee): contact | 13.7 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Run (chase, flee): push-off | 13.7 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Run (chase, flee): both feet up | 13.7 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Run (chase, flee): push-off 2 | 13.7 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Skid stop: brace | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Skid stop: settle | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Turn-around: narrowing | -22.9 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Turn-around: mid (2 frames) | -23.7 @0 near hand-near-grip | off 0 
+  rat-raider | rehearsal Turn-around: widening (flipped) | -24.5 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Jump squat / land: squat | 41.8 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Jump squat / land: land | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Jump squat / land: land settle | -23 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Jump rise / apex / fall: rise | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Jump rise / apex / fall: apex | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Jump rise / apex / fall: fall | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Dodge hop: crouch | -39.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Dodge hop: hop | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Dodge hop: land | -39.6 @0 near hand-near-grip | off 0 @0 far
+  rat-raider | rehearsal Dodge roll: tuck | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Dodge roll: roll (back) | -45 @0 near hand-near-back | off 0 @0 far
+  rat-raider | rehearsal Dodge roll: roll (back) 2 | -45 @0 near hand-near-back | off 0 @0 far
+  rat-raider | rehearsal Dodge roll: up | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Telegraph (held wind-up): held wind-up | 44.4 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Slash 1 (forehand cut): wind | 44.4 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Slash 1 (forehand cut): over the shoulder (depth switch) | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Slash 1 (forehand cut): strike | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Slash 1 (forehand cut): follow | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Slash 1 (forehand cut): recover | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Slash 2 (backhand): in front | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Slash 2 (backhand): mid-swing (depth switch) | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Slash 2 (backhand): behind | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Slash 3 spin (finisher): start | 44.9 @0 far hand-far-fist | off 0 
+  rat-raider | rehearsal Slash 3 spin (finisher): side | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Slash 3 spin (finisher): back (mid-spin) | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Slash 3 spin (finisher): front | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Slash 3 spin (finisher): end | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Overhead chop (club, axe): wind (lean back) | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Overhead chop (club, axe): strike | 44.9 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Overhead chop (club, axe): follow | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Dagger stab: draw back | -45 @0 near hand-near-grip-overhand | off 0 @0 near
+  rat-raider | rehearsal Dagger stab: stab | -45 @0 near hand-near-grip-overhand | off 0 @0 near
+  rat-raider | rehearsal Dagger stab: recover | -45 @0 near hand-near-grip-overhand | off 0 @0 near
+  rat-raider | rehearsal Dagger throw: cock | 44.4 @0 far hand-far-fist | off 0 
+  rat-raider | rehearsal Dagger throw: release | 45 @0 near hand-near-open | off 0 
+  rat-raider | rehearsal Dagger throw: follow | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Jump attack: rise | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Jump attack: top | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Jump attack: chop | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Jump attack: land | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Dash attack: dash | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Dash attack: hit | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Kick (unarmed): chamber | 44.9 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Kick (unarmed): extend | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Kick (unarmed): recover | -37.4 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Block (shield): guard loop | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Block (shield): hit | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Shield bash: draw back | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Shield bash: bash | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Shield bash: recover | -24.6 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Captain rally (shout): raise | 14.5 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Captain rally (shout): shout | 13.5 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Grab reach / hold (rat grabs): reach | -21.8 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Grab reach / hold (rat grabs): hold | -21.8 @0 near hand-near-fist | off 0 @0 near
+  rat-raider | rehearsal Grabbed hold / hurt (victim): held | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Grabbed hold / hurt (victim): hurt | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Forward throw (rat throws): grab | -21.8 @0 near hand-near-fist | off 0 @0 near
+  rat-raider | rehearsal Forward throw (rat throws): turn | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Forward throw (rat throws): heave | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Thrown (victim): lift | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Thrown (victim): over | 45 @0 near hand-near-open | off 0 @0 near
+  rat-raider | rehearsal Thrown (victim): mid-spin (back) | 45 @0 near hand-near-open | off 0 @0 far
+  rat-raider | rehearsal Thrown (victim): land | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Hurt light (front): snap back | 45 @0 far hand-far-open | off 0 @0 far
+  rat-raider | rehearsal Hurt from behind: pitched forward | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Stagger (heavy): reel | 45 @0 far hand-far-open | off 0 @0 far
+  rat-raider | rehearsal Stagger (heavy): knee | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Knockdown, bounce, lying face-up, death: fall | 45 @0 near hand-near-open | off 0 @0 near
+  rat-raider | rehearsal Knockdown, bounce, lying face-up, death: bounce | 45 @0 near hand-near-open | off 0 @0 near
+  rat-raider | rehearsal Knockdown, bounce, lying face-up, death: lying | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Knockdown, bounce, lying face-up, death: death | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Lying face-down: face-down | 45 @0 near hand-near-open | off 0 @0 far
+  rat-raider | rehearsal Get-up: push up | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Get-up: kneel | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Get-up: stand | -21.8 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Stun / dizzy: dizzy | -45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Weapon drop / pickup: drop | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Weapon drop / pickup: drop 2 | 45 @0 far hand-far-open | off 0 @0 near
+  rat-raider | rehearsal Weapon drop / pickup: squat | -42.3 @0 near hand-near-open | off 0 @0 near
+  rat-raider | rehearsal Weapon drop / pickup: grip | -42.3 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Weapon drop / pickup: rise | -21.8 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Victory / taunt: raise | 45 @0 far | off 0 @0 far
+  rat-raider | rehearsal Victory / taunt: taunt | 45 @0 far | off 0 @0 far
+  rat-raider | rehearsal Weapon thrust in the air (victory, rally): lift | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Weapon thrust in the air (victory, rally): thrust up | 45 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Throw the hero over the shoulder (back throw): grab | -21.8 @0 near hand-near-fist | off 0 @0 near
+  rat-raider | rehearsal Throw the hero over the shoulder (back throw): lift | 45 @0 far | off 0 @0 far
+  rat-raider | rehearsal Throw the hero over the shoulder (back throw): release | 45 @0 near hand-near-open | off 0 @0 far
+  rat-raider | rehearsal Throw the hero forward (hip toss): grab | -21.8 @0 near hand-near-fist | off 0 @0 near
+  rat-raider | rehearsal Throw the hero forward (hip toss): turn | 45 @0 far hand-far-fist | off 0 @0 near
+  rat-raider | rehearsal Throw the hero forward (hip toss): heave | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Lift the hero overhead and hurl: squat | -42.3 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Lift the hero overhead and hurl: hurl | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Pick up and carry an object (crate, barrel): squat | -42.3 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Pick up and carry an object (crate, barrel): lift | -21.8 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Pick up and carry an object (crate, barrel): carry loop | -24.6 @0 near hand-near-palm | off 0 @0 far
+  rat-raider | rehearsal Throw an object two-handed (overhead): release | 45 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Throw a small object one-handed (bottle, fish): cock | 44.4 @0 far hand-far-fist | off 0 @0 far
+  rat-raider | rehearsal Throw a small object one-handed (bottle, fish): release | 45 @0 near hand-near-open | off 0 @0 near
+  rat-raider | rehearsal Drink (potion, flask): raise | 9.3 @0 far hand-far-fist | off 0 
+  rat-raider | rehearsal Drink (potion, flask): drink | 9.3 @0 far hand-far-fist | off 0 
+  rat-raider | rehearsal Drink (potion, flask): lower | -21.8 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Drink (potion, flask): wipe | 9.3 @0 far hand-far-fist | off 0 
+  rat-raider | rehearsal Charge (gather): charge loop | -21.8 @0 near hand-near-cup | off 0 @0 near
+  rat-raider | rehearsal Push (palm blast): release | 45 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Two-hand beam: beam loop | 45 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Two-hand beam: release | 45 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Hold an orb / flame in hand: hold loop | -21.8 @0 near hand-near-cup | off 0 @0 near
+  rat-raider | rehearsal Call down (overhead): release | 45 @0 near hand-near-palm | off 0 @0 near
+  rat-raider | rehearsal Ground strike: strike | -45 @0 near hand-near-fist | off 0 @0 near
+  rat-raider | rehearsal Point / command: point | 45 @0 near hand-near-point | off 0 @0 near
+  rat-raider | rehearsal Self-buff / roar: gather | -21.8 @0 near hand-near-fist | off 0 @0 near
+  rat-raider | rehearsal Self-buff / roar: roar | -21.8 @0 near hand-near-grip | off 0 @0 near
+  rat-raider | rehearsal Staff cast: wind | 45 @0 far | off 0 @0 far
+  rat-raider | rehearsal Staff cast: release | 45 @0 near hand-near-grip-overhand | off 0 @0 near
+  rat-spearman | idle | 39.1 @178 near hand-near-grip-overhand | off 0 @240 far
+  rat-spearman | walk | 45 @2 far hand-far-grip-overhand | off 0 @60 far
+  rat-spearman | walkAcross | 45 @2 far hand-far-grip-overhand | off 0 @151 far
+  rat-spearman | turn | 45 @87 near hand-near-grip-overhand | off 0 @130 near
+  rat-spearman | spearThrust | 44.1 @49 near hand-near-grip-overhand | off 0 @98 far
+  rat-spearman | staffSwing | -45 @24 far hand-far-grip-overhand | off 0 @75 far
+  rat-spearman | staffOverhead | 45 @64 near hand-near-grip-overhand | off 0 @90 near
+  rat-spearman | hurt | 45 @34 near hand-near-grip-overhand | off 0 @75 far
+  rat-spearman | knockdown | 45 @105 near hand-near-grip-overhand | off 0 @144 far
+  rat-spearman | grabbed | 45 @3 far hand-far-open | off 0 @190 far
+  rat-spearman | thrown | 45 @116 near hand-near-grip-overhand | off 0 @151 far
+  rat-spearman | cast | 45 @7 far | off 0 @100 far
+  rat-spearman | pose:stance | 37.9 @0 near hand-near-grip-overhand | off 0 @90 far
+  rat-spearman | pose:jump | 45 @4 near hand-near-grip-overhand | off 0 @90 far
+  rat-spearman | pose:jumpSquat | 45 @3 far hand-far-grip-overhand | off 0 @90 far
+  rat-spearman | pose:hurt | 45 @2 near hand-near-grip-overhand | off 0 @90 far
+  rat-spearman | pose:held | 44.9 @1 far hand-far-open | off 0 @4 far
+  rat-spearman | pose:knockdown | 44.9 @1 far hand-far-open | off 0 @90 far
+  rat-spearman | pose:down | 44.9 @1 far hand-far-open | off 0 @90 near
+  rat-spearman | pose:getup | 45 @4 far hand-far-open | off 0 @90 far
+  rat-spearman | pose:cast | 45 @1 far | off 0 @90 far
+  rat-spearman | rehearsal Spear thrust: draw back | 10.6 @0 far hand-far-grip-overhand | off 0 @0 far
+  rat-spearman | rehearsal Spear thrust: lunge | 42.1 @0 far hand-far-grip-overhand | off 0 @0 near
+  rat-spearman | rehearsal Spear thrust: recover | 33 @0 far hand-far-grip-overhand | off 0 @0 far
+  rat-spearman | rehearsal Staff two-hand swing / overhead: wind | -36.2 @0 far hand-far-grip-overhand | off 0 @0 far
+  rat-spearman | rehearsal Staff two-hand swing / overhead: swing | 39.7 @0 near hand-near-grip-overhand | off 0 @0 near
+  rat-spearman | rehearsal Staff two-hand swing / overhead: overhead wind | 32.9 @0 far hand-far-grip-overhand | off 0 @0 near
+  rat-spearman | rehearsal Staff two-hand swing / overhead: overhead strike | 45 @0 near hand-near-grip-overhand | off 0 @0 far
+  rat-archer | idle | 28.8 @240 far hand-far-grip | off 0 @240 near
+  rat-archer | walk | 28.8 @60 far hand-far-grip | off 0 @60 near
+  rat-archer | walkAcross | 28.8 @151 far hand-far-grip | off 0 @151 near
+  rat-archer | turn | 39.6 @24 near hand-near-pinch | off 0 @130 near
+  rat-archer | bowShot | 45 @14 near hand-near-pinch | off 0 @131 near
+  rat-archer | hurt | 45 @33 far hand-far-open | off 0 @76 near
+  rat-archer | knockdown | 45 @31 far hand-far-open | off 0 @144 near
+  rat-archer | grabbed | 45 @3 far hand-far-open | off 0 @191 near
+  rat-archer | thrown | 45 @3 far hand-far-open | off 0 @151 near
+  rat-archer | cast | 28.8 @7 far hand-far-grip | off 0 @100 far
+  rat-archer | pose:stance | 28.8 @90 far hand-far-grip | off 0 @90 near
+  rat-archer | pose:jump | 37.2 @90 far hand-far-grip | off 0 @5 far
+  rat-archer | pose:jumpSquat | -45 @2 near hand-near-pinch | off 0 @90 near
+  rat-archer | pose:hurt | 45 @3 far hand-far-open | off 0 @90 near
+  rat-archer | pose:held | 45 @1 far hand-far-open | off 0 @90 near
+  rat-archer | pose:knockdown | 45 @1 far hand-far-open | off 0 @90 far
+  rat-archer | pose:down | 45 @1 far hand-far-open | off 0 @90 near
+  rat-archer | pose:getup | 45 @1 far hand-far-open | off 0 @90 near
+  rat-archer | pose:cast | 28.8 @1 far hand-far-grip | off 0 @90 far
+  rat-archer | rehearsal Bow draw / aim / release: draw | -5 @0 far hand-far-grip | off 0 @0 near
+  rat-archer | rehearsal Bow draw / aim / release: aim | -12.5 @0 far hand-far-grip | off 0 @0 near
+  rat-archer | rehearsal Bow draw / aim / release: release | 44.9 @0 near hand-near-open | off 0 @0 near

@@ -77,6 +77,9 @@ export const KNOWN = {
   'mouse | getup (floor) | pelvis / leg-far-upper': [5.3, HIP_FAR],
   'mouse | lying (floor) | torso / arm-near-upper': [8.5, SHOULDER],
   'mouse | lying (floor) | leg-near-upper / leg-near-lower': [3.5, KNEE_CAP],
+  // T029 r3: the wrist limits turn the lying mouse's hands back, which changes the lying rest's turn (lowest points):
+  // the near ankle's gap shows at the new angle (mouse rebuild)
+  'mouse | lying (floor) | leg-near-lower / foot-near': [9.8, 'T029 r3: ankle core at the lying rest\'s new turn; rounded boot top under the shin (mouse rebuild)'],
   // T025 grip modes (the fist turned on the weapon node): a fist turned over against its forearm opens the wrist
   'mouse | Mouse Fighter: own weapon (overhand) | arm-near-lower / hand-near': [5.3, TURNED],
   'mouse | rat-cutlass (overhand) | arm-near-lower / hand-near': [6.5, TURNED],

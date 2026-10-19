@@ -11,6 +11,7 @@ import { phaseOf } from '../sim/fighter.js';
 import { at, reach } from './rig-ik.js';
 import { modesOf, nodeActive, placeNode } from './weapon-node.js';
 import { GRIP_MODES, GRIP_BAND } from '../data/grip-modes.js';
+import { limitWrists, turnOf } from './wrist.js';
 
 export { at, reach };
 
@@ -40,6 +41,17 @@ function axesOf(L, held, G, wm) {
 // reach the wrist spot for that one: the ring holds either way; or as `G.wrist` says: forearm 'above' / 'below' the
 // shaft); out of reach, the fist slides along the shaft toward the other hand; the arm is IK'd to put the wrist where the turned
 // fist's ring sits on the target, then the fist turns about the wrist onto the shaft line.
+// T029 r3: how far (deg from its drawing's neutral) the fist's wrist turns if the arm reaches the wrist spot and the fist
+// turns onto `goal` (its axis' screen angle)
+function turnFor(rig, joints, swap, held, G, wrist, spot, goal, wm) {
+  let j = joints;
+  for (let i = 0; i < 2; i++) j = reach(rig, j, swap, held, wrist, spot);
+  const [, axis2, h] = axesOf(layoutRig(rig, j, swap, held), held, G, wm);
+  j = { ...j, [G.ik.end]: j[G.ik.end] + Math.sign(h[0] * h[3] - h[1] * h[2]) * wrap(goal - axis2) };
+  const L = layoutRig(rig, j, swap, held), H = L.find((e) => e.name === G.ik.end), F = H && L.find((e) => e.name === H.p.parent);
+  return F ? Math.abs(turnOf(rig, F, H)) : 0;
+}
+
 function alignGrip(rig, joints, swap, held, G, target, wm, wrist2 = G.wrist) {
   const end = G.ik.end, pivot = rig.parts[end].pivot, wrist = { ...G.ik, hand: pivot };
   let L = layoutRig(rig, joints, swap, held);
@@ -51,6 +63,8 @@ function alignGrip(rig, joints, swap, held, G, target, wm, wrist2 = G.wrist) {
   const len = dist(S, E) + dist(E, P), out = (t) => dist(S, wristAt(t)) - len;
   if (wrist2) { if ((wristAt(d)[1] > T[1]) !== (wrist2 === 'below')) d = wrap(d + 180); }   // the forearm from below / above the shaft
   else if (out(d) > 0 && out(d + 180) < out(d)) d = wrap(d + 180);
+  // T029 r3: both ways reach: the one that bends the wrist less (the pinch at full draw: elbow back, forearm along the arrow)
+  else if (out(d + 180) <= 0 && turnFor(rig, joints, swap, held, G, wrist, () => wristAt(wrap(d + 180)), axis + wrap(d + 180), wm) < turnFor(rig, joints, swap, held, G, wrist, () => wristAt(d), axis + d, wm)) d = wrap(d + 180);
   // out of reach: the fist slides back along the shaft (toward the other hand's grip) until the arm reaches
   const back = [Math.cos(shaft * D), Math.sin(shaft * D)];
   for (let k = 1; out(d) > 0 && k <= 80; k++) T = [T0[0] - back[0] * k, T0[1] - back[1] * k];
@@ -110,7 +124,7 @@ export function gripLayout(rig, joints, swap, held, f, force) {
   // T026: a whole-limb drawing (A019 raised / cocked arm) that hides the arm the grip bends: no second-hand IK this frame
   const G = G0 && !Object.entries(swap).some(([p, k]) => rig.parts[p]?.swaps?.[k]?.hide?.some((h) => [...G0.ik.arm, G0.ik.end].includes(h))) ? G0 : null;
   const N = nodeActive(rig, joints, swap, held, modes);
-  if (!G && !N) return band(layoutRig(rig, joints, swap, held), held?.part ? held.slot : typeof rig.slots?.['one-hand'] === 'string' && rig.slots['one-hand'], []);
+  if (!G && !N) return band(limitWrists(rig, layoutRig(rig, joints, swap, held), { art: held?.kit?.art }), held?.part ? held.slot : typeof rig.slots?.['one-hand'] === 'string' && rig.slots['one-hand'], []);
   // T029: a hand the pose opens (the bow's loose: hand-near-open) has let go; it keeps the pose's drawing
   const opened = Object.fromEntries(Object.keys(G?.swap ?? {}).filter((p) => /-(open|palm)$/.test(swap[p] ?? '')).map((p) => [p, swap[p]]));
   let sw = { ...withHeldHand(rig, swap, held), ...G?.swap, ...opened }, j = joints, finish = (L) => L, Wn = null, Nm = N;
@@ -124,26 +138,34 @@ export function gripLayout(rig, joints, swap, held, f, force) {
     const node = placeNode(rig, j, sw, held, Nm, modes.grip);
     j = node.joints; finish = node.finish; Wn = node.W;
   }
-  if (!G) return band(finish(layoutRig(rig, j, sw, held)), N.slot, [N.hand]);
+  if (!G) return band(limitWrists(rig, finish(layoutRig(rig, j, sw, held)), { art: held?.kit?.art }), N.slot, [N.hand]);
   const A = held.kit.art, k = A.nock ? drawOf(f) : 0, posed = j;
-  const weapon = (L) => Wn ?? L.find((x) => x.name === held.slot).m, weaponPt = (L, xy) => apply(weapon(L), ...xy);
+  let done = false;   // T029 r3: once the wrists are limited, the drawn item is where it is (it may have turned)
+  const weapon = (L) => (done ? null : Wn) ?? L.find((x) => x.name === held.slot).m, weaponPt = (L, xy) => apply(weapon(L), ...xy);
   const to = (L) => (A.nock ? [A.nock[0] - pullOf(rig, G, A, L, weapon(L)) * k, A.nock[1]] : A[G.ik.to]);
   for (let i = 0; i < 2; i++) j = reach(rig, j, sw, held, G.ik, (L) => weaponPt(L, to(L)));   // 2nd pass mops up the error
   const wrist2 = modes.grip2 ? GRIP_MODES[modes.grip2]?.wrist : G.wrist;   // T025: the second fist's mode (over / under the shaft)
   if (G.align != null) j = alignGrip(rig, j, sw, held, G, (L) => weaponPt(L, to(L)), weapon, wrist2);
   // T028 r4: on the user's lines a second fist that can't reach the shaft lets go (its own fist, posed) rather than
   // gripping beside it
-  if (rig.gripLines && G.ik.to === 'grip2' && offShaft(rig, layoutRig(rig, j, sw, held), held, G, weapon) > LET_GO) {
+  // T029 r3: also when the wrist limits (render/wrist.js) leave it off the shaft
+  const letGo = (L) => rig.gripLines && G.ik.to === 'grip2' && offShaft(rig, L, held, G, (M) => M.find((x) => x.name === held.slot).m) > LET_GO;
+  const second = { hand: G.ik.end, of: N?.hand ?? held.part.parent, slide: !A.nock };
+  const wristed = (G.ik.to === 'grip2' || !A.nock || Math.min(1, k / A.reachIn) >= 1) && limitWrists(rig, finish(layoutRig(rig, j, sw, held)), { second, art: A });
+  if (rig.gripLines && G.ik.to === 'grip2' && (offShaft(rig, layoutRig(rig, j, sw, held), held, G, weapon) > LET_GO || letGo(wristed))) {
     sw = { ...withHeldHand(rig, swap, held), ...(N ? { [N.hand]: sw[N.hand] } : {}) };
     delete sw[G.ik.end];
     for (const n of [...G.ik.arm, G.ik.end]) j = { ...j, [n]: posed[n] };
-    return band(finish(layoutRig(rig, j, sw, held)), held.slot, [N?.hand]);
+    return band(limitWrists(rig, finish(layoutRig(rig, j, sw, held)), { art: held?.kit?.art }), held.slot, [N?.hand]);
   }
   // a bow hand only goes to the string as the draw starts (over the first `A.reachIn` of it); at rest it stays posed
   const w = A.nock ? Math.min(1, k / A.reachIn) : 1;
   if (w < 1) for (const n of G.ik.arm) j[n] = posed[n] + (j[n] - posed[n]) * w;
-  const L = band(finish(layoutRig(rig, j, sw, held)).filter((e) => !G.hide?.includes(e.name))
+  // T029 r3: wrists inside their limits (render/wrist.js), the second hand solved with the item it grips (a bow hand not
+  // yet on the string is free)
+  const L = band(((w >= 1 && wristed) || limitWrists(rig, finish(layoutRig(rig, j, sw, held)), { second: w >= 1 ? second : null, art: A })).filter((e) => !G.hide?.includes(e.name))
     .map((e) => (G.order?.[e.name] != null ? { ...e, order: G.order[e.name] } : e)), held.slot, [N?.hand, G.ik.to === 'grip2' && G.ik.end]);   // T020: e.g. the far fist over the shaft
+  done = true;
   if (!A.tips || k <= 0) return L.sort((a, b) => a.order - b.order);
   const bow = L.find((x) => x.name === held.slot), Nk = weaponPt(L, to(L));
   const out = [...L, { name: 'string', order: G.string ?? bow.order + 0.1, line: [weaponPt(L, A.tips[0]), Nk, weaponPt(L, A.tips[1])] }];
