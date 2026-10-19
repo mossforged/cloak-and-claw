@@ -28,7 +28,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 
 ## What builders need now
 - Code: idle (T033 limb repairs and A025 shoulder kept as reference; rat v3 decided).
-- Art: A026 rat v3 round 1, near arm and leg drawn individually on the user's skeleton (job 020).
+- Art: idle. A026 round 2 on `a026-rat-v3-arm-leg` (not merged): six near pieces keep the master's own paint, domed hidden ends; waiting on the user's bend check in Fitting Room v3 (artifact GQEwo2i25oFiGSdJkn6UgS).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-19 lead: reviewed A026 r2: pieces now match the master at rest (master paint kept, sizes right), elbow and wrist bend cleanly; left: stray cut edges, doubled cuff/ankle contours, shin stops short of the knee point. Context torso/seat are old art. Built Fitting Room v3 with the six pieces joined on the user's skeleton for his bend check.
 2026-10-19 lead: T034 showed the user's joint points don't fit the cut-up drawings; **rat v3 redraw decided** (rat-v3-plan.md). User tapped the skeleton on the master (rat-v3-skeleton.json); A026 queued (near arm and leg, each piece drawn on its own, round ends on his points). Merged T029, T031, T032 (gear), A020, A024 source.
 2026-10-19 code: T032 round 2 on `t032-import-rat-gear` (runner job 016): main merged (T029 r3 wrists / moves, T031 drag-to-pose); known lists (pose seams 109, exposure 57) and the pass bar (48 / 73) regenerated on the merged code with no change from the earlier merge. 42/42. Build `t032 gear v2`.
 2026-10-19 code: T032 r2 gear holds through the T029 moves: new strips docs/screens/T032/r2-*.jpg (raider hood + jerkin slash, captain hat + sash slash, spearman thrust, archer bow) from `tools/pose-strip.mjs --gear`; views.json links unchanged. Not merged.
