@@ -28,7 +28,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 
 ## What builders need now
 - Code: idle (T033 limb repairs and A025 shoulder kept as reference; rat v3 decided).
-- Art: idle. A026 round 2 on `a026-rat-v3-arm-leg` (not merged): six near pieces keep the master's own paint, domed hidden ends; waiting on the user's bend check in Fitting Room v3 (artifact GQEwo2i25oFiGSdJkn6UgS).
+- Art: A026 round 3 (job 022): wrist cuff onto the hand, ankle wrap onto the foot, the user's new joint points and ranges.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
