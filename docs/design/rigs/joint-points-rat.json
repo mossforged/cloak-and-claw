@@ -1,0 +1,158 @@
+{
+ "source": "Fitting Room (artifact CprWqugyahBpiNUoztcwEt, db joint-points), user, 2026-10-19",
+ "rig": "rat-raider",
+ "view": "Q",
+ "units": "pivot/attach in each piece's game image px (assets/art/enemies/rat-raider/rig/*.png), same space as rig.parts[].pivot/attach; limits in degrees from rest, + = clockwise on screen; front = child drawn over parent",
+ "joints": {
+  "shoulder-near": {
+   "parent": "torso",
+   "child": "arm-near-upper",
+   "pivot": [
+    102,
+    15
+   ],
+   "attach": [
+    54.5,
+    33.5
+   ],
+   "limits": {
+    "lo": -61,
+    "hi": 59
+   },
+   "front": true,
+   "rigPivot": [
+    70.8,
+    48.8
+   ],
+   "rigAttach": [
+    39.6,
+    67.6
+   ]
+  },
+  "elbow-near": {
+   "parent": "arm-near-upper",
+   "child": "arm-near-lower",
+   "pivot": [
+    51.2,
+    11.1
+   ],
+   "attach": [
+    21.7,
+    118
+   ],
+   "limits": {
+    "lo": -73,
+    "hi": 5
+   },
+   "front": false,
+   "rigPivot": [
+    41.2,
+    24.8
+   ],
+   "rigAttach": [
+    27.6,
+    103.2
+   ]
+  },
+  "wrist-near": {
+   "parent": "arm-near-lower",
+   "child": "hand-near",
+   "pivot": [
+    43.1,
+    6.3
+   ],
+   "attach": [
+    24.9,
+    64.9
+   ],
+   "limits": {
+    "lo": -42,
+    "hi": 17
+   },
+   "front": true,
+   "rigPivot": [
+    38,
+    28
+   ],
+   "rigAttach": [
+    22.8,
+    76.8
+   ]
+  },
+  "hip-near": {
+   "parent": "pelvis",
+   "child": "leg-near-upper",
+   "pivot": [
+    79.7,
+    52.9
+   ],
+   "attach": [
+    50.8,
+    105.1
+   ],
+   "limits": {
+    "lo": -23,
+    "hi": 25
+   },
+   "front": true,
+   "rigPivot": [
+    71.2,
+    33.6
+   ],
+   "rigAttach": [
+    51.6,
+    92
+   ]
+  },
+  "knee-near": {
+   "parent": "leg-near-upper",
+   "child": "leg-near-lower",
+   "pivot": [
+    37.7,
+    16.7
+   ],
+   "attach": [
+    48.7,
+    137.3
+   ],
+   "limits": {
+    "lo": -23,
+    "hi": 51
+   },
+   "front": false,
+   "rigPivot": [
+    35.6,
+    23.6
+   ],
+   "rigAttach": [
+    49.6,
+    123.6
+   ]
+  },
+  "ankle-near": {
+   "parent": "leg-near-lower",
+   "child": "foot-near",
+   "pivot": [
+    35,
+    12.3
+   ],
+   "attach": [
+    26.7,
+    66
+   ],
+   "limits": {
+    "lo": -19,
+    "hi": 40
+   },
+   "front": true,
+   "rigPivot": [
+    31.6,
+    54
+   ],
+   "rigAttach": [
+    27.2,
+    66.8
+   ]
+  }
+ }
+}
