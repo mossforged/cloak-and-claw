@@ -27,8 +27,8 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: T029 round 1 (queued as job 003; every rehearsal move, moving and attacking; pass-bar tune; hand-table check).
-- Art: A020 (queued as job 004; gear and masks for every view).
+- Code: T032 gear import (job 010), then T031 drag-to-pose (job 011).
+- Art: A024 limb end repairs (job 012).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-19 lead: merged T029 (Moving + Attacking rehearsal moves posed, A021 items, views snap, wrist limits ±45 and a wrist test with no known list; 40/40). A020 round 3 gear drawings accepted (masks parked) -> T032 import; T031 drag-to-pose and A024 limb repairs queued. Runner checks now every ~25 min (jobs take 15-50).
 2026-10-19 code: T029 round 3 on `t029-every-rehearsal-move` (runner job 009): wrist limits (data/wrists.js, 45 deg both hands, lab Wrists; each hand drawing's neutral: near overhand and far bow grip +90); render/wrist.js turns the arm (and, where the arm can't, the item) so no wrist passes its limit, second hand solved with the item; staff overhead wind on the jointed far arm; spearman idle / thrust / staff keys re-placed; archer draws with the elbow back. New tests/wrist.test.mjs (no known list). 40/40. Build `t029 moves r3`.
 2026-10-19 code: T029 r3 worst wrist per clip: 185 of 267 clips / keys past 45 before (staff swing 157, overhead far -155, raider slashes ~180, bow string 135), none after (docs/screens/T029/r3-wrists.md). Pass bar 47 / 73 (r2 50): 3 new misses are raised upper arms showing hidden shoulder paint (art). Not merged.
 2026-10-19 code: T029 round 2 on `t029-every-rehearsal-move` (runner job 006): views snap on their keys (RIG_MOTION.viewBlend 0; a key's drawings show from the frame it is reached); A021 dagger / hand axe / staff / round shield as items (items/a021-items.js, kind gear) in the dagger stab and throw (a spinning shot), overhead chop, staff swing / overhead (far raised arm), block and shield bash (shield on the far strap: render/strap.js); archer "regression" was the global fighter id shifting the idle phase (sandbox numbers fighters per clip). 39/39 (new tests/items-a021.test.mjs). Build `t029 moves r2`.
