@@ -1,0 +1,1932 @@
+{
+  "pass": false,
+  "drawings": [
+    {
+      "name": "head-effort",
+      "source": "assets/source/A018-rat-parts/head-effort.png",
+      "box": [
+        493,
+        589,
+        1312,
+        1225
+      ],
+      "counts": {
+        "fur": 127553,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near",
+      "source": "assets/source/A023-rat-complete-kit/hand-near.png",
+      "box": [
+        294,
+        1359,
+        515,
+        1567
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 11115
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "scarf-tail",
+      "source": "assets/source/A023-rat-complete-kit/scarf-tail.png",
+      "box": [
+        258,
+        959,
+        639,
+        1421
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 19546,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head-back",
+      "source": "assets/source/A023-rat-complete-kit/head-back.png",
+      "box": [
+        558,
+        628,
+        1303,
+        1175
+      ],
+      "counts": {
+        "fur": 119309,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far",
+      "source": "assets/source/A023-rat-complete-kit/hand-far.png",
+      "box": [
+        1020,
+        1350,
+        1216,
+        1600
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 9559
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "tail-3",
+      "source": "assets/source/A018-rat-parts/tail-3.png",
+      "box": [
+        218,
+        1721,
+        393,
+        1869
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "tail-2",
+      "source": "assets/source/A018-rat-parts/tail-2.png",
+      "box": [
+        283,
+        1656,
+        484,
+        1869
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head-ko",
+      "source": "assets/source/A018-rat-parts/head-ko.png",
+      "box": [
+        492,
+        588,
+        1311,
+        1225
+      ],
+      "counts": {
+        "fur": 137232,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "torso-side",
+      "source": "assets/source/A023-rat-complete-kit/torso-side.png",
+      "box": [
+        552,
+        961,
+        984,
+        1452
+      ],
+      "counts": {
+        "fur": 15168,
+        "cloth": 10842,
+        "trim": 9547,
+        "leather": 42540
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "tail-1",
+      "source": "assets/source/A023-rat-complete-kit/tail-1.png",
+      "box": [
+        395,
+        1451,
+        588,
+        1750
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-pinch",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-pinch.png",
+      "box": [
+        340,
+        1411,
+        514,
+        1591
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 6169
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-open",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-open.png",
+      "box": [
+        1047,
+        1409,
+        1251,
+        1615
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 8906
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-grip-overhand",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-grip-overhand.png",
+      "box": [
+        395,
+        1396,
+        579,
+        1602
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 14796
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-open",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-open.png",
+      "box": [
+        323,
+        1417,
+        501,
+        1621
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 7418
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "torso-back",
+      "source": "assets/source/A023-rat-complete-kit/torso-back.png",
+      "box": [
+        255,
+        917,
+        1059,
+        1467
+      ],
+      "counts": {
+        "fur": 5683,
+        "cloth": 56420,
+        "trim": 0,
+        "leather": 91542
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-upper",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-upper.png",
+      "box": [
+        366,
+        1040,
+        684,
+        1389
+      ],
+      "counts": {
+        "fur": 6800,
+        "cloth": 0,
+        "trim": 49,
+        "leather": 21828
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-far-lower",
+      "source": "assets/source/A022-rat-joint-repair/leg-far-lower.png",
+      "box": [
+        827,
+        1674,
+        1008,
+        1908
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 1782,
+        "leather": 16344
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-grip-overhand",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-grip-overhand.png",
+      "box": [
+        1066,
+        1513,
+        1238,
+        1597
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 1450
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-fist",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-fist.png",
+      "box": [
+        294,
+        1359,
+        515,
+        1567
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 11108
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-near-upper",
+      "source": "assets/source/A023-rat-complete-kit/leg-near-upper.png",
+      "box": [
+        448,
+        1425,
+        809,
+        1817
+      ],
+      "counts": {
+        "fur": 125,
+        "cloth": 38410,
+        "trim": 1013,
+        "leather": 12217
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-far-lower",
+      "source": "assets/source/A022-rat-joint-repair/arm-far-lower.png",
+      "box": [
+        968,
+        1260,
+        1171,
+        1488
+      ],
+      "counts": {
+        "fur": 3918,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 9714
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-fist",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-fist.png",
+      "box": [
+        1020,
+        1350,
+        1216,
+        1600
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 9559
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head",
+      "source": "assets/source/A018-rat-parts/head.png",
+      "box": [
+        488,
+        592,
+        1309,
+        1225
+      ],
+      "counts": {
+        "fur": 139282,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head-attack",
+      "source": "assets/source/A018-rat-parts/head-attack.png",
+      "box": [
+        483,
+        589,
+        1318,
+        1225
+      ],
+      "counts": {
+        "fur": 119223,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head-hurt",
+      "source": "assets/source/A018-rat-parts/head-hurt.png",
+      "box": [
+        480,
+        588,
+        1317,
+        1225
+      ],
+      "counts": {
+        "fur": 135516,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-near",
+      "source": "assets/source/A023-rat-complete-kit/foot-near.png",
+      "box": [
+        472,
+        1708,
+        819,
+        1963
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 45,
+        "leather": 16946
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-grip",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-grip.png",
+      "box": [
+        304,
+        1394,
+        510,
+        1578
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 14796
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-far-upper",
+      "source": "assets/source/A023-rat-complete-kit/arm-far-upper.png",
+      "box": [
+        914,
+        1128,
+        1112,
+        1401
+      ],
+      "counts": {
+        "fur": 5257,
+        "cloth": 0,
+        "trim": 20,
+        "leather": 9499
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "torso",
+      "source": "assets/source/A023-rat-complete-kit/torso.png",
+      "box": [
+        444,
+        993,
+        1032,
+        1465
+      ],
+      "counts": {
+        "fur": 22142,
+        "cloth": 12211,
+        "trim": 7811,
+        "leather": 53749
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-far",
+      "source": "assets/source/A023-rat-complete-kit/foot-far.png",
+      "box": [
+        821,
+        1697,
+        1192,
+        1961
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 20629
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-lower",
+      "source": "assets/source/A022-rat-joint-repair/arm-near-lower.png",
+      "box": [
+        332,
+        1236,
+        558,
+        1469
+      ],
+      "counts": {
+        "fur": 2800,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 14286
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-far-upper",
+      "source": "assets/source/A023-rat-complete-kit/leg-far-upper.png",
+      "box": [
+        766,
+        1383,
+        1069,
+        1821
+      ],
+      "counts": {
+        "fur": 2497,
+        "cloth": 34717,
+        "trim": 1172,
+        "leather": 19256
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-near-lower",
+      "source": "assets/source/A018-rat-parts/leg-near-lower.png",
+      "box": [
+        483,
+        1674,
+        662,
+        1917
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 354,
+        "leather": 15951
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "pelvis",
+      "source": "assets/source/A023-rat-complete-kit/pelvis.png",
+      "box": [
+        497,
+        1278,
+        1028,
+        1622
+      ],
+      "counts": {
+        "fur": 435,
+        "cloth": 14576,
+        "trim": 6019,
+        "leather": 60975
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-shield",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-shield.png",
+      "box": [
+        1020,
+        1350,
+        1239,
+        1593
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 9132
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-grip",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-grip.png",
+      "box": [
+        1072,
+        1408,
+        1224,
+        1613
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 1895
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-far-raised-back",
+      "source": "assets/source/A023-rat-complete-kit/arm-far-raised-back.png",
+      "box": [
+        731,
+        850,
+        1012,
+        1243
+      ],
+      "counts": {
+        "fur": 3488,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 19356
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-cocked",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-cocked.png",
+      "box": [
+        304,
+        832,
+        622,
+        1241
+      ],
+      "counts": {
+        "fur": 5983,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 22507
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-far-guard",
+      "source": "assets/source/A023-rat-complete-kit/arm-far-guard.png",
+      "box": [
+        722,
+        1115,
+        1114,
+        1399
+      ],
+      "counts": {
+        "fur": 3341,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 13922
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-raised",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-raised.png",
+      "box": [
+        432,
+        745,
+        669,
+        1239
+      ],
+      "counts": {
+        "fur": 6699,
+        "cloth": 0,
+        "trim": 140,
+        "leather": 36387
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-grip-under",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-grip-under.png",
+      "box": [
+        326,
+        1523,
+        471,
+        1578
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 535
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "pelvis-front",
+      "source": "assets/source/A023-rat-complete-kit/pelvis-front.png",
+      "box": [
+        491,
+        1309,
+        1048,
+        1646
+      ],
+      "counts": {
+        "fur": 7124,
+        "cloth": 17290,
+        "trim": 8328,
+        "leather": 48192
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-far-folded",
+      "source": "assets/source/A023-rat-complete-kit/leg-far-folded.png",
+      "box": [
+        808,
+        1418,
+        1260,
+        1779
+      ],
+      "counts": {
+        "fur": 8439,
+        "cloth": 22015,
+        "trim": 0,
+        "leather": 21697
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-smear-h",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-smear-h.png",
+      "box": [
+        464,
+        1046,
+        1183,
+        1261
+      ],
+      "counts": {
+        "fur": 7548,
+        "cloth": 0,
+        "trim": 1232,
+        "leather": 26499
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "pelvis-side",
+      "source": "assets/source/A023-rat-complete-kit/pelvis-side.png",
+      "box": [
+        552,
+        1307,
+        1018,
+        1682
+      ],
+      "counts": {
+        "fur": 2660,
+        "cloth": 25942,
+        "trim": 0,
+        "leather": 58532
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-near-out",
+      "source": "assets/source/A023-rat-complete-kit/foot-near-out.png",
+      "box": [
+        468,
+        1708,
+        816,
+        1962
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 13931
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-upper-back",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-upper-back.png",
+      "box": [
+        436,
+        1051,
+        757,
+        1438
+      ],
+      "counts": {
+        "fur": 10849,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 9339
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-near-lower-back",
+      "source": "assets/source/A023-rat-complete-kit/leg-near-lower-back.png",
+      "box": [
+        507,
+        1698,
+        701,
+        1823
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 246,
+        "leather": 6101
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "seat",
+      "source": "assets/source/A023-rat-complete-kit/seat.png",
+      "box": [
+        507,
+        1458,
+        1028,
+        1651
+      ],
+      "counts": {
+        "fur": 1087,
+        "cloth": 19835,
+        "trim": 1807,
+        "leather": 21042
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head-shout",
+      "source": "assets/source/A023-rat-complete-kit/head-shout.png",
+      "box": [
+        488,
+        552,
+        1311,
+        1225
+      ],
+      "counts": {
+        "fur": 118709,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-smear-o",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-smear-o.png",
+      "box": [
+        478,
+        1056,
+        950,
+        1643
+      ],
+      "counts": {
+        "fur": 10668,
+        "cloth": 0,
+        "trim": 222,
+        "leather": 34817
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-back",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-back.png",
+      "box": [
+        302,
+        1363,
+        490,
+        1552
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 5596
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-far-heel",
+      "source": "assets/source/A023-rat-complete-kit/foot-far-heel.png",
+      "box": [
+        818,
+        1704,
+        1144,
+        1962
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 15057
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-far-back",
+      "source": "assets/source/A023-rat-complete-kit/foot-far-back.png",
+      "box": [
+        788,
+        1704,
+        1099,
+        1928
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 20291
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head-drink",
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "box": [
+        488,
+        525,
+        1311,
+        1225
+      ],
+      "counts": {
+        "fur": 142499,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-grip-under",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-grip-under.png",
+      "box": [
+        1018,
+        1416,
+        1128,
+        1598
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 4218
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-near-upper-back",
+      "source": "assets/source/A023-rat-complete-kit/leg-near-upper-back.png",
+      "box": [
+        489,
+        1398,
+        808,
+        1778
+      ],
+      "counts": {
+        "fur": 1082,
+        "cloth": 31827,
+        "trim": 0,
+        "leather": 8342
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-lower-back",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-lower-back.png",
+      "box": [
+        354,
+        1222,
+        576,
+        1466
+      ],
+      "counts": {
+        "fur": 1864,
+        "cloth": 0,
+        "trim": 157,
+        "leather": 11702
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "shoulder-far",
+      "source": "assets/source/A023-rat-complete-kit/shoulder-far.png",
+      "box": [
+        878,
+        1100,
+        1057,
+        1280
+      ],
+      "counts": {
+        "fur": 4315,
+        "cloth": 0,
+        "trim": 109,
+        "leather": 6339
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-back",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-back.png",
+      "box": [
+        1020,
+        1372,
+        1204,
+        1545
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 4694
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "torso-away",
+      "source": "assets/source/A023-rat-complete-kit/torso-away.png",
+      "box": [
+        488,
+        954,
+        1052,
+        1436
+      ],
+      "counts": {
+        "fur": 238,
+        "cloth": 8722,
+        "trim": 773,
+        "leather": 84776
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-far-lower-back",
+      "source": "assets/source/A023-rat-complete-kit/arm-far-lower-back.png",
+      "box": [
+        930,
+        1271,
+        1125,
+        1474
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 9867
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-near-heel",
+      "source": "assets/source/A023-rat-complete-kit/foot-near-heel.png",
+      "box": [
+        466,
+        1708,
+        814,
+        1962
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 19556
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "torso-front",
+      "source": "assets/source/A023-rat-complete-kit/torso-front.png",
+      "box": [
+        468,
+        995,
+        1052,
+        1443
+      ],
+      "counts": {
+        "fur": 10774,
+        "cloth": 28629,
+        "trim": 11583,
+        "leather": 50767
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-point",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-point.png",
+      "box": [
+        314,
+        1408,
+        576,
+        1558
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 23,
+        "leather": 8840
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "tail-root-back",
+      "source": "assets/source/A023-rat-complete-kit/tail-root-back.png",
+      "box": [
+        402,
+        1511,
+        519,
+        1739
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-near-mouth",
+      "source": "assets/source/A023-rat-complete-kit/arm-near-mouth.png",
+      "box": [
+        478,
+        925,
+        1122,
+        1472
+      ],
+      "counts": {
+        "fur": 24615,
+        "cloth": 0,
+        "trim": 1277,
+        "leather": 58530
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-near-back",
+      "source": "assets/source/A023-rat-complete-kit/foot-near-back.png",
+      "box": [
+        473,
+        1708,
+        847,
+        1932
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 19558
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-far-lower-back",
+      "source": "assets/source/A023-rat-complete-kit/leg-far-lower-back.png",
+      "box": [
+        812,
+        1698,
+        1029,
+        1823
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 6713
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-far-toe",
+      "source": "assets/source/A023-rat-complete-kit/foot-far-toe.png",
+      "box": [
+        816,
+        1704,
+        1146,
+        2089
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 366,
+        "leather": 21301
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "pelvis-back",
+      "source": "assets/source/A023-rat-complete-kit/pelvis-back.png",
+      "box": [
+        510,
+        1288,
+        1045,
+        1621
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 26231,
+        "trim": 0,
+        "leather": 29039
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-near-kneeling",
+      "source": "assets/source/A023-rat-complete-kit/leg-near-kneeling.png",
+      "box": [
+        228,
+        1392,
+        809,
+        1889
+      ],
+      "counts": {
+        "fur": 284,
+        "cloth": 38815,
+        "trim": 450,
+        "leather": 35004
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-grip-overhand-under",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-grip-overhand-under.png",
+      "box": [
+        1001,
+        1321,
+        1245,
+        1537
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 12122
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-far-raised",
+      "source": "assets/source/A023-rat-complete-kit/arm-far-raised.png",
+      "box": [
+        868,
+        764,
+        1052,
+        1239
+      ],
+      "counts": {
+        "fur": 6448,
+        "cloth": 0,
+        "trim": 967,
+        "leather": 15589
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "torso-lean-back",
+      "source": "assets/source/A023-rat-complete-kit/torso-lean-back.png",
+      "box": [
+        463,
+        955,
+        927,
+        1458
+      ],
+      "counts": {
+        "fur": 24055,
+        "cloth": 15374,
+        "trim": 2422,
+        "leather": 44097
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-cup",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-cup.png",
+      "box": [
+        1018,
+        1412,
+        1236,
+        1571
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 7042
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "arm-far-upper-back",
+      "source": "assets/source/A023-rat-complete-kit/arm-far-upper-back.png",
+      "box": [
+        788,
+        1096,
+        1048,
+        1438
+      ],
+      "counts": {
+        "fur": 8624,
+        "cloth": 0,
+        "trim": 175,
+        "leather": 15321
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-grip-overhand-under",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-grip-overhand-under.png",
+      "box": [
+        426,
+        1493,
+        491,
+        1600
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 2859
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-far-upper-back",
+      "source": "assets/source/A023-rat-complete-kit/leg-far-upper-back.png",
+      "box": [
+        752,
+        1397,
+        1052,
+        1778
+      ],
+      "counts": {
+        "fur": 622,
+        "cloth": 18364,
+        "trim": 0,
+        "leather": 21647
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-palm",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-palm.png",
+      "box": [
+        313,
+        1422,
+        520,
+        1649
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 6418
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "foot-near-toe",
+      "source": "assets/source/A023-rat-complete-kit/foot-near-toe.png",
+      "box": [
+        459,
+        1708,
+        768,
+        2061
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 17656
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-pinch-under",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-pinch-under.png",
+      "box": [
+        353,
+        1523,
+        427,
+        1584
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "shoulder-near",
+      "source": "assets/source/A023-rat-complete-kit/shoulder-near.png",
+      "box": [
+        463,
+        1069,
+        691,
+        1268
+      ],
+      "counts": {
+        "fur": 11550,
+        "cloth": 0,
+        "trim": 350,
+        "leather": 6793
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "seat-side",
+      "source": "assets/source/A023-rat-complete-kit/seat-side.png",
+      "box": [
+        552,
+        1458,
+        1018,
+        1722
+      ],
+      "counts": {
+        "fur": 1436,
+        "cloth": 28193,
+        "trim": 0,
+        "leather": 27403
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "head-front",
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "box": [
+        468,
+        522,
+        1291,
+        1225
+      ],
+      "counts": {
+        "fur": 171766,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 0
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "torso-hunched",
+      "source": "assets/source/A023-rat-complete-kit/torso-hunched.png",
+      "box": [
+        498,
+        1006,
+        1002,
+        1443
+      ],
+      "counts": {
+        "fur": 6769,
+        "cloth": 23915,
+        "trim": 2051,
+        "leather": 50842
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-near-cup",
+      "source": "assets/source/A023-rat-complete-kit/hand-near-cup.png",
+      "box": [
+        316,
+        1410,
+        542,
+        1615
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 11806
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "seat-front",
+      "source": "assets/source/A023-rat-complete-kit/seat-front.png",
+      "box": [
+        491,
+        1458,
+        1048,
+        1709
+      ],
+      "counts": {
+        "fur": 6219,
+        "cloth": 20117,
+        "trim": 2501,
+        "leather": 21954
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "leg-near-kneeup",
+      "source": "assets/source/A023-rat-complete-kit/leg-near-kneeup.png",
+      "box": [
+        510,
+        1335,
+        990,
+        1889
+      ],
+      "counts": {
+        "fur": 6430,
+        "cloth": 35343,
+        "trim": 0,
+        "leather": 27237
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "belt",
+      "source": "assets/source/A023-rat-complete-kit/belt.png",
+      "box": [
+        548,
+        1308,
+        1001,
+        1479
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 4383,
+        "leather": 28257
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "hand-far-palm",
+      "source": "assets/source/A023-rat-complete-kit/hand-far-palm.png",
+      "box": [
+        1030,
+        1410,
+        1223,
+        1578
+      ],
+      "counts": {
+        "fur": 0,
+        "cloth": 0,
+        "trim": 0,
+        "leather": 3935
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-jerkin",
+      "source": "assets/source/A020-rat-gear-every-view/gear-jerkin.png",
+      "box": [
+        444,
+        990,
+        1033,
+        1525
+      ],
+      "counts": {
+        "fur": 5759,
+        "cloth": 11459,
+        "trim": 62,
+        "leather": 85379
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood.png",
+      "box": [
+        484,
+        586,
+        1307,
+        1284
+      ],
+      "counts": {
+        "fur": 58004,
+        "cloth": 52153,
+        "trim": 13497,
+        "leather": 18180
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-jerkin-front",
+      "source": "assets/source/A020-rat-gear-every-view/gear-jerkin-front.png",
+      "box": [
+        469,
+        994,
+        1051,
+        1533
+      ],
+      "counts": {
+        "fur": 2463,
+        "cloth": 19457,
+        "trim": 1204,
+        "leather": 85314
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-jerkin-side",
+      "source": "assets/source/A020-rat-gear-every-view/gear-jerkin-side.png",
+      "box": [
+        554,
+        959,
+        985,
+        1499
+      ],
+      "counts": {
+        "fur": 2693,
+        "cloth": 5626,
+        "trim": 0,
+        "leather": 65743
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-jerkin-back",
+      "source": "assets/source/A020-rat-gear-every-view/gear-jerkin-back.png",
+      "box": [
+        256,
+        916,
+        1059,
+        1505
+      ],
+      "counts": {
+        "fur": 4206,
+        "cloth": 15576,
+        "trim": 0,
+        "leather": 91325
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-jerkin-away",
+      "source": "assets/source/A020-rat-gear-every-view/gear-jerkin-away.png",
+      "box": [
+        490,
+        953,
+        1052,
+        1433
+      ],
+      "counts": {
+        "fur": 1153,
+        "cloth": 6096,
+        "trim": 85,
+        "leather": 91093
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-jerkin-hunched",
+      "source": "assets/source/A020-rat-gear-every-view/gear-jerkin-hunched.png",
+      "box": [
+        477,
+        1005,
+        1001,
+        1519
+      ],
+      "counts": {
+        "fur": 688,
+        "cloth": 10121,
+        "trim": 42,
+        "leather": 62668
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-jerkin-lean-back",
+      "source": "assets/source/A020-rat-gear-every-view/gear-jerkin-lean-back.png",
+      "box": [
+        465,
+        953,
+        928,
+        1466
+      ],
+      "counts": {
+        "fur": 2205,
+        "cloth": 9643,
+        "trim": 719,
+        "leather": 63933
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-back",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-back.png",
+      "box": [
+        558,
+        627,
+        1301,
+        1221
+      ],
+      "counts": {
+        "fur": 23086,
+        "cloth": 58025,
+        "trim": 16562,
+        "leather": 21544
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-drink",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-drink.png",
+      "box": [
+        474,
+        515,
+        1310,
+        1291
+      ],
+      "counts": {
+        "fur": 21903,
+        "cloth": 66752,
+        "trim": 11542,
+        "leather": 39648
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-hurt",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-hurt.png",
+      "box": [
+        467,
+        590,
+        1308,
+        1273
+      ],
+      "counts": {
+        "fur": 51884,
+        "cloth": 49567,
+        "trim": 8930,
+        "leather": 38351
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-shout",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-shout.png",
+      "box": [
+        483,
+        546,
+        1318,
+        1284
+      ],
+      "counts": {
+        "fur": 30350,
+        "cloth": 69344,
+        "trim": 12200,
+        "leather": 34571
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-attack",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-attack.png",
+      "box": [
+        482,
+        587,
+        1314,
+        1280
+      ],
+      "counts": {
+        "fur": 31753,
+        "cloth": 53074,
+        "trim": 9929,
+        "leather": 27796
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-effort",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-effort.png",
+      "box": [
+        486,
+        593,
+        1310,
+        1278
+      ],
+      "counts": {
+        "fur": 45426,
+        "cloth": 55804,
+        "trim": 10106,
+        "leather": 29465
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-ko",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-ko.png",
+      "box": [
+        492,
+        587,
+        1310,
+        1313
+      ],
+      "counts": {
+        "fur": 21311,
+        "cloth": 73944,
+        "trim": 18645,
+        "leather": 31038
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    },
+    {
+      "name": "gear-hood-front",
+      "source": "assets/source/A020-rat-gear-every-view/gear-hood-front.png",
+      "box": [
+        455,
+        525,
+        1303,
+        1349
+      ],
+      "counts": {
+        "fur": 45178,
+        "cloth": 81796,
+        "trim": 13023,
+        "leather": 53576
+      },
+      "semanticPass": false,
+      "reason": "Not certified: shared brown/cream colours and textured shades require further manual isolation; diagnostic tint sheet supplied."
+    }
+  ],
+  "remainingGear": "Round 1 masks retained for gear outside jerkin/hood; not certified."
+}

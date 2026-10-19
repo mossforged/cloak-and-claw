@@ -1,0 +1,75 @@
+{
+  "sourceCanvasesAndReferences": true,
+  "exactOverlayReconstructions": 19,
+  "round2ByteIdenticalSwaps": 16,
+  "maskFiles": 580,
+  "phoneJPGs": 81,
+  "allPhoneLongSidesAtMost2000": true,
+  "largestAnchorSupportChanges": [
+    [
+      2359,
+      "head-drink-hood",
+      "neck"
+    ],
+    [
+      2048,
+      "head-shout-hood",
+      "neck"
+    ],
+    [
+      1796,
+      "head-attack-hood",
+      "neck"
+    ],
+    [
+      1092,
+      "head-hurt-hat",
+      "neck"
+    ],
+    [
+      1078,
+      "head-hurt-hood",
+      "neck"
+    ],
+    [
+      858,
+      "head-front-hood",
+      "neck"
+    ],
+    [
+      765,
+      "head-hurt-helmet",
+      "neck"
+    ],
+    [
+      745,
+      "head-ko-hood",
+      "neck"
+    ],
+    [
+      725,
+      "head-effort-hood",
+      "neck"
+    ],
+    [
+      718,
+      "head-notch",
+      "neck"
+    ],
+    [
+      718,
+      "head-hood",
+      "neck"
+    ],
+    [
+      718,
+      "head-helmet",
+      "neck"
+    ]
+  ],
+  "independentTintTests": 580,
+  "tintOutsideMaskChanges": 0,
+  "semanticTintPass": false,
+  "visualFitPass": false,
+  "importReady": false
+}
