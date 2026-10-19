@@ -63,7 +63,22 @@ run_job() { # agent dir jobfile
     rc=$?
     python3 -c "import json,sys; print(json.load(open(sys.argv[1])).get('result',''))" "$last.json" > "$last" 2>/dev/null || cp "$last.json" "$last"
   else
-    run_boxed "$mins" "$logf" "$logf" "$CODEX_BIN" exec --full-auto -C "$dir" -o "$last" "$prompt"
+    # Build the Codex call from what this Codex version supports (0.162 dropped --full-auto).
+    local help; help="$("$CODEX_BIN" exec --help 2>&1)"
+    local args=(exec)
+    if echo "$help" | grep -q -- '--full-auto'; then args+=(--full-auto)
+    elif echo "$help" | grep -q -- '--sandbox'; then args+=(--sandbox workspace-write)
+    else args+=(-c 'sandbox_mode="workspace-write"'); fi
+    if echo "$help" | grep -q -- '--ask-for-approval'; then args+=(--ask-for-approval never)
+    else args+=(-c 'approval_policy="never"'); fi
+    local outlast=0
+    if echo "$help" | grep -q -- '--output-last-message'; then args+=(--output-last-message "$last"); else outlast=1; fi
+    echo "codex ${args[*]}" >> "$logf"
+    if [ $outlast = 1 ]; then
+      run_boxed "$mins" "$last" "$logf" "$CODEX_BIN" "${args[@]}" "$prompt"
+    else
+      run_boxed "$mins" "$logf" "$logf" "$CODEX_BIN" "${args[@]}" "$prompt"
+    fi
     rc=$?
   fi
   # Commit anything the agent left (Codex's sandbox may not write .git), then the run report.
