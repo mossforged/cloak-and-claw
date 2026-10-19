@@ -41,12 +41,14 @@ const idx = (L, n) => L.findIndex((e) => e.name === n);
   for (const [key, fixture] of Object.entries(old)) {
     const [id, c] = key.split('|'), [st, t] = c.split(':'), d = FIGHTERS[id], R = RIGS[d.art.rig];
     check(id !== 'mouse-fighter' || !R.bodyViews, 'mouse: no views');
+    const RM = R.poses.moves?.[st];   // T029: a move posed on views (the spearman's side-on thrust) has no view-free layout to match
+    if (RM && [RM.windup, RM.through, RM.strike, RM.recover].flat().some((x) => x?.view)) continue;
     const { bodyViews, ...noViews } = R;
     const want = id === 'mouse-fighter' ? fixture : layout(d, noViews, st, t);
     check(JSON.stringify(layout(d, R, st, t)) === JSON.stringify(want), `${key}: lays out exactly as without views`);
     n++;
   }
-  check(n >= 40, `no-view cells: ${n} frames`);
+  check(n >= 39, `no-view cells: ${n} frames`);   // T029: the spearman's thrust (3 cells) now names its views
 }
 
 // 2. views: children on the view's points, the view's drawing, bands

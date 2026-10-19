@@ -65,6 +65,8 @@ export function clipsFor(id, item = 'own') {
       act: (sb, k) => swingAt(sb, k, 36), done: (sb) => sb.k > 80 && done(sb), gap: () => 62 });
   }
   for (const [key, m] of Object.entries(all)) add(moveClip(key, m, def.move));
+  // T029: the rehearsal moves his body is posed for (def.rehearsal with a rig move pose; own item only: they're his body's)
+  if (!kit) for (const [key, m] of Object.entries(def.rehearsal ?? {})) if (P.moves?.[key] && !all[key]) add({ ...moveClip(key, m, def.move), group: 'Rehearsal' });
   const first = attackOf({ def, weapon: kit?.moves ? { def: kit } : null });
   if (moves[first]?.next) add({ key: 'combo', label: 'combo', group: 'Attacks', kind: 'attack', done, tail: 20, gap: () => 60,
     input: (sb, k) => ({ attack: k < 40 && k % 3 === 0 }) });
@@ -112,4 +114,4 @@ export function clipsFor(id, item = 'own') {
   for (const name of Object.keys(P)) if (!STATE_POSES.has(name) && typeof P[name] === 'object') add({ key: `pose:${name}`, label: name, group: 'Poses', hold: name, frames: 90 });
   return L;
 }
-export const GROUPS = ['Moves', 'Attacks', 'Hits', 'Grab', 'Grabbed', 'Items', 'Helping', 'Poses'];
+export const GROUPS = ['Moves', 'Attacks', 'Rehearsal', 'Hits', 'Grab', 'Grabbed', 'Items', 'Helping', 'Poses'];

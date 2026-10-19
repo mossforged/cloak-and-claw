@@ -105,13 +105,14 @@ export function rigFrame(f, rig, time, mem, pose) {
   if (f.state === 'grabbing' || f.state === 'throw' || f.state === 'toss' || f.state === 'pickup') { p.rot = 0; p.dx = 0; p.sx = p.sy = 1; }   // the grab/knee/throw poses do it
   if (f.state === 'block') { p.rot -= BLOCK_LEAN + braceOf(f, time).rot; p.sx = p.sy = 1; }   // the block pose leans and crouches (and the brace loop breathes); keep only the jolt
   const k = 1 + (f.look?.size ?? 0) * LOOKS.size;   // T019: render-only size (hit areas unchanged)
-  if (grounded(f) || kneel) {   // T024 floor-line rule: boots on their floor lines; the standee's lean turns the hips
+  // T029: a key posed off the floor (`aloft`: the hop, jump and roll keys in the air) places its legs itself
+  if ((grounded(f) && !mem.swap['@aloft']) || kneel) {   // T024 floor-line rule: boots on their floor lines; the standee's lean turns the hips
     joints = floorLayer(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy }, p.rot);
     p.rot = 0;
   }
   if (!pose) joints = springLayer(rig, f, joints, mem.swap, mem, time, k);   // T028 tail and scarf springs
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
-  const held = heldOf(f, rig, mem.sheathed);
+  const held = mem.swap?.['@free'] ? null : heldOf(f, rig, mem.sheathed);   // T029: a pose's `free` (released in a throw)
   const G = carryLayer(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), mem.swap);   // T028 carried object
   const L = splitGrips(gearLayout(rig, G, gearOf(f)), held);   // T019 gear; T025 forced grip modes; T028 r2 split grips
   if (lying(f) && !kneel) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)

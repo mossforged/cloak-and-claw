@@ -1,0 +1,15 @@
+[
+  { "label": "Rehearsal sheet: Moving and Attacking now show the posed frames; tap a move's ▶ to play it", "q": "rehearse=rat-raider" },
+  { "label": "Turning slash, slow (new: the horizontal smear arm on the cut frame)", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" },
+  { "label": "Backhand, slow: across in front (chest toward camera) -> side-on -> behind (turned away)", "q": "f=rat-raider&anim=backhand&speed=0.25&zoom=2" },
+  { "label": "Spin finisher, slow: three-quarter -> side -> back (smear arm) -> front -> three-quarter", "q": "f=rat-raider&anim=spin&speed=0.25&zoom=2" },
+  { "label": "Overhead chop, slow: lean back with the raised arm -> hunched, overhead smear down in front", "q": "f=rat-raider&anim=overheadChop&speed=0.25&zoom=2" },
+  { "label": "Spear thrust, slow: side-on chest and hips, out-turned rear boot on the lunge", "q": "f=rat-spearman&anim=spearThrust&speed=0.25&zoom=2" },
+  { "label": "Dash attack, slow: hunched, off the trailing toe", "q": "f=rat-raider&anim=dashAttack&speed=0.25&zoom=2" },
+  { "label": "Jump attack, slow: rise cocked -> top turned away -> chop down in front -> land", "q": "f=rat-raider&anim=jumpAttack&speed=0.25&zoom=2" },
+  { "label": "Block (guard arm in front of the chest; no shield item yet), slow", "q": "f=rat-raider&anim=guard&speed=0.5&zoom=2" },
+  { "label": "Bow draw / aim / release, slow (open hand on the loose)", "q": "f=rat-archer&anim=bowShot&speed=0.25&zoom=2" },
+  { "label": "Dodge roll, slow: tuck -> back to the camera mid-roll -> up on the knee", "q": "f=rat-raider&anim=dodgeRoll&speed=0.25&zoom=2" },
+  { "label": "Run (in place): hunched chest, both feet up between steps", "q": "f=rat-raider&anim=pose:run&speed=0.5&zoom=2" },
+  { "label": "Skid stop, slow: leaning back on the out-turned trailing boot", "q": "f=rat-raider&anim=skidStop&speed=0.25&zoom=2" }
+]

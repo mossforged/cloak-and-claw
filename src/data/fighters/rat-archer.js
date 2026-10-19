@@ -8,7 +8,7 @@ export default {
   art: { ...base.art, idle: 'assets/art/enemies/rat-archer.png', rig: 'rat-archer', gear: LOADOUTS.archer },
   kit: KIT.id,
   stats: { ...base.stats, maxHp: 24 },
-  moves: KIT.moves, attack: KIT.attack,
+  moves: KIT.moves, attack: KIT.attack, rehearsal: {},   // T029: the raider's are posed on the raider
   ai: { ...base.ai, ...KIT.ai },
   look: RAT_LOOKS.archer,
   xp: 14, drop: null,

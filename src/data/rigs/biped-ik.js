@@ -178,20 +178,25 @@ export function liftWaves(rig, pose, N = 48) {
 // (`heel` deg) at the end of the stance, then the toe-off drawing (`toe`: swap per side) pushing off into the swing,
 // toes up `strike` deg as it reaches for the next contact. Lifted `lift` px at mid-swing. Returns waves for the leg
 // joints, '<foot>.lift' and dy, and `swapPhase` (render/rig-pose.js shows the toe-off drawings in their window).
-export function walkCycle(rig, { speed, walk, lift = 5, dy = 0, bob = 0, gather = 0, stride, heel = 12, strike = 8, toe = {}, toeAt = [0.4, 0.62], N = 72 }) {
-  const half = (stride ?? walk / speed / 2) / 2, of = placer(rig, {}, () => 0), x0 = (s) => of(`leg-${s}-upper`)[0];
+// T029: stance = share of the cycle each foot is planted (0.5 = a walk; under 0.5 a run, both feet up in between; the
+// stride then defaults to walk * stance / speed: no skating); heelDraw = a heel-strike drawing per side over heelAt (the
+// contact: the foot reaching forward and landing heel first, drawn flat: no extra tilt). Defaults give the old walk.
+export function walkCycle(rig, { speed, walk, lift = 5, dy = 0, bob = 0, gather = 0, stride, heel = 12, strike = 8, toe = {}, toeAt = [0.4, 0.62], N = 72,
+  stance = 0.5, heelDraw = {}, heelAt = [0.9, 0.04] }) {
+  const half = (stride ?? walk * stance / speed) / 2, of = placer(rig, {}, () => 0), x0 = (s) => of(`leg-${s}-upper`)[0];
   const mid = (x0('near') + x0('far')) / 2, centre = (s) => x0(s) + gather * (mid - x0(s));
   const reachDown = (ft, img, tilt) => {   // how far below the ankle the drawing reaches at this tilt (screen px)
     const p = rig.parts[ft], sw = p.swaps?.[img], H = HULLS[sw ? sw.img : p.img] ?? [], off = sw?.offset ?? [0, 0], k = sw?.scale ?? 1;
     return Math.max(...H.map(([x, y]) => rig.scale * turn(tilt, [off[0] + k * x - p.pivot[0], off[1] + k * y - p.pivot[1]])[1]));
   };
+  const within = (u, [a, b]) => (a < b ? u >= a && u < b : u >= a || u < b);
   const step = (s, u) => {   // [ankle x, sole height, tilt, swap]
-    const tw = toe[s] && u >= toeAt[0] && u < toeAt[1] ? toe[s] : null;
-    if (u < 0.5) {
-      const k = Math.max(0, (u - 0.3) / 0.1);
-      return [centre(s) + half - 4 * half * u, 0, tw ? 0 : heel * Math.min(1, k), tw];
+    const hw = heelDraw[s] && within(u, heelAt) ? heelDraw[s] : null, tw = hw ?? (toe[s] && u >= toeAt[0] && u < toeAt[1] ? toe[s] : null);
+    if (u < stance) {
+      const v = u * 0.5 / stance, k = Math.max(0, (v - 0.3) / 0.1);
+      return [centre(s) + half - 4 * half * v, 0, tw ? 0 : heel * Math.min(1, k), tw];
     }
-    const k = (u - 0.5) * 2, e = k * k * (3 - 2 * k);
+    const k = (u - stance) / (1 - stance), e = k * k * (3 - 2 * k);
     return [centre(s) - half + 2 * half * e, lift * Math.sin(Math.PI * k), tw ? 0 : heel * (1 - k) * 1.2 - strike * k, tw];
   };
   const keys = ['leg-near-upper', 'leg-near-lower', 'foot-near', 'leg-far-upper', 'leg-far-lower', 'foot-far'];
@@ -210,6 +215,7 @@ export function walkCycle(rig, { speed, walk, lift = 5, dy = 0, bob = 0, gather 
   }
   const out = Object.fromEntries(Object.entries(series).map(([k, v]) => [k, fitWave(v, 6)]));
   out.dy = [[dy, bob, 0.25, 2]];
-  out.swapPhase = Object.entries(toe).map(([s, sw]) => ({ part: `foot-${s}`, swap: sw, from: (toeAt[0] + (s === 'far' ? 0.5 : 0)) % 1, to: (toeAt[1] + (s === 'far' ? 0.5 : 0)) % 1 }));
+  const win = ([s, sw], [a, b]) => ({ part: `foot-${s}`, swap: sw, from: (a + (s === 'far' ? 0.5 : 0)) % 1, to: (b + (s === 'far' ? 0.5 : 0)) % 1 });
+  out.swapPhase = [...Object.entries(toe).map((e) => win(e, toeAt)), ...Object.entries(heelDraw).map((e) => win(e, heelAt))];
   return out;
 }

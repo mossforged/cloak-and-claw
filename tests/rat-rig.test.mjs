@@ -22,7 +22,7 @@ const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 // rigs/hulls.js) is on that foot's floor line (rigs/biped-floor.js, the master's); x = its ankle (the same point in
 // every drawing), for the walk's stride.
 const FEET = ['foot-near', 'foot-far'];
-const CHANNELS = new Set(['speed', 'swap', 'swapPhase', 'dx', 'dy', 'sx', 'weapon', 'view', 'order', 'carry']);   // T028: views, bands, carried object   // weapon.*: T025 node channels
+const CHANNELS = new Set(['speed', 'swap', 'swapPhase', 'dx', 'dy', 'sx', 'weapon', 'view', 'order', 'carry', 'grip', 'grip2', 'free', 'aloft']);   // T029: grip mode, released item, key off the floor   // T028: views, bands, carried object   // weapon.*: T025 node channels
 
 for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   const def = FIGHTERS[id], rig = RIGS[def.art.rig], P = rig.poses;
@@ -37,7 +37,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
   check(Object.values(rig.parts).every((p) => p.scale === undefined), `${id}: uniform scale only (no per-part scale)`);
 
   // every pose (states, waves, move phases) names only parts the rig has, and swaps it has
-  const poses = { ...P, ...Object.fromEntries(Object.entries(P.moves).flatMap(([k, M]) => Object.entries(M).map(([ph, v]) => [`${k}.${ph}`, v]))) };
+  const poses = { ...P, ...Object.fromEntries(Object.entries(P.moves).flatMap(([k, M]) => Object.entries(M).filter(([, v]) => typeof v === 'object').flatMap(([ph, v]) => (Array.isArray(v) ? v.map((x, i) => [`${k}.${ph}.${i}`, x]) : [[`${k}.${ph}`, v]])))) };
   delete poses.timing; delete poses.moves;
   for (const [k, pose] of Object.entries(poses)) {
     for (const ch of Object.keys(pose)) {
@@ -135,7 +135,7 @@ for (const id of ['rat-raider', 'rat-spearman', 'rat-archer']) {
     const fi = { def, t: 0, mf: 0, move: null, weapon: null, hp: 10, ...f }, tp = targetPose(fi, rig, 0);
     const L = gripLayout(rig, tp.joints, tp.swap, heldOf(fi, rig), fi);
     const bow = L.find((e) => e.name === 'held'), near = L.find((e) => e.name === 'hand-near'), far = L.find((e) => e.name === 'hand-far');
-    check(bow?.img === K.art.img && far.swap === 'hand-far-grip' && near.swap === 'hand-near-pinch', `archer ${label}: bow in the far grip hand, near hand pinching`);
+    check(bow?.img === K.art.img && far.swap === 'hand-far-grip' && near.swap === (label === 'loosed' ? 'hand-near-open' : 'hand-near-pinch'), `archer ${label}: bow in the far grip hand, near hand ${label === 'loosed' ? 'open on the loose (T029 rehearsal)' : 'pinching'}`);
     check(Math.abs(Math.atan2(bow.m[1], bow.m[0])) < 0.01, `archer ${label}: bow upright (${(Math.atan2(bow.m[1], bow.m[0]) / Math.PI * 180).toFixed(2)} deg)`);
     const s = rig.parts['hand-near'].swaps['hand-near-pinch'], sk = s.scale ?? 1;
     const pinch = apply(near.m, [(G.ik.hand[0] - s.offset[0]) / sk, (G.ik.hand[1] - s.offset[1]) / sk]);

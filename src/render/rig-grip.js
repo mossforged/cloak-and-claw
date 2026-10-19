@@ -111,7 +111,9 @@ export function gripLayout(rig, joints, swap, held, f, force) {
   const G = G0 && !Object.entries(swap).some(([p, k]) => rig.parts[p]?.swaps?.[k]?.hide?.some((h) => [...G0.ik.arm, G0.ik.end].includes(h))) ? G0 : null;
   const N = nodeActive(rig, joints, swap, held, modes);
   if (!G && !N) return band(layoutRig(rig, joints, swap, held), held?.part ? held.slot : typeof rig.slots?.['one-hand'] === 'string' && rig.slots['one-hand'], []);
-  let sw = { ...withHeldHand(rig, swap, held), ...G?.swap }, j = joints, finish = (L) => L, Wn = null, Nm = N;
+  // T029: a hand the pose opens (the bow's loose: hand-near-open) has let go; it keeps the pose's drawing
+  const opened = Object.fromEntries(Object.keys(G?.swap ?? {}).filter((p) => /-(open|palm)$/.test(swap[p] ?? '')).map((p) => [p, swap[p]]));
+  let sw = { ...withHeldHand(rig, swap, held), ...G?.swap, ...opened }, j = joints, finish = (L) => L, Wn = null, Nm = N;
   if (N) {   // T025: the weapon node and its grip hand first (a mode's own hand drawing if the rig has one)
     const ms = GRIP_MODES[modes.grip]?.swap, cur = sw[N.hand] ?? N.hand, own = `${cur}-${ms}`;
     if (ms && rig.parts[N.hand].swaps?.[own]) {

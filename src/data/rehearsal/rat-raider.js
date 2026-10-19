@@ -6,57 +6,59 @@
 //   names, A023 names for the ones still coming), note: effects or anything else the key needs, carry: a prop at the
 //   carry socket }.
 // View codes: Q three-quarter, S side, F toward the camera, BQ turned away, B back; H hunched and LB leaning back are
-// three-quarter torso drawings with their own joint points (rig standard 4). Poses are stand-ins until T029 poses every
-// move: the sheet checks the drawings, views and depth, not the motion.
+// three-quarter torso drawings with their own joint points (rig standard 4). T029: Moving and Attacking are posed: a key's
+// pose names the move's own key ('<move>:windup|through[.i]|strike|recover|<frame>', '<cycle pose>:<share>', '@<clip>:<frame>'
+// = a viewer clip's frame) and the sheet shows that frame as the game draws it; `clip` = the move's viewer animation
+// (`clips`: several). The other sections stay stand-ins until rounds 2 and 3.
 const k = (key, view, pose, draw = '', note = '', f) => ({ key, view, pose, draw: draw.split(' ').filter(Boolean), note, ...(f && { f }) });
 const SPEAR = 'rat-spearman', BOW = 'rat-archer';
 
-export default {
+const SHEET = {
   id: 'rat-raider', fighter: 'rat-raider', title: 'Rat Raider: move rehearsal (complete kit)',
   source: 'docs/design/rigs/rat-raider-rehearsal.md',
   sections: [
-    { title: 'Moving', moves: [
-      { name: 'Menace idle + fidget', keys: [k('idle a', 'Q', 'idle:0', 'hand-near-grip hand-far-fist'), k('idle b', 'Q', 'idle:0.8', 'hand-near-grip hand-far-fist'),
-        k('fidget a', 'Q', 'idle:0.4', 'head-shout'), k('fidget b', 'Q', 'idle:1.2', 'head-shout')] },
-      { name: 'Walk, approach, circle, back-walk', keys: [0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => k(`walk ${i + 1}/9`, 'Q', `walk:${(i / 9).toFixed(3)}`,
-        i === 0 || i === 4 ? 'foot-near-heel' : i === 3 ? 'foot-far-toe' : i === 7 ? 'foot-near-toe' : '')) },
-      { name: 'Run (chase, flee)', keys: [k('contact', 'H', 'walk:0', 'torso-hunched foot-near-heel'), k('push-off', 'H', 'walk:0.3', 'torso-hunched foot-far-toe'),
-        k('both feet up', 'H', 'jump', 'torso-hunched'), k('push-off 2', 'H', 'walk:0.8', 'torso-hunched foot-near-toe')] },
-      { name: 'Skid stop', keys: [k('brace', 'LB', 'hurt', 'torso-lean-back foot-near-out', 'dust fx'), k('settle', 'LB', 'jumpSquat', 'torso-lean-back foot-near-out', 'dust fx')] },
-      { name: 'Turn-around', keys: [k('narrowing', 'Q', 'idle:0'), k('mid (2 frames)', 'F', 'idle:0', 'torso-front pelvis-front head-front', 'scale crosses zero'), k('widening (flipped)', 'Q', 'idle:0')] },
-      { name: 'Jump squat / land', keys: [k('squat', 'Q', 'jumpSquat', 'leg-far-folded'), k('land', 'Q', 'jumpSquat', 'leg-far-folded'), k('land settle', 'Q', 'jumpSquat', 'leg-far-folded')] },
-      { name: 'Jump rise / apex / fall', keys: [k('rise', 'Q', 'jump', 'leg-near-kneeup leg-far-folded head-effort'), k('apex', 'Q', 'jump', 'leg-near-kneeup leg-far-folded'), k('fall', 'Q', 'jump', 'leg-far-folded')] },
-      { name: 'Dodge hop', keys: [k('crouch', 'H', 'jumpSquat', 'torso-hunched leg-far-folded'), k('hop', 'H', 'jump', 'torso-hunched leg-near-kneeup leg-far-folded'), k('land', 'H', 'jumpSquat', 'torso-hunched leg-far-folded')] },
-      { name: 'Dodge roll', keys: [k('tuck', 'Q', 'jumpSquat', 'leg-near-kneeup leg-far-folded'), k('roll (back)', 'B', 'jump', 'torso-back head-back pelvis-back shoulder-far leg-near-kneeup leg-far-folded'),
-        k('roll (back) 2', 'B', 'jump', 'torso-back head-back pelvis-back shoulder-far'), k('up', 'Q', 'getup', 'leg-near-kneeling')] },
+    { title: 'Moving', posed: true, moves: [
+      { name: 'Menace idle + fidget', clip: 'idle', keys: [k('idle a', 'Q', 'idle:0', 'hand-near-grip hand-far-fist'), k('idle b', 'Q', 'idle:0.8', 'hand-near-grip hand-far-fist'),
+        k('fidget a', 'Q', 'fidget:windup', 'head-shout'), k('fidget b', 'Q', 'fidget:strike', 'head-shout')], clips: ['idle', 'fidget'] },
+      { name: 'Walk, approach, circle, back-walk', clip: 'walk', keys: [0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => k(`walk ${i + 1}/9`, 'Q', `walk:${(i / 9).toFixed(3)}`,
+        i === 0 ? 'foot-near-heel foot-far-toe' : i === 4 ? 'foot-far-heel foot-near-toe' : '')) },
+      { name: 'Run (chase, flee)', clip: 'pose:run', keys: [k('contact', 'H', 'run:0', 'torso-hunched foot-near-heel'), k('push-off', 'H', 'run:0.33', 'torso-hunched foot-near-toe'),
+        k('both feet up', 'H', 'run:0.42', 'torso-hunched'), k('push-off 2', 'H', 'run:0.83', 'torso-hunched foot-far-toe')] },
+      { name: 'Skid stop', clip: 'skidStop', keys: [k('brace', 'LB', 'skidStop:windup', 'torso-lean-back foot-near-out', 'dust fx'), k('settle', 'LB', 'skidStop:strike', 'torso-lean-back foot-near-out', 'dust fx')] },
+      { name: 'Turn-around', clip: 'turn', keys: [k('narrowing', 'Q', '@turn:21'), k('mid (2 frames)', 'F/F', '@turn:22', 'torso-front pelvis-front head-front', 'scale crosses zero'), k('widening (flipped)', 'Q', '@turn:24')] },
+      { name: 'Jump squat / land', clip: 'jumpUp', keys: [k('squat', 'H', 'jumpUp:windup', 'torso-hunched leg-far-folded'), k('land', 'H', 'jumpUp:recover', 'torso-hunched leg-far-folded'), k('land settle', 'Q', 'jumpUp:56', '')] },
+      { name: 'Jump rise / apex / fall', clip: 'jumpUp', keys: [k('rise', 'Q', 'jumpUp:through.0', 'leg-near-kneeup leg-far-folded head-effort'), k('apex', 'Q', 'jumpUp:through.1', 'leg-near-kneeup leg-far-folded'), k('fall', 'Q', 'jumpUp:strike', '')] },
+      { name: 'Dodge hop', clip: 'dodgeHop', keys: [k('crouch', 'H', 'dodgeHop:windup', 'torso-hunched leg-far-folded'), k('hop', 'H', 'dodgeHop:strike', 'torso-hunched leg-near-kneeup leg-far-folded'), k('land', 'H', 'dodgeHop:recover', 'torso-hunched leg-far-folded')] },
+      { name: 'Dodge roll', clip: 'dodgeRoll', keys: [k('tuck', 'H', 'dodgeRoll:windup', 'leg-near-kneeup leg-far-folded'), k('roll (back)', 'B', 'dodgeRoll:through.0', 'torso-back head-back pelvis-back shoulder-far leg-near-kneeup leg-far-folded'),
+        k('roll (back) 2', 'B', 'dodgeRoll:through.1', 'torso-back head-back pelvis-back shoulder-far'), k('up', 'Q', 'dodgeRoll:strike', 'leg-near-kneeling')] },
     ] },
-    { title: 'Attacking', moves: [
-      { name: 'Telegraph (held wind-up)', keys: [k('held wind-up', 'BQ', 'ratSlash:windup', 'torso-away arm-near-cocked head-effort')] },
-      { name: 'Slash 1 (forehand cut)', keys: [k('wind', 'BQ', 'ratSlash:windup', 'torso-away arm-near-cocked head-effort'),
-        k('over the shoulder (depth switch)', 'F/Q', 'ratSlash:through', 'torso-front shoulder-near head-attack'),
-        k('strike', 'F/Q', 'ratSlash:strike', 'torso-front shoulder-near head-attack foot-near-toe arm-near-smear-h'), k('follow', 'F/Q', 'ratSlash:strike', 'torso-front shoulder-near head-attack'),
+    { title: 'Attacking', posed: true, moves: [
+      { name: 'Telegraph (held wind-up)', clip: 'ratSlash', keys: [k('held wind-up', 'BQ', 'ratSlash:windup', 'torso-away arm-near-cocked head-effort')] },
+      { name: 'Slash 1 (forehand cut)', clip: 'ratSlash', keys: [k('wind', 'BQ', 'ratSlash:windup', 'torso-away arm-near-cocked head-effort'),
+        k('over the shoulder (depth switch)', 'F/Q', 'ratSlash:through.0', 'torso-front shoulder-near head-attack'),
+        k('strike', 'F/Q', 'ratSlash:through.1', 'torso-front head-attack foot-near-toe arm-near-smear-h'), k('follow', 'F/Q', 'ratSlash:strike', 'torso-front shoulder-near head-attack'),
         k('recover', 'Q', 'ratSlash:recover', '')] },
-      { name: 'Slash 2 (backhand)', keys: [k('in front', 'F', 'ratSlash:strike', 'torso-front shoulder-near'), k('mid-swing (depth switch)', 'S', 'cast', 'torso-side shoulder-near'), k('behind', 'BQ', 'ratSlash:windup', 'torso-away')] },
-      { name: 'Slash 3 spin (finisher)', keys: [k('start', 'Q', 'ratSlash:windup', 'arm-near-cocked'), k('side', 'S', 'ratSlash:through', 'torso-side pelvis-side shoulder-near'),
-        k('back (mid-spin)', 'B', 'ratSlash:strike', 'torso-back head-back pelvis-back arm-near-smear-h shoulder-far'), k('front', 'F', 'ratSlash:strike', 'torso-front pelvis-front head-front shoulder-near'), k('end', 'Q', 'idle:0')] },
-      { name: 'Overhead chop (club, axe)', keys: [k('wind (lean back)', 'LB', 'cast', 'torso-lean-back arm-near-raised'), k('strike', 'H', 'ratSlash:strike', 'torso-hunched shoulder-near arm-near-smear-o', 'hunched chest toward the camera (one torso drawing per key)'),
-        k('follow (two-hand)', 'F', 'ratSlash:strike', 'torso-hunched hand-near-grip-overhand hand-far-grip-overhand arm-far-raised')] },
-      { name: 'Spear thrust', keys: [k('draw back', 'S/S', 'spearThrust:windup', 'torso-side pelvis-side hand-near-grip-overhand hand-far-grip-overhand', '', SPEAR),
+      { name: 'Slash 2 (backhand)', clip: 'backhand', keys: [k('in front', 'F/Q', 'backhand:windup', 'torso-front shoulder-near'), k('mid-swing (depth switch)', 'S/Q', 'backhand:through', 'torso-side shoulder-near'), k('behind', 'BQ', 'backhand:strike', 'torso-away')] },
+      { name: 'Slash 3 spin (finisher)', clip: 'spin', keys: [k('start', 'Q', 'spin:windup', 'arm-near-cocked'), k('side', 'S/S', 'spin:through.0', 'torso-side pelvis-side shoulder-near'),
+        k('back (mid-spin)', 'B/B', 'spin:through.1', 'torso-back head-back pelvis-back arm-near-smear-h shoulder-far'), k('front', 'F/F', 'spin:strike', 'torso-front pelvis-front head-front shoulder-near'), k('end', 'Q', 'spin:recover')] },
+      { name: 'Overhead chop (club, axe)', clip: 'overheadChop', keys: [k('wind (lean back)', 'LB', 'overheadChop:windup', 'torso-lean-back arm-near-raised'), k('strike', 'H', 'overheadChop:through', 'torso-hunched arm-near-smear-o', 'hunched chest toward the camera (one torso drawing per key)'),
+        k('follow', 'H', 'overheadChop:strike', 'torso-hunched', 'one-handed with the cutlass: the two-hand version (overhand grips, far raised arm) waits for a two-hand club or staff item')] },
+      { name: 'Spear thrust', clip: 'spearThrust', f: SPEAR, keys: [k('draw back', 'S/S', 'spearThrust:windup', 'torso-side pelvis-side hand-near-grip-overhand hand-far-grip-overhand', '', SPEAR),
         k('lunge', 'S/S', 'spearThrust:strike', 'torso-side pelvis-side foot-near-out', 'far fist over the shaft (overlay band); out-turned rear foot (one near-foot drawing per key)', SPEAR), k('recover', 'S/S', 'spearThrust:recover', 'torso-side pelvis-side', '', SPEAR)] },
-      { name: 'Dagger stab', keys: [k('draw back', 'S/S', 'ratSlash:windup', 'torso-side pelvis-side hand-near-grip-overhand', 'reverse grip'), k('stab', 'S/S', 'ratSlash:strike', 'torso-side pelvis-side shoulder-near'), k('recover', 'S/S', 'ratSlash:recover', 'torso-side pelvis-side')] },
-      { name: 'Dagger throw', keys: [k('cock', 'BQ', 'ratSlash:windup', 'torso-away arm-near-cocked'), k('release', 'F', 'ratSlash:strike', 'torso-front shoulder-near hand-near-open'), k('follow', 'F', 'ratSlash:recover', 'torso-front hand-near-open')] },
-      { name: 'Jump attack', keys: [k('rise', 'Q', 'jump', 'arm-near-cocked leg-near-kneeup leg-far-folded'), k('top', 'BQ', 'jump', 'torso-away arm-near-cocked'),
-        k('chop', 'F', 'ratSlash:strike', 'torso-front shoulder-near leg-near-kneeup leg-far-folded arm-near-smear-o'), k('land', 'Q', 'jumpSquat', 'leg-far-folded')] },
-      { name: 'Dash attack', keys: [k('dash', 'H', 'ratSlash:through', 'torso-hunched foot-near-toe'), k('hit', 'H', 'ratSlash:strike', 'torso-hunched foot-near-toe')] },
-      { name: 'Kick (unarmed)', keys: [k('chamber', 'LB', 'jump', 'torso-lean-back leg-near-kneeup foot-far-toe'), k('extend', 'LB', 'jump', 'torso-lean-back foot-far-toe', 'near leg rigid, extended'), k('recover', 'Q', 'idle:0')] },
-      { name: 'Block (shield)', keys: [k('guard loop', 'H', 'idle:0', 'torso-hunched arm-far-guard shoulder-far hand-far-shield head-effort foot-near-out', 'guard arm in front of the chest (pose band)'),
-        k('hit', 'H', 'hurt', 'torso-hunched arm-far-guard shoulder-far hand-far-shield head-effort')] },
-      { name: 'Shield bash', keys: [k('draw back', 'S/S', 'idle:0', 'torso-side pelvis-side arm-far-guard'), k('bash', 'S/S', 'ratSlash:strike', 'torso-side pelvis-side arm-far-guard foot-near-toe'), k('recover', 'S/S', 'idle:0', 'torso-side pelvis-side')] },
-      { name: 'Bow draw / aim / release', keys: [k('draw', 'S', 'bowShot:windup', 'torso-side arm-far-raised-back hand-near-pinch', '', BOW), k('aim', 'S', 'bowShot:windup', 'torso-side hand-near-pinch hand-far-grip', '', BOW),
-        k('release', 'S', 'bowShot:strike', 'torso-side hand-near-open', '', BOW)] },
-      { name: 'Staff two-hand swing / overhead', keys: [k('wind', 'BQ', 'cast', 'torso-away hand-near-grip-overhand hand-far-grip-overhand arm-far-raised'), k('swing', 'F', 'ratSlash:strike', 'torso-front shoulder-near hand-near-grip-overhand hand-far-grip-overhand'),
-        k('overhead wind', 'LB', 'cast', 'torso-lean-back arm-near-raised arm-far-raised'), k('overhead strike', 'H', 'ratSlash:strike', 'torso-hunched shoulder-near')] },
-      { name: 'Captain rally (shout)', keys: [k('raise', 'Q', 'cast', 'head-shout arm-near-raised'), k('shout', 'Q', 'cast', 'head-shout arm-near-raised')] },
+      { name: 'Dagger stab', clip: 'daggerStab', keys: [k('draw back', 'S/S', 'daggerStab:windup', 'torso-side pelvis-side hand-near-grip-overhand', 'reverse grip (the cutlass stands in for the dagger)'), k('stab', 'S/S', 'daggerStab:strike', 'torso-side pelvis-side shoulder-near'), k('recover', 'S/S', 'daggerStab:recover', 'torso-side pelvis-side')] },
+      { name: 'Dagger throw', clip: 'daggerThrow', keys: [k('cock', 'BQ', 'daggerThrow:windup', 'torso-away arm-near-cocked'), k('release', 'F/Q', 'daggerThrow:strike', 'torso-front shoulder-near hand-near-open', 'the blade leaves the hand (no flying dagger drawn yet)'), k('follow', 'F/Q', 'daggerThrow:recover', 'torso-front hand-near-open')] },
+      { name: 'Jump attack', clip: 'jumpAttack', keys: [k('rise', 'Q', 'jumpAttack:windup', 'arm-near-cocked leg-near-kneeup leg-far-folded'), k('top', 'BQ', 'jumpAttack:through', 'torso-away arm-near-cocked'),
+        k('chop', 'F/Q', 'jumpAttack:strike', 'torso-front leg-near-kneeup leg-far-folded arm-near-smear-o'), k('land', 'H', 'jumpAttack:recover', 'leg-far-folded')] },
+      { name: 'Dash attack', clip: 'dashAttack', keys: [k('dash', 'H', 'dashAttack:windup', 'torso-hunched foot-near-toe'), k('hit', 'H', 'dashAttack:strike', 'torso-hunched foot-near-toe')] },
+      { name: 'Kick (unarmed)', clip: 'kick', keys: [k('chamber', 'LB', 'kick:windup', 'torso-lean-back leg-near-kneeup foot-far-toe'), k('extend', 'LB', 'kick:strike', 'torso-lean-back foot-far-toe', 'near leg rigid, extended'), k('recover', 'Q', 'kick:30')] },
+      { name: 'Block (shield)', clip: 'guard', keys: [k('guard loop', 'H', 'guard:windup', 'torso-hunched arm-far-guard shoulder-far head-effort foot-near-out', 'guard arm in front of the chest (pose band); no shield item to carry yet (A021 buckler: hold sheet only)'),
+        k('hit', 'H', 'guard:strike', 'torso-hunched arm-far-guard shoulder-far head-effort')] },
+      { name: 'Shield bash', clip: 'shieldBash', keys: [k('draw back', 'S/S', 'shieldBash:windup', 'torso-side pelvis-side arm-far-guard'), k('bash', 'S/S', 'shieldBash:strike', 'torso-side pelvis-side arm-far-guard foot-near-toe'), k('recover', 'S/S', 'shieldBash:recover', 'torso-side pelvis-side')] },
+      { name: 'Bow draw / aim / release', clip: 'bowShot', f: BOW, keys: [k('draw', 'Q', 'bowShot:20', 'hand-near-pinch', 'three-quarter (rehearsal: S or Q); bow at arm\'s length (the user\'s bow line, T028 r5), not the raised-back far arm', BOW), k('aim', 'Q', 'bowShot:windup', 'hand-near-pinch hand-far-grip', '', BOW),
+        k('release', 'Q', 'bowShot:strike', 'hand-near-open', '', BOW)] },
+      { name: 'Staff two-hand swing / overhead', clip: 'staffSwing', f: SPEAR, keys: [k('wind', 'BQ', 'staffSwing:windup', 'torso-away hand-near-grip-overhand hand-far-grip-overhand', 'the spear stands in for a staff', SPEAR), k('swing', 'F/Q', 'staffSwing:strike', 'torso-front shoulder-near hand-near-grip-overhand hand-far-grip-overhand', '', SPEAR),
+        k('overhead wind', 'LB', 'staffOverhead:windup', 'torso-lean-back', 'raised arms: the two-hand hold stays on the hand drawings (a raised whole arm can\'t hold the shaft)', SPEAR), k('overhead strike', 'H', 'staffOverhead:strike', 'torso-hunched', '', SPEAR)], clips: ['staffSwing', 'staffOverhead'] },
+      { name: 'Captain rally (shout)', clip: 'rally', keys: [k('raise', 'Q', 'rally:windup', 'head-shout arm-near-raised'), k('shout', 'Q', 'rally:strike', 'head-shout arm-near-raised')] },
     ] },
     { title: 'Grabs, hurt, down', moves: [
       { name: 'Grab reach / hold (rat grabs)', keys: [k('reach', 'Q', 'idle:0', 'hand-near-palm hand-far-palm'), k('hold', 'Q', 'idle:0', 'hand-near-fist hand-far-fist')] },
@@ -102,3 +104,6 @@ export default {
     ] },
   ],
 };
+// T029: every key of a posed section is drawn as posed (viewer/rehearse-frames.js keyFrame)
+for (const sec of SHEET.sections) if (sec.posed) for (const mv of sec.moves) for (const key of mv.keys) key.posed = true;
+export default SHEET;

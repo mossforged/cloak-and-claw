@@ -29,6 +29,13 @@ for (const [id, f] of Object.entries(FIGHTERS)) {
     check((m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0) || (m.shot?.damage > 0 && m.shot.speed > 0 && existsSync(m.shot.art.img)), `${id}.${mk}: damage and hitbox (or a shot)`);
     if (m.next) check(f.moves[m.next], `${id}.${mk}: combo next '${m.next}' exists`);
   }
+  // T029: rehearsal moves: a hit (damage + hitbox) or a motion (no hit at all), phases set, a rig move pose on his rig
+  for (const [mk, m] of Object.entries(f.rehearsal ?? {})) {
+    check(!f.moves[mk], `${id}.${mk}: a rehearsal move isn't one of his own`);
+    check(m.windup > 0 && m.active > 0 && m.recovery > 0, `${id}.${mk}: rehearsal phases`);
+    check(m.kind === 'motion' ? !m.hitbox && !m.damage : m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0, `${id}.${mk}: a hit with a hitbox, or a motion with none`);
+    check(RIGS[f.art.rig]?.poses.moves?.[mk], `${id}.${mk}: rig ${f.art.rig} poses the rehearsal move`);
+  }
   if (f.team === 'enemy') check(f.ai && f.ai.range > 0, `${id}: ai config`);
   if (f.kit) check(ITEMS[f.kit]?.kind === 'weapon' && f.moves === ITEMS[f.kit].moves, `${id}: kit '${f.kit}' is a weapon kit and gives his moves`);
 }
@@ -101,11 +108,11 @@ for (const [id, r] of Object.entries(RIGS)) {
     for (let q = name; q && !seen.has(q); q = r.parts[q]?.parent) seen.add(q);
     check(seen.size <= Object.keys(r.parts).length && !r.parts[[...seen].pop()]?.parent, `rig ${id}.${name}: parent chain reaches the root`);
   }
-  const known = new Set([...jointsOfRig(r), 'speed', 'swap', 'swapPhase', 'view', 'order', 'carry']);   // T028: views, bands, carried object   // swap contents: tests/rig.test.mjs
+  const known = new Set([...jointsOfRig(r), 'speed', 'swap', 'swapPhase', 'view', 'order', 'carry', 'free', 'aloft', 'grip', 'grip2', 'weapon']);   // T029: free (released), aloft (off the floor)   // T028: views, bands, carried object   // swap contents: tests/rig.test.mjs
   const P = r.poses, M = P.moves ?? {};
   const named = { stance: P.stance, idle: P.idle, walk: P.walk, jump: P.jump, hurt: P.hurt, knockdown: P.knockdown, down: P.down, getup: P.getup };
   for (const [k, pose] of Object.entries(P)) if (!(k in named) && !['timing', 'moves', 'kits'].includes(k)) named[k] = pose;   // extra named poses (cast)
-  const addMoves = (pre, ms) => { for (const [k, m] of Object.entries(ms)) { named[`${pre}${k}.windup`] = m.windup; named[`${pre}${k}.strike`] = m.strike; if (m.through) named[`${pre}${k}.through`] = m.through; } };
+  const addMoves = (pre, ms) => { for (const [k, m] of Object.entries(ms)) { named[`${pre}${k}.windup`] = m.windup; named[`${pre}${k}.strike`] = m.strike; [m.through ?? []].flat().forEach((x, i) => { named[`${pre}${k}.through${i || ''}`] = x; }); if (m.recover) named[`${pre}${k}.recover`] = m.recover; } };
   addMoves('', M);
   for (const [kit, KP] of Object.entries(P.kits ?? {})) {   // T017 weapon feel: a kit's own state and move poses
     check(ITEMS[kit]?.kind === 'weapon', `rig ${id}: kits '${kit}' is a weapon kit`);
@@ -118,7 +125,7 @@ for (const [id, r] of Object.entries(RIGS)) {
     for (const j of Object.keys(pose ?? {})) check(known.has(j), `rig ${id}: pose '${k}' names unknown joint '${j}'`);
   }
   for (const f of Object.values(FIGHTERS).filter((f) => f.art.rig === id))
-    for (const k of Object.keys(M)) check(f.moves[k], `rig ${id}: move pose '${k}' matches a move of ${f.id}`);
+    for (const k of Object.keys(M)) check(f.moves[k] || f.rehearsal?.[k], `rig ${id}: move pose '${k}' matches a move (or rehearsal move) of ${f.id}`);
   check(P.timing.blend > 0 && P.timing.strikeIn > 0 && P.timing.strikeIn <= 1, `rig ${id}: timing`);
 }
 console.log(fails ? `${fails} failures` : 'ALL OK');

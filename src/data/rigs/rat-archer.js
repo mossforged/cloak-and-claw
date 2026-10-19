@@ -4,7 +4,9 @@
 // A019's raised-back far arm (fist at the jaw) is not used: with the bow out in front the near arm can't reach past
 // that fist (near shoulder + arm ends ~5 px behind it), so the string arm stays the near one (report T026).
 import rat from './rat-raider.js';
-import base, { P, CROUCH } from './rat-raider-poses.js';
+import raider, { P, CROUCH } from './rat-raider-poses.js';
+
+const { run: _run, ...base } = raider;   // T029: the raider's run holds a cutlass guard
 
 // T028 r4: the user's lines: the far grip's handle runs up the fist and the bow's runs forward (across the bow), so the
 // far fist turns by the difference to keep the bow upright (UPRIGHT); the near hand holds nothing until the string, so its
@@ -22,6 +24,8 @@ const BOW = (off, extra = {}) => ({ shield: { off: [off[0] + SHIFT[0], off[1] + 
 // T026 r2: hand dirs are measured on the side-grip slot (A022: -16, was -45) and A022's pinch is drawn turned 55 deg: every
 // dir here +84 from round 1 keeps the pinch drawing at its old screen angle (the pinch then reaches the string mid-draw)
 const DRAW = { 'hand-near.order': 818 };   // the string hand over string (805) and arrow (810), still under its bracer (820; T026 r2)
+// T029 (rehearsal: bow draw / aim / release, S or Q): three-quarter; the bow stays at arm's length in the far grip (T028
+// r5, the user's line), not the raised-back far arm (its fist can't reach past the string arm, T026); open hand on the loose
 const { swap: _s, ...STANCE } = P({ ...CROUCH, torso: 4, head: -6, hand: { off: [10, 16], dir: 24 + NEAR }, ...BOW([16, 14]) });
 const keep = (S, ...ks) => Object.fromEntries(ks.map((k) => [k, S[k]]));
 const ARMS = ['arm-near-upper', 'arm-near-lower', 'hand-near', 'arm-far-upper', 'arm-far-lower', 'hand-far'];
@@ -41,7 +45,8 @@ export default {
         // straight at full reach (~31 px), which ends at the snout tip, so he stands up and leans back (torso -10, was 0)
         // with the chin up (head -12, was -2) and the bow fist at shoulder height (BOW [35, 0], was [33, -6]); the string
         // still comes to the jaw anchor (1.9 px). Full draw: bow grip 9 px in front of the nose, no bow pixel over the head
-        // (was ~150 px²)
+        // (was ~150 px²). T029: kept three-quarter (the rehearsal allows S or Q): on the side chest the near arm in front
+        // showed the torso's hidden paint (52 px²) and the head sat 7 px above the string
         windup: { ...P({ ...CROUCH, swap: { head: 'head-effort' }, torso: -10, head: -12, dx: -2, hand: { off: [14, -2], dir: 144 + NEAR }, ...BOW([35, 0]) }), ...DRAW },
         strike: { ...P({ ...CROUCH, swap: { head: 'head-attack', 'hand-near': 'hand-near-open' }, torso: -10, head: -14, dx: 1, hand: { off: [-4, -4], dir: -6 + NEAR }, ...BOW([35, 0]) }), ...DRAW },
       },
