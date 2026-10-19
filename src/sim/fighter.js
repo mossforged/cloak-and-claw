@@ -48,7 +48,9 @@ export function phaseOf(f) {
 }
 
 export function startMove(f, key) {
-  f.move = movesOf(f)[key] ?? f.def.moves[key]; f.moveKey = key;   // a kit without the move (jumpSlash with a cutlass) = the fighter's own
+  // a kit without the move (jumpSlash with a cutlass) = the fighter's own; T029: then a rehearsal move his body is posed
+  // for (def.rehearsal: the viewer plays them; no brain starts one)
+  f.move = movesOf(f)[key] ?? f.def.moves[key] ?? f.def.rehearsal?.[key]; f.moveKey = key;
   if (f.weapon) f.weapon.hit = false;
   f.mf = 0; f.queued = false; f.bounced = false; f.hitList.clear();
   if (f.control.mx) f.facing = Math.sign(f.control.mx);

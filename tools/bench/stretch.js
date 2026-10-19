@@ -132,11 +132,12 @@ function core(alphaOf, list, J) {
 // The widest crack inside the disc (J, r): an empty point with drawing on both sides of it (across 8 directions, up to
 // 8 px apart) measures the narrowest such span; a point at the silhouette's edge (drawing on one side only) is no crack.
 // out: unit vector to the outer side of the bend (null = nearly straight: every side counts).
-function crack(alphaOf, list, J, r, out = null) {
-  const hit = (P) => list.some((e) => covers(alphaOf, e, P));
-  const reach = (P, c, s) => { for (let d = 0.25; d <= 8; d += 0.25) if (hit([P[0] + c * d, P[1] + s * d])) return d; return Infinity; };
+// T029 `pair`: the sides must be these drawings (the joint's own two pieces), and the crack within `within` px of J.
+function crack(alphaOf, list, J, r, out = null, pair = null, within = Infinity) {
+  const hit = (P) => list.some((e) => covers(alphaOf, e, P)), side = pair ? (P) => pair.some((e) => covers(alphaOf, e, P)) : hit;
+  const reach = (P, c, s) => { for (let d = 0.25; d <= 8; d += 0.25) if (side([P[0] + c * d, P[1] + s * d])) return d; return Infinity; };
   let worst = 0;
-  for (let R = 0; R <= r; R += 0.5) for (let a = 0; a < (R ? 24 : 1); a++) {
+  for (let R = 0; R <= Math.min(r, within); R += 0.5) for (let a = 0; a < (R ? 24 : 1); a++) {
     const P = [J[0] + R * Math.cos(a * Math.PI / 12), J[1] + R * Math.sin(a * Math.PI / 12)];
     if (hit(P) || (out && (P[0] - J[0]) * out[0] + (P[1] - J[1]) * out[1] < 0)) continue;   // the inner crease is anatomy
     let w = Infinity;
@@ -161,6 +162,20 @@ export function outward(rig, by, e, p, J, alphaOf) {
   return b && [-b[0], -b[1]];
 }
 
+// T029 pass-bar tune: at a limb-on-body joint (shoulder: the torso and an upper arm, LIMB_BODY) a seam is a gap between
+// those two pieces within reach of the pivot (the limb's width across its bone at the pivot, at rest: `limbReach`);
+// open space further out, under a raised or swung arm (armpit, between the arm and the torso), is daylight, not a seam.
+// cell.limbBody turns it on (the pose seam test and the pass bar); the stretch strip measures as before.
+export const LIMB_BODY = /^arm-(near|far)-upper$/;
+export function limbReach(alphaOf, rig, e, J) {
+  const H = alphaOf(e.img);
+  if (!H) return Infinity;
+  const lo = Object.keys(rig.parts).find((c) => rig.parts[c].parent === e.name && !ITEM.has(c));
+  const far = lo && !e.p?.swaps?.[e.swap]?.hide?.includes(lo) ? apply(e.base, rig.parts[lo].attach) : apply(e.m, [H.w / 2, H.h / 2]);
+  const u = [far[0] - J[0], far[1] - J[1]], n = Math.hypot(u[0], u[1]) || 1, v = [-u[1] / n, u[0] / n];
+  const run = (s) => { let d = 0; while (d < 40 && covers(alphaOf, e, [J[0] + s * v[0] * (d + 0.25), J[1] + s * v[1] * (d + 0.25)])) d += 0.25; return d; };
+  return run(1) + run(-1);
+}
 export function flagsOf(cell, alphaOf) {
   const { rig, L } = cell, flags = [], marks = (cell.marks = []), drawn = L.filter((e) => e.m && !e.line), by = Object.fromEntries(drawn.map((e) => [e.name, e]));
   const carried = new Set(drawn.flatMap((e) => Object.keys(e.p?.swaps?.[e.swap]?.carry ?? {})));
@@ -171,7 +186,9 @@ export function flagsOf(cell, alphaOf) {
     if (!p || ITEM.has(e.name) || carried.has(e.name) || !by[p] || !rest[e.name] || !rest[p]) continue;
     const J0 = apply(rest[e.name].base, rig.parts[e.name].pivot), r0 = core(alphaOf, [rest[e.name], rest[p]], J0);
     if (r0 < 1) continue;   // the joint barely inside the drawings at rest: nothing to keep closed
-    const J = apply(e.base, rig.parts[e.name].pivot), out = outward(rig, by, e, p, J, alphaOf), gap = crack(alphaOf, drawn, J, r0, out) * cell.k;
+    const J = apply(e.base, rig.parts[e.name].pivot), out = outward(rig, by, e, p, J, alphaOf);
+    const lb = cell.limbBody && LIMB_BODY.test(e.name) && p === 'torso';
+    const gap = crack(alphaOf, drawn, J, r0, out, lb ? [by[p], e] : null, lb ? limbReach(alphaOf, rig, rest[e.name], J0) : Infinity) * cell.k;
     if (gap > SEAM_PX) { flags.push(`seam ${p} / ${e.name}: ${gap.toFixed(1)} px`); marks.push(apply(cell.view, J)); }
   }
   const H = cell.view, height = ([x, y]) => H[1] * x + H[3] * y + H[5];

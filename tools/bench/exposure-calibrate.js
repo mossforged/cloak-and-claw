@@ -5,6 +5,7 @@
 // but for readRGBA (the caller's).
 import { frameExposure } from './exposure.js';
 import { poseFrames } from './pose-seams.js';
+import { WRISTS } from '../../src/data/wrists.js';
 
 const FIX = 'tools/fixtures/a023-r3/';
 // piece -> round 3 pivot (own px) and the clips its block showed in (T028 r3 list / the lead's walk frame 2)
@@ -27,7 +28,12 @@ export function withR3(rig, name, root = '') {
 // flagged only for a straight cut run beside it (a real cut end left, not unfinished fill)
 export function calibrate(name, readRGBA, ref, root = '') {
   const out = [], P = R3_PIECES[name];
-  for (const fk of poseFrames(P.id ?? 'rat-raider', P.clips)) {
+  // T029 r3: the frames the r3 strips showed, as they were posed then (before the wrist limits turned the hands)
+  const on = WRISTS.on;
+  WRISTS.on = false;
+  const frames = poseFrames(P.id ?? 'rat-raider', P.clips);
+  WRISTS.on = on;
+  for (const fk of frames) {
     const c = fk.cell, e = c.L.find((x) => x.name === name && (x.swap ?? null) === (P.swap ?? null));
     if (!e) continue;
     // the r3 drawing on the same canvas point: its image px = r4's + (r4 pivot - offset) - (r3 pivot - offset)

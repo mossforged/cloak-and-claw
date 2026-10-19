@@ -12,6 +12,10 @@ import { layoutRig } from '../src/render/rig-layout.js';
 import { gripLayout } from '../src/render/rig-grip.js';
 import { nodeOf } from '../src/render/weapon-node.js';
 import HULLS from '../src/data/rigs/hulls.js';
+import { WRISTS } from '../src/data/wrists.js';
+
+// T029 r3: the node's own placement, without the wrist limits that run after it (render/wrist.js; tests/wrist.test.mjs)
+WRISTS.on = false;
 
 let fails = 0;
 const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
