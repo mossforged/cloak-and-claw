@@ -80,6 +80,9 @@ const ui = createUI({
       setTimeout(() => URL.revokeObjectURL(a.href), 2000);
     });
   },
+  pose() {   // T031: the drag-to-pose page on this frame
+    location.href = `${location.pathname}?pose=${S.f}&from=${S.anim}:${frameNow()}${S.item !== 'own' ? `&item=${S.item}` : ''}`;
+  },
   async share() {
     S.t = frameNow(); writeUrl();
     try { if (navigator.share) await navigator.share({ url: location.href, title: 'Model viewer' }); else await navigator.clipboard.writeText(location.href); hud.dataset.note = 'Link copied'; setTimeout(() => { delete hud.dataset.note; dirty = true; }, 2000); dirty = true; } catch {}

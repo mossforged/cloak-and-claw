@@ -1,0 +1,22 @@
+[
+ {
+  "label": "Drag to pose: the raider's idle. Drag a white handle (hand, foot), the blue hips or the green head; the small ring beside a hand or foot twists it. Try dragging a foot up.",
+  "q": "pose=rat-raider&from=idle:0"
+ },
+ {
+  "label": "The spearman holding the staff: the gold fist moves the staff (its ring turns it), the hollow gold fist swings it round the other hand; both fists stay on the shaft",
+  "q": "pose=rat-spearman&from=idle:0&item=a021-staff"
+ },
+ {
+  "label": "The turning slash's strike frame (ratSlash frame 43, chest toward camera)",
+  "q": "pose=rat-raider&from=ratSlash:43"
+ },
+ {
+  "label": "A shared pose: the raider's far foot dragged up 20 px (what Share sends; the link holds the pose)",
+  "q": "pose=rat-raider&from=idle%3A0&j=head:-4.06,arm-near-upper:-337.49,hand-near:338.2,arm-far-upper:46.77,hand-far:9.22,leg-far-upper:-79.6,leg-far-lower:117.51,foot-far:-40.91,foot-far.lift:20.68,tail:-0.49,tail-2:17.47,tail-3:14.12,scarf-tail:-2.16&sw=hand-far:hand-far-fist"
+ },
+ {
+  "label": "In the normal viewer: View tab -> Pose -> 'Pose this frame' opens the pose page on whatever frame is showing",
+  "q": "f=rat-raider&anim=ratSlash&paused=1&t=43"
+ }
+]
