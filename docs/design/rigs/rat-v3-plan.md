@@ -1,6 +1,6 @@
 # Rat v3: a from-scratch rebuild, drawn for the rig (draft, lead, 2026-10-19)
 
-**Status: draft for a decision.** Decide after T033 (limb repairs), T034 (the user's joint points) and A025 (shoulder on the arm) are reviewed. If the joints on the user's points still look pieced together, this replaces further patching.
+**Status: decided 2026-10-19 (user: "switching up the art with the learning we've done makes a lot more sense for the process going forward").** Step 1 changed after T034: the skeleton is tapped on the approved painting itself (one point per joint, the "Rat Skeleton" page, db `skeleton/rat-v3-Q`), so limb lengths can't drift; the limits come from the user's Fitting Room values (`joint-points-rat.json`). Decide after T033 (limb repairs), T034 (the user's joint points) and A025 (shoulder on the arm) are reviewed. If the joints on the user's points still look pieced together, this replaces further patching.
 
 **User (2026-10-19):** "I sort of fear we might need to redo the art from scratch incorporating all of these ... the next pass, if we do it, the body parts need to be drawn individually, to have smooth edges, and the right joint/limb endings."
 
