@@ -1,0 +1,2790 @@
+{
+  "outsideMaskChecks": {
+    "head-effort": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 127553
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "hand-near": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 11115
+      }
+    },
+    "scarf-tail": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 19546
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 119309
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "hand-far": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9559
+      }
+    },
+    "tail-3": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "tail-2": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-ko": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 137232
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "torso-side": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15168
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 10842
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9547
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 42540
+      }
+    },
+    "tail-1": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "hand-near-pinch": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6169
+      }
+    },
+    "hand-far-open": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8906
+      }
+    },
+    "hand-near-grip-overhand": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 14796
+      }
+    },
+    "hand-near-open": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 7418
+      }
+    },
+    "torso-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 5683
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 56420
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 91542
+      }
+    },
+    "arm-near-upper": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6800
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 49
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 21828
+      }
+    },
+    "leg-far-lower": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1782
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 16344
+      }
+    },
+    "hand-far-grip-overhand": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1450
+      }
+    },
+    "hand-near-fist": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 11108
+      }
+    },
+    "leg-near-upper": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 125
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 38410
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1013
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 12217
+      }
+    },
+    "arm-far-lower": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 3918
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9714
+      }
+    },
+    "hand-far-fist": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9559
+      }
+    },
+    "head": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 139282
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-attack": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 119223
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-hurt": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 135516
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "foot-near": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 45
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 16946
+      }
+    },
+    "hand-near-grip": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 14796
+      }
+    },
+    "arm-far-upper": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 5257
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 20
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9499
+      }
+    },
+    "torso": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 22142
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 12211
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 7811
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 53749
+      }
+    },
+    "foot-far": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 20629
+      }
+    },
+    "arm-near-lower": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2800
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 14286
+      }
+    },
+    "leg-far-upper": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2497
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 34717
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1172
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 19256
+      }
+    },
+    "leg-near-lower": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 354
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15951
+      }
+    },
+    "pelvis": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 435
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 14576
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6019
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 60975
+      }
+    },
+    "hand-far-shield": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9132
+      }
+    },
+    "hand-far-grip": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1895
+      }
+    },
+    "arm-far-raised-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 3488
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 19356
+      }
+    },
+    "arm-near-cocked": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 5983
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 22507
+      }
+    },
+    "arm-far-guard": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 3341
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 13922
+      }
+    },
+    "arm-near-raised": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6699
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 140
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 36387
+      }
+    },
+    "hand-near-grip-under": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 535
+      }
+    },
+    "pelvis-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 7124
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 17290
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8328
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 48192
+      }
+    },
+    "leg-far-folded": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8439
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 22014
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 21697
+      }
+    },
+    "arm-near-smear-h": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 7548
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1232
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 26499
+      }
+    },
+    "pelvis-side": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2660
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 25942
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 58532
+      }
+    },
+    "foot-near-out": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 13931
+      }
+    },
+    "arm-near-upper-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 10849
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9339
+      }
+    },
+    "leg-near-lower-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 246
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6101
+      }
+    },
+    "seat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1087
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 19835
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1807
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 21042
+      }
+    },
+    "head-shout": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 118709
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "arm-near-smear-o": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 10668
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 222
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 34816
+      }
+    },
+    "hand-near-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 5596
+      }
+    },
+    "foot-far-heel": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15057
+      }
+    },
+    "foot-far-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 20291
+      }
+    },
+    "head-drink": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 142499
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "hand-far-grip-under": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 4218
+      }
+    },
+    "leg-near-upper-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1082
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 31827
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8342
+      }
+    },
+    "arm-near-lower-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1864
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 157
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 11702
+      }
+    },
+    "shoulder-far": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 4315
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 109
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6339
+      }
+    },
+    "hand-far-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 4694
+      }
+    },
+    "torso-away": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 238
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8722
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 773
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 84776
+      }
+    },
+    "arm-far-lower-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9867
+      }
+    },
+    "foot-near-heel": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 19556
+      }
+    },
+    "torso-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 10774
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 28629
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 11583
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 50767
+      }
+    },
+    "hand-near-point": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 23
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8840
+      }
+    },
+    "tail-root-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "arm-near-mouth": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 24615
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1277
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 58530
+      }
+    },
+    "foot-near-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 19558
+      }
+    },
+    "leg-far-lower-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6713
+      }
+    },
+    "foot-far-toe": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 366
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 21298
+      }
+    },
+    "pelvis-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 26231
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 29039
+      }
+    },
+    "leg-near-kneeling": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 284
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 38815
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 450
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 35004
+      }
+    },
+    "hand-far-grip-overhand-under": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 12122
+      }
+    },
+    "arm-far-raised": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6448
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 967
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15589
+      }
+    },
+    "torso-lean-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 24055
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15374
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2422
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 44097
+      }
+    },
+    "hand-far-cup": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 7042
+      }
+    },
+    "arm-far-upper-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8624
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 175
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15321
+      }
+    },
+    "hand-near-grip-overhand-under": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2859
+      }
+    },
+    "leg-far-upper-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 622
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 18364
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 21647
+      }
+    },
+    "hand-near-palm": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6418
+      }
+    },
+    "foot-near-toe": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 17646
+      }
+    },
+    "hand-near-pinch-under": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "shoulder-near": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 11550
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 350
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6793
+      }
+    },
+    "seat-side": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1436
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 28193
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 27403
+      }
+    },
+    "head-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 171766
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "torso-hunched": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6769
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 23915
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2051
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 50842
+      }
+    },
+    "hand-near-cup": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 11806
+      }
+    },
+    "seat-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6219
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 20117
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2501
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 21954
+      }
+    },
+    "leg-near-kneeup": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6430
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 35343
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 27237
+      }
+    },
+    "belt": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 4383
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 28257
+      }
+    },
+    "hand-far-palm": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 3935
+      }
+    },
+    "head-attack-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 24941
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 31969
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 60436
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-back-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 49503
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 38778
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 57638
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-drink-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 46735
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 37733
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 66741
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-effort-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 25151
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 33929
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 64571
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-front-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 73899
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 38987
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 89022
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-hurt-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 29695
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 23121
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 62740
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-ko-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 31948
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 31857
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 79729
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-shout-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 33903
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 25719
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 75084
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-hood": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 36635
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 26175
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 81760
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "torso-away-jerkin": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 58079
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 46837
+      }
+    },
+    "torso-back-jerkin": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 43
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 57015
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 10959
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 57272
+      }
+    },
+    "torso-front-jerkin": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2158
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 68338
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1480
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 52671
+      }
+    },
+    "torso-hunched-jerkin": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 5428
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 44228
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 566
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 35080
+      }
+    },
+    "torso-lean-back-jerkin": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 4445
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 41795
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 5314
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 34777
+      }
+    },
+    "torso-side-jerkin": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1580
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 36175
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 4326
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 39879
+      }
+    },
+    "torso-jerkin": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2085
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 41113
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8846
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 54811
+      }
+    },
+    "head-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 38054
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 31270
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-attack-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 23309
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 24241
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-effort-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 22577
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 18443
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-hurt-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 29325
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 32885
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-ko-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 43406
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 3895
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-back-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 16867
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 40900
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-front-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 59626
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 26283
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-shout-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 37960
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 14234
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-drink-helmet": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 48659
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 23863
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "head-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 44345
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 68847
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 180842
+      }
+    },
+    "head-attack-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 37864
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 63634
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 118832
+      }
+    },
+    "head-effort-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 35236
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 56517
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 193990
+      }
+    },
+    "head-hurt-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 33631
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 44425
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 240830
+      }
+    },
+    "head-ko-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 53932
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 19871
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 154719
+      }
+    },
+    "head-back-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 45859
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 71457
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 220465
+      }
+    },
+    "head-front-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 80935
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 44982
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 208471
+      }
+    },
+    "head-shout-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 41219
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15734
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 154542
+      }
+    },
+    "head-drink-hat": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 57541
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 70319
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 148711
+      }
+    },
+    "head-notch": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 57821
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "gear-sash": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 49631
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 14389
+      }
+    },
+    "gear-sash-side": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 37198
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2272
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 10141
+      }
+    },
+    "gear-sash-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 43749
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 144
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 14184
+      }
+    },
+    "gear-sash-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 46840
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 605
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 17030
+      }
+    },
+    "gear-sash-away": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 26830
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 234
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 8067
+      }
+    },
+    "gear-sash-hunched": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 34152
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1333
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 9295
+      }
+    },
+    "gear-sash-lean-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 36554
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2576
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 10450
+      }
+    },
+    "gear-quiver": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 6559
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 28932
+      }
+    },
+    "gear-quiver-side": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 3464
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 711
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 23812
+      }
+    },
+    "gear-quiver-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1093
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 253
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 64417
+      }
+    },
+    "gear-quiver-away": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 727
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 353
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 42450
+      }
+    },
+    "gear-quiver-hunched": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2966
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 22
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 11412
+      }
+    },
+    "gear-quiver-lean-back": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 4782
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 597
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 12180
+      }
+    },
+    "detail-eyepatch-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 22938
+      }
+    },
+    "detail-scar2-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "detail-earring-front": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 485
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "detail-eyepatch-drink": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 1105
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 15072
+      }
+    },
+    "detail-scar2-drink": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    },
+    "detail-earring-drink": {
+      "fur": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "cloth": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      },
+      "trim": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 2340
+      },
+      "leather": {
+        "outsideMaskChangedPixels": 0,
+        "selectedPixels": 0
+      }
+    }
+  },
+  "allOutsideMaskCountsZero": true,
+  "semanticPass": false,
+  "pages": [
+    "review-tints-round3-01.png",
+    "review-tints-round3-02.png",
+    "review-tints-round3-03.png",
+    "review-tints-round3-04.png",
+    "review-tints-round3-05.png",
+    "review-tints-round3-06.png",
+    "review-tints-round3-07.png",
+    "review-tints-round3-08.png",
+    "review-tints-round3-09.png",
+    "review-tints-round3-10.png",
+    "review-tints-round3-11.png",
+    "review-tints-round3-12.png",
+    "review-tints-round3-13.png",
+    "review-tints-round3-14.png",
+    "review-tints-round3-15.png",
+    "review-tints-round3-16.png",
+    "review-tints-round3-17.png",
+    "review-tints-round3-18.png",
+    "review-tints-round3-19.png",
+    "review-tints-round3-20.png",
+    "review-tints-round3-21.png",
+    "review-tints-round3-22.png",
+    "review-tints-round3-23.png",
+    "review-tints-round3-24.png",
+    "review-tints-round3-25.png"
+  ],
+  "unresolvedDrawings": [
+    "head-effort",
+    "hand-near",
+    "scarf-tail",
+    "head-back",
+    "hand-far",
+    "tail-3",
+    "tail-2",
+    "head-ko",
+    "torso-side",
+    "tail-1",
+    "hand-near-pinch",
+    "hand-far-open",
+    "hand-near-grip-overhand",
+    "hand-near-open",
+    "torso-back",
+    "arm-near-upper",
+    "leg-far-lower",
+    "hand-far-grip-overhand",
+    "hand-near-fist",
+    "leg-near-upper",
+    "arm-far-lower",
+    "hand-far-fist",
+    "head",
+    "head-attack",
+    "head-hurt",
+    "foot-near",
+    "hand-near-grip",
+    "arm-far-upper",
+    "torso",
+    "foot-far",
+    "arm-near-lower",
+    "leg-far-upper",
+    "leg-near-lower",
+    "pelvis",
+    "hand-far-shield",
+    "hand-far-grip",
+    "arm-far-raised-back",
+    "arm-near-cocked",
+    "arm-far-guard",
+    "arm-near-raised",
+    "hand-near-grip-under",
+    "pelvis-front",
+    "leg-far-folded",
+    "arm-near-smear-h",
+    "pelvis-side",
+    "foot-near-out",
+    "arm-near-upper-back",
+    "leg-near-lower-back",
+    "seat",
+    "head-shout",
+    "arm-near-smear-o",
+    "hand-near-back",
+    "foot-far-heel",
+    "foot-far-back",
+    "head-drink",
+    "hand-far-grip-under",
+    "leg-near-upper-back",
+    "arm-near-lower-back",
+    "shoulder-far",
+    "hand-far-back",
+    "torso-away",
+    "arm-far-lower-back",
+    "foot-near-heel",
+    "torso-front",
+    "hand-near-point",
+    "tail-root-back",
+    "arm-near-mouth",
+    "foot-near-back",
+    "leg-far-lower-back",
+    "foot-far-toe",
+    "pelvis-back",
+    "leg-near-kneeling",
+    "hand-far-grip-overhand-under",
+    "arm-far-raised",
+    "torso-lean-back",
+    "hand-far-cup",
+    "arm-far-upper-back",
+    "hand-near-grip-overhand-under",
+    "leg-far-upper-back",
+    "hand-near-palm",
+    "foot-near-toe",
+    "hand-near-pinch-under",
+    "shoulder-near",
+    "seat-side",
+    "head-front",
+    "torso-hunched",
+    "hand-near-cup",
+    "seat-front",
+    "leg-near-kneeup",
+    "belt",
+    "hand-far-palm",
+    "head-attack-hood",
+    "head-back-hood",
+    "head-drink-hood",
+    "head-effort-hood",
+    "head-front-hood",
+    "head-hurt-hood",
+    "head-ko-hood",
+    "head-shout-hood",
+    "head-hood",
+    "torso-away-jerkin",
+    "torso-back-jerkin",
+    "torso-front-jerkin",
+    "torso-hunched-jerkin",
+    "torso-lean-back-jerkin",
+    "torso-side-jerkin",
+    "torso-jerkin",
+    "head-helmet",
+    "head-attack-helmet",
+    "head-effort-helmet",
+    "head-hurt-helmet",
+    "head-ko-helmet",
+    "head-back-helmet",
+    "head-front-helmet",
+    "head-shout-helmet",
+    "head-drink-helmet",
+    "head-hat",
+    "head-attack-hat",
+    "head-effort-hat",
+    "head-hurt-hat",
+    "head-ko-hat",
+    "head-back-hat",
+    "head-front-hat",
+    "head-shout-hat",
+    "head-drink-hat",
+    "head-notch",
+    "gear-sash",
+    "gear-sash-side",
+    "gear-sash-back",
+    "gear-sash-front",
+    "gear-sash-away",
+    "gear-sash-hunched",
+    "gear-sash-lean-back",
+    "gear-quiver",
+    "gear-quiver-side",
+    "gear-quiver-back",
+    "gear-quiver-away",
+    "gear-quiver-hunched",
+    "gear-quiver-lean-back",
+    "detail-eyepatch-front",
+    "detail-scar2-front",
+    "detail-earring-front",
+    "detail-eyepatch-drink",
+    "detail-scar2-drink",
+    "detail-earring-drink"
+  ]
+}

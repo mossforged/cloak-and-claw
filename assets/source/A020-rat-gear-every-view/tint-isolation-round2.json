@@ -1,0 +1,2142 @@
+{
+  "head-effort:fur": {
+    "selected": 127553,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-effort:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-effort:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-effort:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near:leather": {
+    "selected": 11115,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "scarf-tail:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "scarf-tail:cloth": {
+    "selected": 19546,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "scarf-tail:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "scarf-tail:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-back:fur": {
+    "selected": 119309,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-back:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far:leather": {
+    "selected": 9559,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-3:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-3:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-3:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-3:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-2:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-2:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-2:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-2:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-ko:fur": {
+    "selected": 137232,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-ko:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-ko:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-ko:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-side:fur": {
+    "selected": 15168,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-side:cloth": {
+    "selected": 10842,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-side:trim": {
+    "selected": 9547,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-side:leather": {
+    "selected": 42540,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-1:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-1:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-1:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-1:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch:leather": {
+    "selected": 6169,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-open:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-open:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-open:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-open:leather": {
+    "selected": 8906,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand:leather": {
+    "selected": 14796,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-open:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-open:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-open:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-open:leather": {
+    "selected": 7418,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-back:fur": {
+    "selected": 5683,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-back:cloth": {
+    "selected": 56420,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-back:leather": {
+    "selected": 91542,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper:fur": {
+    "selected": 6800,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper:trim": {
+    "selected": 49,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper:leather": {
+    "selected": 21828,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower:trim": {
+    "selected": 1782,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower:leather": {
+    "selected": 16344,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand:leather": {
+    "selected": 1450,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-fist:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-fist:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-fist:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-fist:leather": {
+    "selected": 11108,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper:fur": {
+    "selected": 125,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper:cloth": {
+    "selected": 38410,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper:trim": {
+    "selected": 1013,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper:leather": {
+    "selected": 12217,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower:fur": {
+    "selected": 3918,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower:leather": {
+    "selected": 9714,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-fist:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-fist:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-fist:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-fist:leather": {
+    "selected": 9559,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head:fur": {
+    "selected": 139282,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-attack:fur": {
+    "selected": 119223,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-attack:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-attack:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-attack:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-hurt:fur": {
+    "selected": 135516,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-hurt:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-hurt:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-hurt:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near:trim": {
+    "selected": 45,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near:leather": {
+    "selected": 16946,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip:leather": {
+    "selected": 14796,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper:fur": {
+    "selected": 5257,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper:trim": {
+    "selected": 20,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper:leather": {
+    "selected": 9499,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso:fur": {
+    "selected": 22142,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso:cloth": {
+    "selected": 12211,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso:trim": {
+    "selected": 7811,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso:leather": {
+    "selected": 53749,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far:leather": {
+    "selected": 20629,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower:fur": {
+    "selected": 2800,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower:leather": {
+    "selected": 14286,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper:fur": {
+    "selected": 2497,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper:cloth": {
+    "selected": 34717,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper:trim": {
+    "selected": 1172,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper:leather": {
+    "selected": 19256,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower:trim": {
+    "selected": 354,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower:leather": {
+    "selected": 15951,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis:fur": {
+    "selected": 435,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis:cloth": {
+    "selected": 14576,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis:trim": {
+    "selected": 6019,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis:leather": {
+    "selected": 60975,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-shield:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-shield:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-shield:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-shield:leather": {
+    "selected": 9132,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip:leather": {
+    "selected": 1895,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised-back:fur": {
+    "selected": 3488,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised-back:leather": {
+    "selected": 19356,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-cocked:fur": {
+    "selected": 5983,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-cocked:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-cocked:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-cocked:leather": {
+    "selected": 22507,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-guard:fur": {
+    "selected": 3341,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-guard:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-guard:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-guard:leather": {
+    "selected": 13922,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-raised:fur": {
+    "selected": 6699,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-raised:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-raised:trim": {
+    "selected": 140,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-raised:leather": {
+    "selected": 36387,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-under:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-under:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-under:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-under:leather": {
+    "selected": 535,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-front:fur": {
+    "selected": 7124,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-front:cloth": {
+    "selected": 17290,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-front:trim": {
+    "selected": 8328,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-front:leather": {
+    "selected": 48192,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-folded:fur": {
+    "selected": 8439,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-folded:cloth": {
+    "selected": 22015,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-folded:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-folded:leather": {
+    "selected": 21697,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-h:fur": {
+    "selected": 7548,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-h:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-h:trim": {
+    "selected": 1232,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-h:leather": {
+    "selected": 26499,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-side:fur": {
+    "selected": 2660,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-side:cloth": {
+    "selected": 25942,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-side:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-side:leather": {
+    "selected": 58532,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-out:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-out:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-out:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-out:leather": {
+    "selected": 13931,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper-back:fur": {
+    "selected": 10849,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-upper-back:leather": {
+    "selected": 9339,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower-back:trim": {
+    "selected": 246,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-lower-back:leather": {
+    "selected": 6101,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat:fur": {
+    "selected": 1087,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat:cloth": {
+    "selected": 19835,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat:trim": {
+    "selected": 1807,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat:leather": {
+    "selected": 21042,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-shout:fur": {
+    "selected": 118709,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-shout:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-shout:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-shout:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-o:fur": {
+    "selected": 10668,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-o:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-o:trim": {
+    "selected": 222,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-smear-o:leather": {
+    "selected": 34817,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-back:leather": {
+    "selected": 5596,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-heel:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-heel:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-heel:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-heel:leather": {
+    "selected": 15057,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-back:leather": {
+    "selected": 20291,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-drink:fur": {
+    "selected": 142499,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-drink:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-drink:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-drink:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-under:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-under:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-under:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-under:leather": {
+    "selected": 4218,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper-back:fur": {
+    "selected": 1082,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper-back:cloth": {
+    "selected": 31827,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-upper-back:leather": {
+    "selected": 8342,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower-back:fur": {
+    "selected": 1864,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower-back:trim": {
+    "selected": 157,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-lower-back:leather": {
+    "selected": 11702,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-far:fur": {
+    "selected": 4315,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-far:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-far:trim": {
+    "selected": 109,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-far:leather": {
+    "selected": 6339,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-back:leather": {
+    "selected": 4694,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-away:fur": {
+    "selected": 238,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-away:cloth": {
+    "selected": 8722,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-away:trim": {
+    "selected": 773,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-away:leather": {
+    "selected": 84776,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-lower-back:leather": {
+    "selected": 9867,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-heel:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-heel:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-heel:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-heel:leather": {
+    "selected": 19556,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-front:fur": {
+    "selected": 10774,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-front:cloth": {
+    "selected": 28629,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-front:trim": {
+    "selected": 11583,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-front:leather": {
+    "selected": 50767,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-point:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-point:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-point:trim": {
+    "selected": 23,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-point:leather": {
+    "selected": 8840,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-root-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-root-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-root-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "tail-root-back:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-mouth:fur": {
+    "selected": 24615,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-mouth:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-mouth:trim": {
+    "selected": 1277,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-near-mouth:leather": {
+    "selected": 58530,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-back:leather": {
+    "selected": 19558,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-lower-back:leather": {
+    "selected": 6713,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-toe:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-toe:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-toe:trim": {
+    "selected": 366,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-far-toe:leather": {
+    "selected": 21301,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-back:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-back:cloth": {
+    "selected": 26231,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "pelvis-back:leather": {
+    "selected": 29039,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeling:fur": {
+    "selected": 284,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeling:cloth": {
+    "selected": 38815,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeling:trim": {
+    "selected": 450,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeling:leather": {
+    "selected": 35004,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand-under:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand-under:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand-under:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-grip-overhand-under:leather": {
+    "selected": 12122,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised:fur": {
+    "selected": 6448,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised:trim": {
+    "selected": 967,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-raised:leather": {
+    "selected": 15589,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-lean-back:fur": {
+    "selected": 24055,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-lean-back:cloth": {
+    "selected": 15374,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-lean-back:trim": {
+    "selected": 2422,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-lean-back:leather": {
+    "selected": 44097,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-cup:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-cup:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-cup:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-cup:leather": {
+    "selected": 7042,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper-back:fur": {
+    "selected": 8624,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper-back:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper-back:trim": {
+    "selected": 175,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "arm-far-upper-back:leather": {
+    "selected": 15321,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand-under:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand-under:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand-under:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-grip-overhand-under:leather": {
+    "selected": 2859,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper-back:fur": {
+    "selected": 622,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper-back:cloth": {
+    "selected": 18364,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-far-upper-back:leather": {
+    "selected": 21647,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-palm:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-palm:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-palm:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-palm:leather": {
+    "selected": 6418,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-toe:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-toe:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-toe:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "foot-near-toe:leather": {
+    "selected": 17656,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch-under:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch-under:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch-under:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-pinch-under:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-near:fur": {
+    "selected": 11550,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-near:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-near:trim": {
+    "selected": 350,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "shoulder-near:leather": {
+    "selected": 6793,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-side:fur": {
+    "selected": 1436,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-side:cloth": {
+    "selected": 28193,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-side:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-side:leather": {
+    "selected": 27403,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-front:fur": {
+    "selected": 171766,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-front:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-front:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "head-front:leather": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-hunched:fur": {
+    "selected": 6769,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-hunched:cloth": {
+    "selected": 23915,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-hunched:trim": {
+    "selected": 2051,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "torso-hunched:leather": {
+    "selected": 50842,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-cup:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-cup:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-cup:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-near-cup:leather": {
+    "selected": 11806,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-front:fur": {
+    "selected": 6219,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-front:cloth": {
+    "selected": 20117,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-front:trim": {
+    "selected": 2501,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "seat-front:leather": {
+    "selected": 21954,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeup:fur": {
+    "selected": 6430,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeup:cloth": {
+    "selected": 35343,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeup:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "leg-near-kneeup:leather": {
+    "selected": 27237,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "belt:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "belt:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "belt:trim": {
+    "selected": 4383,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "belt:leather": {
+    "selected": 28257,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-palm:fur": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-palm:cloth": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-palm:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "hand-far-palm:leather": {
+    "selected": 3935,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin:fur": {
+    "selected": 5759,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin:cloth": {
+    "selected": 11459,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin:trim": {
+    "selected": 62,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin:leather": {
+    "selected": 85379,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood:fur": {
+    "selected": 58004,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood:cloth": {
+    "selected": 52153,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood:trim": {
+    "selected": 13497,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood:leather": {
+    "selected": 18180,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-front:fur": {
+    "selected": 2463,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-front:cloth": {
+    "selected": 19457,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-front:trim": {
+    "selected": 1204,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-front:leather": {
+    "selected": 85314,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-side:fur": {
+    "selected": 2693,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-side:cloth": {
+    "selected": 5626,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-side:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-side:leather": {
+    "selected": 65743,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-back:fur": {
+    "selected": 4206,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-back:cloth": {
+    "selected": 15576,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-back:trim": {
+    "selected": 0,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-back:leather": {
+    "selected": 91325,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-away:fur": {
+    "selected": 1153,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-away:cloth": {
+    "selected": 6096,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-away:trim": {
+    "selected": 85,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-away:leather": {
+    "selected": 91093,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-hunched:fur": {
+    "selected": 688,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-hunched:cloth": {
+    "selected": 10121,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-hunched:trim": {
+    "selected": 42,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-hunched:leather": {
+    "selected": 62668,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-lean-back:fur": {
+    "selected": 2205,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-lean-back:cloth": {
+    "selected": 9643,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-lean-back:trim": {
+    "selected": 719,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-jerkin-lean-back:leather": {
+    "selected": 63933,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-back:fur": {
+    "selected": 23086,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-back:cloth": {
+    "selected": 58025,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-back:trim": {
+    "selected": 16562,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-back:leather": {
+    "selected": 21544,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-drink:fur": {
+    "selected": 21903,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-drink:cloth": {
+    "selected": 66752,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-drink:trim": {
+    "selected": 11542,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-drink:leather": {
+    "selected": 39648,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-hurt:fur": {
+    "selected": 51884,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-hurt:cloth": {
+    "selected": 49567,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-hurt:trim": {
+    "selected": 8930,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-hurt:leather": {
+    "selected": 38351,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-shout:fur": {
+    "selected": 30350,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-shout:cloth": {
+    "selected": 69344,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-shout:trim": {
+    "selected": 12200,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-shout:leather": {
+    "selected": 34571,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-attack:fur": {
+    "selected": 31753,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-attack:cloth": {
+    "selected": 53074,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-attack:trim": {
+    "selected": 9929,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-attack:leather": {
+    "selected": 27796,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-effort:fur": {
+    "selected": 45426,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-effort:cloth": {
+    "selected": 55804,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-effort:trim": {
+    "selected": 10106,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-effort:leather": {
+    "selected": 29465,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-ko:fur": {
+    "selected": 21311,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-ko:cloth": {
+    "selected": 73944,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-ko:trim": {
+    "selected": 18645,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-ko:leather": {
+    "selected": 31038,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-front:fur": {
+    "selected": 45178,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-front:cloth": {
+    "selected": 81796,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-front:trim": {
+    "selected": 13023,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  },
+  "gear-hood-front:leather": {
+    "selected": 53576,
+    "changedOutsideMask": 0,
+    "semanticPass": false
+  }
+}
