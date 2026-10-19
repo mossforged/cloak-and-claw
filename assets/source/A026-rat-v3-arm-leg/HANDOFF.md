@@ -47,3 +47,7 @@ Finish the forearm's angled inner edge and cuff-side scraps; finish the foot-wra
 The first shin edit returned fur and a clipped end. A smooth pink-shin retry was rejected at output by the image service safety system. A closed smooth suede-component edit succeeded, followed by a color-only coral-pink correction; final shin is closed at both ends and is the only selected shin delivered. Full prompts and processing are recorded in `prompt.md`. No runtime code workaround was introduced.
 
 No user-only design question: the packet's decisions are clear. This is a best attempt under the asset rule for tool limitations, not an import approval. Runner is responsible for pushing; commit attempt result is recorded below.
+
+Commit succeeded on the task branch. Git LFS recognized all six revised part PNGs and source/reference sheets before commit; review.png and the phone JPGs remain in normal git. No push performed. Delivery contract checks (canvas/green, user shared points, cover bands and phone dimensions) and `git diff --check` passed. The visual failures above keep importReady false.
+
+Commit `9b99df6` contains all delivered art, manifests, reports, review sheets and the assets-row update. A later attempt to stage/amend this final handoff note was blocked by the sandbox (`.git/index.lock`: Operation not permitted). This HANDOFF.md note is the only remaining working-tree change; the runner should commit it and push the branch.
