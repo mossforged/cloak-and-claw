@@ -1,3 +1,60 @@
+# A020 Round 3 — current delivery, best attempt; not import-ready
+
+Branch: `a020-rat-gear-every-view`. Kept the runner's checked-out branch; no checkout, pull, branch switch or push. All current deliverables are on disk in this folder and `docs/screens/A020/`. The Round 1/2 handoffs below are history; **the current manifest is `rig-source.json` and the current checks are the `*-round3.json` files.**
+
+## Swaps delivered
+
+35 whole-drawing swaps, all 1536×2304, with inherited source pivots and per-view torso anchors:
+
+- `head-hood`, `head-attack-hood`, `head-effort-hood`, `head-hurt-hood`, `head-ko-hood`, `head-back-hood`, `head-front-hood`, `head-shout-hood`, `head-drink-hood`.
+- The same nine heads with `-helmet`, and the same nine with `-hat` (A011 captain tricorn, stitched patch, gold piping and feather).
+- `torso-jerkin`, `torso-side-jerkin`, `torso-back-jerkin`, `torso-front-jerkin`, `torso-away-jerkin`, `torso-hunched-jerkin`, `torso-lean-back-jerkin`.
+- `head-notch`: neutral only, a genuine silhouette cut in the camera-side ear, using the whole registered tool edit with detached debris removed. It is a swap, not a painted rim or green eraser. Its exposed anatomy still has some tool repaint.
+
+**The nine hoods and seven jerkins are byte-for-byte copies of Round 2's dressed drawings, now named and registered as swaps.** Their former additive difference PNGs are historical and are not active in the manifest. New helmet/hat/notch edits were uniformly registered to exposed original anatomy, without local stretching or a runtime workaround. Source registration scales/translations are recorded. Headwear and jerkin must REPLACE the riding head/torso drawing.
+
+## Overlays delivered
+
+19 additive overlays:
+
+- Seven `gear-sash` variants: Q, side, back, front, away, hunched, lean-back.
+- Six `gear-quiver` variants: Q, side, back, away, hunched, lean-back. Q/side/hunched/lean-back use band 90 behind the torso; back/away use band 660. **Front is not delivered: full occlusion has not been proven, so front turn continuity is not passed.**
+- `detail-eyepatch-front/drink`, `detail-scar2-front/drink`, `detail-earring-front/drink`. The new front scar/earring edits were retried to put them on image left, the same side as the star scar. Drink details remain on the camera side.
+
+Each started as a tool edit of the actual body drawing. Hand-traced gear selections then restored original anatomy outside the intended gear; the delivered overlay is the literal difference of that CLEANED dressed drawing against the original. The cleaned dressed references are `dressed-gear-sash*.png`, `dressed-gear-quiver*.png` and `dressed-detail-*.png`. **All 19 reconstruct those cleaned references exactly (zero RGBA mismatch pixels). This does not assert equality with raw tool outputs, or prove that every retained pixel belongs to gear.** `extraction-regions-round3.json` records selections; `overlay-checks-round3.json` records source registration and comparison details. Hunched sash received an additional source translation [0,-120] px to close its initial waist gap. No additive item was certified as needing another whole swap; these remain best-attempt overlays with `gearOnlyPass` unset.
+
+## Line-up and visual results
+
+`fit.jpg` is the overview. Each of the 54 drawings also has `fit-<drawing>.jpg`: native-size original/final cells on grey, source anchor marks, a four-cell original/dressed/original/dressed strip at 136 px character scale, and the extracted layer for overlays. Phone equivalents are `docs/screens/A020/round3-fit-<drawing>.jpg`. `review.png` contains every current drawing plus a 130 px neutral hood/jerkin source assembly over harbor-market. `reference.png` is that source assembly, not a runtime rehearsal.
+
+The whole swaps remove the old fur/whisker/hem pixels that an additive overlay could not erase. The helmet and hat now have explicit expression/view drawings, rather than neutral reuse. Source canvases, pivot coordinates, source references and 16 exact reuses pass file checks. **Visual line-up is not a full pass:** hood collars change neck coverage markedly (especially drink, shout and attack), new head edits retain some expression/outline drift after uniform registration, and the inherited jerkins retain their Round 2 hem/design limitations. Native comparisons are supplied rather than claiming that metadata alone proves joint fit. `fit-round3.json` records alpha-support differences in 49 px anchor windows; those counts are descriptive, not a seam or movement score.
+
+Additive appearance also remains imperfect: sashes can have cut or abrupt belt boundaries and inconsistent waist perspective, especially hunched/back; some hand selections retain small body-painted fringes. Those pixels could repaint a jerkin if layered with it, so exact reconstruction over the undressed body is not a stacking pass. Quiver views are improved but have inconsistent visible arrow coverage and unproven front occlusion. Face-detail fit is reviewable, not human-approved. The notch is confined to the neutral drawing for this round.
+
+## Masks and tint results
+
+580 active grayscale masks: four materials per 91 undressed body drawings and 54 current swaps/overlays. Of these, 216 gear/swap masks are newly built in Round 3; 364 body masks remain the Round 2 selections. For dressed swaps, start with RGB difference >12 plus alpha-support differences; split material colours inside that region, and select unchanged fur outside it. Use each drawing's own 64-colour palette with RGB distance 18 / palette distance 24 from the hand samples in `palette-round2.json`, 3 px closing, removal of components under 20 px, and conservative inherited mouth exclusions. No image-tool material masks were used. Metal is in the trim channel; scars remain fixed skin detail with empty tint masks.
+
+`review-tints-round3-01.png` through `-25.png` show original plus four independent tint applications on **all 145 drawings**. All pages have phone JPGs. `tint-round3.json` records 580 tint tests, all with zero changes outside the selected mask. **Material semantics FAIL:** fur is underselected in repainted/textured regions; hood cloth and tan trim overlap; jerkin/leather selections still catch brown fur or cloth; hat/helmet trim can reach warm face/ear pixels; some additive masks retain body-colour fringes. Restricting selection to the difference helps, but a generative edit's difference also contains repainted anatomy, so it does not uniquely identify gear. The full unresolved list is `tint-round3.json: unresolvedDrawings`; body regions are also listed in `palette-round3.json: unresolvedBodyDrawings`. The A017 master was inspected, but a reliable hand region separation of all 91 body drawings was not completed. No body mask is newly certified from colour similarity alone.
+
+Consequently **`importReady: false`**, `semanticTintPass: false`, and `visualFitPass: false`. The supplied structure and zero-outside-mask checks are not acceptance claims. A moving hooded/jerkined captain turning into a slash still needs Code's import and the human gate after these art failures are corrected.
+
+## Files, checks and runner handoff
+
+Current registration and exact prompts (38 selected edits plus two rejected front-detail attempts, 40 built-in calls total) are saved in `rig-source.json`, `prompt.md`, `palette-round3.json`, `extraction-regions-round3.json`, `overlay-checks-round3.json`, `fit-round3.json`, `tint-round3.json` and `self-check-round3.json`. No raw tool-output directories or discarded variants were added. Existing Round 1/2 files are historical only unless the current manifest names them.
+
+Checks: 54 current part canvases, all referenced sources/masks, 16 byte-identical reused swaps, 19 exact overlay reconstructions, 580 grayscale mask files, and 81 current phone review JPGs (quality 80, long side ≤2000 px). Source PNGs and native fit JPGs are covered by Git LFS; `review*.png` and phone JPGs are normal git. Git LFS 3.8.0 is installed and `git check-attr` confirms those rules.
+
+**Commit blocked by sandbox:** `git add` failed with `Unable to create .git/index.lock: Operation not permitted`. `git lfs status` could not refresh the index for the same reason, so staged-LFS verification could not complete. Files are saved for the runner to stage, commit and push, as AGENTS.md's unattended exception permits. No push was attempted. Only A020 source/review files and A020's row in `docs/assets.md` were changed.
+
+## Anything only the user can answer
+
+No design question blocks this round. The remaining issues are art fit/selection work, not missing user direction. Human approval of the moving captain remains the later post-import gate; this failed fit/tint delivery does not request approval.
+
+---
+
+# Earlier round reports (historical)
+
 # A020 — corrected-reference redraw, best-attempt source delivery
 
 **Status: visual fit and material-selection checks FAILED. These files are reviewable source attempts, not a G4 pass or an import-ready kit.** `rig-source.json` explicitly records `importReady: false`. The earlier missing-reference blocker is resolved: A011 was read with the lead's authorization.

@@ -616,3 +616,330 @@ Image 2: `assets/source/A011-rat-raider-finishing/gear-hood.png`
 ```text
 Use case: precise-object-edit. Image 1 is EDIT TARGET: ONE front-facing rat head on green, 1536x2304. Image 2 is design reference only for olive stitched hood, reinforced ear openings and ragged collar. Dress ONLY the ONE existing front head from Image 1 in the hood; preserve its exact scale, placement, expression, eyes, nose, teeth, ears, skull shape and all green margins. Hood conforms around this head and these ears. Maintain entire canvas and anatomy unchanged outside cloth area. ONE SINGLE FRONT HEAD ONLY, NO SECOND HEAD, NO OTHER VIEW, NO SHEET. Flat #00FF00 background, warm painted cartoon, bold outlines, upper-left light. Output dressed head, not empty clothing.
 ```
+
+
+# Round 3 — selected edits and source preparation
+
+Tool: built-in `image_gen.imagegen`, one request per drawing. No seed or CLI/API fallback. Flat green requested; selected outputs keyed to alpha and saved at 1536×2304. The 7 Round 2 jerkins and 9 hoods are copied byte-for-byte to whole-swap names; no redraw or shape change. New edits uniformly registered to exposed original anatomy (scale and translation recorded in `rig-source.json` / `overlay-checks-round3.json`), with no nonuniform warp. For additives, hand-traced gear selections restore untouched original anatomy outside the selection, then the literal pixel difference is extracted. Compare against these CLEANED dressed references, not raw tool outputs. Hunched sash receives an additional source translation [0,-120] px to close its waist gap. No game code changed. Neutral notch uses the whole registered tool edit; detached ear debris is removed by alpha component cleanup.
+
+Masks: own 64-colour palettes, RGB distance 18, palette distance 24 from the hand samples in `palette-round2.json`; selection restricted to dressed-vs-undressed difference, trim split within it, unchanged fur outside it. 3 px closing, components <20 px dropped, conservative mouth exclusions inherited. Tint semantics remain uncertified; see HANDOFF.
+
+## Round 3 selected: head-helmet
+
+Edit target: `assets/source/A018-rat-parts/head.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is the current rat head. Image 2 DESIGN REFERENCE is approved battered steel helmet with brass rim/rivets and curled ear cutouts. Dress the single head in this helmet fitted around THESE ears. Output whole dressed head, including all uncovered face, ears, neck. Preserve exact 1536x2304 canvas, original position, scale, pose, expression, neck connection and green margins. Preserve exposed anatomy and outline weight. Helmet covers crown fur, follows current head perspective. Flat #00FF00 background; warm painted cartoon, bold dark outline, upper-left light. No text or shadow.
+```
+
+## Round 3 selected: head-hat
+
+Edit target: `assets/source/A018-rat-parts/head.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, large golden curled feather. Dress this single head in that hat, fitting around these ears. Output whole dressed head including uncovered anatomy. Preserve original canvas proportions, exact margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. Hat can hide crown fur and part of ears; feather extends into existing margin. Preserve bold dark outline weight and warm painted cartoon, upper-left lighting. Pure #00FF00 outside head and hat. No new design, text, shadow or additional head.
+```
+
+## Round 3 selected: head-attack-helmet
+
+Edit target: `assets/source/A018-rat-parts/head-attack.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-attack rat head. Image 2 DESIGN REFERENCE is the approved battered steel helmet with brass trim/rivets and curled ear cutouts. Dress this single head itself in that helmet, around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions, green margins, head position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, painted warm cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-attack-hat
+
+Edit target: `assets/source/A018-rat-parts/head-attack.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-attack rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, large golden curled feather. Dress this single head in that hat, fitting around these ears. Output whole dressed head including uncovered anatomy. Preserve original canvas proportions, exact margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. Hat can hide crown fur and part of ears; feather extends into existing margin. Preserve bold dark outline weight and warm painted cartoon, upper-left lighting. Pure #00FF00 outside head and hat. No new design, text, shadow or additional head.
+```
+
+## Round 3 selected: head-effort-helmet
+
+Edit target: `assets/source/A018-rat-parts/head-effort.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-effort rat head. Image 2 DESIGN REFERENCE is the approved battered steel helmet with brass trim/rivets and curled ear cutouts. Dress this single head itself in that helmet, around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions, green margins, head position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, painted warm cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-effort-hat
+
+Edit target: `assets/source/A018-rat-parts/head-effort.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-effort rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, large golden curled feather. Dress this single head in that hat, fitting around these ears. Output whole dressed head including uncovered anatomy. Preserve original canvas proportions, exact margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. Hat can hide crown fur and part of ears; feather extends into existing margin. Preserve bold dark outline weight and warm painted cartoon, upper-left lighting. Pure #00FF00 outside head and hat. No new design, text, shadow or additional head.
+```
+
+## Round 3 selected: head-hurt-helmet
+
+Edit target: `assets/source/A018-rat-parts/head-hurt.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-hurt rat head. Image 2 DESIGN REFERENCE is the approved battered steel helmet with brass trim/rivets and curled ear cutouts. Dress this single head itself in that helmet, around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions, green margins, head position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, painted warm cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-hurt-hat
+
+Edit target: `assets/source/A018-rat-parts/head-hurt.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-hurt rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, large golden curled feather. Dress this single head in that hat, fitting around these ears. Output whole dressed head including uncovered anatomy. Preserve original canvas proportions, exact margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. Hat can hide crown fur and part of ears; feather extends into existing margin. Preserve bold dark outline weight and warm painted cartoon, upper-left lighting. Pure #00FF00 outside head and hat. No new design, text, shadow or additional head.
+```
+
+## Round 3 selected: head-ko-helmet
+
+Edit target: `assets/source/A018-rat-parts/head-ko.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-ko rat head. Image 2 DESIGN REFERENCE is the approved battered steel helmet with brass trim/rivets and curled ear cutouts. Dress this single head itself in that helmet, around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions, green margins, head position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, painted warm cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-ko-hat
+
+Edit target: `assets/source/A018-rat-parts/head-ko.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-ko rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, large golden curled feather. Dress this single head in that hat, fitting around these ears. Output whole dressed head including uncovered anatomy. Preserve original canvas proportions, exact margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. Hat can hide crown fur and part of ears; feather extends into existing margin. Preserve bold dark outline weight and warm painted cartoon, upper-left lighting. Pure #00FF00 outside head and hat. No new design, text, shadow or additional head.
+```
+
+## Round 3 selected: head-back-helmet
+
+Edit target: `assets/source/A023-rat-complete-kit/head-back.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-back-helmet rat head. Image 2 DESIGN REFERENCE is approved battered steel helmet with brass trim/rivets, curled ear cutouts. Dress this single head itself in that helmet around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions and green margins, position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. BACK view: only rear helmet and ears, no face; DRINK view: head remains tipped back. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, warm painted cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-back-hat
+
+Edit target: `assets/source/A023-rat-complete-kit/head-back.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-back rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, golden curled feather. Dress this exact head in that hat, around these ears. Output whole dressed head with uncovered anatomy. Preserve original canvas proportions, green margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. BACK view: rear of hat/ears, no added face. DRINK: keep tipped-back angle. Feather extends into existing margin. Match bold dark outline weight, warm painted cartoon, upper-left lighting. Pure #00FF00 background. No new design, text, shadow or additional heads.
+```
+
+## Round 3 selected: head-front-helmet
+
+Edit target: `assets/source/A023-rat-complete-kit/head-front.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-front-helmet rat head. Image 2 DESIGN REFERENCE is approved battered steel helmet with brass trim/rivets, curled ear cutouts. Dress this single head itself in that helmet around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions and green margins, position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. BACK view: only rear helmet and ears, no face; DRINK view: head remains tipped back. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, warm painted cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-front-hat
+
+Edit target: `assets/source/A023-rat-complete-kit/head-front.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-front rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, golden curled feather. Dress this exact head in that hat, around these ears. Output whole dressed head with uncovered anatomy. Preserve original canvas proportions, green margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. BACK view: rear of hat/ears, no added face. DRINK: keep tipped-back angle. Feather extends into existing margin. Match bold dark outline weight, warm painted cartoon, upper-left lighting. Pure #00FF00 background. No new design, text, shadow or additional heads.
+```
+
+## Round 3 selected: head-shout-helmet
+
+Edit target: `assets/source/A023-rat-complete-kit/head-shout.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-shout-helmet rat head. Image 2 DESIGN REFERENCE is approved battered steel helmet with brass trim/rivets, curled ear cutouts. Dress this single head itself in that helmet around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions and green margins, position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. BACK view: only rear helmet and ears, no face; DRINK view: head remains tipped back. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, warm painted cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-shout-hat
+
+Edit target: `assets/source/A023-rat-complete-kit/head-shout.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-shout rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, golden curled feather. Dress this exact head in that hat, around these ears. Output whole dressed head with uncovered anatomy. Preserve original canvas proportions, green margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. BACK view: rear of hat/ears, no added face. DRINK: keep tipped-back angle. Feather extends into existing margin. Match bold dark outline weight, warm painted cartoon, upper-left lighting. Pure #00FF00 background. No new design, text, shadow or additional heads.
+```
+
+## Round 3 selected: head-drink-helmet
+
+Edit target: `assets/source/A023-rat-complete-kit/head-drink.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-helmet.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-drink-helmet rat head. Image 2 DESIGN REFERENCE is approved battered steel helmet with brass trim/rivets, curled ear cutouts. Dress this single head itself in that helmet around THESE ears. Output entire dressed head including uncovered anatomy. Preserve exact original canvas proportions and green margins, position, size, expression, pose, perspective, muzzle, eyes, teeth, ear shapes and neck connection. Do not enlarge or recenter. BACK view: only rear helmet and ears, no face; DRINK view: head remains tipped back. Whole-drawing swap; helmet may hide crown fur. Bold dark outlines matching input, warm painted cartoon, upper-left light. Flat #00FF00 background, no text or shadow.
+```
+
+## Round 3 selected: head-drink-hat
+
+Edit target: `assets/source/A023-rat-complete-kit/head-drink.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-captain-hat.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE head-drink rat head. Image 2 DESIGN REFERENCE is approved dark brown captain tricorn, gold piping, stitched patch, golden curled feather. Dress this exact head in that hat, around these ears. Output whole dressed head with uncovered anatomy. Preserve original canvas proportions, green margins, head size and position, expression, pose, perspective, eyes, muzzle, teeth, neck connection. Do not enlarge or recenter. BACK view: rear of hat/ears, no added face. DRINK: keep tipped-back angle. Feather extends into existing margin. Match bold dark outline weight, warm painted cartoon, upper-left lighting. Pure #00FF00 background. No new design, text, shadow or additional heads.
+```
+
+## Round 3 selected: head-notch
+
+Edit target: `assets/source/A018-rat-parts/head.png`; design reference: `none`.
+
+```text
+Use case: precise-object-edit. Edit this ONE existing rat head ONLY at the rim of its camera-side large left ear. Add a single clearly cut V notch to the outer upper-left ear rim, with warm skin inner edge and bold dark outline. A true notch removes a small triangular bite of the silhouette; green background shows through. Preserve literally all other anatomy, original existing small nicks, expression, size, position, canvas proportions, green margins, neck connection. Do not move or recenter. Whole-head swap with no gear. Painted warm cartoon, match line weight and upper-left light. Pure #00FF00 background; no text, shadow or other head.
+```
+
+## Round 3 selected: torso-sash
+
+Edit target: `assets/source/A023-rat-complete-kit/torso.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-sash.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso torso drawing. Image 2 DESIGN REFERENCE is approved red waist sash with brown belt, gold square buckle, short tied ragged red ends. Dress this exact torso in that sash at ITS waist, following its own pose and perspective. BACK/AWAY: back of belt and cloth, buckle only if front actually visible. Preserve every original torso pixel outside sash; preserve original canvas proportions, exact large green margins, size, position, shoulder/neck/waist connections, pose, clothing, scarf and fur. Gear only adds; do not remove or alter underlying silhouette elsewhere. Output whole dressed torso including uncovered original body. No head or limbs added. Match bold dark outline and painted warm cartoon, upper-left light. Pure flat #00FF00 background, no text or ground shadow.
+```
+
+## Round 3 selected: torso-quiver
+
+Edit target: `assets/source/A023-rat-complete-kit/torso.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-quiver.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso torso. Image 2 DESIGN REFERENCE is approved narrow brown leather quiver, stitched patch, two brass buckled straps, white-feathered arrows. Add this quiver worn at the back shoulder of this exact torso in its own perspective. Q/SIDE/HUNCHED/LEAN-BACK: quiver behind torso with visible arrow ends over rear shoulder and exposed lower tube if visible. BACK/AWAY: quiver lies over back diagonal. Preserve every original body pixel outside visible gear, exact original canvas proportions, green margins, torso size, position, shoulder/neck/waist connections, pose, scarf and clothing. Output entire dressed torso; no head or limbs. Gear only adds, do not erase body silhouette. Match warm painted cartoon, bold outline, upper-left light. Pure flat #00FF00 background. No text or shadow.
+```
+
+## Round 3 selected: torso-side-sash
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-side.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-sash.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-side torso drawing. Image 2 DESIGN REFERENCE is approved red waist sash with brown belt, gold square buckle, short tied ragged red ends. Dress this exact torso in that sash at ITS waist, following its own pose and perspective. BACK/AWAY: back of belt and cloth, buckle only if front actually visible. Preserve every original torso pixel outside sash; preserve original canvas proportions, exact large green margins, size, position, shoulder/neck/waist connections, pose, clothing, scarf and fur. Gear only adds; do not remove or alter underlying silhouette elsewhere. Output whole dressed torso including uncovered original body. No head or limbs added. Match bold dark outline and painted warm cartoon, upper-left light. Pure flat #00FF00 background, no text or ground shadow.
+```
+
+## Round 3 selected: torso-side-quiver
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-side.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-quiver.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-side torso. Image 2 DESIGN REFERENCE is approved narrow brown leather quiver, stitched patch, two brass buckled straps, white-feathered arrows. Add this quiver worn at the back shoulder of this exact torso in its own perspective. Q/SIDE/HUNCHED/LEAN-BACK: quiver behind torso with visible arrow ends over rear shoulder and exposed lower tube if visible. BACK/AWAY: quiver lies over back diagonal. Preserve every original body pixel outside visible gear, exact original canvas proportions, green margins, torso size, position, shoulder/neck/waist connections, pose, scarf and clothing. Output entire dressed torso; no head or limbs. Gear only adds, do not erase body silhouette. Match warm painted cartoon, bold outline, upper-left light. Pure flat #00FF00 background. No text or shadow.
+```
+
+## Round 3 selected: torso-back-sash
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-back.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-sash.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-back torso drawing. Image 2 DESIGN REFERENCE is approved red waist sash with brown belt, gold square buckle, short tied ragged red ends. Dress this exact torso in that sash at ITS waist, following its own pose and perspective. BACK/AWAY: back of belt and cloth, buckle only if front actually visible. Preserve every original torso pixel outside sash; preserve original canvas proportions, exact large green margins, size, position, shoulder/neck/waist connections, pose, clothing, scarf and fur. Gear only adds; do not remove or alter underlying silhouette elsewhere. Output whole dressed torso including uncovered original body. No head or limbs added. Match bold dark outline and painted warm cartoon, upper-left light. Pure flat #00FF00 background, no text or ground shadow.
+```
+
+## Round 3 selected: torso-back-quiver
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-back.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-quiver.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-back torso. Image 2 DESIGN REFERENCE is approved narrow brown leather quiver, stitched patch, two brass buckled straps, white-feathered arrows. Add this quiver worn at the back shoulder of this exact torso in its own perspective. Q/SIDE/HUNCHED/LEAN-BACK: quiver behind torso with visible arrow ends over rear shoulder and exposed lower tube if visible. BACK/AWAY: quiver lies over back diagonal. Preserve every original body pixel outside visible gear, exact original canvas proportions, green margins, torso size, position, shoulder/neck/waist connections, pose, scarf and clothing. Output entire dressed torso; no head or limbs. Gear only adds, do not erase body silhouette. Match warm painted cartoon, bold outline, upper-left light. Pure flat #00FF00 background. No text or shadow.
+```
+
+## Round 3 selected: torso-front-sash
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-front.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-sash.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-front torso drawing. Image 2 DESIGN REFERENCE is approved red waist sash with brown belt, gold square buckle, short tied ragged red ends. Dress this exact torso in that sash at ITS waist, following its own pose and perspective. BACK/AWAY: back of belt and cloth, buckle only if front actually visible. Preserve every original torso pixel outside sash; preserve original canvas proportions, exact large green margins, size, position, shoulder/neck/waist connections, pose, clothing, scarf and fur. Gear only adds; do not remove or alter underlying silhouette elsewhere. Output whole dressed torso including uncovered original body. No head or limbs added. Match bold dark outline and painted warm cartoon, upper-left light. Pure flat #00FF00 background, no text or ground shadow.
+```
+
+## Round 3 selected: torso-away-sash
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-away.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-sash.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-away torso drawing. Image 2 DESIGN REFERENCE is approved red waist sash with brown belt, gold square buckle, short tied ragged red ends. Dress this exact torso in that sash at ITS waist, following its own pose and perspective. BACK/AWAY: back of belt and cloth, buckle only if front actually visible. Preserve every original torso pixel outside sash; preserve original canvas proportions, exact large green margins, size, position, shoulder/neck/waist connections, pose, clothing, scarf and fur. Gear only adds; do not remove or alter underlying silhouette elsewhere. Output whole dressed torso including uncovered original body. No head or limbs added. Match bold dark outline and painted warm cartoon, upper-left light. Pure flat #00FF00 background, no text or ground shadow.
+```
+
+## Round 3 selected: torso-away-quiver
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-away.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-quiver.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-away torso. Image 2 DESIGN REFERENCE is approved narrow brown leather quiver, stitched patch, two brass buckled straps, white-feathered arrows. Add this quiver worn at the back shoulder of this exact torso in its own perspective. Q/SIDE/HUNCHED/LEAN-BACK: quiver behind torso with visible arrow ends over rear shoulder and exposed lower tube if visible. BACK/AWAY: quiver lies over back diagonal. Preserve every original body pixel outside visible gear, exact original canvas proportions, green margins, torso size, position, shoulder/neck/waist connections, pose, scarf and clothing. Output entire dressed torso; no head or limbs. Gear only adds, do not erase body silhouette. Match warm painted cartoon, bold outline, upper-left light. Pure flat #00FF00 background. No text or shadow.
+```
+
+## Round 3 selected: torso-hunched-sash
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-hunched.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-sash.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-hunched torso drawing. Image 2 DESIGN REFERENCE is approved red waist sash with brown belt, gold square buckle, short tied ragged red ends. Dress this exact torso in that sash at ITS waist, following its own pose and perspective. BACK/AWAY: back of belt and cloth, buckle only if front actually visible. Preserve every original torso pixel outside sash; preserve original canvas proportions, exact large green margins, size, position, shoulder/neck/waist connections, pose, clothing, scarf and fur. Gear only adds; do not remove or alter underlying silhouette elsewhere. Output whole dressed torso including uncovered original body. No head or limbs added. Match bold dark outline and painted warm cartoon, upper-left light. Pure flat #00FF00 background, no text or ground shadow.
+```
+
+## Round 3 selected: torso-hunched-quiver
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-hunched.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-quiver.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-hunched torso. Image 2 DESIGN REFERENCE is approved narrow brown leather quiver, stitched patch, two brass buckled straps, white-feathered arrows. Add this quiver worn at the back shoulder of this exact torso in its own perspective. Q/SIDE/HUNCHED/LEAN-BACK: quiver behind torso with visible arrow ends over rear shoulder and exposed lower tube if visible. BACK/AWAY: quiver lies over back diagonal. Preserve every original body pixel outside visible gear, exact original canvas proportions, green margins, torso size, position, shoulder/neck/waist connections, pose, scarf and clothing. Output entire dressed torso; no head or limbs. Gear only adds, do not erase body silhouette. Match warm painted cartoon, bold outline, upper-left light. Pure flat #00FF00 background. No text or shadow.
+```
+
+## Round 3 selected: torso-lean-back-sash
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-lean-back.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-sash.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-lean-back torso drawing. Image 2 DESIGN REFERENCE is approved red waist sash with brown belt, gold square buckle, short tied ragged red ends. Dress this exact torso in that sash at ITS waist, following its own pose and perspective. BACK/AWAY: back of belt and cloth, buckle only if front actually visible. Preserve every original torso pixel outside sash; preserve original canvas proportions, exact large green margins, size, position, shoulder/neck/waist connections, pose, clothing, scarf and fur. Gear only adds; do not remove or alter underlying silhouette elsewhere. Output whole dressed torso including uncovered original body. No head or limbs added. Match bold dark outline and painted warm cartoon, upper-left light. Pure flat #00FF00 background, no text or ground shadow.
+```
+
+## Round 3 selected: torso-lean-back-quiver
+
+Edit target: `assets/source/A023-rat-complete-kit/torso-lean-back.png`; design reference: `assets/source/A011-rat-raider-finishing/gear-quiver.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat torso-lean-back torso. Image 2 DESIGN REFERENCE is approved narrow brown leather quiver, stitched patch, two brass buckled straps, white-feathered arrows. Add this quiver worn at the back shoulder of this exact torso in its own perspective. Q/SIDE/HUNCHED/LEAN-BACK: quiver behind torso with visible arrow ends over rear shoulder and exposed lower tube if visible. BACK/AWAY: quiver lies over back diagonal. Preserve every original body pixel outside visible gear, exact original canvas proportions, green margins, torso size, position, shoulder/neck/waist connections, pose, scarf and clothing. Output entire dressed torso; no head or limbs. Gear only adds, do not erase body silhouette. Match warm painted cartoon, bold outline, upper-left light. Pure flat #00FF00 background. No text or shadow.
+```
+
+## Round 3 selected: head-front-eyepatch
+
+Edit target: `assets/source/A023-rat-complete-kit/head-front.png`; design reference: `assets/source/A011-rat-raider-finishing/detail-eyepatch.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat head-front. Image 2 DESIGN REFERENCE shows the approved detail. Add a small brown stitched leather eyepatch over ONLY the camera-side eye (image left in front view), thin leather strap around head. Fit this actual eye, not oversized or across both eyes. Preserve every original pixel outside the small detail. Keep exact head size and position, pose, expression, eyes, muzzle, ears, teeth, original canvas proportions and green margins, neck connection. DRINK head stays tipped back. Output whole edited head, not separate detail. Only one-sided camera-side detail. Match warm painted cartoon, bold dark outline and upper-left light. Pure #00FF00 background, no shadow, text or other head.
+```
+
+## Round 3 selected: head-front-scar2
+
+Edit target: `assets/source/A023-rat-complete-kit/head-front.png`; design reference: `assets/source/A011-rat-raider-finishing/detail-scar2.png`.
+
+```text
+Use case: precise-object-edit. Add the TWO SMALL thin pink healed diagonal cheek scars from reference image 2 to the FRONT head in image 1, on the LEFT SIDE OF THE IMAGE, immediately BELOW the existing star scar and OUTSIDE the mouth/whiskers. Both new scars must be on same cheek as the star. No marks on image right cheek. Keep each new scar smaller than the existing star. Preserve exact original head size, position, expression, pose, neck and all green margins. Whole edited head; all other pixels unchanged. Warm painted cartoon, bold dark outlines, upper-left lighting, pure #00FF00 background, no other heads or text.
+```
+
+## Round 3 selected: head-front-earring
+
+Edit target: `assets/source/A023-rat-complete-kit/head-front.png`; design reference: `assets/source/A011-rat-raider-finishing/detail-earring.png`.
+
+```text
+Use case: precise-object-edit. Image 1 edit target is the ONE FRONT rat head. Add the small gold hoop from Image 2 to the EAR ON THE LEFT SIDE OF THE IMAGE, same side as the star cheek scar. Place hoop at the LOWER OUTER rim of this LEFT ear, hanging below rim. Small restrained hoop, width less than one eighth of that ear. No earring on image right ear. Preserve original head exactly, all face, ears, expression, position, scale, neck and all green margins. Whole edited head, pure #00FF00 background, bold cartoon outlines and upper-left light. No text, other heads or added shadows.
+```
+
+## Round 3 selected: head-drink-eyepatch
+
+Edit target: `assets/source/A023-rat-complete-kit/head-drink.png`; design reference: `assets/source/A011-rat-raider-finishing/detail-eyepatch.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat head-drink. Image 2 DESIGN REFERENCE shows the approved detail. Add a small brown stitched leather eyepatch over ONLY the camera-side eye (image left in front view), thin leather strap around head. Fit this actual eye, not oversized or across both eyes. Preserve every original pixel outside the small detail. Keep exact head size and position, pose, expression, eyes, muzzle, ears, teeth, original canvas proportions and green margins, neck connection. DRINK head stays tipped back. Output whole edited head, not separate detail. Only one-sided camera-side detail. Match warm painted cartoon, bold dark outline and upper-left light. Pure #00FF00 background, no shadow, text or other head.
+```
+
+## Round 3 selected: head-drink-scar2
+
+Edit target: `assets/source/A023-rat-complete-kit/head-drink.png`; design reference: `assets/source/A011-rat-raider-finishing/detail-scar2.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat head-drink. Image 2 DESIGN REFERENCE shows the approved detail. Add the two small thin pink healed diagonal cheek scars on camera-side cheek, subtle and no larger than the existing star scar. Preserve every original pixel outside the small detail. Keep exact head size and position, pose, expression, eyes, muzzle, ears, teeth, original canvas proportions and green margins, neck connection. DRINK head stays tipped back. Output whole edited head, not separate detail. Only one-sided camera-side detail. Match warm painted cartoon, bold dark outline and upper-left light. Pure #00FF00 background, no shadow, text or other head.
+```
+
+## Round 3 selected: head-drink-earring
+
+Edit target: `assets/source/A023-rat-complete-kit/head-drink.png`; design reference: `assets/source/A011-rat-raider-finishing/detail-earring.png`.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat head-drink. Image 2 DESIGN REFERENCE shows the approved detail. Add one small gold hoop pierced through lower rim of camera-side ear, modest scale and attached securely to THIS ear. Preserve every original pixel outside the small detail. Keep exact head size and position, pose, expression, eyes, muzzle, ears, teeth, original canvas proportions and green margins, neck connection. DRINK head stays tipped back. Output whole edited head, not separate detail. Only one-sided camera-side detail. Match warm painted cartoon, bold dark outline and upper-left light. Pure #00FF00 background, no shadow, text or other head.
+```
+
+## Round 3 rejected first front scar2 edit
+
+Target `assets/source/A023-rat-complete-kit/head-front.png`; reference `assets/source/A011-rat-raider-finishing/detail-scar2.png`. Rejected because new detail landed on image right. Output not delivered.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat head-front. Image 2 DESIGN REFERENCE shows the approved detail. Add the two small thin pink healed diagonal cheek scars on camera-side cheek, subtle and no larger than the existing star scar. Preserve every original pixel outside the small detail. Keep exact head size and position, pose, expression, eyes, muzzle, ears, teeth, original canvas proportions and green margins, neck connection. DRINK head stays tipped back. Output whole edited head, not separate detail. Only one-sided camera-side detail. Match warm painted cartoon, bold dark outline and upper-left light. Pure #00FF00 background, no shadow, text or other head.
+```
+
+## Round 3 rejected first front earring edit
+
+Target `assets/source/A023-rat-complete-kit/head-front.png`; reference `assets/source/A011-rat-raider-finishing/detail-earring.png`. Rejected because new detail landed on image right. Output not delivered.
+
+```text
+Use case: precise-object-edit. Image 1 EDIT TARGET is ONE rat head-front. Image 2 DESIGN REFERENCE shows the approved detail. Add one small gold hoop pierced through lower rim of camera-side ear, modest scale and attached securely to THIS ear. Preserve every original pixel outside the small detail. Keep exact head size and position, pose, expression, eyes, muzzle, ears, teeth, original canvas proportions and green margins, neck connection. DRINK head stays tipped back. Output whole edited head, not separate detail. Only one-sided camera-side detail. Match warm painted cartoon, bold dark outline and upper-left light. Pure #00FF00 background, no shadow, text or other head.
+```
