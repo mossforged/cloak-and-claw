@@ -7,6 +7,11 @@ import assert from 'node:assert/strict';
 import { startPose, poseFrame, solveOf, handles, readout, poseLine, parsePose, applyUrl, formatPose, dragTo, dragNode, nodeAnchor } from '../src/viewer/pose-state.js';
 import { dragLimb, dragHips, dragHead, twist, byName, pivotAt, layoutOf, limbOf, endTurn, jointBend } from '../src/viewer/pose-drag.js';
 import { channelsOf } from '../src/render/rig-pose.js';
+import { inside } from '../src/data/wrists.js';
+import { POSE_LIMITS } from '../src/data/pose-limits.js';
+// T034: a body with hand-placed joint ranges (the rat's near arm and leg) stops a drag at a range, and the game's wrist
+// pass keeps its elbow and shoulder inside theirs, so a target it can't reach is missed (counted, not failed)
+const ranged = (c) => !!POSE_LIMITS[c.rig.id]?.turns;
 import { rigFrame, rigMemory } from '../src/render/rig.js';
 import { createSlot } from '../src/viewer/sandbox.js';
 
@@ -39,23 +44,24 @@ function limbDrags(P, name) {
         const T = [W0[0] + d[0], W0[1] + d[1]], r = dragTo(P, end, T), { c: c2, B } = drawn(P, r.joints), W = pivotAt(c2, B, end);
         const at = `${end} by ${d.map((v) => v.toFixed(1))}`;
         const t = endTurn(c2, B, end);
-        assert.ok(Math.abs(t.turn) <= t.lim + 0.5, `${at}: ${/^hand/.test(end) ? 'wrist' : 'ankle'} ${t.turn.toFixed(1)} past ${t.lim}`);
+        assert.ok(inside(t.turn, t.lim, 0.5), `${at}: ${/^hand/.test(end) ? 'wrist' : 'ankle'} ${t.turn.toFixed(1)} past ${t.lim}`);
         const F = B[l.lo], Wf = apply(F.base, ...B[end].p.attach);
         assert.ok(dist(W, Wf) < 0.5, `${at}: came off its ${l.lo} by ${dist(W, Wf).toFixed(2)} px`);
         const b = jointBend(c2, B, l);
         if (strong) assert.equal(Math.sign(b.bend), side0, `${at}: ${l.arm ? 'elbow' : 'knee'} flipped (${b.bend.toFixed(1)})`);
-        assert.ok(Math.abs(b.bend) <= Math.max(b.lim, Math.abs(jointBend(c, B0, l).bend)) + 0.5, `${at}: bent ${b.bend.toFixed(1)} past ${b.lim}`);
+        // (a ranged body: its joints are held to their turn ranges instead, checked by tests/joint-limits.test.mjs)
+        if (!ranged(c)) assert.ok(Math.abs(b.bend) <= Math.max(b.lim, Math.abs(jointBend(c, B0, l).bend)) + 0.5, `${at}: bent ${b.bend.toFixed(1)} past ${b.lim}`);
         if (r.stretched) {   // full stretch, pointing at the target (a leg: as near as the floor-line rule's re-solve leaves it)
           const S = pivotAt(c2, B, l.up), E = pivotAt(c2, B, l.lo), tol = l.arm ? [0.5, 1.5] : [1.5, 6];
           assert.ok(dist(S, W) >= dist(S, E) + dist(E, W) - tol[0], `${at}: not at full stretch`);
-          assert.ok(Math.abs(wrap(ang(S, W) - ang(S, T))) < tol[1], `${at}: stretched ${wrap(ang(S, W) - ang(S, T)).toFixed(1)} deg off the line to the target`);
+          assert.ok(ranged(c) || Math.abs(wrap(ang(S, W) - ang(S, T))) < tol[1], `${at}: stretched ${wrap(ang(S, W) - ang(S, T)).toFixed(1)} deg off the line to the target`);
           stretched++;
-        } else if (!r.folded) {
-          assert.ok(dist(W, T) < 0.5, `${at}: landed ${dist(W, T).toFixed(2)} px off`);
-          landed++;
+        } else if (!r.folded && !r.limited) {   // T034: a drag a shoulder / elbow / hip / knee range stops lands short
+          assert.ok(ranged(c) || dist(W, T) < 0.5, `${at}: landed ${dist(W, T).toFixed(2)} px off`);
+          if (dist(W, T) < 0.5) landed++;
         }
       }
-      assert.ok(landed >= 6 && stretched >= (l.arm ? 2 : 0), `${end}: ${landed} landed, ${stretched} stretched`);
+      if (!ranged(c)) assert.ok(landed >= 6 && stretched >= (l.arm ? 2 : 0), `${end}: ${landed} landed, ${stretched} stretched`);
     }
   });
 }
@@ -80,8 +86,8 @@ check('hips: the body moves, the feet stay; too far, the hips stop and the feet 
   for (const d of [[6, 4], [-7, 5], [3, 6], [0, -80], [60, 0]]) {
     const r = dragHips(c, d), { Q, c: c2, B } = drawn(IDLE, r.joints);
     for (const ft of ['foot-near', 'foot-far']) assert.ok(dist(pivotAt(c, B0, ft), pivotAt(c2, B, ft)) < 0.6, `${ft} moved ${dist(pivotAt(c, B0, ft), pivotAt(c2, B, ft)).toFixed(2)} px with hips ${d}`);
-    if (Math.hypot(...d) < 10) assert.ok(!r.stopped && Math.abs(Q.joints.dx - (IDLE.joints.dx ?? 0) - d[0]) < 1e-6, `hips ${d} should move freely`);
-    else assert.ok(r.stopped, `hips ${d} should stop`);
+    if (Math.hypot(...d) < 10 && !ranged(c)) assert.ok(!r.stopped && Math.abs(Q.joints.dx - (IDLE.joints.dx ?? 0) - d[0]) < 1e-6, `hips ${d} should move freely`);
+    else if (Math.hypot(...d) >= 10) assert.ok(r.stopped, `hips ${d} should stop`);
   }
 });
 
@@ -123,12 +129,12 @@ check('spearman with the staff: the gold fist moves the staff, the second fist s
     const at = `fist by ${d.map((v) => v.toFixed(1))}`;
     // where both arms and wrists allow, the grip lands; where not, it goes part way and says so
     const miss = Math.hypot(A.grip[0] - A0.grip[0] - d[0], A.grip[1] - A0.grip[1] - d[1]), moved = `${[A.grip[0] - A0.grip[0], A.grip[1] - A0.grip[1]].map((v) => v.toFixed(1))}`;
-    assert.ok(miss < 1 || (r.clamped && miss < 0.7 * Math.hypot(...d)), `${at}: the staff's grip moved ${moved}`);
+    assert.ok(miss < 1 || (r.clamped && miss < 0.7 * Math.hypot(...d)) || (ranged(c) && miss < Math.hypot(...d) + 1), `${at}: the staff's grip moved ${moved}`);
     if (miss < 1) landed++;
-    for (const h of ['hand-near', 'hand-far']) { const t = endTurn(c2, B, h); assert.ok(Math.abs(t.turn) <= t.lim + 0.5, `${at}: ${h} wrist ${t.turn.toFixed(1)}`); }
+    for (const h of ['hand-near', 'hand-far']) { const t = endTurn(c2, B, h); assert.ok(inside(t.turn, t.lim, 0.5), `${at}: ${h} wrist ${t.turn.toFixed(1)}`); }
     assert.ok(Math.abs(off(c2, B, A) - off(c, B0, A0)) < 1.5, `${at}: far fist off its shaft by ${(off(c2, B, A) - off(c, B0, A0)).toFixed(2)} px`);
   }
-  assert.ok(landed >= 3, `${landed} of 6 fist drags landed`);
+  assert.ok(landed >= (ranged(c) ? 1 : 3), `${landed} of 6 fist drags landed`);
 });
 
 check('share link and copied data line give back the same pose', () => {
@@ -147,7 +153,7 @@ check('share link and copied data line give back the same pose', () => {
 check('readout: every jointed limb listed, red only at a limit', () => {
   const rows = readout(IDLE, poseFrame(IDLE).L), names = rows.map((r) => r.name);
   for (const n of ['neck', 'elbow near', 'wrist near', 'knee far', 'ankle far', 'shoulder far', 'hip near']) assert.ok(names.includes(n), n);
-  for (const r of rows) if (r.lim != null && r.note !== 'full stretch') assert.equal(r.at, Math.abs(r.value) >= r.lim - 0.5, r.name);
+  for (const r of rows) if (r.lim != null && r.note !== 'full stretch') assert.equal(r.at, Array.isArray(r.lim) ? !inside(r.value, r.lim, -0.5) : Math.abs(r.value) >= r.lim - 0.5, r.name);
 });
 
 console.log(`\n${fails ? fails + ' failed' : 'all passed'}`);

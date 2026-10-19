@@ -2,7 +2,7 @@
 // node tools/wrist-report.mjs [fighter,fighter] [--json] [--swaps: bend spread per hand drawing] [--hands: per clip and hand] [--clips a,b] [--no-wrists: before the limits]   (text: one line per clip, '!' past the limit or off > 0.5 px)
 import { wristFrames } from './bench/wrist.js';
 import { MODELS } from '../src/viewer/models.js';
-import { wristLimit, WRISTS } from '../src/data/wrists.js';
+import { wristLimit, WRISTS, inside } from '../src/data/wrists.js';
 import { rigOf } from '../src/viewer/models.js';
 
 const args = process.argv.slice(2), json = args.includes('--json'), swaps = args.includes('--swaps'), hands = args.includes('--hands'), per = {};
@@ -15,7 +15,7 @@ for (const id of ids) {
     const k = (f.clip === 'rehearsal' ? f.label : f.clip) + (hands ? ` ${w.hand}` : ''), cur = worst[k] ?? (worst[k] = { bend: 0, off: 0, over: false });
     if (Math.abs(w.bend) > Math.abs(cur.bend)) Object.assign(cur, { bend: +w.bend.toFixed(1), at: `@${f.n} ${w.hand} ${w.swap ?? ''}`.trim() });
     if (w.off > cur.off) Object.assign(cur, { off: +w.off.toFixed(2), offAt: `@${f.n} ${w.hand}` });
-    if (Math.abs(w.bend) > wristLimit(rig, w.hand, w.swap) + 0.5) cur.over = true;
+    if (!inside(w.bend, wristLimit(rig, w.hand, w.swap ?? `hand-${w.hand}`), 0.5)) cur.over = true;
     (per[`${id} ${w.hand} ${w.swap ?? '-'}`] ??= []).push(w.bend);
   }
   res[id] = worst;

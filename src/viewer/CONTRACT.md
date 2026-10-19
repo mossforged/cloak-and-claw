@@ -20,3 +20,8 @@ page (`index.html` / `src/game.js` are never loaded or changed).
   `pose-drag.js`, `pose-state.js`, pure: Node tests `tests/pose-drag.test.mjs`). The pose is a clip frame's joints and drawings,
   drawn as a held pose through the game's rigFrame / drawRig; drags change only the page's copy (never the data files). Limits:
   wrists from `data/wrists.js`, ankle / neck / knee from `data/pose-limits.js`, the elbow's from `WRISTS.elbowMax`.
+  T034: a limit may be `[lo, hi]`; a body with hand-placed joints (`POSE_LIMITS[rig].turns`: the rat's near arm and leg) stops
+  a drag at each joint's range (`limitTurns`, `limited` on the result; a joint the start pose already has outside stays as far
+  out, no further), and the readout lists those ranges.
+- T034 page switches: `joints=old` (the rat's old joint points and limits) and `order=his|all` (the user's draw-order picks)
+  are read by `data/rigs/rat-raider-joints.js` at load and kept in the address by `main.js` / `pose.js` (not view state).

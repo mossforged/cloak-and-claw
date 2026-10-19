@@ -12,6 +12,7 @@ import { layoutRig } from '../src/render/rig-layout.js';
 import { channelsOf } from '../src/render/rig-pose.js';
 import { calibrate, R3_PIECES } from '../tools/bench/exposure-calibrate.js';
 import { FLAT_SD, FLAT_SHARE } from '../tools/bench/exposure.js';
+import { JOINT_SWITCH } from '../src/data/rigs/rat-raider-joints.js';
 
 let failed = 0, flags = 0;
 const check = (c, msg) => { if (!c) { failed++; console.log('FAIL:', msg); } };
@@ -44,7 +45,10 @@ const noShin = frameExposure(restCell({}, ['leg-near-lower']), readRGBA, { ref }
 // T028 r4: A023 r4 finished the foot tops (they show, but as paint, not fill), so the shin-removed case only finds the
 // cut end now: the near thigh's hem still flags
 check(!noShin.exposed.some((e) => e.part === 'foot-near') || noShin.exposed.find((e) => e.part === 'foot-near').edged, 'near shin removed: the near foot top shows as finished paint, not fill');
-check(noShin.exposed.some((e) => e.part === 'leg-near-upper'), 'near shin removed: the thigh\'s hidden hem shows');
+// T034: on the user's joint points the near shin hangs lower and no longer covers the thigh's hidden hem at rest (nothing
+// hidden there to show): the calibration takes the far leg (old points) instead
+const HEM = JOINT_SWITCH.points ? ['leg-far-lower', 'leg-far-upper', 'far'] : ['leg-near-lower', 'leg-near-upper', 'near'];
+check(frameExposure(restCell({}, [HEM[0]]), readRGBA, { ref }).exposed.some((e) => e.part === HEM[1]), `${HEM[2]} shin removed: the thigh's hidden hem shows`);
 // and with A023 r3's foot top (fill) laid in, the same frame flags it (the measure still sees a block)
 check(calibrate('foot-near', readRGBA, ref).some((x) => x.r3 > 0), 'A023 r3 near foot top (fill) flags with the shin swinging');
 check(frameExposure(restCell({ '@view.torso': 'B', '@view.pelvis': 'B' }, ['torso']), readRGBA, { ref }).cuts.some((c) => c.part === 'pelvis'), 'B, torso removed: the back pelvis\' straight top cut shows');

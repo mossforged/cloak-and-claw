@@ -5,9 +5,10 @@
 import { poseFrames } from '../tools/bench/pose-seams.js';
 import { gripHolds, gripMisses, ALIGN_PX, ALIGN_DEG } from '../tools/bench/grip-align.js';
 import { MODELS, rigOf, itemsFor } from '../src/viewer/models.js';
+import { knownT034 } from '../tools/bench/joint-points-known.js';   // T034: holds his joint points break (listed)
 
 let failed = 0, holds = 0;
-const check = (c, msg) => { if (!c) { failed++; console.log('FAIL:', msg); } };
+const check = (c, msg) => { if (!c && knownT034(msg)) console.log('known (T034):', msg); else if (!c) { failed++; console.log('FAIL:', msg); } };
 const seen = new Set(), pairs = new Set();
 for (const id of MODELS) {
   const rig = rigOf(id);

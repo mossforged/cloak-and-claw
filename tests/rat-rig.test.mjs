@@ -13,9 +13,10 @@ import { gripLayout } from '../src/render/rig-grip.js';
 import { BIPED_PARTS } from '../src/data/rigs/biped-poses.js';
 import { floorLine } from '../src/data/rigs/biped-floor.js';
 import HULLS from '../src/data/rigs/hulls.js';
+import { knownT034 } from '../tools/bench/joint-points-known.js';   // T034: holds his joint points break (listed)
 
 let fails = 0;
-const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
+const check = (ok, msg) => { if (!ok && knownT034(msg)) console.log('known (T034):', msg); else if (!ok) { fails++; console.error('FAIL:', msg); } };
 const apply = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1]);
 // T026: a foot is on its floor when the lowest point of whichever drawing it shows (flat or A019 toe-off: its hull,

@@ -15,7 +15,8 @@ import { nodeActive, modesOf } from '../render/weapon-node.js';
 import { FPS } from '../config.js';
 import { byName, limbOf, endTurn, jointBend, jointed, pivotAt, dragLimb, moveNode, layoutOf, liftOf } from './pose-drag.js';
 import { bendOf } from '../render/wrist.js';
-import { poseLimit, POSE_LIMITS } from '../data/pose-limits.js';
+import { poseLimit, POSE_LIMITS, turnRange } from '../data/pose-limits.js';
+import { inside, clampIn } from '../data/wrists.js';
 import HULLS from '../data/rigs/hulls.js';
 
 const D = Math.PI / 180;
@@ -81,8 +82,8 @@ function ankleDrawn(P, joints, foot) {
   let j = joints, hit = false;
   for (let i = 0; i < 3; i++) {
     const Q = { ...P, joints: j }, c = solveOf(Q), t = endTurn(c, byName(poseFrame(Q).L), foot);
-    if (Math.abs(t.turn) <= t.lim) break;
-    j = { ...j, [foot]: j[foot] - (t.turn - Math.sign(t.turn) * (t.lim - 0.05)) };
+    if (inside(t.turn, t.lim)) break;
+    j = { ...j, [foot]: j[foot] - (t.turn - clampIn(t.turn, t.lim, 0.05)) };
     j[`${foot}.lift`] = Math.round(liftOf(c, j, foot) * 100) / 100;
     hit = true;
   }
@@ -157,17 +158,19 @@ export function shaftGap(P, L) {
 
 // Every joint on the drawn layout L: [{ name, value (deg), lim (deg or null), at (at its limit), note }]
 export function readout(P, L) {
-  const c = solveOf(P), B = byName(L), rows = [], row = (name, value, lim, note = '') => rows.push({ name, value: r2(value), lim, at: lim != null && Math.abs(value) >= lim - 0.5, note });
+  const c = solveOf(P), B = byName(L), rows = [], row = (name, value, lim, note = '') => rows.push({ name, value: r2(value), lim, at: lim != null && (Array.isArray(lim) ? !inside(value, lim, -0.5) : Math.abs(value) >= lim - 0.5), note });
   for (const n of ['pelvis', 'torso']) if (B[n]) row(n, wrap(c.joints[n] ?? 0), null);
   if (B.head && B[c.rig.parts.head.parent]) row('neck', bendOf(B[c.rig.parts.head.parent], B.head), poseLimit(c.rig, 'neck'));
   for (const end of ['hand-near', 'hand-far', 'foot-near', 'foot-far']) {
     const l = limbOf(end), side = end.split('-')[1], joint = l.arm ? 'elbow' : 'knee';
     if (!B[l.up]) continue;
-    row(`${l.arm ? 'shoulder' : 'hip'} ${side}`, wrap(c.joints[l.up] ?? 0), null);
+    const R = turnRange(c.rig, l.up);   // T034: a hand-placed joint: its turn on its parent as drawn, and its range
+    row(`${l.arm ? 'shoulder' : 'hip'} ${side}`, R ? bendOf(B[c.rig.parts[l.up].parent], B[l.up]) : wrap(c.joints[l.up] ?? 0), R);
     if (!jointed(B, l)) { rows.push({ name: `${joint} ${side}`, value: null, lim: null, at: false, note: 'whole-limb drawing' }); continue; }
     const b = jointBend(c, B, l), full = Math.abs(b.bend) < 1.5;   // straight: it can't reach further
     row(`${joint} ${side}`, b.bend, b.lim, full ? 'full stretch' : '');
     if (full) rows[rows.length - 1].at = true;
+    if (turnRange(c.rig, l.lo)) row(`${joint} ${side} turn`, bendOf(B[l.up], B[l.lo]), turnRange(c.rig, l.lo));
     const t = endTurn(c, B, end);
     row(`${l.arm ? 'wrist' : 'ankle'} ${side}`, t.turn, t.lim, B[end].swap ?? '');
   }

@@ -6,6 +6,7 @@ import { poseSeams, STRICT } from '../tools/bench/pose-seams.js';
 import { KNOWN } from '../tools/bench/pose-seams-known.js';
 import { readAlpha } from '../tools/bench/png.mjs';
 import { MODELS } from '../src/viewer/models.js';
+import { JOINT_SWITCH } from '../src/data/rigs/rat-raider-joints.js';
 
 let failed = 0, flags = 0;
 const check = (c, msg) => { if (!c) { failed++; console.log('FAIL:', msg); } };
@@ -26,7 +27,10 @@ for (const id of MODELS) {
 // round 4's re-cut pelvis and far thigh open both hips, its torso the neck and scarf root; the near fist turned onto the
 // user's grip line opens the near wrist. Named one by one: any other idle seam still fails.
 const R4_IDLE = ['pelvis / leg-far-upper', 'pelvis / leg-near-upper', 'torso / head', 'torso / scarf-tail', 'arm-near-lower / hand-near'];
-for (const k of Object.keys(KNOWN)) if (k.startsWith('rat-raider | idle |')) check(/arm-(near|far)-upper$/.test(k) || R4_IDLE.some((j) => k.endsWith(`| ${j}`)), `rat idle: only shoulder seams (and T028 r4's named ones) are known (${k})`);
+// T034: on the user's joint points the near elbow opens (his forearm hangs lower on the upper arm) and the waist does;
+// both hips close. Named while his points are on.
+const T034_IDLE = JOINT_SWITCH.points ? ['arm-near-upper / arm-near-lower', 'pelvis / torso'] : [];
+for (const k of Object.keys(KNOWN)) if (k.startsWith('rat-raider | idle |')) check(/arm-(near|far)-upper$/.test(k) || [...R4_IDLE, ...T034_IDLE].some((j) => k.endsWith(`| ${j}`)), `rat idle: only shoulder seams (and T028 r4's / T034's named ones) are known (${k})`);
 for (const k of Object.keys(KNOWN)) if (!seen.has(k)) console.log(`NOTE fixed (rerun tools/pose-seams-known.mjs): ${k}`);
 console.log(failed ? `${failed} failures` : `ALL OK (${flags} seam flags, all known: ${seen.size} keys waiting on art)`);
 process.exit(failed ? 1 : 0);

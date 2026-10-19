@@ -25,7 +25,9 @@ const assets = await loadAssets(collectArtPaths(FIGHTERS, RIGS, ITEMS));
 
 let P = applyUrl(startPose(U), U), L = [], H = [], M = [1, 0, 0, 1, 0, 0], drag = null, dirty = true;
 const undo = [];
-const writeUrl = () => history.replaceState(null, '', `${location.pathname}?${formatPose(P)}`);
+// T034: the page-wide rig switches (joints=old, order=...) stay in the address
+const SWITCHES = [...new URLSearchParams(location.search)].filter(([k]) => k === 'joints' || k === 'order').map(([k, v]) => `&${k}=${v}`).join('');
+const writeUrl = () => history.replaceState(null, '', `${location.pathname}?${formatPose(P)}${SWITCHES}`);
 const note = (msg) => { panel.show(poseLine(P), msg); };
 
 // The drawn figure's extent in rig px [minX, minY, maxX] (every drawing's corners, a little floor room): the camera fits it

@@ -7,7 +7,7 @@ import { RIGS } from '../src/data/rigs/index.js';
 import { rigFrame } from '../src/render/rig.js';
 import { keyMf } from '../src/viewer/rehearse-frames.js';
 import { ITEMS } from '../src/data/items/index.js';
-import { WRISTS, wristLimit } from '../src/data/wrists.js';
+import { WRISTS, wristLimit, rangeOf } from '../src/data/wrists.js';
 import { wrists } from './bench/wrist.js';
 
 WRISTS.on = false;
@@ -24,7 +24,7 @@ const out = [];
 for (let x = o.x - DX; x <= o.x + DX; x += 2) for (let y = o.y - DY; y <= o.y + DY; y += 2) for (let r = o.r - DR; r <= o.r + DR; r += 4) {
   Object.assign(P, { 'weapon.x': x, 'weapon.y': y, 'weapon.rot': r });
   const L = frame(), w = wrists(L, rig), grips = L.some((e) => e.name === 'hand-far' && /grip/.test(e.swap ?? ''));
-  const over = w.reduce((s, h) => s + Math.max(0, Math.abs(h.bend) - (wristLimit(rig, h.hand) - 5)), 0);
+  const over = w.reduce((s, h) => s + (([lo, hi]) => Math.max(0, h.bend - (hi - 5), (lo + 5) - h.bend))(rangeOf(wristLimit(rig, h.hand, h.swap ?? `hand-${h.hand}`))), 0);
   out.push({ x, y, r, over: +over.toFixed(1), grips, w: w.map((h) => `${h.hand} ${h.bend.toFixed(0)}`).join(' '), cost: over * 10 + (grips ? 0 : 1000) + Math.abs(x - o.x) + Math.abs(y - o.y) + Math.abs(r - o.r) / 2 });
 }
 Object.assign(P, { 'weapon.x': o.x, 'weapon.y': o.y, 'weapon.rot': o.r });

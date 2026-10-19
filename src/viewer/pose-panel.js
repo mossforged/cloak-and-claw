@@ -14,7 +14,7 @@ export function createPanel(root, api) {
   const out = el('pre', { className: 'line' }), note = el('p', { className: 'note' });
   const joints = () => el('div', { className: 'joints' }, api.readout().map((r) => el('div', { className: `j${r.at ? ' at' : ''}` }, [
     el('span', { textContent: r.name }), el('b', { textContent: r.value == null ? '-' : `${r.value}°` }),
-    el('span', { className: 'lim', textContent: `${r.lim != null ? `±${r.lim}` : ''}${r.note ? ` ${r.note}` : ''}` })])));
+    el('span', { className: 'lim', textContent: `${r.lim != null ? (Array.isArray(r.lim) ? `${r.lim[0]}..${r.lim[1]}` : `±${r.lim}`) : ''}${r.note ? ` ${r.note}` : ''}` })])));
   function render() {
     const P = api.P(), rig = P.rig, [anim, n] = P.from.split(':');
     const clips = clipsFor(P.id, P.item), pick = el('select', { onchange: (e) => api.restart(`${e.target.value}:0`) },

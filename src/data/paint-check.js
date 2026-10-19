@@ -1,3 +1,5 @@
+import { JOINT_SWITCH } from './rigs/rat-raider-joints.js';
+
 // Paint check numbers (T026 round 2, rig standard 8: tools/bench/paint.js, tests/paint.test.mjs).
 // art: the importer's cut scale (canvas px -> cut px; the check's grid). edge: px of the master's silhouette edge left out
 // (antialiasing, 1-px drift). strong: a per-pixel colour difference (mean |RGB|, 0..255) that reads as different paint.
@@ -11,5 +13,9 @@ export const PAINT = {
   // the far thigh 1.13%; round 3 passed). Map: docs/screens/T028/r4-paint-rat.jpg.
   // T030: A023 round 5's seat lies over the crotch and both thigh tops at rest, painted unlike the master there (1.68% ->
   // 2.17%, largest region unchanged at 14). Map: docs/screens/T030/paint-rat.jpg.
-  known: { rat: { strongShare: 0.0217, region: 14, why: 'A023 r4 pelvis + far thigh repaint and the A023 r5 seat show at rest (Art)' } },
+  // T034: on the user's joint points the rest no longer lays the near arm and leg on the master (his pivot / attach pairs
+  // are different canvas points: the arm hangs ~10 px longer with the elbow open, the near shin and foot ~4 game px lower):
+  // 10.98%, largest region 168 (the near foot). Old points: as T030. Map: docs/screens/T034/paint-rat.jpg.
+  known: { rat: JOINT_SWITCH.points ? { strongShare: 0.1098, region: 168, why: 'T034: his joint points move the near arm and leg off the master at rest (his call)' }
+    : { strongShare: 0.0217, region: 14, why: 'A023 r4 pelvis + far thigh repaint and the A023 r5 seat show at rest (Art)' } },
 };

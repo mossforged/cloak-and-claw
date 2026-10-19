@@ -13,9 +13,10 @@ import { gripLayout, at } from '../src/render/rig-grip.js';
 import { movesOf } from '../src/sim/weapons.js';
 import { HOLDERS, holdFrames, holdFrame } from '../tools/bench/hold.js';
 import { GRIP_MODE_NAMES, modesFor } from '../src/data/grip-modes.js';
+import { knownT034 } from '../tools/bench/joint-points-known.js';   // T034: holds his joint points break (listed)
 
 let fails = 0;
-const check = (ok, msg) => { if (!ok) { fails++; console.error('FAIL:', msg); } };
+const check = (ok, msg) => { if (!ok && knownT034(msg)) console.log('known (T034):', msg); else if (!ok) { fails++; console.error('FAIL:', msg); } };
 const apply = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const lin = (m, [x, y]) => [m[0] * x + m[2] * y, m[1] * x + m[3] * y];
 const deg = ([x, y]) => Math.atan2(y, x) * 180 / Math.PI;

@@ -36,6 +36,8 @@ import { BODY_VIEWS } from './rat-raider-views.js';
 import * as LINES from './rat-raider-grip-lines.js';
 import { withGripLines } from './grip-lines.js';
 import { A021_HOLDS } from '../items/a021-holds.js';
+import { withJointPoints } from './joint-points.js';
+import { RAT_JOINTS, JOINT_SWITCH, orderPicks } from './rat-raider-joints.js';
 
 const P = 'assets/art/enemies/rat-raider/rig/';
 // T028 r4: every grip hand, every arm key that carries an item and every item's handle line come from the user's grip
@@ -161,6 +163,9 @@ const RIG = {
 };
 
 // T028 r4: the user's grip lines (hands, arm keys, slots, second-hand grips, item lines); a re-import moves pivots and
-// offsets above, the lines stay on the canvas
-export default withGripLines(RIG, LINES, ['rat-cutlass', 'plank-club', 'big-fish', 'rat-spear', 'rat-bow', 'mouse-sword', 'rat-arrow', ...Object.keys(A021_HOLDS)],
+// offsets above, the lines stay on the canvas. T034: then the user's near arm and leg joint points (rat-raider-joints.js:
+// put on after the lines, which are read through the importer's pivots above)
+// (BEFORE_POINTS: the rig on the importer's points, for tests/joint-points.test.mjs)
+export const BEFORE_POINTS = withGripLines(RIG, LINES, ['rat-cutlass', 'plank-club', 'big-fish', 'rat-spear', 'rat-bow', 'mouse-sword', 'rat-arrow', ...Object.keys(A021_HOLDS)],
   Object.fromEntries(Object.entries(A021_HOLDS).map(([id, d]) => [id, d.size])));
+export default withJointPoints(BEFORE_POINTS, RAT_JOINTS, JOINT_SWITCH, orderPicks);

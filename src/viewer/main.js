@@ -16,6 +16,8 @@ import { itemsFor, versionsOf, VERSION_RIGS } from './models.js';
 import { parseState, formatState } from './state.js';
 import { drawSlot, warm } from './scene.js';
 import { createUI } from './ui.js';
+// T034: the page-wide rig switches (data/rigs/rat-raider-joints.js: `joints=old`, `order=his|all`) stay in the address
+const SWITCHES = [...new URLSearchParams(location.search)].filter(([k]) => k === 'joints' || k === 'order').map(([k, v]) => `&${k}=${v}`).join('');
 
 const S = parseState(location.search);
 if (!new URLSearchParams(location.search).has('size') && innerWidth < 600) S.size = 1;   // a phone: 1x game size fits (pinch for more)
@@ -64,7 +66,7 @@ function setPlaying(p) {
   $('play').innerHTML = p ? '&#x23F8;' : '&#x25B6;';
   writeUrl();
 }
-function writeUrl() { history.replaceState(null, '', `${location.pathname}${formatState(S) ? '?' + formatState(S) : ''}`); }
+function writeUrl() { const q = formatState(S) + SWITCHES; history.replaceState(null, '', `${location.pathname}${q ? '?' + q.replace(/^&/, '') : ''}`); }
 
 const RELOAD_KEYS = ['f', 'v', 'item', 'grip', 'anim', 'flip', 'target', 'detail', 'tint', 'fur', 'lsize', 'gear', 'f2', 'v2', 'item2'];
 const ui = createUI({
@@ -81,7 +83,7 @@ const ui = createUI({
     });
   },
   pose() {   // T031: the drag-to-pose page on this frame
-    location.href = `${location.pathname}?pose=${S.f}&from=${S.anim}:${frameNow()}${S.item !== 'own' ? `&item=${S.item}` : ''}`;
+    location.href = `${location.pathname}?pose=${S.f}&from=${S.anim}:${frameNow()}${S.item !== 'own' ? `&item=${S.item}` : ''}${SWITCHES}`;
   },
   async share() {
     S.t = frameNow(); writeUrl();

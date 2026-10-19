@@ -4,6 +4,7 @@
 //   dragLimb: a hand or foot to a wrist / ankle point: 2-bone IK (render/rig-ik.js reach: the elbow / knee keeps the side it
 //     bends to), the hand / foot keeps its turn on screen, then its wrist (data/wrists.js) or ankle (data/pose-limits.js)
 //     inside its limit. Out of reach: full stretch toward the point; never folded deeper than the elbow / knee limit.
+//     T034: a joint with a [lo, hi] turn range (hand-placed joints) stops there (`limited`: the limb stops short).
 //   twist: a hand or foot turned; past its limit the forearm / shin turns the rest (about the elbow / knee).
 //   dragHips: the body moved, every planted foot kept where it stands (the hips stop where a leg would leave its foot).
 //   dragHead: the head turned on the neck, inside its limit.
@@ -12,8 +13,8 @@
 import { layoutRig } from '../render/rig-layout.js';
 import { reach } from '../render/rig-ik.js';
 import { bendOf, turnOf } from '../render/wrist.js';
-import { wristLimit, WRISTS } from '../data/wrists.js';
-import { poseLimit, POSE_LIMITS } from '../data/pose-limits.js';
+import { wristLimit, WRISTS, inside, clampIn } from '../data/wrists.js';
+import { poseLimit, POSE_LIMITS, turnRange } from '../data/pose-limits.js';
 import { floorLine } from '../data/rigs/biped-floor.js';
 import HULLS from '../data/rigs/hulls.js';
 
@@ -38,8 +39,8 @@ export const pivotAt = (c, B, n) => apply(B[n].base, ...c.rig.parts[n].pivot);
 // The end's turn on its parent from its natural angle (a hand: from its drawing's neutral; a foot: as drawn) and its limit.
 export function endTurn(c, B, end) {
   const F = B[c.rig.parts[end].parent], H = B[end];
-  if (/^hand-/.test(end)) return { turn: turnOf(c.rig, F, H), lim: wristLimit(c.rig, end.slice(5)) };
-  return { turn: bendOf(F, H), lim: poseLimit(c.rig, 'ankle') };
+  if (/^hand-/.test(end)) return { turn: turnOf(c.rig, F, H), lim: wristLimit(c.rig, end.slice(5), H.swap ?? H.name) };
+  return { turn: bendOf(F, H), lim: turnRange(c.rig, end) ?? poseLimit(c.rig, 'ankle') };   // T034: a hand-placed ankle's [lo, hi]
 }
 // The elbow / knee bend on screen (degrees between the two bones) and its limit.
 export function jointBend(c, B, { up, lo, end, arm }) {
@@ -54,8 +55,8 @@ function limitEnd(c, j, end) {
   let out = j, hit = false;
   for (let i = 0; i < 3; i++) {
     const { turn, lim } = endTurn(c, byName(layoutOf(c, out)), end);
-    if (Math.abs(turn) <= lim + 1e-6) break;
-    out = { ...out, [end]: out[end] - (turn - clamp(turn, lim - 1e-4)) };   // measured in the parent's px: same sense as the joint
+    if (inside(turn, lim, 1e-6)) break;
+    out = { ...out, [end]: out[end] - (turn - clampIn(turn, lim, 1e-4)) };   // measured in the parent's px: same sense as the joint
     hit = true;
   }
   return [out, hit];
@@ -80,8 +81,33 @@ export function solveLimb(c, j, limb, T) {
   const a0 = angOf(B[limb.end].base), ik = { arm: [limb.up, limb.lo], end: limb.end, hand: c.rig.parts[limb.end].pivot };
   let out = j;
   for (let i = 0; i < 2; i++) out = reach(c.rig, out, c.swap, c.held, ik, () => P);
-  const [lim2, clamped] = limitEnd(c, keepTurn(c, out, limb.end, a0), limb.end);
-  return { joints: lim2, stretched, folded, clamped };
+  const [inRange, limited] = limitTurns(c, out, [limb.up, limb.lo]);
+  const [lim2, clamped] = limitEnd(c, keepTurn(c, inRange, limb.end, a0), limb.end);
+  return { joints: lim2, stretched, folded, clamped: clamped || limited, limited };
+}
+
+// T034: turns each of `parts` that has a [lo, hi] range (data/pose-limits.js turns: hand-placed joints) back inside it,
+// measured on its parent as drawn (the limb then stops short of the point); a joint the start pose c already has outside
+// its range may stay out that far, no further. [joints, clamped]
+export function limitTurns(c, j, parts) {
+  let out = j, hit = false;
+  const B0 = byName(layoutOf(c));
+  for (const n of parts) {
+    let R = turnRange(c.rig, n);
+    const P0 = B0[c.rig.parts[n]?.parent];
+    if (!R || !B0[n] || !P0) continue;
+    const t0 = bendOf(P0, B0[n]);
+    R = [Math.min(R[0], t0), Math.max(R[1], t0)];
+    for (let i = 0; i < 3; i++) {
+      const B = byName(layoutOf(c, out)), P = B[c.rig.parts[n].parent];
+      if (!B[n] || !P) break;
+      const t = bendOf(P, B[n]);
+      if (inside(t, R, 1e-6)) break;
+      out = { ...out, [n]: (out[n] ?? 0) - (t - clampIn(t, R, 1e-4)) };
+      hit = true;
+    }
+  }
+  return [out, hit];
 }
 
 // A foot's drawing above its floor line (px, 0 = standing on it).
@@ -107,12 +133,13 @@ export function dragLimb(c, end, T) {
 export function twist(c, end, deg) {
   const limb = limbOf(end), B = byName(layoutOf(c));
   if (!B[end] || !B[limb.lo]) return { joints: c.joints, clamped: false };
-  const { turn, lim } = endTurn(c, B, end), dj = det(B[limb.lo].base) * deg, want = turn + dj, own = clamp(want, lim);
+  const { turn, lim } = endTurn(c, B, end), dj = det(B[limb.lo].base) * deg, want = turn + dj, own = clampIn(want, lim);
   let out = { ...c.joints, [end]: c.joints[end] + own - turn }, rest = want - own;
   for (let k = 1; Math.abs(rest) > 1e-6 && k >= 0; k -= 0.1) {   // the forearm / shin turns what the wrist / ankle can't
     const j = { ...out, [limb.lo]: c.joints[limb.lo] + rest * k }, Bj = byName(layoutOf(c, j)), b = jointBend(c, Bj, limb);
     if (Math.abs(b.bend) <= b.lim || Math.abs(b.bend) <= Math.abs(jointBend(c, B, limb).bend)) { out = j; break; }
   }
+  [out] = limitTurns(c, out, [limb.lo]);   // T034: the forearm / shin no further than its own range
   return { joints: /^foot-/.test(end) ? withLifts(c, out) : out, clamped: Math.abs(rest) > 1e-6 };
 }
 
@@ -125,7 +152,7 @@ export function dragHips(c, d) {
     let j = { ...c.joints, dx: (c.joints.dx ?? 0) + d[0] * k, dy: (c.joints.dy ?? 0) + d[1] * k }, ok = true;
     for (const { l, A } of keep) {
       const r = solveLimb(c, j, l, A);
-      ok = ok && !r.stretched && !r.folded;
+      ok = ok && !r.stretched && !r.folded && !r.limited;   // T034: nor turned past a hip / knee range
       j = r.joints;
     }
     return { j, ok };

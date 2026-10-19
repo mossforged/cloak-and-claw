@@ -6,7 +6,7 @@ import { writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { RIGS } from '../src/data/rigs/index.js';
 import { layoutRig, mul, apply } from '../src/render/rig-layout.js';
-import { wristLimit, neutralOf } from '../src/data/wrists.js';
+import { wristLimit, neutralOf, inside } from '../src/data/wrists.js';
 
 const args = process.argv.slice(2), opt = (k, d) => { const i = args.indexOf(k); return i < 0 ? d : args.splice(i, 2)[1]; };
 const zoom = +opt('--zoom', 2), turns = opt('--turns', '-135,-90,-45,0,45,90,135,180').split(',').map(Number);
@@ -14,7 +14,7 @@ const [id, out, ...names] = args, rig = RIGS[id];
 const all = ['hand-near', 'hand-far'].flatMap((h) => [h, ...Object.keys(rig.parts[h].swaps ?? {}).filter((k) => !/-under$/.test(k))]);
 const pick = names.length ? all.filter((n) => names.includes(n)) : all;
 const cells = pick.flatMap((s) => turns.map((t) => {
-  const h = s.startsWith('hand-near') ? 'hand-near' : 'hand-far', over = Math.abs(t - neutralOf(rig, s)) > wristLimit(rig, h.slice(5));
+  const h = s.startsWith('hand-near') ? 'hand-near' : 'hand-far', over = !inside(t - neutralOf(rig, s), wristLimit(rig, h.slice(5), s));
   const L = layoutRig(rig, { [h]: t }, s === h ? {} : { [h]: s }, null).filter((e) => e.m && new RegExp(`^(arm-${h.slice(5)}-lower|${h})$`).test(e.name));
   const U = rig.parts[h].swaps?.[s]?.under;   // a split grip's under piece (render/grip-split.js), drawn first
   if (U) L.unshift(layoutRig(rig, { [h]: t }, { [h]: U }, null).find((e) => e.name === h));

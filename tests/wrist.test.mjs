@@ -5,7 +5,7 @@
 // wrist pass leaves an in-limit layout exactly as it was and turns a hand past the limit back inside it, item and all.
 import { wristFrames } from '../tools/bench/wrist.js';
 import { MODELS } from '../src/viewer/models.js';
-import { wristLimit, WRISTS } from '../src/data/wrists.js';
+import { wristLimit, WRISTS, inside } from '../src/data/wrists.js';
 import { limitWrists, turnOf } from '../src/render/wrist.js';
 import { RIGS } from '../src/data/rigs/index.js';
 import { layoutRig, apply } from '../src/render/rig-layout.js';
@@ -19,9 +19,9 @@ for (const id of MODELS) {
     frames++;
     for (const w of f.w) {
       hands++;
-      const lim = wristLimit(f.rig, w.hand), key = `${id} ${f.clip} ${w.hand}`;
+      const lim = wristLimit(f.rig, w.hand, w.swap ?? `hand-${w.hand}`), key = `${id} ${f.clip} ${w.hand}`;
       if (seen.has(key)) continue;   // the first failing frame per clip and hand
-      const ok = Math.abs(w.bend) <= lim + 0.5 && w.off <= 0.5;
+      const ok = inside(w.bend, lim, 0.5) && w.off <= 0.5;   // T034: a limit may be [lo, hi] (the rat's near wrist)
       if (!ok) seen.add(key);
       check(ok, `${id} ${f.label}: ${w.hand} hand ${w.swap ?? '(own drawing)'} turned ${w.bend.toFixed(1)} deg on the forearm (limit ${lim}), wrist point ${w.off.toFixed(2)} px off`);
     }
@@ -48,7 +48,7 @@ console.log(`wrists: ${hands} hands in ${frames} frames of ${MODELS.length} figh
   for (const h of ['hand-near', 'hand-far']) {
     const H = out.find((e) => e.name === h), F = out.find((e) => e.name === H.p.parent), t = turnOf(rat, F, H);
     const P = apply(H.base, ...H.p.pivot), W = apply(F.base, ...H.p.attach);
-    check(Math.abs(t) <= wristLimit(rat, h.slice(5)) + 0.01 && Math.hypot(P[0] - W[0], P[1] - W[1]) < 1e-6, `wrist pass: ${h} turned past the limit comes back to it on its wrist (${t.toFixed(1)})`);
+    check(inside(t, wristLimit(rat, h.slice(5), H.swap ?? h), 0.01) && Math.hypot(P[0] - W[0], P[1] - W[1]) < 1e-6, `wrist pass: ${h} turned past the limit comes back to it on its wrist (${t.toFixed(1)})`);
   }
   WRISTS.on = false;
   check(limitWrists(rat, L2) === L2, 'wrist pass off (WRISTS.on false): the layout as is');

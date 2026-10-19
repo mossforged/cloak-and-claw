@@ -1,0 +1,20 @@
+[
+  { "label": "Walk, HIS joint points, slow", "q": "f=rat-raider&anim=walk&speed=0.25&zoom=2" },
+  { "label": "Walk, OLD joint points, slow", "q": "f=rat-raider&anim=walk&speed=0.25&zoom=2&joints=old" },
+  { "label": "Idle, HIS points", "q": "f=rat-raider&anim=idle&speed=0.5&zoom=2" },
+  { "label": "Idle, OLD points", "q": "f=rat-raider&anim=idle&speed=0.5&zoom=2&joints=old" },
+  { "label": "Turning slash, HIS points, slow", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" },
+  { "label": "Turning slash, OLD points, slow", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2&joints=old" },
+  { "label": "Overhead chop, HIS points, slow", "q": "f=rat-raider&anim=overheadChop&speed=0.25&zoom=2" },
+  { "label": "Overhead chop, OLD points, slow", "q": "f=rat-raider&anim=overheadChop&speed=0.25&zoom=2&joints=old" },
+  { "label": "Dash attack, HIS points, slow", "q": "f=rat-raider&anim=dashAttack&speed=0.25&zoom=2" },
+  { "label": "Dash attack, OLD points, slow", "q": "f=rat-raider&anim=dashAttack&speed=0.25&zoom=2&joints=old" },
+  { "label": "Kick, HIS points, slow", "q": "f=rat-raider&anim=kick&speed=0.25&zoom=2" },
+  { "label": "Kick, OLD points, slow", "q": "f=rat-raider&anim=kick&speed=0.25&zoom=2&joints=old" },
+  { "label": "Knee-up jump, HIS points, slow", "q": "f=rat-raider&anim=jumpUp&speed=0.25&zoom=2" },
+  { "label": "Knee-up jump, OLD points, slow", "q": "f=rat-raider&anim=jumpUp&speed=0.25&zoom=2&joints=old" },
+  { "label": "Draw order: walk with HIS wrist + ankle picks (hand over bracer, foot over shin), slow", "q": "f=rat-raider&anim=walk&speed=0.25&zoom=3&order=his" },
+  { "label": "Draw order: turning slash grip with HIS wrist + ankle picks, slow", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=3&order=his" },
+  { "label": "Draw order: walk with ALL his picks (also arm over torso, upper arm over forearm, thigh over shin), slow", "q": "f=rat-raider&anim=walk&speed=0.25&zoom=3&order=all" },
+  { "label": "Drag-to-pose on his points (joint readout shows his ranges; drags stop at them)", "q": "pose=rat-raider&from=idle:0" }
+]
