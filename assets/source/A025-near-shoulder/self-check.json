@@ -1,0 +1,305 @@
+{
+  "torso": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      501,
+      1044,
+      1021,
+      1454
+    ]
+  },
+  "torso-jerkin": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      498,
+      1042,
+      1021,
+      1513
+    ]
+  },
+  "arm-near-upper": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      380,
+      950,
+      769,
+      1377
+    ]
+  },
+  "arm-near-cocked": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      316,
+      844,
+      695,
+      1309
+    ]
+  },
+  "arm-near-raised": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      422,
+      757,
+      694,
+      1313
+    ]
+  },
+  "arm-near-mouth": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      415,
+      937,
+      1110,
+      1462
+    ]
+  },
+  "arm-near-smear-h": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      416,
+      1043,
+      1171,
+      1312
+    ]
+  },
+  "arm-near-smear-o": {
+    "canvas": [
+      1536,
+      2304
+    ],
+    "foregroundComponents8": 1,
+    "foregroundBounds": [
+      416,
+      1036,
+      938,
+      1631
+    ]
+  },
+  "paint": {
+    "masterForeground": 841558,
+    "strongRGBDifferenceVsMasterBefore": 83618,
+    "strongRGBDifferenceVsMasterAfter": 169151,
+    "changedRGBAFromInheritedRest": 147702,
+    "exactRestPaintPass": false
+  },
+  "shoulderSweep": {
+    "base-61": {
+      "shoulderOverlapSourcePixels": 51393
+    },
+    "base-30": {
+      "shoulderOverlapSourcePixels": 31566
+    },
+    "base0": {
+      "shoulderOverlapSourcePixels": 26643
+    },
+    "base30": {
+      "shoulderOverlapSourcePixels": 25837
+    },
+    "base59": {
+      "shoulderOverlapSourcePixels": 27311
+    },
+    "jerkin-61": {
+      "shoulderOverlapSourcePixels": 53464
+    },
+    "jerkin-30": {
+      "shoulderOverlapSourcePixels": 31992
+    },
+    "jerkin0": {
+      "shoulderOverlapSourcePixels": 27431
+    },
+    "jerkin30": {
+      "shoulderOverlapSourcePixels": 26666
+    },
+    "jerkin59": {
+      "shoulderOverlapSourcePixels": 28068
+    }
+  },
+  "geometry": {
+    "pivot": [
+      633,
+      1089.5
+    ],
+    "attach": [
+      592.25,
+      1088.75
+    ],
+    "radius": 139.0,
+    "donorCircleFit": [
+      281.5323594143528,
+      209.3340631763423,
+      129.0363458925014
+    ],
+    "donorCircleMaxResidual": 1.1483084391501137,
+    "angles": {
+      "arm-near-upper": 0,
+      "arm-near-cocked": 83.35842258399157,
+      "arm-near-raised": 139.85111609530156,
+      "arm-near-mouth": -93.80643538186433,
+      "arm-near-smear-h": -135.04797635848624,
+      "arm-near-smear-o": -81.51866974540175
+    },
+    "keyCenters": {
+      "arm-near-upper": [
+        633,
+        1089.5
+      ],
+      "arm-near-cocked": [
+        555,
+        1174
+      ],
+      "arm-near-raised": [
+        555,
+        1174
+      ],
+      "arm-near-mouth": [
+        555,
+        1174
+      ],
+      "arm-near-smear-h": [
+        555,
+        1174
+      ],
+      "arm-near-smear-o": [
+        555,
+        1174
+      ]
+    },
+    "torsoMask": [
+      [
+        442,
+        1000
+      ],
+      [
+        610,
+        987
+      ],
+      [
+        648,
+        1009
+      ],
+      [
+        675,
+        1043
+      ],
+      [
+        688,
+        1085
+      ],
+      [
+        716,
+        1131
+      ],
+      [
+        749,
+        1189
+      ],
+      [
+        731,
+        1228
+      ],
+      [
+        685,
+        1278
+      ],
+      [
+        618,
+        1320
+      ],
+      [
+        558,
+        1332
+      ],
+      [
+        478,
+        1296
+      ],
+      [
+        440,
+        1208
+      ]
+    ]
+  },
+  "arcFitMaxSourceResidualAfterRegistration": 1.2369760778473917,
+  "runtimeTest": "Not run: source only; Fitting Room / imported posed checks required.",
+  "preservationAudit": {
+    "torso": {
+      "changedRGBPixels": 63285,
+      "changedOutsideRepairSupport": 0
+    },
+    "torso-jerkin": {
+      "changedRGBPixels": 63012,
+      "changedOutsideRepairSupport": 0
+    },
+    "arm-near-upper": {
+      "changedRGBPixels": 43579,
+      "changedOutsideRepairSupport": 1
+    },
+    "arm-near-cocked": {
+      "changedRGBPixels": 43731,
+      "changedOutsideRepairSupport": 0
+    },
+    "arm-near-raised": {
+      "changedRGBPixels": 43683,
+      "changedOutsideRepairSupport": 0
+    },
+    "arm-near-mouth": {
+      "changedRGBPixels": 43724,
+      "changedOutsideRepairSupport": 0
+    },
+    "arm-near-smear-h": {
+      "changedRGBPixels": 43714,
+      "changedOutsideRepairSupport": 0
+    },
+    "arm-near-smear-o": {
+      "changedRGBPixels": 43728,
+      "changedOutsideRepairSupport": 0
+    }
+  },
+  "phoneCopies": [
+    "docs/screens/A025/arm-near-cocked.jpg",
+    "docs/screens/A025/arm-near-mouth.jpg",
+    "docs/screens/A025/arm-near-raised.jpg",
+    "docs/screens/A025/arm-near-smear-h.jpg",
+    "docs/screens/A025/arm-near-smear-o.jpg",
+    "docs/screens/A025/arm-near-upper.jpg",
+    "docs/screens/A025/reference.jpg",
+    "docs/screens/A025/review-paint.jpg",
+    "docs/screens/A025/review.jpg",
+    "docs/screens/A025/shoulder-sweep.jpg",
+    "docs/screens/A025/sweep-+0.jpg",
+    "docs/screens/A025/sweep-+30.jpg",
+    "docs/screens/A025/sweep-+59.jpg",
+    "docs/screens/A025/sweep--30.jpg",
+    "docs/screens/A025/sweep--61.jpg",
+    "docs/screens/A025/torso-jerkin.jpg",
+    "docs/screens/A025/torso.jpg"
+  ]
+}
