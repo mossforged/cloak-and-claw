@@ -27,8 +27,8 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: idle until the handoff automation or T029.
-- Art: idle.
+- Code: T029 round 1 (queued as job 003; every rehearsal move, moving and attacking; pass-bar tune; hand-table check).
+- Art: A020 (queued as job 004; gear and masks for every view).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
