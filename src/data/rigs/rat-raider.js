@@ -24,6 +24,10 @@
 // hand's grips and each item's own line on this body (itemLines); no per-item or per-hand angle offsets.
 // T030: A023 round 5 imported the same way: the pelvis-locked `seat` (540) and the repaired near upper arm, raised arm,
 // far foot and scarf root (their tops reach higher, so the near upper arm's and far foot's pivots and offsets moved).
+// T033: A024 limb repairs, 4 of 9 imported (same importer, an A024 fragment merged last): the raised near arm's shoulder
+// end, the near overhand fist's wrist fur (its trim grew, so its offset moved), the far back-view upper arm, the scarf
+// root. Held back (each raised flags; docs/screens/T033/summary.md): near / far upper arms, near back upper arm, far
+// thigh, far foot (A023 round 5 cuts kept).
 // hands: contact points (palms, cups, the pointing finger: A023 grips, hand part px); the grip hands come from the lines. heldHand (T026): A018's default hands are fists; the near one holds its item in the
 //   side grip drawing (a pose may name another). A grip mode with its own drawing (overhand) uses that drawing's slot.
 // slots / grips: as rigs/a010/rat-raider.js (T018-T020); attach points, axes, the spear's far overhand fist and the bow
@@ -121,7 +125,7 @@ const RIG = {
     'hand-near': { img: P + 'hand-near.png', parent: 'arm-near-lower', attach: [22.8, 76.8], pivot: [38.0, 28.0], order: 815, swaps: { 'hand-near-fist': { img: P + 'hand-near-fist.png', offset: [0.0, 0.0] },
         'hand-near-open': { img: P + 'hand-near-open.png', offset: [11.6, 22.4] },
         'hand-near-grip': { img: P + 'hand-near-grip.png', offset: [4.0, 14.4], under: 'hand-near-grip-under' },
-        'hand-near-grip-overhand': { img: P + 'hand-near-grip-overhand.png', offset: [40.4, 15.2], under: 'hand-near-grip-overhand-under' },
+        'hand-near-grip-overhand': { img: P + 'hand-near-grip-overhand.png', offset: [24.0, -6.4], under: 'hand-near-grip-overhand-under' },
         'hand-near-pinch': { img: P + 'hand-near-pinch.png', offset: [18.0, 21.2], under: 'hand-near-pinch-under' },
         'hand-near-palm': { img: P + 'hand-near-palm.png', offset: [7.6, 24.8] },
         'hand-near-cup': { img: P + 'hand-near-cup.png', offset: [8.0, 20.0] },
