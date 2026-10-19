@@ -57,6 +57,8 @@ for (const id of MODELS) {
       if (/^hand-(near|far)$/.test(e.name) && GRIP_DRAWING.test(e.swap ?? '')) used.push([e.name.slice(5), e.name === parent ? 'item' : 'second', e.swap, e, false]);
       if (e.p?.swaps?.[e.swap]?.carry?.held) used.push([e.name.includes('near') ? 'near' : 'far', 'item', e.swap, e, true]);
     }
+    // T029 r2: the far hand on a strapped shield's strap (render/strap.js) is a strap hold, not a second hand on the item
+    for (const u of used) if (u[2] === 'hand-far-shield' && L.some((e) => e.p?.strap)) u[1] = 'strap';
     const pe = L.find((e) => e.name === parent);
     if (pe && !pe.swap) used.push([own, 'item', parent, pe, false]);   // the bare default fist holding the item
     for (const [hand, role, drawing, e, carried] of used) {
@@ -64,7 +66,8 @@ for (const id of MODELS) {
       const key = `${id} | ${hand} | ${role} | ${grip} ${mode} | ${drawing}`;
       if (seenHold.has(key)) continue;
       seenHold.add(key);
-      const rows = holdRows(T, { hand, role, grip, mode, carried }), hold = `${role === 'item' ? `holding the ${H.kit.id}` : `second hand on the ${H.kit.id}`} (${grip}, ${mode})`;
+      const g = role === 'strap' ? 'shield' : grip, rows = holdRows(T, { hand, role, grip: g, mode, carried });
+      const hold = `${role === 'item' ? `holding the ${H.kit.id}` : role === 'strap' ? 'on the shield strap' : `second hand on the ${H.kit.id}`} (${g}, ${mode})`;
       check(rows.length, `${id} ${fk.label}: ${hand} hand ${hold}: no row in the hand table`);
       if (rows.length) check(rows.some((r) => r.drawing === drawing), `${id} ${fk.label}: ${hand} hand ${hold} uses ${drawing}; the hand table names ${rows.map((r) => r.drawing).join(' or ')}`);
       const under = L.find((x) => x.name === `${e.name}:under`);

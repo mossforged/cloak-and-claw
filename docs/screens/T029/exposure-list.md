@@ -14,33 +14,28 @@ poses every move: their flags are real for those drawings but the pose may chang
 
 | Piece under cover | Worst px² | Worst frame | Fix |
 |---|---|---|---|
-| pelvis under leg-far-upper | 222 | rat-raider, spin @37 | pelvis paint under the thigh (reconstruction) shows as the thigh swings: paint it as finished seat cloth with its seam |
 | arm-near-upper under torso | 204 | rat-raider, Overhead chop (club, axe): strike | upper-arm top hidden under the torso / cap shows as the arm swings: rounded shoulder end, painted as fur |
-| arm-far-upper under torso | 202.5 | rat-raider, shieldBash @4 | upper-arm top hidden under the torso / cap shows as the arm swings: rounded shoulder end, painted as fur |
-| scarf-tail under torso | 159.3 | rat-raider, spin @36 | scarf tail root hidden under the torso shows as the scarf swings: shorter root, or paint it as cloth |
-| torso under head | 142.8 | rat-raider, spin @37 | torso top under the head shows as the head turns: finish the collar / neck fur under the head |
+| scarf-tail under torso | 158 | rat-raider, Slash 3 spin (finisher): back (mid-spin) | scarf tail root hidden under the torso shows as the scarf swings: shorter root, or paint it as cloth |
 | foot-far under leg-far-lower | 54.5 | rat-raider, knockdown, get up @114 | foot top (hidden under the shin) is wider than the shin: narrow it to the shin hem, or widen the hem, so it stays covered as the ankle turns |
-| leg-far-upper under pelvis | 47.8 | rat-raider, daggerStab @1 | thigh top (hidden under the seat / apron) shows as the thigh swings: trim it to the seat outline or paint it as trouser cloth |
 | torso under belt | 46.8 | rat-raider, Stagger (heavy): knee | waist: torso hem / pelvis top hidden under the belt or jerkin shows as the torso bends: finish it as cloth |
 | torso under arm-near-upper | 45 | rat-raider, daggerStab @39 | torso paint under the arm (views where the arm draws in front) shows as the arm swings: finish it as chest |
-| arm-far-upper under arm-far-lower | 34.5 | rat-raider, dodgeRoll @20 | elbow: forearm top / upper-arm end hidden paint shows as the elbow bends: round both ends |
+| pelvis under torso | 33.5 | rat-raider, spin @38 | waist: torso hem / pelvis top hidden under the belt or jerkin shows as the torso bends: finish it as cloth |
 | torso under arm-far-upper | 30.3 | rat-raider, Thrown (victim): mid-spin (back) | torso paint under the arm (views where the arm draws in front) shows as the arm swings: finish it as chest |
+| torso under head | 23.3 | rat-raider, Throw the hero over the shoulder (back throw): lift | torso top under the head shows as the head turns: finish the collar / neck fur under the head |
 | hand-near under arm-near-lower | 19.5 | rat-raider, Hurt light (front): snap back | wrist end hidden under the bracer shows as the fist turns: shorter, rounded wrist end in the hand drawing |
-| leg-near-upper under pelvis | 12.5 | rat-raider, spin @36 | thigh top (hidden under the seat / apron) shows as the thigh swings: trim it to the seat outline or paint it as trouser cloth |
-| pelvis under leg-near-upper | 9.3 | rat-raider, shieldBash @1 | pelvis paint under the thigh (reconstruction) shows as the thigh swings: paint it as finished seat cloth with its seam |
+| leg-far-upper under pelvis | 17.5 | rat-raider, spin @39 | thigh top (hidden under the seat / apron) shows as the thigh swings: trim it to the seat outline or paint it as trouser cloth |
+| arm-far-upper under torso | 9.3 | rat-raider, grabbed + kneed @5 | upper-arm top hidden under the torso / cap shows as the arm swings: rounded shoulder end, painted as fur |
 | foot-near under leg-near-lower | 8.8 | rat-raider, guard @4 | foot top (hidden under the shin) is wider than the shin: narrow it to the shin hem, or widen the hem, so it stays covered as the ankle turns |
 
 ## Straight cut edges off the reference outline (game px long, 4 or more)
 
 | Piece | Worst px | Worst frame | Fix |
 |---|---|---|---|
-| leg-far-upper | 10.3 | rat-spearman, down @5 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
-| torso | 6.7 | rat-raider, spin @57 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
+| leg-far-upper | 6.7 | rat-raider, down @5 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
 | arm-near-upper | 6.4 | rat-raider, jumpAttack @8 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
-| arm-far-upper | 5.3 | rat-raider, shieldBash @4 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
+| arm-far-upper | 5.3 | rat-raider, grabbed + kneed @5 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
 | hand-near | 5.3 | rat-raider, Hurt light (front): snap back | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
 | head | 5.3 | rat-raider, rally @63 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
-| leg-near-upper | 5.3 | rat-archer, getup @4 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
 | foot-far | 5 | rat-raider, knockdown, get up @114 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
 | scarf-tail | 4.6 | rat-archer, walk across @27 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |
 | hand-far | 4.2 | rat-raider, thrown @41 | straight cut edge showing: outline or round the cut, or extend the piece that covers it |

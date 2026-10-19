@@ -151,14 +151,18 @@ export function squatLayer(rig, joints, k) {
 // T028: `switchAt` (share of the way to the strike) = the named key where the depth switches (the hand passing the edge
 // of the body): the windup's swaps, views and bands hold until then, then the through pose's (from switchAt to the
 // end of timing.throughSwap) or the strike's. Without it, as before.
+// T029 r2: views change on a key, never between two: a list of through keys (or one through key that names a view) shows
+// the drawings of the last key reached (the windup's, each through key's from its own frame, the strike's once it lands);
+// `switchAt` moves the first through key's drawings up to the named depth-switch frame.
 function activeSwap(M, p, T) {
   const s = Math.min(1, p / T.strikeIn);
   if (M.switchAt != null && s < M.switchAt) return swapOf(M.windup);
-  if (Array.isArray(M.through)) {   // T029: the nearest key's drawings (windup, each through key, strike)
-    const n = M.through.length, i = Math.round(s * (n + 1));
+  if (Array.isArray(M.through)) {
+    const n = M.through.length, i = Math.max(Math.floor(s * (n + 1) + 1e-9), M.switchAt != null ? 1 : 0);
     return swapOf(i <= 0 ? M.windup : i > n ? M.strike : M.through[i - 1]);
   }
-  if (!M.through?.swap && !M.through?.view && !M.through?.order) return swapOf(M.strike);
+  if (M.through?.view) return swapOf(s >= 1 ? M.strike : s + 1e-9 >= (M.switchAt ?? throughAt(1, 0)) ? M.through : M.windup);
+  if (!M.through?.swap && !M.through?.order) return swapOf(M.strike);
   const [a, b] = T.throughSwap;
   return s >= (M.switchAt ?? a) && s < b ? swapOf(M.through) : swapOf(M.strike);
 }

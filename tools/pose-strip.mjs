@@ -11,6 +11,7 @@ import { rigFrame } from '../src/render/rig.js';
 import { floorLine } from '../src/data/rigs/biped-floor.js';
 import { RAT_A010 } from '../src/data/rigs/a010/index.js';
 import { keyMf } from '../src/viewer/rehearse-frames.js';
+import { ITEMS } from '../src/data/items/index.js';
 
 const args = process.argv.slice(2), opt = (k) => { const i = args.indexOf(k); return i < 0 ? null : args.splice(i, 2)[1]; };
 const zoom = +(opt('--zoom') ?? 1.5), old = args.includes('--a010') && args.splice(args.indexOf('--a010'), 1);
@@ -23,7 +24,8 @@ const cells = specs.map((spec) => {
   const f = { def, state: a, t: +b, mf: 0, move: null, z: +z, vz: 0, facing: 1, id: 1, x: 0, y: 0, stun: 10, grab: { knee: -1 } };
   let pose, time = 0;
   if (a.startsWith('=')) { f.state = 'idle'; pose = a.slice(1); time = rig.poses[pose]?.speed ? +b / rig.poses[pose].speed : 0; }   // =run:0.25 (share of a cycle)
-  else if (m) Object.assign(f, { state: m.air ? 'jump' : 'attack', move: m, moveKey: a, mf: +b, t: +b });
+  else if (m) Object.assign(f, { state: m.air ? 'jump' : 'attack', move: m, moveKey: a, mf: +b, t: +b },   // T029 r2: + the move's own items
+    m.item && { weapon: { def: ITEMS[m.item], uses: 999, hit: false, broken: false } }, m.strap && { strap: { def: ITEMS[m.strap] } });
   else if (a === 'walk') f.t = +b * 60 / rig.poses.walk.speed;
   const mem = {};
   rigFrame(f, rig, time - 1, mem, pose); const fr = rigFrame(f, rig, time, mem, pose), p = fr.p, k = fr.k;

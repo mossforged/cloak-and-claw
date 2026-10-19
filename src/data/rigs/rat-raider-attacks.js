@@ -15,14 +15,15 @@ const LUNGE = { near: [FEET.near[0] - 6, 9.8, 0], far: [FEET.far[0] + 6, 0, 0] }
 
 export const ATTACKS = {
   // Slash 2 (backhand): from the forehand's end (arm across in front, chest toward the camera) the blade sweeps out
-  // forward (side-on, the near arm still in front) and on round behind him (turned away: the arm wholly behind the body)
+  // forward (side-on, the near arm still in front) and on round behind him (turned away: the arm wholly behind the body).
+  // T029 r2: the strike's fist 12 px lower (off y 6, was -6): raised, the upper arm's end showed over the away chest (44 px²)
   backhand: {
     windup: P({ ...CROUCH, view: V('F'), swap: { ...FIST, head: 'head-effort' }, dx: 2, dy: 6, pelvis: 5, torso: 18, head: -14,
       hand: { off: [22, 12], dir: 170 }, shield: { off: [-2, 18], turn: 20 }, ...TAIL(-15, 0, 10), 'scarf-tail': -15 }),
     through: P({ ...CROUCH, view: V('S'), swap: { ...FIST, head: 'head-attack' }, dx: 4, dy: 4, pelvis: 4, torso: 10, head: -12,
       hand: { off: [30, 0], dir: -5 }, shield: { off: [8, 18], turn: 0 }, feet: LUNGE, ...TAIL(-5, 5, 10) }),
     strike: P({ ...CROUCH, view: V('BQ'), swap: { ...FIST, head: 'head-attack', 'foot-near': 'foot-near-toe' }, dx: 2, dy: 4, pelvis: 2, torso: -4, head: -8,
-      hand: { off: [-14, -6], dir: -170 }, shield: { off: [20, 12], turn: -30 }, feet: LUNGE, ...TAIL(15, 15, 15), 'scarf-tail': 15 }),
+      hand: { off: [-14, 6], dir: -170 }, shield: { off: [20, 12], turn: -30 }, feet: LUNGE, ...TAIL(15, 15, 15), 'scarf-tail': 15 }),
   },
   // Slash 3 (spin finisher): cocked (three-quarter) -> side-on, the blade out level -> his back to the camera mid-spin with
   // the horizontal smear arm -> facing the camera, the blade sweeping through in front -> back to three-quarter (rest)

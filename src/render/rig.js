@@ -17,6 +17,7 @@ import { viewLayer } from './rig-views.js';
 import { springLayer } from './springs.js';
 import { carryLayer, carryMotion } from './carry.js';
 import { splitGrips } from './grip-split.js';
+import { strapRig, strapOf, rideLayer } from './strap.js';
 
 export { layoutRig };
 
@@ -88,6 +89,7 @@ function tinted(color) {
 // and how the standee places it (p: lean, squash, offsets; k: look size). mem = the fighter's render memory.
 // pose: optional named pose to hold (view-only test poses such as `cast`).
 export function rigFrame(f, rig, time, mem, pose) {
+  rig = strapRig(rig, strapOf(f));   // T029 r2: a second item on the far hand's strap (the round shield)
   // sword draw after a held weapon is thrown or breaks (not when swapped at a pickup or knocked loose)
   if (mem.hadWeapon && !f.weapon && ['idle', 'walk', 'toss', 'attack', 'jumpStart', 'jump', 'block'].includes(f.state)) mem.drawT0 = time;
   mem.hadWeapon = !!f.weapon;
@@ -113,7 +115,7 @@ export function rigFrame(f, rig, time, mem, pose) {
   if (!pose) joints = springLayer(rig, f, joints, mem.swap, mem, time, k);   // T028 tail and scarf springs
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
   const held = mem.swap?.['@free'] ? null : heldOf(f, rig, mem.sheathed);   // T029: a pose's `free` (released in a throw)
-  const G = carryLayer(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), mem.swap);   // T028 carried object
+  const G = rideLayer(carryLayer(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), mem.swap));   // T028 carried object; T029 r2 strapped item over its carrier
   const L = splitGrips(gearLayout(rig, G, gearOf(f)), held);   // T019 gear; T025 forced grip modes; T028 r2 split grips
   if (lying(f) && !kneel) {   // T024: the body rests on the floor (exactly, once down; never below it while falling or rising)
     const dy = restDy(L, view, f.z);

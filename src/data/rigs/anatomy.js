@@ -77,7 +77,7 @@ const RAT_HANDS = [
   { hold: 'swung in an overhead smear (strike frame)', hand: 'near', face: 'back', drawing: 'arm-near-smear-o', carry: true },
   { hold: 'weapon held in front (two-hand, bow at arm\'s length)', hand: 'far', face: 'palm', drawing: 'hand-far-grip', holds: [{ grip: ['bow'], role: 'item' }] },
   { hold: 'overhand on a shaft', hand: 'far', face: 'palm', drawing: 'hand-far-grip-overhand', holds: [{ grip: ['two-hand'], role: 'second' }] },
-  { hold: 'shield strap', hand: 'far', face: 'hidden / knuckles', drawing: 'hand-far-shield' },
+  { hold: 'shield strap', hand: 'far', face: 'hidden / knuckles', drawing: 'hand-far-shield', holds: [{ grip: ['shield'], role: 'strap' }] },   // T029 r2: A021's round shield (render/strap.js)
   { hold: 'shield guard arm', hand: 'far', face: 'knuckles', drawing: 'arm-far-guard', carry: true },
   { hold: 'raised back holding the bow', hand: 'far', face: 'palm', drawing: 'arm-far-raised-back', carry: true },
   { hold: 'raised', hand: 'far', face: 'palm', drawing: 'arm-far-raised', carry: true },

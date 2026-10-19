@@ -32,6 +32,7 @@ function moveClip(key, m, own) {
   const hb = m.hitbox;
   return {
     key, label: m.label ?? key, group: 'Attacks', kind: 'attack', done, tail: 20,
+    item: m.item, strap: m.strap,   // T029 r2: a rehearsal move's own items (sandbox.js puts them on him with the own item)
     gap: () => (hb ? hb.x + hb.w * 0.6 : 260),   // target on: where the swing lands (an arrow: down the lane)
     input: (sb, k) => (m.air && own.jump && k === 0 ? { jump: true } : {}),
     act: (sb, k) => {

@@ -2,6 +2,7 @@
 // stand-in pose (rigFrame, as the game draws it), the key's chest / hip views and every drawing it names that the rig
 // has; a drawing the rig doesn't have yet (or a view's `standIn`) becomes a labelled box at its part's place.
 import { FIGHTERS } from '../data/fighters/index.js';
+import { ITEMS } from '../data/items/index.js';
 import { RIGS } from '../data/rigs/index.js';
 import HULLS from '../data/rigs/hulls.js';
 import { rigFrame, rigMemory } from '../render/rig.js';
@@ -48,7 +49,9 @@ function fighterFor(def, rig, ref) {
   const M = def.moves[a] ?? def.rehearsal?.[a];
   if (M) {
     const at = keyMf(rig, M, a, b ?? 'windup');
-    return { f: Object.assign(f, { state: M.air ? 'jump' : 'attack', move: M, moveKey: a, mf: at, t: at }), time: 0 };
+    // T029 r2: the move's own items (the dagger stab's dagger, the bash's shield on the far strap)
+    const items = { ...(M.item && { weapon: { def: ITEMS[M.item], uses: 999, hit: false, broken: false } }), ...(M.strap && { strap: { def: ITEMS[M.strap] } }) };
+    return { f: Object.assign(f, { state: M.air ? 'jump' : 'attack', move: M, moveKey: a, mf: at, t: at }, items), time: 0 };
   }
   if (a === 'walk') return { f: Object.assign(f, { state: 'walk', t: +b * 60 / rig.poses.walk.speed }), time: 0 };
   if (a === 'idle') return { f, time: +(b ?? 0) };

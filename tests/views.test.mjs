@@ -92,7 +92,17 @@ const idx = (L, n) => L.findIndex((e) => e.name === n);
 
 // 4. the slide between views, the turn-around through F
 {
-  const mem = {}, f = fighter(def), sw = (v) => ({ '@view.torso': v });
+  const sw = (v) => ({ '@view.torso': v });
+  {   // T029 r2: by default a view snaps on its key: the switch frame already hangs the head on the new view's neck
+    const mem = {}, f = fighter(def);
+    viewLayer(rat, f, S, sw('Q'), mem, 0);
+    const snap = viewLayer(rat, f, S, sw('S'), mem, 1).swap, L = by(layoutRig(rat, S, snap));
+    check(RIG_MOTION.viewBlend === 0 && !('@viewMix.torso' in snap), 'snap: no slide between two views by default');
+    check(near(apply(L.torso.base, ...anchorsOf(rat, 'torso', 'S').head), apply(L.head.base, ...rat.parts.head.pivot)), 'snap: the switch frame is on the new view\'s points');
+  }
+  const was = RIG_MOTION.viewBlend;
+  RIG_MOTION.viewBlend = 0.07;   // the lab can still turn a slide on
+  const mem = {}, f = fighter(def);
   viewLayer(rat, f, S, sw('Q'), mem, 0);
   const T = RIG_MOTION.viewBlend, mid = viewLayer(rat, f, S, sw('S'), mem, 1).swap;
   check(mid['@viewFrom.torso'] === 'Q' && mid['@viewMix.torso'] === 0, 'slide: starts from the old view');
@@ -100,6 +110,7 @@ const idx = (L, n) => L.findIndex((e) => e.name === n);
   const want = anchorsOf(rat, 'torso', 'Q').head.map((v, i) => (v + anchorsOf(rat, 'torso', 'S').head[i]) / 2);
   check(near(apply(L.torso.base, ...want), apply(L.head.base, ...rat.parts.head.pivot)), 'slide: halfway, the head halfway between the two necks');
   check(!('@viewMix.torso' in viewLayer(rat, f, S, sw('S'), mem, 1 + T).swap), 'slide: done after viewBlend');
+  RIG_MOTION.viewBlend = was;
   const m2 = {}, g = fighter(def), seq = [];
   viewLayer(rat, g, S, {}, m2, 0);
   g.facing = -1;

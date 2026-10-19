@@ -33,7 +33,11 @@ for (const [id, f] of Object.entries(FIGHTERS)) {
   for (const [mk, m] of Object.entries(f.rehearsal ?? {})) {
     check(!f.moves[mk], `${id}.${mk}: a rehearsal move isn't one of his own`);
     check(m.windup > 0 && m.active > 0 && m.recovery > 0, `${id}.${mk}: rehearsal phases`);
-    check(m.kind === 'motion' ? !m.hitbox && !m.damage : m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0, `${id}.${mk}: a hit with a hitbox, or a motion with none`);
+    // T029 r2: or a throw (a shot: the dagger flies), and the items it names (`item` in the hand, `strap` on the far hand) exist
+    check(m.kind === 'motion' ? !m.hitbox && !m.damage && !m.shot : (m.damage > 0 && m.hitbox?.w > 0 && m.hitbox?.h > 0) || (m.shot?.damage > 0 && m.shot.speed > 0 && existsSync(m.shot.art.img)),
+      `${id}.${mk}: a hit with a hitbox (or a shot), or a motion with none`);
+    if (m.item) check(ITEMS[m.item] && RIGS[f.art.rig].slots?.[ITEMS[m.item].grip], `${id}.${mk}: item ${m.item} exists and fits a slot of his rig`);
+    if (m.strap) check(ITEMS[m.strap]?.grip === 'shield' && RIGS[f.art.rig].itemLines?.[m.strap], `${id}.${mk}: strap ${m.strap} is a shield on the user's lines`);
     check(RIGS[f.art.rig]?.poses.moves?.[mk], `${id}.${mk}: rig ${f.art.rig} poses the rehearsal move`);
   }
   if (f.team === 'enemy') check(f.ai && f.ai.range > 0, `${id}: ai config`);
