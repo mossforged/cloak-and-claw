@@ -3,7 +3,7 @@
 **Owns:** backdrop, stage art, standees (pose, lean, squash, flash, tint), cutout rigs (part layout, joint poses, blends, held weapons in hand slots), props and floor items, effects (incl. debris), screen shake + hit-stop counters, HUD, debug overlay.
 **Does not own:** gameplay state. Render reads `world` and listens to bus events; it never writes to fighters or world.
 
-**Public API:** `createRenderer(ctx, assets)`, `createJuice()`, `drawStandee`, `drawRig`, `rigFrame`, `rigMemory`, `lastFrame` (T027 viewer), `floorLayer`, `socketOf`, `socketPoints`, `braceLayer`, `layoutRig`, `heldOf`, `restIn`, `handleAngle`, `gripLayout`, `gearLayout`, `tintPixels`, `drawHud`, `drawDebug`, `stepViewPose`, `squatOf`, `feelLayer`, T028: `applyViews`, `viewLayer`, `viewRig`, `springLayer`, `carryLayer`, `carryMotion`.
+**Public API:** `createRenderer(ctx, assets)`, `createJuice()`, `drawStandee`, `drawRig`, `rigFrame`, `rigMemory`, `lastFrame` (T027 viewer), `floorLayer`, `socketOf`, `socketPoints`, `braceLayer`, `layoutRig`, `heldOf`, `restIn`, `handleAngle`, `gripLayout`, `gearLayout`, `tintPixels`, `drawHud`, `drawDebug`, `stepViewPose`, `squatOf`, `feelLayer`, T028: `applyViews`, `viewLayer`, `viewRig`, `springLayer`, `carryLayer`, `carryMotion`, T032: `dressOf` (render/looks.js: whole-drawing gear; `gearLayout` entries gain `dressed`).
 
 **Rules:**
 - Look numbers live in `src/data/juice.js`, move `pose`/`fx` blocks in `src/data/moves/` and rig parts/poses in `src/data/rigs/`.

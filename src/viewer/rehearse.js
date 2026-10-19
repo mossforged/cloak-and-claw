@@ -14,7 +14,8 @@ import { keyFrame } from './rehearse-frames.js';
 
 const W = 96, H = 140, FEET = 124, Z = 0.8;   // cell px; feet line; game size x Z (the rat is ~136 px tall: 3 keys a row on a phone)
 const NAMES = { Q: 'three-quarter', S: 'side', F: 'toward camera', BQ: 'turned away', B: 'back', H: 'hunched', LB: 'leaning back' };
-const id = new URLSearchParams(location.search).get('rehearse') || 'rat-raider', sheet = REHEARSALS[id];
+const Q = new URLSearchParams(location.search), id = Q.get('rehearse') || 'rat-raider', sheet = REHEARSALS[id];
+const gear = (Q.get('gear') || '').split(',').filter(Boolean);   // T032: &gear=gear-hood,gear-jerkin wears that gear on every key
 document.body.className = 'rehearse';
 document.body.innerHTML = '<div class="rh" id="rh"></div>';
 const root = document.getElementById('rh'), el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
@@ -23,7 +24,8 @@ document.title = `Rehearsal: ${sheet.title}`;
 root.append(el('h1', null, sheet.title));
 root.append(el('p', 'legend', `<span>Every move's keys at about game size. Moving and Attacking: each key is the posed frame as the game draws it (T029); tap a move's ▶ to play it in the viewer. The other sections are stand-in poses until rounds 2 and 3.</span> `
   + `<span class="view">Blue: chest / hip view.</span> <span class="miss">Red: a drawing not game-ready yet (box = where it goes).</span> `
-  + `<span>Views: ${Object.entries(NAMES).map(([k, v]) => `${k} ${v}`).join(', ')}.</span> <span>Build ${BUILD}.</span>`));
+  + `<span>Views: ${Object.entries(NAMES).map(([k, v]) => `${k} ${v}`).join(', ')}.</span> <span>Build ${BUILD}.</span>`
+  + (gear.length ? ` <span class="ok">Wearing: ${gear.map((g) => g.replace(/^(gear|detail)-/, '')).join(', ')}.</span>` : '')));
 const assets = await loadAssets(collectArtPaths(FIGHTERS, RIGS, ITEMS, PROPS));
 
 function drawKey(canvas, r) {
@@ -69,7 +71,7 @@ for (const sec of sheet.sections) {
     box.append(el('h3', null, `${mv.name} <span class="ok">(${mv.keys.length} key${mv.keys.length > 1 ? 's' : ''})</span> ${links}`), keys);
     root.append(box);
     for (const key of mv.keys) {
-      const r = keyFrame(sheet, key), card = el('div', 'key'), cv = el('canvas');
+      const r = keyFrame(sheet, key, gear), card = el('div', 'key'), cv = el('canvas');
       drawKey(cv, r);
       const stand = r.missing.filter((m) => !key.draw.includes(m.name)).map((m) => m.name);
       card.append(cv, el('b', null, key.key), el('div', 'view', `chest ${r.views.torso} / hips ${r.views.pelvis}`),

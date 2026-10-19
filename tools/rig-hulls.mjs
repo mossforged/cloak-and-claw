@@ -40,6 +40,7 @@ export function imagesOf(rig) {
     out.add(p.img);
     for (const s of Object.values(p.swaps ?? {})) out.add(s.img);
   }
+  for (const s of Object.values(rig.dressed ?? {})) out.add(s.img);   // T032 gear swaps (a lying hooded rat rests on his hood)
   return [...out];
 }
 

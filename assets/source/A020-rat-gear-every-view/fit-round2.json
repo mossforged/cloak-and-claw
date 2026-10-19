@@ -1,0 +1,386 @@
+{
+  "gear-jerkin": {
+    "body": "torso",
+    "source": "assets/source/A023-rat-complete-kit/torso.png",
+    "dressed": "dressed-gear-jerkin.png",
+    "overlay": "gear-jerkin.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 3437,
+    "badCompositePixels": 3437,
+    "overlayComponents": 70,
+    "componentsAtLeast20": 12,
+    "overlayPixels": 157011,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood": {
+    "body": "head",
+    "source": "assets/source/A018-rat-parts/head.png",
+    "dressed": "dressed-gear-hood.png",
+    "overlay": "gear-hood.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 2439,
+    "badCompositePixels": 2439,
+    "overlayComponents": 502,
+    "componentsAtLeast20": 47,
+    "overlayPixels": 220545,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-jerkin-front": {
+    "body": "torso-front",
+    "source": "assets/source/A023-rat-complete-kit/torso-front.png",
+    "dressed": "dressed-gear-jerkin-front.png",
+    "overlay": "gear-jerkin-front.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1737,
+    "badCompositePixels": 1737,
+    "overlayComponents": 202,
+    "componentsAtLeast20": 26,
+    "overlayPixels": 155811,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-jerkin-side": {
+    "body": "torso-side",
+    "source": "assets/source/A023-rat-complete-kit/torso-side.png",
+    "dressed": "dressed-gear-jerkin-side.png",
+    "overlay": "gear-jerkin-side.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 984,
+    "badCompositePixels": 984,
+    "overlayComponents": 139,
+    "componentsAtLeast20": 16,
+    "overlayPixels": 112286,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-jerkin-back": {
+    "body": "torso-back",
+    "source": "assets/source/A023-rat-complete-kit/torso-back.png",
+    "dressed": "dressed-gear-jerkin-back.png",
+    "overlay": "gear-jerkin-back.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 6529,
+    "badCompositePixels": 6529,
+    "overlayComponents": 453,
+    "componentsAtLeast20": 85,
+    "overlayPixels": 176135,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-jerkin-away": {
+    "body": "torso-away",
+    "source": "assets/source/A023-rat-complete-kit/torso-away.png",
+    "dressed": "dressed-gear-jerkin-away.png",
+    "overlay": "gear-jerkin-away.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 2344,
+    "badCompositePixels": 2344,
+    "overlayComponents": 238,
+    "componentsAtLeast20": 21,
+    "overlayPixels": 135042,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-jerkin-hunched": {
+    "body": "torso-hunched",
+    "source": "assets/source/A023-rat-complete-kit/torso-hunched.png",
+    "dressed": "dressed-gear-jerkin-hunched.png",
+    "overlay": "gear-jerkin-hunched.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1238,
+    "badCompositePixels": 1238,
+    "overlayComponents": 319,
+    "componentsAtLeast20": 40,
+    "overlayPixels": 116057,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-jerkin-lean-back": {
+    "body": "torso-lean-back",
+    "source": "assets/source/A023-rat-complete-kit/torso-lean-back.png",
+    "dressed": "dressed-gear-jerkin-lean-back.png",
+    "overlay": "gear-jerkin-lean-back.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1780,
+    "badCompositePixels": 1780,
+    "overlayComponents": 218,
+    "componentsAtLeast20": 27,
+    "overlayPixels": 114291,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-back": {
+    "body": "head-back",
+    "source": "assets/source/A023-rat-complete-kit/head-back.png",
+    "dressed": "dressed-gear-hood-back.png",
+    "overlay": "gear-hood-back.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1664,
+    "badCompositePixels": 1664,
+    "overlayComponents": 663,
+    "componentsAtLeast20": 96,
+    "overlayPixels": 168751,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-drink": {
+    "body": "head-drink",
+    "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+    "dressed": "dressed-gear-hood-drink.png",
+    "overlay": "gear-hood-drink.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1325,
+    "badCompositePixels": 1325,
+    "overlayComponents": 323,
+    "componentsAtLeast20": 43,
+    "overlayPixels": 248051,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-hurt": {
+    "body": "head-hurt",
+    "source": "assets/source/A018-rat-parts/head-hurt.png",
+    "dressed": "dressed-gear-hood-hurt.png",
+    "overlay": "gear-hood-hurt.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 3927,
+    "badCompositePixels": 3927,
+    "overlayComponents": 583,
+    "componentsAtLeast20": 65,
+    "overlayPixels": 227816,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-shout": {
+    "body": "head-shout",
+    "source": "assets/source/A023-rat-complete-kit/head-shout.png",
+    "dressed": "dressed-gear-hood-shout.png",
+    "overlay": "gear-hood-shout.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 2108,
+    "badCompositePixels": 2108,
+    "overlayComponents": 464,
+    "componentsAtLeast20": 54,
+    "overlayPixels": 249372,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-attack": {
+    "body": "head-attack",
+    "source": "assets/source/A018-rat-parts/head-attack.png",
+    "dressed": "dressed-gear-hood-attack.png",
+    "overlay": "gear-hood-attack.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1687,
+    "badCompositePixels": 1687,
+    "overlayComponents": 472,
+    "componentsAtLeast20": 52,
+    "overlayPixels": 207781,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-effort": {
+    "body": "head-effort",
+    "source": "assets/source/A018-rat-parts/head-effort.png",
+    "dressed": "dressed-gear-hood-effort.png",
+    "overlay": "gear-hood-effort.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 3623,
+    "badCompositePixels": 3623,
+    "overlayComponents": 342,
+    "componentsAtLeast20": 39,
+    "overlayPixels": 238754,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-ko": {
+    "body": "head-ko",
+    "source": "assets/source/A018-rat-parts/head-ko.png",
+    "dressed": "dressed-gear-hood-ko.png",
+    "overlay": "gear-hood-ko.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1073,
+    "badCompositePixels": 1073,
+    "overlayComponents": 389,
+    "componentsAtLeast20": 61,
+    "overlayPixels": 234312,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  },
+  "gear-hood-front": {
+    "body": "head-front",
+    "source": "assets/source/A023-rat-complete-kit/head-front.png",
+    "dressed": "dressed-gear-hood-front.png",
+    "overlay": "gear-hood-front.png",
+    "nativeToolSize": [
+      1024,
+      1536
+    ],
+    "canvas": [
+      1536,
+      2304
+    ],
+    "differenceToleranceRGB": 12,
+    "fitToleranceRGB": 24,
+    "unerasableBodyPixels": 1599,
+    "badCompositePixels": 1599,
+    "overlayComponents": 665,
+    "componentsAtLeast20": 69,
+    "overlayPixels": 322160,
+    "fitPass": false,
+    "gearOnlyPass": false,
+    "notes": "Literal pixel difference contains exposed-anatomy repaint. Original-body foreground missing in dressed image cannot be removed by an additive overlay."
+  }
+}

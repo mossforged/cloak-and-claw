@@ -1,0 +1,10 @@
+[
+  { "label": "Hooded, jerkined raider turning into the slash, slow (gear stays on through the turned-away wind-up and the front-view strike)", "q": "f=rat-raider&anim=ratSlash&gear=gear-hood,gear-jerkin&speed=0.25&zoom=2" },
+  { "label": "Captain in the hat (and sash) through the turning slash, slow", "q": "f=rat-raider&anim=ratSlash&gear=gear-captain-hat,gear-sash&speed=0.25&zoom=1.5" },
+  { "label": "Captain turning around, slow (front view mid-turn: the hat's front drawing)", "q": "f=rat-raider&anim=turn&gear=gear-captain-hat,gear-sash&speed=0.25&zoom=1.5" },
+  { "label": "Helmeted spearman's thrust, slow (his own loadout: helmet + jerkin)", "q": "f=rat-spearman&anim=spearThrust&speed=0.25&zoom=2" },
+  { "label": "Hooded archer's bow shot, slow (hood + quiver)", "q": "f=rat-archer&anim=bowShot&speed=0.25&zoom=2" },
+  { "label": "Rehearsal sheet with hood + jerkin on every key", "q": "rehearse=rat-raider&gear=gear-hood,gear-jerkin" },
+  { "label": "Rehearsal sheet with the captain's hat + sash", "q": "rehearse=rat-raider&gear=gear-captain-hat,gear-sash" },
+  { "label": "Rehearsal sheet with helmet + jerkin", "q": "rehearse=rat-raider&gear=gear-helmet,gear-jerkin" }
+]

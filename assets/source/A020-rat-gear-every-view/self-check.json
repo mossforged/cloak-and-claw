@@ -1,0 +1,1456 @@
+{
+  "drawings": {
+    "gear-jerkin@torso": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        569,
+        1128,
+        976,
+        1393
+      ],
+      "gear_pixels": 67256,
+      "overlap_with_riding_part_pixels": 62981,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-jerkin-side@torso-side": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-side.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        586,
+        976,
+        998,
+        1455
+      ],
+      "gear_pixels": 129800,
+      "overlap_with_riding_part_pixels": 106723,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-jerkin-back@torso-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-back.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        436,
+        984,
+        1007,
+        1430
+      ],
+      "gear_pixels": 204469,
+      "overlap_with_riding_part_pixels": 185979,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-jerkin-front@torso-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-front.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        475,
+        1007,
+        1026,
+        1458
+      ],
+      "gear_pixels": 197335,
+      "overlap_with_riding_part_pixels": 154646,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-jerkin-away@torso-away": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-away.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        506,
+        1015,
+        1007,
+        1413
+      ],
+      "gear_pixels": 149912,
+      "overlap_with_riding_part_pixels": 142659,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-jerkin-hunched@torso-hunched": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-hunched.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        510,
+        1001,
+        979,
+        1455
+      ],
+      "gear_pixels": 132624,
+      "overlap_with_riding_part_pixels": 112950,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-jerkin-lean-back@torso-lean-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-lean-back.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        484,
+        969,
+        940,
+        1457
+      ],
+      "gear_pixels": 136413,
+      "overlap_with_riding_part_pixels": 116543,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-sash@torso": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        425,
+        1008,
+        999,
+        1442
+      ],
+      "gear_pixels": 124595,
+      "overlap_with_riding_part_pixels": 104535,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-sash-side@torso-side": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-side.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        446,
+        1034,
+        989,
+        1467
+      ],
+      "gear_pixels": 117760,
+      "overlap_with_riding_part_pixels": 74321,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-sash-back@torso-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-back.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        255,
+        1007,
+        1027,
+        1461
+      ],
+      "gear_pixels": 166567,
+      "overlap_with_riding_part_pixels": 137560,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-sash-front@torso-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-front.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        439,
+        1012,
+        1024,
+        1447
+      ],
+      "gear_pixels": 130936,
+      "overlap_with_riding_part_pixels": 114954,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-sash-away@torso-away": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-away.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        468,
+        1112,
+        1000,
+        1451
+      ],
+      "gear_pixels": 90797,
+      "overlap_with_riding_part_pixels": 70758,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-sash-hunched@torso-hunched": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-hunched.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        424,
+        1035,
+        1018,
+        1488
+      ],
+      "gear_pixels": 133239,
+      "overlap_with_riding_part_pixels": 104461,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-sash-lean-back@torso-lean-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-lean-back.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        387,
+        1002,
+        999,
+        1493
+      ],
+      "gear_pixels": 144074,
+      "overlap_with_riding_part_pixels": 92876,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-quiver@torso": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        373,
+        828,
+        977,
+        1539
+      ],
+      "gear_pixels": 117787,
+      "overlap_with_riding_part_pixels": 75745,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-quiver-side@torso-side": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-side.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        503,
+        893,
+        938,
+        1488
+      ],
+      "gear_pixels": 77088,
+      "overlap_with_riding_part_pixels": 54682,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-quiver-back@torso-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-back.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        376,
+        812,
+        965,
+        1566
+      ],
+      "gear_pixels": 128841,
+      "overlap_with_riding_part_pixels": 85322,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-quiver-away@torso-away": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-away.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        460,
+        819,
+        981,
+        1536
+      ],
+      "gear_pixels": 113883,
+      "overlap_with_riding_part_pixels": 71380,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-quiver-hunched@torso-hunched": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-hunched.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        443,
+        852,
+        957,
+        1517
+      ],
+      "gear_pixels": 100219,
+      "overlap_with_riding_part_pixels": 61922,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-quiver-lean-back@torso-lean-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/torso-lean-back.png",
+      "source_pivot": [
+        776,
+        1382
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        358,
+        810,
+        955,
+        1537
+      ],
+      "gear_pixels": 125291,
+      "overlap_with_riding_part_pixels": 77406,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood@head": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        523,
+        603,
+        1300,
+        1258
+      ],
+      "gear_pixels": 223160,
+      "overlap_with_riding_part_pixels": 181763,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood-back@head-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A022-rat-joint-repair/head-back.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        611,
+        679,
+        1311,
+        1245
+      ],
+      "gear_pixels": 203694,
+      "overlap_with_riding_part_pixels": 159340,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood-hurt@head-hurt": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-hurt.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        503,
+        626,
+        1201,
+        1260
+      ],
+      "gear_pixels": 210504,
+      "overlap_with_riding_part_pixels": 174402,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood-front@head-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        442,
+        523,
+        1304,
+        1247
+      ],
+      "gear_pixels": 261568,
+      "overlap_with_riding_part_pixels": 201521,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood-drink@head-drink": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        500,
+        531,
+        1318,
+        1258
+      ],
+      "gear_pixels": 252667,
+      "overlap_with_riding_part_pixels": 194592,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood-attack@head-attack": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-attack.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        508,
+        584,
+        1256,
+        1278
+      ],
+      "gear_pixels": 226913,
+      "overlap_with_riding_part_pixels": 171436,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood-shout@head-shout": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-shout.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        457,
+        443,
+        1330,
+        1285
+      ],
+      "gear_pixels": 306150,
+      "overlap_with_riding_part_pixels": 180041,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood@head-effort": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-effort.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        523,
+        603,
+        1300,
+        1258
+      ],
+      "gear_pixels": 223160,
+      "overlap_with_riding_part_pixels": 182323,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-hood@head-ko": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-ko.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        523,
+        603,
+        1300,
+        1258
+      ],
+      "gear_pixels": 223160,
+      "overlap_with_riding_part_pixels": 182661,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet@head": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        517,
+        604,
+        1253,
+        1123
+      ],
+      "gear_pixels": 170013,
+      "overlap_with_riding_part_pixels": 155892,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet-back@head-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A022-rat-joint-repair/head-back.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        595,
+        638,
+        1272,
+        1165
+      ],
+      "gear_pixels": 201242,
+      "overlap_with_riding_part_pixels": 175554,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet-hurt@head-hurt": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-hurt.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        497,
+        610,
+        1233,
+        1128
+      ],
+      "gear_pixels": 172120,
+      "overlap_with_riding_part_pixels": 156237,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet-front@head-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        456,
+        547,
+        1295,
+        1076
+      ],
+      "gear_pixels": 213312,
+      "overlap_with_riding_part_pixels": 191073,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet-drink@head-drink": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        496,
+        554,
+        1254,
+        1066
+      ],
+      "gear_pixels": 149722,
+      "overlap_with_riding_part_pixels": 141467,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet-shout@head-shout": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-shout.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        502,
+        560,
+        1209,
+        1213
+      ],
+      "gear_pixels": 188160,
+      "overlap_with_riding_part_pixels": 172531,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet@head-attack": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-attack.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        517,
+        604,
+        1253,
+        1123
+      ],
+      "gear_pixels": 170013,
+      "overlap_with_riding_part_pixels": 152224,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet@head-effort": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-effort.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        517,
+        604,
+        1253,
+        1123
+      ],
+      "gear_pixels": 170013,
+      "overlap_with_riding_part_pixels": 155884,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-helmet@head-ko": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-ko.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        517,
+        604,
+        1253,
+        1123
+      ],
+      "gear_pixels": 170013,
+      "overlap_with_riding_part_pixels": 156072,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat@head": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        456,
+        541,
+        1310,
+        1107
+      ],
+      "gear_pixels": 229385,
+      "overlap_with_riding_part_pixels": 169097,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat-back@head-back": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A022-rat-joint-repair/head-back.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        563,
+        588,
+        1305,
+        1164
+      ],
+      "gear_pixels": 221400,
+      "overlap_with_riding_part_pixels": 175024,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat-hurt@head-hurt": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-hurt.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        493,
+        570,
+        1338,
+        1144
+      ],
+      "gear_pixels": 230980,
+      "overlap_with_riding_part_pixels": 184453,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat-front@head-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        414,
+        452,
+        1332,
+        1059
+      ],
+      "gear_pixels": 257872,
+      "overlap_with_riding_part_pixels": 166326,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat-drink@head-drink": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        459,
+        592,
+        1261,
+        1119
+      ],
+      "gear_pixels": 220507,
+      "overlap_with_riding_part_pixels": 184185,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat-shout@head-shout": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-shout.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        396,
+        433,
+        1367,
+        1132
+      ],
+      "gear_pixels": 303118,
+      "overlap_with_riding_part_pixels": 169691,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat@head-attack": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-attack.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        456,
+        541,
+        1310,
+        1107
+      ],
+      "gear_pixels": 229385,
+      "overlap_with_riding_part_pixels": 165831,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat@head-effort": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-effort.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        456,
+        541,
+        1310,
+        1107
+      ],
+      "gear_pixels": 229385,
+      "overlap_with_riding_part_pixels": 168472,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "gear-captain-hat@head-ko": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A018-rat-parts/head-ko.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        456,
+        541,
+        1310,
+        1107
+      ],
+      "gear_pixels": 229385,
+      "overlap_with_riding_part_pixels": 168756,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-eyepatch-front@head-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        533,
+        550,
+        1186,
+        1013
+      ],
+      "gear_pixels": 83824,
+      "overlap_with_riding_part_pixels": 83562,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-eyepatch-drink@head-drink": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        643,
+        629,
+        1249,
+        996
+      ],
+      "gear_pixels": 68052,
+      "overlap_with_riding_part_pixels": 67796,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-scar2-front@head-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        621,
+        889,
+        758,
+        995
+      ],
+      "gear_pixels": 3643,
+      "overlap_with_riding_part_pixels": 3643,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-scar2-drink@head-drink": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        780,
+        835,
+        970,
+        969
+      ],
+      "gear_pixels": 6568,
+      "overlap_with_riding_part_pixels": 6568,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-ear-notch-front@head-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        487,
+        736,
+        578,
+        839
+      ],
+      "gear_pixels": 3489,
+      "overlap_with_riding_part_pixels": 3326,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-ear-notch-drink@head-drink": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        547,
+        769,
+        718,
+        963
+      ],
+      "gear_pixels": 11971,
+      "overlap_with_riding_part_pixels": 11857,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-earring-front@head-front": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-front.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        546,
+        812,
+        691,
+        1032
+      ],
+      "gear_pixels": 22432,
+      "overlap_with_riding_part_pixels": 20657,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    },
+    "detail-earring-drink@head-drink": {
+      "source_canvas": [
+        1536,
+        2304
+      ],
+      "source": "assets/source/A023-rat-complete-kit/head-drink.png",
+      "source_pivot": [
+        880,
+        1200
+      ],
+      "offset": [
+        0,
+        0
+      ],
+      "gear_bounds": [
+        642,
+        904,
+        812,
+        1148
+      ],
+      "gear_pixels": 28587,
+      "overlap_with_riding_part_pixels": 21029,
+      "visual_fit": "requires review; metrics are not a coverage pass"
+    }
+  },
+  "mask_tint_isolation": {
+    "torso:fur": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 15323
+    },
+    "torso-front:fur": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 18275
+    },
+    "torso-back:fur": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 8201
+    },
+    "gear-jerkin:fur": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 0
+    },
+    "gear-jerkin-front:fur": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 0
+    },
+    "gear-jerkin-back:fur": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 0
+    },
+    "torso:cloth": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 59653
+    },
+    "torso-front:cloth": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 80763
+    },
+    "torso-back:cloth": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 155104
+    },
+    "gear-jerkin:cloth": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 0
+    },
+    "gear-jerkin-front:cloth": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 0
+    },
+    "gear-jerkin-back:cloth": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 0
+    },
+    "torso:trim": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 4095
+    },
+    "torso-front:trim": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 2316
+    },
+    "torso-back:trim": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 8962
+    },
+    "gear-jerkin:trim": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 4309
+    },
+    "gear-jerkin-front:trim": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 5319
+    },
+    "gear-jerkin-back:trim": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 6513
+    },
+    "torso:leather": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 23111
+    },
+    "torso-front:leather": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 12522
+    },
+    "torso-back:leather": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 6781
+    },
+    "gear-jerkin:leather": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 53402
+    },
+    "gear-jerkin-front:leather": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 142977
+    },
+    "gear-jerkin-back:leather": {
+      "changed_outside_mask": 0,
+      "selected_pixels": 154294
+    }
+  },
+  "canvas_pass": true,
+  "visual_fit_pass": false,
+  "material_semantics_pass": false,
+  "runtime_motion_checked": false,
+  "structural_checks": {
+    "overlays": 47,
+    "masked_drawings": 138,
+    "mask_files": 552,
+    "four_materials_every_drawing": true,
+    "overlay_canvas_and_green_corner": true,
+    "mask_canvas_and_grayscale": true,
+    "phone_JPGs": 69,
+    "phone_max_long_side": 2000,
+    "phone_quality": 80
+  },
+  "known_failures": [
+    "Q jerkin belly hem exposed",
+    "jerkin shoulder holes cover existing pauldron/fur",
+    "away jerkin insufficient turn",
+    "drink hood floating far ear hole and muzzle interference",
+    "front eyepatch oversized and central",
+    "mask material spill and incomplete selection",
+    "front quiver occlusion unverified"
+  ],
+  "supersededBy": "Round 2 checks below; original per-drawing Round 1 metrics retained for history only.",
+  "round2": {
+    "canvasPass": true,
+    "fitPass": false,
+    "materialSemanticsPass": false,
+    "importReady": false,
+    "fit": "fit-round2.json",
+    "tint": "tint-round2.json",
+    "isolation": "tint-isolation-round2.json"
+  }
+}

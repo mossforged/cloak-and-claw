@@ -3,10 +3,11 @@
 //   The part's current drawing (its swap, or the part itself) picks the group's variant (rig.views: the hood's `-hurt`
 //   with the hurt head, the jerkin's `-side` / `-back` with those torsos); the overlay image shares the part's canvas, so
 //   it sits at its offset in the part's own image px. A hidden part hides its gear.
+//   T032: whole-drawing gear (rig.dress / rig.dressed: a hooded head, a jerkined torso) replaces the part's drawing.
 // Tints: images with masks (rig.masks) are recoloured once per look and cached (never per frame): cloth toward the
 //   look's palette colour for the mask's channel (data/looks.js CHANNELS), keeping each pixel's shading; fur a little
 //   lighter/warmer or darker/cooler. tintPixels is pure (tests use it).
-import { LOOKS, CHANNELS } from '../data/looks.js';
+import { LOOKS, CHANNELS, COVERS } from '../data/looks.js';
 
 const mul = (m, n) => [m[0] * n[0] + m[2] * n[1], m[1] * n[0] + m[3] * n[1], m[0] * n[2] + m[2] * n[3],
   m[1] * n[2] + m[3] * n[3], m[0] * n[4] + m[2] * n[5] + m[4], m[1] * n[4] + m[3] * n[5] + m[5]];
@@ -21,10 +22,27 @@ export function overlayFor(rig, group, drawing) {
   return o?.img ? o : null;
 }
 
-// Layout entries (layoutRig's, which carry each part's `base` matrix) plus the gear overlays, in draw order.
+// T032: the dressed swap (whole drawing: hood, helmet, hat, jerkin, ear notch) a part shows for its current drawing,
+// or null (bare). The first group that dresses the part wins (loadout before the face detail: a helmet over the notch).
+export function dressOf(rig, groups, part, drawing) {
+  for (const g of groups) {
+    const D = rig.dress?.[g];
+    if (D?.on === part && D.views[drawing]) return D.views[drawing];
+  }
+  return null;
+}
+
+// Layout entries (layoutRig's, which carry each part's `base` matrix) with their gear: dressed drawings replace a head /
+// torso drawing (`dressed`: the swap's name; `swap` stays the bare drawing, so overlays and views go by it), then the
+// overlays, in draw order. A detail the worn gear covers (COVERS) is left off.
 export function gearLayout(rig, L, groups) {
   if (!groups.length || !rig.views) return L;
-  const out = [...L];
+  const off = new Set(groups.flatMap((g) => COVERS[g] ?? []));
+  groups = groups.filter((g) => !off.has(g));
+  const out = L.map((e) => {
+    const d = rig.dress && e.base && dressOf(rig, groups, e.name, e.swap ?? e.name), S = d && rig.dressed[d];
+    return S ? { ...e, img: S.img, m: mul(e.base, [1, 0, 0, 1, ...S.offset]), dressed: d } : e;
+  });
   for (const g of groups) {
     const on = rig.views[g]?.on, e = L.find((x) => x.name === on);
     const o = e && overlayFor(rig, g, e.swap ?? on);

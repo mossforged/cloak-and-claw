@@ -1,0 +1,791 @@
+{
+  "anchorSupport": {
+    "head-attack-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 1796,
+        "originalSupportPixels": 577,
+        "dressedSupportPixels": 2373
+      }
+    },
+    "head-back-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 0,
+        "dressedSupportPixels": 0
+      }
+    },
+    "head-drink-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 2359,
+        "originalSupportPixels": 2,
+        "dressedSupportPixels": 2361
+      }
+    },
+    "head-effort-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 725,
+        "originalSupportPixels": 1676,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "head-front-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 858,
+        "originalSupportPixels": 1543,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "head-hurt-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 1078,
+        "originalSupportPixels": 1259,
+        "dressedSupportPixels": 2337
+      }
+    },
+    "head-ko-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 745,
+        "originalSupportPixels": 1656,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "head-shout-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 2048,
+        "originalSupportPixels": 329,
+        "dressedSupportPixels": 2377
+      }
+    },
+    "head-hood": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 718,
+        "originalSupportPixels": 1683,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "torso-away-jerkin": {
+      "neck": {
+        "sourcePoint": [
+          805,
+          1180
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_near": {
+        "sourcePoint": [
+          550,
+          1160
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_far": {
+        "sourcePoint": [
+          982,
+          1170
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "waist": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "torso-back-jerkin": {
+      "neck": {
+        "sourcePoint": [
+          830,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_near": {
+        "sourcePoint": [
+          1000,
+          1190
+        ],
+        "supportXorPixels49px": 14,
+        "originalSupportPixels": 2387,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_far": {
+        "sourcePoint": [
+          520,
+          1190
+        ],
+        "supportXorPixels49px": 19,
+        "originalSupportPixels": 2384,
+        "dressedSupportPixels": 2395
+      },
+      "waist": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "torso-front-jerkin": {
+      "neck": {
+        "sourcePoint": [
+          790,
+          1135
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_near": {
+        "sourcePoint": [
+          555,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_far": {
+        "sourcePoint": [
+          945,
+          1150
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "waist": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "torso-hunched-jerkin": {
+      "neck": {
+        "sourcePoint": [
+          855,
+          1220
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_near": {
+        "sourcePoint": [
+          590,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_far": {
+        "sourcePoint": [
+          930,
+          1220
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "waist": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "torso-lean-back-jerkin": {
+      "neck": {
+        "sourcePoint": [
+          720,
+          1080
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_near": {
+        "sourcePoint": [
+          570,
+          1130
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_far": {
+        "sourcePoint": [
+          865,
+          1180
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "waist": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "torso-side-jerkin": {
+      "neck": {
+        "sourcePoint": [
+          870,
+          1120
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_near": {
+        "sourcePoint": [
+          655,
+          1120
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_far": {
+        "sourcePoint": [
+          900,
+          1145
+        ],
+        "supportXorPixels49px": 23,
+        "originalSupportPixels": 2350,
+        "dressedSupportPixels": 2373
+      },
+      "waist": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "torso-jerkin": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 24,
+        "originalSupportPixels": 2377,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_near": {
+        "sourcePoint": [
+          555,
+          1174
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      },
+      "shoulder_far": {
+        "sourcePoint": [
+          960,
+          1179
+        ],
+        "supportXorPixels49px": 73,
+        "originalSupportPixels": 2328,
+        "dressedSupportPixels": 2401
+      },
+      "waist": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "head-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 718,
+        "originalSupportPixels": 1683,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "head-attack-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 270,
+        "originalSupportPixels": 577,
+        "dressedSupportPixels": 847
+      }
+    },
+    "head-effort-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 454,
+        "originalSupportPixels": 1676,
+        "dressedSupportPixels": 2130
+      }
+    },
+    "head-hurt-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 765,
+        "originalSupportPixels": 1259,
+        "dressedSupportPixels": 1950
+      }
+    },
+    "head-ko-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 110,
+        "originalSupportPixels": 1656,
+        "dressedSupportPixels": 1766
+      }
+    },
+    "head-back-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 0,
+        "dressedSupportPixels": 0
+      }
+    },
+    "head-front-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 114,
+        "originalSupportPixels": 1543,
+        "dressedSupportPixels": 1645
+      }
+    },
+    "head-shout-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 139,
+        "originalSupportPixels": 329,
+        "dressedSupportPixels": 394
+      }
+    },
+    "head-drink-helmet": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 78,
+        "originalSupportPixels": 2,
+        "dressedSupportPixels": 80
+      }
+    },
+    "head-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 718,
+        "originalSupportPixels": 1683,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "head-attack-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 35,
+        "originalSupportPixels": 577,
+        "dressedSupportPixels": 564
+      }
+    },
+    "head-effort-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 667,
+        "originalSupportPixels": 1676,
+        "dressedSupportPixels": 2343
+      }
+    },
+    "head-hurt-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 1092,
+        "originalSupportPixels": 1259,
+        "dressedSupportPixels": 2351
+      }
+    },
+    "head-ko-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 34,
+        "originalSupportPixels": 1656,
+        "dressedSupportPixels": 1622
+      }
+    },
+    "head-back-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 0,
+        "dressedSupportPixels": 0
+      }
+    },
+    "head-front-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 128,
+        "originalSupportPixels": 1543,
+        "dressedSupportPixels": 1661
+      }
+    },
+    "head-shout-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 119,
+        "originalSupportPixels": 329,
+        "dressedSupportPixels": 298
+      }
+    },
+    "head-drink-hat": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 89,
+        "originalSupportPixels": 2,
+        "dressedSupportPixels": 91
+      }
+    },
+    "head-notch": {
+      "neck": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 718,
+        "originalSupportPixels": 1683,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-sash": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-sash-side": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-sash-back": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-sash-front": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-sash-away": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-sash-hunched": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-sash-lean-back": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-quiver": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-quiver-side": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-quiver-back": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-quiver-away": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-quiver-hunched": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "gear-quiver-lean-back": {
+      "pivot": {
+        "sourcePoint": [
+          776,
+          1382
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2401,
+        "dressedSupportPixels": 2401
+      }
+    },
+    "detail-eyepatch-front": {
+      "pivot": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 1543,
+        "dressedSupportPixels": 1543
+      }
+    },
+    "detail-scar2-front": {
+      "pivot": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 1543,
+        "dressedSupportPixels": 1543
+      }
+    },
+    "detail-earring-front": {
+      "pivot": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 1543,
+        "dressedSupportPixels": 1543
+      }
+    },
+    "detail-eyepatch-drink": {
+      "pivot": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2,
+        "dressedSupportPixels": 2
+      }
+    },
+    "detail-scar2-drink": {
+      "pivot": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2,
+        "dressedSupportPixels": 2
+      }
+    },
+    "detail-earring-drink": {
+      "pivot": {
+        "sourcePoint": [
+          880,
+          1200
+        ],
+        "supportXorPixels49px": 0,
+        "originalSupportPixels": 2,
+        "dressedSupportPixels": 2
+      }
+    }
+  },
+  "coordinateSystem": "unchanged source canvas and pivots; alpha-support XOR in 49px anchor windows, descriptive only, not a motion/seam pass",
+  "swapCount": 35,
+  "overlayCount": 19,
+  "visualPass": false
+}
