@@ -1,0 +1,303 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "fighter": "rat-raider",
+  "fragmentOnly": true,
+  "baseSource": "A023-rat-complete-kit/rig-source.json",
+  "parts": {
+    "torso": {
+      "img": "torso.png",
+      "parent": "pelvis",
+      "pivot": [
+        776,
+        1382
+      ],
+      "band": 600,
+      "source": "A025-near-shoulder",
+      "anchors": {
+        "neck": [
+          880,
+          1200
+        ],
+        "shoulder_near": [
+          592.25,
+          1088.75
+        ],
+        "shoulder_far": [
+          960,
+          1179
+        ],
+        "waist": [
+          776,
+          1382
+        ]
+      }
+    },
+    "arm-near-upper": {
+      "img": "arm-near-upper.png",
+      "parent": "torso",
+      "pivot": [
+        633,
+        1089.5
+      ],
+      "band": 810,
+      "source": "A025-near-shoulder",
+      "attachCanvas": [
+        592.25,
+        1088.75
+      ]
+    }
+  },
+  "swaps": {
+    "arm-near-cocked": {
+      "img": "arm-near-cocked.png",
+      "of": "arm-near-upper",
+      "pivot": [
+        555,
+        1174
+      ],
+      "hide": [
+        "arm-near-lower",
+        "hand-near"
+      ],
+      "jointCenters": [
+        [
+          555,
+          1174
+        ],
+        [
+          410,
+          1078
+        ],
+        [
+          480,
+          960
+        ]
+      ],
+      "itemGrip": [
+        469.22,
+        924.9
+      ],
+      "slotDirection": [
+        [
+          504.19,
+          921.96
+        ],
+        [
+          434.24,
+          927.84
+        ]
+      ],
+      "source": "A025-near-shoulder",
+      "handFace": "back"
+    },
+    "arm-near-raised": {
+      "img": "arm-near-raised.png",
+      "of": "arm-near-upper",
+      "pivot": [
+        555,
+        1174
+      ],
+      "hide": [
+        "arm-near-lower",
+        "hand-near"
+      ],
+      "jointCenters": [
+        [
+          555,
+          1174
+        ],
+        [
+          555,
+          1000
+        ],
+        [
+          555,
+          862
+        ]
+      ],
+      "itemGrip": [
+        527.82,
+        837.31
+      ],
+      "slotDirection": [
+        [
+          556.4,
+          816.94
+        ],
+        [
+          499.24,
+          857.68
+        ]
+      ],
+      "source": "A025-near-shoulder",
+      "handFace": "back"
+    },
+    "arm-near-mouth": {
+      "img": "arm-near-mouth.png",
+      "of": "arm-near-upper",
+      "pivot": [
+        555,
+        1174
+      ],
+      "source": "A025-near-shoulder",
+      "hide": [
+        "arm-near-lower",
+        "hand-near"
+      ],
+      "jointCenters": [
+        [
+          555,
+          1174
+        ],
+        [
+          835,
+          1380
+        ],
+        [
+          1008,
+          1120
+        ]
+      ],
+      "itemGrip": [
+        1035,
+        1050
+      ],
+      "slotDirection": [
+        [
+          1010,
+          1075
+        ],
+        [
+          1060,
+          1025
+        ]
+      ]
+    },
+    "arm-near-smear-h": {
+      "img": "arm-near-smear-h.png",
+      "of": "arm-near-upper",
+      "pivot": [
+        555,
+        1174
+      ],
+      "source": "A025-near-shoulder",
+      "hide": [
+        "arm-near-lower",
+        "hand-near"
+      ],
+      "jointCenters": [
+        [
+          555,
+          1174
+        ],
+        [
+          835,
+          1150
+        ],
+        [
+          1050,
+          1165
+        ]
+      ],
+      "itemGrip": [
+        1095,
+        1162
+      ],
+      "slotDirection": [
+        [
+          1095,
+          1132
+        ],
+        [
+          1095,
+          1192
+        ]
+      ]
+    },
+    "arm-near-smear-o": {
+      "img": "arm-near-smear-o.png",
+      "of": "arm-near-upper",
+      "pivot": [
+        555,
+        1174
+      ],
+      "source": "A025-near-shoulder",
+      "hide": [
+        "arm-near-lower",
+        "hand-near"
+      ],
+      "jointCenters": [
+        [
+          555,
+          1174
+        ],
+        [
+          710,
+          1350
+        ],
+        [
+          845,
+          1510
+        ]
+      ],
+      "itemGrip": [
+        855,
+        1548
+      ],
+      "slotDirection": [
+        [
+          825,
+          1548
+        ],
+        [
+          885,
+          1548
+        ]
+      ]
+    },
+    "torso-jerkin": {
+      "img": "torso-jerkin.png",
+      "of": "torso",
+      "pivot": [
+        776,
+        1382
+      ],
+      "source": "A025-near-shoulder",
+      "view": "Q"
+    }
+  },
+  "viewBands": {
+    "Q": {
+      "arm-near-upper": 810,
+      "shoulder-near": null
+    }
+  },
+  "jointPointOverride": {
+    "shoulder-near": {
+      "pivotCanvas": [
+        633,
+        1089.5
+      ],
+      "attachCanvas": [
+        592.25,
+        1088.75
+      ],
+      "from": "docs/design/rigs/joint-points-rat.json",
+      "sourceGameImageScale": 0.4,
+      "limits": {
+        "lo": -61,
+        "hi": 59
+      },
+      "front": true
+    }
+  },
+  "notes": [
+    "SOURCE FRAGMENT: independent child pivot / parent attachment. The generic source importer assumes a shared canvas joint and does not consume attachCanvas; Code must explicitly carry both points into the rig. Do not substitute pivotCanvas for attachCanvas.",
+    "All other source pivots, anchors, canvas locations and grips unchanged. Whole-arm swaps retain their original source shoulder pivots [555,1174] and itemGrip points. Attach them to the same new torso shoulder anchor; their local shoulder rim centers coincide with their own pivots.",
+    "Q only: near upper arm over torso at 810, under cuff/forearm at 820; disable shoulder-near in Q. Retain existing cap/depth in other torso views pending their own posed check.",
+    "torso-jerkin replaces A020 Q torso-jerkin; retain its existing torso pivot and all unrelated gear data. No tint mask certification."
+  ]
+}
