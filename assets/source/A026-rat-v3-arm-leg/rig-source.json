@@ -27,19 +27,12 @@
       "skeleton_from": "shoulder-near",
       "skeleton_to": "elbow-near",
       "registration": {
-        "source_landmarks": [
-          [
-            650,
-            530
-          ],
-          [
-            300,
-            1060
-          ]
-        ],
-        "uniform_scale": 0.31682520451060686,
-        "clockwise_deg": -1.9536138702367745,
-        "note": "Visual landmark registration; exact circularity is not certified."
+        "method": "uniform image-tool hidden-end registration + exact master-region restoration",
+        "scale": 0.4186335403726708,
+        "top_left": [
+          401,
+          1018
+        ]
       }
     },
     "arm-near-lower": {
@@ -63,19 +56,12 @@
       "skeleton_from": "elbow-near",
       "skeleton_to": "wrist-near",
       "registration": {
-        "source_landmarks": [
-          [
-            660,
-            545
-          ],
-          [
-            365,
-            1060
-          ]
-        ],
-        "uniform_scale": 0.2900312506105697,
-        "clockwise_deg": -0.02271338539423661,
-        "note": "Visual landmark registration; exact circularity is not certified."
+        "method": "uniform image-tool hidden-end registration + exact master-region restoration",
+        "scale": 0.4074074074074074,
+        "top_left": [
+          333,
+          1274
+        ]
       }
     },
     "hand-near": {
@@ -99,19 +85,12 @@
       "skeleton_from": "wrist-near",
       "skeleton_to": "hand-near-tip",
       "registration": {
-        "source_landmarks": [
-          [
-            570,
-            525
-          ],
-          [
-            455,
-            1085
-          ]
-        ],
-        "uniform_scale": 0.2513270827665335,
-        "clockwise_deg": -9.690295901925479,
-        "note": "Visual landmark registration; exact circularity is not certified."
+        "method": "uniform image-tool hidden-end registration + exact master-region restoration",
+        "scale": 0.4127659574468085,
+        "top_left": [
+          307,
+          1367
+        ]
       }
     },
     "leg-near-upper": {
@@ -135,19 +114,12 @@
       "skeleton_from": "hip-near",
       "skeleton_to": "knee-near",
       "registration": {
-        "source_landmarks": [
-          [
-            535,
-            450
-          ],
-          [
-            490,
-            1000
-          ]
-        ],
-        "uniform_scale": 0.3438051102915326,
-        "clockwise_deg": -0.41536790192215567,
-        "note": "Visual landmark registration; exact circularity is not certified."
+        "method": "uniform image-tool hidden-end registration + exact master-region restoration",
+        "scale": 0.3982188295165394,
+        "top_left": [
+          474,
+          1444
+        ]
       }
     },
     "leg-near-lower": {
@@ -171,19 +143,12 @@
       "skeleton_from": "knee-near",
       "skeleton_to": "ankle-near",
       "registration": {
-        "source_landmarks": [
-          [
-            635,
-            665
-          ],
-          [
-            490,
-            1000
-          ]
-        ],
-        "uniform_scale": 0.41469815420307454,
-        "clockwise_deg": 0.7730082614011013,
-        "note": "Visual landmark registration; exact circularity is not certified."
+        "method": "uniform image-tool hidden-end registration + exact master-region restoration",
+        "scale": 0.4029126213592233,
+        "top_left": [
+          489,
+          1714
+        ]
       }
     },
     "foot-near": {
@@ -207,19 +172,12 @@
       "skeleton_from": "ankle-near",
       "skeleton_to": "toe-near",
       "registration": {
-        "source_landmarks": [
-          [
-            290,
-            840
-          ],
-          [
-            850,
-            1150
-          ]
-        ],
-        "uniform_scale": 0.35747961737238926,
-        "clockwise_deg": 4.896029922754246,
-        "note": "Visual landmark registration; exact circularity is not certified."
+        "method": "uniform image-tool hidden-end registration + exact master-region restoration",
+        "scale": 0.4073604060913706,
+        "top_left": [
+          485,
+          1766
+        ]
       }
     }
   },
@@ -231,6 +189,13 @@
     "knee-near": "leg-near-upper over leg-near-lower",
     "ankle-near": "leg-near-lower over foot-near"
   },
-  "note": "External torso/pelvis parent anchors must equal the named skeleton points. No new parent drawings supplied.",
-  "importReady": false
+  "note": "Exact v3 skeleton points, no pivot override from legacy A025. Legacy parent art shares master canvas but coverage must be reviewed.",
+  "importReady": false,
+  "round": 2,
+  "review_context": {
+    "torso": "A025-near-shoulder/torso.png",
+    "pelvis": "A023-rat-complete-kit/pelvis.png",
+    "seat": "A023-rat-complete-kit/seat.png",
+    "other": "A018-rat-parts"
+  }
 }

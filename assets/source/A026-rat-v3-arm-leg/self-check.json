@@ -1,137 +1,781 @@
 {
-  "overlap_measurements": {
-    "shoulder-near": [
+  "round": 2,
+  "silhouette": {
+    "arm-near-upper": {
+      "master_region_pixels": 61772,
+      "retained_master_silhouette_percent": 100.0,
+      "whole_part_IoU_percent": 82.036,
+      "generated_file": "exec-c8172ff0-723f-4f2a-9905-50da94447589.png",
+      "uniform_scale": 0.4186335403726708,
+      "placed_top_left": [
+        401,
+        1018
+      ],
+      "target_polygon": [
+        [
+          464,
+          1130
+        ],
+        [
+          480,
+          1090
+        ],
+        [
+          514,
+          1052
+        ],
+        [
+          561,
+          1020
+        ],
+        [
+          600,
+          1017
+        ],
+        [
+          633,
+          1025
+        ],
+        [
+          661,
+          1033
+        ],
+        [
+          690,
+          1066
+        ],
+        [
+          713,
+          1110
+        ],
+        [
+          724,
+          1153
+        ],
+        [
+          737,
+          1186
+        ],
+        [
+          720,
+          1217
+        ],
+        [
+          688,
+          1224
+        ],
+        [
+          649,
+          1255
+        ],
+        [
+          614,
+          1280
+        ],
+        [
+          599,
+          1305
+        ],
+        [
+          580,
+          1318
+        ],
+        [
+          568,
+          1350
+        ],
+        [
+          549,
+          1363
+        ],
+        [
+          527,
+          1323
+        ],
+        [
+          490,
+          1291
+        ],
+        [
+          447,
+          1276
+        ],
+        [
+          401,
+          1279
+        ],
+        [
+          410,
+          1251
+        ],
+        [
+          433,
+          1218
+        ],
+        [
+          451,
+          1170
+        ]
+      ],
+      "note": "Coverage of manually traced visible master region; full-part IoU includes hidden additions. Existing region pixels preserved; tool paint completes hidden ends and adjoining cut edges; visible-region pixels remain exact."
+    },
+    "arm-near-lower": {
+      "master_region_pixels": 18196,
+      "retained_master_silhouette_percent": 100.0,
+      "whole_part_IoU_percent": 70.97,
+      "generated_file": "exec-adc97d4e-07e4-407b-af41-59c1abe453ee.png",
+      "uniform_scale": 0.4074074074074074,
+      "placed_top_left": [
+        333,
+        1274
+      ],
+      "target_polygon": [
+        [
+          388,
+          1280
+        ],
+        [
+          421,
+          1274
+        ],
+        [
+          463,
+          1278
+        ],
+        [
+          499,
+          1292
+        ],
+        [
+          532,
+          1315
+        ],
+        [
+          558,
+          1358
+        ],
+        [
+          541,
+          1394
+        ],
+        [
+          510,
+          1425
+        ],
+        [
+          478,
+          1447
+        ],
+        [
+          440,
+          1420
+        ],
+        [
+          406,
+          1411
+        ],
+        [
+          370,
+          1416
+        ],
+        [
+          333,
+          1439
+        ],
+        [
+          339,
+          1398
+        ],
+        [
+          350,
+          1360
+        ],
+        [
+          370,
+          1334
+        ]
+      ],
+      "note": "Coverage of manually traced visible master region; full-part IoU includes hidden additions. Existing region pixels preserved; tool paint completes hidden ends and adjoining cut edges; visible-region pixels remain exact."
+    },
+    "hand-near": {
+      "master_region_pixels": 22458,
+      "retained_master_silhouette_percent": 100.0,
+      "whole_part_IoU_percent": 88.616,
+      "generated_file": "exec-143dd1b0-ad75-491e-b439-f586d1abe701.png",
+      "uniform_scale": 0.4127659574468085,
+      "placed_top_left": [
+        307,
+        1367
+      ],
+      "target_polygon": [
+        [
+          335,
+          1421
+        ],
+        [
+          365,
+          1407
+        ],
+        [
+          406,
+          1401
+        ],
+        [
+          443,
+          1408
+        ],
+        [
+          480,
+          1430
+        ],
+        [
+          500,
+          1474
+        ],
+        [
+          499,
+          1510
+        ],
+        [
+          482,
+          1534
+        ],
+        [
+          456,
+          1547
+        ],
+        [
+          408,
+          1555
+        ],
+        [
+          361,
+          1549
+        ],
+        [
+          326,
+          1528
+        ],
+        [
+          307,
+          1497
+        ],
+        [
+          308,
+          1467
+        ]
+      ],
+      "note": "Coverage of manually traced visible master region; full-part IoU includes hidden additions. Existing region pixels preserved; tool paint completes hidden ends and adjoining cut edges; visible-region pixels remain exact."
+    },
+    "leg-near-upper": {
+      "master_region_pixels": 67646,
+      "retained_master_silhouette_percent": 100.0,
+      "whole_part_IoU_percent": 88.65,
+      "generated_file": "exec-bbef5942-a91e-4bdb-bf5e-bc8d9dfbe95d.png",
+      "uniform_scale": 0.3982188295165394,
+      "placed_top_left": [
+        474,
+        1444
+      ],
+      "target_polygon": [
+        [
+          547,
+          1473
+        ],
+        [
+          604,
+          1488
+        ],
+        [
+          648,
+          1468
+        ],
+        [
+          690,
+          1477
+        ],
+        [
+          731,
+          1500
+        ],
+        [
+          763,
+          1556
+        ],
+        [
+          786,
+          1620
+        ],
+        [
+          769,
+          1664
+        ],
+        [
+          730,
+          1711
+        ],
+        [
+          693,
+          1744
+        ],
+        [
+          670,
+          1767
+        ],
+        [
+          651,
+          1779
+        ],
+        [
+          637,
+          1753
+        ],
+        [
+          622,
+          1783
+        ],
+        [
+          603,
+          1760
+        ],
+        [
+          583,
+          1744
+        ],
+        [
+          574,
+          1761
+        ],
+        [
+          556,
+          1737
+        ],
+        [
+          538,
+          1720
+        ],
+        [
+          519,
+          1737
+        ],
+        [
+          510,
+          1700
+        ],
+        [
+          490,
+          1715
+        ],
+        [
+          486,
+          1680
+        ],
+        [
+          475,
+          1688
+        ],
+        [
+          481,
+          1649
+        ],
+        [
+          465,
+          1659
+        ],
+        [
+          478,
+          1624
+        ],
+        [
+          455,
+          1633
+        ],
+        [
+          480,
+          1590
+        ],
+        [
+          455,
+          1600
+        ],
+        [
+          479,
+          1574
+        ],
+        [
+          444,
+          1584
+        ],
+        [
+          473,
+          1548
+        ],
+        [
+          495,
+          1511
+        ]
+      ],
+      "note": "Coverage of manually traced visible master region; full-part IoU includes hidden additions. Existing region pixels preserved; tool paint completes hidden ends and adjoining cut edges; visible-region pixels remain exact."
+    },
+    "leg-near-lower": {
+      "master_region_pixels": 20796,
+      "retained_master_silhouette_percent": 100.0,
+      "whole_part_IoU_percent": 88.078,
+      "generated_file": "exec-93f05609-cf67-4379-b7fe-306475308ab7.png",
+      "uniform_scale": 0.4029126213592233,
+      "placed_top_left": [
+        489,
+        1714
+      ],
+      "target_polygon": [
+        [
+          533,
+          1714
+        ],
+        [
+          560,
+          1734
+        ],
+        [
+          582,
+          1740
+        ],
+        [
+          605,
+          1762
+        ],
+        [
+          627,
+          1780
+        ],
+        [
+          639,
+          1761
+        ],
+        [
+          647,
+          1765
+        ],
+        [
+          638,
+          1780
+        ],
+        [
+          644,
+          1796
+        ],
+        [
+          635,
+          1816
+        ],
+        [
+          642,
+          1844
+        ],
+        [
+          654,
+          1863
+        ],
+        [
+          618,
+          1875
+        ],
+        [
+          588,
+          1889
+        ],
+        [
+          561,
+          1913
+        ],
+        [
+          533,
+          1917
+        ],
+        [
+          491,
+          1907
+        ],
+        [
+          489,
+          1878
+        ],
+        [
+          500,
+          1835
+        ],
+        [
+          510,
+          1806
+        ],
+        [
+          519,
+          1785
+        ],
+        [
+          515,
+          1764
+        ],
+        [
+          522,
+          1741
+        ]
+      ],
+      "note": "Coverage of manually traced visible master region; full-part IoU includes hidden additions. Existing region pixels preserved; tool paint completes hidden ends and adjoining cut edges; visible-region pixels remain exact."
+    },
+    "foot-near": {
+      "master_region_pixels": 24186,
+      "retained_master_silhouette_percent": 100.0,
+      "whole_part_IoU_percent": 72.795,
+      "generated_file": "exec-c180f6a9-a748-47e6-8128-81077f36145d.png",
+      "uniform_scale": 0.4073604060913706,
+      "placed_top_left": [
+        485,
+        1766
+      ],
+      "target_polygon": [
+        [
+          491,
+          1850
+        ],
+        [
+          522,
+          1843
+        ],
+        [
+          551,
+          1845
+        ],
+        [
+          578,
+          1849
+        ],
+        [
+          608,
+          1841
+        ],
+        [
+          639,
+          1840
+        ],
+        [
+          670,
+          1857
+        ],
+        [
+          699,
+          1862
+        ],
+        [
+          731,
+          1860
+        ],
+        [
+          763,
+          1874
+        ],
+        [
+          789,
+          1894
+        ],
+        [
+          804,
+          1921
+        ],
+        [
+          808,
+          1946
+        ],
+        [
+          793,
+          1941
+        ],
+        [
+          782,
+          1945
+        ],
+        [
+          767,
+          1942
+        ],
+        [
+          747,
+          1949
+        ],
+        [
+          722,
+          1948
+        ],
+        [
+          697,
+          1945
+        ],
+        [
+          666,
+          1941
+        ],
+        [
+          628,
+          1932
+        ],
+        [
+          584,
+          1925
+        ],
+        [
+          536,
+          1921
+        ],
+        [
+          502,
+          1918
+        ],
+        [
+          485,
+          1908
+        ],
+        [
+          487,
+          1878
+        ]
+      ],
+      "note": "Coverage of manually traced visible master region; full-part IoU includes hidden additions. Existing region pixels preserved; tool paint completes hidden ends and adjoining cut edges; visible-region pixels remain exact."
+    }
+  },
+  "sweeps": {
+    "shoulder": [
       {
         "angle": -61.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 59057
       },
       {
         "angle": -31.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 55731
       },
       {
         "angle": -1.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 41911
       },
       {
         "angle": 29.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 33439
       },
       {
         "angle": 59.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 25377
       }
     ],
-    "elbow-near": [
+    "elbow": [
       {
         "angle": -73.0,
-        "overlap_source_px": 4911
+        "parent_child_overlap_px2": 10989
       },
       {
         "angle": -53.5,
-        "overlap_source_px": 4415
+        "parent_child_overlap_px2": 10331
       },
       {
         "angle": -34.0,
-        "overlap_source_px": 4080
+        "parent_child_overlap_px2": 9774
       },
       {
         "angle": -14.5,
-        "overlap_source_px": 3833
+        "parent_child_overlap_px2": 9420
       },
       {
         "angle": 5.0,
-        "overlap_source_px": 3681
+        "parent_child_overlap_px2": 8340
       }
     ],
-    "wrist-near": [
+    "wrist": [
       {
         "angle": -42.0,
-        "overlap_source_px": 2566
+        "parent_child_overlap_px2": 9953
       },
       {
         "angle": -27.25,
-        "overlap_source_px": 2359
+        "parent_child_overlap_px2": 9028
       },
       {
         "angle": -12.5,
-        "overlap_source_px": 2149
+        "parent_child_overlap_px2": 8767
       },
       {
         "angle": 2.25,
-        "overlap_source_px": 2003
+        "parent_child_overlap_px2": 8476
       },
       {
         "angle": 17.0,
-        "overlap_source_px": 1911
+        "parent_child_overlap_px2": 7914
       }
     ],
-    "hip-near": [
+    "hip": [
       {
         "angle": -23.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 37220
       },
       {
         "angle": -11.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 33833
       },
       {
         "angle": 1.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 30434
       },
       {
         "angle": 13.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 26573
       },
       {
         "angle": 25.0,
-        "overlap_source_px": null
+        "parent_child_overlap_px2": 23165
       }
     ],
-    "knee-near": [
+    "knee": [
       {
         "angle": -23.0,
-        "overlap_source_px": 7104
+        "parent_child_overlap_px2": 3110
       },
       {
         "angle": -4.5,
-        "overlap_source_px": 7238
+        "parent_child_overlap_px2": 2656
       },
       {
         "angle": 14.0,
-        "overlap_source_px": 7410
+        "parent_child_overlap_px2": 3588
       },
       {
         "angle": 32.5,
-        "overlap_source_px": 7841
+        "parent_child_overlap_px2": 5428
       },
       {
         "angle": 51.0,
-        "overlap_source_px": 8315
+        "parent_child_overlap_px2": 7376
       }
     ],
-    "ankle-near": [
+    "ankle": [
       {
         "angle": -19.0,
-        "overlap_source_px": 6140
+        "parent_child_overlap_px2": 15073
       },
       {
         "angle": -4.25,
-        "overlap_source_px": 5855
+        "parent_child_overlap_px2": 16640
       },
       {
         "angle": 10.5,
-        "overlap_source_px": 5775
+        "parent_child_overlap_px2": 16795
       },
       {
         "angle": 25.25,
-        "overlap_source_px": 5871
+        "parent_child_overlap_px2": 15848
       },
       {
         "angle": 40.0,
-        "overlap_source_px": 6007
+        "parent_child_overlap_px2": 15224
       }
     ]
   },
-  "caveat": "Nonzero overlap is only a connectivity check, not proof of no visible cap or seam. Shoulder/hip lack separate parent source in named inputs. Visual failures documented in HANDOFF."
+  "metric_note": "Retained master-region coverage is intersection / manually traced master visible region. Whole-part IoU penalizes intended hidden extensions as well as drift. Neither metric certifies the visible assembled silhouette or dome centers.",
+  "importReady": false
 }
