@@ -55,9 +55,24 @@
   .rh .ok { color: var(--dim); }
   .rh .play { color: #9fd8ff; font-weight: 600; text-decoration: none; margin-left: 6px; white-space: nowrap; }
   .rh .legend { color: var(--dim); font-size: 13px; }
+  /* T031 drag to pose */
+  body.posing #stage { flex: 0 0 auto; height: 60dvh; }
+  body.posing #sheet { flex: 1 1 auto; height: auto; min-height: 0; }
+  body.posing #panel { padding-top: 8px; }
+  body.posing #hud { top: 6px; bottom: auto; }
+  body.posing select { font: inherit; color: var(--ink); background: var(--btn); border: 1px solid var(--line); border-radius: 10px; min-height: 44px; padding: 6px 8px; max-width: 100%; }
+  body.posing .frame input { font: inherit; width: 72px; min-height: 44px; color: var(--ink); background: var(--btn); border: 1px solid var(--line); border-radius: 10px; padding: 0 8px; }
+  body.posing pre.line { white-space: pre-wrap; overflow-wrap: anywhere; font: 11px/1.35 ui-monospace, monospace; color: var(--dim); background: #18161f; border-radius: 8px; padding: 6px 8px; margin: 6px 0; user-select: all; -webkit-user-select: all; }
+  body.posing .joints { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 10px; font-size: 13px; }
+  body.posing .joints .j { display: flex; gap: 6px; align-items: baseline; padding: 2px 0; border-bottom: 1px solid var(--line); }
+  body.posing .joints .j b { margin-left: auto; font-variant-numeric: tabular-nums; }
+  body.posing .joints .j .lim { color: var(--dim); font-size: 11px; min-width: 34px; }
+  body.posing .joints .j.at, body.posing .joints .j.at .lim { color: #ff6b5e; }
   @media (min-width: 900px) and (min-aspect-ratio: 1/1) {
     body { flex-direction: row; }
     #sheet { width: 400px; height: 100dvh; border-top: 0; border-left: 1px solid var(--line); }
+    body.posing #stage { flex: 1 1 auto; height: 100dvh; }
+    body.posing #sheet { flex: 0 0 auto; height: 100dvh; }
   }
 </style>
 </head>
@@ -76,9 +91,11 @@
   <nav id="tabs"></nav>
   <section id="panel"></section>
 </div>
-<!-- T028: ?rehearse=<body> opens the move rehearsal sheet (src/viewer/rehearse.js) instead of the viewer -->
+<!-- T028: ?rehearse=<body> opens the move rehearsal sheet (src/viewer/rehearse.js) instead of the viewer; T031: ?pose=<fighter>
+     the drag-to-pose page (src/viewer/pose.js) -->
 <script type="module">
-  import(new URLSearchParams(location.search).has('rehearse') ? './src/viewer/rehearse.js' : './src/viewer/main.js');
+  const q = new URLSearchParams(location.search);
+  import(q.has('rehearse') ? './src/viewer/rehearse.js' : q.has('pose') ? './src/viewer/pose.js' : './src/viewer/main.js');
 </script>
 </body>
 </html>
