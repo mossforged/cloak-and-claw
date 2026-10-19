@@ -10,7 +10,6 @@ import { LOOKS, LOADOUTS, RAT_LOOKS, CHANNELS, PALETTES } from '../src/data/look
 import { pickLook } from '../src/sim/looks.js';
 import { createRng } from '../src/core/rng.js';
 import { layoutRig } from '../src/render/rig.js';
-import { HIDDEN_GEAR } from '../src/data/rigs/rat-raider.js';
 import { RAT_A010 } from '../src/data/rigs/a010/index.js';
 import { gearLayout, gearOf, tintPixels, rgbHsl, hexRgb } from '../src/render/looks.js';
 import { botControl } from './bot.mjs';
@@ -60,7 +59,7 @@ for (const def of Object.values(FIGHTERS)) {
     ...Object.values(LOADOUTS).flat(), ...Object.values(RAT_LOOKS).flatMap((L) => Object.keys(L.details))].filter((g) => g !== 'none'));
   for (const g of groups) {
     const G = rig.views[g];
-    if (HIDDEN_GEAR.includes(g) && rig.parts.torso.img.includes('/rig/')) { check(!G, `${def.id}: ${g} hidden until A020 (T026)`); continue; }
+    if (rig.dress?.[g]) { check(!G, `${def.id}: ${g} is a whole dressed drawing, not an overlay (T032; tests/gear.test.mjs)`); continue; }
     check(G, `${def.id}: gear group ${g} has views`);
     if (!G) continue;
     for (const d of [G.on, ...Object.keys(rig.parts[G.on].swaps ?? {})]) {
@@ -92,24 +91,21 @@ const lay = (swap, hide) => {
   return gearLayout(rig, L, gearOf(f));
 };
 const img = (L, n) => L.find((e) => e.name === n)?.img?.split('/').pop();
-check(img(lay({}), 'gear-hood') === 'gear-hood.png', 'hood on the default head');
-check(img(lay({ head: 'head-hurt' }), 'gear-hood') === 'gear-hood-hurt.png', 'hurt head -> hood-hurt');
+// T032: the rebuilt rat's hood is a whole dressed head (tests/gear.test.mjs); its face details still ride the bare drawing
+check(img(lay({}), 'head') === 'head-hood.png', 'hooded default head');
 check(img(lay({ head: 'head-hurt' }), 'detail-eyepatch') === 'detail-eyepatch-hurt.png', 'hurt head -> eyepatch-hurt');
-check(img(lay({ head: 'head-ko' }), 'gear-hood') === 'gear-hood.png', 'KO head keeps the default hood');
-check(img(lay({ head: 'head-back' }), 'gear-hood') === 'gear-hood-back.png', 'back head -> hood-back');
 check(!img(lay({ head: 'head-back' }), 'detail-eyepatch'), 'rear head: no eyepatch (face hidden)');
-check(!img(lay({}, 'head'), 'gear-hood'), 'a hidden head hides its hood');
-// torso gear (T019) checked on the A010 rats it was drawn for; the rebuilt rat draws none until A020 refits it (T026)
+check(!img(lay({}, 'head'), 'detail-eyepatch'), 'a hidden head hides its detail');
+// torso gear as T019 drew it, on the A010 rats it was drawn for (viewer compare slot)
 const sp = RAT_A010['rat-spearman'], sf = { def: FIGHTERS['rat-spearman'], look: null };
-check(img(gearLayout(sp, layoutRig(sp, {}, { torso: 'torso-side' }), gearOf(sf)), 'gear-jerkin') === 'gear-jerkin-side.png', 'side torso -> jerkin-side');
-check(!lay({}).some((e) => HIDDEN_GEAR.includes(e.name)), 'rebuilt rat: torso gear hidden (A020)');
+check(img(gearLayout(sp, layoutRig(sp, {}, { torso: 'torso-side' }), gearOf(sf)), 'gear-jerkin') === 'gear-jerkin-side.png', 'A010 rat: side torso -> jerkin-side');
 const old = RAT_A010['rat-archer'], Lq = gearLayout(old, layoutRig(old, {}), gearOf(f));
 check(Lq.findIndex((e) => e.name === 'gear-quiver') >= 0 && Lq.findIndex((e) => e.name === 'gear-quiver') < Lq.findIndex((e) => e.name === 'torso'), 'A010 rat: quiver behind the torso');
-const L0 = lay({}), at = (n) => L0.findIndex((e) => e.name === n);
-check(at('torso') < at('head') && at('torso') < at('head') && at('head') < at('detail-eyepatch') && at('detail-eyepatch') < at('gear-hood'),
-  'draw order: detail over the head, hood over the detail');
-const head = L0.find((e) => e.name === 'head'), hood = L0.find((e) => e.name === 'gear-hood'), o = rig.overlays['gear-hood'].offset;
-check(Math.abs(hood.m[4] - (head.m[0] * o[0] + head.m[2] * o[1] + head.m[4])) < 1e-9, 'hood sits at its offset on the head image');
+const L0 = gearLayout(old, layoutRig(old, {}), gearOf(f)), at = (n) => L0.findIndex((e) => e.name === n);
+check(at('torso') < at('head') && at('head') < at('detail-eyepatch') && at('detail-eyepatch') < at('gear-hood'),
+  'A010 rat draw order: detail over the head, hood over the detail');
+const head = L0.find((e) => e.name === 'head'), hood = L0.find((e) => e.name === 'gear-hood'), o = old.overlays['gear-hood'].offset;
+check(Math.abs(hood.m[4] - (head.m[0] * o[0] + head.m[2] * o[1] + head.m[4])) < 1e-9, 'A010 rat: hood sits at its offset on the head image');
 check(String(gearLayout(rig, layoutRig(rig, {}), [])) === String(layoutRig(rig, {})), 'no gear -> layout unchanged');
 
 // --- tints: unmasked pixels untouched, cloth lands on the palette colour with shading kept, fur shift is small

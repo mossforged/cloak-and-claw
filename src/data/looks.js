@@ -33,7 +33,10 @@ export const RAT_LOOKS = {
   captain: { details: { none: 1, 'detail-eyepatch': 2, 'detail-scar2': 1, 'detail-earring': 2 }, tints: { ...RAT, sash: PALETTES.sash } },   // no captain enemy yet
 };
 
-// Gear loadouts (overlay groups from rigs/rat-raider-gear.js), worn by every rat of the type.
+// T032: gear that covers a face detail (the hood covers the ears: no earring, no ear notch under it).
+export const COVERS = { 'gear-hood': ['detail-earring', 'detail-ear-notch'] };
+
+// Gear loadouts (gear groups: whole dressed drawings or overlays, rigs/rat-raider-dress.js), worn by every rat of the type.
 export const LOADOUTS = {
   archer: ['gear-hood', 'gear-quiver'],
   spearman: ['gear-helmet', 'gear-jerkin'],

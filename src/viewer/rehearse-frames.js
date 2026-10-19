@@ -7,6 +7,7 @@ import HULLS from '../data/rigs/hulls.js';
 import { rigFrame } from '../render/rig.js';
 import { gripLayout } from '../render/rig-grip.js';
 import { carryLayer } from '../render/carry.js';
+import { gearLayout } from '../render/looks.js';
 import { apply } from '../render/rig-layout.js';
 
 // 'F/Q' -> { torso: 'F', pelvis: 'Q' }; one code = both, a hip view the rig lacks = Q
@@ -59,7 +60,8 @@ const boxOf = (L, rig, { parts, joint }) => {
 };
 
 // One key: { L (layout entries, rig space), p (standee placement), k, held, views, ready: [names], missing: [{ name, box }] }
-export function keyFrame(sheet, key) {
+// T032: gear = gear groups to wear (viewer.html?rehearse=<body>&gear=gear-hood,gear-jerkin); none = bare, as before.
+export function keyFrame(sheet, key, gear = []) {
   const def = FIGHTERS[key.f ?? sheet.fighter], rig = RIGS[def.art.rig], { f, time, pose } = fighterFor(def, rig, key.pose);
   const mem = {};
   rigFrame(f, rig, time - 1 / 60, mem, pose);
@@ -72,7 +74,7 @@ export function keyFrame(sheet, key) {
     const V = rig.bodyViews?.[slot]?.[code];
     if (code !== 'Q' && (!V || V.standIn)) missing.add(V?.standIn ?? `${slot} view ${code}`);
   }
-  const L = carryLayer(rig, gripLayout(rig, fr.joints, swap, fr.held, f), swap);
+  const L = gearLayout(rig, carryLayer(rig, gripLayout(rig, fr.joints, swap, fr.held, f), swap), gear);
   return { def, rig, L, p: fr.p, k: fr.k, held: fr.held, views, ready: key.draw.filter((n) => ready(rig, n)),
     missing: [...missing].map((name) => ({ name, box: boxOf(L, rig, placeOf(name)) })) };
 }
