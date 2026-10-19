@@ -1,0 +1,106 @@
+{
+ "source": "Rat Skeleton page (artifact 9DPtCPHZufQFRNDHViqpUD, db skeleton/rat-v3-Q), user, 2026-10-19",
+ "image": "assets/source/A017-rat-setup-master/master.png",
+ "units": "master.png pixels (1536x2304)",
+ "skipped": [
+  "tail",
+  "shoulder-far"
+ ],
+ "points": {
+  "ankle-far": [
+   904.7,
+   1807.9
+  ],
+  "ankle-near": [
+   571.1,
+   1799.1
+  ],
+  "elbow-far": [
+   996.9,
+   1309.3
+  ],
+  "elbow-near": [
+   484.1,
+   1253.1
+  ],
+  "hand-far-tip": [
+   1152.9,
+   1571.2
+  ],
+  "hand-near-tip": [
+   393.8,
+   1546.1
+  ],
+  "hip-far": [
+   884.4,
+   1484.5
+  ],
+  "hip-near": [
+   647.2,
+   1471.8
+  ],
+  "knee-far": [
+   995.5,
+   1624
+  ],
+  "knee-near": [
+   633.1,
+   1661
+  ],
+  "neck": [
+   850.6,
+   1147.1
+  ],
+  "shoulder-near": [
+   589.2,
+   1081.5
+  ],
+  "toe-far": [
+   1151.6,
+   1901.6
+  ],
+  "toe-near": [
+   761.1,
+   1926.6
+  ],
+  "waist": [
+   806.2,
+   1441.6
+  ],
+  "wrist-far": [
+   1114.4,
+   1427.9
+  ],
+  "wrist-near": [
+   398.6,
+   1402.5
+  ]
+ },
+ "limits_deg": {
+  "note": "user's Fitting Room ranges for the near side, + = clockwise on screen, from the rest pose in master.png",
+  "shoulder-near": [
+   -61,
+   59
+  ],
+  "elbow-near": [
+   -73,
+   5
+  ],
+  "wrist-near": [
+   -42,
+   17
+  ],
+  "hip-near": [
+   -23,
+   25
+  ],
+  "knee-near": [
+   -23,
+   51
+  ],
+  "ankle-near": [
+   -19,
+   40
+  ]
+ }
+}

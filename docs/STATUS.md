@@ -27,8 +27,8 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: T032 gear import (job 010), then T031 drag-to-pose (job 011).
-- Art: A024 limb end repairs (job 012).
+- Code: idle (T033 limb repairs and A025 shoulder kept as reference; rat v3 decided).
+- Art: A026 rat v3 round 1, near arm and leg drawn individually on the user's skeleton (job 020).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-19 lead: T034 showed the user's joint points don't fit the cut-up drawings; **rat v3 redraw decided** (rat-v3-plan.md). User tapped the skeleton on the master (rat-v3-skeleton.json); A026 queued (near arm and leg, each piece drawn on its own, round ends on his points). Merged T029, T031, T032 (gear), A020, A024 source.
 2026-10-19 code: T032 round 2 on `t032-import-rat-gear` (runner job 016): main merged (T029 r3 wrists / moves, T031 drag-to-pose); known lists (pose seams 109, exposure 57) and the pass bar (48 / 73) regenerated on the merged code with no change from the earlier merge. 42/42. Build `t032 gear v2`.
 2026-10-19 code: T032 r2 gear holds through the T029 moves: new strips docs/screens/T032/r2-*.jpg (raider hood + jerkin slash, captain hat + sash slash, spearman thrust, archer bow) from `tools/pose-strip.mjs --gear`; views.json links unchanged. Not merged.
 2026-10-19 code: T032 on `t032-import-rat-gear` (not merged): A020 r3 imported (tools/gear_swaps_from_source.py): hood / helmet / hat on all nine heads and the jerkin on all seven torsos as whole dressed drawings (render/looks.js `dressOf`), sash and quiver per torso view, front / drink face details, notch on the neutral head; rehearsal sheet takes `&gear=`. 39/39; pass bar 32 / 54 as T030. Build `t032 gear v1`.
