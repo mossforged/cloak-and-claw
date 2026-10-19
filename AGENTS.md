@@ -24,3 +24,6 @@ You never touch `src/`, `tests/`, `tools/`, `assets/art/`, `index.html` or other
 
 ## Handoff
 Commit, `git push -u origin <branch>`, and report: branch name, files delivered, what is missing or flawed, and any question for the user.
+
+## When the runner started you (unattended)
+If your prompt says the runner started you: the task branch is already checked out with main merged in, so skip the checkout, pull and branch steps (Step 0's folder check still applies); don't switch branches and don't push (the runner pushes after you). If git is blocked in your sandbox, leave the files: the runner commits them. Nobody can answer questions mid-run: write any question in `HANDOFF.md` and your final message, and stop. Your final message becomes `docs/runs/<id>.md`.

@@ -35,3 +35,6 @@ When a packet says to import an asset: run `python3 tools/key_green.py assets/so
 - Found a problem outside your task? Note it in your report; don't fix it.
 - The user asks for something outside the packet? Note it in your report for the lead; don't build it.
 - Gate tags (`stage-N`): only when the lead asks.
+
+## When the runner started you (unattended)
+If your prompt says the runner started you: the task branch is already checked out with main merged in, so skip the checkout, pull and branch steps above; don't switch branches and don't push (the runner pushes after you). Do everything else as usual (tests, screens, "Last session" lines, commit). Nobody can answer questions mid-run: if you hit one only the user can answer, write it in your report and stop. Your final message becomes `docs/runs/<id>.md`, so make it the report.
