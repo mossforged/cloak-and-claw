@@ -1,0 +1,692 @@
+{
+ "head-attack-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.68
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.28
+  }
+ },
+ "head-attack-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.6,
+     0.4
+    ],
+    "match": 0.54
+   }
+  },
+  "covered": {},
+  "fix": [
+   2.38,
+   -1.59
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-attack-hood": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.2,
+     -0.2
+    ],
+    "match": 0.48
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.28
+  }
+ },
+ "head-back-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.6,
+     -0.2
+    ],
+    "match": 0.62
+   }
+  },
+  "covered": {},
+  "fix": [
+   2.38,
+   0.79
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-back-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     2.62,
+     2.01
+    ],
+    "match": 0.28
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 3.3
+  }
+ },
+ "head-back-hood": {
+  "points": {},
+  "covered": {
+   "neck": 0.11
+  },
+  "fix": null,
+  "residual": {}
+ },
+ "head-drink-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.4
+    ],
+    "match": 0.56
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.4
+  }
+ },
+ "head-drink-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.2
+    ],
+    "match": 0.55
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.2
+  }
+ },
+ "head-drink-hood": {
+  "points": {},
+  "covered": {
+   "neck": 0.1
+  },
+  "fix": null,
+  "residual": {}
+ },
+ "head-effort-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.4,
+     0.6
+    ],
+    "match": 0.52
+   }
+  },
+  "covered": {},
+  "fix": [
+   1.59,
+   -2.38
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-effort-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     -1.81,
+     0.2
+    ],
+    "match": 0.54
+   }
+  },
+  "covered": {},
+  "fix": [
+   7.19,
+   -0.79
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-effort-hood": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.27
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.2
+  }
+ },
+ "head-front-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.2
+    ],
+    "match": 0.61
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.2
+  }
+ },
+ "head-front-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.2
+    ],
+    "match": 0.63
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.2
+  }
+ },
+ "head-front-hood": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.0
+    ],
+    "match": 0.5
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.81,
+     1.01
+    ],
+    "match": 0.61
+   }
+  },
+  "covered": {},
+  "fix": [
+   3.22,
+   -4.01
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     -1.01,
+     1.01
+    ],
+    "match": 0.61
+   }
+  },
+  "covered": {},
+  "fix": [
+   4.01,
+   -4.01
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-hood": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.0
+    ],
+    "match": 0.41
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-hurt-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.4,
+     2.01
+    ],
+    "match": 0.47
+   }
+  },
+  "covered": {},
+  "fix": [
+   1.59,
+   -7.98
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-hurt-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     -1.21,
+     0.6
+    ],
+    "match": 0.48
+   }
+  },
+  "covered": {},
+  "fix": [
+   4.8,
+   -2.38
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-hurt-hood": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.0
+    ],
+    "match": 0.32
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-ko-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.2,
+     -0.2
+    ],
+    "match": 0.78
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.28
+  }
+ },
+ "head-ko-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.2,
+     0.0
+    ],
+    "match": 0.75
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.2
+  }
+ },
+ "head-ko-hood": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.21
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.2
+  }
+ },
+ "head-notch": {
+  "points": {
+   "neck": {
+    "shift": [
+     -1.21,
+     0.81
+    ],
+    "match": 0.61
+   }
+  },
+  "covered": {},
+  "fix": [
+   4.8,
+   -3.22
+  ],
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "head-shout-hat": {
+  "points": {
+   "neck": {
+    "shift": [
+     -0.4,
+     0.0
+    ],
+    "match": 0.6
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.4
+  }
+ },
+ "head-shout-helmet": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.2
+    ],
+    "match": 0.62
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.2
+  }
+ },
+ "head-shout-hood": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     0.0
+    ],
+    "match": 0.36
+   }
+  },
+  "covered": {},
+  "fix": null,
+  "residual": {
+   "neck": 0.0
+  }
+ },
+ "torso-away-jerkin": {
+  "points": {
+   "shoulder_near": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.5
+   },
+   "shoulder_far": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.26
+   }
+  },
+  "covered": {
+   "neck": 0.07,
+   "waist": 0.14
+  },
+  "fix": null,
+  "residual": {
+   "shoulder_near": 0.28,
+   "shoulder_far": 0.2
+  }
+ },
+ "torso-back-jerkin": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.17
+   },
+   "shoulder_near": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.55
+   },
+   "shoulder_far": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.75
+   }
+  },
+  "covered": {
+   "waist": 0.04
+  },
+  "fix": null,
+  "residual": {
+   "neck": 0.2,
+   "shoulder_near": 0.2,
+   "shoulder_far": 0.28
+  }
+ },
+ "torso-front-jerkin": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.51
+   },
+   "shoulder_near": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.45
+   },
+   "shoulder_far": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.57
+   }
+  },
+  "covered": {
+   "waist": 0.04
+  },
+  "fix": null,
+  "residual": {
+   "neck": 0.2,
+   "shoulder_near": 0.28,
+   "shoulder_far": 0.2
+  }
+ },
+ "torso-hunched-jerkin": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.48
+   },
+   "shoulder_near": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.6
+   },
+   "shoulder_far": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.55
+   }
+  },
+  "covered": {
+   "waist": 0.07
+  },
+  "fix": null,
+  "residual": {
+   "neck": 0.2,
+   "shoulder_near": 0.2,
+   "shoulder_far": 0.2
+  }
+ },
+ "torso-jerkin": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.0,
+     -0.2
+    ],
+    "match": 0.26
+   },
+   "shoulder_near": {
+    "shift": [
+     0.2,
+     -0.4
+    ],
+    "match": 0.31
+   },
+   "shoulder_far": {
+    "shift": [
+     0.0,
+     -0.4
+    ],
+    "match": 0.3
+   }
+  },
+  "covered": {
+   "waist": 0.04
+  },
+  "fix": null,
+  "residual": {
+   "neck": 0.2,
+   "shoulder_near": 0.45,
+   "shoulder_far": 0.4
+  }
+ },
+ "torso-lean-back-jerkin": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.2,
+     -0.4
+    ],
+    "match": 0.57
+   },
+   "shoulder_near": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.56
+   },
+   "shoulder_far": {
+    "shift": [
+     0.2,
+     -0.4
+    ],
+    "match": 0.42
+   }
+  },
+  "covered": {
+   "waist": 0.07
+  },
+  "fix": null,
+  "residual": {
+   "neck": 0.45,
+   "shoulder_near": 0.28,
+   "shoulder_far": 0.45
+  }
+ },
+ "torso-side-jerkin": {
+  "points": {
+   "neck": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.51
+   },
+   "shoulder_near": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.55
+   },
+   "shoulder_far": {
+    "shift": [
+     0.2,
+     -0.2
+    ],
+    "match": 0.5
+   }
+  },
+  "covered": {
+   "waist": 0.05
+  },
+  "fix": null,
+  "residual": {
+   "neck": 0.28,
+   "shoulder_near": 0.28,
+   "shoulder_far": 0.28
+  }
+ }
+}

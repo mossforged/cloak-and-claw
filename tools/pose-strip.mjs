@@ -2,6 +2,7 @@
 // lean, lying rest) with each boot's floor line, headless, as a JPG (tools/stretch_render.py).
 // Usage: node tools/pose-strip.mjs <fighter id> <out.jpg> <title> <cell> [<cell> ...] [--zoom N] [--a010]
 //   --no-wrists (T029 r3): without the wrist limits (render/wrist.js), for before / after sheets
+//   --gear g,g (T032 r2): wear that gear (render/looks.js groups) instead of the fighter's own loadout
 //   --zoom: scale (default 1.5; 1 = game size); --a010 (T026): draw a rat with its old A010 rig (rigs/a010/)
 //   cell: state[:t[:z]] (walk:<0..1 of a stride>), a named pose (=name, e.g. =cast), or move:<frame> (e.g. slash3:14)
 import { writeFileSync } from 'node:fs';
@@ -18,7 +19,8 @@ import { WRISTS } from '../src/data/wrists.js';
 const args = process.argv.slice(2), opt = (k) => { const i = args.indexOf(k); return i < 0 ? null : args.splice(i, 2)[1]; };
 const zoom = +(opt('--zoom') ?? 1.5), old = args.includes('--a010') && args.splice(args.indexOf('--a010'), 1);
 if (args.includes('--no-wrists')) { WRISTS.on = false; args.splice(args.indexOf('--no-wrists'), 1); }   // T029 r3: the frame before wrist limits
-const [id, out, title, ...specs] = args, def = FIGHTERS[id], rig = old ? RAT_A010[def.art.rig] : RIGS[def.art.rig];
+const gear = opt('--gear');   // T032 r2: --gear gear-hood,gear-jerkin wears that gear instead of the fighter's loadout
+const [id, out, title, ...specs] = args, def0 = FIGHTERS[id], def = gear ? { ...def0, art: { ...def0.art, gear: gear.split(',') } } : def0, rig = old ? RAT_A010[def.art.rig] : RIGS[def.art.rig];
 const mul = (m, n) => [m[0] * n[0] + m[2] * n[1], m[1] * n[0] + m[3] * n[1], m[0] * n[2] + m[2] * n[3],
   m[1] * n[2] + m[3] * n[3], m[0] * n[4] + m[2] * n[5] + m[4], m[1] * n[4] + m[3] * n[5] + m[5]];
 const cells = specs.map((spec) => {

@@ -10,6 +10,7 @@ import { createSlot } from './sandbox.js';
 import { FPS } from '../config.js';
 import { gripLayout } from '../render/rig-grip.js';
 import { carryLayer } from '../render/carry.js';
+import { gearLayout } from '../render/looks.js';
 import { apply } from '../render/rig-layout.js';
 import { throughAt } from '../render/rig-pose.js';
 
@@ -81,9 +82,9 @@ export const posed = (def, rig, ref) => {   // does a posed key's ref resolve
   const [a, b] = ref.split(':');
   return a.startsWith('@') || !!(def.moves[a] ?? def.rehearsal?.[a]) && !!rig.poses.moves?.[def.moves[a]?.rig ?? a] || (b != null && !!rig.poses[a]?.speed) || ['idle', 'walk'].includes(a);
 };
-function clipFrame(id, rig, ref) {   // '@<clip>:<frame>': the viewer sandbox played to that frame (the turn-around's flip)
+function clipFrame(id, rig, ref, gear) {   // '@<clip>:<frame>': the viewer sandbox played to that frame (the turn-around's flip)
   const [a, n] = ref.slice(1).split(':'), slot = createSlot();
-  slot.load({ f: id, v: 'current', anim: a, item: 'own', grip: '', look: {}, gear: null });
+  slot.load({ f: id, v: 'current', anim: a, item: 'own', grip: '', look: {}, gear });
   const sb = slot.seek(0), mem = rigMemory(sb.hero);
   for (let i = 0; i <= +n; i++) { if (i) slot.step(); rigFrame(sb.hero, rig, sb.n / FPS, mem); }
   return { f: sb.hero, fr: rigFrame(sb.hero, rig, sb.n / FPS, mem), mem };
@@ -92,13 +93,15 @@ const shows = (L, n) => L.some((e) => e.m && !e.line && (e.swap === n || e.name 
 
 // One key: { L (layout entries, rig space), p (standee placement), k, held, views, ready: [names], missing: [{ name, box }],
 // posed, off: [names the posed frame doesn't show] }
-export function keyFrame(sheet, key) {
+// T032: gear = gear groups to wear (viewer.html?rehearse=<body>&gear=gear-hood,gear-jerkin), in place of the loadout (the
+// viewer's Gear buttons); none = as before (a posed key wears the fighter's own loadout, as the game; a stand-in key bare).
+export function keyFrame(sheet, key, gear = []) {
   const id = key.f ?? sheet.fighter, def = FIGHTERS[id], rig = RIGS[def.art.rig];
   if (key.posed) {
     let f, fr, mem = {};
-    if (key.pose.startsWith('@')) ({ f, fr, mem } = clipFrame(id, rig, key.pose));
+    if (key.pose.startsWith('@')) ({ f, fr, mem } = clipFrame(id, rig, key.pose, gear.length ? gear : null));
     else {
-      const F = fighterFor(def, rig, key.pose);
+      const F = fighterFor(gear.length ? { ...def, art: { ...def.art, gear } } : def, rig, key.pose);
       f = F.f; rigFrame(f, rig, F.time - 1 / 60, mem, F.pose); fr = rigFrame(f, rig, F.time, mem, F.pose);
     }
     const views = { torso: mem.swap['@view.torso'] ?? 'Q', pelvis: mem.swap['@view.pelvis'] ?? 'Q' }, want = parseView(rig, key.view);
@@ -119,7 +122,7 @@ export function keyFrame(sheet, key) {
     const V = rig.bodyViews?.[slot]?.[code];
     if (code !== 'Q' && (!V || V.standIn)) missing.add(V?.standIn ?? `${slot} view ${code}`);
   }
-  const L = carryLayer(rig, gripLayout(rig, fr.joints, swap, fr.held, f), swap);
+  const L = gearLayout(rig, carryLayer(rig, gripLayout(rig, fr.joints, swap, fr.held, f), swap), gear);
   return { def, rig, L, p: fr.p, k: fr.k, held: fr.held, views, swap, posed: false, off: [], ready: key.draw.filter((n) => ready(rig, n)),
     missing: [...missing].map((name) => ({ name, box: boxOf(L, rig, placeOf(name)) })) };
 }

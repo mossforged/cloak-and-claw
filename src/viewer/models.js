@@ -38,7 +38,7 @@ export const STEPS = [-1, -0.5, 0, 0.5, 1];
 export function looksFor(id) {
   const def = FIGHTERS[id], rig = RIGS[def.art.rig], L = def.look;
   if (!L) return null;
-  const groups = Object.keys(rig.views ?? {});
+  const groups = [...Object.keys(rig.dress ?? {}), ...Object.keys(rig.views ?? {})];   // T032: whole dressed drawings, then overlays
   return {
     details: ['none', ...Object.keys(L.details ?? {}).filter((k) => k !== 'none')],
     tints: Object.fromEntries(Object.keys(L.tints ?? {}).map((ch) => [ch, L.tints[ch]])),
