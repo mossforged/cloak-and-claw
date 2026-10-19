@@ -28,7 +28,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 
 ## What builders need now
 - Code: idle (T033 limb repairs and A025 shoulder kept as reference; rat v3 decided).
-- Art: A026 round 3 (job 022): wrist cuff onto the hand, ankle wrap onto the foot, the user's new joint points and ranges.
+- Art: idle. A026 round 3 on `a026-rat-v3-arm-leg` (not merged): wrist cuff on the hand, ankle wrap on the foot, user's points and ranges; in Fitting Room v3 for the user's bend check.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-19 lead: reviewed A026 r3: cuff follows the hand and wrap follows the foot through the user's ranges; rest matches the master (combined visible limb IoU 96.5%; shin 51% because its visible strip differs). Left: small cut edges. Fitting Room v3 reloaded with r3 (saves in joint-points-r3).
 2026-10-19 lead: reviewed A026 r2: pieces now match the master at rest (master paint kept, sizes right), elbow and wrist bend cleanly; left: stray cut edges, doubled cuff/ankle contours, shin stops short of the knee point. Context torso/seat are old art. Built Fitting Room v3 with the six pieces joined on the user's skeleton for his bend check.
 2026-10-19 lead: T034 showed the user's joint points don't fit the cut-up drawings; **rat v3 redraw decided** (rat-v3-plan.md). User tapped the skeleton on the master (rat-v3-skeleton.json); A026 queued (near arm and leg, each piece drawn on its own, round ends on his points). Merged T029, T031, T032 (gear), A020, A024 source.
 2026-10-19 code: T032 round 2 on `t032-import-rat-gear` (runner job 016): main merged (T029 r3 wrists / moves, T031 drag-to-pose); known lists (pose seams 109, exposure 57) and the pass bar (48 / 73) regenerated on the merged code with no change from the earlier merge. 42/42. Build `t032 gear v2`.
