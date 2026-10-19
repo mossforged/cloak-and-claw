@@ -16,3 +16,7 @@ page (`index.html` / `src/game.js` are never loaded or changed).
 - The URL holds the whole view (`state.js`); a new option = a state field + parse/format + the round-trip test.
 - T028 rehearsal sheet: `viewer.html?rehearse=<body>` (`rehearse.js`, browser; `rehearse-frames.js`, pure) draws every key of
   `src/data/rehearsal/<body>.js` with the real rigFrame; a drawing not in the rig yet is a labelled red box, never invented art.
+- T031 drag to pose: `viewer.html?pose=<fighter>&from=<clip>:<frame>&item=<id>[&j=...&sw=...]` (`pose.js`, `pose-panel.js`, browser;
+  `pose-drag.js`, `pose-state.js`, pure: Node tests `tests/pose-drag.test.mjs`). The pose is a clip frame's joints and drawings,
+  drawn as a held pose through the game's rigFrame / drawRig; drags change only the page's copy (never the data files). Limits:
+  wrists from `data/wrists.js`, ankle / neck / knee from `data/pose-limits.js`, the elbow's from `WRISTS.elbowMax`.

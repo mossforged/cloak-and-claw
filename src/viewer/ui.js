@@ -69,7 +69,8 @@ export function createUI(api) {
       head('Background'), row(BGS.map((b) => btn(b === 'grey' ? 'Grey' : 'Harbor Market', S.bg === b, () => api.set({ bg: b }, false)))),
       head('Target'), row(btn('Something to hit', S.target, () => api.set({ target: !S.target }))),
       el('p', { className: 'note', textContent: 'Without a target, attacks still pause for their hit-stop as if they landed.' }),
-      head('Share'), row(btn('Screenshot', false, () => api.screenshot()), btn('Copy link', false, () => api.share()))];
+      head('Share'), row(btn('Screenshot', false, () => api.screenshot()), btn('Copy link', false, () => api.share())),
+      head('Pose'), row(btn('Pose this frame (drag to pose)', false, () => api.pose()))];
   }
 
   function compare(S) {
