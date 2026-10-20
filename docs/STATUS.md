@@ -46,6 +46,8 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-20 code: T037 on `t037-raider-hulls` (runner job 031): hulls.js regenerated (raider near upper arm, raised arm, far foot, scarf changed; seat drawings got hulls) with a content hash beside each hull; new tests/hulls.test.mjs (missing or stale hull fails); tools/hull-moves.mjs lists what a hulls change moves. 45/45. Build `t037 hulls v1`.
+2026-10-20 code: T037 moves (docs/screens/T037/moves.md): rat far-foot floor line -0.35 -> 0.15; in play at most 0.92 px (walk far shin), lying rest unchanged; viewer only over 2 px: jumpUp @16 folded far leg flips forward (42 px, strip), held down / jump poses 2.8 px. Exposure known list regenerated. Not merged.
 2026-10-20 lead: Art blocked on Codex's limit (A028, job 029). Queued three Code tasks while it waits: T036 joint checker, T037 raider hulls, T038 v3 floor slide.
 2026-10-20 lead: user approved v3 in motion ("this is good"). **Merged T035** (44/44 on main). Queued A028: v3's hand, head and foot swaps so the moves use them and it can hold weapons; then grip lines, then the other views.
 2026-10-20 lead: reviewed T035 r2 (44 files pass): far fist now at the chest in the slash wind-up (27 px fwd vs raider 29), hands within 3-5 px of the raider's, walk feet within 1.7 px. Near arm wind-up stops at shoulder height (near shoulder range). Sent the user the links.

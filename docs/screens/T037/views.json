@@ -1,0 +1,7 @@
+[
+  { "label": "Raider idle with the regenerated hulls (compare raider-before.jpg / raider-after.jpg)", "q": "f=rat-raider&anim=idle&zoom=2" },
+  { "label": "Raider walk (largest in-play change: far shin 0.9 px)", "q": "f=rat-raider&anim=walk&zoom=2" },
+  { "label": "Raider knockdown and down (lying rest unchanged)", "q": "f=rat-raider&anim=knockdown&zoom=2" },
+  { "label": "Raider held down pose (viewer only: far leg 2.8 px)", "q": "f=rat-raider&anim=pose:down&zoom=2" },
+  { "label": "Raider jump in place, slow (viewer only: frame 16 the folded far leg kicks forward, see viewer-after.jpg)", "q": "f=rat-raider&anim=jumpUp&speed=0.25&zoom=2" }
+]

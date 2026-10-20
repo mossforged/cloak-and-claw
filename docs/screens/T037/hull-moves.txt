@@ -1,0 +1,452 @@
+
+## rat-raider
+floor lines (px from the feet line): foot-near 0.05 -> 0.05, foot-far -0.35 -> 0.15
+- walk 0: leg-far-lower 0.61 px
+- walk 1: leg-far-lower 0.63 px
+- walk 5: leg-far-lower 0.75 px
+- walk 6: leg-far-lower 0.92 px
+- walk 11: leg-far-lower 0.62 px
+- walk 12: leg-far-lower 0.61 px
+- walk 13: leg-far-lower 0.63 px
+- walk 17: leg-far-lower 0.75 px
+- walk 18: leg-far-lower 0.92 px
+- walk 23: leg-far-lower 0.62 px
+- jumpUp 0: leg-far-upper 2.78 px
+- jumpUp 2: leg-far-upper 0.89 px
+- jumpUp 4: leg-far-upper 0.88 px
+- jumpUp 6: leg-far-upper 0.80 px
+- jumpUp 8: leg-far-upper 0.78 px
+- jumpUp 10: leg-far-upper 0.77 px
+- jumpUp 12: leg-far-upper 0.80 px
+- jumpUp 14: leg-far-upper 1.11 px
+- jumpUp 16: leg-far-upper 41.93 px
+- jumpUp 52: leg-far-upper 0.75 px
+- jumpUp 54: leg-far-upper 0.91 px
+- dodgeHop 0: leg-far-upper 2.78 px
+- dodgeHop 2: leg-far-upper 0.89 px
+- dodgeHop 4: leg-far-upper 0.90 px
+- dodgeHop 6: leg-far-upper 0.88 px
+- dodgeHop 30: leg-far-upper 0.84 px
+- dodgeHop 32: leg-far-upper 0.92 px
+- dodgeRoll 0: leg-far-upper 2.87 px
+- dodgeRoll 2: leg-far-upper 0.79 px
+- dodgeRoll 4: leg-far-upper 2.91 px
+- dodgeRoll 6: leg-far-upper 2.06 px
+- dodgeRoll 8: leg-far-upper 1.94 px
+- dodgeRoll 10: leg-far-upper 1.29 px
+- dodgeRoll 12: leg-far-upper 1.09 px
+- dodgeRoll 14: leg-far-upper 1.11 px
+- dodgeRoll 16: leg-far-upper 1.17 px
+- dodgeRoll 18: leg-far-upper 0.68 px
+- dodgeRoll 20: leg-far-upper 0.75 px
+- spin 32: leg-far-lower 2.33 px (now foot-near 2.5 off, foot-far 0.8 off)
+- jumpAttack 40: leg-far-upper 0.77 px
+- jumpAttack 42: leg-far-upper 0.79 px
+- jumpAttack 44: leg-far-upper 0.91 px
+- =walk: leg-far-lower 0.61 px
+- =jump: leg-far-upper 2.81 px
+- =jumpSquat: leg-far-upper 0.76 px
+- =held: leg-far-lower 0.48 px
+- =knockdown: leg-far-lower 0.26 px
+- =down: leg-far-upper 2.81 px
+- in motion @0 walk: leg-far-lower 0.61 px
+- in motion @1 walk: leg-far-lower 0.61 px
+- in motion @2 walk: leg-far-lower 0.61 px
+- in motion @3 walk: leg-far-lower 0.65 px
+- in motion @12 walk: leg-far-lower 0.73 px
+- in motion @13 walk: leg-far-lower 0.78 px
+- in motion @14 walk: leg-far-lower 0.85 px
+- in motion @15 walk: leg-far-lower 0.92 px
+- in motion @16 walk: leg-far-lower 0.92 px
+- in motion @17 walk: scarf-tail 0.28 px
+- in motion @18 walk: scarf-tail 0.30 px
+- in motion @19 walk: scarf-tail 0.31 px
+- in motion @20 walk: scarf-tail 0.32 px
+- in motion @21 walk: scarf-tail 0.32 px
+- in motion @22 walk: scarf-tail 0.32 px
+- in motion @23 walk: scarf-tail 0.31 px
+- in motion @24 walk: scarf-tail 0.31 px
+- in motion @25 walk: scarf-tail 0.29 px
+- in motion @26 walk: scarf-tail 0.28 px
+- in motion @27 walk: scarf-tail 0.28 px
+- in motion @28 walk: leg-far-lower 0.62 px
+- in motion @29 walk: leg-far-lower 0.61 px
+- in motion @30 walk: leg-far-lower 0.61 px
+- in motion @31 walk: leg-far-lower 0.61 px
+- in motion @32 walk: leg-far-lower 0.62 px
+- in motion @33 walk: leg-far-lower 0.66 px
+- in motion @34 walk: scarf-tail 0.31 px
+- in motion @35 walk: scarf-tail 0.32 px
+- in motion @36 walk: scarf-tail 0.32 px
+- in motion @37 walk: scarf-tail 0.32 px
+- in motion @38 walk: scarf-tail 0.31 px
+- in motion @39 walk: scarf-tail 0.30 px
+- in motion @40 walk: scarf-tail 0.29 px
+- in motion @41 walk: scarf-tail 0.28 px
+- in motion @42 walk: leg-far-lower 0.73 px
+- in motion @43 walk: leg-far-lower 0.78 px
+- in motion @44 walk: leg-far-lower 0.85 px
+- in motion @45 walk: leg-far-lower 0.92 px
+- in motion @46 walk: leg-far-lower 0.92 px
+- in motion @47 walk: scarf-tail 0.29 px
+- in motion @48 walk: scarf-tail 0.30 px
+- in motion @49 walk: scarf-tail 0.31 px
+- in motion @50 walk: scarf-tail 0.32 px
+- in motion @51 walk: scarf-tail 0.32 px
+- in motion @52 walk: scarf-tail 0.32 px
+- in motion @53 walk: scarf-tail 0.31 px
+- in motion @54 walk: scarf-tail 0.30 px
+- in motion @55 walk: scarf-tail 0.29 px
+- in motion @56 walk: scarf-tail 0.28 px
+- in motion @57 walk: scarf-tail 0.27 px
+- in motion @58 walk: leg-far-lower 0.62 px
+- in motion @59 walk: leg-far-lower 0.61 px
+- in motion @60 walk: leg-far-lower 0.61 px
+- in motion @61 walk: leg-far-lower 0.61 px
+- in motion @62 walk: leg-far-lower 0.62 px
+- in motion @63 walk: leg-far-lower 0.66 px
+- in motion @64 walk: scarf-tail 0.31 px
+- in motion @65 walk: scarf-tail 0.32 px
+- in motion @66 walk: scarf-tail 0.32 px
+- in motion @67 walk: scarf-tail 0.32 px
+- in motion @68 walk: scarf-tail 0.31 px
+- in motion @69 walk: scarf-tail 0.30 px
+- in motion @70 walk: scarf-tail 0.29 px
+- in motion @71 walk: scarf-tail 0.28 px
+- in motion @72 walk: leg-far-lower 0.73 px
+- in motion @73 walk: leg-far-lower 0.78 px
+- in motion @74 walk: leg-far-lower 0.85 px
+- in motion @75 walk: leg-far-lower 0.92 px
+- in motion @76 walk: leg-far-lower 0.92 px
+- in motion @77 walk: scarf-tail 0.29 px
+- in motion @78 walk: scarf-tail 0.30 px
+- in motion @79 walk: scarf-tail 0.31 px
+- in motion @80 walk: scarf-tail 0.32 px
+- in motion @81 walk: scarf-tail 0.32 px
+- in motion @82 walk: scarf-tail 0.32 px
+- in motion @83 walk: scarf-tail 0.31 px
+- in motion @84 walk: scarf-tail 0.30 px
+- in motion @85 walk: scarf-tail 0.29 px
+- in motion @86 walk: scarf-tail 0.28 px
+- in motion @87 walk: scarf-tail 0.27 px
+- in motion @88 walk: leg-far-lower 0.62 px
+- in motion @89 walk: leg-far-lower 0.61 px
+- in motion @90 walk: leg-far-lower 0.61 px
+- in motion @91 walk: leg-far-lower 0.61 px
+- in motion @92 walk: leg-far-lower 0.62 px
+- in motion @93 walk: leg-far-lower 0.66 px
+- in motion @94 walk: scarf-tail 0.31 px
+- in motion @95 walk: scarf-tail 0.32 px
+- in motion @96 walk: scarf-tail 0.32 px
+- in motion @97 walk: scarf-tail 0.32 px
+- in motion @98 walk: scarf-tail 0.31 px
+- in motion @99 walk: scarf-tail 0.30 px
+- in motion @100 walk: scarf-tail 0.29 px
+- in motion @101 walk: scarf-tail 0.28 px
+- in motion @102 walk: leg-far-lower 0.73 px
+- in motion @103 walk: leg-far-lower 0.78 px
+- in motion @104 walk: leg-far-lower 0.85 px
+- in motion @105 walk: leg-far-lower 0.92 px
+- in motion @106 walk: leg-far-lower 0.92 px
+- in motion @107 walk: scarf-tail 0.29 px
+- in motion @108 walk: scarf-tail 0.30 px
+- in motion @109 walk: scarf-tail 0.31 px
+- in motion @110 walk: scarf-tail 0.32 px
+- in motion @111 walk: scarf-tail 0.32 px
+- in motion @112 walk: scarf-tail 0.32 px
+- in motion @113 walk: scarf-tail 0.31 px
+- in motion @114 walk: scarf-tail 0.30 px
+- in motion @115 walk: scarf-tail 0.29 px
+- in motion @116 walk: scarf-tail 0.28 px
+- in motion @117 walk: scarf-tail 0.27 px
+- in motion @118 walk: leg-far-lower 0.62 px
+- in motion @119 walk: leg-far-lower 0.61 px
+- in motion @120 ratSlash: scarf-tail 0.27 px
+- in motion @121 ratSlash: scarf-tail 0.27 px
+- in motion @122 ratSlash: scarf-tail 0.25 px
+- in motion @156 ratSlash: scarf-tail 0.29 px
+- in motion @157 ratSlash: scarf-tail 0.40 px
+- in motion @158 ratSlash: scarf-tail 0.46 px
+- in motion @159 ratSlash: scarf-tail 0.49 px
+- in motion @160 ratSlash: scarf-tail 0.49 px
+- in motion @161 ratSlash: scarf-tail 0.46 px
+- in motion @162 ratSlash: scarf-tail 0.43 px
+- in motion @163 ratSlash: scarf-tail 0.38 px
+- in motion @164 ratSlash: scarf-tail 0.33 px
+- in motion @165 ratSlash: scarf-tail 0.28 px
+173 of 723 frames move >= 0.25 px; worst 41.93 px
+
+## rat-spearman
+floor lines (px from the feet line): foot-near 0.05 -> 0.05, foot-far -0.35 -> 0.15
+- walk 0: leg-far-lower 0.61 px
+- walk 1: leg-far-lower 0.63 px
+- walk 5: leg-far-lower 0.75 px
+- walk 6: leg-far-lower 0.92 px
+- walk 11: leg-far-lower 0.62 px
+- walk 12: leg-far-lower 0.61 px
+- walk 13: leg-far-lower 0.63 px
+- walk 17: leg-far-lower 0.75 px
+- walk 18: leg-far-lower 0.92 px
+- walk 23: leg-far-lower 0.62 px
+- =walk: leg-far-lower 0.61 px
+- =jump: leg-far-upper 2.81 px
+- =jumpSquat: leg-far-upper 0.76 px
+- =held: leg-far-lower 0.48 px
+- =knockdown: leg-far-lower 0.26 px
+- =down: leg-far-upper 2.81 px
+- in motion @0 walk: leg-far-lower 0.61 px
+- in motion @1 walk: leg-far-lower 0.61 px
+- in motion @2 walk: leg-far-lower 0.61 px
+- in motion @3 walk: leg-far-lower 0.65 px
+- in motion @12 walk: leg-far-lower 0.73 px
+- in motion @13 walk: leg-far-lower 0.78 px
+- in motion @14 walk: leg-far-lower 0.85 px
+- in motion @15 walk: leg-far-lower 0.92 px
+- in motion @16 walk: leg-far-lower 0.92 px
+- in motion @17 walk: scarf-tail 0.28 px
+- in motion @18 walk: scarf-tail 0.30 px
+- in motion @19 walk: scarf-tail 0.31 px
+- in motion @20 walk: scarf-tail 0.32 px
+- in motion @21 walk: scarf-tail 0.32 px
+- in motion @22 walk: scarf-tail 0.32 px
+- in motion @23 walk: scarf-tail 0.31 px
+- in motion @24 walk: scarf-tail 0.31 px
+- in motion @25 walk: scarf-tail 0.29 px
+- in motion @26 walk: scarf-tail 0.28 px
+- in motion @27 walk: scarf-tail 0.28 px
+- in motion @28 walk: leg-far-lower 0.62 px
+- in motion @29 walk: leg-far-lower 0.61 px
+- in motion @30 walk: leg-far-lower 0.61 px
+- in motion @31 walk: leg-far-lower 0.61 px
+- in motion @32 walk: leg-far-lower 0.62 px
+- in motion @33 walk: leg-far-lower 0.66 px
+- in motion @34 walk: scarf-tail 0.31 px
+- in motion @35 walk: scarf-tail 0.32 px
+- in motion @36 walk: scarf-tail 0.32 px
+- in motion @37 walk: scarf-tail 0.32 px
+- in motion @38 walk: scarf-tail 0.31 px
+- in motion @39 walk: scarf-tail 0.30 px
+- in motion @40 walk: scarf-tail 0.29 px
+- in motion @41 walk: scarf-tail 0.28 px
+- in motion @42 walk: leg-far-lower 0.73 px
+- in motion @43 walk: leg-far-lower 0.78 px
+- in motion @44 walk: leg-far-lower 0.85 px
+- in motion @45 walk: leg-far-lower 0.92 px
+- in motion @46 walk: leg-far-lower 0.92 px
+- in motion @47 walk: scarf-tail 0.29 px
+- in motion @48 walk: scarf-tail 0.30 px
+- in motion @49 walk: scarf-tail 0.31 px
+- in motion @50 walk: scarf-tail 0.32 px
+- in motion @51 walk: scarf-tail 0.32 px
+- in motion @52 walk: scarf-tail 0.32 px
+- in motion @53 walk: scarf-tail 0.31 px
+- in motion @54 walk: scarf-tail 0.30 px
+- in motion @55 walk: scarf-tail 0.29 px
+- in motion @56 walk: scarf-tail 0.28 px
+- in motion @57 walk: scarf-tail 0.27 px
+- in motion @58 walk: leg-far-lower 0.62 px
+- in motion @59 walk: leg-far-lower 0.61 px
+- in motion @60 walk: leg-far-lower 0.61 px
+- in motion @61 walk: leg-far-lower 0.61 px
+- in motion @62 walk: leg-far-lower 0.62 px
+- in motion @63 walk: leg-far-lower 0.66 px
+- in motion @64 walk: scarf-tail 0.31 px
+- in motion @65 walk: scarf-tail 0.32 px
+- in motion @66 walk: scarf-tail 0.32 px
+- in motion @67 walk: scarf-tail 0.32 px
+- in motion @68 walk: scarf-tail 0.31 px
+- in motion @69 walk: scarf-tail 0.30 px
+- in motion @70 walk: scarf-tail 0.29 px
+- in motion @71 walk: scarf-tail 0.28 px
+- in motion @72 walk: leg-far-lower 0.73 px
+- in motion @73 walk: leg-far-lower 0.78 px
+- in motion @74 walk: leg-far-lower 0.85 px
+- in motion @75 walk: leg-far-lower 0.92 px
+- in motion @76 walk: leg-far-lower 0.92 px
+- in motion @77 walk: scarf-tail 0.29 px
+- in motion @78 walk: scarf-tail 0.30 px
+- in motion @79 walk: scarf-tail 0.31 px
+- in motion @80 walk: scarf-tail 0.32 px
+- in motion @81 walk: scarf-tail 0.32 px
+- in motion @82 walk: scarf-tail 0.32 px
+- in motion @83 walk: scarf-tail 0.31 px
+- in motion @84 walk: scarf-tail 0.30 px
+- in motion @85 walk: scarf-tail 0.29 px
+- in motion @86 walk: scarf-tail 0.28 px
+- in motion @87 walk: scarf-tail 0.27 px
+- in motion @88 walk: leg-far-lower 0.62 px
+- in motion @89 walk: leg-far-lower 0.61 px
+- in motion @90 walk: leg-far-lower 0.61 px
+- in motion @91 walk: leg-far-lower 0.61 px
+- in motion @92 walk: leg-far-lower 0.62 px
+- in motion @93 walk: leg-far-lower 0.66 px
+- in motion @94 walk: scarf-tail 0.31 px
+- in motion @95 walk: scarf-tail 0.32 px
+- in motion @96 walk: scarf-tail 0.32 px
+- in motion @97 walk: scarf-tail 0.32 px
+- in motion @98 walk: scarf-tail 0.31 px
+- in motion @99 walk: scarf-tail 0.30 px
+- in motion @100 walk: scarf-tail 0.29 px
+- in motion @101 walk: scarf-tail 0.28 px
+- in motion @102 walk: leg-far-lower 0.73 px
+- in motion @103 walk: leg-far-lower 0.78 px
+- in motion @104 walk: leg-far-lower 0.85 px
+- in motion @105 walk: leg-far-lower 0.92 px
+- in motion @106 walk: leg-far-lower 0.92 px
+- in motion @107 walk: scarf-tail 0.29 px
+- in motion @108 walk: scarf-tail 0.30 px
+- in motion @109 walk: scarf-tail 0.31 px
+- in motion @110 walk: scarf-tail 0.32 px
+- in motion @111 walk: scarf-tail 0.32 px
+- in motion @112 walk: scarf-tail 0.32 px
+- in motion @113 walk: scarf-tail 0.31 px
+- in motion @114 walk: scarf-tail 0.30 px
+- in motion @115 walk: scarf-tail 0.29 px
+- in motion @116 walk: scarf-tail 0.28 px
+- in motion @117 walk: scarf-tail 0.27 px
+- in motion @118 walk: leg-far-lower 0.62 px
+- in motion @119 walk: leg-far-lower 0.61 px
+- in motion @120 spearThrust: scarf-tail 0.27 px
+- in motion @121 spearThrust: scarf-tail 0.27 px
+- in motion @122 spearThrust: scarf-tail 0.27 px
+- in motion @123 spearThrust: scarf-tail 0.25 px
+132 of 376 frames move >= 0.25 px; worst 2.81 px
+
+## rat-archer
+floor lines (px from the feet line): foot-near 0.05 -> 0.05, foot-far -0.35 -> 0.15
+- walk 0: leg-far-lower 0.61 px
+- walk 1: leg-far-lower 0.63 px
+- walk 5: leg-far-lower 0.75 px
+- walk 6: leg-far-lower 0.92 px
+- walk 11: leg-far-lower 0.62 px
+- walk 12: leg-far-lower 0.61 px
+- walk 13: leg-far-lower 0.63 px
+- walk 17: leg-far-lower 0.75 px
+- walk 18: leg-far-lower 0.92 px
+- walk 23: leg-far-lower 0.62 px
+- =walk: leg-far-lower 0.61 px
+- =jump: leg-far-upper 2.81 px
+- =jumpSquat: leg-far-upper 0.76 px
+- =held: leg-far-lower 0.48 px
+- =knockdown: leg-far-lower 0.26 px
+- =down: leg-far-upper 2.81 px
+- in motion @0 walk: leg-far-lower 0.61 px
+- in motion @1 walk: leg-far-lower 0.61 px
+- in motion @2 walk: leg-far-lower 0.61 px
+- in motion @3 walk: leg-far-lower 0.65 px
+- in motion @12 walk: leg-far-lower 0.73 px
+- in motion @13 walk: leg-far-lower 0.78 px
+- in motion @14 walk: leg-far-lower 0.85 px
+- in motion @15 walk: leg-far-lower 0.92 px
+- in motion @16 walk: leg-far-lower 0.92 px
+- in motion @17 walk: scarf-tail 0.28 px
+- in motion @18 walk: scarf-tail 0.30 px
+- in motion @19 walk: scarf-tail 0.31 px
+- in motion @20 walk: scarf-tail 0.32 px
+- in motion @21 walk: scarf-tail 0.32 px
+- in motion @22 walk: scarf-tail 0.32 px
+- in motion @23 walk: scarf-tail 0.31 px
+- in motion @24 walk: scarf-tail 0.31 px
+- in motion @25 walk: scarf-tail 0.29 px
+- in motion @26 walk: scarf-tail 0.28 px
+- in motion @27 walk: scarf-tail 0.28 px
+- in motion @28 walk: leg-far-lower 0.62 px
+- in motion @29 walk: leg-far-lower 0.61 px
+- in motion @30 walk: leg-far-lower 0.61 px
+- in motion @31 walk: leg-far-lower 0.61 px
+- in motion @32 walk: leg-far-lower 0.62 px
+- in motion @33 walk: leg-far-lower 0.66 px
+- in motion @34 walk: scarf-tail 0.31 px
+- in motion @35 walk: scarf-tail 0.32 px
+- in motion @36 walk: scarf-tail 0.32 px
+- in motion @37 walk: scarf-tail 0.32 px
+- in motion @38 walk: scarf-tail 0.31 px
+- in motion @39 walk: scarf-tail 0.30 px
+- in motion @40 walk: scarf-tail 0.29 px
+- in motion @41 walk: scarf-tail 0.28 px
+- in motion @42 walk: leg-far-lower 0.73 px
+- in motion @43 walk: leg-far-lower 0.78 px
+- in motion @44 walk: leg-far-lower 0.85 px
+- in motion @45 walk: leg-far-lower 0.92 px
+- in motion @46 walk: leg-far-lower 0.92 px
+- in motion @47 walk: scarf-tail 0.29 px
+- in motion @48 walk: scarf-tail 0.30 px
+- in motion @49 walk: scarf-tail 0.31 px
+- in motion @50 walk: scarf-tail 0.32 px
+- in motion @51 walk: scarf-tail 0.32 px
+- in motion @52 walk: scarf-tail 0.32 px
+- in motion @53 walk: scarf-tail 0.31 px
+- in motion @54 walk: scarf-tail 0.30 px
+- in motion @55 walk: scarf-tail 0.29 px
+- in motion @56 walk: scarf-tail 0.28 px
+- in motion @57 walk: scarf-tail 0.27 px
+- in motion @58 walk: leg-far-lower 0.62 px
+- in motion @59 walk: leg-far-lower 0.61 px
+- in motion @60 walk: leg-far-lower 0.61 px
+- in motion @61 walk: leg-far-lower 0.61 px
+- in motion @62 walk: leg-far-lower 0.62 px
+- in motion @63 walk: leg-far-lower 0.66 px
+- in motion @64 walk: scarf-tail 0.31 px
+- in motion @65 walk: scarf-tail 0.32 px
+- in motion @66 walk: scarf-tail 0.32 px
+- in motion @67 walk: scarf-tail 0.32 px
+- in motion @68 walk: scarf-tail 0.31 px
+- in motion @69 walk: scarf-tail 0.30 px
+- in motion @70 walk: scarf-tail 0.29 px
+- in motion @71 walk: scarf-tail 0.28 px
+- in motion @72 walk: leg-far-lower 0.73 px
+- in motion @73 walk: leg-far-lower 0.78 px
+- in motion @74 walk: leg-far-lower 0.85 px
+- in motion @75 walk: leg-far-lower 0.92 px
+- in motion @76 walk: leg-far-lower 0.92 px
+- in motion @77 walk: scarf-tail 0.29 px
+- in motion @78 walk: scarf-tail 0.30 px
+- in motion @79 walk: scarf-tail 0.31 px
+- in motion @80 walk: scarf-tail 0.32 px
+- in motion @81 walk: scarf-tail 0.32 px
+- in motion @82 walk: scarf-tail 0.32 px
+- in motion @83 walk: scarf-tail 0.31 px
+- in motion @84 walk: scarf-tail 0.30 px
+- in motion @85 walk: scarf-tail 0.29 px
+- in motion @86 walk: scarf-tail 0.28 px
+- in motion @87 walk: scarf-tail 0.27 px
+- in motion @88 walk: leg-far-lower 0.62 px
+- in motion @89 walk: leg-far-lower 0.61 px
+- in motion @90 walk: leg-far-lower 0.61 px
+- in motion @91 walk: leg-far-lower 0.61 px
+- in motion @92 walk: leg-far-lower 0.62 px
+- in motion @93 walk: leg-far-lower 0.66 px
+- in motion @94 walk: scarf-tail 0.31 px
+- in motion @95 walk: scarf-tail 0.32 px
+- in motion @96 walk: scarf-tail 0.32 px
+- in motion @97 walk: scarf-tail 0.32 px
+- in motion @98 walk: scarf-tail 0.31 px
+- in motion @99 walk: scarf-tail 0.30 px
+- in motion @100 walk: scarf-tail 0.29 px
+- in motion @101 walk: scarf-tail 0.28 px
+- in motion @102 walk: leg-far-lower 0.73 px
+- in motion @103 walk: leg-far-lower 0.78 px
+- in motion @104 walk: leg-far-lower 0.85 px
+- in motion @105 walk: leg-far-lower 0.92 px
+- in motion @106 walk: leg-far-lower 0.92 px
+- in motion @107 walk: scarf-tail 0.29 px
+- in motion @108 walk: scarf-tail 0.30 px
+- in motion @109 walk: scarf-tail 0.31 px
+- in motion @110 walk: scarf-tail 0.32 px
+- in motion @111 walk: scarf-tail 0.32 px
+- in motion @112 walk: scarf-tail 0.32 px
+- in motion @113 walk: scarf-tail 0.31 px
+- in motion @114 walk: scarf-tail 0.30 px
+- in motion @115 walk: scarf-tail 0.29 px
+- in motion @116 walk: scarf-tail 0.28 px
+- in motion @117 walk: scarf-tail 0.27 px
+- in motion @118 walk: leg-far-lower 0.62 px
+- in motion @119 walk: leg-far-lower 0.61 px
+- in motion @120 bowShot: scarf-tail 0.27 px
+- in motion @121 bowShot: scarf-tail 0.27 px
+- in motion @122 bowShot: scarf-tail 0.25 px
+131 of 310 frames move >= 0.25 px; worst 2.81 px
+
+## mouse-fighter
+floor lines (px from the feet line): foot-near -0.47 -> -0.47, foot-far -1.86 -> -1.86
+0 of 385 frames move >= 0.25 px; worst 0.00 px
