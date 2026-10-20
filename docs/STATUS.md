@@ -28,7 +28,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 
 ## What builders need now
 - Code: idle. T036 (joint checker), T037 (hulls with hashes), T038 (v3 aloft feet) merged.
-- Art: blocked, Codex usage limit: A028 (job 029) exited 1 at 08:01 with no report. Requeue when the limit resets.
+- Art: A028 requeued (job 033).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
