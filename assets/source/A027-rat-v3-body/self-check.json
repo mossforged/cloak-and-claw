@@ -1,0 +1,790 @@
+{
+  "whole_rat_visible_iou_pct": 97.771,
+  "per_piece": {
+    "hand-near": {
+      "visible_iou_pct": 97.91,
+      "expected_px": 29084,
+      "actual_visible_px": 28695,
+      "missing_px": 499,
+      "extra_px": 110
+    },
+    "arm-near-lower": {
+      "visible_iou_pct": 99.84,
+      "expected_px": 10525,
+      "actual_visible_px": 10542,
+      "missing_px": 0,
+      "extra_px": 17
+    },
+    "arm-near-upper": {
+      "visible_iou_pct": 97.26,
+      "expected_px": 63209,
+      "actual_visible_px": 64986,
+      "missing_px": 1,
+      "extra_px": 1778
+    },
+    "head": {
+      "visible_iou_pct": 97.93,
+      "expected_px": 294017,
+      "actual_visible_px": 300243,
+      "missing_px": 0,
+      "extra_px": 6226
+    },
+    "belt": {
+      "visible_iou_pct": 96.45,
+      "expected_px": 53088,
+      "actual_visible_px": 55041,
+      "missing_px": 0,
+      "extra_px": 1953
+    },
+    "torso": {
+      "visible_iou_pct": 83.46,
+      "expected_px": 56207,
+      "actual_visible_px": 56301,
+      "missing_px": 5025,
+      "extra_px": 5119
+    },
+    "seat": {
+      "visible_iou_pct": 86.4,
+      "expected_px": 15315,
+      "actual_visible_px": 16584,
+      "missing_px": 529,
+      "extra_px": 1798
+    },
+    "leg-near-upper": {
+      "visible_iou_pct": 97.01,
+      "expected_px": 54821,
+      "actual_visible_px": 53228,
+      "missing_px": 1616,
+      "extra_px": 23
+    },
+    "foot-near": {
+      "visible_iou_pct": 91.37,
+      "expected_px": 37176,
+      "actual_visible_px": 34119,
+      "missing_px": 3136,
+      "extra_px": 79
+    },
+    "leg-near-lower": {
+      "visible_iou_pct": 76.51,
+      "expected_px": 3011,
+      "actual_visible_px": 3707,
+      "missing_px": 99,
+      "extra_px": 795
+    },
+    "pelvis": {
+      "visible_iou_pct": 72.1,
+      "expected_px": 33560,
+      "actual_visible_px": 31121,
+      "missing_px": 6462,
+      "extra_px": 4023
+    },
+    "leg-far-upper": {
+      "visible_iou_pct": 74.86,
+      "expected_px": 40362,
+      "actual_visible_px": 44398,
+      "missing_px": 4074,
+      "extra_px": 8110
+    },
+    "foot-far": {
+      "visible_iou_pct": 94.14,
+      "expected_px": 35303,
+      "actual_visible_px": 37501,
+      "missing_px": 0,
+      "extra_px": 2198
+    },
+    "leg-far-lower": {
+      "visible_iou_pct": 43.22,
+      "expected_px": 6740,
+      "actual_visible_px": 2913,
+      "missing_px": 3827,
+      "extra_px": 0
+    },
+    "hand-far": {
+      "visible_iou_pct": 90.8,
+      "expected_px": 25027,
+      "actual_visible_px": 27167,
+      "missing_px": 189,
+      "extra_px": 2329
+    },
+    "arm-far-lower": {
+      "visible_iou_pct": 50.54,
+      "expected_px": 8575,
+      "actual_visible_px": 12994,
+      "missing_px": 1334,
+      "extra_px": 5753
+    },
+    "arm-far-upper": {
+      "visible_iou_pct": 57.77,
+      "expected_px": 14693,
+      "actual_visible_px": 8635,
+      "missing_px": 6151,
+      "extra_px": 93
+    },
+    "scarf-tail": {
+      "visible_iou_pct": 98.43,
+      "expected_px": 34280,
+      "actual_visible_px": 34795,
+      "missing_px": 15,
+      "extra_px": 530
+    },
+    "tail-1": {
+      "visible_iou_pct": 95.35,
+      "expected_px": 9788,
+      "actual_visible_px": 10265,
+      "missing_px": 0,
+      "extra_px": 477
+    },
+    "tail-2": {
+      "visible_iou_pct": 94.33,
+      "expected_px": 9862,
+      "actual_visible_px": 9511,
+      "missing_px": 458,
+      "extra_px": 107
+    },
+    "tail-3": {
+      "visible_iou_pct": 88.58,
+      "expected_px": 4406,
+      "actual_visible_px": 4974,
+      "missing_px": 0,
+      "extra_px": 568
+    }
+  },
+  "near_cleanup": {
+    "leg-near-upper": {
+      "mask_unchanged": true,
+      "pixels_changed": 18298
+    },
+    "arm-near-upper": {
+      "mask_unchanged": true,
+      "pixels_changed": 42121
+    },
+    "arm-near-lower": {
+      "mask_unchanged": true,
+      "pixels_changed": 7710
+    },
+    "unchanged_other_near_parts": [
+      "hand-near",
+      "leg-near-lower",
+      "foot-near"
+    ]
+  },
+  "sweeps": {
+    "neck": {
+      "parent": "torso",
+      "child": "head",
+      "samples": [
+        {
+          "angle": -20.0,
+          "overlap_px": 32597,
+          "local_overlap_px": 22769
+        },
+        {
+          "angle": -10.0,
+          "overlap_px": 29511,
+          "local_overlap_px": 22304
+        },
+        {
+          "angle": 0.0,
+          "overlap_px": 26882,
+          "local_overlap_px": 21855
+        },
+        {
+          "angle": 10.0,
+          "overlap_px": 24711,
+          "local_overlap_px": 21445
+        },
+        {
+          "angle": 20.0,
+          "overlap_px": 23117,
+          "local_overlap_px": 21286
+        }
+      ]
+    },
+    "waist": {
+      "parent": "pelvis",
+      "child": "torso",
+      "samples": [
+        {
+          "angle": -15.0,
+          "overlap_px": 40939,
+          "local_overlap_px": 26229
+        },
+        {
+          "angle": -7.5,
+          "overlap_px": 38953,
+          "local_overlap_px": 26236
+        },
+        {
+          "angle": 0.0,
+          "overlap_px": 37145,
+          "local_overlap_px": 26247
+        },
+        {
+          "angle": 7.5,
+          "overlap_px": 35625,
+          "local_overlap_px": 26260
+        },
+        {
+          "angle": 15.0,
+          "overlap_px": 34481,
+          "local_overlap_px": 26271
+        }
+      ]
+    },
+    "shoulder-near": {
+      "parent": "torso",
+      "child": "arm-near-upper",
+      "samples": [
+        {
+          "angle": -116.0,
+          "overlap_px": 26734,
+          "local_overlap_px": 6557
+        },
+        {
+          "angle": -68.0,
+          "overlap_px": 44383,
+          "local_overlap_px": 10571
+        },
+        {
+          "angle": -20.0,
+          "overlap_px": 33706,
+          "local_overlap_px": 10928
+        },
+        {
+          "angle": 28.0,
+          "overlap_px": 19143,
+          "local_overlap_px": 10225
+        },
+        {
+          "angle": 76.0,
+          "overlap_px": 8258,
+          "local_overlap_px": 7138
+        }
+      ]
+    },
+    "hip-near": {
+      "parent": "pelvis",
+      "child": "leg-near-upper",
+      "samples": [
+        {
+          "angle": -23.0,
+          "overlap_px": 31656,
+          "local_overlap_px": 23538
+        },
+        {
+          "angle": -8.75,
+          "overlap_px": 27866,
+          "local_overlap_px": 23193
+        },
+        {
+          "angle": 5.5,
+          "overlap_px": 25000,
+          "local_overlap_px": 22628
+        },
+        {
+          "angle": 19.75,
+          "overlap_px": 23321,
+          "local_overlap_px": 21856
+        },
+        {
+          "angle": 34.0,
+          "overlap_px": 21753,
+          "local_overlap_px": 20958
+        }
+      ]
+    },
+    "shoulder-far": {
+      "parent": "torso",
+      "child": "arm-far-upper",
+      "samples": [
+        {
+          "angle": -116.0,
+          "overlap_px": 538,
+          "local_overlap_px": 538
+        },
+        {
+          "angle": -68.0,
+          "overlap_px": 429,
+          "local_overlap_px": 429
+        },
+        {
+          "angle": -20.0,
+          "overlap_px": 614,
+          "local_overlap_px": 614
+        },
+        {
+          "angle": 28.0,
+          "overlap_px": 8930,
+          "local_overlap_px": 4249
+        },
+        {
+          "angle": 76.0,
+          "overlap_px": 14608,
+          "local_overlap_px": 7542
+        }
+      ]
+    },
+    "elbow-far": {
+      "parent": "arm-far-upper",
+      "child": "arm-far-lower",
+      "samples": [
+        {
+          "angle": -113.0,
+          "overlap_px": 9707,
+          "local_overlap_px": 9641
+        },
+        {
+          "angle": -83.5,
+          "overlap_px": 8085,
+          "local_overlap_px": 8085
+        },
+        {
+          "angle": -54.0,
+          "overlap_px": 6755,
+          "local_overlap_px": 6755
+        },
+        {
+          "angle": -24.5,
+          "overlap_px": 6165,
+          "local_overlap_px": 6165
+        },
+        {
+          "angle": 5.0,
+          "overlap_px": 5614,
+          "local_overlap_px": 5614
+        }
+      ]
+    },
+    "wrist-far": {
+      "parent": "arm-far-lower",
+      "child": "hand-far",
+      "samples": [
+        {
+          "angle": -49.0,
+          "overlap_px": 5268,
+          "local_overlap_px": 5268
+        },
+        {
+          "angle": -34.5,
+          "overlap_px": 5334,
+          "local_overlap_px": 5334
+        },
+        {
+          "angle": -20.0,
+          "overlap_px": 5554,
+          "local_overlap_px": 5554
+        },
+        {
+          "angle": -5.5,
+          "overlap_px": 6069,
+          "local_overlap_px": 6069
+        },
+        {
+          "angle": 9.0,
+          "overlap_px": 7226,
+          "local_overlap_px": 7223
+        }
+      ]
+    },
+    "hip-far": {
+      "parent": "pelvis",
+      "child": "leg-far-upper",
+      "samples": [
+        {
+          "angle": -23.0,
+          "overlap_px": 25294,
+          "local_overlap_px": 23226
+        },
+        {
+          "angle": -8.75,
+          "overlap_px": 25403,
+          "local_overlap_px": 23593
+        },
+        {
+          "angle": 5.5,
+          "overlap_px": 26562,
+          "local_overlap_px": 24182
+        },
+        {
+          "angle": 19.75,
+          "overlap_px": 27907,
+          "local_overlap_px": 24539
+        },
+        {
+          "angle": 34.0,
+          "overlap_px": 30924,
+          "local_overlap_px": 24750
+        }
+      ]
+    },
+    "knee-far": {
+      "parent": "leg-far-upper",
+      "child": "leg-far-lower",
+      "samples": [
+        {
+          "angle": -23.0,
+          "overlap_px": 11946,
+          "local_overlap_px": 10954
+        },
+        {
+          "angle": 0.25,
+          "overlap_px": 12586,
+          "local_overlap_px": 10976
+        },
+        {
+          "angle": 23.5,
+          "overlap_px": 17932,
+          "local_overlap_px": 11883
+        },
+        {
+          "angle": 46.75,
+          "overlap_px": 19537,
+          "local_overlap_px": 12095
+        },
+        {
+          "angle": 70.0,
+          "overlap_px": 19213,
+          "local_overlap_px": 12081
+        }
+      ]
+    },
+    "ankle-far": {
+      "parent": "leg-far-lower",
+      "child": "foot-far",
+      "samples": [
+        {
+          "angle": -19.0,
+          "overlap_px": 6212,
+          "local_overlap_px": 6212
+        },
+        {
+          "angle": -4.25,
+          "overlap_px": 5922,
+          "local_overlap_px": 5922
+        },
+        {
+          "angle": 10.5,
+          "overlap_px": 5577,
+          "local_overlap_px": 5577
+        },
+        {
+          "angle": 25.25,
+          "overlap_px": 5334,
+          "local_overlap_px": 5334
+        },
+        {
+          "angle": 40.0,
+          "overlap_px": 5138,
+          "local_overlap_px": 5138
+        }
+      ]
+    },
+    "tail-root": {
+      "parent": "pelvis",
+      "child": "tail-1",
+      "samples": [
+        {
+          "angle": -40.0,
+          "overlap_px": 2663,
+          "local_overlap_px": 2663
+        },
+        {
+          "angle": -20.0,
+          "overlap_px": 2066,
+          "local_overlap_px": 2066
+        },
+        {
+          "angle": 0.0,
+          "overlap_px": 1727,
+          "local_overlap_px": 1727
+        },
+        {
+          "angle": 20.0,
+          "overlap_px": 1525,
+          "local_overlap_px": 1525
+        },
+        {
+          "angle": 40.0,
+          "overlap_px": 1402,
+          "local_overlap_px": 1402
+        }
+      ]
+    },
+    "tail-mid": {
+      "parent": "tail-1",
+      "child": "tail-2",
+      "samples": [
+        {
+          "angle": -40.0,
+          "overlap_px": 1743,
+          "local_overlap_px": 1743
+        },
+        {
+          "angle": -20.0,
+          "overlap_px": 1662,
+          "local_overlap_px": 1662
+        },
+        {
+          "angle": 0.0,
+          "overlap_px": 1635,
+          "local_overlap_px": 1635
+        },
+        {
+          "angle": 20.0,
+          "overlap_px": 1688,
+          "local_overlap_px": 1688
+        },
+        {
+          "angle": 40.0,
+          "overlap_px": 1745,
+          "local_overlap_px": 1745
+        }
+      ]
+    },
+    "tail-end": {
+      "parent": "tail-2",
+      "child": "tail-3",
+      "samples": [
+        {
+          "angle": -40.0,
+          "overlap_px": 1793,
+          "local_overlap_px": 1793
+        },
+        {
+          "angle": -20.0,
+          "overlap_px": 1808,
+          "local_overlap_px": 1808
+        },
+        {
+          "angle": 0.0,
+          "overlap_px": 1714,
+          "local_overlap_px": 1714
+        },
+        {
+          "angle": 20.0,
+          "overlap_px": 1594,
+          "local_overlap_px": 1594
+        },
+        {
+          "angle": 40.0,
+          "overlap_px": 1460,
+          "local_overlap_px": 1460
+        }
+      ]
+    },
+    "elbow-near": {
+      "parent": "arm-near-upper",
+      "child": "arm-near-lower",
+      "samples": [
+        {
+          "angle": -113.0,
+          "overlap_px": 7863,
+          "local_overlap_px": 7725
+        },
+        {
+          "angle": -83.5,
+          "overlap_px": 6220,
+          "local_overlap_px": 6220
+        },
+        {
+          "angle": -54.0,
+          "overlap_px": 5965,
+          "local_overlap_px": 5965
+        },
+        {
+          "angle": -24.5,
+          "overlap_px": 5980,
+          "local_overlap_px": 5980
+        },
+        {
+          "angle": 5.0,
+          "overlap_px": 6519,
+          "local_overlap_px": 6519
+        }
+      ]
+    },
+    "wrist-near": {
+      "parent": "arm-near-lower",
+      "child": "hand-near",
+      "samples": [
+        {
+          "angle": -49.0,
+          "overlap_px": 11197,
+          "local_overlap_px": 11197
+        },
+        {
+          "angle": -34.5,
+          "overlap_px": 11051,
+          "local_overlap_px": 11051
+        },
+        {
+          "angle": -20.0,
+          "overlap_px": 10969,
+          "local_overlap_px": 10969
+        },
+        {
+          "angle": -5.5,
+          "overlap_px": 11022,
+          "local_overlap_px": 11022
+        },
+        {
+          "angle": 9.0,
+          "overlap_px": 10935,
+          "local_overlap_px": 10935
+        }
+      ]
+    },
+    "knee-near": {
+      "parent": "leg-near-upper",
+      "child": "leg-near-lower",
+      "samples": [
+        {
+          "angle": -23.0,
+          "overlap_px": 19915,
+          "local_overlap_px": 19908
+        },
+        {
+          "angle": 0.25,
+          "overlap_px": 20206,
+          "local_overlap_px": 20033
+        },
+        {
+          "angle": 23.5,
+          "overlap_px": 22018,
+          "local_overlap_px": 20781
+        },
+        {
+          "angle": 46.75,
+          "overlap_px": 24721,
+          "local_overlap_px": 21757
+        },
+        {
+          "angle": 70.0,
+          "overlap_px": 27009,
+          "local_overlap_px": 22363
+        }
+      ]
+    },
+    "ankle-near": {
+      "parent": "leg-near-lower",
+      "child": "foot-near",
+      "samples": [
+        {
+          "angle": -19.0,
+          "overlap_px": 10926,
+          "local_overlap_px": 10926
+        },
+        {
+          "angle": -4.25,
+          "overlap_px": 10892,
+          "local_overlap_px": 10892
+        },
+        {
+          "angle": 10.5,
+          "overlap_px": 10761,
+          "local_overlap_px": 10761
+        },
+        {
+          "angle": 25.25,
+          "overlap_px": 10717,
+          "local_overlap_px": 10717
+        },
+        {
+          "angle": 40.0,
+          "overlap_px": 10829,
+          "local_overlap_px": 10829
+        }
+      ]
+    }
+  },
+  "method": "Manual master material regions plus nearest-label completion of 12055 unassigned boundary/interstice pixels. Original visible master pixels restored; independent final foreground masks occluded in delivery draw order. Per-piece scores depend on tracing/ownership. Whole metric compares full final assembly against original keyed master silhouette.",
+  "importReady": false,
+  "visual_review": {
+    "neck": {
+      "pass": false,
+      "notes": "Connected; cut/registration fragments beneath cheek and at scarf boundary still show as the head turns. Dome contour is not certified."
+    },
+    "waist": {
+      "pass": false,
+      "notes": "Connected; generated lower chest dome exposes a second dark edge under belt and paint/seam transitions at extremes."
+    },
+    "shoulder-near": {
+      "pass": false,
+      "notes": "No old torso slide. Brown fur replaces unsolicited second shoulder panel, but a grey notch remains above the pad at +28/+76; exposed hidden fur/strap boundary remains. FAIL."
+    },
+    "hip-near": {
+      "pass": false,
+      "notes": "Seat stays above thigh and connection holds. Diagonal orange-patch/seat registration seam and doubled patch contours remain at bends. FAIL finish."
+    },
+    "shoulder-far": {
+      "pass": false,
+      "notes": "Only 429 px\u00b2 minimum local overlap; shallow attachment, jagged neck-side wedges and exposed cut paint at turns. FAIL finish, proposal needs fitting."
+    },
+    "elbow-far": {
+      "pass": false,
+      "notes": "Connected closed component, but cap/material scale mismatch and exposed rim-like folded contours remain. No clean no-tube-face certification."
+    },
+    "wrist-far": {
+      "pass": false,
+      "notes": "Cuff turns with hand; connected. Visible-paint ownership was corrected; outline/paint transitions at cuff remain."
+    },
+    "hip-far": {
+      "pass": false,
+      "notes": "Connected; full hidden thigh cap retained. Pelvis/thigh double boundaries and excess generated hip exposure remain."
+    },
+    "knee-far": {
+      "pass": false,
+      "notes": "Connected smooth closed shin reaches knee point. Hem scraps/registration and changed visible shin exposure remain. FAIL finish."
+    },
+    "ankle-far": {
+      "pass": false,
+      "notes": "Wrap belongs to foot; connected. Tool top-opening retry selected, but top cap/outline transition remains visible."
+    },
+    "tail-root": {
+      "pass": false,
+      "notes": "Root revised to (550,1515), minimum local overlap now 1402 px\u00b2. Connected behind pelvis/near thigh; residual root-side material/contour transition remains."
+    },
+    "tail-mid": {
+      "pass": false,
+      "notes": "Connected; rounded generated support retained. Original-to-generated paint transition and dark joining contour remain visible."
+    },
+    "tail-end": {
+      "pass": false,
+      "notes": "Connected; curved tip retained. Negative turns expose a small notch/doubled outline at the join. FAIL finish."
+    },
+    "elbow-near": {
+      "pass": false,
+      "notes": "New full -113..5 range used (A026 manifest was stale at -101). Connected; inner elbow cut/registration edge only partially repaired."
+    },
+    "wrist-near": {
+      "pass": false,
+      "notes": "Original points/mask and cuff-on-hand retained. Connected; inherited cuff-side contour remnants remain."
+    },
+    "knee-near": {
+      "pass": false,
+      "notes": "Original points/mask retained. Connected; thigh hem repairs partial, exposed shin paint/width differs from master strip."
+    },
+    "ankle-near": {
+      "pass": false,
+      "notes": "Original points/mask and wrap-on-foot retained. Connected; inherited wrap-top/strap contour remnants remain."
+    }
+  },
+  "proposed_points": {
+    "shoulder-far": [
+      958,
+      1180
+    ],
+    "tail-root": [
+      550,
+      1515
+    ],
+    "tail-mid": [
+      444,
+      1709
+    ],
+    "tail-end": [
+      351,
+      1815
+    ]
+  }
+}
