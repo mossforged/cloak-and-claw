@@ -13,15 +13,17 @@ import { drawShadow } from '../render/standee.js';
 import { startPose, poseRig, poseFrame, solveOf, dragTo, dragNode, handles, readout, poseLine, parsePose, applyUrl, formatPose, nodeAnchor } from './pose-state.js';
 import { twist, dragHips, dragHead, turnNode, byName, pivotAt } from './pose-drag.js';
 import { createPanel } from './pose-panel.js';
+import { VERSION_RIGS, versionsOf } from './models.js';
 
 const D = Math.PI / 180, ang = (a, b) => Math.atan2(b[1] - a[1], b[0] - a[0]) / D, wrap = (d) => ((d + 540) % 360) - 180;
 const U = parsePose(location.search);
 if (!FIGHTERS[U.id]) U.id = 'rat-raider';
+if (!versionsOf(U.id).includes(U.version)) U.version = 'current';
 document.body.className = 'posing';
 document.body.innerHTML = '<div id="stage"><canvas id="view"></canvas><div id="hud"></div></div><div id="sheet"><section id="panel"></section></div>';
 const canvas = document.getElementById('view'), ctx = canvas.getContext('2d'), hud = document.getElementById('hud');
 hud.textContent = 'Loading art...';
-const assets = await loadAssets(collectArtPaths(FIGHTERS, RIGS, ITEMS));
+const assets = await loadAssets(collectArtPaths(FIGHTERS, RIGS, ITEMS, VERSION_RIGS));   // T035: + compare versions (v3)
 
 let P = applyUrl(startPose(U), U), L = [], H = [], M = [1, 0, 0, 1, 0, 0], drag = null, dirty = true;
 const undo = [];
@@ -82,7 +84,7 @@ function draw() {
     if (h.kind === 'shaft') { ctx.globalAlpha = 1; ctx.lineWidth = 4 * dpr; ctx.strokeStyle = ctx.fillStyle; ctx.stroke(); } else ctx.fill();
     ctx.globalAlpha = 1; ctx.strokeStyle = 'rgba(0,0,0,0.6)'; ctx.lineWidth = 1.5 * dpr; ctx.stroke();
   }
-  hud.textContent = `${FIGHTERS[P.id].name} · from ${P.from}${P.item !== 'own' ? ` · ${P.item}` : ''} · drag a handle; ring = twist; gold = the weapon · ${BUILD}`;
+  hud.textContent = `${FIGHTERS[P.id].name}${P.version !== 'current' ? ` (${P.version})` : ''} · from ${P.from}${P.item !== 'own' ? ` · ${P.item}` : ''} · drag a handle; ring = twist; gold = the weapon · ${BUILD}`;
 }
 
 // What a drag at rig px q does, from the pose at its start (d0)

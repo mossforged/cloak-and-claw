@@ -15,6 +15,7 @@
 export const WRISTS = {
   on: true,
   default: { near: 45, far: 45 },
+  'rat-v3': { near: 49, far: 59 },   // T035: the widest end of the user's ranges (near -49..9, far 0..59: rig.limits)
   neutral: { 'hand-near-grip-overhand': 90, 'hand-far-grip': 90 },
   turn: 2.5,
   turn1: 1,

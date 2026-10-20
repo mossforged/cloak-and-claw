@@ -19,7 +19,15 @@ T028 r2 (A023 round 2): a grip drawing's `under` piece (the fingers behind the h
 (`under: '<swap>'`; paired-under grips are not hands of their own); a part marked `visibleWhenArmInFront` is a shoulder cap
 (`cap: true`); `viewSwaps.<code>` (the back view's limb cuts) and `viewJointPositions.<code>` (where each limb's joint sits
 in that view, canvas px) become the view's `swaps` and `attach` (each child's joint on its parent's own px, so the cut
-hangs where the view's setup put it); the B pelvis hides the separate `belt` (the back drawing has its own)."""
+hangs where the view's setup put it); the B pelvis hides the separate `belt` (the back drawing has its own).
+T035 (rat v3, A026 + A027: every piece drawn whole on the master canvas): --joints <fitted joints json> (the user's Fitting
+Room points and limits, docs/design/rigs/rat-v3-joints-v4.json) wins over the source's pivots: each jointed part turns on
+the user's point (its parent's attach follows), and the limits are written as `limits: { part: [lo, hi] }` (degrees from
+rest, + clockwise on screen). --floor-y gives the floor for a source without `floorY` (A018's 1950: same master, same
+scale as the raider). Re-run after Art's next round (same PNG names, same points), then node tools/rig-hulls.mjs:
+  python3 tools/rig_from_source.py assets/source/A027-rat-v3-body/rig-source.json --id rat-v3 \\
+    --joints docs/design/rigs/rat-v3-joints-v4.json --floor-y 1950 --art assets/art/enemies/rat-raider/rig-v3 \\
+    --out src/data/rigs/rat-v3-parts.js"""
 import argparse, json, math, os, re, sys
 import numpy as np
 from PIL import Image
@@ -143,6 +151,11 @@ VIEW_BANDS = {
 # T028 r2: drawings a view brings for other parts (the front head on the F chest, the back head on the B chest)
 VIEW_HEADS = {("torso", "F"): "head-front", ("torso", "B"): "head-back"}
 ARM_PARTS = ("arm-", "hand-", "shoulder-")
+# T035: a fitted joint's name -> the part that turns on it (rig standard part names)
+JOINT_PART = {"neck": "head", "waist": "torso", "tail-root": "tail", "tail-mid": "tail-2", "tail-end": "tail-3"}
+for _side in ("near", "far"):
+    JOINT_PART.update({f"shoulder-{_side}": f"arm-{_side}-upper", f"elbow-{_side}": f"arm-{_side}-lower", f"wrist-{_side}": f"hand-{_side}",
+                       f"hip-{_side}": f"leg-{_side}-upper", f"knee-{_side}": f"leg-{_side}-lower", f"ankle-{_side}": f"foot-{_side}"})
 
 
 def anchors_of(src):
@@ -212,6 +225,8 @@ def main():
     ap.add_argument("--scale", type=float, default=0.4, help="canvas px -> stored image px")
     ap.add_argument("--merge", action="append", default=[], help="T026: a rig-source fragment (A019, A022) laid over the source: its parts replace, its swaps and grips add; images resolve in the fragment's folder")
     ap.add_argument("--keep-islands", default="", help="T026 r2: comma-separated part/swap names whose detached pieces are kept")
+    ap.add_argument("--joints", help="T035: the user's fitted joints (world points + limits): pivots and `limits`")
+    ap.add_argument("--floor-y", type=float, help="T035: floor (canvas px) when the source has no floorY")
     ap.add_argument("--sockets", action="store_true", help="only print the sockets block (T024; images not written)")
     a = ap.parse_args()
     raw = json.load(open(a.source))
@@ -231,6 +246,21 @@ def main():
                 (raw.get("sockets") or {}).pop(f"hand_{side}", None)
         print(f"merged {frag}: parts {sorted((F.get('parts') or {}))}, swaps {sorted((F.get('swaps') or {}))}", file=sys.stderr)
     src = renamed(raw)
+    if a.floor_y is not None:
+        src["floorY"] = a.floor_y
+    limits = {}
+    if a.joints:   # T035: the user's points win over the source's pivots
+        for jn, j in json.load(open(a.joints))["joints"].items():
+            part = JOINT_PART.get(jn)
+            if part not in src["parts"]:
+                print(f"joint {jn}: no part {part}, skipped", file=sys.stderr)
+                continue
+            old = src["parts"][part]["pivot"]
+            src["parts"][part] = {**src["parts"][part], "pivot": j["world"]}
+            limits[part] = j["limits"]
+            moved = math.hypot(j["world"][0] - old[0], j["world"][1] - old[1])
+            if moved > 0.5:
+                print(f"joint {jn}: {part} pivot {old} -> {j['world']} ({moved:.1f} canvas px)", file=sys.stderr)
     folder = src.get("dir") or os.path.dirname(a.source)
     s = a.scale
     if a.sockets:
@@ -297,6 +327,8 @@ def main():
             fields.append("swaps: { " + ", ".join(sw) + " }")
         lines.append(f"    '{name}': {{ " + ", ".join(fields) + " },")
     lines.append("  },")
+    if limits:   # T035
+        lines.append("  limits: { " + ", ".join(f"'{p}': {lim}" for p, lim in limits.items()) + " },")
     if src.get("grips"):
         lines.append("  hands: {")
         for n, g in src["grips"].items():

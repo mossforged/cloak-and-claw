@@ -8,6 +8,7 @@
 //   dragHips: the body moved, every planted foot kept where it stands (the hips stop where a leg would leave its foot).
 //   dragHead: the head turned on the neck, inside its limit.
 //   turnNode / moveNode: a weapon on the weapon node (render/weapon-node.js: pose channels weapon.x/.y/.rot) moved or turned.
+//   T035: a rig with per-joint `limits` (rat v3) has every drag's joints clamped into them (render/limits.js, as drawn).
 //   liftOf: a foot's drawing above its floor line (the pose's '<foot>.lift': the floor-line rule keeps it there).
 import { layoutRig } from '../render/rig-layout.js';
 import { reach } from '../render/rig-ik.js';
@@ -16,6 +17,7 @@ import { wristLimit, WRISTS } from '../data/wrists.js';
 import { poseLimit, POSE_LIMITS } from '../data/pose-limits.js';
 import { floorLine } from '../data/rigs/biped-floor.js';
 import HULLS from '../data/rigs/hulls.js';
+import { limitLayer } from '../render/limits.js';
 
 const D = Math.PI / 180;
 const apply = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
@@ -96,10 +98,18 @@ const withLifts = (c, j) => {
   return out;
 };
 
+// T035: a solve's joints held inside the rig's per-joint limits (none: the result as it was)
+function limited(c, r) {
+  const j = limitLayer(c.rig, r.joints);
+  if (j === r.joints) return r;
+  const hit = Object.keys(c.rig.limits).some((k) => k in r.joints && Math.abs(wrap(j[k] - r.joints[k])) > 1e-6);
+  return { ...r, joints: j, clamped: r.clamped || hit };
+}
+
 // A hand or foot dragged so its wrist / ankle goes to T (rig px).
 export function dragLimb(c, end, T) {
   const r = solveLimb(c, c.joints, limbOf(end), T);
-  return { ...r, joints: /^foot-/.test(end) ? withLifts(c, r.joints) : r.joints };
+  return limited(c, { ...r, joints: /^foot-/.test(end) ? withLifts(c, r.joints) : r.joints });
 }
 
 // A hand or foot turned by deg (rig px screen sense) from the pose c: its own turn inside the limit, the forearm / shin the
@@ -113,7 +123,7 @@ export function twist(c, end, deg) {
     const j = { ...out, [limb.lo]: c.joints[limb.lo] + rest * k }, Bj = byName(layoutOf(c, j)), b = jointBend(c, Bj, limb);
     if (Math.abs(b.bend) <= b.lim || Math.abs(b.bend) <= Math.abs(jointBend(c, B, limb).bend)) { out = j; break; }
   }
-  return { joints: /^foot-/.test(end) ? withLifts(c, out) : out, clamped: Math.abs(rest) > 1e-6 };
+  return limited(c, { joints: /^foot-/.test(end) ? withLifts(c, out) : out, clamped: Math.abs(rest) > 1e-6 });
 }
 
 // The hips (root) moved by d (rig px); each jointed leg re-solved so its ankle and foot stay put. If a leg can't (out of
@@ -137,7 +147,7 @@ export function dragHips(c, d) {
     for (let i = 0; i < n; i++) { const m = (lo + hi) / 2; if (at(m).ok) lo = m; else hi = m; }
     r = { ...at(lo), stopped: true };
   }
-  return { joints: withLifts(c, r.j), stopped: !!r.stopped };
+  return limited(c, { joints: withLifts(c, r.j), stopped: !!r.stopped });
 }
 
 // The head turned by deg (screen sense) from the pose c, inside the neck limit. { joints, clamped }
@@ -145,7 +155,7 @@ export function dragHead(c, deg) {
   const B = byName(layoutOf(c)), H = B.head, T = H && B[c.rig.parts.head.parent];
   if (!T) return { joints: c.joints, clamped: false };
   const turn = bendOf(T, H), lim = poseLimit(c.rig, 'neck'), want = turn + det(T.base) * deg, got = clamp(want, lim);
-  return { joints: { ...c.joints, head: (c.joints.head ?? 0) + got - turn }, clamped: got !== want };
+  return limited(c, { joints: { ...c.joints, head: (c.joints.head ?? 0) + got - turn }, clamped: got !== want });
 }
 
 // The weapon node's placement moved by d (rig px) / turned by deg, from where it is drawn (A = { grip: the item's grip point,
