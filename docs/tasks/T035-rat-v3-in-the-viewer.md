@@ -18,3 +18,10 @@ The user rebuilt the rat with each piece drawn on its own around joint points he
 - Human (user, phone): does the new rat move better than the old one?
 
 Out of scope: other views, gear, replacing the game's rat.
+
+## Round 2 (lead, 2026-10-20): copy where the hands and feet go, not the angles
+Round 1 reviewed (`t035-rat-v3-viewer`, 9abbc61): import, limits, compare version, drag-to-pose and side by side all in, 43 files pass. Your far-arm question: the user dragged v3's far hand toward the chin in drag-to-pose and the elbow folds the right way inside 0..124, so **his limits stand**. The far arm hangs in the clips because the raider's poses are copied to v3 as joint angles, and v3's drawings rest at different angles from the old rat's (its far forearm especially), so the same number means a different bend.
+1. **Retarget by position:** for v3, place each pose by where the old rat's hands, feet, head and hips are (relative to the hips, scaled by limb length), then solve v3's limbs to those places with the same IK and limits drag-to-pose uses. The torso, neck, waist and tail keep their angles (same rest on both). The old rat's clips stay exactly as they are.
+2. **Re-import A027 round 2** (merged on main: same PNG names and points) with the round 1 command and re-run the hulls for v3 only (leave the game rat's stale hulls alone; that's its own task).
+3. **Feet:** after retargeting, check the planted-foot dip you reported; a foot placed by position with the floor fix inside the IK should land on its line.
+4. Refresh views.json, the strips and the side by side; report before/after for the far arm in the turning slash wind-up (the old rat's far fist is up at the chest, v3's should be too).

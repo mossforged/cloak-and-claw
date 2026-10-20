@@ -27,8 +27,8 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: T035 rat v3 in the viewer (job 027).
-- Art: A027 round 2 (job 026, requeued after the usage limit).
+- Code: idle. T035 on `t035-rat-v3-viewer` (not merged): v3 rat as a viewer compare version; waiting on the user's look and the far elbow/wrist sign question.
+- Art: idle. A027 round 2 merged (rest 96.8%; neck, far limbs, tail fixed; shoulder cap, collar, seat contours left, to be judged in motion).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-20 lead: reviewed A027 r2 (merged) and T035 (42+1 tests pass; v3 plays every move, holds no items yet; 67 keys need drawings v3 lacks). Open question to the user: far elbow 0..124 / far wrist 0..59 bend the arm backward; likely meant -124..0 / -59..0.
 2026-10-20 code: T035 on `t035-rat-v3-viewer` (runner job 027): rat v3 (A026 + A027 r1) imported on the user's fitted joints and limits (`--joints`, re-runnable) as viewer version `v3` for the raider and spearman; every clip plays with every joint clamped into its range; drag-to-pose `&version=v3`; side-by-side links; build `t035 rat v3 v1`.
 2026-10-20 code: T035 notes: v3 holds nothing (no grip lines on its new fists); far elbow 0..124 straightens the far arm in every raider pose (sign?); 67 keys need drawings v3 lacks (docs/screens/T035/missing.md). Not merged.
 2026-10-20 lead: merged A027 round 1 sources; requeued A027 r2 (026); queued T035, the v3 rat as a viewer compare version on the user's joints (027).

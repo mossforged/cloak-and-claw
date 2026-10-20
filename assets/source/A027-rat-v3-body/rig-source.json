@@ -20,7 +20,7 @@
       "pivotPoint": "tail-end",
       "band": 100,
       "attach": {},
-      "proposedPivot": true
+      "proposedPivot": false
     },
     "tail-2": {
       "img": "tail-2.png",
@@ -41,7 +41,7 @@
           1815
         ]
       },
-      "proposedPivot": true
+      "proposedPivot": false
     },
     "tail-1": {
       "img": "tail-1.png",
@@ -62,7 +62,7 @@
           1709
         ]
       },
-      "proposedPivot": true
+      "proposedPivot": false
     },
     "scarf-tail": {
       "img": "scarf-tail.png",
@@ -72,8 +72,8 @@
       ],
       "parent": "torso",
       "pivot": [
-        573.4,
-        1087.6
+        595.8,
+        1203.2
       ],
       "pivotPoint": "shoulder-near",
       "band": 220,
@@ -92,14 +92,14 @@
         1180
       ],
       "pivotPoint": "shoulder-far",
-      "band": 260,
+      "band": 300,
       "attach": {
         "elbow-far": [
-          996.9,
-          1309.3
+          1015.4,
+          1317.8
         ]
       },
-      "proposedPivot": true
+      "proposedPivot": false
     },
     "arm-far-lower": {
       "img": "arm-far-lower.png",
@@ -109,15 +109,15 @@
       ],
       "parent": "arm-far-upper",
       "pivot": [
-        996.9,
-        1309.3
+        1015.4,
+        1317.8
       ],
       "pivotPoint": "elbow-far",
-      "band": 300,
+      "band": 260,
       "attach": {
         "wrist-far": [
           1114.4,
-          1427.9
+          1428
         ]
       },
       "proposedPivot": false
@@ -131,7 +131,7 @@
       "parent": "arm-far-lower",
       "pivot": [
         1114.4,
-        1427.9
+        1428
       ],
       "pivotPoint": "wrist-far",
       "band": 340,
@@ -146,15 +146,15 @@
       ],
       "parent": "leg-far-upper",
       "pivot": [
-        995.5,
+        995.4,
         1624
       ],
       "pivotPoint": "knee-far",
       "band": 380,
       "attach": {
         "ankle-far": [
-          904.7,
-          1807.9
+          904.8,
+          1808
         ]
       },
       "proposedPivot": false
@@ -167,8 +167,8 @@
       ],
       "parent": "leg-far-lower",
       "pivot": [
-        904.7,
-        1807.9
+        904.8,
+        1808
       ],
       "pivotPoint": "ankle-far",
       "band": 420,
@@ -184,13 +184,13 @@
       "parent": "pelvis",
       "pivot": [
         884.4,
-        1484.5
+        1484.4
       ],
       "pivotPoint": "hip-far",
       "band": 460,
       "attach": {
         "knee-far": [
-          995.5,
+          995.4,
           1624
         ]
       },
@@ -220,7 +220,7 @@
         ],
         "hip-far": [
           884.4,
-          1484.5
+          1484.4
         ],
         "tail-root": [
           550,
@@ -319,11 +319,11 @@
       "attach": {
         "neck": [
           850.6,
-          1147.1
+          1147
         ],
         "shoulder-near": [
-          573.4,
-          1087.6
+          595.8,
+          1203.2
         ],
         "shoulder-far": [
           958,
@@ -357,7 +357,7 @@
       "parent": "torso",
       "pivot": [
         850.6,
-        1147.1
+        1147
       ],
       "pivotPoint": "neck",
       "band": 780,
@@ -372,8 +372,8 @@
       ],
       "parent": "torso",
       "pivot": [
-        573.4,
-        1087.6
+        595.8,
+        1203.2
       ],
       "pivotPoint": "shoulder-near",
       "band": 820,
@@ -425,16 +425,16 @@
   },
   "points": {
     "ankle-far": [
-      904.7,
-      1807.9
+      904.8,
+      1808
     ],
     "ankle-near": [
       571.2,
       1799
     ],
     "elbow-far": [
-      996.9,
-      1309.3
+      1015.4,
+      1317.8
     ],
     "elbow-near": [
       489.4,
@@ -450,14 +450,14 @@
     ],
     "hip-far": [
       884.4,
-      1484.5
+      1484.4
     ],
     "hip-near": [
       640.4,
       1476.6
     ],
     "knee-far": [
-      995.5,
+      995.4,
       1624
     ],
     "knee-near": [
@@ -466,11 +466,11 @@
     ],
     "neck": [
       850.6,
-      1147.1
+      1147
     ],
     "shoulder-near": [
-      573.4,
-      1087.6
+      595.8,
+      1203.2
     ],
     "toe-far": [
       1151.6,
@@ -486,7 +486,7 @@
     ],
     "wrist-far": [
       1114.4,
-      1427.9
+      1428
     ],
     "wrist-near": [
       411.2,
@@ -509,29 +509,12 @@
       1815
     ]
   },
-  "proposedPoints": {
-    "shoulder-far": [
-      958,
-      1180
-    ],
-    "tail-root": [
-      550,
-      1515
-    ],
-    "tail-mid": [
-      444,
-      1709
-    ],
-    "tail-end": [
-      351,
-      1815
-    ]
-  },
+  "proposedPoints": {},
   "rootNote": "Skeleton has no root point; pelvis root aliases the user waist point. Seat/belt/scarf inherit parent without independent rotation.",
   "limits_deg": {
     "shoulder-near": [
       -116,
-      76
+      67
     ],
     "elbow-near": [
       -113,
@@ -547,18 +530,18 @@
     ],
     "knee-near": [
       -23,
-      70
+      87
     ],
     "ankle-near": [
-      -19,
+      -1,
       40
     ],
     "neck": [
       -20,
-      20
+      61
     ],
     "waist": [
-      -15,
+      -4,
       15
     ],
     "shoulder-far": [
@@ -566,12 +549,12 @@
       76
     ],
     "elbow-far": [
-      -113,
-      5
+      0,
+      124
     ],
     "wrist-far": [
-      -49,
-      9
+      0,
+      59
     ],
     "hip-far": [
       -23,
@@ -594,8 +577,8 @@
       40
     ],
     "tail-end": [
-      -40,
-      40
+      -3,
+      7
     ]
   },
   "drawOrder": [
@@ -603,8 +586,8 @@
     "tail-2",
     "tail-1",
     "scarf-tail",
-    "arm-far-upper",
     "arm-far-lower",
+    "arm-far-upper",
     "hand-far",
     "leg-far-lower",
     "foot-far",
@@ -627,8 +610,15 @@
     "wrist-near": "hand-near over arm-near-lower",
     "ankle-near": "foot-near over leg-near-lower",
     "wrist-far": "hand-far over arm-far-lower",
-    "ankle-far": "foot-far over leg-far-lower"
+    "ankle-far": "foot-far over leg-far-lower",
+    "elbow-far": "arm-far-upper over the hidden top of arm-far-lower; hand-far stays over both at wrist"
   },
   "importReady": false,
-  "joint_source": "../../../docs/design/rigs/rat-v3-joints-r2.json"
+  "joint_source": "../../../docs/design/rigs/rat-v3-joints-v4.json",
+  "acceptedFormerProposals": [
+    "shoulder-far",
+    "tail-root",
+    "tail-mid",
+    "tail-end"
+  ]
 }
