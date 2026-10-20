@@ -19,3 +19,6 @@ The user watched the v3 rat play every move beside the old one and approved it (
 The PNGs, `rig-source.json` (swaps per part, joint point, which item grips each hand takes), self-check images, `prompt.md`, `HANDOFF.md`; phone JPGs in `docs/screens/A028/`. `importReady: true` when every swap sits on its joint with no jump and no gap through its range.
 
 Out of scope: other views (side, front, back: next), whole-limb drawings (v3's jointed limbs do those moves by IK), gear.
+
+## Also (lead, 2026-10-20): the joint checker
+T036 merged `tools/joint-check.mjs` (see AGENTS.md). Run it on your delivery with `--joints docs/design/rigs/rat-v3-joints-v4.json` and include `joint-check.jpg`. On the current v3 body it flags three faults to fix while you're in there: **near shoulder** gap at −116, −93 and +21 and seams at −47 / −25; **waist** seam (second outline under the belt) at +15; **far ankle** gap at +40 (`docs/screens/T036/a027-current/joint-check.jpg`).
