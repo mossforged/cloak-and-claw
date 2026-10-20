@@ -32,3 +32,18 @@ The user bent all six A026 pieces in the Fitting Room after round 3 and saved ev
 The PNGs (canvas 1536 x 2304, #00FF00, master scale, sitting where the master shows them), `rig-source.json` (all 21+ pieces: parent, pivot = skeleton point, draw order per the covers, the proposed points flagged), the self-check images, `prompt.md`, `HANDOFF.md`; phone JPGs in `docs/screens/A027/`. `importReady: true` when rest matches the master (whole-rat visible IoU >= 95%) and no sweep shows a gap, tube face or doubled outline.
 
 Out of scope: other views, other heads and hand drawings, gear, code.
+
+## Round 2 (lead, 2026-10-20): clean-up on the user's fitted joints
+Round 1 (`a027-rat-v3-body`, 9779df4) is accepted in shape: the whole rat from new pieces matches the master at rest (97.8%), no stand-ins, and the user fitted all 17 joints in Fitting Room v4 with no gaps flagged. **His fit is now the law:** `docs/design/rigs/rat-v3-joints-v4.json` (pivots in master px and ranges). Changes from your round 1 to build around:
+- **Near shoulder turns at (595.8, 1203.2)**, about 115 px below the old skeleton point (the user confirmed it). Rebuild the torso's hidden shoulder area and the arm's hidden top dome around that point so −116..67 shows no notch and no torso edge.
+- Far elbow at (1015.4, 1317.8), range **0..124**; far wrist range **0..59**.
+- Neck range −20..**61**; near knee −23..**87**; waist −4..15; near ankle −1..40; tail tip −3..7; the far shoulder and tail points you proposed are accepted as they are.
+
+Fix (all your own round 1 list):
+1. **Neck:** the back of the neck breaks into jagged fragments at +10..+20; with the range now up to +61 the head's hidden neck needs a full dome under the torso's collar and scarf, no fragments, no grey.
+2. **Near shoulder notch** at positive turns (see above).
+3. **Far limbs:** the paint bars and mismatched exposure in the far arm and leg sweeps; the far forearm's hidden top and the far shin are the worst (50% and 43% IoU).
+4. **Tail joins:** the outlines across the joins and the stray scrap; each tail piece's hidden end a dome under the piece above it.
+5. Seat, neck and hem registration edges; the pelvis and torso extras/missing areas at rest (72% and 83% IoU).
+
+Same self-checks with the v4 ranges and points; `importReady: true` when rest stays >= 95% and no sweep shows a gap, fragment, tube face or doubled outline.

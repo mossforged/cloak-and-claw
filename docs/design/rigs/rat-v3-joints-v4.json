@@ -1,0 +1,176 @@
+{
+ "source": "Fitting Room v4 (artifact GQEwo2i25oFiGSdJkn6UgS, db joint-points-v4), user, 2026-10-20, on A026+A027 pieces. Far elbow and far wrist lower limit 0 set by the lead at the user's word (the page couldn't set a limit at 0; fixed).",
+ "note": "world = master.png px where the joint turns; limits deg, + = clockwise on screen, from rest. Full per-piece points (child pivot / parent attach in the page's half-size crop px) are in the db docs.",
+ "joints": {
+  "shoulder-near": {
+   "world": [
+    595.8,
+    1203.2
+   ],
+   "limits": [
+    -116,
+    67
+   ]
+  },
+  "elbow-near": {
+   "world": [
+    489.4,
+    1303.6
+   ],
+   "limits": [
+    -113,
+    5
+   ]
+  },
+  "wrist-near": {
+   "world": [
+    411.2,
+    1427.6
+   ],
+   "limits": [
+    -49,
+    9
+   ]
+  },
+  "hip-near": {
+   "world": [
+    640.4,
+    1476.6
+   ],
+   "limits": [
+    -23,
+    34
+   ]
+  },
+  "knee-near": {
+   "world": [
+    633.2,
+    1661
+   ],
+   "limits": [
+    -23,
+    87
+   ]
+  },
+  "ankle-near": {
+   "world": [
+    571.2,
+    1799
+   ],
+   "limits": [
+    -1,
+    40
+   ]
+  },
+  "neck": {
+   "world": [
+    850.6,
+    1147
+   ],
+   "limits": [
+    -20,
+    61
+   ]
+  },
+  "waist": {
+   "world": [
+    806.2,
+    1441.6
+   ],
+   "limits": [
+    -4,
+    15
+   ]
+  },
+  "shoulder-far": {
+   "world": [
+    958,
+    1180
+   ],
+   "limits": [
+    -116,
+    76
+   ]
+  },
+  "elbow-far": {
+   "world": [
+    1015.4,
+    1317.8
+   ],
+   "limits": [
+    0,
+    124
+   ]
+  },
+  "wrist-far": {
+   "world": [
+    1114.4,
+    1428
+   ],
+   "limits": [
+    0,
+    59
+   ]
+  },
+  "hip-far": {
+   "world": [
+    884.4,
+    1484.4
+   ],
+   "limits": [
+    -23,
+    34
+   ]
+  },
+  "knee-far": {
+   "world": [
+    995.4,
+    1624
+   ],
+   "limits": [
+    -23,
+    70
+   ]
+  },
+  "ankle-far": {
+   "world": [
+    904.8,
+    1808
+   ],
+   "limits": [
+    -19,
+    40
+   ]
+  },
+  "tail-root": {
+   "world": [
+    550,
+    1515
+   ],
+   "limits": [
+    -40,
+    40
+   ]
+  },
+  "tail-mid": {
+   "world": [
+    444,
+    1709
+   ],
+   "limits": [
+    -40,
+    40
+   ]
+  },
+  "tail-end": {
+   "world": [
+    351,
+    1815
+   ],
+   "limits": [
+    -3,
+    7
+   ]
+  }
+ }
+}
