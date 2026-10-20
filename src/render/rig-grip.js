@@ -117,13 +117,24 @@ function band(L, slot, hands) {
   return L.map((e) => (grips(e) && e.order <= w.order ? { ...e, order: w.order + GRIP_BAND } : e)).sort((a, b) => a.order - b.order);
 }
 
+// T039: a retargeted rig (rat v3, render/retarget.js) already has its grip hand where the source's is, inside its limits,
+// so the weapon node isn't placed again (its IK would take the arm out of them): the item hangs on the hand, and a grip
+// mode's own hand drawing (overhand) still shows, the item on that drawing's line (rig.hands).
+function retargetedNode(rig, swap, held, N, modes) {
+  const ms = GRIP_MODES[modes.grip]?.swap, cur = withHeldHand(rig, swap, held)[N.hand] ?? N.hand, own = `${cur}-${ms}`, H = rig.hands?.[own];
+  if (!ms || !H || !held?.part) return { swap, held, N: null };
+  const part = { ...held.part, attach: H.at, rest: held.part.rest + H.axis - (rig.axes?.[held.grip] ?? H.axis) };
+  return { swap: { ...swap, [N.hand]: own }, held: { ...held, part }, N: null };
+}
+
 // Layout entries (layoutRig's, plus { order, line: [points] } for a bow string), with the grip applied.
 // force (T025, hold sheet and tests): { grip, grip2 } grip modes overriding the pose's.
 export function gripLayout(rig, joints, swap, held, f, force) {
   const G0 = held?.part && rig.grips?.[held.grip], modes = modesOf(rig, held, swap, force);
   // T026: a whole-limb drawing (A019 raised / cocked arm) that hides the arm the grip bends: no second-hand IK this frame
   const G = G0 && !Object.entries(swap).some(([p, k]) => rig.parts[p]?.swaps?.[k]?.hide?.some((h) => [...G0.ik.arm, G0.ik.end].includes(h))) ? G0 : null;
-  const N = nodeActive(rig, joints, swap, held, modes);
+  let N = nodeActive(rig, joints, swap, held, modes);
+  if (N && rig.retarget) ({ swap, held, N } = retargetedNode(rig, swap, held, N, modes));
   if (!G && !N) return band(limitWrists(rig, layoutRig(rig, joints, swap, held), { art: held?.kit?.art }), held?.part ? held.slot : typeof rig.slots?.['one-hand'] === 'string' && rig.slots['one-hand'], []);
   // T029: a hand the pose opens (the bow's loose: hand-near-open) has let go; it keeps the pose's drawing
   const opened = Object.fromEntries(Object.keys(G?.swap ?? {}).filter((p) => /-(open|palm)$/.test(swap[p] ?? '')).map((p) => [p, swap[p]]));

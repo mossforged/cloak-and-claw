@@ -1,0 +1,14 @@
+[
+  { "label": "Side by side: turning slash, slow: the current rat (left), v3 with its A028 hands, heads and feet (right). v3 holds the cutlass on Art's provisional line, so it points another way until your lines arrive", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side: walk (v3's heel and toe feet; the cutlass on Art's line crosses its face)", "q": "f=rat-raider&anim=walk&f2=rat-raider&v2=v3&zoom=1.5" },
+  { "label": "v3 overhead chop with the hand axe, slow", "q": "f=rat-raider&v=v3&anim=overheadChop&speed=0.25&zoom=2" },
+  { "label": "v3 spear thrust, slow (spear in the near grip, far hand on the shaft in its overhand drawing)", "q": "f=rat-spearman&v=v3&anim=spearThrust&speed=0.25&zoom=2" },
+  { "label": "Side by side: spear thrust, slow", "q": "f=rat-spearman&anim=spearThrust&f2=rat-spearman&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "v3 shield bash, slow (no shield yet: Art drew no line on the shield hand)", "q": "f=rat-raider&v=v3&anim=shieldBash&speed=0.25&zoom=2" },
+  { "label": "v3 hurt (hurt head)", "q": "f=rat-raider&v=v3&anim=hurt&speed=0.5&zoom=2" },
+  { "label": "v3 knockdown (hurt then ko head, open hands)", "q": "f=rat-raider&v=v3&anim=knockdown&speed=0.5&zoom=2" },
+  { "label": "v3 drink head (no rat move drinks yet: shown in drag-to-pose)", "q": "pose=rat-raider&version=v3&from=idle:0&sw=head:head-drink" },
+  { "label": "v3 shout head (fidget)", "q": "f=rat-raider&v=v3&anim=fidget&zoom=2" },
+  { "label": "v3 dagger stab, slow (dagger in the near overhand drawing)", "q": "f=rat-raider&v=v3&anim=daggerStab&speed=0.25&zoom=2" },
+  { "label": "The current rat's own clips, unchanged: turning slash", "q": "f=rat-raider&anim=ratSlash&speed=0.25&zoom=2" }
+]

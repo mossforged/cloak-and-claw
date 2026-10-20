@@ -14,12 +14,40 @@ import { limitLayer, clampTurn } from '../src/render/limits.js';
 import { startPose, solveOf, poseFrame, readout, formatPose, parsePose } from '../src/viewer/pose-state.js';
 import { dragLimb, dragHead, twist, dragHips, byName, pivotAt } from '../src/viewer/pose-drag.js';
 import V3, { BANDS, V3_SPEARMAN } from '../src/data/rigs/rat-v3.js';
+import HULLS from '../src/data/rigs/hulls.js';
 
 let fails = 0;
 const check = (name, fn) => { try { fn(); console.log('ok  ', name); } catch (e) { fails++; console.log('FAIL', name, '\n   ', e.stack.split('\n').slice(0, 4).join('\n    ')); } };
 const apply = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const JOINTS = JSON.parse(readFileSync('docs/design/rigs/rat-v3-joints-v4.json', 'utf8')).joints;
-const SRC = JSON.parse(readFileSync('assets/source/A027-rat-v3-body/rig-source.json', 'utf8'));
+const SRC = JSON.parse(readFileSync('assets/source/A028-rat-v3-kit/rig-source.json', 'utf8'));   // T039: A028 (A027's body + its repairs + swaps)
+const by = (L) => Object.fromEntries(L.filter((e) => e.m && !e.line).map((e) => [e.name, e]));
+// T039: what the clips show on v3: each swap drawing, and each held item against the fist holding it
+const shown = new Set(), named = new Set(), held = { frames: 0, bad: [] }, second = { frames: 0, bad: [] };
+const inHull = (P, pts) => pts.every((a, i) => { const b = pts[(i + 1) % pts.length]; return (b[0] - a[0]) * (P[1] - a[1]) - (b[1] - a[1]) * (P[0] - a[0]) >= -0.5 * Math.hypot(b[0] - a[0], b[1] - a[1]); })
+  || pts.every((a, i) => { const b = pts[(i + 1) % pts.length]; return (b[0] - a[0]) * (P[1] - a[1]) - (b[1] - a[1]) * (P[0] - a[0]) <= 0.5 * Math.hypot(b[0] - a[0], b[1] - a[1]); });
+function holds(rig, F, mem, tag) {
+  for (const [p, n] of Object.entries(mem.swap ?? {})) if (rig.parts[p]?.swaps?.[n]) named.add(n);
+  const B = by(F.L);
+  for (const e of F.L) if (e.swap) shown.add(e.swap);
+  if (!F.held?.part) return;
+  const I = B[F.held.slot], H = I && B[F.held.part.parent];
+  if (!I || !H) return;
+  if (H.swap && !rig.hands[H.swap] && mem.swap?.[H.name] === H.swap) { held.open = (held.open ?? 0) + 1; return; }   // the pose opens the hand (knockdown, grabbed: as on the raider)
+  held.frames++;
+  // the item's grip point (on its own line) inside the fist drawing that holds it, which is a drawing with a grip line
+  // (a split grip: its face or its under piece, render/grip-split.js)
+  const G = apply(I.m, ...F.held.kit.art.grip), U = B[`${H.name}:under`], hulls = [H, U].filter(Boolean).map((e) => HULLS[e.img].map((q) => apply(e.m, ...q)));
+  if (!rig.hands[H.swap] || !hulls.some((pts) => inHull(G, pts))) held.bad.push(`${tag}: ${F.held.kit.id} in ${H.swap ?? H.name}${rig.hands[H.swap] ? ' outside it' : ' (no grip line)'}`);
+  // a two-hander's second fist on its overhand drawing: its grip centre on the shaft line (1.5 px)
+  const S = B['hand-far'];
+  if (F.held.kit.art.grip2 && S?.swap === 'hand-far-grip-overhand') {
+    second.frames++;
+    const A = F.held.kit.art, a = apply(I.m, ...A.grip), b = apply(I.m, ...A.gripEnd), c = apply(S.base, ...rig.hands[S.swap].at);
+    const off = Math.abs((b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])) / Math.hypot(b[0] - a[0], b[1] - a[1]);
+    if (off > 1.5) second.bad.push(`${tag}: far fist ${off.toFixed(1)} px off the shaft`);
+  }
+}
 
 check('v3 is a compare version of the raider (and the spearman, for his moves)', () => {
   assert.ok(versionsOf('rat-raider').includes('v3') && versionsOf('rat-spearman').includes('v3'));
@@ -51,8 +79,9 @@ check('every v3 clip frame: joints inside the user\'s limits, pivots on their pa
   const bad = [];
   let frames = 0, clips = 0;
   const warm = (sb, t) => {
-    const f = sb.hero, { L } = rigFrame(f, sb.rig, t, rigMemory(f), sb.pose ?? undefined);
+    const f = sb.hero, F = rigFrame(f, sb.rig, t, rigMemory(f), sb.pose ?? undefined), { L } = F;
     frames++;
+    holds(sb.rig, F, rigMemory(f), `${sb.hero.def.id} ${sb.clip.key} frame ${sb.n}`);
     for (const m of frameFaults(L)) if (bad.length < 20) bad.push(`${sb.hero.def.id} ${sb.clip.key} frame ${sb.n}: ${m}`);
   };
   const slot = createSlot({ warm: (sb, t) => { for (const f of sb.w.fighters) if (f !== sb.hero) rigFrame(f, rigOf(f.def.id), t, rigMemory(f)); warm(sb, t); } });
@@ -64,7 +93,20 @@ check('every v3 clip frame: joints inside the user\'s limits, pivots on their pa
   }
   console.log(`     ${clips} clips, ${frames} frames`);
   assert.ok(clips > 30 && frames > 1000);
-  assert.deepEqual(bad, []);
+  assert.ok(!bad.length, bad.join('; '));
+});
+
+check('T039: every hand, head and foot drawing a v3 clip names shows (the raider\'s names), and some of each kind', () => {
+  assert.deepEqual([...named].filter((n) => !shown.has(n)), []);
+  for (const re of [/^hand-near-/, /^hand-far-/, /^head-/, /^foot-near-/, /^foot-far-/]) assert.ok([...shown].some((n) => re.test(n)), String(re));
+});
+
+check('T039: a held item sits in the fist holding it (its grip point inside that grip drawing), a two-hander\'s second fist on its shaft', () => {
+  assert.ok(held.frames > 1000 && second.frames > 50, `${held.frames} / ${second.frames}`);
+  const kinds = {};
+  for (const b of held.bad) { const k = b.replace(/ frame \d+/, ''); kinds[k] = (kinds[k] ?? 0) + 1; }
+  assert.ok(!held.bad.length, `${held.bad.length}: ${JSON.stringify(kinds)}`);
+  assert.ok(!second.bad.length, `${second.bad.length} of ${second.frames}: ${second.bad.slice(0, 8).join('; ')}`);
 });
 
 check('the pivots are the user\'s fitted points (master px, 0.5 px)', () => {

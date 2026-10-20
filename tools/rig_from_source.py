@@ -24,8 +24,10 @@ T035 (rat v3, A026 + A027: every piece drawn whole on the master canvas): --join
 Room points and limits, docs/design/rigs/rat-v3-joints-v4.json) wins over the source's pivots: each jointed part turns on
 the user's point (its parent's attach follows), and the limits are written as `limits: { part: [lo, hi] }` (degrees from
 rest, + clockwise on screen). --floor-y gives the floor for a source without `floorY` (A018's 1950: same master, same
-scale as the raider). Re-run after Art's next round (same PNG names, same points), then node tools/rig-hulls.mjs:
-  python3 tools/rig_from_source.py assets/source/A027-rat-v3-body/rig-source.json --id rat-v3 \\
+scale as the raider). Re-run after Art's next round (same PNG names, same points), then node tools/rig-hulls.mjs.
+T039: A028's source (the 21 parts with its three repairs, and 31 hand / head / foot swaps: `replaces` = the part,
+`pairedWith` on the `in-front-of-item` piece = its `under`); then node tools/v3-grip-lines.mjs for the held items:
+  python3 tools/rig_from_source.py assets/source/A028-rat-v3-kit/rig-source.json --id rat-v3 \\
     --joints docs/design/rigs/rat-v3-joints-v4.json --floor-y 1950 --art assets/art/enemies/rat-raider/rig-v3 \\
     --out src/data/rigs/rat-v3-parts.js
   node tools/rig-hulls.mjs --only rat-v3   (T035 r2: only v3's outlines; the game rat's stay as they are)"""
@@ -122,7 +124,11 @@ def renamed(src):
     fix = lambda d: {near_far(k): v for k, v in (d or {}).items()}
     out = dict(src)
     out["parts"] = {k: {**p, "parent": near_far(p.get("parent"))} for k, p in fix(src.get("parts")).items()}
-    out["swaps"] = {k: {**s, "of": near_far(s["of"]), **({"hide": [near_far(h) for h in s["hide"]]} if s.get("hide") else {})}
+    # T039 (A028): a swap may name its part as `replaces` and its split-grip partner as `pairedWith` (the piece drawn
+    # `in-front-of-item` is the face; its partner `behind-item` is the under piece)
+    under = lambda s: s.get("under") or (s.get("pairedWith") if s.get("layer") == "in-front-of-item" else None)
+    out["swaps"] = {k: {**s, "of": near_far(s.get("of") or s.get("replaces")), **({"hide": [near_far(h) for h in s["hide"]]} if s.get("hide") else {}),
+                        **({"under": under(s)} if under(s) else {})}
                     for k, s in fix(src.get("swaps")).items()}
     if src.get("grips"):
         out["grips"] = {k: {**g, "of": near_far(g["of"])} for k, g in fix(src["grips"]).items()}

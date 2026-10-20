@@ -11,7 +11,7 @@
 // Whatever is still past (a squashed body during the turn-around) is turned back about the wrist, item and all: never
 // the wrist past its limit. The hand's pivot stays on the forearm's wrist point.
 import { mul, rot, tr, apply } from './rig-layout.js';
-import { WRISTS, wristLimit, neutralOf } from '../data/wrists.js';
+import { WRISTS, wristRange, neutralOf } from '../data/wrists.js';
 
 const D = Math.PI / 180;
 const inv = (m) => { const d = m[0] * m[3] - m[1] * m[2]; return [m[3] / d, -m[1] / d, -m[2] / d, m[0] / d, (m[2] * m[5] - m[3] * m[4]) / d, (m[1] * m[4] - m[0] * m[5]) / d]; };
@@ -21,6 +21,7 @@ const dist = (a, b) => Math.hypot(b[0] - a[0], b[1] - a[1]);
 const about = (P, deg) => mul(mul(tr(P[0], P[1]), rot(deg)), tr(-P[0], -P[1]));
 const u = (deg) => [Math.cos(deg * D), Math.sin(deg * D)];
 export const HANDS = /^hand-(near|far)$/;
+const inside = (bend, [lo, hi]) => bend >= lo - 0.01 && bend <= hi + 0.01;
 
 // The hand's turn on its forearm in degrees (0 = as drawn on it): rotation of the hand's base frame seen from the
 // forearm's base frame (in the forearm's px: a mirrored body measures as an upright one), less the parts' rest turns.
@@ -38,9 +39,18 @@ function armOf(by, H, rig) {
   if (!F || !U || !/-lower$/.test(F.name)) return null;
   const S = apply(U.base, ...U.p.pivot), E = apply(F.base, ...F.p.pivot), W = apply(F.base, ...H.p.attach);
   const flip = Math.sign(F.base[0] * F.base[3] - F.base[1] * F.base[2]) || 1, side = Math.sign((E[0] - S[0]) * (W[1] - S[1]) - (E[1] - S[1]) * (W[0] - S[0]));
-  return { H, F, U, S, E, W, lu: dist(S, E), lf: dist(E, W), flip, side, bend: turnOf(rig, F, H), lim: wristLimit(rig, H.name.slice(5)),
-    fu: ang(S, E), ff: ang(E, W) };
+  const T = by[U.p.parent], L = rig.limits ?? {};   // T039: a rig with limits keeps the shoulder and elbow inside them too
+  const joints = T && L[U.name] && L[F.name] ? { up: bendOf(T, U), lo: bendOf(U, F), rUp: L[U.name], rLo: L[F.name] } : null;
+  return { H, F, U, S, E, W, lu: dist(S, E), lf: dist(E, W), flip, side, bend: turnOf(rig, F, H), range: wristRange(rig, H.name.slice(5)),
+    fu: ang(S, E), ff: ang(E, W), joints };
 }
+
+// T039: the arm's shoulder and elbow turns (as drawn: + clockwise in the body's own sense) at screen angles fu, ff inside
+// the rig's limits (0.5 degrees of slack, as the limit tests)
+const armInside = (a, fu, ff) => {
+  const up = a.joints.up + a.flip * wrap(fu - a.fu), lo = a.joints.lo + a.flip * wrap(wrap(ff - fu) - wrap(a.ff - a.fu));
+  return up >= a.joints.rUp[0] - 0.5 && up <= a.joints.rUp[1] + 0.5 && lo >= a.joints.rLo[0] - 0.5 && lo <= a.joints.rLo[1] + 0.5;
+};
 
 // Best arm for one hand whose wrist should land at Wd with the hand turned d (screen deg) from now:
 // { cost, W (where the wrist ends), fu, ff (the arm's new screen angles), r (px off Wd) }. Px off Wd cost `across` each
@@ -49,7 +59,8 @@ function armOf(by, H, rig) {
 function solveArm(a, Wd, d, ax, across, along, past = along, flips = false) {
   let best = null;
   const hs = a.flip * d;   // the hand's own turn, in the forearm's sense
-  for (let b = -a.lim; b <= a.lim + 1e-9; b += a.lim / 18) {
+  const [lo, hi] = a.range;
+  for (let b = lo; b <= hi + 1e-9; b += (hi - lo) / 36) {
     // bend = a.bend + hs - flip * dff  ->  dff = flip * (a.bend + hs - b)
     const ff = a.ff + a.flip * (a.bend + hs - b), f = u(ff), P = [Wd[0] - a.lf * f[0] - a.S[0], Wd[1] - a.lf * f[1] - a.S[1]];
     // the wrist spots tried: where the elbow circle meets the item's line through Wd (slid along it, exact), else the
@@ -62,6 +73,7 @@ function solveArm(a, Wd, d, ax, across, along, past = along, flips = false) {
     for (const o of spots) {
       const Q = [a.S[0] + P[0] + o[0], a.S[1] + P[1] + o[1]];
       const fu = Math.abs(dist(a.S, Q)) < 1e-6 ? a.fu : ang(a.S, Q), elbow = wrap(ff - fu);
+      if (a.joints && !armInside(a, fu, ff)) continue;   // T039: rat v3's shoulder / elbow ranges
       if (Math.abs(elbow) > Math.max(WRISTS.elbowMax, Math.abs(wrap(a.ff - a.fu)))) continue;   // no deeper elbow bend than the art covers (or the pose had)
       // the elbow keeps its side, or pays for bending the other way on screen (the arm turned in depth: the archer's
       // string arm drawn back level with the arrow)
@@ -101,10 +113,10 @@ export function limitWrists(rig, L, opts = {}) {
     const H = B[name];
     if (!H || (sec && name === sec.hand)) continue;
     const a = armOf(B, H, rig);
-    if (!a || Math.abs(a.bend) <= a.lim + 0.01) {
+    if (!a || inside(a.bend, a.range)) {
       if (!(sec && name === sec.of && a)) continue;
       const b2 = armOf(B, B[sec.hand], rig);
-      if (!b2 || Math.abs(b2.bend) <= b2.lim + 0.01) continue;   // both hands of the item inside: nothing to do
+      if (!b2 || inside(b2.bend, b2.range)) continue;   // both hands of the item inside: nothing to do
     }
     const holds = subtree(L, name).size > 1 || (sec && sec.of === name);
     if (!holds) continue;   // empty hands: the clamp below
@@ -152,11 +164,11 @@ export function clampWrists(rig, L) {
     for (const name of ['hand-near', 'hand-far']) {
       const H = B[name], F = H && B[H.p.parent];
       if (!F || !/-lower$/.test(F.name)) continue;
-      const bend = turnOf(rig, F, H), lim = wristLimit(rig, name.slice(5));
-      if (Math.abs(bend) <= lim + 0.01) continue;
+      const bend = turnOf(rig, F, H), [lo, hi] = wristRange(rig, name.slice(5));
+      if (inside(bend, [lo, hi])) continue;
       const flip = Math.sign(F.base[0] * F.base[3] - F.base[1] * F.base[2]) || 1, P = apply(F.base, ...H.p.attach);
       if (WRISTS.trace) WRISTS.trace.push({ clamp: name, bend });
-      L = moveAll(L, subtree(L, name), about(P, flip * (Math.sign(bend) * (lim - 0.05) - bend)));
+      L = moveAll(L, subtree(L, name), about(P, flip * (Math.min(hi - 0.05, Math.max(lo + 0.05, bend)) - bend)));
       moved = true;
     }
     if (!moved) break;
