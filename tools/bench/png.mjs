@@ -8,6 +8,12 @@ export function readAlpha(path) { return readPng(path); }
 export function readRGBA(path) { return readPng(path); }
 function readPng(path) {
   if (cache.has(path)) return cache.get(path);
+  const out = decodePng(path);
+  cache.set(path, out);
+  return out;
+}
+// T036: the same without the cache (big canvases read once, e.g. tools/joint-check.mjs)
+export function decodePng(path) {
   const b = readFileSync(path);
   let o = 8, w, h, depth, type, inter, trns = null, palette = null;
   const idat = [];
@@ -39,9 +45,7 @@ function readPng(path) {
     const c = type === 6 || type === 2 ? [px[i * bpp], px[i * bpp + 1], px[i * bpp + 2]] : type === 3 ? [palette[px[i] * 3], palette[px[i] * 3 + 1], palette[px[i] * 3 + 2]] : [px[i * bpp], px[i * bpp], px[i * bpp]];
     rgba.set([...c, alpha[i]], i * 4);
   }
-  const out = { w, h, alpha, rgba };
-  cache.set(path, out);
-  return out;
+  return { w, h, alpha, rgba };
 }
 
 // T026 r2: minimal PNG writer (8-bit RGBA, filter 0) for headless maps (tools/paint-map.mjs).
