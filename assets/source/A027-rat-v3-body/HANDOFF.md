@@ -1,83 +1,89 @@
-# A027 — rat v3 body, best-attempt source delivery
+# A027 Round 2 — fitted v4 source repair, best attempt
 
-Branch: `a027-rat-v3-body`. **Not ready to import (`importReady: false`).** All 15 requested new pieces are saved, assembled with A026’s actual six pieces. The whole rest silhouette passes 95%; visible construction/finish defects prevent the sweep gate from passing.
+Branch: `a027-rat-v3-body`. **`importReady: false`.** Saved Round 2 under all original PNG names. Rest passes the whole-rat silhouette threshold, but the strict no-notch/no-exposed-edge/no-doubled-outline sweep gate is not met. This is a partial visual repair, not an import approval.
 
-## Delivered and setup
+## Setup and delivered files
 
-Folder check passed; git-lfs 3.8.0 available. Runner’s existing task branch was retained: no checkout, pull, branch switch or push. Art is entirely from A017’s master regions, new built-in image_gen hidden material, and the six accepted A026 parts. No A018/A023/A025 stand-ins.
+Correct folder verified with `pwd`; git-lfs 3.8.0 available. Runner task branch retained; `main` verified as an ancestor before art work. No branch switch, checkout, pull or push. All 17 fitted points and ranges come directly from `docs/design/rigs/rat-v3-joints-v4.json`, including the lower near shoulder, moved far elbow, zero lower far elbow/wrist limits, neck +61, near knee +87 and tail tip -3..7. Former proposed shoulder/tail points are now accepted, with no proposal flags. No user points were moved.
 
-Saved `torso.png`, `pelvis.png`, `seat.png`, `belt.png`, `head.png`, `scarf-tail.png`, `arm-far-upper.png`, `arm-far-lower.png`, `hand-far.png`, `leg-far-upper.png`, `leg-far-lower.png`, `foot-far.png`, `tail-1.png`, `tail-2.png`, `tail-3.png`: 1536 × 2304 RGB, green #00FF00, master placement/scale. Also `rig-source.json` (all 21 pieces; external near paths reference A026), `reference.png`, `rest.jpg`, `points.jpg`, 17 `sweep-<joint>.jpg`, `review.png`/`review.jpg`, `self-check.json`, exact `prompt.md`, this handoff. Phone JPEGs for every review sheet are in `docs/screens/A027/`, quality 80, longest side ≤2000px. No raw tool outputs or discarded variants committed.
+A027 retains its 15 PNG names: torso, pelvis, seat, belt, head, scarf-tail; far upper/lower arm and hand; far upper/lower leg and foot; tail-1..3. Thirteen have repaired paint/contours; belt and scarf-tail remain the accepted Round-1 pieces. All 21 parts are actual A026+A027 sources, 1536 × 2304 RGB on exact #00FF00, at master placement/scale. No stand-ins.
 
-Three A026 PNGs were replaced in place: `arm-near-upper`, `arm-near-lower`, `leg-near-upper`. Their exact original foreground masks and all fitted points/rest placements are unchanged. Local RGB repair bands target shoulder top/inner pad, inner elbow and thigh top/hem. These are partial paint cleanups, not a claim every leftover edge disappeared. `hand-near`, `leg-near-lower` and `foot-near` are unchanged. The old A026 review/manifest files are historical; A027 supplies the current assembly/measurements and uses the updated -113 elbow limit.
+A026's original reviews/manifest remain historical; the A027 all-21 rig and sheets are the current delivery. A026's three painted repairs are `arm-near-upper.png`, `arm-near-lower.png`, `leg-near-upper.png`. All six near foreground masks are unchanged. Near hand/shin/foot foreground pixels are unchanged; only their inherited keyed background fringe was normalized to green (257/619/446 pixels). No costume or foreground redraw in those three files. Near-thigh hidden orange-patch paint is replaced with olive only under the seat's rest occlusion.
 
-## Whole-rat rest and per-piece visible silhouettes
+Saved: `rig-source.json`, `reference.png`, `rest.jpg`, `silhouette.jpg` (all 21 exposed per-piece masks), `points.jpg`, 17 `sweep-<joint>.jpg`, extra `neck-detail.jpg` at the original +10/+20 failure angles, `review.png`/`review.jpg` (all components and 130px assembly over Harbor Market), `self-check.json`, exact prompts/processing in `prompt.md`, and this handoff. Phone copies of every review plus reference are in `docs/screens/A027/`, quality 80, longest side ≤2000px. No raw outputs, discarded variants or processing scripts delivered.
 
-Whole-rat visible silhouette IoU: **97.771%**. Rest, source/master/difference views and all values are in `rest.jpg`. The master-visible paint is deliberately retained. There are no stand-ins or rest-pose offsets; the near shoulder stays at (573.4,1087.6), without the old (-36,-22) slide. Full rounded hidden pieces expose some extra material at rest (notably the right hip and forearm); silhouette similarity is not paint/contour certification.
+## What changed, and what remains
 
-Per-piece IoU uses manually traced material ownership after actual layer occlusion; traces/interstices and wrap ownership introduce uncertainty. It penalizes stealing a neighbor’s exposed region even when the whole union matches. Scores are not directly comparable to A026’s legacy-body-context measurements.
+Neck: rebuilt smooth closed lower-neck paint and repaired torso collar/neck fragments; no jagged fragment breakup in the reviewed -20..61 samples or the extra +10/+20 check. Face/ears/whiskers retain literal original paint; back-fur edge and lower neck use the clean tool result. The final +10/+20 recheck is free of the inherited red back-fur flecks. The current simple layer order still puts the head contour over the collar; no separate scarf overlay or runtime workaround was invented.
 
-| Piece | Visible IoU |
-| --- | ---: |
-| `tail-3` | 88.58% |
-| `tail-2` | 94.33% |
-| `tail-1` | 95.35% |
-| `scarf-tail` | 98.43% |
-| `arm-far-upper` | 57.77% |
-| `arm-far-lower` | 50.54% |
-| `hand-far` | 90.80% |
-| `leg-far-lower` | 43.22% |
-| `foot-far` | 94.14% |
-| `leg-far-upper` | 74.86% |
-| `pelvis` | 72.10% |
-| `leg-near-lower` | 76.51% |
-| `foot-near` | 91.37% |
-| `leg-near-upper` | 97.01% |
-| `seat` | 86.40% |
-| `torso` | 83.46% |
-| `belt` | 96.45% |
-| `head` | 97.93% |
-| `arm-near-upper` | 97.26% |
-| `arm-near-lower` | 99.84% |
-| `hand-near` | 97.91% |
+Shoulder: torso hidden shoulder extended upward and finished in brown fur around the lower fitted point; near arm hidden-top paint repaired with its original accepted mask retained. Coverage is stronger, but it is **not** a certified circular hidden top centered on the new point. Broad torso edge exposure and the recess above the pad remain. This central Round-2 requirement is incomplete.
 
-The far shin, far forearm and far upper arm are the weakest per-piece silhouettes. The new pelvis/seat/torso also alter exposed material ownership. Their low scores must not be hidden by the whole-rat pass.
+Far limbs: removed forearm/hand/shin paint bars and neighboring scraps; upper arm now draws over the forearm's closed elbow cap, with hand still over wrist. Both remain behind torso. This asset draw-order adjustment is explicit in the manifest and must be used by the importer. Far shin widened through its lower middle; ankle top shortened to a shallow closed cap. Far thigh uses the true master cloth hem, excluding thin wires and detached scrap. A few attached red/registration tips and mismatched shin exposure remain.
+
+Tail: removed proximal trouser scrap, repaired all three continuous contours and closed ends, repainted the distal cap cross-lines coral on tail-1/2. No grey breaks/old black cross-lines in reviewed samples; rounded band/color transitions remain visible.
+
+Body/seat: registration paint repaired, right pelvis bulge reduced, hidden near-thigh duplicate patch partly removed. The seat seam, waist second outline and torso/pelvis material ownership still fail finish/rest checks. Some per-piece rest scores regress; the whole-rat pass must not conceal them.
+
+## Rest match and per-piece silhouettes
+
+Whole-rat IoU: **96.771%**, independently recomputed from saved PNGs; Round 1 was 97.771%. Above the 95% gate, a 1.000 percentage-point regression. No rest-pose offsets.
+
+Per-piece values compare actual exposed masks after layer occlusion to traced master material ownership. Round 1 mistakenly assigned a rectangular brown hem strip to the far shin: 4,455 pixels are returned to the far thigh, leaving a manually traced 2,285px skin strip. Corrected and uncorrected values are both saved; this correction does not change whole-rat IoU. Tracing uncertainty is material, and these scores do not certify hidden paint.
+
+| Piece | Round 1 legacy | Round 2 legacy | Round 2 corrected |
+| --- | ---: | ---: | ---: |
+| `tail-3` | 88.58% | 82.06% | 82.06% |
+| `tail-2` | 94.33% | 88.42% | 88.42% |
+| `tail-1` | 95.35% | 84.59% | 84.59% |
+| `scarf-tail` | 98.43% | 98.12% | 98.12% |
+| `arm-far-lower` | 50.54% | 58.39% | 58.39% |
+| `arm-far-upper` | 57.77% | 74.42% | 74.42% |
+| `hand-far` | 90.80% | 83.82% | 83.82% |
+| `leg-far-lower` | 43.22% | 20.57% | 51.75% |
+| `foot-far` | 94.14% | 97.37% | 97.37% |
+| `leg-far-upper` | 74.86% | 69.57% | 76.16% |
+| `pelvis` | 72.10% | 64.35% | 64.35% |
+| `leg-near-lower` | 76.51% | 76.51% | 76.51% |
+| `foot-near` | 91.37% | 91.37% | 91.37% |
+| `leg-near-upper` | 97.01% | 95.74% | 95.74% |
+| `seat` | 86.40% | 82.52% | 82.52% |
+| `torso` | 83.46% | 79.01% | 79.01% |
+| `belt` | 96.45% | 96.45% | 96.45% |
+| `head` | 97.93% | 96.05% | 96.05% |
+| `arm-near-upper` | 97.26% | 97.26% | 97.26% |
+| `arm-near-lower` | 99.84% | 99.84% | 99.84% |
+| `hand-near` | 97.91% | 97.91% | 97.91% |
+
+The far forearm improves against the same trace (50.54 → 58.39), but remains weak. Far shin is 51.75 on the corrected trace, 20.57 on the old hem-contaminated trace. Pelvis (64.35) and torso (79.01) remain worse than Round 1 (72.10/83.46). These are unresolved failures, not an improved rest-match claim.
 
 ## Sweeps
 
-17 sheets × 5 samples = 85 poses. All are rendered from delivered PNGs, with fixed draw order, exact shared pivots and whole descendant chains. Each includes a 390 × 390 source-pixel crop at 1:1 and a full rat whose foreground is 136px tall. Near ranges come from the current fitted JSON, far ranges mirror them; neck ±20, waist ±15, tails ±40. **All 85 have nonzero local parent/child overlap, but visible gap/notch/contour failures remain.** Overlap is not proof of a clean joint and no continuous-motion/in-game certification is claimed.
+17 joints × five v4 samples = 85 main poses, plus two original neck-failure checks. Fixed source painter order, rigid transforms and full descendant chains; each main sheet has source-pixel 1:1 detail and a full figure at 136px foreground height. All 85 main poses have nonzero local parent/child overlap, minimum 563px² at the far shoulder. Overlap proves contact only; no continuous or in-game certification.
 
-| Joint | Five angles (degrees) | Minimum local overlap, px² | Visual result |
+| Joint | Five angles | Min local overlap, px² | Reviewed result |
 | --- | --- | ---: | --- |
-| `neck` | -20, -10, 0, 10, 20 | 21,286 | Connected; cut/registration fragments beneath cheek and at scarf boundary still show as the head turns. Dome contour is not certified. |
-| `waist` | -15, -7.5, 0, 7.5, 15 | 26,229 | Connected; generated lower chest dome exposes a second dark edge under belt and paint/seam transitions at extremes. |
-| `shoulder-near` | -116, -68, -20, 28, 76 | 6,557 | No old torso slide. Brown fur replaces unsolicited second shoulder panel, but a grey notch remains above the pad at +28/+76; exposed hidden fur/strap boundary remains. FAIL. |
-| `hip-near` | -23, -8.75, 5.5, 19.75, 34 | 20,958 | Seat stays above thigh and connection holds. Diagonal orange-patch/seat registration seam and doubled patch contours remain at bends. FAIL finish. |
-| `shoulder-far` | -116, -68, -20, 28, 76 | 429 | Only 429 px² minimum local overlap; shallow attachment, jagged neck-side wedges and exposed cut paint at turns. FAIL finish, proposal needs fitting. |
-| `elbow-far` | -113, -83.5, -54, -24.5, 5 | 5,614 | Connected closed component, but cap/material scale mismatch and exposed rim-like folded contours remain. No clean no-tube-face certification. |
-| `wrist-far` | -49, -34.5, -20, -5.5, 9 | 5,268 | Cuff turns with hand; connected. Visible-paint ownership was corrected; outline/paint transitions at cuff remain. |
-| `hip-far` | -23, -8.75, 5.5, 19.75, 34 | 23,226 | Connected; full hidden thigh cap retained. Pelvis/thigh double boundaries and excess generated hip exposure remain. |
-| `knee-far` | -23, 0.25, 23.5, 46.75, 70 | 10,954 | Connected smooth closed shin reaches knee point. Hem scraps/registration and changed visible shin exposure remain. FAIL finish. |
-| `ankle-far` | -19, -4.25, 10.5, 25.25, 40 | 5,138 | Wrap belongs to foot; connected. Tool top-opening retry selected, but top cap/outline transition remains visible. |
-| `tail-root` | -40, -20, 0, 20, 40 | 1,402 | Root revised to (550,1515), minimum local overlap now 1402 px². Connected behind pelvis/near thigh; residual root-side material/contour transition remains. |
-| `tail-mid` | -40, -20, 0, 20, 40 | 1,635 | Connected; rounded generated support retained. Original-to-generated paint transition and dark joining contour remain visible. |
-| `tail-end` | -40, -20, 0, 20, 40 | 1,460 | Connected; curved tip retained. Negative turns expose a small notch/doubled outline at the join. FAIL finish. |
-| `elbow-near` | -113, -83.5, -54, -24.5, 5 | 5,965 | New full -113..5 range used (A026 manifest was stale at -101). Connected; inner elbow cut/registration edge only partially repaired. |
-| `wrist-near` | -49, -34.5, -20, -5.5, 9 | 10,935 | Original points/mask and cuff-on-hand retained. Connected; inherited cuff-side contour remnants remain. |
-| `knee-near` | -23, 0.25, 23.5, 46.75, 70 | 19,908 | Original points/mask retained. Connected; thigh hem repairs partial, exposed shin paint/width differs from master strip. |
-| `ankle-near` | -19, -4.25, 10.5, 25.25, 40 | 10,717 | Original points/mask and wrap-on-foot retained. Connected; inherited wrap-top/strap contour remnants remain. |
+| `neck` | -20, 0.25, 20.5, 40.75, 61 | 24,245 | Original jagged cheek/scarf fragments removed. Smooth closed lower-neck fur stays connected through +61; additional +10/+20 detail sheet checks the original failure angles. Single head contour still draws over collar in the existing piece order. |
+| `waist` | -4, 0.75, 5.5, 10.25, 15 | 26,344 | Connected through -4..15. Old horizontal paint bar is repaired, but a second lower-torso outline/fur strip remains visible beneath the belt. |
+| `shoulder-near` | -116, -70.25, -24.5, 21.25, 67 | 22,388 | Exact lower pivot (595.8,1203.2), no rest offset. Extended torso fur and repainted hidden arm top improve coverage; broad torso contour remains exposed at negative turns and a grey recess above the pad under scarf remains at positive turns. Original near-arm mask retained: a full circular cap centered on the lower pivot is not certified. Strict shoulder gate remains open. |
+| `hip-near` | -23, -8.75, 5.5, 19.75, 34 | 21,057 | Connected. Seat registration paint repaired and hidden duplicated orange patch repainted olive, but a clipped/abrupt olive-to-patch boundary and contour/stitch mismatch remain as the thigh turns under the seat. |
+| `shoulder-far` | -116, -68, -20, 28, 76 | 563 | Accepted point retained. Connected in all samples, but minimum local overlap is only 563 px²; narrow shoulder attachment and inner torso registration fringe remain. No new fitting proposal. |
+| `elbow-far` | 0, 31, 62, 93, 124 | 6,911 | New point and 0..124 used. Forearm paint bar removed; upper arm covers the closed hidden forearm top. Connected, no visible flat opening in these samples. This is a source-layer order change documented in manifest. |
+| `wrist-far` | 0, 14.75, 29.5, 44.25, 59 | 5,860 | 0..59 used. Cuff belongs to and turns with hand; hard paint bar and loose leather projection removed. Closed overlap throughout the five samples. |
+| `hip-far` | -23, -8.75, 5.5, 19.75, 34 | 16,967 | Connected. Reduced right pelvis bulge, but the pelvis/thigh boundary still produces a conspicuous second cloth contour; rest material ownership is not reconciled. |
+| `knee-far` | -23, 0.25, 23.5, 46.75, 70 | 12,641 | Smooth coral shin has no trouser paint bar. Thin detached hem wires/scrap removed; a few attached red/registration tips remain at the trouser edge. Rest shin exposure is still too small (51.75% corrected IoU). |
+| `ankle-far` | -19, -4.25, 10.5, 25.25, 40 | 2,989 | Wrap turns with foot and cap is shallower; connected through -19..40. No open tube, but leather cap/rim transition and the attached hem tips above it remain visible. |
+| `tail-root` | -40, -20, 0, 20, 40 | 1,447 | Stray trouser scrap removed. Closed hidden root stays behind pelvis/near thigh through ±40. |
+| `tail-mid` | -40, -20, 0, 20, 40 | 1,544 | Closed painted ends overlap through ±40. Black distal cap cross-line removed; coral paint/band transition remains visible as a rounded joint, with no grey break in these samples. |
+| `tail-end` | -3, -0.5, 2, 4.5, 7 | 1,634 | Uses -3..7 exactly. Closed tip root and coral join paint remove the old notch and black cross-line in the sampled range; hooked tip retained. |
+| `elbow-near` | -113, -83.5, -54, -24.5, 5 | 5,965 | Points/mask unchanged; inner elbow paint improved. Inherited thin pointed/cut contour remnants still appear at bends, especially near the fur/bracer edge. |
+| `wrist-near` | -49, -34.5, -20, -5.5, 9 | 10,935 | Points/mask unchanged, cuff follows hand. Inherited doubled cuff-side contours/strap fragments remain. |
+| `knee-near` | -23, 4.5, 32, 59.5, 87 | 19,908 | New maximum +87 used, connected. Near thigh top/hem paint repaired, but inherited thin hem/registration tips and differently exposed shin persist. |
+| `ankle-near` | -1, 9.25, 19.5, 29.75, 40 | 10,699 | New -1..40 used; wrap follows foot, connected. Inherited wrap-rim line projects at positive turns. |
 
-## Proposed points and manifest
+## Validation and runner handoff
 
-All coordinates are master pixels, orange on `points.jpg`; cyan points are the user’s skeleton/fitted values. Proposed: **shoulder-far (958,1180); tail-root (550,1515); tail-mid (444,1709); tail-end (351,1815)**. The first tail-root proposal (515,1515) was too shallow: shifting its hidden root 35px right increased minimum local overlap from 26 to 1402px². The far shoulder remains shallow and should be checked first in the Fitting Room. These are proposals, not locked user decisions.
+All 21 PNG dimensions/RGB/keyed backgrounds passed. All 17 v4 pivot/attach/range pairs match the law exactly. Six near masks unchanged; three near foregrounds unchanged. Whole-rat IoU recomputed independently. 17 main sweep sheets/85 overlapping samples plus +10/+20 neck details; phone copies present and within size limit. `review.png` and phone JPEGs are normal git; part images are LFS. Git-lfs status recognizes the changed source images. Source-only changes; no code, tools, tests or imported game art touched. The A027 asset row remains `source`.
 
-The skeleton has no explicit root. Manifest uses the user’s waist (806.2,1441.6) as the pelvis root alias and explicitly records that choice. Seat/belt ride pelvis; scarf rides torso. Torso is under near arm/head, seat over near thigh, far chains behind body, cuff with hand and wrap with foot on both sides. Torso’s unsolicited extra shoulder armor was removed with an image-tool retry; brown fur now fills that hidden surface. Domes are tool-painted and registered; perfect circularity/centering is not certified for every joint.
+No user-only design question blocks this delivery. Remaining work is art finish/geometry: near shoulder cap and exposed torso edge; seat/waist contours; pelvis/torso rest ownership; far shin exposure and tiny hem tips; inherited near elbow/cuff/ankle edges. Best attempt under the packet's tool-limit rule. The fitted joint decisions remain accepted.
 
-## Left / next review
-
-The task’s no-gap/no-doubled-outline gate is not met. Most urgent: fill the near-shoulder upper notch through +28/+76 without changing its fitted rest position; finish neck-side registration fragments; reconcile seat/upper-thigh patch boundaries; fit and clean far shoulder/elbow/wrist material exposure; reconcile far shin/hem silhouette and cleanup; blend tail joining outlines and tip notch. Some inherited A026 cuff/ankle edges and its differently exposed shin remain. Isolated-part review also exposes hard horizontal registration/paint bars in the far forearm/hand and far shin, a remaining dark trouser-shaped scrap beside tail-1, thin dangling hem fragments under the far thigh, a clipped neck edge and cut boundaries in seat/pelvis. These are substantive unfinished-art defects, even though they are often hidden at rest. The source images make these problems reviewable; no code workaround was added.
-
-No user-only design question blocked delivery. The only decisions for review are the proposed points and whether these new hidden surfaces are acceptable starting material. This is a best attempt under the asset contract’s tool-limit rule, not an import approval.
-
-Final validation passed: all 21 source dimensions/RGB/green, all six near masks and fitted points unchanged, three untouched near PNGs byte-identical, 17 sweeps/85 samples, all review phone copies/dimensions, and independently recomputed whole-rat IoU 97.771%. Text whitespace check passed. LFS attributes confirmed for new part images; review.png and phone JPGs are normal git. Staging succeeded. Art is committed on the runner’s task branch; runner is responsible for push.
-
-Commit `9779df4` contains the complete art delivery, manifest, sheets, prompts, asset row and initial reports. A subsequent staging attempt for the final HANDOFF/self-check defect descriptions was blocked by the sandbox (`.git/index.lock`: Operation not permitted); those two final text updates remain on disk for the runner to commit. No push was performed.
+Commit and Git LFS staging succeeded on the task branch. No push was performed; runner handles push. The earlier read-only diff attempt hit a transient sandbox denial in `.git/lfs/tmp`, but the final staging and art commit completed successfully.
