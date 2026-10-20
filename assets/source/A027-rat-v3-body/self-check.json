@@ -722,11 +722,11 @@
     },
     "elbow-far": {
       "pass": false,
-      "notes": "Connected closed component, but cap/material scale mismatch and exposed rim-like folded contours remain. No clean no-tube-face certification."
+      "notes": "Connected closed component, but cap/material scale mismatch and exposed rim-like folded contours remain. No clean no-tube-face certification. Hard horizontal registration/paint bar remains in the isolated bracer."
     },
     "wrist-far": {
       "pass": false,
-      "notes": "Cuff turns with hand; connected. Visible-paint ownership was corrected; outline/paint transitions at cuff remain."
+      "notes": "Cuff turns with hand; connected. Visible-paint ownership was corrected; outline/paint transitions at cuff remain. Hard horizontal registration/paint bar remains in isolated hand."
     },
     "hip-far": {
       "pass": false,
@@ -734,7 +734,7 @@
     },
     "knee-far": {
       "pass": false,
-      "notes": "Connected smooth closed shin reaches knee point. Hem scraps/registration and changed visible shin exposure remain. FAIL finish."
+      "notes": "Connected smooth closed shin reaches knee point. Hem scraps/registration and changed visible shin exposure remain. FAIL finish. Isolated shin carries a horizontal cloth/paint remnant; far thigh has dangling thin hem fragments."
     },
     "ankle-far": {
       "pass": false,
@@ -742,7 +742,7 @@
     },
     "tail-root": {
       "pass": false,
-      "notes": "Root revised to (550,1515), minimum local overlap now 1402 px\u00b2. Connected behind pelvis/near thigh; residual root-side material/contour transition remains."
+      "notes": "Root revised to (550,1515), minimum local overlap now 1402 px\u00b2. Connected behind pelvis/near thigh; residual root-side material/contour transition remains. Dark trouser-shaped scrap remains beside proximal tail."
     },
     "tail-mid": {
       "pass": false,
