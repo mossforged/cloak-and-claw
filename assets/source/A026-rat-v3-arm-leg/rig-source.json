@@ -1,0 +1,248 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "master": "../A017-rat-setup-master/master.png",
+  "units": "master pixels",
+  "parts": {
+    "arm-near-upper": {
+      "img": "arm-near-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "torso",
+      "pivot": [
+        573.4,
+        1087.6
+      ],
+      "attach": {
+        "elbow-near": [
+          489.4,
+          1303.6
+        ]
+      },
+      "band": 800,
+      "skeleton_from": "shoulder-near",
+      "skeleton_to": "elbow-near",
+      "registration": {
+        "method": "uniform tool registration; original visible master-region restoration; cap-neighborhood extraction",
+        "width": 337,
+        "xy": [
+          401,
+          1018
+        ]
+      }
+    },
+    "arm-near-lower": {
+      "img": "arm-near-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-near-upper",
+      "pivot": [
+        489.4,
+        1303.6
+      ],
+      "attach": {
+        "wrist-near": [
+          411.2,
+          1427.6
+        ]
+      },
+      "band": 820,
+      "skeleton_from": "elbow-near",
+      "skeleton_to": "wrist-near",
+      "registration": {
+        "method": "uniform tool registration; original visible master-region restoration; cap-neighborhood extraction",
+        "width": 200,
+        "xy": [
+          342,
+          1270
+        ]
+      }
+    },
+    "hand-near": {
+      "img": "hand-near.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-near-lower",
+      "pivot": [
+        411.2,
+        1427.6
+      ],
+      "attach": {
+        "hand-near-tip": [
+          393.8,
+          1546.1
+        ]
+      },
+      "band": 830,
+      "skeleton_from": "wrist-near",
+      "skeleton_to": "hand-near-tip",
+      "registration": {
+        "method": "uniform tool registration; original visible master-region restoration; cap-neighborhood extraction",
+        "width": 197,
+        "xy": [
+          307,
+          1354
+        ]
+      }
+    },
+    "leg-near-upper": {
+      "img": "leg-near-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        640.4,
+        1476.6
+      ],
+      "attach": {
+        "knee-near": [
+          633.2,
+          1661
+        ]
+      },
+      "band": 540,
+      "skeleton_from": "hip-near",
+      "skeleton_to": "knee-near",
+      "registration": {
+        "method": "uniform tool registration; original visible master-region restoration; cap-neighborhood extraction",
+        "width": 342,
+        "xy": [
+          444,
+          1445
+        ]
+      }
+    },
+    "leg-near-lower": {
+      "img": "leg-near-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-near-upper",
+      "pivot": [
+        633.2,
+        1661
+      ],
+      "attach": {
+        "ankle-near": [
+          571.2,
+          1799
+        ]
+      },
+      "band": 530,
+      "skeleton_from": "knee-near",
+      "skeleton_to": "ankle-near",
+      "registration": {
+        "method": "uniform tool registration; original visible master-region restoration; cap-neighborhood extraction",
+        "width": 170,
+        "xy": [
+          506,
+          1591
+        ],
+        "landmarks": [
+          [
+            490,
+            600
+          ],
+          [
+            714,
+            714
+          ]
+        ],
+        "world": [
+          [
+            633.2,
+            1661
+          ],
+          [
+            571.2,
+            1799
+          ]
+        ]
+      }
+    },
+    "foot-near": {
+      "img": "foot-near.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-near-lower",
+      "pivot": [
+        571.2,
+        1799
+      ],
+      "attach": {
+        "toe-near": [
+          761.1,
+          1926.6
+        ]
+      },
+      "band": 535,
+      "skeleton_from": "ankle-near",
+      "skeleton_to": "toe-near",
+      "registration": {
+        "method": "uniform tool registration; original visible master-region restoration; cap-neighborhood extraction",
+        "width": 323,
+        "xy": [
+          485,
+          1754
+        ]
+      }
+    }
+  },
+  "covers": {
+    "shoulder-near": "arm-near-upper over torso",
+    "elbow-near": "arm-near-lower over arm-near-upper",
+    "wrist-near": "hand-near over arm-near-lower",
+    "hip-near": "seat / trousers over leg-near-upper",
+    "knee-near": "leg-near-upper over leg-near-lower",
+    "ankle-near": "foot-near over leg-near-lower"
+  },
+  "note": "Round 3 user points replace original skeleton near joints. Parent attaches equal child pivots. Wrist cuff is owned by hand; ankle wrap by foot. Exact dome circularity remains subject to visual review.",
+  "importReady": false,
+  "round": 3,
+  "review_context": {
+    "torso": "A025-near-shoulder/torso.png",
+    "pelvis": "A023-rat-complete-kit/pelvis.png",
+    "seat": "A023-rat-complete-kit/seat.png",
+    "other": "A018-rat-parts"
+  },
+  "joint_source": "../../../docs/design/rigs/rat-v3-joints-r2.json",
+  "limits_deg": {
+    "shoulder-near": [
+      -116,
+      76
+    ],
+    "elbow-near": [
+      -101,
+      5
+    ],
+    "wrist-near": [
+      -49,
+      9
+    ],
+    "hip-near": [
+      -23,
+      34
+    ],
+    "knee-near": [
+      -23,
+      70
+    ],
+    "ankle-near": [
+      -19,
+      40
+    ]
+  }
+}

@@ -1,0 +1,921 @@
+{
+  "round": 3,
+  "joint_source": "docs/design/rigs/rat-v3-joints-r2.json",
+  "silhouette": {
+    "arm-near-upper": {
+      "registration": {
+        "file": "exec-8c3b453e-de29-47e2-a1ea-162ffcf31423.png",
+        "width": 337,
+        "xy": [
+          401,
+          1018
+        ]
+      },
+      "tool_uniform_scale": 0.34886128364389235,
+      "expected_region_px": 61772,
+      "visible_actual_px": 64191,
+      "visible_master_px": 61514,
+      "visible_intersection_px": 60546,
+      "visible_union_px": 65159,
+      "visible_IoU_percent": 92.92,
+      "visible_master_coverage_percent": 98.426,
+      "visual_result": "Master pad/fur retained; top hole repaired and fur-end cut blended. Extra elbow-end paint and residual inner registration edges remain; the exact fur-cap center is not certified."
+    },
+    "arm-near-lower": {
+      "registration": {
+        "file": "exec-89784544-0627-4ae3-888a-28b904710fc3.png",
+        "width": 200,
+        "xy": [
+          342,
+          1270
+        ]
+      },
+      "tool_uniform_scale": 0.3048780487804878,
+      "expected_region_px": 10972,
+      "visible_actual_px": 10615,
+      "visible_master_px": 10972,
+      "visible_intersection_px": 10612,
+      "visible_union_px": 10975,
+      "visible_IoU_percent": 96.692,
+      "visible_master_coverage_percent": 96.719,
+      "visual_result": "Bottom cuff removed; plain leather wrist dome now under the hand. Master middle folds retained. The original angled inner boundary and small outline fragments remain; not a clean outline pass."
+    },
+    "hand-near": {
+      "registration": {
+        "file": "exec-5c07d537-9f37-4d12-a0e2-9386437474dd.png",
+        "width": 197,
+        "xy": [
+          307,
+          1354
+        ]
+      },
+      "tool_uniform_scale": 0.29056047197640117,
+      "expected_region_px": 28355,
+      "visible_actual_px": 28933,
+      "visible_master_px": 28355,
+      "visible_intersection_px": 28355,
+      "visible_union_px": 28933,
+      "visible_IoU_percent": 98.002,
+      "visible_master_coverage_percent": 100.0,
+      "visual_result": "Owns the transferred wrist band and draws above forearm. Fist/glove preserved. Small cuff-side/lace contour remnants remain."
+    },
+    "leg-near-upper": {
+      "registration": {
+        "file": "exec-6d789233-5fe6-47b3-95e9-99eb130a3c4d.png",
+        "width": 342,
+        "xy": [
+          444,
+          1445
+        ]
+      },
+      "tool_uniform_scale": 0.3922018348623853,
+      "expected_region_px": 67646,
+      "visible_actual_px": 39619,
+      "visible_master_px": 39560,
+      "visible_intersection_px": 39560,
+      "visible_union_px": 39619,
+      "visible_IoU_percent": 99.851,
+      "visible_master_coverage_percent": 100.0,
+      "visual_result": "Master patch, width and ragged hem preserved; top cloth repair added. Some thin hem artifacts remain. Legacy seat context repeats/overlaps the upper patch."
+    },
+    "leg-near-lower": {
+      "registration": {
+        "file": "exec-2df28485-fee7-4874-a289-7167fc86f72f.png",
+        "width": 170,
+        "xy": [
+          506,
+          1591
+        ],
+        "landmarks": [
+          [
+            490,
+            600
+          ],
+          [
+            714,
+            714
+          ]
+        ],
+        "world": [
+          [
+            633.2,
+            1661
+          ],
+          [
+            571.2,
+            1799
+          ]
+        ]
+      },
+      "tool_uniform_scale": 0.6019239294907293,
+      "expected_region_px": 2959,
+      "visible_actual_px": 3671,
+      "visible_master_px": 2744,
+      "visible_intersection_px": 2172,
+      "visible_union_px": 4243,
+      "visible_IoU_percent": 51.19,
+      "visible_master_coverage_percent": 79.155,
+      "visual_result": "New complete smooth pink shin, closed round knee and ankle ends; image landmarks registered to the new knee and ankle. Visible strip is wider/differently exposed than the traced master sliver; paint transition remains. This piece fails the 95% visible silhouette gate."
+    },
+    "foot-near": {
+      "registration": {
+        "file": "exec-409a70d1-eb20-4c5d-80c1-d9f7f87fb46b.png",
+        "width": 323,
+        "xy": [
+          485,
+          1754
+        ]
+      },
+      "tool_uniform_scale": 0.35185185185185186,
+      "expected_region_px": 33727,
+      "visible_actual_px": 34347,
+      "visible_master_px": 33706,
+      "visible_intersection_px": 33621,
+      "visible_union_px": 34432,
+      "visible_IoU_percent": 97.645,
+      "visible_master_coverage_percent": 99.748,
+      "visual_result": "Owns ankle/instep wrap and draws above shin; toes, claws and heel retained. Upper wrap repaired with closed tool paint. Small strap/top-contour remnants still show at positive turns."
+    }
+  },
+  "combined_visible_IoU_percent": 96.457,
+  "sweeps": {
+    "shoulder": [
+      {
+        "angle": -116.0,
+        "parent_child_overlap_px2": 30503
+      },
+      {
+        "angle": -68.0,
+        "parent_child_overlap_px2": 53194
+      },
+      {
+        "angle": -20.0,
+        "parent_child_overlap_px2": 46025
+      },
+      {
+        "angle": 28.0,
+        "parent_child_overlap_px2": 31791
+      },
+      {
+        "angle": 76.0,
+        "parent_child_overlap_px2": 19701
+      }
+    ],
+    "elbow": [
+      {
+        "angle": -101.0,
+        "parent_child_overlap_px2": 6935
+      },
+      {
+        "angle": -74.5,
+        "parent_child_overlap_px2": 6252
+      },
+      {
+        "angle": -48.0,
+        "parent_child_overlap_px2": 6078
+      },
+      {
+        "angle": -21.5,
+        "parent_child_overlap_px2": 6113
+      },
+      {
+        "angle": 5.0,
+        "parent_child_overlap_px2": 6632
+      }
+    ],
+    "wrist": [
+      {
+        "angle": -49.0,
+        "parent_child_overlap_px2": 11346
+      },
+      {
+        "angle": -34.5,
+        "parent_child_overlap_px2": 11188
+      },
+      {
+        "angle": -20.0,
+        "parent_child_overlap_px2": 11100
+      },
+      {
+        "angle": -5.5,
+        "parent_child_overlap_px2": 11136
+      },
+      {
+        "angle": 9.0,
+        "parent_child_overlap_px2": 11017
+      }
+    ],
+    "hip": [
+      {
+        "angle": -23.0,
+        "parent_child_overlap_px2": 37112
+      },
+      {
+        "angle": -8.75,
+        "parent_child_overlap_px2": 32487
+      },
+      {
+        "angle": 5.5,
+        "parent_child_overlap_px2": 28096
+      },
+      {
+        "angle": 19.75,
+        "parent_child_overlap_px2": 23595
+      },
+      {
+        "angle": 34.0,
+        "parent_child_overlap_px2": 20225
+      }
+    ],
+    "knee": [
+      {
+        "angle": -23.0,
+        "parent_child_overlap_px2": 20100
+      },
+      {
+        "angle": 0.25,
+        "parent_child_overlap_px2": 20398
+      },
+      {
+        "angle": 23.5,
+        "parent_child_overlap_px2": 22205
+      },
+      {
+        "angle": 46.75,
+        "parent_child_overlap_px2": 24916
+      },
+      {
+        "angle": 70.0,
+        "parent_child_overlap_px2": 27229
+      }
+    ],
+    "ankle": [
+      {
+        "angle": -19.0,
+        "parent_child_overlap_px2": 11086
+      },
+      {
+        "angle": -4.25,
+        "parent_child_overlap_px2": 11049
+      },
+      {
+        "angle": 10.5,
+        "parent_child_overlap_px2": 10918
+      },
+      {
+        "angle": 25.25,
+        "parent_child_overlap_px2": 10863
+      },
+      {
+        "angle": 40.0,
+        "parent_child_overlap_px2": 10969
+      }
+    ]
+  },
+  "metric_note": "Visible silhouette IoU = intersection / union of actually exposed part masks vs traced master limb masks after cuff/wrap reassignment. Higher layers occlude each set independently; extras count against score. Manual master segmentation and legacy context introduce uncertainty.",
+  "importReady": false,
+  "master_region_provenance": {
+    "base": "Round 2 commit 9eb47f3, self-check.json target polygons, master alpha, and its documented neighbor-scrap cleanup",
+    "polygons": {
+      "arm-near-upper": [
+        [
+          464,
+          1130
+        ],
+        [
+          480,
+          1090
+        ],
+        [
+          514,
+          1052
+        ],
+        [
+          561,
+          1020
+        ],
+        [
+          600,
+          1017
+        ],
+        [
+          633,
+          1025
+        ],
+        [
+          661,
+          1033
+        ],
+        [
+          690,
+          1066
+        ],
+        [
+          713,
+          1110
+        ],
+        [
+          724,
+          1153
+        ],
+        [
+          737,
+          1186
+        ],
+        [
+          720,
+          1217
+        ],
+        [
+          688,
+          1224
+        ],
+        [
+          649,
+          1255
+        ],
+        [
+          614,
+          1280
+        ],
+        [
+          599,
+          1305
+        ],
+        [
+          580,
+          1318
+        ],
+        [
+          568,
+          1350
+        ],
+        [
+          549,
+          1363
+        ],
+        [
+          527,
+          1323
+        ],
+        [
+          490,
+          1291
+        ],
+        [
+          447,
+          1276
+        ],
+        [
+          401,
+          1279
+        ],
+        [
+          410,
+          1251
+        ],
+        [
+          433,
+          1218
+        ],
+        [
+          451,
+          1170
+        ]
+      ],
+      "arm-near-lower": [
+        [
+          388,
+          1280
+        ],
+        [
+          421,
+          1274
+        ],
+        [
+          463,
+          1278
+        ],
+        [
+          499,
+          1292
+        ],
+        [
+          532,
+          1315
+        ],
+        [
+          558,
+          1358
+        ],
+        [
+          541,
+          1394
+        ],
+        [
+          510,
+          1425
+        ],
+        [
+          478,
+          1447
+        ],
+        [
+          440,
+          1420
+        ],
+        [
+          406,
+          1411
+        ],
+        [
+          370,
+          1416
+        ],
+        [
+          333,
+          1439
+        ],
+        [
+          339,
+          1398
+        ],
+        [
+          350,
+          1360
+        ],
+        [
+          370,
+          1334
+        ]
+      ],
+      "hand-near": [
+        [
+          335,
+          1421
+        ],
+        [
+          365,
+          1407
+        ],
+        [
+          406,
+          1401
+        ],
+        [
+          443,
+          1408
+        ],
+        [
+          480,
+          1430
+        ],
+        [
+          500,
+          1474
+        ],
+        [
+          499,
+          1510
+        ],
+        [
+          482,
+          1534
+        ],
+        [
+          456,
+          1547
+        ],
+        [
+          408,
+          1555
+        ],
+        [
+          361,
+          1549
+        ],
+        [
+          326,
+          1528
+        ],
+        [
+          307,
+          1497
+        ],
+        [
+          308,
+          1467
+        ]
+      ],
+      "leg-near-upper": [
+        [
+          547,
+          1473
+        ],
+        [
+          604,
+          1488
+        ],
+        [
+          648,
+          1468
+        ],
+        [
+          690,
+          1477
+        ],
+        [
+          731,
+          1500
+        ],
+        [
+          763,
+          1556
+        ],
+        [
+          786,
+          1620
+        ],
+        [
+          769,
+          1664
+        ],
+        [
+          730,
+          1711
+        ],
+        [
+          693,
+          1744
+        ],
+        [
+          670,
+          1767
+        ],
+        [
+          651,
+          1779
+        ],
+        [
+          637,
+          1753
+        ],
+        [
+          622,
+          1783
+        ],
+        [
+          603,
+          1760
+        ],
+        [
+          583,
+          1744
+        ],
+        [
+          574,
+          1761
+        ],
+        [
+          556,
+          1737
+        ],
+        [
+          538,
+          1720
+        ],
+        [
+          519,
+          1737
+        ],
+        [
+          510,
+          1700
+        ],
+        [
+          490,
+          1715
+        ],
+        [
+          486,
+          1680
+        ],
+        [
+          475,
+          1688
+        ],
+        [
+          481,
+          1649
+        ],
+        [
+          465,
+          1659
+        ],
+        [
+          478,
+          1624
+        ],
+        [
+          455,
+          1633
+        ],
+        [
+          480,
+          1590
+        ],
+        [
+          455,
+          1600
+        ],
+        [
+          479,
+          1574
+        ],
+        [
+          444,
+          1584
+        ],
+        [
+          473,
+          1548
+        ],
+        [
+          495,
+          1511
+        ]
+      ],
+      "leg-near-lower": [
+        [
+          533,
+          1714
+        ],
+        [
+          560,
+          1734
+        ],
+        [
+          582,
+          1740
+        ],
+        [
+          605,
+          1762
+        ],
+        [
+          627,
+          1780
+        ],
+        [
+          639,
+          1761
+        ],
+        [
+          647,
+          1765
+        ],
+        [
+          638,
+          1780
+        ],
+        [
+          644,
+          1796
+        ],
+        [
+          635,
+          1816
+        ],
+        [
+          642,
+          1844
+        ],
+        [
+          654,
+          1863
+        ],
+        [
+          618,
+          1875
+        ],
+        [
+          588,
+          1889
+        ],
+        [
+          561,
+          1913
+        ],
+        [
+          533,
+          1917
+        ],
+        [
+          491,
+          1907
+        ],
+        [
+          489,
+          1878
+        ],
+        [
+          500,
+          1835
+        ],
+        [
+          510,
+          1806
+        ],
+        [
+          519,
+          1785
+        ],
+        [
+          515,
+          1764
+        ],
+        [
+          522,
+          1741
+        ]
+      ],
+      "foot-near": [
+        [
+          491,
+          1850
+        ],
+        [
+          522,
+          1843
+        ],
+        [
+          551,
+          1845
+        ],
+        [
+          578,
+          1849
+        ],
+        [
+          608,
+          1841
+        ],
+        [
+          639,
+          1840
+        ],
+        [
+          670,
+          1857
+        ],
+        [
+          699,
+          1862
+        ],
+        [
+          731,
+          1860
+        ],
+        [
+          763,
+          1874
+        ],
+        [
+          789,
+          1894
+        ],
+        [
+          804,
+          1921
+        ],
+        [
+          808,
+          1946
+        ],
+        [
+          793,
+          1941
+        ],
+        [
+          782,
+          1945
+        ],
+        [
+          767,
+          1942
+        ],
+        [
+          747,
+          1949
+        ],
+        [
+          722,
+          1948
+        ],
+        [
+          697,
+          1945
+        ],
+        [
+          666,
+          1941
+        ],
+        [
+          628,
+          1932
+        ],
+        [
+          584,
+          1925
+        ],
+        [
+          536,
+          1921
+        ],
+        [
+          502,
+          1918
+        ],
+        [
+          485,
+          1908
+        ],
+        [
+          487,
+          1878
+        ]
+      ]
+    },
+    "wrist_transfer_polygon": [
+      [
+        300,
+        1395
+      ],
+      [
+        370,
+        1366
+      ],
+      [
+        420,
+        1360
+      ],
+      [
+        472,
+        1370
+      ],
+      [
+        520,
+        1410
+      ],
+      [
+        523,
+        1470
+      ],
+      [
+        300,
+        1470
+      ]
+    ],
+    "ankle_transfer_polygon": [
+      [
+        460,
+        1745
+      ],
+      [
+        525,
+        1740
+      ],
+      [
+        570,
+        1756
+      ],
+      [
+        625,
+        1764
+      ],
+      [
+        675,
+        1790
+      ],
+      [
+        680,
+        1935
+      ],
+      [
+        460,
+        1935
+      ]
+    ],
+    "ankle_excludes": "Original pink shin pixels: R > 150, R > 1.2G, B > 0.6G, y < 1785. They stay on shin."
+  },
+  "visual_sweep_results": {
+    "shoulder": "Connected at every sample using the actual A025 torso. Pad top is repaired, but inner/cap registration artifacts remain and old torso paint is exposed at extremes. PARTIAL.",
+    "elbow": "Connected at every sample, forearm in front. No flat tube face; round fur end visible at bends. Inner forearm cut edge/outline fragments remain. PARTIAL.",
+    "wrist": "Transferred cuff turns with hand, above the plain forearm end, at every sample. No sliding hand out of a stationary cuff. Cuff-side fragments and a hard forearm boundary remain. PARTIAL.",
+    "hip": "Seat remains above thigh at all five samples. Connection holds; legacy seat repeats the thigh patch and creates doubled costume contours. Context mismatch remains. PARTIAL.",
+    "knee": "New shin reaches above the new knee point; closed upper dome stays under the thigh through 70 degrees. All five connected. Exposed shin shape/color transition and hem remnants remain. PARTIAL.",
+    "ankle": "Wrap turns with foot above shin at all five samples, with closed shin end inside it. Heel/instep are now on the same moving piece. Top/strap outline fragments remain at positive turns. PARTIAL."
+  },
+  "continuous_motion_certified": false,
+  "dome_centers_certified": false
+}
