@@ -27,7 +27,8 @@ rest, + clockwise on screen). --floor-y gives the floor for a source without `fl
 scale as the raider). Re-run after Art's next round (same PNG names, same points), then node tools/rig-hulls.mjs:
   python3 tools/rig_from_source.py assets/source/A027-rat-v3-body/rig-source.json --id rat-v3 \\
     --joints docs/design/rigs/rat-v3-joints-v4.json --floor-y 1950 --art assets/art/enemies/rat-raider/rig-v3 \\
-    --out src/data/rigs/rat-v3-parts.js"""
+    --out src/data/rigs/rat-v3-parts.js
+  node tools/rig-hulls.mjs --only rat-v3   (T035 r2: only v3's outlines; the game rat's stay as they are)"""
 import argparse, json, math, os, re, sys
 import numpy as np
 from PIL import Image

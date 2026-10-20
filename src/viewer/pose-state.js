@@ -9,7 +9,8 @@
 //   &version=v3 poses a viewer compare version).
 import { createSlot } from './sandbox.js';
 import { rigOf } from './models.js';
-import { rigFrame, rigMemory, heldOf } from '../render/rig.js';
+import { rigFrame, rigMemory, heldOf, sourceOf } from '../render/rig.js';
+import { retargetLayer } from '../render/retarget.js';
 import { channelsOf } from '../render/rig-pose.js';
 import { strapRig, strapOf } from '../render/strap.js';
 import { nodeActive, modesOf } from '../render/weapon-node.js';
@@ -34,7 +35,9 @@ export function startPose({ id, item = 'own', from = 'idle:0', grip = '', versio
   const sb = slot.seek(Math.min(n, slot.len)), mem = rigMemory(sb.hero);
   rigFrame(sb.hero, sb.rig, sb.n / FPS, mem, sb.pose ?? undefined);
   const swap = Object.fromEntries(Object.entries(mem.swap ?? {}).filter(([k]) => !TRANSIENT.test(k)));
-  return { id, item, version, from: `${sb.clip.key}:${sb.n}`, f: sb.hero, rig: sb.rig, joints: { ...mem.last }, swap, time: sb.n / FPS, start: { joints: { ...mem.last }, swap } };
+  // T035 r2: a retargeted rig (rat v3) starts from the frame as it plays: the source's pose placed by position
+  const j = sb.rig.retarget ? retargetLayer(sb.rig, mem.last, sourceOf(sb.hero, sb.rig, mem.last, mem)) : mem.last;
+  return { id, item, version, from: `${sb.clip.key}:${sb.n}`, f: sb.hero, rig: sb.rig, joints: { ...j }, swap, time: sb.n / FPS, start: { joints: { ...j }, swap } };
 }
 
 // The rig with the pose as its held `@pose` (one copy per rig, its poses object updated in place)

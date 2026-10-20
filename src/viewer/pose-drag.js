@@ -8,7 +8,8 @@
 //   dragHips: the body moved, every planted foot kept where it stands (the hips stop where a leg would leave its foot).
 //   dragHead: the head turned on the neck, inside its limit.
 //   turnNode / moveNode: a weapon on the weapon node (render/weapon-node.js: pose channels weapon.x/.y/.rot) moved or turned.
-//   T035: a rig with per-joint `limits` (rat v3) has every drag's joints clamped into them (render/limits.js, as drawn).
+//   T035: a rig with per-joint `limits` (rat v3) has every drag's joints clamped into them (render/limits.js, as drawn);
+//   T035 r2: its hands and feet are solved inside them (limbInLimits, as the retarget), not clamped after.
 //   liftOf: a foot's drawing above its floor line (the pose's '<foot>.lift': the floor-line rule keeps it there).
 import { layoutRig } from '../render/rig-layout.js';
 import { reach } from '../render/rig-ik.js';
@@ -17,7 +18,7 @@ import { wristLimit, WRISTS } from '../data/wrists.js';
 import { poseLimit, POSE_LIMITS } from '../data/pose-limits.js';
 import { floorLine } from '../data/rigs/biped-floor.js';
 import HULLS from '../data/rigs/hulls.js';
-import { limitLayer } from '../render/limits.js';
+import { limitLayer, limbInLimits } from '../render/limits.js';
 
 const D = Math.PI / 180;
 const apply = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
@@ -106,9 +107,18 @@ function limited(c, r) {
   return { ...r, joints: j, clamped: r.clamped || hit };
 }
 
+// T035 r2: on a rig with per-joint limits (rat v3), the retarget's solve (render/limits.js limbInLimits): elbow / knee and
+// shoulder / hip picked inside their ranges, the bend kept on its side, the hand / foot keeping its turn on screen
+function solveInLimits(c, limb, T) {
+  const B = byName(layoutOf(c));
+  if (!jointed(B, limb)) return { joints: c.joints, stretched: false, folded: false, clamped: false };
+  const r = limbInLimits(c.rig, B, c.joints, [limb.up, limb.lo, limb.end], T);
+  return { joints: r.joints, stretched: false, folded: false, clamped: r.err > 0.5 };
+}
+
 // A hand or foot dragged so its wrist / ankle goes to T (rig px).
 export function dragLimb(c, end, T) {
-  const r = solveLimb(c, c.joints, limbOf(end), T);
+  const r = c.rig.limits ? solveInLimits(c, limbOf(end), T) : solveLimb(c, c.joints, limbOf(end), T);
   return limited(c, { ...r, joints: /^foot-/.test(end) ? withLifts(c, r.joints) : r.joints });
 }
 
