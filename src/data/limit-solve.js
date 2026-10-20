@@ -9,4 +9,6 @@
 //   looks along the line, up to slide px in slideStep steps (a trailing leg past its hip limit slides rather than sink);
 //   slideCost = cost per px the ankle lands away from the rule's x, tiltCost = per degree the foot ends off its wanted tilt
 //   (being off the line costs 1 per px).
-export const LIMIT_SOLVE = { step: 1, fine: 0.05, bent: 5, side: 3, stay: 0.001, tilt: 0.5, onLine: 0.3, slide: 24, slideStep: 0.5, slideCost: 0.1, tiltCost: 0.05 };
+// planted: T038, in a key posed off the floor (`aloft`) on the ground, a foot raised less than this (px) is planted: the
+//   floor fix puts it on its line (render/floor.js aloftInLimits).
+export const LIMIT_SOLVE = { step: 1, fine: 0.05, bent: 5, side: 3, stay: 0.001, tilt: 0.5, onLine: 0.3, slide: 24, slideStep: 0.5, slideCost: 0.1, tiltCost: 0.05, planted: 0.5 };
