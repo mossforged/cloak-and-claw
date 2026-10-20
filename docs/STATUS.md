@@ -27,7 +27,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: T036 joint checker (030), then T037 raider hulls (031), then T038 v3 floor slide (032).
+- Code: idle. T036 (joint checker), T037 (hulls with hashes), T038 (v3 aloft feet) merged.
 - Art: blocked, Codex usage limit: A028 (job 029) exited 1 at 08:01 with no report. Requeue when the limit resets.
 
 ## Open questions (for the user)
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-20 lead: merged T036 (tools/joint-check.mjs, calibrated: A027 r1 neck + shoulder flagged, r2 neck and A026 r3 wrist/ankle pass; on today's A027: near shoulder gap, waist seam, far ankle gap), T037 (raider hulls regenerated with hashes; play moves <1 px; viewer jumpUp f16 far leg flips, accepted), T038 (v3 aloft feet: kick 0, hop 1.2, jump attack 1.6 px). 47/47 on main.
 2026-10-20 code: T036 on `t036-joint-checker`: `node tools/joint-check.mjs <rig-source.json> [--joints ...]` (Node only) turns each joint through its range (9 samples) and flags gaps / notches, thin fragments, seam lines and PNG islands -> joint-check.json + joint-check.jpg, exit 1 on a flag. Numbers in src/data/joint-check.js; calibrated (docs/screens/T036/calibration.md): A027 r1 neck (+5..+20 seams) and near-shoulder notch (+28) flag, A027 r2 neck and A026 r3 wrist / ankle pass. AGENTS.md self-check line added. 45/45. Build `t036 joint check v1`.
 2026-10-20 code: T036 on today's A027 (r2, v4 joints): 14 of 17 joints pass; flags: near shoulder (gap 799 px at -116 and +21, seam at -47..-25), waist (seam 992 px at +15, the second outline under the belt), far ankle (gap 303 px at +40). All three are on Art's own open list except the far-ankle notch. Sheet: docs/screens/T036/a027-current/joint-check.jpg.
 2026-10-20 lead: Art blocked on Codex's limit (A028, job 029). Queued three Code tasks while it waits: T036 joint checker, T037 raider hulls, T038 v3 floor slide.
