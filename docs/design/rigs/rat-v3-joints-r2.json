@@ -1,5 +1,5 @@
 {
- "source": "Fitting Room v3 (artifact GQEwo2i25oFiGSdJkn6UgS, db joint-points), user, 2026-10-19, on A026 round 2 pieces",
+ "source": "Fitting Room v3 (artifact GQEwo2i25oFiGSdJkn6UgS, db joint-points), user, 2026-10-19, on A026 round 2 pieces; updated with the user's round 3 fit (db joint-points-r3, 2026-10-20)",
  "note": "pivot = point on the child piece, attach = point on the parent piece, both in the Fitting Room's half-size crop px; world = master.png px. front = child drawn over parent. + = clockwise.",
  "joints": {
   "shoulder-near": {
@@ -19,7 +19,7 @@
     1303.6
    ],
    "limits": [
-    -101,
+    -113,
     5
    ],
    "front": true
@@ -33,7 +33,7 @@
     -49,
     9
    ],
-   "front": false
+   "front": true
   },
   "hip-near": {
    "world": [
@@ -66,7 +66,8 @@
     -19,
     40
    ],
-   "front": false
+   "front": true
   }
- }
+ },
+ "round3_note": "On the A025 torso the user slid the upper arm (and everything below it) by about (-36, -22) master px (up and left) relative to the torso's shoulder point; the other five joints kept Art's placement. All six saved with no gaps flagged."
 }
