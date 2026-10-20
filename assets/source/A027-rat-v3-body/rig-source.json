@@ -1,0 +1,634 @@
+{
+  "canvas": [
+    1536,
+    2304
+  ],
+  "master": "../A017-rat-setup-master/master.png",
+  "units": "master pixels; clockwise positive",
+  "parts": {
+    "tail-3": {
+      "img": "tail-3.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "tail-2",
+      "pivot": [
+        351,
+        1815
+      ],
+      "pivotPoint": "tail-end",
+      "band": 100,
+      "attach": {},
+      "proposedPivot": true
+    },
+    "tail-2": {
+      "img": "tail-2.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "tail-1",
+      "pivot": [
+        444,
+        1709
+      ],
+      "pivotPoint": "tail-mid",
+      "band": 140,
+      "attach": {
+        "tail-end": [
+          351,
+          1815
+        ]
+      },
+      "proposedPivot": true
+    },
+    "tail-1": {
+      "img": "tail-1.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        550,
+        1515
+      ],
+      "pivotPoint": "tail-root",
+      "band": 180,
+      "attach": {
+        "tail-mid": [
+          444,
+          1709
+        ]
+      },
+      "proposedPivot": true
+    },
+    "scarf-tail": {
+      "img": "scarf-tail.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "torso",
+      "pivot": [
+        573.4,
+        1087.6
+      ],
+      "pivotPoint": "shoulder-near",
+      "band": 220,
+      "attach": {},
+      "proposedPivot": false
+    },
+    "arm-far-upper": {
+      "img": "arm-far-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "torso",
+      "pivot": [
+        958,
+        1180
+      ],
+      "pivotPoint": "shoulder-far",
+      "band": 260,
+      "attach": {
+        "elbow-far": [
+          996.9,
+          1309.3
+        ]
+      },
+      "proposedPivot": true
+    },
+    "arm-far-lower": {
+      "img": "arm-far-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-far-upper",
+      "pivot": [
+        996.9,
+        1309.3
+      ],
+      "pivotPoint": "elbow-far",
+      "band": 300,
+      "attach": {
+        "wrist-far": [
+          1114.4,
+          1427.9
+        ]
+      },
+      "proposedPivot": false
+    },
+    "hand-far": {
+      "img": "hand-far.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-far-lower",
+      "pivot": [
+        1114.4,
+        1427.9
+      ],
+      "pivotPoint": "wrist-far",
+      "band": 340,
+      "attach": {},
+      "proposedPivot": false
+    },
+    "leg-far-lower": {
+      "img": "leg-far-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-far-upper",
+      "pivot": [
+        995.5,
+        1624
+      ],
+      "pivotPoint": "knee-far",
+      "band": 380,
+      "attach": {
+        "ankle-far": [
+          904.7,
+          1807.9
+        ]
+      },
+      "proposedPivot": false
+    },
+    "foot-far": {
+      "img": "foot-far.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-far-lower",
+      "pivot": [
+        904.7,
+        1807.9
+      ],
+      "pivotPoint": "ankle-far",
+      "band": 420,
+      "attach": {},
+      "proposedPivot": false
+    },
+    "leg-far-upper": {
+      "img": "leg-far-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        884.4,
+        1484.5
+      ],
+      "pivotPoint": "hip-far",
+      "band": 460,
+      "attach": {
+        "knee-far": [
+          995.5,
+          1624
+        ]
+      },
+      "proposedPivot": false
+    },
+    "pelvis": {
+      "img": "pelvis.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": null,
+      "pivot": [
+        806.2,
+        1441.6
+      ],
+      "pivotPoint": "waist",
+      "band": 500,
+      "attach": {
+        "waist": [
+          806.2,
+          1441.6
+        ],
+        "hip-near": [
+          640.4,
+          1476.6
+        ],
+        "hip-far": [
+          884.4,
+          1484.5
+        ],
+        "tail-root": [
+          550,
+          1515
+        ]
+      },
+      "proposedPivot": false
+    },
+    "leg-near-lower": {
+      "img": "../A026-rat-v3-arm-leg/leg-near-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-near-upper",
+      "pivot": [
+        633.2,
+        1661
+      ],
+      "pivotPoint": "knee-near",
+      "band": 540,
+      "attach": {
+        "ankle-near": [
+          571.2,
+          1799
+        ]
+      },
+      "proposedPivot": false
+    },
+    "foot-near": {
+      "img": "../A026-rat-v3-arm-leg/foot-near.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "leg-near-lower",
+      "pivot": [
+        571.2,
+        1799
+      ],
+      "pivotPoint": "ankle-near",
+      "band": 580,
+      "attach": {},
+      "proposedPivot": false
+    },
+    "leg-near-upper": {
+      "img": "../A026-rat-v3-arm-leg/leg-near-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        640.4,
+        1476.6
+      ],
+      "pivotPoint": "hip-near",
+      "band": 620,
+      "attach": {
+        "knee-near": [
+          633.2,
+          1661
+        ]
+      },
+      "proposedPivot": false
+    },
+    "seat": {
+      "img": "seat.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        640.4,
+        1476.6
+      ],
+      "pivotPoint": "hip-near",
+      "band": 660,
+      "attach": {},
+      "proposedPivot": false
+    },
+    "torso": {
+      "img": "torso.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        806.2,
+        1441.6
+      ],
+      "pivotPoint": "waist",
+      "band": 700,
+      "attach": {
+        "neck": [
+          850.6,
+          1147.1
+        ],
+        "shoulder-near": [
+          573.4,
+          1087.6
+        ],
+        "shoulder-far": [
+          958,
+          1180
+        ]
+      },
+      "proposedPivot": false
+    },
+    "belt": {
+      "img": "belt.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "pelvis",
+      "pivot": [
+        806.2,
+        1441.6
+      ],
+      "pivotPoint": "waist",
+      "band": 740,
+      "attach": {},
+      "proposedPivot": false
+    },
+    "head": {
+      "img": "head.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "torso",
+      "pivot": [
+        850.6,
+        1147.1
+      ],
+      "pivotPoint": "neck",
+      "band": 780,
+      "attach": {},
+      "proposedPivot": false
+    },
+    "arm-near-upper": {
+      "img": "../A026-rat-v3-arm-leg/arm-near-upper.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "torso",
+      "pivot": [
+        573.4,
+        1087.6
+      ],
+      "pivotPoint": "shoulder-near",
+      "band": 820,
+      "attach": {
+        "elbow-near": [
+          489.4,
+          1303.6
+        ]
+      },
+      "proposedPivot": false
+    },
+    "arm-near-lower": {
+      "img": "../A026-rat-v3-arm-leg/arm-near-lower.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-near-upper",
+      "pivot": [
+        489.4,
+        1303.6
+      ],
+      "pivotPoint": "elbow-near",
+      "band": 860,
+      "attach": {
+        "wrist-near": [
+          411.2,
+          1427.6
+        ]
+      },
+      "proposedPivot": false
+    },
+    "hand-near": {
+      "img": "../A026-rat-v3-arm-leg/hand-near.png",
+      "canvas": [
+        1536,
+        2304
+      ],
+      "parent": "arm-near-lower",
+      "pivot": [
+        411.2,
+        1427.6
+      ],
+      "pivotPoint": "wrist-near",
+      "band": 900,
+      "attach": {},
+      "proposedPivot": false
+    }
+  },
+  "points": {
+    "ankle-far": [
+      904.7,
+      1807.9
+    ],
+    "ankle-near": [
+      571.2,
+      1799
+    ],
+    "elbow-far": [
+      996.9,
+      1309.3
+    ],
+    "elbow-near": [
+      489.4,
+      1303.6
+    ],
+    "hand-far-tip": [
+      1152.9,
+      1571.2
+    ],
+    "hand-near-tip": [
+      393.8,
+      1546.1
+    ],
+    "hip-far": [
+      884.4,
+      1484.5
+    ],
+    "hip-near": [
+      640.4,
+      1476.6
+    ],
+    "knee-far": [
+      995.5,
+      1624
+    ],
+    "knee-near": [
+      633.2,
+      1661
+    ],
+    "neck": [
+      850.6,
+      1147.1
+    ],
+    "shoulder-near": [
+      573.4,
+      1087.6
+    ],
+    "toe-far": [
+      1151.6,
+      1901.6
+    ],
+    "toe-near": [
+      761.1,
+      1926.6
+    ],
+    "waist": [
+      806.2,
+      1441.6
+    ],
+    "wrist-far": [
+      1114.4,
+      1427.9
+    ],
+    "wrist-near": [
+      411.2,
+      1427.6
+    ],
+    "shoulder-far": [
+      958,
+      1180
+    ],
+    "tail-root": [
+      550,
+      1515
+    ],
+    "tail-mid": [
+      444,
+      1709
+    ],
+    "tail-end": [
+      351,
+      1815
+    ]
+  },
+  "proposedPoints": {
+    "shoulder-far": [
+      958,
+      1180
+    ],
+    "tail-root": [
+      550,
+      1515
+    ],
+    "tail-mid": [
+      444,
+      1709
+    ],
+    "tail-end": [
+      351,
+      1815
+    ]
+  },
+  "rootNote": "Skeleton has no root point; pelvis root aliases the user waist point. Seat/belt/scarf inherit parent without independent rotation.",
+  "limits_deg": {
+    "shoulder-near": [
+      -116,
+      76
+    ],
+    "elbow-near": [
+      -113,
+      5
+    ],
+    "wrist-near": [
+      -49,
+      9
+    ],
+    "hip-near": [
+      -23,
+      34
+    ],
+    "knee-near": [
+      -23,
+      70
+    ],
+    "ankle-near": [
+      -19,
+      40
+    ],
+    "neck": [
+      -20,
+      20
+    ],
+    "waist": [
+      -15,
+      15
+    ],
+    "shoulder-far": [
+      -116,
+      76
+    ],
+    "elbow-far": [
+      -113,
+      5
+    ],
+    "wrist-far": [
+      -49,
+      9
+    ],
+    "hip-far": [
+      -23,
+      34
+    ],
+    "knee-far": [
+      -23,
+      70
+    ],
+    "ankle-far": [
+      -19,
+      40
+    ],
+    "tail-root": [
+      -40,
+      40
+    ],
+    "tail-mid": [
+      -40,
+      40
+    ],
+    "tail-end": [
+      -40,
+      40
+    ]
+  },
+  "drawOrder": [
+    "tail-3",
+    "tail-2",
+    "tail-1",
+    "scarf-tail",
+    "arm-far-upper",
+    "arm-far-lower",
+    "hand-far",
+    "leg-far-lower",
+    "foot-far",
+    "leg-far-upper",
+    "pelvis",
+    "leg-near-lower",
+    "foot-near",
+    "leg-near-upper",
+    "seat",
+    "torso",
+    "belt",
+    "head",
+    "arm-near-upper",
+    "arm-near-lower",
+    "hand-near"
+  ],
+  "covers": {
+    "shoulder-near": "arm-near-upper over torso",
+    "hip-near": "seat over leg-near-upper",
+    "wrist-near": "hand-near over arm-near-lower",
+    "ankle-near": "foot-near over leg-near-lower",
+    "wrist-far": "hand-far over arm-far-lower",
+    "ankle-far": "foot-far over leg-far-lower"
+  },
+  "importReady": false,
+  "joint_source": "../../../docs/design/rigs/rat-v3-joints-r2.json"
+}
