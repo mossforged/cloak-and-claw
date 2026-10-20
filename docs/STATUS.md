@@ -28,7 +28,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 
 ## What builders need now
 - Code: idle (T033 limb repairs and A025 shoulder kept as reference; rat v3 decided).
-- Art: idle. A027 on `a027-rat-v3-body` (not merged): whole three-quarter rat from new pieces (rest IoU 97.8%); in Fitting Room v4 for the user's bend check (db joint-points-v4).
+- Art: A027 round 2 (job 024): clean-up on the user's 17 fitted joints (rat-v3-joints-v4.json).
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-20 lead: user fitted all 17 joints in Fitting Room v4 (near shoulder moved ~115 px down, confirmed; far elbow and wrist from 0). Fixed the page's limit buttons (couldn't set 0). Queued A027 round 2.
 2026-10-20 lead: reviewed A027: 15 new pieces + 3 A026 repairs, whole rat at rest matches the master (97.8%), no stand-ins. Visible faults: neck back edge breaks at +10..20, near shoulder notch at positive turns, far-limb paint bars, tail join outlines. Proposed points: far shoulder (958,1180), tail (550,1515)/(444,1709)/(351,1815). Fitting Room v4: all 17 joints.
 2026-10-20 lead: user fitted all six A026 r3 joints with no gaps (elbow now −113..5; arm slid ~40 px on the old torso). **Merged A026.** Queued A027: the rest of the three-quarter rat by the same method.
 2026-10-19 lead: reviewed A026 r3: cuff follows the hand and wrap follows the foot through the user's ranges; rest matches the master (combined visible limb IoU 96.5%; shin 51% because its visible strip differs). Left: small cut edges. Fitting Room v3 reloaded with r3 (saves in joint-points-r3).
