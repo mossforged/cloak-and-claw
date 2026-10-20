@@ -1,5 +1,7 @@
 {
-  "whole_rat_visible_iou_pct": 97.771,
+  "round": 2,
+  "joint_source": "../../../docs/design/rigs/rat-v3-joints-v4.json",
+  "whole_rat_visible_iou_pct": 96.771,
   "per_piece": {
     "hand-near": {
       "visible_iou_pct": 97.91,
@@ -23,11 +25,11 @@
       "extra_px": 1778
     },
     "head": {
-      "visible_iou_pct": 97.93,
+      "visible_iou_pct": 96.05,
       "expected_px": 294017,
-      "actual_visible_px": 300243,
-      "missing_px": 0,
-      "extra_px": 6226
+      "actual_visible_px": 302774,
+      "missing_px": 1632,
+      "extra_px": 10389
     },
     "belt": {
       "visible_iou_pct": 96.45,
@@ -37,25 +39,25 @@
       "extra_px": 1953
     },
     "torso": {
-      "visible_iou_pct": 83.46,
+      "visible_iou_pct": 79.01,
       "expected_px": 56207,
-      "actual_visible_px": 56301,
-      "missing_px": 5025,
-      "extra_px": 5119
+      "actual_visible_px": 52847,
+      "missing_px": 8075,
+      "extra_px": 4715
     },
     "seat": {
-      "visible_iou_pct": 86.4,
+      "visible_iou_pct": 82.52,
       "expected_px": 15315,
-      "actual_visible_px": 16584,
-      "missing_px": 529,
-      "extra_px": 1798
+      "actual_visible_px": 16048,
+      "missing_px": 1135,
+      "extra_px": 1868
     },
     "leg-near-upper": {
-      "visible_iou_pct": 97.01,
+      "visible_iou_pct": 95.74,
       "expected_px": 54821,
-      "actual_visible_px": 53228,
-      "missing_px": 1616,
-      "extra_px": 23
+      "actual_visible_px": 53692,
+      "missing_px": 1744,
+      "extra_px": 615
     },
     "foot-near": {
       "visible_iou_pct": 91.37,
@@ -72,101 +74,82 @@
       "extra_px": 795
     },
     "pelvis": {
-      "visible_iou_pct": 72.1,
+      "visible_iou_pct": 64.35,
       "expected_px": 33560,
-      "actual_visible_px": 31121,
-      "missing_px": 6462,
-      "extra_px": 4023
+      "actual_visible_px": 22522,
+      "missing_px": 11601,
+      "extra_px": 563
     },
     "leg-far-upper": {
-      "visible_iou_pct": 74.86,
-      "expected_px": 40362,
-      "actual_visible_px": 44398,
-      "missing_px": 4074,
-      "extra_px": 8110
+      "visible_iou_pct": 76.16,
+      "expected_px": 44817,
+      "actual_visible_px": 53517,
+      "missing_px": 2304,
+      "extra_px": 11004
     },
     "foot-far": {
-      "visible_iou_pct": 94.14,
+      "visible_iou_pct": 97.37,
       "expected_px": 35303,
-      "actual_visible_px": 37501,
-      "missing_px": 0,
-      "extra_px": 2198
+      "actual_visible_px": 34998,
+      "missing_px": 621,
+      "extra_px": 316
     },
     "leg-far-lower": {
-      "visible_iou_pct": 43.22,
-      "expected_px": 6740,
-      "actual_visible_px": 2913,
-      "missing_px": 3827,
-      "extra_px": 0
+      "visible_iou_pct": 51.75,
+      "expected_px": 2285,
+      "actual_visible_px": 1700,
+      "missing_px": 926,
+      "extra_px": 341
     },
     "hand-far": {
-      "visible_iou_pct": 90.8,
+      "visible_iou_pct": 83.82,
       "expected_px": 25027,
-      "actual_visible_px": 27167,
-      "missing_px": 189,
-      "extra_px": 2329
-    },
-    "arm-far-lower": {
-      "visible_iou_pct": 50.54,
-      "expected_px": 8575,
-      "actual_visible_px": 12994,
-      "missing_px": 1334,
-      "extra_px": 5753
+      "actual_visible_px": 25030,
+      "missing_px": 2201,
+      "extra_px": 2204
     },
     "arm-far-upper": {
-      "visible_iou_pct": 57.77,
+      "visible_iou_pct": 74.42,
       "expected_px": 14693,
-      "actual_visible_px": 8635,
-      "missing_px": 6151,
-      "extra_px": 93
+      "actual_visible_px": 16178,
+      "missing_px": 1521,
+      "extra_px": 3006
+    },
+    "arm-far-lower": {
+      "visible_iou_pct": 58.39,
+      "expected_px": 8575,
+      "actual_visible_px": 6344,
+      "missing_px": 3075,
+      "extra_px": 844
     },
     "scarf-tail": {
-      "visible_iou_pct": 98.43,
+      "visible_iou_pct": 98.12,
       "expected_px": 34280,
-      "actual_visible_px": 34795,
-      "missing_px": 15,
-      "extra_px": 530
+      "actual_visible_px": 34808,
+      "missing_px": 64,
+      "extra_px": 592
     },
     "tail-1": {
-      "visible_iou_pct": 95.35,
+      "visible_iou_pct": 84.59,
       "expected_px": 9788,
-      "actual_visible_px": 10265,
-      "missing_px": 0,
-      "extra_px": 477
+      "actual_visible_px": 8950,
+      "missing_px": 1201,
+      "extra_px": 363
     },
     "tail-2": {
-      "visible_iou_pct": 94.33,
+      "visible_iou_pct": 88.42,
       "expected_px": 9862,
-      "actual_visible_px": 9511,
-      "missing_px": 458,
-      "extra_px": 107
+      "actual_visible_px": 8852,
+      "missing_px": 1080,
+      "extra_px": 70
     },
     "tail-3": {
-      "visible_iou_pct": 88.58,
+      "visible_iou_pct": 82.06,
       "expected_px": 4406,
-      "actual_visible_px": 4974,
-      "missing_px": 0,
-      "extra_px": 568
+      "actual_visible_px": 4597,
+      "missing_px": 348,
+      "extra_px": 539
     }
-  },
-  "near_cleanup": {
-    "leg-near-upper": {
-      "mask_unchanged": true,
-      "pixels_changed": 18298
-    },
-    "arm-near-upper": {
-      "mask_unchanged": true,
-      "pixels_changed": 42121
-    },
-    "arm-near-lower": {
-      "mask_unchanged": true,
-      "pixels_changed": 7710
-    },
-    "unchanged_other_near_parts": [
-      "hand-near",
-      "leg-near-lower",
-      "foot-near"
-    ]
   },
   "sweeps": {
     "neck": {
@@ -175,28 +158,28 @@
       "samples": [
         {
           "angle": -20.0,
-          "overlap_px": 32597,
-          "local_overlap_px": 22769
+          "overlap_px": 38245,
+          "local_overlap_px": 25168
         },
         {
-          "angle": -10.0,
-          "overlap_px": 29511,
-          "local_overlap_px": 22304
+          "angle": 0.25,
+          "overlap_px": 31274,
+          "local_overlap_px": 24458
         },
         {
-          "angle": 0.0,
-          "overlap_px": 26882,
-          "local_overlap_px": 21855
+          "angle": 20.5,
+          "overlap_px": 27200,
+          "local_overlap_px": 24245
         },
         {
-          "angle": 10.0,
-          "overlap_px": 24711,
-          "local_overlap_px": 21445
+          "angle": 40.75,
+          "overlap_px": 26233,
+          "local_overlap_px": 24307
         },
         {
-          "angle": 20.0,
-          "overlap_px": 23117,
-          "local_overlap_px": 21286
+          "angle": 61.0,
+          "overlap_px": 30109,
+          "local_overlap_px": 24359
         }
       ]
     },
@@ -205,29 +188,29 @@
       "child": "torso",
       "samples": [
         {
-          "angle": -15.0,
-          "overlap_px": 40939,
-          "local_overlap_px": 26229
+          "angle": -4.0,
+          "overlap_px": 38362,
+          "local_overlap_px": 26344
         },
         {
-          "angle": -7.5,
-          "overlap_px": 38953,
-          "local_overlap_px": 26236
+          "angle": 0.75,
+          "overlap_px": 37233,
+          "local_overlap_px": 26344
         },
         {
-          "angle": 0.0,
-          "overlap_px": 37145,
-          "local_overlap_px": 26247
+          "angle": 5.5,
+          "overlap_px": 36241,
+          "local_overlap_px": 26349
         },
         {
-          "angle": 7.5,
-          "overlap_px": 35625,
-          "local_overlap_px": 26260
+          "angle": 10.25,
+          "overlap_px": 35436,
+          "local_overlap_px": 26363
         },
         {
           "angle": 15.0,
-          "overlap_px": 34481,
-          "local_overlap_px": 26271
+          "overlap_px": 34734,
+          "local_overlap_px": 26368
         }
       ]
     },
@@ -237,28 +220,28 @@
       "samples": [
         {
           "angle": -116.0,
-          "overlap_px": 26734,
-          "local_overlap_px": 6557
+          "overlap_px": 39969,
+          "local_overlap_px": 23723
         },
         {
-          "angle": -68.0,
-          "overlap_px": 44383,
-          "local_overlap_px": 10571
+          "angle": -70.25,
+          "overlap_px": 34217,
+          "local_overlap_px": 22434
         },
         {
-          "angle": -20.0,
-          "overlap_px": 33706,
-          "local_overlap_px": 10928
+          "angle": -24.5,
+          "overlap_px": 25218,
+          "local_overlap_px": 22388
         },
         {
-          "angle": 28.0,
-          "overlap_px": 19143,
-          "local_overlap_px": 10225
+          "angle": 21.25,
+          "overlap_px": 32345,
+          "local_overlap_px": 24163
         },
         {
-          "angle": 76.0,
-          "overlap_px": 8258,
-          "local_overlap_px": 7138
+          "angle": 67.0,
+          "overlap_px": 41736,
+          "local_overlap_px": 27672
         }
       ]
     },
@@ -268,28 +251,28 @@
       "samples": [
         {
           "angle": -23.0,
-          "overlap_px": 31656,
-          "local_overlap_px": 23538
+          "overlap_px": 31879,
+          "local_overlap_px": 23586
         },
         {
           "angle": -8.75,
-          "overlap_px": 27866,
-          "local_overlap_px": 23193
+          "overlap_px": 27789,
+          "local_overlap_px": 23264
         },
         {
           "angle": 5.5,
-          "overlap_px": 25000,
-          "local_overlap_px": 22628
+          "overlap_px": 25124,
+          "local_overlap_px": 22692
         },
         {
           "angle": 19.75,
-          "overlap_px": 23321,
-          "local_overlap_px": 21856
+          "overlap_px": 23474,
+          "local_overlap_px": 21942
         },
         {
           "angle": 34.0,
-          "overlap_px": 21753,
-          "local_overlap_px": 20958
+          "overlap_px": 21922,
+          "local_overlap_px": 21057
         }
       ]
     },
@@ -299,28 +282,28 @@
       "samples": [
         {
           "angle": -116.0,
-          "overlap_px": 538,
-          "local_overlap_px": 538
+          "overlap_px": 918,
+          "local_overlap_px": 918
         },
         {
           "angle": -68.0,
-          "overlap_px": 429,
-          "local_overlap_px": 429
+          "overlap_px": 563,
+          "local_overlap_px": 563
         },
         {
           "angle": -20.0,
-          "overlap_px": 614,
-          "local_overlap_px": 614
+          "overlap_px": 890,
+          "local_overlap_px": 890
         },
         {
           "angle": 28.0,
-          "overlap_px": 8930,
-          "local_overlap_px": 4249
+          "overlap_px": 9306,
+          "local_overlap_px": 4696
         },
         {
           "angle": 76.0,
-          "overlap_px": 14608,
-          "local_overlap_px": 7542
+          "overlap_px": 16328,
+          "local_overlap_px": 8291
         }
       ]
     },
@@ -329,29 +312,29 @@
       "child": "arm-far-lower",
       "samples": [
         {
-          "angle": -113.0,
-          "overlap_px": 9707,
-          "local_overlap_px": 9641
+          "angle": 0.0,
+          "overlap_px": 7228,
+          "local_overlap_px": 7228
         },
         {
-          "angle": -83.5,
-          "overlap_px": 8085,
-          "local_overlap_px": 8085
+          "angle": 31.0,
+          "overlap_px": 6911,
+          "local_overlap_px": 6911
         },
         {
-          "angle": -54.0,
-          "overlap_px": 6755,
-          "local_overlap_px": 6755
+          "angle": 62.0,
+          "overlap_px": 7028,
+          "local_overlap_px": 7028
         },
         {
-          "angle": -24.5,
-          "overlap_px": 6165,
-          "local_overlap_px": 6165
+          "angle": 93.0,
+          "overlap_px": 7155,
+          "local_overlap_px": 7155
         },
         {
-          "angle": 5.0,
-          "overlap_px": 5614,
-          "local_overlap_px": 5614
+          "angle": 124.0,
+          "overlap_px": 7738,
+          "local_overlap_px": 7738
         }
       ]
     },
@@ -360,29 +343,29 @@
       "child": "hand-far",
       "samples": [
         {
-          "angle": -49.0,
-          "overlap_px": 5268,
-          "local_overlap_px": 5268
+          "angle": 0.0,
+          "overlap_px": 5860,
+          "local_overlap_px": 5860
         },
         {
-          "angle": -34.5,
-          "overlap_px": 5334,
-          "local_overlap_px": 5334
+          "angle": 14.75,
+          "overlap_px": 5980,
+          "local_overlap_px": 5980
         },
         {
-          "angle": -20.0,
-          "overlap_px": 5554,
-          "local_overlap_px": 5554
+          "angle": 29.5,
+          "overlap_px": 6061,
+          "local_overlap_px": 6061
         },
         {
-          "angle": -5.5,
-          "overlap_px": 6069,
-          "local_overlap_px": 6069
+          "angle": 44.25,
+          "overlap_px": 6214,
+          "local_overlap_px": 6214
         },
         {
-          "angle": 9.0,
-          "overlap_px": 7226,
-          "local_overlap_px": 7223
+          "angle": 59.0,
+          "overlap_px": 6633,
+          "local_overlap_px": 6633
         }
       ]
     },
@@ -392,28 +375,28 @@
       "samples": [
         {
           "angle": -23.0,
-          "overlap_px": 25294,
-          "local_overlap_px": 23226
+          "overlap_px": 16969,
+          "local_overlap_px": 16969
         },
         {
           "angle": -8.75,
-          "overlap_px": 25403,
-          "local_overlap_px": 23593
+          "overlap_px": 17018,
+          "local_overlap_px": 16967
         },
         {
           "angle": 5.5,
-          "overlap_px": 26562,
-          "local_overlap_px": 24182
+          "overlap_px": 18256,
+          "local_overlap_px": 17536
         },
         {
           "angle": 19.75,
-          "overlap_px": 27907,
-          "local_overlap_px": 24539
+          "overlap_px": 19554,
+          "local_overlap_px": 18012
         },
         {
           "angle": 34.0,
-          "overlap_px": 30924,
-          "local_overlap_px": 24750
+          "overlap_px": 22246,
+          "local_overlap_px": 18421
         }
       ]
     },
@@ -423,28 +406,28 @@
       "samples": [
         {
           "angle": -23.0,
-          "overlap_px": 11946,
-          "local_overlap_px": 10954
+          "overlap_px": 13825,
+          "local_overlap_px": 12641
         },
         {
           "angle": 0.25,
-          "overlap_px": 12586,
-          "local_overlap_px": 10976
+          "overlap_px": 14501,
+          "local_overlap_px": 12875
         },
         {
           "angle": 23.5,
-          "overlap_px": 17932,
-          "local_overlap_px": 11883
+          "overlap_px": 17432,
+          "local_overlap_px": 12837
         },
         {
           "angle": 46.75,
-          "overlap_px": 19537,
-          "local_overlap_px": 12095
+          "overlap_px": 18043,
+          "local_overlap_px": 12809
         },
         {
           "angle": 70.0,
-          "overlap_px": 19213,
-          "local_overlap_px": 12081
+          "overlap_px": 17543,
+          "local_overlap_px": 12800
         }
       ]
     },
@@ -454,28 +437,28 @@
       "samples": [
         {
           "angle": -19.0,
-          "overlap_px": 6212,
-          "local_overlap_px": 6212
+          "overlap_px": 3432,
+          "local_overlap_px": 3432
         },
         {
           "angle": -4.25,
-          "overlap_px": 5922,
-          "local_overlap_px": 5922
+          "overlap_px": 3198,
+          "local_overlap_px": 3198
         },
         {
           "angle": 10.5,
-          "overlap_px": 5577,
-          "local_overlap_px": 5577
+          "overlap_px": 3060,
+          "local_overlap_px": 3060
         },
         {
           "angle": 25.25,
-          "overlap_px": 5334,
-          "local_overlap_px": 5334
+          "overlap_px": 2990,
+          "local_overlap_px": 2990
         },
         {
           "angle": 40.0,
-          "overlap_px": 5138,
-          "local_overlap_px": 5138
+          "overlap_px": 2989,
+          "local_overlap_px": 2989
         }
       ]
     },
@@ -485,28 +468,28 @@
       "samples": [
         {
           "angle": -40.0,
-          "overlap_px": 2663,
-          "local_overlap_px": 2663
+          "overlap_px": 2762,
+          "local_overlap_px": 2762
         },
         {
           "angle": -20.0,
-          "overlap_px": 2066,
-          "local_overlap_px": 2066
+          "overlap_px": 2137,
+          "local_overlap_px": 2137
         },
         {
           "angle": 0.0,
-          "overlap_px": 1727,
-          "local_overlap_px": 1727
+          "overlap_px": 1786,
+          "local_overlap_px": 1786
         },
         {
           "angle": 20.0,
-          "overlap_px": 1525,
-          "local_overlap_px": 1525
+          "overlap_px": 1573,
+          "local_overlap_px": 1573
         },
         {
           "angle": 40.0,
-          "overlap_px": 1402,
-          "local_overlap_px": 1402
+          "overlap_px": 1447,
+          "local_overlap_px": 1447
         }
       ]
     },
@@ -516,28 +499,28 @@
       "samples": [
         {
           "angle": -40.0,
-          "overlap_px": 1743,
-          "local_overlap_px": 1743
+          "overlap_px": 1605,
+          "local_overlap_px": 1605
         },
         {
           "angle": -20.0,
-          "overlap_px": 1662,
-          "local_overlap_px": 1662
+          "overlap_px": 1565,
+          "local_overlap_px": 1565
         },
         {
           "angle": 0.0,
-          "overlap_px": 1635,
-          "local_overlap_px": 1635
+          "overlap_px": 1544,
+          "local_overlap_px": 1544
         },
         {
           "angle": 20.0,
-          "overlap_px": 1688,
-          "local_overlap_px": 1688
+          "overlap_px": 1545,
+          "local_overlap_px": 1545
         },
         {
           "angle": 40.0,
-          "overlap_px": 1745,
-          "local_overlap_px": 1745
+          "overlap_px": 1583,
+          "local_overlap_px": 1583
         }
       ]
     },
@@ -546,29 +529,29 @@
       "child": "tail-3",
       "samples": [
         {
-          "angle": -40.0,
-          "overlap_px": 1793,
-          "local_overlap_px": 1793
+          "angle": -3.0,
+          "overlap_px": 1712,
+          "local_overlap_px": 1712
         },
         {
-          "angle": -20.0,
-          "overlap_px": 1808,
-          "local_overlap_px": 1808
+          "angle": -0.5,
+          "overlap_px": 1691,
+          "local_overlap_px": 1691
         },
         {
-          "angle": 0.0,
-          "overlap_px": 1714,
-          "local_overlap_px": 1714
+          "angle": 2.0,
+          "overlap_px": 1676,
+          "local_overlap_px": 1676
         },
         {
-          "angle": 20.0,
-          "overlap_px": 1594,
-          "local_overlap_px": 1594
+          "angle": 4.5,
+          "overlap_px": 1653,
+          "local_overlap_px": 1653
         },
         {
-          "angle": 40.0,
-          "overlap_px": 1460,
-          "local_overlap_px": 1460
+          "angle": 7.0,
+          "overlap_px": 1634,
+          "local_overlap_px": 1634
         }
       ]
     },
@@ -644,24 +627,24 @@
           "local_overlap_px": 19908
         },
         {
-          "angle": 0.25,
-          "overlap_px": 20206,
-          "local_overlap_px": 20033
+          "angle": 4.5,
+          "overlap_px": 20475,
+          "local_overlap_px": 20169
         },
         {
-          "angle": 23.5,
-          "overlap_px": 22018,
-          "local_overlap_px": 20781
+          "angle": 32.0,
+          "overlap_px": 23057,
+          "local_overlap_px": 21175
         },
         {
-          "angle": 46.75,
-          "overlap_px": 24721,
-          "local_overlap_px": 21757
+          "angle": 59.5,
+          "overlap_px": 26231,
+          "local_overlap_px": 22242
         },
         {
-          "angle": 70.0,
-          "overlap_px": 27009,
-          "local_overlap_px": 22363
+          "angle": 87.0,
+          "overlap_px": 27905,
+          "local_overlap_px": 22352
         }
       ]
     },
@@ -670,24 +653,24 @@
       "child": "foot-near",
       "samples": [
         {
-          "angle": -19.0,
-          "overlap_px": 10926,
-          "local_overlap_px": 10926
+          "angle": -1.0,
+          "overlap_px": 10887,
+          "local_overlap_px": 10887
         },
         {
-          "angle": -4.25,
-          "overlap_px": 10892,
-          "local_overlap_px": 10892
+          "angle": 9.25,
+          "overlap_px": 10770,
+          "local_overlap_px": 10770
         },
         {
-          "angle": 10.5,
-          "overlap_px": 10761,
-          "local_overlap_px": 10761
+          "angle": 19.5,
+          "overlap_px": 10699,
+          "local_overlap_px": 10699
         },
         {
-          "angle": 25.25,
-          "overlap_px": 10717,
-          "local_overlap_px": 10717
+          "angle": 29.75,
+          "overlap_px": 10732,
+          "local_overlap_px": 10732
         },
         {
           "angle": 40.0,
@@ -697,94 +680,233 @@
       ]
     }
   },
-  "method": "Manual master material regions plus nearest-label completion of 12055 unassigned boundary/interstice pixels. Original visible master pixels restored; independent final foreground masks occluded in delivery draw order. Per-piece scores depend on tracing/ownership. Whole metric compares full final assembly against original keyed master silhouette.",
+  "method": "Round-1 manually traced master material ownership with one documented far-shin/hem correction and the same prior ownership transfers. Actual saved PNG foregrounds occluded in manifest order. Whole-rat IoU compares actual foreground union against original keyed master; per-piece IoU is sensitive to ownership tracing. Five rigid rotations per v4 joint with full descendant chains. Overlap is only a connectivity check.",
+  "legacy_per_piece": {
+    "tail-3": {
+      "visible_iou_pct": 82.06
+    },
+    "tail-2": {
+      "visible_iou_pct": 88.42
+    },
+    "tail-1": {
+      "visible_iou_pct": 84.59
+    },
+    "scarf-tail": {
+      "visible_iou_pct": 98.12
+    },
+    "arm-far-lower": {
+      "visible_iou_pct": 58.39
+    },
+    "arm-far-upper": {
+      "visible_iou_pct": 74.42
+    },
+    "hand-far": {
+      "visible_iou_pct": 83.82
+    },
+    "leg-far-lower": {
+      "visible_iou_pct": 20.57
+    },
+    "foot-far": {
+      "visible_iou_pct": 97.37
+    },
+    "leg-far-upper": {
+      "visible_iou_pct": 69.57
+    },
+    "pelvis": {
+      "visible_iou_pct": 64.35
+    },
+    "leg-near-lower": {
+      "visible_iou_pct": 76.51
+    },
+    "foot-near": {
+      "visible_iou_pct": 91.37
+    },
+    "leg-near-upper": {
+      "visible_iou_pct": 95.74
+    },
+    "seat": {
+      "visible_iou_pct": 82.52
+    },
+    "torso": {
+      "visible_iou_pct": 79.01
+    },
+    "belt": {
+      "visible_iou_pct": 96.45
+    },
+    "head": {
+      "visible_iou_pct": 96.05
+    },
+    "arm-near-upper": {
+      "visible_iou_pct": 97.26
+    },
+    "arm-near-lower": {
+      "visible_iou_pct": 99.84
+    },
+    "hand-near": {
+      "visible_iou_pct": 97.91
+    }
+  },
+  "trace_correction": "Far shin ground truth excludes the rectangular brown trouser-hem portion erroneously assigned to it in round 1; returned that portion to far thigh. Actual pink strip manually traced; all other master ownership traces unchanged. Legacy per-piece table retained separately.",
   "importReady": false,
   "visual_review": {
     "neck": {
-      "pass": false,
-      "notes": "Connected; cut/registration fragments beneath cheek and at scarf boundary still show as the head turns. Dome contour is not certified."
+      "pass_at_reviewed_samples": true,
+      "notes": "Original jagged cheek/scarf fragments removed. Smooth closed lower-neck fur stays connected through +61; additional +10/+20 detail sheet checks the original failure angles. Single head contour still draws over collar in the existing piece order."
     },
     "waist": {
-      "pass": false,
-      "notes": "Connected; generated lower chest dome exposes a second dark edge under belt and paint/seam transitions at extremes."
+      "pass_at_reviewed_samples": false,
+      "notes": "Connected through -4..15. Old horizontal paint bar is repaired, but a second lower-torso outline/fur strip remains visible beneath the belt."
     },
     "shoulder-near": {
-      "pass": false,
-      "notes": "No old torso slide. Brown fur replaces unsolicited second shoulder panel, but a grey notch remains above the pad at +28/+76; exposed hidden fur/strap boundary remains. FAIL."
+      "pass_at_reviewed_samples": false,
+      "notes": "Exact lower pivot (595.8,1203.2), no rest offset. Extended torso fur and repainted hidden arm top improve coverage; broad torso contour remains exposed at negative turns and a grey recess above the pad under scarf remains at positive turns. Original near-arm mask retained: a full circular cap centered on the lower pivot is not certified. Strict shoulder gate remains open."
     },
     "hip-near": {
-      "pass": false,
-      "notes": "Seat stays above thigh and connection holds. Diagonal orange-patch/seat registration seam and doubled patch contours remain at bends. FAIL finish."
+      "pass_at_reviewed_samples": false,
+      "notes": "Connected. Seat registration paint repaired and hidden duplicated orange patch repainted olive, but a clipped/abrupt olive-to-patch boundary and contour/stitch mismatch remain as the thigh turns under the seat."
     },
     "shoulder-far": {
-      "pass": false,
-      "notes": "Only 429 px\u00b2 minimum local overlap; shallow attachment, jagged neck-side wedges and exposed cut paint at turns. FAIL finish, proposal needs fitting."
+      "pass_at_reviewed_samples": false,
+      "notes": "Accepted point retained. Connected in all samples, but minimum local overlap is only 563 px\u00b2; narrow shoulder attachment and inner torso registration fringe remain. No new fitting proposal."
     },
     "elbow-far": {
-      "pass": false,
-      "notes": "Connected closed component, but cap/material scale mismatch and exposed rim-like folded contours remain. No clean no-tube-face certification. Hard horizontal registration/paint bar remains in the isolated bracer."
+      "pass_at_reviewed_samples": true,
+      "notes": "New point and 0..124 used. Forearm paint bar removed; upper arm covers the closed hidden forearm top. Connected, no visible flat opening in these samples. This is a source-layer order change documented in manifest."
     },
     "wrist-far": {
-      "pass": false,
-      "notes": "Cuff turns with hand; connected. Visible-paint ownership was corrected; outline/paint transitions at cuff remain. Hard horizontal registration/paint bar remains in isolated hand."
+      "pass_at_reviewed_samples": true,
+      "notes": "0..59 used. Cuff belongs to and turns with hand; hard paint bar and loose leather projection removed. Closed overlap throughout the five samples."
     },
     "hip-far": {
-      "pass": false,
-      "notes": "Connected; full hidden thigh cap retained. Pelvis/thigh double boundaries and excess generated hip exposure remain."
+      "pass_at_reviewed_samples": false,
+      "notes": "Connected. Reduced right pelvis bulge, but the pelvis/thigh boundary still produces a conspicuous second cloth contour; rest material ownership is not reconciled."
     },
     "knee-far": {
-      "pass": false,
-      "notes": "Connected smooth closed shin reaches knee point. Hem scraps/registration and changed visible shin exposure remain. FAIL finish. Isolated shin carries a horizontal cloth/paint remnant; far thigh has dangling thin hem fragments."
+      "pass_at_reviewed_samples": false,
+      "notes": "Smooth coral shin has no trouser paint bar. Thin detached hem wires/scrap removed; a few attached red/registration tips remain at the trouser edge. Rest shin exposure is still too small (51.75% corrected IoU)."
     },
     "ankle-far": {
-      "pass": false,
-      "notes": "Wrap belongs to foot; connected. Tool top-opening retry selected, but top cap/outline transition remains visible."
+      "pass_at_reviewed_samples": false,
+      "notes": "Wrap turns with foot and cap is shallower; connected through -19..40. No open tube, but leather cap/rim transition and the attached hem tips above it remain visible."
     },
     "tail-root": {
-      "pass": false,
-      "notes": "Root revised to (550,1515), minimum local overlap now 1402 px\u00b2. Connected behind pelvis/near thigh; residual root-side material/contour transition remains. Dark trouser-shaped scrap remains beside proximal tail."
+      "pass_at_reviewed_samples": true,
+      "notes": "Stray trouser scrap removed. Closed hidden root stays behind pelvis/near thigh through \u00b140."
     },
     "tail-mid": {
-      "pass": false,
-      "notes": "Connected; rounded generated support retained. Original-to-generated paint transition and dark joining contour remain visible."
+      "pass_at_reviewed_samples": true,
+      "notes": "Closed painted ends overlap through \u00b140. Black distal cap cross-line removed; coral paint/band transition remains visible as a rounded joint, with no grey break in these samples."
     },
     "tail-end": {
-      "pass": false,
-      "notes": "Connected; curved tip retained. Negative turns expose a small notch/doubled outline at the join. FAIL finish."
+      "pass_at_reviewed_samples": true,
+      "notes": "Uses -3..7 exactly. Closed tip root and coral join paint remove the old notch and black cross-line in the sampled range; hooked tip retained."
     },
     "elbow-near": {
-      "pass": false,
-      "notes": "New full -113..5 range used (A026 manifest was stale at -101). Connected; inner elbow cut/registration edge only partially repaired."
+      "pass_at_reviewed_samples": false,
+      "notes": "Points/mask unchanged; inner elbow paint improved. Inherited thin pointed/cut contour remnants still appear at bends, especially near the fur/bracer edge."
     },
     "wrist-near": {
-      "pass": false,
-      "notes": "Original points/mask and cuff-on-hand retained. Connected; inherited cuff-side contour remnants remain."
+      "pass_at_reviewed_samples": false,
+      "notes": "Points/mask unchanged, cuff follows hand. Inherited doubled cuff-side contours/strap fragments remain."
     },
     "knee-near": {
-      "pass": false,
-      "notes": "Original points/mask retained. Connected; thigh hem repairs partial, exposed shin paint/width differs from master strip."
+      "pass_at_reviewed_samples": false,
+      "notes": "New maximum +87 used, connected. Near thigh top/hem paint repaired, but inherited thin hem/registration tips and differently exposed shin persist."
     },
     "ankle-near": {
-      "pass": false,
-      "notes": "Original points/mask and wrap-on-foot retained. Connected; inherited wrap-top/strap contour remnants remain."
+      "pass_at_reviewed_samples": false,
+      "notes": "New -1..40 used; wrap follows foot, connected. Inherited wrap-rim line projects at positive turns."
     }
   },
-  "proposed_points": {
-    "shoulder-far": [
-      958,
-      1180
+  "round_1_whole_rat_visible_iou_pct": 97.771,
+  "round_1_per_piece_legacy": {
+    "tail-3": 88.58,
+    "tail-2": 94.33,
+    "tail-1": 95.35,
+    "scarf-tail": 98.43,
+    "arm-far-upper": 57.77,
+    "arm-far-lower": 50.54,
+    "hand-far": 90.8,
+    "leg-far-lower": 43.22,
+    "foot-far": 94.14,
+    "leg-far-upper": 74.86,
+    "pelvis": 72.1,
+    "leg-near-lower": 76.51,
+    "foot-near": 91.37,
+    "leg-near-upper": 97.01,
+    "seat": 86.4,
+    "torso": 83.46,
+    "belt": 96.45,
+    "head": 97.93,
+    "arm-near-upper": 97.26,
+    "arm-near-lower": 99.84,
+    "hand-near": 97.91
+  },
+  "additional_neck_angles_deg": [
+    10,
+    20
+  ],
+  "validation": {
+    "source_parts": 21,
+    "all_17_v4_pivots_attach_limits_exact": true,
+    "all_rgb_1536x2304_exact_green": true,
+    "whole_rat_iou_independent_pct": 96.771,
+    "near_parts": {
+      "leg-near-lower": {
+        "mask_unchanged": true,
+        "foreground_paint_unchanged": true,
+        "byte_unchanged": false
+      },
+      "foot-near": {
+        "mask_unchanged": true,
+        "foreground_paint_unchanged": true,
+        "byte_unchanged": false
+      },
+      "leg-near-upper": {
+        "mask_unchanged": true,
+        "foreground_paint_unchanged": false,
+        "byte_unchanged": false
+      },
+      "arm-near-upper": {
+        "mask_unchanged": true,
+        "foreground_paint_unchanged": false,
+        "byte_unchanged": false
+      },
+      "arm-near-lower": {
+        "mask_unchanged": true,
+        "foreground_paint_unchanged": false,
+        "byte_unchanged": false
+      },
+      "hand-near": {
+        "mask_unchanged": true,
+        "foreground_paint_unchanged": true,
+        "byte_unchanged": false
+      }
+    },
+    "phone_reviews": [
+      "sweep-shoulder-far.jpg",
+      "sweep-wrist-near.jpg",
+      "sweep-tail-mid.jpg",
+      "sweep-neck.jpg",
+      "sweep-elbow-near.jpg",
+      "silhouette.jpg",
+      "sweep-ankle-near.jpg",
+      "review.jpg",
+      "sweep-tail-root.jpg",
+      "sweep-knee-far.jpg",
+      "sweep-tail-end.jpg",
+      "neck-detail.jpg",
+      "sweep-elbow-far.jpg",
+      "sweep-shoulder-near.jpg",
+      "points.jpg",
+      "sweep-hip-near.jpg",
+      "sweep-knee-near.jpg",
+      "sweep-ankle-far.jpg",
+      "rest.jpg",
+      "sweep-wrist-far.jpg",
+      "sweep-hip-far.jpg",
+      "sweep-waist.jpg"
     ],
-    "tail-root": [
-      550,
-      1515
-    ],
-    "tail-mid": [
-      444,
-      1709
-    ],
-    "tail-end": [
-      351,
-      1815
-    ]
+    "source_sweep_sheets": 17
   }
 }
