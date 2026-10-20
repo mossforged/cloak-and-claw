@@ -1,0 +1,591 @@
+{
+  "hand-near-open": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      258,
+      1355,
+      519,
+      1603
+    ],
+    "pairedWith": null
+  },
+  "hand-near-palm": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      242,
+      1355,
+      523,
+      1637
+    ],
+    "pairedWith": null
+  },
+  "hand-near-back": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      285,
+      1355,
+      500,
+      1570
+    ],
+    "pairedWith": null
+  },
+  "hand-near-cup": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      285,
+      1355,
+      659,
+      1681
+    ],
+    "pairedWith": null
+  },
+  "hand-near-grip": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      283,
+      1498,
+      512,
+      1568
+    ],
+    "pairedWith": "hand-near-grip-under"
+  },
+  "hand-near-grip-overhand": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      406,
+      1355,
+      519,
+      1610
+    ],
+    "pairedWith": "hand-near-grip-overhand-under"
+  },
+  "hand-near-point": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      315,
+      1355,
+      761,
+      1587
+    ],
+    "pairedWith": null
+  },
+  "hand-near-pinch": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      309,
+      1508,
+      547,
+      1585
+    ],
+    "pairedWith": "hand-near-pinch-under"
+  },
+  "hand-far-open": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1032,
+      1370,
+      1312,
+      1628
+    ],
+    "pairedWith": null
+  },
+  "hand-far-palm": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1007,
+      1370,
+      1323,
+      1635
+    ],
+    "pairedWith": null
+  },
+  "hand-far-back": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1043,
+      1370,
+      1233,
+      1602
+    ],
+    "pairedWith": null
+  },
+  "hand-far-cup": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1000,
+      1370,
+      1168,
+      1489
+    ],
+    "pairedWith": null
+  },
+  "hand-far-grip": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1067,
+      1528,
+      1236,
+      1621
+    ],
+    "pairedWith": "hand-far-grip-under"
+  },
+  "hand-far-grip-overhand": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1048,
+      1512,
+      1222,
+      1593
+    ],
+    "pairedWith": "hand-far-grip-overhand-under"
+  },
+  "hand-far-shield": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1059,
+      1370,
+      1302,
+      1654
+    ],
+    "pairedWith": null
+  },
+  "head-attack": {
+    "replaces": "head",
+    "joint": "neck",
+    "pivot": [
+      850.6,
+      1147
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      501,
+      600,
+      1290,
+      1200
+    ],
+    "pairedWith": null
+  },
+  "head-effort": {
+    "replaces": "head",
+    "joint": "neck",
+    "pivot": [
+      850.6,
+      1147
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      501,
+      600,
+      1282,
+      1205
+    ],
+    "pairedWith": null
+  },
+  "head-hurt": {
+    "replaces": "head",
+    "joint": "neck",
+    "pivot": [
+      850.6,
+      1147
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      501,
+      600,
+      1278,
+      1209
+    ],
+    "pairedWith": null
+  },
+  "head-ko": {
+    "replaces": "head",
+    "joint": "neck",
+    "pivot": [
+      850.6,
+      1147
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      501,
+      600,
+      1280,
+      1204
+    ],
+    "pairedWith": null
+  },
+  "head-shout": {
+    "replaces": "head",
+    "joint": "neck",
+    "pivot": [
+      850.6,
+      1147
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      501,
+      600,
+      1285,
+      1211
+    ],
+    "pairedWith": null
+  },
+  "head-drink": {
+    "replaces": "head",
+    "joint": "neck",
+    "pivot": [
+      850.6,
+      1147
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      501,
+      600,
+      1280,
+      1205
+    ],
+    "pairedWith": null
+  },
+  "foot-near-heel": {
+    "replaces": "foot-near",
+    "joint": "ankle-near",
+    "pivot": [
+      571.2,
+      1799
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      474,
+      1755,
+      794,
+      1969
+    ],
+    "pairedWith": null
+  },
+  "foot-near-toe": {
+    "replaces": "foot-near",
+    "joint": "ankle-near",
+    "pivot": [
+      571.2,
+      1799
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      449,
+      1755,
+      769,
+      2086
+    ],
+    "pairedWith": null
+  },
+  "foot-near-out": {
+    "replaces": "foot-near",
+    "joint": "ankle-near",
+    "pivot": [
+      571.2,
+      1799
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      472,
+      1755,
+      792,
+      1975
+    ],
+    "pairedWith": null
+  },
+  "foot-far-heel": {
+    "replaces": "foot-far",
+    "joint": "ankle-far",
+    "pivot": [
+      904.8,
+      1808
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      806,
+      1773,
+      1154,
+      2043
+    ],
+    "pairedWith": null
+  },
+  "foot-far-toe": {
+    "replaces": "foot-far",
+    "joint": "ankle-far",
+    "pivot": [
+      904.8,
+      1808
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      799,
+      1773,
+      1147,
+      2166
+    ],
+    "pairedWith": null
+  },
+  "hand-near-grip-under": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      280,
+      1355,
+      513,
+      1515
+    ],
+    "pairedWith": "hand-near-grip"
+  },
+  "hand-near-grip-overhand-under": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      276,
+      1355,
+      406,
+      1605
+    ],
+    "pairedWith": "hand-near-grip-overhand"
+  },
+  "hand-near-pinch-under": {
+    "replaces": "hand-near",
+    "joint": "wrist-near",
+    "pivot": [
+      411.2,
+      1427.6
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      297,
+      1355,
+      547,
+      1525
+    ],
+    "pairedWith": "hand-near-pinch"
+  },
+  "hand-far-grip-under": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1052,
+      1370,
+      1237,
+      1545
+    ],
+    "pairedWith": "hand-far-grip"
+  },
+  "hand-far-grip-overhand-under": {
+    "replaces": "hand-far",
+    "joint": "wrist-far",
+    "pivot": [
+      1114.4,
+      1428
+    ],
+    "restOffset": [
+      0,
+      0
+    ],
+    "bbox": [
+      1048,
+      1370,
+      1221,
+      1529
+    ],
+    "pairedWith": "hand-far-grip-overhand"
+  }
+}

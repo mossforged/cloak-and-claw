@@ -1,0 +1,1558 @@
+{
+ "hand-near-open": {
+  "pass": true,
+  "joints": {
+   "wrist-near": {
+    "pass": true,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 161,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -49,
+      "share": 0.51
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 9,
+      "share": 0.1
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -20,
+      "share": 0.46
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-near-palm": {
+  "pass": true,
+  "joints": {
+   "wrist-near": {
+    "pass": true,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 137,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -49,
+      "share": 0.32
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 9,
+      "share": 0.09
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -12.75,
+      "share": 0.52
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-near-back": {
+  "pass": true,
+  "joints": {
+   "wrist-near": {
+    "pass": true,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 176,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -49,
+      "share": 0.41
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 9,
+      "share": 0.37
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-near-cup": {
+  "pass": false,
+  "joints": {
+   "wrist-near": {
+    "pass": false,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 176,
+    "gap": {
+     "pass": false,
+     "flagged": [
+      -34.5
+     ],
+     "worst": {
+      "deg": -34.5,
+      "px": 264,
+      "total": 264,
+      "box": [
+       482,
+       1357,
+       541,
+       1389
+      ]
+     },
+     "peak": {
+      "deg": -34.5,
+      "share": 1.06
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -49,
+      "share": 0.02
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -49,
+      "share": 0.63
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-near-grip": {
+  "pass": true,
+  "joints": {
+   "wrist-near": {
+    "pass": true,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 162,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -49,
+      "share": 0.58
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -41.75,
+      "share": 0.41
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-near-grip-overhand": {
+  "pass": true,
+  "joints": {
+   "wrist-near": {
+    "pass": true,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 195,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -34.5,
+      "share": 0.5
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -49,
+      "share": 0.41
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-near-point": {
+  "pass": false,
+  "joints": {
+   "wrist-near": {
+    "pass": false,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 150,
+    "gap": {
+     "pass": false,
+     "flagged": [
+      -12.75
+     ],
+     "worst": {
+      "deg": -12.75,
+      "px": 317,
+      "total": 317,
+      "box": [
+       481,
+       1366,
+       531,
+       1391
+      ]
+     },
+     "peak": {
+      "deg": -12.75,
+      "share": 1.27
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -27.25,
+      "share": 0.65
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-near-pinch": {
+  "pass": true,
+  "joints": {
+   "wrist-near": {
+    "pass": true,
+    "part": "hand-near",
+    "point": [
+     411.2,
+     1427.6
+    ],
+    "limits": [
+     -49,
+     9
+    ],
+    "angles": [
+     -49,
+     -41.75,
+     -34.5,
+     -27.25,
+     -20,
+     -12.75,
+     -5.5,
+     1.75,
+     9
+    ],
+    "window": 149,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -27.25,
+      "share": 0.94
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -41.75,
+      "share": 0.54
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-far-open": {
+  "pass": true,
+  "joints": {
+   "wrist-far": {
+    "pass": true,
+    "part": "hand-far",
+    "point": [
+     1114.4,
+     1428
+    ],
+    "limits": [
+     0,
+     59
+    ],
+    "angles": [
+     0,
+     7.38,
+     14.75,
+     22.13,
+     29.5,
+     36.88,
+     44.25,
+     51.63,
+     59
+    ],
+    "window": 95,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 44.25,
+      "share": 0.63
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 59,
+      "share": 0.64
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-far-palm": {
+  "pass": true,
+  "joints": {
+   "wrist-far": {
+    "pass": true,
+    "part": "hand-far",
+    "point": [
+     1114.4,
+     1428
+    ],
+    "limits": [
+     0,
+     59
+    ],
+    "angles": [
+     0,
+     7.38,
+     14.75,
+     22.13,
+     29.5,
+     36.88,
+     44.25,
+     51.63,
+     59
+    ],
+    "window": 87,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 51.63,
+      "share": 0.62
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 59,
+      "share": 0.68
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-far-back": {
+  "pass": true,
+  "joints": {
+   "wrist-far": {
+    "pass": true,
+    "part": "hand-far",
+    "point": [
+     1114.4,
+     1428
+    ],
+    "limits": [
+     0,
+     59
+    ],
+    "angles": [
+     0,
+     7.38,
+     14.75,
+     22.13,
+     29.5,
+     36.88,
+     44.25,
+     51.63,
+     59
+    ],
+    "window": 113,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 51.63,
+      "share": 0.48
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 59,
+      "share": 0.34
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-far-cup": {
+  "pass": true,
+  "joints": {
+   "wrist-far": {
+    "pass": true,
+    "part": "hand-far",
+    "point": [
+     1114.4,
+     1428
+    ],
+    "limits": [
+     0,
+     59
+    ],
+    "angles": [
+     0,
+     7.38,
+     14.75,
+     22.13,
+     29.5,
+     36.88,
+     44.25,
+     51.63,
+     59
+    ],
+    "window": 89,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 59,
+      "share": 0.38
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 14.75,
+      "share": 0.58
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-far-grip": {
+  "pass": true,
+  "joints": {
+   "wrist-far": {
+    "pass": true,
+    "part": "hand-far",
+    "point": [
+     1114.4,
+     1428
+    ],
+    "limits": [
+     0,
+     59
+    ],
+    "angles": [
+     0,
+     7.38,
+     14.75,
+     22.13,
+     29.5,
+     36.88,
+     44.25,
+     51.63,
+     59
+    ],
+    "window": 100,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 51.63,
+      "share": 0.48
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 59,
+      "share": 0.36
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-far-grip-overhand": {
+  "pass": true,
+  "joints": {
+   "wrist-far": {
+    "pass": true,
+    "part": "hand-far",
+    "point": [
+     1114.4,
+     1428
+    ],
+    "limits": [
+     0,
+     59
+    ],
+    "angles": [
+     0,
+     7.38,
+     14.75,
+     22.13,
+     29.5,
+     36.88,
+     44.25,
+     51.63,
+     59
+    ],
+    "window": 107,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 51.63,
+      "share": 0.47
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 59,
+      "share": 0.25
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "hand-far-shield": {
+  "pass": true,
+  "joints": {
+   "wrist-far": {
+    "pass": true,
+    "part": "hand-far",
+    "point": [
+     1114.4,
+     1428
+    ],
+    "limits": [
+     0,
+     59
+    ],
+    "angles": [
+     0,
+     7.38,
+     14.75,
+     22.13,
+     29.5,
+     36.88,
+     44.25,
+     51.63,
+     59
+    ],
+    "window": 86,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 44.25,
+      "share": 0.38
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 59,
+      "share": 0.59
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "head-attack": {
+  "pass": false,
+  "joints": {
+   "neck": {
+    "pass": false,
+    "part": "head",
+    "point": [
+     850.6,
+     1147
+    ],
+    "limits": [
+     -20,
+     61
+    ],
+    "angles": [
+     -20,
+     -9.88,
+     0.25,
+     10.38,
+     20.5,
+     30.63,
+     40.75,
+     50.88,
+     61
+    ],
+    "window": 220,
+    "gap": {
+     "pass": false,
+     "flagged": [
+      -20
+     ],
+     "worst": {
+      "deg": -20,
+      "px": 400,
+      "total": 400,
+      "box": [
+       940,
+       1148,
+       994,
+       1159
+      ]
+     },
+     "peak": {
+      "deg": -20,
+      "share": 1.6
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 0.25,
+      "share": 0.04
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 40.75,
+      "share": 0.63
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "head-effort": {
+  "pass": true,
+  "joints": {
+   "neck": {
+    "pass": true,
+    "part": "head",
+    "point": [
+     850.6,
+     1147
+    ],
+    "limits": [
+     -20,
+     61
+    ],
+    "angles": [
+     -20,
+     -9.88,
+     0.25,
+     10.38,
+     20.5,
+     30.63,
+     40.75,
+     50.88,
+     61
+    ],
+    "window": 218,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -20,
+      "share": 0.61
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 50.88,
+      "share": 0.79
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "head-hurt": {
+  "pass": true,
+  "joints": {
+   "neck": {
+    "pass": true,
+    "part": "head",
+    "point": [
+     850.6,
+     1147
+    ],
+    "limits": [
+     -20,
+     61
+    ],
+    "angles": [
+     -20,
+     -9.88,
+     0.25,
+     10.38,
+     20.5,
+     30.63,
+     40.75,
+     50.88,
+     61
+    ],
+    "window": 220,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 20.5,
+      "share": 0.63
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 50.88,
+      "share": 0.67
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "head-ko": {
+  "pass": true,
+  "joints": {
+   "neck": {
+    "pass": true,
+    "part": "head",
+    "point": [
+     850.6,
+     1147
+    ],
+    "limits": [
+     -20,
+     61
+    ],
+    "angles": [
+     -20,
+     -9.88,
+     0.25,
+     10.38,
+     20.5,
+     30.63,
+     40.75,
+     50.88,
+     61
+    ],
+    "window": 220,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 10.38,
+      "share": 0.62
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 20.5,
+      "share": 0.02
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 50.88,
+      "share": 0.74
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "head-shout": {
+  "pass": false,
+  "joints": {
+   "neck": {
+    "pass": false,
+    "part": "head",
+    "point": [
+     850.6,
+     1147
+    ],
+    "limits": [
+     -20,
+     61
+    ],
+    "angles": [
+     -20,
+     -9.88,
+     0.25,
+     10.38,
+     20.5,
+     30.63,
+     40.75,
+     50.88,
+     61
+    ],
+    "window": 220,
+    "gap": {
+     "pass": false,
+     "flagged": [
+      30.63
+     ],
+     "worst": {
+      "deg": 30.63,
+      "px": 284,
+      "total": 284,
+      "box": [
+       1015,
+       1217,
+       1041,
+       1247
+      ]
+     },
+     "peak": {
+      "deg": 30.63,
+      "share": 1.14
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 0.25,
+      "share": 0.04
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 40.75,
+      "share": 0.61
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "head-drink": {
+  "pass": true,
+  "joints": {
+   "neck": {
+    "pass": true,
+    "part": "head",
+    "point": [
+     850.6,
+     1147
+    ],
+    "limits": [
+     -20,
+     61
+    ],
+    "angles": [
+     -20,
+     -9.88,
+     0.25,
+     10.38,
+     20.5,
+     30.63,
+     40.75,
+     50.88,
+     61
+    ],
+    "window": 220,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 61,
+      "share": 0.9
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 0.25,
+      "share": 0.08
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 10.38,
+      "share": 0.69
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "foot-near-heel": {
+  "pass": true,
+  "joints": {
+   "ankle-near": {
+    "pass": true,
+    "part": "foot-near",
+    "point": [
+     571.2,
+     1799
+    ],
+    "limits": [
+     -1,
+     40
+    ],
+    "angles": [
+     -1,
+     4.13,
+     9.25,
+     14.38,
+     19.5,
+     24.63,
+     29.75,
+     34.88,
+     40
+    ],
+    "window": 164,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 29.75,
+      "share": 0.02
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 4.13,
+      "share": 0.09
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 40,
+      "share": 0.15
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "foot-near-toe": {
+  "pass": true,
+  "joints": {
+   "ankle-near": {
+    "pass": true,
+    "part": "foot-near",
+    "point": [
+     571.2,
+     1799
+    ],
+    "limits": [
+     -1,
+     40
+    ],
+    "angles": [
+     -1,
+     4.13,
+     9.25,
+     14.38,
+     19.5,
+     24.63,
+     29.75,
+     34.88,
+     40
+    ],
+    "window": 113,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 29.75,
+      "share": 0.05
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 4.13,
+      "share": 0.13
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 40,
+      "share": 0.16
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "foot-near-out": {
+  "pass": true,
+  "joints": {
+   "ankle-near": {
+    "pass": true,
+    "part": "foot-near",
+    "point": [
+     571.2,
+     1799
+    ],
+    "limits": [
+     -1,
+     40
+    ],
+    "angles": [
+     -1,
+     4.13,
+     9.25,
+     14.38,
+     19.5,
+     24.63,
+     29.75,
+     34.88,
+     40
+    ],
+    "window": 136,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 40,
+      "share": 0.03
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 9.25,
+      "share": 0.32
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": 34.88,
+      "share": 0.35
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "foot-far-heel": {
+  "pass": true,
+  "joints": {
+   "ankle-far": {
+    "pass": true,
+    "part": "foot-far",
+    "point": [
+     904.8,
+     1808
+    ],
+    "limits": [
+     -19,
+     40
+    ],
+    "angles": [
+     -19,
+     -11.63,
+     -4.25,
+     3.13,
+     10.5,
+     17.88,
+     25.25,
+     32.63,
+     40
+    ],
+    "window": 102,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -19,
+      "share": 0.16
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ },
+ "foot-far-toe": {
+  "pass": true,
+  "joints": {
+   "ankle-far": {
+    "pass": true,
+    "part": "foot-far",
+    "point": [
+     904.8,
+     1808
+    ],
+    "limits": [
+     -19,
+     40
+    ],
+    "angles": [
+     -19,
+     -11.63,
+     -4.25,
+     3.13,
+     10.5,
+     17.88,
+     25.25,
+     32.63,
+     40
+    ],
+    "window": 98,
+    "gap": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": -19,
+      "share": 0.16
+     }
+    },
+    "fragment": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    },
+    "seam": {
+     "pass": true,
+     "flagged": [],
+     "worst": null,
+     "peak": {
+      "deg": null,
+      "share": 0
+     }
+    }
+   }
+  },
+  "islands": [],
+  "notes": []
+ }
+}
