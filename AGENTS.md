@@ -20,6 +20,7 @@ You never touch `src/`, `tests/`, `tools/`, `assets/art/`, `index.html` or other
 - **Phone review copy:** also save every review image as a small JPG (quality ~80, long side <= 2000 px) in `docs/screens/<ID>/` (e.g. `docs/screens/A019/review.jpg`). The user reviews on his phone from the published preview, which cannot show LFS files.
 - Include `prompt.md` (tool + exact prompts), `review.png` (all images on grey + one at game size, about 130 px tall, over `assets/art/stages/harbor-market.png`) and `HANDOFF.md`.
 - **Large files:** source images (png, jpg, webp, psd) in new folders go into Git LFS automatically (`.gitattributes`); `review*.png` and text files stay in normal git. Before committing, `git lfs status` should list your new part images. Never commit raw tool outputs (`generated/` folders, discarded variants): only the files the packet names.
+- **Joint self-check (rig pieces):** before handing in a `rig-source.json`, run `node tools/joint-check.mjs assets/source/<ID>-<slug>/rig-source.json [--joints <the packet's joints file>]` (Node only) and loop until it exits 0, or until what it still flags is acceptable; include `joint-check.jpg` in `HANDOFF.md` (and a copy in `docs/screens/<ID>/`), and say which flags you judge acceptable and why.
 - If the tool cannot meet a rule (for example parts keep overlapping), deliver your best attempt and say so in `HANDOFF.md`. Do not invent a workaround in code.
 
 ## Handoff

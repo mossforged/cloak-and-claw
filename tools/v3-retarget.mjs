@@ -2,7 +2,7 @@
 // foot's wrist / ankle as drawn vs its goal from the raider's (render/retarget.js goalOf), and every planted foot's
 // gap to its floor line, for round 1 (joint angles copied) and round 2 (retargeted). Also the turning slash wind-up: the
 // far fist against the chest on the raider, r1 and r2.
-// Usage: node tools/v3-retarget.mjs [out.md]   (default docs/screens/T035/retarget.md)
+// Usage: node tools/v3-retarget.mjs [out.md]   (default docs/screens/T038/retarget.md; T035's own is docs/screens/T035/)
 import { writeFileSync } from 'node:fs';
 import { clipsFor } from '../src/viewer/clips.js';
 import { createSlot } from '../src/viewer/sandbox.js';
@@ -17,7 +17,7 @@ import { goalOf, LIMBS } from '../src/render/retarget.js';
 import { limitLayer } from '../src/render/limits.js';
 import { layoutRig } from '../src/render/rig-layout.js';
 
-const out = process.argv[2] ?? 'docs/screens/T035/retarget.md';
+const out = process.argv[2] ?? 'docs/screens/T038/retarget.md';
 const apply = (m, [x, y]) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const by = (L) => Object.fromEntries(L.filter((e) => e.m && !e.line).map((e) => [e.name, e]));
 const pv = (rig, B, n) => apply(B[n].m === B[n].base ? B[n].m : B[n].base, B[n].p?.pivot ?? rig.parts[n].pivot);
@@ -38,14 +38,16 @@ function errors(src, A, rig, B, sx) {
 // planted feet (lift under 0.5 px): drawn bottom vs its floor line less the lift (px, + = below it), and which of the
 // leg's joints sit at an end of their range
 function gaps(f, rig, F) {
-  if (!grounded(f) || F.joints['@aloft']) return [];
+  if (!grounded(f)) return [];   // aloft keys on the ground count (T038: the hop's take-off and landing, the kick)
   const B = by(F.L), o = [];
   for (const ft of ['foot-near', 'foot-far']) {
     const lift = Math.max(0, F.joints[`${ft}.lift`] ?? 0);
     if (!B[ft] || !(HULLS[B[ft].img] ?? []).length || lift > 0.5) continue;
-    const y = Math.max(...HULLS[B[ft].img].map((p) => apply(B[ft].m, p)[1])), leg = ft.replace('foot', 'leg');
+    // height as drawn (render/floor.js heightOf): an aloft key keeps the standee's lean (T038)
+    const a = Math.sin(F.p.rot) * F.p.sx * F.k, b = Math.cos(F.p.rot) * F.p.sy * F.k, leg = ft.replace('foot', 'leg');
+    const y = Math.max(...HULLS[B[ft].img].map((p) => { const q = apply(B[ft].m, p); return a * q[0] + b * q[1]; }));
     const at = [`${leg}-upper`, `${leg}-lower`, ft].filter((n) => rig.limits[n] && rig.limits[n].some((e) => Math.abs((F.joints[n] ?? 0) - e) < 0.5));
-    o.push({ g: F.p.dy + F.p.sy * F.k * y - floorLine(rig, ft) + lift, at: at.map((n) => `${n} ${rig.limits[n].find((e) => Math.abs((F.joints[n] ?? 0) - e) < 0.5)}`) });
+    o.push({ g: F.p.dy + y - floorLine(rig, ft) + lift, at: at.map((n) => `${n} ${rig.limits[n].find((e) => Math.abs((F.joints[n] ?? 0) - e) < 0.5)}`) });
   }
   return o;
 }

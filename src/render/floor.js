@@ -83,16 +83,35 @@ export function footGoal(rig, joints, L, ft, view) {
 // foot as near the tilt the rule gave it as its range lets. Off the line costs 1 per px, away from the rule's ankle x
 // K.slideCost per px (a trailing leg past its hip limit slides along the line, up to K.slide px, rather than sink), off the
 // wanted tilt K.tiltCost per degree. No limits: as given.
-export function floorInLimits(rig, joints, swap = {}, view = { rot: 0, sx: 1, sy: 1, dy: 0 }) {
+// pick(ft, L): which feet (L: the layout inside the limits), and onto what lift (null = leave the leg as it is; default: every foot at its own lift).
+export function floorInLimits(rig, joints, swap = {}, view = { rot: 0, sx: 1, sy: 1, dy: 0 }, pick = (ft) => joints[`${ft}.lift`]) {
   if (!rig.limits || Math.abs(joints.sx ?? 1) < 0.2) return joints;
   let out = limitLayer(rig, joints);
   const L0 = byName(rig, joints, swap);
   for (const leg of LEGS) {
     const L = byName(rig, out, swap), [up, lo, ft] = leg;
     if (!L[up] || !L[lo] || !L[ft] || !L0[ft] || !hull(L[ft]).length) continue;
-    out = legOnLine(rig, L, out, leg, view, turnOf(L0[ft].base), apply(L0[ft].base, rig.parts[ft].pivot)[0]);
+    const lift = pick(ft, L), key = `${ft}.lift`;
+    if (lift === null) continue;
+    const j = legOnLine(rig, L, { ...out, [key]: lift }, leg, view, turnOf(L0[ft].base), apply(L0[ft].base, rig.parts[ft].pivot)[0]);
+    out = { ...j, [key]: out[key] };
+    if (out[key] === undefined) delete out[key];
   }
   return out;
+}
+
+// T038: a key posed off the floor (`aloft`: render/rig.js skips the rule above) while the fighter is on the ground: the
+// hop's take-off and landing frames (the key shows at once, its height blends in) and the kick (aloft so the kicking leg
+// stays up) left a planted foot 10-23 px off its line on rat v3. With limits only: a planted foot (lift under
+// K.planted px) goes onto its line as above; a raised one that would sink below the floor stops on it; the rest as posed.
+export function aloftInLimits(rig, joints, swap = {}, view = { rot: 0, sx: 1, sy: 1, dy: 0 }) {
+  if (!rig.limits) return joints;
+  return floorInLimits(rig, joints, swap, view, (ft, L) => {
+    const lift = Math.max(0, joints[`${ft}.lift`] ?? 0);
+    if (lift < K.planted) return lift;
+    const G = footGoal(rig, { ...joints, [`${ft}.lift`]: 0 }, L, ft, view);
+    return G && G.T[1] < G.ankle[1] - 1e-6 ? 0 : null;   // the sole below the floor: up onto it
+  });
 }
 
 // One leg of layout L (joints j) onto its floor line inside the limits, the foot near tilt `want`, its ankle near x X.
