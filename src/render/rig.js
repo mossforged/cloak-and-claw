@@ -12,12 +12,14 @@ import { LOOKS } from '../data/looks.js';
 import { gearLayout, gearOf, lookImage } from './looks.js';
 import { socketPoints, keepSockets, socketOf } from './sockets.js';
 import { layoutRig } from './rig-layout.js';
-import { floorLayer, restDy, grounded, lying } from './floor.js';
+import { floorLayer, floorInLimits, restDy, grounded, lying } from './floor.js';
 import { viewLayer } from './rig-views.js';
 import { springLayer } from './springs.js';
 import { carryLayer, carryMotion } from './carry.js';
 import { splitGrips } from './grip-split.js';
 import { strapRig, strapOf, rideLayer } from './strap.js';
+import { limitLayer } from './limits.js';
+import { retargetLayer, sourceLayout } from './retarget.js';
 
 export { layoutRig };
 
@@ -100,6 +102,8 @@ export function rigFrame(f, rig, time, mem, pose) {
   if (sq > 0.5 && rig.poses.jumpSquat?.swap) mem.swap = { ...mem.swap, ...rig.poses.jumpSquat.swap };   // T024: its folded leg
   ({ joints, swap: mem.swap } = viewLayer(rig, f, joints, mem.swap, mem, time));   // T028: turn-around, view slide
   if (!pose) joints = feelLayer(rig, f, joints, time, mem);   // T017 held weapon wobble / impact squash
+  // T035 r2: rat v3 by position (also a held named pose such as run; not the pose page's own '@pose', posed on v3 itself)
+  if (rig.retarget && pose !== '@pose') joints = retargetLayer(rig, joints, sourceOf(f, rig, joints, mem));
   const p = { ...poseOf(f, time) }, kneel = f.state === 'downed' && rig.poses.downed;
   if (kneel) Object.assign(p, { rot: 0, sx: 1, sy: 1 });   // T024: the rig kneels instead of lying flat
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
@@ -110,9 +114,11 @@ export function rigFrame(f, rig, time, mem, pose) {
   // T029: a key posed off the floor (`aloft`: the hop, jump and roll keys in the air) places its legs itself
   if ((grounded(f) && !mem.swap['@aloft']) || kneel) {   // T024 floor-line rule: boots on their floor lines; the standee's lean turns the hips
     joints = floorLayer(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy }, p.rot);
+    joints = floorInLimits(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy });   // T035 r2: limits (rat v3)
     p.rot = 0;
   }
   if (!pose) joints = springLayer(rig, f, joints, mem.swap, mem, time, k);   // T028 tail and scarf springs
+  joints = limitLayer(rig, joints);   // T035: a rig's joint limits (rat v3); none = untouched
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
   const held = mem.swap?.['@free'] ? null : heldOf(f, rig, mem.sheathed);   // T029: a pose's `free` (released in a throw)
   const G = rideLayer(carryLayer(rig, gripLayout(rig, joints, mem.swap, held, f, forced.get(f)), mem.swap));   // T028 carried object; T029 r2 strapped item over its carrier
@@ -123,6 +129,9 @@ export function rigFrame(f, rig, time, mem, pose) {
   }
   return { joints, held, L, p, k };
 }
+
+// T035 r2: the retarget source's drawn layout for this frame (its own drawings, held item and grips: render/retarget.js)
+export const sourceOf = (f, rig, joints, mem) => sourceLayout(strapRig(rig.retarget, strapOf(f)), joints, mem.swap, heldOf(f, rig.retarget, mem.sheathed), f);
 
 export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {
   const mem = rigMemory(f), F = rigFrame(f, rig, time, mem, pose);

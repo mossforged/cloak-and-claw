@@ -1,0 +1,15 @@
+[
+  { "label": "Side by side: walk, the current rat (left) and v3 round 2 (right, retargeted by position)", "q": "f=rat-raider&anim=walk&f2=rat-raider&v2=v3&zoom=1.5" },
+  { "label": "Side by side: turning slash, slow (wind-up: both far fists up at the chest; v3 holds no cutlass yet)", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "v3 idle", "q": "f=rat-raider&v=v3&anim=idle&zoom=2" },
+  { "label": "v3 walk (soles on their floor lines inside your limits)", "q": "f=rat-raider&v=v3&anim=walk&zoom=2" },
+  { "label": "v3 run (held cycle; the long stride asks more of the hips than your ranges give: some foot slide)", "q": "f=rat-raider&v=v3&anim=pose:run&zoom=2" },
+  { "label": "v3 turning slash, slow", "q": "f=rat-raider&v=v3&anim=ratSlash&speed=0.25&zoom=2" },
+  { "label": "v3 backhand, slow", "q": "f=rat-raider&v=v3&anim=backhand&speed=0.25&zoom=2" },
+  { "label": "v3 overhead chop, slow", "q": "f=rat-raider&v=v3&anim=overheadChop&speed=0.25&zoom=2" },
+  { "label": "v3 spear thrust (the spearman's hands on the v3 body), slow", "q": "f=rat-spearman&v=v3&anim=spearThrust&speed=0.25&zoom=2" },
+  { "label": "v3 dodge roll, slow", "q": "f=rat-raider&v=v3&anim=dodgeRoll&speed=0.25&zoom=2" },
+  { "label": "v3 jump attack, slow", "q": "f=rat-raider&v=v3&anim=jumpAttack&speed=0.25&zoom=2" },
+  { "label": "v3 drag-to-pose: hands, feet, head and hips inside your limits (readout shows each range)", "q": "pose=rat-raider&version=v3&from=idle:0" },
+  { "label": "v3 drag-to-pose from the turning slash wind-up (starts as the clip plays it)", "q": "pose=rat-raider&version=v3&from=ratSlash:33" }
+]

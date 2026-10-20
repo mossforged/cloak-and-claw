@@ -6,6 +6,7 @@ import { ITEMS } from '../data/items/index.js';
 import { RAT_LOOKS, PALETTES } from '../data/looks.js';
 import { GRIP_MODE_NAMES } from '../data/grip-modes.js';
 import { RAT_A010 } from '../data/rigs/a010/index.js';
+import RAT_V3, { V3_SPEARMAN } from '../data/rigs/rat-v3.js';
 
 export const MODELS = Object.values(FIGHTERS).filter((d) => RIGS[d.art?.rig]).map((d) => d.id);
 export const GRIPS = GRIP_MODE_NAMES;
@@ -14,8 +15,11 @@ export const SPEEDS = [0.25, 0.5, 1];
 
 // Versions of a rig to compare (view only): 'current' is the game's; an old rig kept beside a new one during an import.
 // T026: 'a010' = the rat family as it was on A010 (rigs/a010/), beside the rebuilt one.
+// T035: 'v3' = the redrawn rat (rigs/rat-v3.js, three-quarter only) on the raider's moves (and the spearman's), beside the game's rat.
 const VERSIONS = Object.fromEntries(Object.entries(RAT_A010).map(([id, old]) => [id, { a010: () => old }]));
-export const VERSION_RIGS = RAT_A010;   // their art is loaded with the game's
+VERSIONS['rat-raider'].v3 = () => RAT_V3;
+VERSIONS['rat-spearman'].v3 = () => V3_SPEARMAN;   // the same body on the spearman's moves (spear thrust)
+export const VERSION_RIGS = { ...RAT_A010, [RAT_V3.id]: RAT_V3 };   // their art is loaded with the game's
 export const versionsOf = (id) => ['current', ...Object.keys(VERSIONS[FIGHTERS[id].art.rig] ?? {})];
 export function rigOf(id, version = 'current') {
   const r = FIGHTERS[id].art.rig, make = VERSIONS[r]?.[version];

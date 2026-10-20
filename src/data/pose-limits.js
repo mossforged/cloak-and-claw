@@ -10,6 +10,9 @@
 // (screen px).
 export const POSE_LIMITS = {
   default: { ankle: 60, neck: 40, knee: 150 },
+  // T035: rat v3's exact ranges are its rig's `limits` (the user's, rigs/rat-v3-parts.js; drags are clamped into them); these
+  // are only the widest end of each, for the solves' either-way checks
+  'rat-v3': { ankle: 40, neck: 61, knee: 150 },
   hipStep: 0.5,
   handle: 13,
   ring: { r: 9, off: 15 },

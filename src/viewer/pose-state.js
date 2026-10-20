@@ -5,10 +5,12 @@
 //   startPose: the clip frame's pose; poseFrame: one frame of it (rigFrame); solveOf: what pose-drag.js solves on; dragTo:
 //   a hand or foot onto a point of the drawing; dragNode: the weapon node's fist with the finger;
 //   handles: the round handles (rig px) and what each does; readout: every joint's angle and limit; poseLine: the pose as
-//   a move file's data line; parsePose / formatPose: the page's URL (?pose=<fighter>&from=<clip>:<frame>&item&j&sw).
+//   a move file's data line; parsePose / formatPose: the page's URL (?pose=<fighter>&from=<clip>:<frame>&item&j&sw; T035:
+//   &version=v3 poses a viewer compare version).
 import { createSlot } from './sandbox.js';
 import { rigOf } from './models.js';
-import { rigFrame, rigMemory, heldOf } from '../render/rig.js';
+import { rigFrame, rigMemory, heldOf, sourceOf } from '../render/rig.js';
+import { retargetLayer } from '../render/retarget.js';
 import { channelsOf } from '../render/rig-pose.js';
 import { strapRig, strapOf } from '../render/strap.js';
 import { nodeActive, modesOf } from '../render/weapon-node.js';
@@ -25,15 +27,17 @@ const r2 = (v) => Math.round(v * 100) / 100;
 const TRANSIENT = /^@view(From|Mix)\./;   // a view's slide between two keys: not part of a pose
 
 // The clip frame's pose: the sandbox played to frame n, that frame's blended joints and drawings (render memory).
-export function startPose({ id, item = 'own', from = 'idle:0', grip = '' }) {
+export function startPose({ id, item = 'own', from = 'idle:0', grip = '', version = 'current' }) {
   const [anim, nn] = from.split(':'), n = Math.max(0, Math.round(+nn || 0));
   const warm = (sb, t) => { for (const f of sb.w.fighters) rigFrame(f, f === sb.hero ? sb.rig : rigOf(f.def.id), t, rigMemory(f), f === sb.hero ? sb.pose ?? undefined : undefined); };
   const slot = createSlot({ warm });
-  slot.load({ f: id, v: 'current', item, grip, anim, flip: false, target: false, look: {}, gear: null });
+  slot.load({ f: id, v: version, item, grip, anim, flip: false, target: false, look: {}, gear: null });
   const sb = slot.seek(Math.min(n, slot.len)), mem = rigMemory(sb.hero);
   rigFrame(sb.hero, sb.rig, sb.n / FPS, mem, sb.pose ?? undefined);
   const swap = Object.fromEntries(Object.entries(mem.swap ?? {}).filter(([k]) => !TRANSIENT.test(k)));
-  return { id, item, from: `${sb.clip.key}:${sb.n}`, f: sb.hero, rig: sb.rig, joints: { ...mem.last }, swap, time: sb.n / FPS, start: { joints: { ...mem.last }, swap } };
+  // T035 r2: a retargeted rig (rat v3) starts from the frame as it plays: the source's pose placed by position
+  const j = sb.rig.retarget ? retargetLayer(sb.rig, mem.last, sourceOf(sb.hero, sb.rig, mem.last, mem)) : mem.last;
+  return { id, item, version, from: `${sb.clip.key}:${sb.n}`, f: sb.hero, rig: sb.rig, joints: { ...j }, swap, time: sb.n / FPS, start: { joints: { ...j }, swap } };
 }
 
 // The rig with the pose as its held `@pose` (one copy per rig, its poses object updated in place)
@@ -156,8 +160,23 @@ export function shaftGap(P, L) {
 }
 
 // Every joint on the drawn layout L: [{ name, value (deg), lim (deg or null), at (at its limit), note }]
+// T035: each limited joint's own turn (wrapped) and its range [lo, hi]; `at` within half a degree of either end
+const JOINT_NAMES = { torso: 'waist', head: 'neck', tail: 'tail root', 'tail-2': 'tail mid', 'tail-3': 'tail end' };
+const jointName = (part) => JOINT_NAMES[part] ?? part.replace(/^arm-(\w+)-upper$/, 'shoulder $1').replace(/^arm-(\w+)-lower$/, 'elbow $1')
+  .replace(/^hand-(\w+)$/, 'wrist $1').replace(/^leg-(\w+)-upper$/, 'hip $1').replace(/^leg-(\w+)-lower$/, 'knee $1').replace(/^foot-(\w+)$/, 'ankle $1');
+function limitRows(c, B) {
+  const rows = B.pelvis ? [{ name: 'pelvis', value: r2(wrap(c.joints.pelvis ?? 0)), lim: null, at: false, note: '' }] : [];
+  for (const [part, [lo, hi]] of Object.entries(c.rig.limits)) {
+    if (!B[part]) continue;
+    const v = wrap(c.joints[part] ?? 0);
+    rows.push({ name: jointName(part), value: r2(v), lim: [lo, hi], at: v <= lo + 0.5 || v >= hi - 0.5, note: '' });
+  }
+  return rows;
+}
+
 export function readout(P, L) {
   const c = solveOf(P), B = byName(L), rows = [], row = (name, value, lim, note = '') => rows.push({ name, value: r2(value), lim, at: lim != null && Math.abs(value) >= lim - 0.5, note });
+  if (c.rig.limits) return limitRows(c, B);   // T035: a rig with per-joint ranges (rat v3)
   for (const n of ['pelvis', 'torso']) if (B[n]) row(n, wrap(c.joints[n] ?? 0), null);
   if (B.head && B[c.rig.parts.head.parent]) row('neck', bendOf(B[c.rig.parts.head.parent], B.head), poseLimit(c.rig, 'neck'));
   for (const end of ['hand-near', 'hand-far', 'foot-near', 'foot-far']) {
@@ -199,7 +218,7 @@ export function poseLine(P) {
 export function parsePose(search) {
   const q = new URLSearchParams(search), list = (k) => (q.get(k) ? q.get(k).split(',').filter(Boolean).map((s) => { const i = s.lastIndexOf(':'); return [s.slice(0, i), s.slice(i + 1)]; }) : null);
   const j = list('j'), sw = q.get('sw') === '-' ? [] : list('sw');
-  return { id: q.get('pose'), from: q.get('from') || 'idle:0', item: q.get('item') || 'own', j: j && Object.fromEntries(j.map(([k, v]) => [k, +v])), sw: sw && Object.fromEntries(sw.map(([k, v]) => [k, v === 'true' ? true : v])) };
+  return { id: q.get('pose'), from: q.get('from') || 'idle:0', item: q.get('item') || 'own', version: q.get('version') || 'current', j: j && Object.fromEntries(j.map(([k, v]) => [k, +v])), sw: sw && Object.fromEntries(sw.map(([k, v]) => [k, v === 'true' ? true : v])) };
 }
 export function applyUrl(P, u) {
   const S = { ...channelsOf(P.rig), ...P.rig.poses.stance };
@@ -211,6 +230,6 @@ export function formatPose(P) {
   const S = { ...channelsOf(P.rig), ...P.rig.poses.stance };
   const j = Object.entries(P.joints).filter(([k, v]) => typeof v === 'number' && Math.abs(v - (S[k] ?? 0)) > 0.005).map(([k, v]) => `${k}:${r2(v)}`);
   const sw = Object.entries(P.swap).map(([k, v]) => `${k}:${v}`);
-  const q = new URLSearchParams({ pose: P.id, from: P.from, ...(P.item !== 'own' && { item: P.item }) });
+  const q = new URLSearchParams({ pose: P.id, from: P.from, ...(P.item !== 'own' && { item: P.item }), ...(P.version && P.version !== 'current' && { version: P.version }) });
   return `${q.toString()}&j=${encodeURIComponent(j.join(',')).replace(/%2C/g, ',').replace(/%3A/g, ':')}&sw=${sw.length ? encodeURIComponent(sw.join(',')).replace(/%2C/g, ',').replace(/%3A/g, ':') : '-'}`;
 }
