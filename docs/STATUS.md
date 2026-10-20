@@ -28,7 +28,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 
 ## What builders need now
 - Code: idle. T035 merged (v3 rat in the viewer as compare version v3).
-- Art: A028 v3 hands, heads and feet swaps, three-quarter (job 029).
+- Art: blocked, Codex usage limit: A028 (job 029) exited 1 at 08:01 with no report. Requeue when the limit resets.
 
 ## Open questions (for the user)
 - **What failure costs** (lean: retreat home and retry). Decide in Stage 5.
