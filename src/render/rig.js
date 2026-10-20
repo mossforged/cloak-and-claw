@@ -12,7 +12,7 @@ import { LOOKS } from '../data/looks.js';
 import { gearLayout, gearOf, lookImage } from './looks.js';
 import { socketPoints, keepSockets, socketOf } from './sockets.js';
 import { layoutRig } from './rig-layout.js';
-import { floorLayer, floorInLimits, restDy, grounded, lying } from './floor.js';
+import { floorLayer, floorInLimits, aloftInLimits, restDy, grounded, lying } from './floor.js';
 import { viewLayer } from './rig-views.js';
 import { springLayer } from './springs.js';
 import { carryLayer, carryMotion } from './carry.js';
@@ -116,7 +116,7 @@ export function rigFrame(f, rig, time, mem, pose) {
     joints = floorLayer(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy }, p.rot);
     joints = floorInLimits(rig, joints, mem.swap, { rot: 0, sx: p.sx * k, sy: p.sy * k, dy: p.dy });   // T035 r2: limits (rat v3)
     p.rot = 0;
-  }
+  } else if (grounded(f)) joints = aloftInLimits(rig, joints, mem.swap, { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy });   // T038: rat v3's planted feet in an aloft key
   if (!pose) joints = springLayer(rig, f, joints, mem.swap, mem, time, k);   // T028 tail and scarf springs
   joints = limitLayer(rig, joints);   // T035: a rig's joint limits (rat v3); none = untouched
   const view = { rot: p.rot, sx: p.sx * k, sy: p.sy * k, dy: p.dy };
