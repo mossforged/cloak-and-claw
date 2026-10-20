@@ -27,7 +27,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: idle. T035 merged (v3 rat in the viewer as compare version v3).
+- Code: T036 joint checker (030), then T037 raider hulls (031), then T038 v3 floor slide (032).
 - Art: blocked, Codex usage limit: A028 (job 029) exited 1 at 08:01 with no report. Requeue when the limit resets.
 
 ## Open questions (for the user)
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-20 lead: Art blocked on Codex's limit (A028, job 029). Queued three Code tasks while it waits: T036 joint checker, T037 raider hulls, T038 v3 floor slide.
 2026-10-20 lead: user approved v3 in motion ("this is good"). **Merged T035** (44/44 on main). Queued A028: v3's hand, head and foot swaps so the moves use them and it can hold weapons; then grip lines, then the other views.
 2026-10-20 lead: reviewed T035 r2 (44 files pass): far fist now at the chest in the slash wind-up (27 px fwd vs raider 29), hands within 3-5 px of the raider's, walk feet within 1.7 px. Near arm wind-up stops at shoulder height (near shoulder range). Sent the user the links.
 2026-10-20 lead: reviewed A027 r2 (merged) and T035 (42+1 tests pass; v3 plays every move, holds no items yet; 67 keys need drawings v3 lacks). Open question to the user: far elbow 0..124 / far wrist 0..59 bend the arm backward; likely meant -124..0 / -59..0.
