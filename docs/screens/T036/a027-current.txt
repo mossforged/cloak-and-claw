@@ -1,0 +1,18 @@
+FAIL  shoulder-near  -116..67   gap 799px @-116 (-116 -93.13 21.25) | fragment ok 0.19 | seam 1222px @-24.5 (-47.38 -24.5)
+pass  elbow-near     -113..5    gap ok 0.04 | fragment ok 0.14 | seam ok 0.18
+pass  wrist-near     -49..9     gap ok 0.53 | fragment ok 0.18 | seam ok 0.42
+pass  hip-near       -23..34    gap ok 0.11 | fragment ok 0.03 | seam ok 0.98
+pass  knee-near      -23..87    gap ok 0.47 | fragment ok 0.1 | seam ok 0.06
+pass  ankle-near     -1..40     gap ok 0.26 | fragment ok 0.32 | seam ok 0.21
+pass  neck           -20..61    gap ok 0.6 | fragment ok 0.13 | seam ok 0.66
+FAIL  waist          -4..15     gap ok 0.6 | fragment ok 0.13 | seam 992px @15 (15)
+pass  shoulder-far   -116..76   gap ok 0.52 | fragment ok 0 | seam ok 0.15
+pass  elbow-far      0..124     gap ok 0.48 | fragment ok 0.19 | seam ok 0.57
+pass  wrist-far      0..59      gap ok 0.45 | fragment ok 0 | seam ok 0.22
+pass  hip-far        -23..34    gap ok 0.65 | fragment ok 0 | seam ok 0.58
+pass  knee-far       -23..70    gap ok 0 | fragment ok 0 | seam ok 0
+FAIL  ankle-far      -19..40    gap 303px @40 (40) | fragment ok 0 | seam ok 0
+pass  tail-root      -40..40    gap ok 0.46 | fragment ok 0 | seam ok 0
+pass  tail-mid       -40..40    gap ok 0.54 | fragment ok 0 | seam ok 0
+pass  tail-end       -3..7      gap ok 0.02 | fragment ok 0 | seam ok 0
+FAIL: docs/screens/T036/a027-current/joint-check.json, docs/screens/T036/a027-current/joint-check.jpg

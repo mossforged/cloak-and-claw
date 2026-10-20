@@ -1,0 +1,926 @@
+{
+ "source": "assets/source/A027-rat-v3-body/rig-source.json",
+ "joints": {
+  "shoulder-near": {
+   "pass": false,
+   "part": "arm-near-upper",
+   "point": [
+    595.8,
+    1203.2
+   ],
+   "limits": [
+    -116,
+    67
+   ],
+   "angles": [
+    -116,
+    -93.13,
+    -70.25,
+    -47.38,
+    -24.5,
+    -1.63,
+    21.25,
+    44.13,
+    67
+   ],
+   "window": 220,
+   "gap": {
+    "pass": false,
+    "flagged": [
+     -116,
+     -93.13,
+     21.25
+    ],
+    "worst": {
+     "deg": -116,
+     "px": 799,
+     "total": 799,
+     "box": [
+      454,
+      1074,
+      516,
+      1160
+     ]
+    },
+    "peak": {
+     "deg": -116,
+     "share": 3.2
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -70.25,
+     "share": 0.19
+    }
+   },
+   "seam": {
+    "pass": false,
+    "flagged": [
+     -47.38,
+     -24.5
+    ],
+    "worst": {
+     "deg": -24.5,
+     "px": 1222,
+     "total": 1222,
+     "box": [
+      440,
+      1021,
+      720,
+      1324
+     ]
+    },
+    "peak": {
+     "deg": -24.5,
+     "share": 1.39
+    }
+   }
+  },
+  "elbow-near": {
+   "pass": true,
+   "part": "arm-near-lower",
+   "point": [
+    489.4,
+    1303.6
+   ],
+   "limits": [
+    -113,
+    5
+   ],
+   "angles": [
+    -113,
+    -98.25,
+    -83.5,
+    -68.75,
+    -54,
+    -39.25,
+    -24.5,
+    -9.75,
+    5
+   ],
+   "window": 60,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -39.25,
+     "share": 0.04
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -39.25,
+     "share": 0.14
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -98.25,
+     "share": 0.18
+    }
+   }
+  },
+  "wrist-near": {
+   "pass": true,
+   "part": "hand-near",
+   "point": [
+    411.2,
+    1427.6
+   ],
+   "limits": [
+    -49,
+    9
+   ],
+   "angles": [
+    -49,
+    -41.75,
+    -34.5,
+    -27.25,
+    -20,
+    -12.75,
+    -5.5,
+    1.75,
+    9
+   ],
+   "window": 137,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -49,
+     "share": 0.53
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -27.25,
+     "share": 0.18
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -41.75,
+     "share": 0.42
+    }
+   }
+  },
+  "hip-near": {
+   "pass": true,
+   "part": "leg-near-upper",
+   "point": [
+    640.4,
+    1476.6
+   ],
+   "limits": [
+    -23,
+    34
+   ],
+   "angles": [
+    -23,
+    -15.88,
+    -8.75,
+    -1.63,
+    5.5,
+    12.63,
+    19.75,
+    26.88,
+    34
+   ],
+   "window": 131,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 5.5,
+     "share": 0.11
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 26.88,
+     "share": 0.03
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 34,
+     "share": 0.98
+    }
+   }
+  },
+  "knee-near": {
+   "pass": true,
+   "part": "leg-near-lower",
+   "point": [
+    633.2,
+    1661
+   ],
+   "limits": [
+    -23,
+    87
+   ],
+   "angles": [
+    -23,
+    -9.25,
+    4.5,
+    18.25,
+    32,
+    45.75,
+    59.5,
+    73.25,
+    87
+   ],
+   "window": 122,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 18.25,
+     "share": 0.47
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 45.75,
+     "share": 0.1
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 4.5,
+     "share": 0.06
+    }
+   }
+  },
+  "ankle-near": {
+   "pass": true,
+   "part": "foot-near",
+   "point": [
+    571.2,
+    1799
+   ],
+   "limits": [
+    -1,
+    40
+   ],
+   "angles": [
+    -1,
+    4.13,
+    9.25,
+    14.38,
+    19.5,
+    24.63,
+    29.75,
+    34.88,
+    40
+   ],
+   "window": 116,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 9.25,
+     "share": 0.26
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 4.13,
+     "share": 0.32
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 14.38,
+     "share": 0.21
+    }
+   }
+  },
+  "neck": {
+   "pass": true,
+   "part": "head",
+   "point": [
+    850.6,
+    1147
+   ],
+   "limits": [
+    -20,
+    61
+   ],
+   "angles": [
+    -20,
+    -9.88,
+    0.25,
+    10.38,
+    20.5,
+    30.63,
+    40.75,
+    50.88,
+    61
+   ],
+   "window": 220,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -20,
+     "share": 0.6
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 0.25,
+     "share": 0.13
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 10.38,
+     "share": 0.66
+    }
+   }
+  },
+  "waist": {
+   "pass": false,
+   "part": "torso",
+   "point": [
+    806.2,
+    1441.6
+   ],
+   "limits": [
+    -4,
+    15
+   ],
+   "angles": [
+    -4,
+    -1.63,
+    0.75,
+    3.13,
+    5.5,
+    7.88,
+    10.25,
+    12.63,
+    15
+   ],
+   "window": 220,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -4,
+     "share": 0.6
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 15,
+     "share": 0.13
+    }
+   },
+   "seam": {
+    "pass": false,
+    "flagged": [
+     15
+    ],
+    "worst": {
+     "deg": 15,
+     "px": 992,
+     "total": 992,
+     "box": [
+      704,
+      1348,
+      983,
+      1488
+     ]
+    },
+    "peak": {
+     "deg": 15,
+     "share": 1.13
+    }
+   }
+  },
+  "shoulder-far": {
+   "pass": true,
+   "part": "arm-far-upper",
+   "point": [
+    958,
+    1180
+   ],
+   "limits": [
+    -116,
+    76
+   ],
+   "angles": [
+    -116,
+    -92,
+    -68,
+    -44,
+    -20,
+    4,
+    28,
+    52,
+    76
+   ],
+   "window": 60,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -20,
+     "share": 0.52
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 52,
+     "share": 0.15
+    }
+   }
+  },
+  "elbow-far": {
+   "pass": true,
+   "part": "arm-far-lower",
+   "point": [
+    1015.4,
+    1317.8
+   ],
+   "limits": [
+    0,
+    124
+   ],
+   "angles": [
+    0,
+    15.5,
+    31,
+    46.5,
+    62,
+    77.5,
+    93,
+    108.5,
+    124
+   ],
+   "window": 88,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 62,
+     "share": 0.48
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 62,
+     "share": 0.19
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 93,
+     "share": 0.57
+    }
+   }
+  },
+  "wrist-far": {
+   "pass": true,
+   "part": "hand-far",
+   "point": [
+    1114.4,
+    1428
+   ],
+   "limits": [
+    0,
+    59
+   ],
+   "angles": [
+    0,
+    7.38,
+    14.75,
+    22.13,
+    29.5,
+    36.88,
+    44.25,
+    51.63,
+    59
+   ],
+   "window": 104,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 59,
+     "share": 0.45
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 59,
+     "share": 0.22
+    }
+   }
+  },
+  "hip-far": {
+   "pass": true,
+   "part": "leg-far-upper",
+   "point": [
+    884.4,
+    1484.4
+   ],
+   "limits": [
+    -23,
+    34
+   ],
+   "angles": [
+    -23,
+    -15.88,
+    -8.75,
+    -1.63,
+    5.5,
+    12.63,
+    19.75,
+    26.88,
+    34
+   ],
+   "window": 173,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 5.5,
+     "share": 0.65
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 19.75,
+     "share": 0.58
+    }
+   }
+  },
+  "knee-far": {
+   "pass": true,
+   "part": "leg-far-lower",
+   "point": [
+    995.4,
+    1624
+   ],
+   "limits": [
+    -23,
+    70
+   ],
+   "angles": [
+    -23,
+    -11.38,
+    0.25,
+    11.88,
+    23.5,
+    35.13,
+    46.75,
+    58.38,
+    70
+   ],
+   "window": 75,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   }
+  },
+  "ankle-far": {
+   "pass": false,
+   "part": "foot-far",
+   "point": [
+    904.8,
+    1808
+   ],
+   "limits": [
+    -19,
+    40
+   ],
+   "angles": [
+    -19,
+    -11.63,
+    -4.25,
+    3.13,
+    10.5,
+    17.88,
+    25.25,
+    32.63,
+    40
+   ],
+   "window": 125,
+   "gap": {
+    "pass": false,
+    "flagged": [
+     40
+    ],
+    "worst": {
+     "deg": 40,
+     "px": 303,
+     "total": 303,
+     "box": [
+      860,
+      1748,
+      901,
+      1763
+     ]
+    },
+    "peak": {
+     "deg": 40,
+     "share": 1.21
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   }
+  },
+  "tail-root": {
+   "pass": true,
+   "part": "tail-1",
+   "point": [
+    550,
+    1515
+   ],
+   "limits": [
+    -40,
+    40
+   ],
+   "angles": [
+    -40,
+    -30,
+    -20,
+    -10,
+    0,
+    10,
+    20,
+    30,
+    40
+   ],
+   "window": 60,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 30,
+     "share": 0.46
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   }
+  },
+  "tail-mid": {
+   "pass": true,
+   "part": "tail-2",
+   "point": [
+    444,
+    1709
+   ],
+   "limits": [
+    -40,
+    40
+   ],
+   "angles": [
+    -40,
+    -30,
+    -20,
+    -10,
+    0,
+    10,
+    20,
+    30,
+    40
+   ],
+   "window": 60,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": -40,
+     "share": 0.54
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   }
+  },
+  "tail-end": {
+   "pass": true,
+   "part": "tail-3",
+   "point": [
+    351,
+    1815
+   ],
+   "limits": [
+    -3,
+    7
+   ],
+   "angles": [
+    -3,
+    -1.75,
+    -0.5,
+    0.75,
+    2,
+    3.25,
+    4.5,
+    5.75,
+    7
+   ],
+   "window": 60,
+   "gap": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": 7,
+     "share": 0.02
+    }
+   },
+   "fragment": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   },
+   "seam": {
+    "pass": true,
+    "flagged": [],
+    "worst": null,
+    "peak": {
+     "deg": null,
+     "share": 0
+    }
+   }
+  }
+ },
+ "pass": false,
+ "islands": [],
+ "notes": []
+}
