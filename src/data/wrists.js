@@ -15,7 +15,9 @@
 export const WRISTS = {
   on: true,
   default: { near: 45, far: 45 },
-  'rat-v3': { near: 49, far: 59 },   // T035: the widest end of the user's ranges (near -49..9, far 0..59: rig.limits)
+  // T035: the widest end of the user's ranges (near -49..9, far 0..59: rig.limits); T039: a rig with `limits` keeps its
+  // wrists inside its own range (wristRange); its A028 grip drawings are registered on the hanging forearm (neutral 0)
+  'rat-v3': { near: 49, far: 59, neutral: {} },
   neutral: { 'hand-near-grip-overhand': 90, 'hand-far-grip': 90 },
   turn: 2.5,
   turn1: 1,
@@ -30,4 +32,6 @@ export const WRISTS = {
 
 export const wristLimit = (rig, hand) => (WRISTS[rig?.id] ?? WRISTS.default)[hand] ?? WRISTS.default[hand] ?? 45;
 // the drawing's natural angle on the forearm (its swap name, or the hand part's own name)
-export const neutralOf = (rig, drawing) => WRISTS.neutral[drawing] ?? 0;
+export const neutralOf = (rig, drawing) => (WRISTS[rig?.id]?.neutral ?? WRISTS.neutral)[drawing] ?? 0;
+// T039: the range a hand's turn (from its neutral) stays in: the rig's own [lo, hi] (rat v3's limits), else +-wristLimit
+export const wristRange = (rig, hand) => rig?.limits?.[`hand-${hand}`] ?? [-wristLimit(rig, hand), wristLimit(rig, hand)];
