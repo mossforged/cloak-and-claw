@@ -26,8 +26,14 @@ export function channelsOf(rig) {
     out[name] = 0; out[`${name}.sx`] = 1; out[`${name}.sy`] = 1; out[`${name}.order`] = p.order;
     if (name.startsWith('foot-')) out[`${name}.lift`] = 0;
   }
+  for (const e of rig.places ?? []) for (const c of PLACE) out[`place.${e}.${c}`] = 0;   // T040: a rig's own places (rat v3)
   return out;
 }
+// T040: a key's own places for a retargeted rig (rat v3: data/rigs/rat-v3-poses.js), `place: { <hand>: { at: [x, y], item } }`
+// (rig px from the body's offset, x forward; item = the screen angle of that hand's grip line, i.e. the held item's handle)
+// -> channels 'place.<hand>.x/.y' weighted by '.at', '.item' weighted by '.iw', stored times their weight so a blend with a
+// key that has none keeps the place and only fades its pull (render/retarget.js divides back).
+const PLACE = ['x', 'y', 'at', 'item', 'iw'];
 const WEAPON = { 'weapon.x': 0, 'weapon.y': 0, 'weapon.rot': 0, 'weapon.at': 0, 'weapon.turn': 0 };   // T025: the pose's weapon node
 export const jointsOfRig = (rig) => Object.keys(channelsOf(rig));
 
@@ -38,6 +44,13 @@ function evalPose(pose, stance, t) {
     if (k === 'weapon') {   // T025: placement fields -> channels + weights
       if (v.x != null && v.y != null) Object.assign(out, { 'weapon.x': v.x, 'weapon.y': v.y, 'weapon.at': 1 });
       if (v.rot != null) Object.assign(out, { 'weapon.rot': v.rot, 'weapon.turn': 1 });
+      continue;
+    }
+    if (k === 'place') {   // T040
+      for (const [e, q] of Object.entries(v)) {
+        if (q.at) Object.assign(out, { [`place.${e}.x`]: q.at[0], [`place.${e}.y`]: q.at[1], [`place.${e}.at`]: 1 });
+        if (q.item != null) Object.assign(out, { [`place.${e}.item`]: q.item, [`place.${e}.iw`]: 1 });
+      }
       continue;
     }
     const wave = (w) => w[0] + w[1] * Math.sin(2 * Math.PI * ((pose.speed ?? 1) * t * (w[3] ?? 1) + (w[2] ?? 0)));
@@ -189,7 +202,10 @@ export function targetPose(f, rig, time, override) {
       const [ph, p] = phaseOf(f);
       const W = evalPose(M.windup, S, 0), K = evalPose(M.strike, S, 0);
       const X = M.through && (Array.isArray(M.through) ? M.through.map((x) => evalPose(x, S, 0)) : evalPose(M.through, S, 0));
-      const rest = evalPose(f.state === 'attack' ? poses.idle : poses.jump, S, time);
+      // T040: a move's `rest` ({ place }: rat v3's own poses) laid over the rest pose it starts from, `restBack` (default
+      // `rest`) over the one it returns to (a blade that goes once round: its angle blends as a number)
+      const rest0 = evalPose(f.state === 'attack' ? poses.idle : poses.jump, S, time), R0 = ph === 'recovery' ? M.restBack ?? M.rest : M.rest;
+      const rest = R0 ? evalPose(R0, rest0, 0) : rest0;
       // M.hold: share of the windup held at the top (the club's heavy beat), with a strain tremble of M.tremble degrees on the arm
       if (ph === 'windup') return { key, joints: windupPose(M, rest, W, p, time), swap: swapOf(M.windup) };
       if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: activeSwap(M, p, T) };

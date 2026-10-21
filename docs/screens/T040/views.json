@@ -1,0 +1,11 @@
+[
+  { "label": "Side by side, slow: spear thrust, the current rat (left), v3 on its own pose (right): fist behind the hip, shaft forward along the forearm line, far fist on the shaft, clear of the head", "q": "f=rat-spearman&anim=spearThrust&f2=rat-spearman&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side: the spearman's walk (v3 carries the spear low, point forward)", "q": "f=rat-spearman&anim=walk&f2=rat-spearman&v2=v3&zoom=1.5" },
+  { "label": "Side by side, slow: staff overhead (v3 raises it forward-up as far as two fists allow: it can't go over the head, see the report)", "q": "f=rat-spearman&anim=staffOverhead&f2=rat-spearman&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side, slow: staff swing", "q": "f=rat-spearman&anim=staffSwing&f2=rat-spearman&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side, slow: turning slash (v3's wind-up: blade up behind the head; the cut ends level and low in front)", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side, slow: overhead chop (v3's axe head reaches ear height, not over the head: see the report)", "q": "f=rat-raider&anim=overheadChop&f2=rat-raider&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side: guard (v3's shield out in front, rim at the chin, eyes over it; cutlass up behind the head)", "q": "f=rat-raider&anim=guard&f2=rat-raider&v2=v3&speed=0.5&zoom=1.5" },
+  { "label": "Side by side, slow: shield bash", "q": "f=rat-raider&anim=shieldBash&f2=rat-raider&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Drag-to-pose on v3 from the guard key (move the shield hand to try other places; the limits hold)", "q": "pose=rat-raider&version=v3&from=guard:9" }
+]

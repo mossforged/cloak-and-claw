@@ -11,7 +11,7 @@ import { ITEMS } from '../data/items/index.js';
 import { LOOKS } from '../data/looks.js';
 import { gearLayout, gearOf, lookImage } from './looks.js';
 import { socketPoints, keepSockets, socketOf } from './sockets.js';
-import { layoutRig } from './rig-layout.js';
+import { layoutRig, withHeldHand } from './rig-layout.js';
 import { floorLayer, floorInLimits, aloftInLimits, restDy, grounded, lying } from './floor.js';
 import { viewLayer } from './rig-views.js';
 import { springLayer } from './springs.js';
@@ -103,7 +103,8 @@ export function rigFrame(f, rig, time, mem, pose) {
   ({ joints, swap: mem.swap } = viewLayer(rig, f, joints, mem.swap, mem, time));   // T028: turn-around, view slide
   if (!pose) joints = feelLayer(rig, f, joints, time, mem);   // T017 held weapon wobble / impact squash
   // T035 r2: rat v3 by position (also a held named pose such as run; not the pose page's own '@pose', posed on v3 itself)
-  if (rig.retarget && pose !== '@pose') joints = retargetLayer(rig, joints, sourceOf(f, rig, joints, mem));
+  // T040: with v3's hand drawings this frame (its own places turn them by their grip lines)
+  if (rig.retarget && pose !== '@pose') joints = retargetOf(f, rig, joints, mem);
   const p = { ...poseOf(f, time) }, kneel = f.state === 'downed' && rig.poses.downed;
   if (kneel) Object.assign(p, { rot: 0, sx: 1, sy: 1 });   // T024: the rig kneels instead of lying flat
   if (f.move) p.rot *= rig.poses.timing.bodyLean;   // the joints already lean into the swing
@@ -131,6 +132,11 @@ export function rigFrame(f, rig, time, mem, pose) {
 }
 
 // T035 r2: the retarget source's drawn layout for this frame (its own drawings, held item and grips: render/retarget.js)
+// T040: the retarget with v3's hand drawings this frame (its own places turn them by their grip lines); rig strapped or not
+export function retargetOf(f, rig, joints, mem) {
+  const R = strapRig(rig, strapOf(f)), hands = { ...withHeldHand(R, mem.swap ?? {}, heldOf(f, R, mem.sheathed)), ...R.strapHand };
+  return retargetLayer(R, joints, sourceOf(f, R, joints, mem), hands);
+}
 export const sourceOf = (f, rig, joints, mem) => sourceLayout(strapRig(rig.retarget, strapOf(f)), joints, mem.swap, heldOf(f, rig.retarget, mem.sheathed), f);
 
 export function drawRig(ctx, f, rig, assets, time, flash = 0, pose) {

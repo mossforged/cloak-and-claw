@@ -67,7 +67,7 @@ export function reachInLimits(g, T, lim1, lim2, side = 0, end = null) {
   const los = [del, -del].map((x) => wrap(x - g.c2 + g.c1)).map((lo) => (lim2 ? clampTurn(lo, lim2) : lo));
   if (lim2) for (let lo = lim2[0]; lo <= lim2[1]; lo += K.step) los.push(lo);
   const over = (r) => { if (!end?.lim) return 0; const e = wrap(end.e0 - wrap(r.up - g.ju) - wrap(r.lo - g.jl)); return Math.max(0, end.lim[0] - e, e - end.lim[1]); };
-  const score = (r) => r.err + (side && Math.abs(r.bend) > K.bent && Math.sign(r.bend) !== side ? K.side : 0) + K.tilt * over(r) + K.stay * Math.abs(wrap(r.lo - g.jl));
+  const score = (r) => r.err + (side && Math.abs(r.bend) > K.bent && Math.sign(r.bend) !== side ? K.side : 0) + (end?.k ?? K.tilt) * over(r) + K.stay * Math.abs(wrap(r.lo - g.jl));
   let best = null;
   for (const lo of los) { const r = at(lo); if (!best || score(r) < score(best)) best = r; }
   for (let lo = best.lo - K.step; lo <= best.lo + K.step; lo += K.fine) {
@@ -83,9 +83,11 @@ export function reachInLimits(g, T, lim1, lim2, side = 0, end = null) {
 // it is past K.bent (default: the limb's as drawn; nearly straight = either side).
 // A foot's tilt counts in the solve (it decides where the sole lands); a hand's place wins over its turn.
 const sideOf = (bend) => (Math.abs(bend) > K.bent ? Math.sign(bend) : 0);
-export function limbInLimits(rig, B, joints, limb, T, turn, bend) {
-  const [up, lo, end] = limb, g = limbGeometry(rig, B, joints, limb), L = rig.limits ?? {};
-  const want = turn ?? g.endTurn, r = reachInLimits(g, T, L[up], L[lo], sideOf(bend ?? g.bend), /^foot-/.test(end) ? { e0: (joints[end] ?? 0) + wrap(want - g.endTurn), lim: L[end] } : null);
+// T040: hold = a hand whose turn is part of its place (rat v3's own poses: the item's angle): its wrist range counts in the
+// solve as a foot's (K.hold px per degree over), so the arm turns to let the wrist reach the angle.
+export function limbInLimits(rig, B, joints, limb, T, turn, bend, hold = false) {
+  const [up, lo, end] = limb, g = limbGeometry(rig, B, joints, limb), L = rig.limits ?? {}, foot = /^foot-/.test(end);
+  const want = turn ?? g.endTurn, r = reachInLimits(g, T, L[up], L[lo], sideOf(bend ?? g.bend), foot || hold ? { e0: (joints[end] ?? 0) + wrap(want - g.endTurn), lim: L[end], k: foot ? K.tilt : K.hold } : null);
   const out = { ...joints, [up]: r.up, [lo]: r.lo };
   const moved = wrap(r.up - (joints[up] ?? 0)) + wrap(r.lo - (joints[lo] ?? 0));
   out[end] = (joints[end] ?? 0) + wrap(want - (g.endTurn + moved));
