@@ -27,7 +27,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: idle. T039 r2 merged (v3 holds on the user's grip lines). Open: spear/staff and slash/chop wind-ups need v3's own poses (wrist range) — user's call.
+- Code: T040 v3's own poses for spear, staff, slash wind-up, chop, guard, shield bash (job 036).
 - Art: idle. A028 merged (31 swaps; body joint check 17/17; near cup/point wrist notches, attack/shout neck flags left).
 
 ## Open questions (for the user)
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-21 lead: user chose to re-pose the big held-item moves for v3 (not loosen the wrist, not new whole-arm art). Queued T040.
 2026-10-21 lead: merged T039 r2 (49/49): cutlass 10.8° off the raider (0 in walk/idle), dagger 21°, axe 63°, shield 81°, spear 123°. Spear crosses the face and the slash wind-up reaches back, because the old moves leaned on whole-arm drawings and wider wrist turns than v3's limits.
 2026-10-21 code: T039 round 2 on `t039-v3-swaps-r2`: v3 holds on the user's grip lines (his canvasA/B; fractions read by cropSize agree within 0.05 px); a v3 hand holding something turns its line onto the raider's item (render/retarget.js itemTurn); round shield strapped on his strap line, far arm drawn over the chest in guard / bash (rig.bandWith). Cutlass 96.5 -> 10.8 deg mean off the raider's (0 at rest / walk), dagger 89 -> 21, axe 88 -> 63, shield 81. 49/49. Build `t039 v3 grip lines r2`.
 2026-10-21 code: T039 r2 open: spear 36 -> 123 and staff 46 -> 111 deg worse on v3 (the spearman's folded near arm + v3's near wrist -49..9 can't turn the fist onto the shaft; Art's vertical line suited it by chance): v3 needs its own spear stance. Wind-ups (slash, chop) wait on whole-arm drawings. Table docs/screens/T039/r2-item-angles.md.
