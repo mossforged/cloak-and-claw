@@ -1,0 +1,369 @@
+{
+ "_about": "The user's grip lines on the v3 rat's A028 grip hands (Rat v3 Grip Lines page, artifact XXZFRybdeKQF5FYwztCDwL, db grip-lines-v3, 2026-10-21) and his weapon lines carried over from grip-lines-rat.json. Hands: a/b are fractions of the page image = the canvas crop at `origin` of size `cropSize` (canvas px), scaled by `scale` (image px per canvas px); canvasA/canvasB are the same points in A028 canvas px. a = pommel end, b = toward the item's head (for the shield hand: along the strap).",
+ "lines": {
+  "a021-axe": {
+   "kind": "weapon",
+   "file": "assets/source/A021-weapon-items/axe.png (keyed, game size)",
+   "w": 60,
+   "h": 23,
+   "a": [
+    0.2299,
+    0.2999
+   ],
+   "b": [
+    0.3671,
+    0.2971
+   ],
+   "c": null
+  },
+  "a021-dagger": {
+   "kind": "weapon",
+   "file": "assets/source/A021-weapon-items/dagger.png (keyed, game size)",
+   "w": 40,
+   "h": 10,
+   "a": [
+    0.2232,
+    0.5143
+   ],
+   "b": [
+    0.335,
+    0.5174
+   ],
+   "c": null
+  },
+  "a021-shield": {
+   "kind": "weapon",
+   "file": "assets/source/A021-weapon-items/shield.png (keyed, game size)",
+   "w": 46,
+   "h": 48,
+   "a": [
+    0.1754,
+    0.5102
+   ],
+   "b": [
+    0.533,
+    0.4957
+   ],
+   "c": null
+  },
+  "a021-staff": {
+   "kind": "weapon",
+   "file": "assets/source/A021-weapon-items/staff.png (keyed, game size)",
+   "w": 150,
+   "h": 27,
+   "a": [
+    0.2804,
+    0.3744
+   ],
+   "b": [
+    0.4163,
+    0.3699
+   ],
+   "c": [
+    0.5614,
+    0.3871
+   ]
+  },
+  "big-fish": {
+   "kind": "weapon",
+   "file": "assets/art/items/big-fish.png",
+   "w": 240,
+   "h": 106,
+   "a": [
+    0.2265,
+    0.3667
+   ],
+   "b": [
+    0.3303,
+    0.4589
+   ],
+   "c": null
+  },
+  "mouse-sword": {
+   "kind": "weapon",
+   "file": "assets/art/items/mouse-sword.png",
+   "w": 206,
+   "h": 162,
+   "a": [
+    0.8221,
+    0.18
+   ],
+   "b": [
+    0.7285,
+    0.2813
+   ],
+   "c": null
+  },
+  "plank-club": {
+   "kind": "weapon",
+   "file": "assets/art/items/plank-club.png",
+   "w": 240,
+   "h": 90,
+   "a": [
+    0.1606,
+    0.4366
+   ],
+   "b": [
+    0.2678,
+    0.4758
+   ],
+   "c": null
+  },
+  "rat-arrow": {
+   "kind": "weapon",
+   "file": "assets/art/items/rat-arrow.png",
+   "w": 245,
+   "h": 32,
+   "a": [
+    0.4494,
+    0.4732
+   ],
+   "b": [
+    0.5995,
+    0.4645
+   ],
+   "c": null
+  },
+  "rat-bow": {
+   "kind": "weapon",
+   "file": "assets/art/items/rat-bow.png",
+   "w": 89,
+   "h": 364,
+   "a": [
+    0.7079,
+    0.5007
+   ],
+   "b": [
+    0.7079,
+    0.4121
+   ],
+   "c": null,
+   "note": "2026-10-18: user picked the line along the bow (B) from the on-body comparison; replaces his first line, which ran across the bow"
+  },
+  "rat-cutlass": {
+   "kind": "weapon",
+   "file": "assets/art/items/rat-cutlass.png",
+   "w": 240,
+   "h": 81,
+   "a": [
+    0.1926,
+    0.6845
+   ],
+   "b": [
+    0.3055,
+    0.6251
+   ],
+   "c": null
+  },
+  "rat-spear": {
+   "kind": "weapon",
+   "file": "assets/art/items/rat-spear.png",
+   "w": 123,
+   "h": 592,
+   "a": [
+    0.2554,
+    0.731
+   ],
+   "b": [
+    0.267,
+    0.6129
+   ],
+   "c": [
+    0.267,
+    0.4673
+   ]
+  },
+  "hand-far-grip": {
+   "kind": "hand",
+   "file": "assets/source/A028-rat-v3-kit/hand-far-grip.png",
+   "w": 47,
+   "h": 63,
+   "a": [
+    0.5762,
+    0.9484
+   ],
+   "b": [
+    0.6805,
+    0.3708
+   ],
+   "c": null,
+   "origin": [
+    1052,
+    1370
+   ],
+   "scale": 0.25185,
+   "cropSize": [
+    185,
+    251
+   ],
+   "canvasA": [
+    1158.6,
+    1608.0
+   ],
+   "canvasB": [
+    1177.9,
+    1463.1
+   ]
+  },
+  "hand-far-grip-overhand": {
+   "kind": "hand",
+   "file": "assets/source/A028-rat-v3-kit/hand-far-grip-overhand.png",
+   "w": 44,
+   "h": 56,
+   "a": [
+    0.961,
+    0.7219
+   ],
+   "b": [
+    0.0516,
+    0.6946
+   ],
+   "c": null,
+   "origin": [
+    1048,
+    1370
+   ],
+   "scale": 0.25185,
+   "cropSize": [
+    174,
+    223
+   ],
+   "canvasA": [
+    1215.2,
+    1531.0
+   ],
+   "canvasB": [
+    1057.0,
+    1524.9
+   ]
+  },
+  "hand-far-shield": {
+   "kind": "hand",
+   "file": "assets/source/A028-rat-v3-kit/hand-far-shield.png",
+   "w": 61,
+   "h": 72,
+   "a": [
+    0.2083,
+    0.7998
+   ],
+   "b": [
+    0.5768,
+    0.6683
+   ],
+   "c": null,
+   "origin": [
+    1059,
+    1370
+   ],
+   "scale": 0.25185,
+   "cropSize": [
+    243,
+    284
+   ],
+   "canvasA": [
+    1109.6,
+    1597.1
+   ],
+   "canvasB": [
+    1199.2,
+    1559.8
+   ]
+  },
+  "hand-near-grip": {
+   "kind": "hand",
+   "file": "assets/source/A028-rat-v3-kit/hand-near-grip.png",
+   "w": 59,
+   "h": 54,
+   "a": [
+    0.0806,
+    0.7961
+   ],
+   "b": [
+    0.7351,
+    0.6423
+   ],
+   "c": null,
+   "origin": [
+    280,
+    1355
+   ],
+   "scale": 0.25185,
+   "cropSize": [
+    233,
+    213
+   ],
+   "canvasA": [
+    298.8,
+    1524.6
+   ],
+   "canvasB": [
+    451.3,
+    1491.8
+   ]
+  },
+  "hand-near-grip-overhand": {
+   "kind": "hand",
+   "file": "assets/source/A028-rat-v3-kit/hand-near-grip-overhand.png",
+   "w": 61,
+   "h": 64,
+   "a": [
+    0.6361,
+    0.9977
+   ],
+   "b": [
+    0.6528,
+    0.2371
+   ],
+   "c": null,
+   "origin": [
+    276,
+    1355
+   ],
+   "scale": 0.25185,
+   "cropSize": [
+    243,
+    255
+   ],
+   "canvasA": [
+    430.6,
+    1609.4
+   ],
+   "canvasB": [
+    434.6,
+    1415.5
+   ]
+  },
+  "hand-near-pinch": {
+   "kind": "hand",
+   "file": "assets/source/A028-rat-v3-kit/hand-near-pinch.png",
+   "w": 63,
+   "h": 58,
+   "a": [
+    0.3883,
+    0.2762
+   ],
+   "b": [
+    0.7928,
+    0.8788
+   ],
+   "c": null,
+   "origin": [
+    297,
+    1355
+   ],
+   "scale": 0.25185,
+   "cropSize": [
+    250,
+    230
+   ],
+   "canvasA": [
+    394.1,
+    1418.5
+   ],
+   "canvasB": [
+    495.2,
+    1557.1
+   ]
+  }
+ }
+}

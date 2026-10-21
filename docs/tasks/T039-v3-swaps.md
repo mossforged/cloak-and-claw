@@ -10,3 +10,9 @@
 
 ## Acceptance
 `npm test` 0 failed (T035's limit and joint tests over the swaps too; held item inside each grip fist); the new missing list; strips and links.
+
+## Round 2 (lead, 2026-10-21): the user's grip lines
+Round 1 merged. The user drew his lines on all six v3 grip hands: `docs/design/rigs/grip-lines-rat-v3.json` (hands: fractions of his page image plus `origin`, `cropSize` and `scale` = image px per canvas px, as you assumed, and `canvasA` / `canvasB` already in A028 canvas px: use those; weapon lines as in `grip-lines-rat.json`).
+1. Re-run `tools/v3-grip-lines.mjs` so v3 holds on his lines; check the tool's reading against `canvasA/B` (within 1 px).
+2. **Shield:** `hand-far-shield` now has a line (along the strap): strap the round shield in guard and shield bash.
+3. Report, per clip, how far each held item's angle is from the raider's now (round 1: 72° mean for the cutlass) and refresh the strips and views.json (walk, turning slash, axe chop, spear thrust, shield bash, dagger stab).
