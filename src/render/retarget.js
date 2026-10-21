@@ -73,13 +73,30 @@ function itemTurn(src, A, rig, end) {
   return dirOf(A[end] ? A[end].base : A[by].m, S.axis) - H.axis;
 }
 
-export function retargetLayer(rig, joints, A) {
+// T040: a key with its own places for v3 (data/rigs/rat-v3-poses.js, channels 'place.<hand>.*': render/rig-pose.js) puts
+// that hand there instead (rig px from the body's offset), turned so its grip line runs at the key's item angle, the
+// wrist's range counted in the solve (limbInLimits hold); a blend with a retargeted key mixes the two places by the
+// channels' weights. hands = v3's hand drawings this frame (withHeldHand, the strap). null = no own place for that hand.
+function ownOf(rig, j, end, hands) {
+  const w = j[`place.${end}.at`] ?? 0, iw = j[`place.${end}.iw`] ?? 0, H = rig.hands?.[hands?.[end]];
+  if (!(w > 1e-6) && !(iw > 1e-6 && H)) return null;
+  return { w, P: w > 1e-6 && [(j.dx ?? 0) + j[`place.${end}.x`] / w, (j.dy ?? 0) + j[`place.${end}.y`] / w], iw: H ? iw : 0, turn: H && j[`place.${end}.item`] / iw - H.axis };
+}
+const mixTurn = (a, b, t) => (a == null ? b : a + t * (((b - a + 540) % 360) - 180));
+
+export function retargetLayer(rig, joints, A, hands) {
   if (!rig.retarget || !A) return joints;
   const src = rig.retarget;
   let out = { ...joints, sx: 1 }, B = byName(layoutRig(rig, out));
   for (const limb of LIMBS) {
     if (!has(B, limb)) continue;
-    if (has(A, limb)) {
+    const own = ownOf(rig, joints, limb[2], hands);
+    if (own) {   // T040: v3's own place, mixed with the retarget's where the key blends with one that has none
+      const g = has(A, limb) || wholeFist(src, A, limb) ? goalOf(src, A, rig, B, limb) : null, s = has(A, limb) ? limbGeometry(src, A, joints, limb) : null;
+      const P = own.P ? (g ? [g[0] + (own.P[0] - g[0]) * own.w, g[1] + (own.P[1] - g[1]) * own.w] : own.P) : g ?? pivotOf(rig, B, limb[2]);
+      const t0 = itemTurn(src, A, rig, limb[2]) ?? s?.endTurn, turn = own.iw ? mixTurn(t0, own.turn, own.iw) : t0;
+      out = limbInLimits(rig, B, out, limb, P, turn, s?.bend, own.iw > 0.5).joints;
+    } else if (has(A, limb)) {
       const s = limbGeometry(src, A, joints, limb);
       out = limbInLimits(rig, B, out, limb, goalOf(src, A, rig, B, limb), itemTurn(src, A, rig, limb[2]) ?? s.endTurn, s.bend).joints;
     } else if (wholeFist(src, A, limb)) out = limbInLimits(rig, B, out, limb, goalOf(src, A, rig, B, limb), itemTurn(src, A, rig, limb[2]), 0).joints;

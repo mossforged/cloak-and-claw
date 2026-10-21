@@ -21,6 +21,7 @@ import { A021_HOLDS } from '../items/a021-holds.js';
 import raiderPoses from './rat-raider-poses.js';
 import raider from './rat-raider.js';
 import spearman from './rat-spearman.js';
+import { RAIDER, SPEARMAN, PLACES, withOwn } from './rat-v3-poses.js';
 
 export const BANDS = {
   'tail-3': 60, 'tail-2': 70, tail: 80, 'scarf-tail': 90, 'arm-far-lower': 110, 'arm-far-upper': 120, 'hand-far': 125,   // A027 r2: far upper arm over the forearm's top
@@ -47,7 +48,8 @@ const RIG = {
   // shield bash: GUARD_FRONT) v3's jointed forearm and hand (and the shield riding the hand) go there with it
   bandWith: { 'arm-far-lower': 'arm-far-upper', 'hand-far': 'arm-far-upper' },
   springs: { parts: { tail: 0.6, 'tail-2': 0.8, 'tail-3': 1, 'scarf-tail': 0.8 } },   // as the raider's
-  poses: raiderPoses,
+  poses: withOwn(raiderPoses, RAIDER),   // T040: v3's own places for the moves the retarget can't carry (rat-v3-poses.js)
+  places: PLACES,
   retarget: { ...raider, poses: raiderPoses },   // T035 r2: the raider's poses by where his hands and feet are (render/retarget.js), not by angle
 };
 // v3 holding by grip lines G (the format of rat-v3-grip-lines.js; tools/v3-grip-ends.mjs tries both ways of Art's lines)
@@ -59,4 +61,4 @@ export default HELD;
 // T039 r2: the spear and staff stay in v3's near side grip (not the spearman's overhand `holds`): his stance folds the
 // near forearm up, and v3's near wrist (-49..9) can't turn the overhand fist off the forearm, so the shaft would run
 // back along it (169 deg off his, 123 in the side grip): v3 needs its own spear stance (T039 r2 report)
-export const V3_SPEARMAN = { ...HELD, poses: spearman.poses, retarget: spearman };
+export const V3_SPEARMAN = { ...HELD, poses: withOwn(spearman.poses, SPEARMAN), retarget: spearman };
