@@ -69,8 +69,15 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
   // relative to the hand it hangs from when a view moves that hand to another band. T028 r2: a whole-arm drawing carrying
   // the held item is lifted over it later (rig-grip.js band, GRIP_BAND): its cap goes by that lifted order
   // T029 r2: a part that `rides` its parent (a strapped item) draws that many bands over it, whichever part carries it
-  const orderOf = (name) => V.bands[name] ?? (parts[name].cap ? liftedOf(parts[name].parent) + (parts[name].capOrder ?? 5)
+  const orderOf = (name) => V.bands[name] ?? bandWith(name) ?? (parts[name].cap ? liftedOf(parts[name].parent) + (parts[name].capOrder ?? 5)
     : parts[name].rides != null ? orderOf(parts[name].parent) + parts[name].rides : joints[`${name}.order`] ?? parts[name].order);
+  // T039 r2: rig.bandWith { part: leader } = a part with no band of its own goes where a pose's band override (`order`) puts
+  // its leader, at its resting distance from it (v3's jointed far arm drawn over the chest where the raider's guard
+  // drawing is: GUARD_FRONT). No bandWith: as before
+  const bandWith = (name) => {
+    const w = rig.bandWith?.[name], o = w && V.bands[w];
+    return o == null ? null : o + parts[name].order - parts[w].order;
+  };
   const heldBy = held?.part && rig.parts[held.part.parent] ? held.part.parent : null;
   const orderAt = (name) => (heldBy && name === held.slot && V.bands[heldBy] != null && V.bands[name] == null
     ? parts[name].order + orderOf(heldBy) - (joints[`${heldBy}.order`] ?? rig.parts[heldBy].order) : orderOf(name));
