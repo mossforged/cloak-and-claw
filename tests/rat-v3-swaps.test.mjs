@@ -4,7 +4,7 @@
 // boxes apart x the cut's 0.4, the importer's keying re-measured on the source PNGs); A028's three body repairs are the
 // drawings v3 uses; the grip lines are Art's until the user's file exists, and switch to it on a re-run.
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync, mkdtempSync } from 'node:fs';
+import { readFileSync, existsSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
@@ -71,7 +71,28 @@ check('grip lines: Art\'s until the user\'s file exists (then the user\'s); ever
       assert.ok((same(a, p) && same(b, q)) || (same(a, q) && same(b, p)), n);
     }
   }
-  assert.equal(V3.hands['hand-far-shield'], undefined);   // no line on Art's shield hand yet: nothing strapped
+  // T039 r2: the user drew a line on the shield hand (along the strap); Art drew none
+  if (LINES.SOURCE === 'user') assert.ok(V3.hands['hand-far-shield'], 'the strap line');
+  else assert.equal(V3.hands['hand-far-shield'], undefined);
+});
+
+check('T039 r2: the user\'s hands are his canvasA / canvasB, and the fraction reading agrees within 1 px', () => {
+  if (LINES.SOURCE !== 'user') return;
+  const U = JSON.parse(readFileSync('docs/design/rigs/grip-lines-rat-v3.json', 'utf8')).lines;
+  for (const [n, L] of Object.entries(U)) if (L.kind === 'hand') {
+    assert.deepEqual(LINES.DRAWINGS[n].a, L.canvasA, n); assert.deepEqual(LINES.DRAWINGS[n].b, L.canvasB, n);
+    for (const [f, C] of [[L.a, L.canvasA], [L.b, L.canvasB]]) {
+      const P = [L.origin[0] + f[0] * L.cropSize[0], L.origin[1] + f[1] * L.cropSize[1]];
+      assert.ok(Math.hypot(P[0] - C[0], P[1] - C[1]) <= 1, `${n} fraction reading ${P} vs ${C}`);
+    }
+  }
+});
+
+check('T039 r2: a user file whose fractions miss its canvas points by more than 1 px is refused', () => {
+  const dir = mkdtempSync(join(tmpdir(), 't039-')), bad = join(dir, 'bad.json');
+  const L = { kind: 'hand', w: 47, h: 63, a: [0.5, 0.5], b: [0.5, 0.9], origin: [1000, 1000], cropSize: [100, 100], scale: 0.25, canvasA: [1050, 1050], canvasB: [1053, 1090] };
+  writeFileSync(bad, JSON.stringify({ lines: { 'hand-far-grip': L } }));
+  assert.throws(() => execFileSync(process.execPath, ['tools/v3-grip-lines.mjs', '--user', bad, '--out', join(dir, 'x.mjs')], { stdio: 'pipe' }));
 });
 
 check('the user\'s lines file switches the source: hands to canvas by origin + fraction x size / scale, his item lines', async () => {

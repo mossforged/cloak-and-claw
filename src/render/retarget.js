@@ -54,6 +54,25 @@ export function goalOf(src, A, rig, B, limb) {
   return [v.S[0] + w[0], v.S[1] + w[1]];
 }
 
+// T039 r2: a hand holding something turns so its own grip line (rig.hands: the user's lines on v3's drawings) runs where
+// the source's item points, not to the source hand's turn: the two rats' grip drawings sit at other angles in the fist,
+// and the source's grip mode turns its hand about the item (weapon-node.js), which v3 doesn't redo. The held item: along
+// the source fist's line (its hand drawing, or a whole-arm key's `axis`); the strapped shield: its own item line. Screen
+// degrees for v3's hand part's x axis; undefined = no item in that hand (or no line): the source hand's turn, as before.
+const dirOf = (m, deg) => Math.atan2(m[1] * Math.cos(deg * D) + m[3] * Math.sin(deg * D), m[0] * Math.cos(deg * D) + m[2] * Math.sin(deg * D)) / D;
+function itemTurn(src, A, rig, end) {
+  if (!rig.gripLines || !src.gripLines) return undefined;
+  const side = end.replace('hand-', ''), sh = A.shield, L = sh && src.itemLines?.[sh.p.strap];
+  if (end === 'hand-far' && L && rig.hands?.['hand-far-shield']) return dirOf(sh.m, Math.atan2(L.gripEnd[1] - L.grip[1], L.gripEnd[0] - L.grip[0]) / D) - rig.hands['hand-far-shield'].axis;
+  const h = A.held, by = h?.p?.parent;
+  if (!h?.m || !by?.includes(`-${side}`)) return undefined;
+  const H = rig.hands?.[A[end]?.swap] ?? (!A[end] && rig.hands?.[rig.heldHand?.[end]]);
+  if (!H) return undefined;
+  const S = A[end] ? src.hands?.[A[end].swap] : src.parts[by]?.swaps?.[A[by]?.swap];
+  if (S?.axis == null) return undefined;
+  return dirOf(A[end] ? A[end].base : A[by].m, S.axis) - H.axis;
+}
+
 export function retargetLayer(rig, joints, A) {
   if (!rig.retarget || !A) return joints;
   const src = rig.retarget;
@@ -62,8 +81,8 @@ export function retargetLayer(rig, joints, A) {
     if (!has(B, limb)) continue;
     if (has(A, limb)) {
       const s = limbGeometry(src, A, joints, limb);
-      out = limbInLimits(rig, B, out, limb, goalOf(src, A, rig, B, limb), s.endTurn, s.bend).joints;
-    } else if (wholeFist(src, A, limb)) out = limbInLimits(rig, B, out, limb, goalOf(src, A, rig, B, limb), undefined, 0).joints;
+      out = limbInLimits(rig, B, out, limb, goalOf(src, A, rig, B, limb), itemTurn(src, A, rig, limb[2]) ?? s.endTurn, s.bend).joints;
+    } else if (wholeFist(src, A, limb)) out = limbInLimits(rig, B, out, limb, goalOf(src, A, rig, B, limb), itemTurn(src, A, rig, limb[2]), 0).joints;
     else continue;
     B = byName(layoutRig(rig, out));
   }

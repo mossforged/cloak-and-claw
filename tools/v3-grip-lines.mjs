@@ -2,8 +2,10 @@
 // rat-raider-grip-lines.js (read through data/rigs/grip-lines.js withGripLines). Two sources, the user's winning:
 //   1. docs/design/rigs/grip-lines-rat-v3.json, the user's own lines (the "Rat v3 Grip Lines" page; the lead drops it in):
 //      the format of grip-lines-rat.json (fractions a / b / c of each image, w / h its size) plus each hand drawing's
-//      `origin` (canvas px of the image's top-left) and `scale` (image px per canvas px: 0.4 for the game's cuts), so a
-//      hand's point on the A017 canvas = origin + (fraction x [w, h]) / scale. Its weapon lines replace the raider's.
+//      `origin` (canvas px of the image's top-left), `cropSize` (canvas px the image shows) and `scale` (image px per
+//      canvas px), so a hand's point on the A017 canvas = origin + fraction x cropSize (no cropSize: x [w, h] / scale);
+//      `canvasA` / `canvasB`, when given, are used as written (the reading must agree within 1 px). Its weapon lines
+//      replace the raider's.
 //   2. Until then, Art's `handleLine` on A028's grip hands (assets/source/A028-rat-v3-kit/rig-source.json, canvas px).
 //      Art's lines have no direction, so each is run toward the item's head as the raider's line for the same hand runs
 //      (the end whose direction is nearer the raider's); where the two ends are equally far from it (Art's line square
@@ -36,9 +38,21 @@ if (user) {
     if (L.kind === 'weapon') { items.push(`  '${name}': { size: [${L.w}, ${L.h}], a: ${fr(L.a)}, b: ${fr(L.b)}${L.c ? `, c: ${fr(L.c)}` : ''} },`); continue; }
     if (!name.startsWith('hand-') || !L.origin || !L.scale) { notes.push(`${name}: skipped (not a hand line with origin and scale)`); continue; }
     const part = name.startsWith('hand-near') ? 'hand-near' : 'hand-far';
-    const canvas = (f) => [L.origin[0] + (f[0] * L.w) / L.scale, L.origin[1] + (f[1] * L.h) / L.scale];
-    let [a, b] = [canvas(L.a), canvas(L.b)];
+    // T039 r2: the page image is the canvas crop at origin of size cropSize (w / h are rounded, up to 1.6 px off), and the
+    // page also writes canvasA / canvasB: use those, and check the fraction reading against them (1 px)
+    const size = L.cropSize ?? [L.w / L.scale, L.h / L.scale];
+    const canvas = (f) => [L.origin[0] + f[0] * size[0], L.origin[1] + f[1] * size[1]];
+    const read = [canvas(L.a), canvas(L.b)], given = L.canvasA && L.canvasB ? [L.canvasA, L.canvasB] : null;
+    let how = 'read from the fractions';
+    if (given) {
+      const miss = Math.max(...read.map((p, i) => Math.hypot(p[0] - given[i][0], p[1] - given[i][1])));
+      if (miss > 1) { console.error(`${name}: the fraction reading is ${r(miss)} px off canvasA / canvasB`); process.exit(1); }
+      how = `canvasA / canvasB, the fractions read within ${r(miss)} px`;
+    }
+    let [a, b] = given ?? read;
     if (flip.has(name)) [a, b] = [b, a];
+    const old = RAIDER.DRAWINGS[name];
+    notes.push(`${name}: ${pt(a)} -> ${pt(b)} (${r(deg(a, b))} deg; the raider's ${old ? r(deg(old.a, old.b)) : '-'} deg; ${how}${flip.has(name) ? ', flipped' : ''})`);
     hands.push(`  '${name}': { part: '${part}', a: ${pt(a)}, b: ${pt(b)} },`);
   }
 } else {
