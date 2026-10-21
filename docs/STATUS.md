@@ -27,7 +27,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: T039 v3 uses its swaps (job 034).
+- Code: idle. T039 merged (v3 uses its swaps; items on Art's provisional handle lines until the user's grip lines arrive).
 - Art: idle. A028 merged (31 swaps; body joint check 17/17; near cup/point wrist notches, attack/shout neck flags left).
 
 ## Open questions (for the user)
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-21 lead: merged T039 (48/48). Waiting on the user's v3 grip lines (Art's near-grip line is square to the raider's, cutlass points wrong in the walk).
 2026-10-20 code: T039 on `t039-v3-swaps`: A028's 31 swaps + 3 repairs imported into rat-v3 (importer reads `replaces` / `pairedWith`); the raider's poses now show v3's hands, heads and feet (missing list: 61 keys, only other views and whole-limb drawings, docs/screens/T039/missing.md). v3 holds items on Art's handle lines (tools/v3-grip-lines.mjs; switches to docs/design/rigs/grip-lines-rat-v3.json on a re-run); grips stay inside the user's limits (rig-ik, wrist solver). No shield (no line). 48/48. Build `t039 v3 swaps v1`.
 2026-10-20 code: T039 open: Art's near grip line is square to the raider's, so v3's cutlass points ~72 deg off his on average (crosses the face in the walk) until the user's lines land; walk frame 32 heel sinks 3.6 px (near hip at -23).
 2026-10-20 lead: merged A028. Grip Lines v3 page for the user (artifact XXZFRybdeKQF5FYwztCDwL, db grip-lines-v3; Art's handle lines prefilled, weapon lines carried over). Queued T039.
