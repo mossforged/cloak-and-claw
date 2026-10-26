@@ -15,6 +15,8 @@ function readPng(path) {
 // T036: the same without the cache (big canvases read once, e.g. tools/joint-check.mjs)
 export function decodePng(path) {
   const b = readFileSync(path);
+  // T042: a clone without the LFS content holds a text pointer, not the image: say how to get it
+  if (b.subarray(0, 40).toString('latin1').startsWith('version https://git-lfs')) throw new Error(`${path} is a Git LFS pointer, not the image: run git lfs pull -I "${path}" (CI: tools/lfs-needed.mjs lists the sources tests read)`);
   let o = 8, w, h, depth, type, inter, trns = null, palette = null;
   const idat = [];
   while (o < b.length) {
