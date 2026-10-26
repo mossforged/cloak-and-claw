@@ -27,7 +27,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 | 10 | First season of missions with stage art (**on hold**) | Does a season hold together? |
 
 ## What builders need now
-- Code: idle. T040 merged (v3's own poses: spear, staff, slash wind-up, guard, bash read; chop axe stops at ear height).
+- Code: T041 two-handers item-led + impact overshoot/stretch (job 037).
 - Art: idle. A028 merged (31 swaps; body joint check 17/17; near cup/point wrist notches, attack/shout neck flags left).
 
 ## Open questions (for the user)
@@ -46,6 +46,7 @@ Later (talked through, not planned): stage kits per place (segments, joins, prop
 - **Other:** Play.command serves whatever already listens on 8100 without checking the folder (T024 note); pose swaps as fallback; art-bible items as rewards; lab boot code duplicates `src/main.js`; harbor stone backfill (brief clean ground edges); gamepad block untested.
 
 ## Last session
+2026-10-26 lead: rigging research (docs/design/rigs/research-cutout-rigging.md; user doc RFGeka6SbwCgTbptnBWeEW). User agreed: two-handers item-led, impact overshoot. Queued T041.
 2026-10-21 lead: merged T040 (50/50). Spear thrust forward 16.5° up, slash wind-up behind the head, guard shield below the eyes; chop axe 34 px below the head top and staff overhead forward-only (near shoulder +67 / wrist limits).
 2026-10-21 code: T040 on `t040-v3-own-poses`: v3's own poses as data (rigs/rat-v3-poses.js: hand places + item angles on the source keys, solved inside the user's limits; keys without one still retarget; old rat untouched). Spear carried low point forward, thrust 16.5 deg off forward, both fists on spear and staff, slash wind-up blade up behind the head, guard shield at chin height (eyes over it). 50/50. Build `t040 v3 own poses v1`.
 2026-10-21 code: T040 open: chop's axe head stops 34 px under the head top (near shoulder +67); staff can't go over the head with two fists (arm reach); slash / chop blade crosses the ear rising back to the idle carry (near wrist). Table docs/screens/T040/table.md.
