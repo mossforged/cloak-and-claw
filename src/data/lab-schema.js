@@ -32,6 +32,8 @@ import { RIG_MOTION } from './rig-motion.js';
 import { WRISTS } from './wrists.js';
 import healthPotion from './items/health-potion.js';
 import { ALLY } from './ally.js';
+import { IMPACT } from './impact.js';
+import { ITEM_LEAD } from './item-lead.js';
 
 export const ROOTS = {
   'src/data/moves/mouse-sword.js': MOUSE_SWORD,
@@ -62,6 +64,8 @@ export const ROOTS = {
   'src/data/ally.js': ALLY,
   'src/data/rig-motion.js': RIG_MOTION,
   'src/data/wrists.js': WRISTS,
+  'src/data/impact.js': IMPACT,
+  'src/data/item-lead.js': ITEM_LEAD,
 };
 // One pick section per floor weapon's moves (T010).
 const weaponMoves = (title, file) => ({
@@ -285,6 +289,21 @@ export const LAB_SCHEMA = [
       { path: 'trade', min: 0.1, max: 3, step: 0.05, label: 'cost per px the hand moves' },
       { path: 'armTurn', min: 0, max: 0.5, step: 0.01, label: 'cost per deg the arm turns' },
       { path: 'elbowMax', min: 60, max: 170, step: 1, label: 'deepest elbow bend (deg)' },
+    ],
+  },
+  {
+    title: 'Impact (T041, rat v3 attacks, look only)', file: 'src/data/impact.js',
+    fields: [
+      { path: 'over', min: 0, max: 0.5, step: 0.01, label: 'overshoot past the strike (share of the last swing)' },
+      { path: 'stretch', min: 0, max: 0.08, step: 0.005, label: 'arm stretch at the hit' },
+      { path: 'frames', min: 1, max: 2, step: 1, label: 'stretch frames' },
+    ],
+  },
+  {
+    title: 'Item-led two-handers (T041, rat v3, look only)', file: 'src/data/item-lead.js',
+    fields: [
+      { path: 'search.slide', min: 0, max: 30, step: 1, label: 'second fist may slide along the shaft (px)' },
+      { path: 'search.max', min: 0, max: 60, step: 2, label: 'furthest the item moves to be held (px)' },
     ],
   },
   {

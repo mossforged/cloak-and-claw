@@ -13,6 +13,8 @@
 // (carried in the swap list as '@grip' / '@grip2').
 import { phaseOf } from '../sim/fighter.js';
 import { RULES } from '../data/rules.js';
+import { impactLayer } from './impact.js';
+import { impactOf } from '../data/impact.js';
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const easeOut = (t) => 1 - (1 - t) ** 3;
@@ -27,6 +29,8 @@ export function channelsOf(rig) {
     if (name.startsWith('foot-')) out[`${name}.lift`] = 0;
   }
   for (const e of rig.places ?? []) for (const c of PLACE) out[`place.${e}.${c}`] = 0;   // T040: a rig's own places (rat v3)
+  if (rig.itemPoses) for (const c of ITEM) out[`item.${c}`] = 0;   // T041: a key's item pose (rat v3)
+  if (rig.impact) for (const n of Object.keys(rig.parts)) out[`${n}.len`] = 1;   // T041: a bone stretched along its length (impact)
   return out;
 }
 // T040: a key's own places for a retargeted rig (rat v3: data/rigs/rat-v3-poses.js), `place: { <hand>: { at: [x, y], item } }`
@@ -34,13 +38,22 @@ export function channelsOf(rig) {
 // -> channels 'place.<hand>.x/.y' weighted by '.at', '.item' weighted by '.iw', stored times their weight so a blend with a
 // key that has none keeps the place and only fades its pull (render/retarget.js divides back).
 const PLACE = ['x', 'y', 'at', 'item', 'iw'];
+// T041: a key that poses the held item itself (render/item-lead.js), `item: { at: [x, y], rot, from: 'hips' | 'chest' }`
+// and `itemLead` (0..1, default 1) -> channels 'item.x/.y/.rot/.chest' times 'item.lead' (as the places: a blend with a
+// key that has none fades the lead, not the place)
+const ITEM = ['x', 'y', 'rot', 'chest', 'lead'];
 const WEAPON = { 'weapon.x': 0, 'weapon.y': 0, 'weapon.rot': 0, 'weapon.at': 0, 'weapon.turn': 0 };   // T025: the pose's weapon node
 export const jointsOfRig = (rig) => Object.keys(channelsOf(rig));
 
 function evalPose(pose, stance, t) {
   const out = { ...stance };
   for (const [k, v] of Object.entries(pose ?? {})) {
-    if (k === 'speed' || k === 'swap' || k === 'swapPhase' || k === 'grip' || k === 'grip2' || k === 'view' || k === 'order' || k === 'carry' || k === 'free' || k === 'aloft') continue;
+    if (k === 'item') {   // T041
+      const w = pose.itemLead ?? 1;
+      Object.assign(out, { 'item.x': v.at[0] * w, 'item.y': v.at[1] * w, 'item.rot': v.rot * w, 'item.chest': (v.from === 'chest' ? 1 : 0) * w, 'item.lead': w });
+      continue;
+    }
+    if (k === 'itemLead' || k === 'speed' || k === 'swap' || k === 'swapPhase' || k === 'grip' || k === 'grip2' || k === 'view' || k === 'order' || k === 'carry' || k === 'free' || k === 'aloft') continue;
     if (k === 'weapon') {   // T025: placement fields -> channels + weights
       if (v.x != null && v.y != null) Object.assign(out, { 'weapon.x': v.x, 'weapon.y': v.y, 'weapon.at': 1 });
       if (v.rot != null) Object.assign(out, { 'weapon.rot': v.rot, 'weapon.turn': 1 });
@@ -208,6 +221,12 @@ export function targetPose(f, rig, time, override) {
       const rest = R0 ? evalPose(R0, rest0, 0) : rest0;
       // M.hold: share of the windup held at the top (the club's heavy beat), with a strain tremble of M.tremble degrees on the arm
       if (ph === 'windup') return { key, joints: windupPose(M, rest, W, p, time), swap: swapOf(M.windup) };
+      // T041: a move with an impact (data/impact.js) eases into its strike without the back-overshoot, then overshoots it
+      // for one frame and stretches the striking arm (render/impact.js)
+      if (ph === 'active' && impactOf(rig, key)) {
+        const j = strikePose(M, W, X, K, p, { ...T, overshoot: 0 }), prev = Array.isArray(X) ? X[X.length - 1] : X ?? W;
+        return { key, joints: impactLayer(rig, key, f.move, T, j, K, prev, f.mf - f.move.windup), swap: activeSwap(M, p, T) };
+      }
       if (ph === 'active') return { key, joints: strikePose(M, W, X, K, p, T), swap: activeSwap(M, p, T) };
       // recovery keeps the strike's swaps until it is `swapBack` of the way back to rest. T028 r2: a move's optional
       // `recover` key is passed through at the middle of it (the blade dropped low in front before the guard comes back up)

@@ -20,6 +20,7 @@ import { splitGrips } from './grip-split.js';
 import { strapRig, strapOf, rideLayer } from './strap.js';
 import { limitLayer } from './limits.js';
 import { retargetLayer, sourceLayout } from './retarget.js';
+import { leadOf } from '../data/item-lead.js';
 
 export { layoutRig };
 
@@ -134,8 +135,10 @@ export function rigFrame(f, rig, time, mem, pose) {
 // T035 r2: the retarget source's drawn layout for this frame (its own drawings, held item and grips: render/retarget.js)
 // T040: the retarget with v3's hand drawings this frame (its own places turn them by their grip lines); rig strapped or not
 export function retargetOf(f, rig, joints, mem) {
-  const R = strapRig(rig, strapOf(f)), hands = { ...withHeldHand(R, mem.swap ?? {}, heldOf(f, R, mem.sheathed)), ...R.strapHand };
-  return retargetLayer(R, joints, sourceOf(f, R, joints, mem), hands);
+  const R = strapRig(rig, strapOf(f)), held = heldOf(f, R, mem.sheathed), hands = { ...withHeldHand(R, mem.swap ?? {}, held), ...R.strapHand };
+  // T041: an item that leads (two-handers: data/item-lead.js) on a key that poses it carries both arms
+  const lead = held?.part && !mem.swap?.['@free'] && leadOf(held.grip, f.moveKey ?? null) === 'item' ? { held } : null;
+  return retargetLayer(R, joints, sourceOf(f, R, joints, mem), hands, lead);
 }
 export const sourceOf = (f, rig, joints, mem) => sourceLayout(strapRig(rig.retarget, strapOf(f)), joints, mem.swap, heldOf(f, rig.retarget, mem.sheathed), f);
 

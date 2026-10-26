@@ -13,19 +13,31 @@ export const EYES = [[190, 148], [262, 146]];
 
 const at = (x, y, item) => ({ at: [x, y], ...(item != null && { item }) });
 
-// The spearman (spear and staff): the near (back) fist low by the hip, the shaft along the forearm, point forward and up;
-// the far fist rides the shaft on grip2 (the two-hand grip's IK, inside v3's limits)
-const CARRY = { 'hand-near': at(-31, -53, -8) };
+// The spearman (spear and staff), T041: item-led (data/item-lead.js: two-handers). Each key poses the item itself:
+// `item: { at: [x, y], rot, from }` = the grip point (where the near fist holds it) in rig px from the hips' point (the
+// pelvis pivot) or the chest's (x forward, y down), and the shaft's screen angle (0 forward, - up); both fists then reach
+// their grip lines on it inside v3's limits (render/item-lead.js), the item moved the least distance that lets both reach
+// where a key asks for more (the notes say how far). The rest of each key (torso, head, views, feet) is the spearman's.
+const held = (x, y, rot, from = 'hips') => ({ item: { at: [x, y], rot, from } });
+// Each place sits inside the window where both fists hold at that angle (tools/item-lead-map.mjs <clip> <key> <angles>),
+// at its low edge so the shaft passes under the snout. The window is small (about 8 x 20 px): its forward edge is the
+// near wrist (-49..9: the near fist's grip line runs back along the forearm, so that fist stays ~40-50 px behind the
+// hips' point), its low edge the far arm's reach to grip2 (the far fist slides back along the shaft up to 16 px first).
+// Carried by the hip, point forward and a little up
+const CARRY = held(-45, -6, -8);
 export const SPEARMAN = {
   stance: CARRY, idle: CARRY, walk: CARRY,
   moves: {
-    spearThrust: { windup: { 'hand-near': at(-36, -52, -8) }, strike: { 'hand-near': at(-24, -54, -14) }, recover: { 'hand-near': at(-28, -54, -8) } },
-    // the staff's two fists sit 42 px apart on the shaft, v3's far shoulder ~37 px in front of the near one and each arm
-    // reaches ~30 px: with both fists on, the shaft points forward (never back or over the head), and the near fist's
-    // grip line runs back along its forearm (near wrist -49..9): so the swing draws it back level, low behind the hip,
-    // and the overhead raises it forward-up as far as the two fists allow (-37 deg), its head in front of the snout
-    staffSwing: { windup: { 'hand-near': at(-44, -52, -20) }, strike: { 'hand-near': at(-26, -52, -6) } },
-    staffOverhead: { windup: { 'hand-near': at(-24, -54, -38) }, strike: { 'hand-near': at(-24, -54, 14) } },
+    // drawn back (with the body's dx -4), driven out level at the enemy, back to the carry. Inside the limits the fists
+    // move ~4 px forward of the wind-up: the reach of the thrust is the lunge
+    spearThrust: { windup: held(-48, -6, -10), strike: held(-44, -12, 0), recover: held(-46, -8, -6) },
+    // drawn back point up (level is out of reach behind the hip: the near wrist), swept through to level in front
+    staffSwing: { windup: held(-48, -1, -20), strike: held(-44, -18, 2) },
+    // raised forward-up (asked: over the head, which v3 can't: the near wrist -49 and near shoulder +67 cap the angle at
+    // about -40 deg, and even with no limits the arms can't lift the staff's centre over the head, the centre lying
+    // between the fists ~30 px from the shoulders: tools/item-lead-map.mjs --free. At -40 the shaft crosses the face, so
+    // -30), then chopped down, head low in front
+    staffOverhead: { windup: held(-38, 10, -30), strike: held(-40, -24, 10) },
   },
 };
 
@@ -70,7 +82,8 @@ export const RAIDER = {
 
 // poses with v3's places merged into the keys that have them (a key: a pose; moves: { clip: { windup, through, strike,
 // recover } }, through may be a list). Keys without a place are the same objects.
-const put = (key, place) => (place && Object.keys(place).length ? { ...key, place } : key);
+// T041: an entry `{ item, itemLead? }` (an item-led key) is merged as it is, not as a place
+const put = (key, place) => (place?.item ? { ...key, ...place } : place && Object.keys(place).length ? { ...key, place } : key);
 export function withOwn(poses, own) {
   const out = { ...poses };
   for (const [k, place] of Object.entries(own)) if (k !== 'moves' && poses[k]) out[k] = put(poses[k], place);

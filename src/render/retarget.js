@@ -15,6 +15,7 @@
 import { layoutRig } from './rig-layout.js';
 import { gripLayout } from './rig-grip.js';
 import { limbGeometry, limbInLimits, pivotOf } from './limits.js';
+import { itemLeadLayer } from './item-lead.js';
 
 const D = Math.PI / 180;
 export const LIMBS = [['arm-near-upper', 'arm-near-lower', 'hand-near'], ['arm-far-upper', 'arm-far-lower', 'hand-far'],
@@ -84,7 +85,9 @@ function ownOf(rig, j, end, hands) {
 }
 const mixTurn = (a, b, t) => (a == null ? b : a + t * (((b - a + 540) % 360) - 180));
 
-export function retargetLayer(rig, joints, A, hands) {
+// T041: lead = { held } when the held item leads (data/item-lead.js): a key that poses the item puts both arms on it
+// after the limbs (render/item-lead.js); none = as before
+export function retargetLayer(rig, joints, A, hands, lead = null) {
   if (!rig.retarget || !A) return joints;
   const src = rig.retarget;
   let out = { ...joints, sx: 1 }, B = byName(layoutRig(rig, out));
@@ -103,6 +106,7 @@ export function retargetLayer(rig, joints, A, hands) {
     else continue;
     B = byName(layoutRig(rig, out));
   }
+  if (lead?.held) out = itemLeadLayer(rig, out, B, lead.held);
   const { sx: _sx, ...rest } = out;
   return joints.sx === undefined ? rest : { ...rest, sx: joints.sx };
 }
