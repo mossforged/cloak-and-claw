@@ -13,7 +13,14 @@ export const sc = (x, y = x) => [x, 0, 0, y, 0, 0];
 export const apply = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
 const scaleOf = (p) => (Array.isArray(p.scale) ? p.scale : [p.scale ?? 1, p.scale ?? 1]);
 // image -> bone frame (no translation); pose stretch '<part>.sx/.sy' multiplies the data scale.
-const shape = (name, p, j) => { const [x, y] = scaleOf(p); return mul(sc(x * (j[`${name}.sx`] ?? 1), y * (j[`${name}.sy`] ?? 1)), rot(p.rest ?? 0)); };
+// T041: '<part>.len' (render/impact.js) stretches the bone along its length (pivot -> its child's attach, in the bone's
+// frame) so the child moves out with it; 1 or absent = as before.
+const shape = (name, p, j, bone) => {
+  const [x, y] = scaleOf(p), m = mul(sc(x * (j[`${name}.sx`] ?? 1), y * (j[`${name}.sy`] ?? 1)), rot(p.rest ?? 0)), k = j[`${name}.len`];
+  if (k == null || k === 1 || !bone) return m;
+  const v = apply(m, bone[0], bone[1]), l = Math.hypot(...v), u = [v[0] / l, v[1] / l], e = k - 1;
+  return mul([1 + e * u[0] * u[0], e * u[0] * u[1], e * u[0] * u[1], 1 + e * u[1] * u[1], 0, 0], m);
+};
 
 // A swap image is drawn so its pixel (x, y) lands on the part's own (offset + scale * (x, y)):
 // pivot and children's attach points stay in the part's own pixels whichever image shows.
@@ -50,6 +57,9 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
       if (parts[c] && !(s.carryHand && parts[c].parent !== s.carryHand)) parts[c] = { ...parts[c], parent: name, attach: apply(swapMatrix(s), ...xy), rest: (parts[c].rest ?? 0) + (s.turn?.[c] ?? 0) };
     }
   }
+  // the bone of a part: pivot -> the attach of its first child (a stretched part only)
+  const boneOf = (name) => { const c = Object.values(parts).find((q) => q.parent === name), p = parts[name]; return c && [c.attach[0] - p.pivot[0], c.attach[1] - p.pivot[1]]; };
+  const shapeOf = (name, p) => (joints[`${name}.len`] != null && joints[`${name}.len`] !== 1 ? shape(name, p, joints, boneOf(name)) : shape(name, p, joints));
   const frameOf = (name) => {
     if (frames[name]) return frames[name];
     const p = parts[name];
@@ -57,7 +67,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
     if (!p.parent) m = mul(mul(tr(joints.dx ?? 0, (joints.dy ?? 0) - rig.rootY), sc(rig.scale * (joints.sx ?? 1), rig.scale)), rot(joints[name] ?? 0));
     else {
       const q = parts[p.parent];
-      const [ax, ay] = apply(shape(p.parent, q, joints), p.attach[0] - q.pivot[0], p.attach[1] - q.pivot[1]);
+      const [ax, ay] = apply(shapeOf(p.parent, q), p.attach[0] - q.pivot[0], p.attach[1] - q.pivot[1]);
       const pf = frameOf(p.parent);
       // upright parts (the shield) cancel their parents' turn: the pose angle is relative to the rig, not the arm
       const undo = p.upright ? -Math.atan2(pf[1], pf[0]) / D : 0;
@@ -85,7 +95,7 @@ export function layoutRig(rig, joints, swap = {}, held = null) {
     ? orderAt(held.slot) + GRIP_BAND : orderOf(name));
   return Object.entries(parts)
     .map(([name, p]) => {
-      const m = mul(mul(frameOf(name), shape(name, p, joints)), tr(-p.pivot[0], -p.pivot[1]));
+      const m = mul(mul(frameOf(name), shapeOf(name, p)), tr(-p.pivot[0], -p.pivot[1]));
       const s = p.swaps?.[swap[name]];
       return { name, p, order: orderAt(name), img: s ? s.img : p.img, swap: s ? swap[name] : null, m: s ? mul(m, swapMatrix(s)) : m, base: m };
     })

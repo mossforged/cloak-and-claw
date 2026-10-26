@@ -12,6 +12,7 @@ import { at, reach } from './rig-ik.js';
 import { modesOf, nodeActive, placeNode } from './weapon-node.js';
 import { GRIP_MODES, GRIP_BAND } from '../data/grip-modes.js';
 import { limitWrists, turnOf } from './wrist.js';
+import { ITEM_LEAD } from '../data/item-lead.js';
 
 export { at, reach };
 
@@ -100,6 +101,16 @@ function offShaft(rig, L, held, G, wm) {
   return Math.abs((P[0] - g[0]) * u[1] - (P[1] - g[1]) * u[0]) / Math.hypot(...u);
 }
 
+// T041: the second fist already on the shaft (within ON px across, its line along it either way within ON_DEG) at its
+// grip point or slid back from it toward the first fist (data/item-lead.js search.slide)
+const ON = 1, ON_DEG = 1;
+function secondOn(rig, L, held, G, wm, to) {
+  if (G.ik.to !== 'grip2' || G.align == null || !L.some((e) => e.name === G.ik.end)) return false;
+  const [shaft, axis] = axesOf(L, held, G, wm), d = Math.abs(wrap(shaft - axis)), P = at(rig, L, G.ik.end, G.ik.hand), T = apply(wm(L), ...to(L));
+  const u = [Math.cos(shaft * D), Math.sin(shaft * D)], v = [P[0] - T[0], P[1] - T[1]], along = v[0] * u[0] + v[1] * u[1];
+  return Math.abs(v[0] * u[1] - v[1] * u[0]) <= ON && along <= ON && along >= -ITEM_LEAD.search.slide - ON && Math.min(d, 180 - d) <= ON_DEG;
+}
+
 // How far back (bow image px) full draw pulls the string: to the grip's `anchor` (T020: the ear; the anchor seen along
 // the bow's forward axis), else the item's `pull`.
 function pullOf(rig, G, A, L, bow) {
@@ -154,9 +165,13 @@ export function gripLayout(rig, joints, swap, held, f, force) {
   let done = false;   // T029 r3: once the wrists are limited, the drawn item is where it is (it may have turned)
   const weapon = (L) => (done ? null : Wn) ?? L.find((x) => x.name === held.slot).m, weaponPt = (L, xy) => apply(weapon(L), ...xy);
   const to = (L) => (A.nock ? [A.nock[0] - pullOf(rig, G, A, L, weapon(L)) * k, A.nock[1]] : A[G.ik.to]);
-  for (let i = 0; i < 2; i++) j = reach(rig, j, sw, held, G.ik, (L) => weaponPt(L, to(L)));   // 2nd pass mops up the error
-  const wrist2 = modes.grip2 ? GRIP_MODES[modes.grip2]?.wrist : G.wrist;   // T025: the second fist's mode (over / under the shaft)
-  if (G.align != null) j = alignGrip(rig, j, sw, held, G, (L) => weaponPt(L, to(L)), weapon, wrist2);
+  // T041: an item-led key (render/item-lead.js) has already put the second fist on its grip inside the limits: kept
+  const placed = (j['item.lead'] ?? 0) >= 1 - 1e-6 && secondOn(rig, layoutRig(rig, j, sw, held), held, G, weapon, to);
+  if (!placed) {
+    for (let i = 0; i < 2; i++) j = reach(rig, j, sw, held, G.ik, (L) => weaponPt(L, to(L)));   // 2nd pass mops up the error
+    const wrist2 = modes.grip2 ? GRIP_MODES[modes.grip2]?.wrist : G.wrist;   // T025: the second fist's mode (over / under the shaft)
+    if (G.align != null) j = alignGrip(rig, j, sw, held, G, (L) => weaponPt(L, to(L)), weapon, wrist2);
+  }
   // T028 r4: on the user's lines a second fist that can't reach the shaft lets go (its own fist, posed) rather than
   // gripping beside it
   // T029 r3: also when the wrist limits (render/wrist.js) leave it off the shaft

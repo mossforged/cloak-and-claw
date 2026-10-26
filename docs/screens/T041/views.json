@@ -1,0 +1,8 @@
+[
+  { "label": "Side by side, slow: spear thrust, the current rat (left), v3 item-led (right): the spear posed at its angle, both fists reach it; level at the thrust; overshoot + arm stretch on the hit frame", "q": "f=rat-spearman&anim=spearThrust&f2=rat-spearman&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side, slow: staff overhead (v3 raises it forward-up to -30 deg: over the head is out of v3's reach, see the report), then the chop with impact", "q": "f=rat-spearman&anim=staffOverhead&f2=rat-spearman&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side, slow: staff swing (item-led, impact on the hit)", "q": "f=rat-spearman&anim=staffSwing&f2=rat-spearman&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side, slow: turning slash with impact (v3: one frame past the strike, sword arm 6% longer, then settles)", "q": "f=rat-raider&anim=ratSlash&f2=rat-raider&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side, slow: overhead chop with impact", "q": "f=rat-raider&anim=overheadChop&f2=rat-raider&v2=v3&speed=0.25&zoom=1.5" },
+  { "label": "Side by side: the spearman's walk (v3 carries the spear item-led, low under the snout)", "q": "f=rat-spearman&anim=walk&f2=rat-spearman&v2=v3&zoom=1.5" }
+]

@@ -99,8 +99,12 @@ const headTop = (rig, B) => apply(B.head.m, rig.sockets.head_top.at)[1];
 
 // The named keys and what each must reach: got(F, rig) -> { got, ok }
 export const TARGETS = [
-  { fighter: 'rat-spearman', clip: 'spearThrust', key: 'strike', target: 'spear point within 20 deg of forward',
-    got: (F) => { const a = itemOf(F).angle; return { got: `${a.toFixed(1)} deg`, ok: Math.abs(wrap(a)) <= 20 }; } },
+  { fighter: 'rat-spearman', clip: 'spearThrust', key: 'strike', target: 'spear point within 15 deg of forward (T041; T040: 20)',
+    got: (F) => { const a = itemOf(F).angle; return { got: `${a.toFixed(1)} deg`, ok: Math.abs(wrap(a)) <= 15 }; } },
+  // T041: the staff's centre (its drawing's middle) above the head's top
+  { fighter: 'rat-spearman', clip: 'staffOverhead', key: 'windup', target: 'staff centre above the head top (T041)',
+    got: (F, rig) => { const it = itemOf(F), r = readAlpha(it.e.img), c = apply(it.e.m, [r.w / 2, r.h / 2]), top = headTop(rig, by(F.L));
+      return { got: `centre ${(top - c[1]).toFixed(1)} px above the head's top (shaft ${it.angle.toFixed(1)} deg)`, ok: c[1] < top }; } },
   { fighter: 'rat-raider', clip: 'ratSlash', key: 'windup', target: 'blade above the shoulder line, behind the head',
     got: (F, rig) => { const B = by(F.L), it = itemOf(F), S = pivot(rig, B, 'arm-near-upper'), hx = apply(B.head.m, [0, 0])[0];
       return { got: `tip ${(S[1] - it.tip[1]).toFixed(1)} px above the near shoulder, ${(apply(B.head.m, [40, 0])[0] - it.tip[0]).toFixed(1)} px behind the head's back`, ok: it.tip[1] < S[1] && it.tip[0] < hx + 40 }; } },
@@ -137,7 +141,7 @@ export function table() {
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const i = process.argv.indexOf('--out'), out = i < 0 ? null : process.argv[i + 1], t = table();
-  if (out) writeFileSync(out, `# T040: v3's own poses against their targets\n\nnode tools/v3-own-check.mjs --out ${out}\n\n${t}\n`);
+  const i = process.argv.indexOf('--out'), out = i < 0 ? null : process.argv[i + 1], t = table(), k = process.argv.indexOf('--title');
+  if (out) writeFileSync(out, `# ${k < 0 ? 'T040' : process.argv[k + 1]}: v3's own poses against their targets\n\nnode tools/v3-own-check.mjs --out ${out}\n\n${t}\n`);
   console.log(t);
 }

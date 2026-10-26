@@ -27,7 +27,7 @@ check('the old rats\' poses are untouched: no places, no place channels; withOwn
   assert.notEqual(P.moves.ratSlash, raiderPoses.moves.ratSlash);
   assert.equal(P.moves.backhand, raiderPoses.moves.backhand);   // a move without places: the same object
   assert.equal(P.idle, raiderPoses.idle);
-  assert.equal(V3_SPEARMAN.poses.moves.spearThrust.windup.place['hand-near'].at.length, 2);
+  assert.equal(V3_SPEARMAN.poses.moves.spearThrust.windup.item.at.length, 2);   // T041: the spearman's keys pose the item
   assert.ok(Object.keys(SPEARMAN.moves).every((k) => V3_SPEARMAN.poses.moves[k]));
 });
 
@@ -42,7 +42,8 @@ check('a key\'s place blends as a weight: half way from a key without one, the p
 // Frames the held item overlaps the head (more than TOL item px, every 2nd px), known per clip: the slash's first through
 // frame (the blade over the top) and its recovery rising back to the rest; the chop the same, and its start from the
 // rest (the raider's idle carry: the axe head beside the ear). Never more frames or deeper than recorded here.
-const TOL = 5, KNOWN = { ratSlash: { frames: 20, worst: 640 }, overheadChop: { frames: 30, worst: 470 } };
+// T041: + the impact's overshoot frame on each
+const TOL = 5, KNOWN = { ratSlash: { frames: 21, worst: 640 }, overheadChop: { frames: 31, worst: 470 } };
 check('every frame of the clips v3 poses: joints inside the limits, item in its fist, item off the head', () => {
   const bad = [];
   for (const [id, clip, rig] of CLIPS) {
@@ -59,13 +60,13 @@ check('every frame of the clips v3 poses: joints inside the limits, item in its 
   assert.deepEqual(bad, []);
 });
 
-check('the named keys reach their targets (the chop\'s axe head: known short of the head\'s top)', () => {
+check('the named keys reach their targets (known short: the chop\'s axe head and the staff over the head)', () => {
   const miss = [];
   for (const T of TARGETS) {
     const rig = T.fighter === 'rat-spearman' ? V3_SPEARMAN : V3, r = T.got(keyFrame(T.fighter, T.clip, T.key, rig), rig);
     if (!r.ok) miss.push(`${T.clip} ${T.key}`);
   }
-  assert.deepEqual(miss, ['overheadChop windup']);
+  assert.deepEqual(miss, ['staffOverhead windup', 'overheadChop windup']);
   // what the chop does reach: the axe head above the near shoulder and up behind the head, nothing over the head
   const F = keyFrame('rat-raider', 'overheadChop', 'windup', V3), m = by(F.L)['arm-near-upper'].base, [px, py] = V3.parts['arm-near-upper'].pivot;
   const S = m[1] * px + m[3] * py + m[5], it = itemOf(F);
